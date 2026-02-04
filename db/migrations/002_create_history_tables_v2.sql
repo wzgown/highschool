@@ -1,7 +1,9 @@
 -- =============================================================================
--- 上海中考招生模拟系统 - 历史数据表 DDL
+-- 上海中考招生模拟系统 - 历史数据表 DDL（优化版）
 -- =============================================================================
 -- 基于 original_data/ 目录下的2024年等历年中考数据
+-- 优化说明：
+--   - ref_middle_school 表的 school_nature_id 改为字符串类型
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------
@@ -38,7 +40,7 @@ CREATE TABLE IF NOT EXISTS ref_middle_school (
     name VARCHAR(200) NOT NULL,
     short_name VARCHAR(100),
     district_id INTEGER NOT NULL REFERENCES ref_district(id),
-    school_nature_id INTEGER REFERENCES ref_school_nature(id),
+    school_nature_id VARCHAR(50),
     is_non_selective BOOLEAN NOT NULL DEFAULT TRUE,
     data_year INTEGER NOT NULL DEFAULT 2025,
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
@@ -48,6 +50,7 @@ CREATE TABLE IF NOT EXISTS ref_middle_school (
 );
 
 CREATE INDEX idx_middle_school_district ON ref_middle_school(district_id);
+CREATE INDEX idx_middle_school_nature ON ref_middle_school(school_nature_id);
 CREATE INDEX idx_middle_school_non_selective ON ref_middle_school(is_non_selective);
 
 COMMENT ON TABLE ref_middle_school IS '初中学校表（用于名额分配到校）';
@@ -55,7 +58,7 @@ COMMENT ON COLUMN ref_middle_school.code IS '学校代码';
 COMMENT ON COLUMN ref_middle_school.name IS '学校全称';
 COMMENT ON COLUMN ref_middle_school.short_name IS '学校简称';
 COMMENT ON COLUMN ref_middle_school.district_id IS '所属区ID';
-COMMENT ON COLUMN ref_middle_school.school_nature_id IS '办别ID（公办/民办）';
+COMMENT ON COLUMN ref_middle_school.school_nature_id IS '办别代码（PUBLIC=公办, PRIVATE=民办）';
 COMMENT ON COLUMN ref_middle_school.is_non_selective IS '是否不选择生源初中（名额分配到校填报资格）';
 COMMENT ON COLUMN ref_middle_school.data_year IS '数据年份';
 

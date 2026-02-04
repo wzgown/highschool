@@ -22,16 +22,14 @@
 ## 目录结构
 
 ```
-highschool_new/
+highschool/
 ├── backend/                 # 后端服务
 │   ├── src/
 │   │   ├── api/v1/         # API路由
 │   │   ├── domain/         # 领域层
-│   │   ├── infrastructure/ # 基础设施层
-│   │   ├── shared/         # 共享模块
-│   │   └── main.ts         # 入口文件
-│   ├── package.json
-│   └── tsconfig.json
+│   │   ├── infrastructure/ # 基�设施层
+│   │   └── shared/         # 共享模块
+│   └── package.json
 │
 ├── frontend/              # 前端项目
 │   ├── src/
@@ -40,16 +38,25 @@ highschool_new/
 │   │   ├── composables/   # 组合式API
 │   │   ├── stores/        # Pinia状态管理
 │   │   └── api/           # API调用
-│   ├── package.json
-│   └── vite.config.ts
+│   └── package.json
 │
-├── shared/                # 前后端共享类型
-│   ├── types/
-│   └── constants/
+├── shared/                # 前后端共享类型和常量
+│   ├── types/             # TypeScript 类型定义
+│   └── constants/         # 枚举和常量定义（已优化，不再存储在数据库）
 │
 ├── db/                    # 数据库SQL
-│   ├── migrations/
-│   └── seeds/
+│   ├── migrations/        # 表结构定义
+│   │   ├── 001_create_reference_tables_v2.sql    # 参考数据表（优化版）
+│   │   └── 002_create_history_tables_v2.sql      # 历史数据表（优化版）
+│   └── seeds/             # 种子数据
+│       ├── 001_seed_control_score_v2.sql         # 最低投档控制分数线
+│       ├── 002_seed_schools_2025_v2.sql         # 2025年学校名单
+│       ├── 003_seed_quota_allocation_district_2025.sql  # 名额分配到区计划
+│       ├── 010_seed_district_exam_count.sql       # 各区中考人数
+│       ├── 020_seed_2024_jiading_quota_school_v2.sql     # 2024年嘉定名额分配到校
+│       ├── 021_seed_2024_jiading_admission_quota_district.sql  # 2024年嘉定名额分配到区分数线
+│       ├── 022_seed_2024_jiading_admission_quota_school.sql   # 2024年嘉定名额分配到校分数线
+│       └── 023_seed_2024_jiading_admission_unified_fixed.sql # 2024年嘉定1-15志愿分数线
 │
 ├── scripts/               # 脚本工具
 │   ├── setup.sh           # 环境初始化
@@ -95,13 +102,30 @@ cp frontend/.env.h5.example frontend/.env.h5
 ### 初始化数据库
 
 ```bash
-# 执行数据库迁移
-psql -U your_user -d your_database -f db/migrations/001_create_reference_tables.sql
-psql -U your_user -d your_database -f db/migrations/002_create_history_tables.sql
+# 执行数据库迁移（使用优化后的脚本）
+psql -U highschool -d highschool -f db/migrations/001_create_reference_tables_v2.sql
+psql -U highschool -d highschool -f db/migrations/002_create_history_tables_v2.sql
 
-# 导入种子数据
-psql -U your_user -d your_database -f db/seeds/001_seed_reference_data.sql
-psql -U your_user -d your_database -f db/seeds/002_seed_schools_2025.sql
+# 导入种子数据（使用优化后的脚本）
+psql -U highschool -d highschool -f db/seeds/001_seed_control_score_v2.sql
+psql -U highschool -d highschool -f db/seeds/002_seed_schools_2025_v2.sql
+psql -U highschool -d highschool -f db/seeds/003_seed_quota_allocation_district_2025.sql
+psql -U highschool -d highschool -f db/seeds/010_seed_district_exam_count.sql
+psql -U highschool -d highschool -f db/seeds/020_seed_2024_jiading_quota_school_v2.sql
+psql -U highschool -d highschool -f db/seeds/021_seed_2024_jiading_admission_quota_district.sql
+psql -U highschool -d highschool -f db/seeds/022_seed_2024_jiading_admission_quota_school.sql
+psql -U highschool -d highschool -f db/seeds/023_seed_2024_jiading_admission_unified_fixed.sql
+```
+
+### 使用 Docker
+
+```bash
+# 启动 PostgreSQL 和 Redis
+cd /root/.openclaw/workspace/highschool
+docker compose up -d
+
+# 检查容器状态
+docker ps
 ```
 
 ### 启动开发服务
@@ -145,6 +169,35 @@ npm run dev:h5
 - 平行志愿录取
 - 同分比较(6位序)
 - 批次顺序录取
+
+## 数据库设计优化
+
+### 优化说明
+为了减少数据库复杂度，将枚举类型的常量数据从数据库中移除，改为代码常量：
+
+**已删除的常量表（已迁移到代码）：**
+- `ref_school_nature` → `shared/constants/index.ts` 中的 `SchoolNature` 枚举
+- `ref_school_type` → `shared/constants/index.ts` 中的 `SchoolType` 枚举
+- `ref_boarding_type` → `shared/constants/index.ts` 中的 `BoardingType` 枚举
+- `ref_admission_batch` → `shared/constants/index.ts` 中的 `AdmissionBatch` 枚举
+- `ref_subject` → `shared/constants/index.ts` 中的 `Subject` 枚举
+
+**修改的表（使用常量代码代替外键）：**
+- `ref_school` 表的 `school_nature_id`, `school_type_id`, `boarding_type_id` 改为 VARCHAR 类型
+- `ref_middle_school` 表的 `school_nature_id` 改为 VARCHAR 类型
+- `ref_control_score` 表的 `admission_batch_id` 改为 VARCHAR 类型
+
+**保留的数据表：**
+- `ref_district` - 上海16个区（保留，因为可能有动态变化）
+- `ref_school` - 学校主表
+- `ref_quota_allocation_district` - 名额分配到区计划
+- `ref_middle_school` - 初中学校表
+- `ref_quota_allocation_school` - 名额分配到校计划
+- `ref_district_exam_count` - 各区中考人数
+- `ref_admission_score_quota_district` - 名额分配到区录取分数线
+- `ref_admission_score_quota_school` - 名额分配到校录取分数线
+- `ref_admission_score_unified` - 1-15志愿录取分数线
+- `ref_control_score` - 最低投档控制分数线
 
 ## 脚本命令
 
