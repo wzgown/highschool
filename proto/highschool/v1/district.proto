@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package highschool.v1;
+
+option go_package = "github.com/highschool/backend/gen/highschool/v1;highschoolv1";
+
+// 区县
+message District {
+  int32 id = 1;
+  string code = 2;
+  string name = 3;
+  string name_en = 4;
+  int32 display_order = 5;
+}

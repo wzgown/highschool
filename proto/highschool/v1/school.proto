@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package highschool.v1;
+
+option go_package = "github.com/highschool/backend/gen/highschool/v1;highschoolv1";
+
+// 初中学校
+message MiddleSchool {
+  int32 id = 1;
+  optional string code = 2;
+  string name = 3;
+  optional string short_name = 4;
+  int32 district_id = 5;
+  optional string district_name = 6;
+  bool is_non_selective = 7;
+}
+
+// 高中学校
+message School {
+  int32 id = 1;
+  string code = 2;
+  string full_name = 3;
+  optional string short_name = 4;
+  int32 district_id = 5;
+  optional string district_name = 6;
+  string school_nature_id = 7;
+  optional string school_type_id = 8;
+  optional bool has_international_course = 9;
+}
+
+// 学校详情
+message SchoolDetail {
+  School school = 1;
+  optional string school_nature_name = 2;
+  optional string school_type_name = 3;
+  optional string boarding_type_id = 4;
+  optional string boarding_type_name = 5;
+  optional string remarks = 6;
+  repeated HistoryScore history_scores = 7;
+}
+
+// 历史分数线
+message HistoryScore {
+  int32 year = 1;
+  string batch = 2;
+  string batch_name = 3;
+  optional int32 school_id = 4;
+  string school_name = 5;
+  double min_score = 6;
+  optional bool is_tie_preferred = 7;
+}
+
+// 分页参数
+message PaginationParams {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+// 分页响应元数据
+message PaginationMeta {
+  int32 total = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int32 total_page = 4;
+  bool has_next = 5;
+  bool has_prev = 6;
+}

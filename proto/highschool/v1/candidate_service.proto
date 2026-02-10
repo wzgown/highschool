@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package highschool.v1;
+
+option go_package = "github.com/highschool/backend/gen/highschool/v1;highschoolv1";
+
+import "highschool/v1/candidate.proto";
+import "highschool/v1/school.proto";
+
+// 考生服务
+service CandidateService {
+  // 提交模拟分析
+  rpc SubmitAnalysis(SubmitAnalysisRequest) returns (SubmitAnalysisResponse);
+  
+  // 获取分析结果
+  rpc GetAnalysisResult(GetAnalysisResultRequest) returns (GetAnalysisResultResponse);
+  
+  // 获取历史记录
+  rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse);
+  
+  // 删除历史记录
+  rpc DeleteHistory(DeleteHistoryRequest) returns (DeleteHistoryResponse);
+}
+
+// 提交模拟分析请求
+message SubmitAnalysisRequest {
+  CandidateInfo candidate = 1;
+  CandidateScores scores = 2;
+  RankingInfo ranking = 3;
+  int32 comprehensive_quality = 4;
+  Volunteers volunteers = 5;
+  bool is_tie_preferred = 6;
+  optional string device_id = 7;
+}
+
+// 提交模拟分析响应
+message SubmitAnalysisResponse {
+  AnalysisResult result = 1;
+}
+
+// 获取分析结果请求
+message GetAnalysisResultRequest {
+  string id = 1;
+}
+
+// 获取分析结果响应
+message GetAnalysisResultResponse {
+  AnalysisResult result = 1;
+}
+
+// 获取历史记录请求
+message GetHistoryRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+// 获取历史记录响应
+message GetHistoryResponse {
+  repeated HistorySummary histories = 1;
+  PaginationMeta meta = 2;
+}
+
+// 删除历史记录请求
+message DeleteHistoryRequest {
+  string id = 1;
+}
+
+// 删除历史记录响应
+message DeleteHistoryResponse {
+  bool success = 1;
+}

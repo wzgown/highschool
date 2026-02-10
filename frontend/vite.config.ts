@@ -1,43 +1,29 @@
 import { defineConfig } from 'vite';
-import uni from '@dcloudio/vite-plugin-uni';
-import path from 'path';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [uni()],
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@shared': path.resolve(__dirname, '../shared'),
+      '@': resolve(__dirname, 'src'),
     },
   },
   server: {
     port: 5173,
-    host: '0.0.0.0',
     proxy: {
-      '/api': {
-        target: process.env.VITE_API_BASE_URL || 'http://localhost:3000',
+      // Connect-RPC 服务路径
+      '/highschool.v1': {
+        target: 'http://localhost:3000',
         changeOrigin: true,
       },
-      '/ws': {
-        target: process.env.VITE_API_BASE_URL || 'http://localhost:3000',
-        ws: true,
+      // 健康检查路径
+      '/health': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
       },
     },
   },
-  define: {
-    'process.env': {},
-  },
-  build: {
-    target: 'es2015',
-    outDir: 'dist/build',
-    assetsDir: 'static',
-    sourcemap: false,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
-  },
+
 });

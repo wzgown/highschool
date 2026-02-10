@@ -1,0 +1,695 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "highschool/v1/candidate.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CandidateService"
+    },
+    {
+      "name": "ReferenceService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "HistorySummarySummary": {
+      "type": "object",
+      "properties": {
+        "totalVolunteers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "safeCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "moderateCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "riskyCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AnalysisResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "results": {
+          "$ref": "#/definitions/v1SimulationResults"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "completedAt": {
+          "type": "string"
+        }
+      },
+      "title": "分析结果"
+    },
+    "v1CandidateInfo": {
+      "type": "object",
+      "properties": {
+        "districtId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "middleSchoolId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasQuotaSchoolEligibility": {
+          "type": "boolean"
+        }
+      },
+      "title": "考生信息"
+    },
+    "v1CandidateScores": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "chinese": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "math": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "foreign": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "integrated": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ethics": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "history": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pe": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "考生成绩"
+    },
+    "v1CompetitorAnalysis": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "scoreDistribution": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ScoreDistributionItem"
+          }
+        }
+      },
+      "title": "竞争分析"
+    },
+    "v1DeleteHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "title": "删除历史记录响应"
+    },
+    "v1District": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nameEn": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "区县"
+    },
+    "v1DistrictExamCountItem": {
+      "type": "object",
+      "properties": {
+        "districtId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "districtName": {
+          "type": "string"
+        },
+        "examCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "获取各区中考人数项"
+    },
+    "v1GetAnalysisResultResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v1AnalysisResult"
+        }
+      },
+      "title": "获取分析结果响应"
+    },
+    "v1GetDistrictExamCountResponse": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "districts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1DistrictExamCountItem"
+          }
+        }
+      },
+      "title": "获取各区中考人数响应"
+    },
+    "v1GetDistrictsResponse": {
+      "type": "object",
+      "properties": {
+        "districts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1District"
+          }
+        }
+      },
+      "title": "获取区县列表响应"
+    },
+    "v1GetHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "histories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HistorySummary"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/v1PaginationMeta"
+        }
+      },
+      "title": "获取历史记录响应"
+    },
+    "v1GetHistoryScoresResponse": {
+      "type": "object",
+      "properties": {
+        "scores": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HistoryScore"
+          }
+        }
+      },
+      "title": "获取历年分数线响应"
+    },
+    "v1GetMiddleSchoolsResponse": {
+      "type": "object",
+      "properties": {
+        "middleSchools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1MiddleSchool"
+          }
+        }
+      },
+      "title": "获取初中学校列表响应"
+    },
+    "v1GetSchoolDetailResponse": {
+      "type": "object",
+      "properties": {
+        "school": {
+          "$ref": "#/definitions/v1SchoolDetail"
+        }
+      },
+      "title": "获取学校详情响应"
+    },
+    "v1GetSchoolsResponse": {
+      "type": "object",
+      "properties": {
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1School"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/v1PaginationMeta"
+        }
+      },
+      "title": "获取高中学校列表响应"
+    },
+    "v1HistoryScore": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "batch": {
+          "type": "string"
+        },
+        "batchName": {
+          "type": "string"
+        },
+        "schoolId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "schoolName": {
+          "type": "string"
+        },
+        "minScore": {
+          "type": "number",
+          "format": "double"
+        },
+        "isTiePreferred": {
+          "type": "boolean"
+        }
+      },
+      "title": "历史分数线"
+    },
+    "v1HistorySummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "summary": {
+          "$ref": "#/definitions/HistorySummarySummary"
+        }
+      },
+      "title": "历史记录摘要"
+    },
+    "v1MiddleSchool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "shortName": {
+          "type": "string"
+        },
+        "districtId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "districtName": {
+          "type": "string"
+        },
+        "isNonSelective": {
+          "type": "boolean"
+        }
+      },
+      "title": "初中学校"
+    },
+    "v1PaginationMeta": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasNext": {
+          "type": "boolean"
+        },
+        "hasPrev": {
+          "type": "boolean"
+        }
+      },
+      "title": "分页响应元数据"
+    },
+    "v1RankPrediction": {
+      "type": "object",
+      "properties": {
+        "districtRank": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "districtRankRangeLow": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "districtRankRangeHigh": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "confidence": {
+          "type": "string"
+        },
+        "percentile": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "排名预测"
+    },
+    "v1RankingInfo": {
+      "type": "object",
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalStudents": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "percentile": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "排名信息"
+    },
+    "v1School": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "code": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "shortName": {
+          "type": "string"
+        },
+        "districtId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "districtName": {
+          "type": "string"
+        },
+        "schoolNatureId": {
+          "type": "string"
+        },
+        "schoolTypeId": {
+          "type": "string"
+        },
+        "hasInternationalCourse": {
+          "type": "boolean"
+        }
+      },
+      "title": "高中学校"
+    },
+    "v1SchoolDetail": {
+      "type": "object",
+      "properties": {
+        "school": {
+          "$ref": "#/definitions/v1School"
+        },
+        "schoolNatureName": {
+          "type": "string"
+        },
+        "schoolTypeName": {
+          "type": "string"
+        },
+        "boardingTypeId": {
+          "type": "string"
+        },
+        "boardingTypeName": {
+          "type": "string"
+        },
+        "remarks": {
+          "type": "string"
+        },
+        "historyScores": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HistoryScore"
+          }
+        }
+      },
+      "title": "学校详情"
+    },
+    "v1ScoreDistributionItem": {
+      "type": "object",
+      "properties": {
+        "range": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "分数分布项"
+    },
+    "v1SimulationResults": {
+      "type": "object",
+      "properties": {
+        "predictions": {
+          "$ref": "#/definitions/v1RankPrediction"
+        },
+        "probabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1VolunteerProbability"
+          }
+        },
+        "strategy": {
+          "$ref": "#/definitions/v1StrategyAnalysis"
+        },
+        "competitors": {
+          "$ref": "#/definitions/v1CompetitorAnalysis"
+        }
+      },
+      "title": "模拟结果"
+    },
+    "v1StrategyAnalysis": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "gradient": {
+          "$ref": "#/definitions/v1StrategyGradient"
+        },
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "volunteerRationality": {
+          "$ref": "#/definitions/v1VolunteerRationality"
+        }
+      },
+      "title": "策略分析"
+    },
+    "v1StrategyGradient": {
+      "type": "object",
+      "properties": {
+        "reach": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "target": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "safety": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "策略梯度"
+    },
+    "v1SubmitAnalysisResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v1AnalysisResult"
+        }
+      },
+      "title": "提交模拟分析响应"
+    },
+    "v1VolunteerProbability": {
+      "type": "object",
+      "properties": {
+        "batch": {
+          "type": "string"
+        },
+        "schoolId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "schoolName": {
+          "type": "string"
+        },
+        "schoolCode": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "number",
+          "format": "double"
+        },
+        "riskLevel": {
+          "type": "string"
+        },
+        "scoreDiff": {
+          "type": "number",
+          "format": "double"
+        },
+        "volunteerIndex": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "志愿概率"
+    },
+    "v1VolunteerRationality": {
+      "type": "object",
+      "properties": {
+        "hasSafetySchool": {
+          "type": "boolean"
+        },
+        "isGradientReasonable": {
+          "type": "boolean"
+        },
+        "hasDuplicateOrInvalid": {
+          "type": "boolean"
+        }
+      },
+      "title": "志愿合理性"
+    },
+    "v1Volunteers": {
+      "type": "object",
+      "properties": {
+        "quotaDistrict": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quotaSchool": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "unified": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "title": "志愿信息"
+    }
+  }
+}
