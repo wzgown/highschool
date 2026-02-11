@@ -216,6 +216,11 @@ export class GetHistoryRequest extends Message<GetHistoryRequest> {
    */
   pageSize = 0;
 
+  /**
+   * @generated from field: optional string device_id = 3;
+   */
+  deviceId?: string;
+
   constructor(data?: PartialMessage<GetHistoryRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -226,6 +231,7 @@ export class GetHistoryRequest extends Message<GetHistoryRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "page", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "page_size", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "device_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetHistoryRequest {

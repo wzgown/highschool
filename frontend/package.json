@@ -9,9 +9,9 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "^2.11.0",
-    "@connectrpc/connect": "^2.1.1",
-    "@connectrpc/connect-web": "^2.1.1",
+    "@bufbuild/protobuf": "^1.10.0",
+    "@connectrpc/connect": "^1.6.1",
+    "@connectrpc/connect-web": "^1.6.1",
     "@element-plus/icons-vue": "^2.3.0",
     "@fingerprintjs/fingerprintjs": "^4.2.0",
     "axios": "^1.6.0",

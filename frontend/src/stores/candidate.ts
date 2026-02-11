@@ -66,12 +66,24 @@ export const useCandidateStore = defineStore('candidate', () => {
   const form = ref<CandidateForm>(defaultState());
   
   // Getters
+  // 计算已填科目的总分（非0科目才计入）
   const calculatedTotal = computed(() => {
     const { chinese, math, foreign, integrated, ethics, history, pe } = form.value.scores;
     return chinese + math + foreign + integrated + ethics + history + pe;
   });
   
+  // 判断是否填了任何科目（有非0科目）
+  const hasAnySubjectScore = computed(() => {
+    const { chinese, math, foreign, integrated, ethics, history, pe } = form.value.scores;
+    return chinese > 0 || math > 0 || foreign > 0 || integrated > 0 || 
+           ethics > 0 || history > 0 || pe > 0;
+  });
+  
+  // 成绩校验：如果没填任何科目，返回true；如果填了，则校验总和是否等于总分
   const isScoreValid = computed(() => {
+    if (!hasAnySubjectScore.value) {
+      return true; // 没填任何科目，允许通过
+    }
     return form.value.scores.total === calculatedTotal.value;
   });
   
@@ -146,6 +158,7 @@ export const useCandidateStore = defineStore('candidate', () => {
   return {
     form,
     calculatedTotal,
+    hasAnySubjectScore,
     isScoreValid,
     canSubmit,
     reset,

@@ -52,6 +52,7 @@ message GetAnalysisResultResponse {
 message GetHistoryRequest {
   int32 page = 1;
   int32 page_size = 2;
+  optional string device_id = 3;
 }
 
 // 获取历史记录响应

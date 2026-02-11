@@ -43,7 +43,7 @@ func NewSchoolRepository() SchoolRepository {
 // GetByID 根据ID获取学校
 func (r *schoolRepo) GetByID(ctx context.Context, id int32) (*highschoolv1.School, error) {
 	row := r.db.QueryRow(ctx, `
-		SELECT s.id, s.name, s.code, d.id, d.name, s.school_type_id, s.school_nature_id,
+		SELECT s.id, s.full_name, s.code, d.id, d.name, s.school_type_id, s.school_nature_id,
 		       s.has_international_course
 		FROM ref_school s
 		JOIN ref_district d ON s.district_id = d.id
@@ -118,12 +118,12 @@ func (r *schoolRepo) List(ctx context.Context, districtID *int32, schoolTypeID, 
 
 	// 获取分页数据
 	query := fmt.Sprintf(`
-		SELECT s.id, s.name, s.code, d.id, d.name, s.school_type_id, s.school_nature_id,
+		SELECT s.id, s.full_name, s.code, d.id, d.name, s.school_type_id, s.school_nature_id,
 		       s.has_international_course
 		FROM ref_school s
 		JOIN ref_district d ON s.district_id = d.id
 		%s
-		ORDER BY s.display_order, s.id
+		ORDER BY s.id
 		LIMIT $%d OFFSET $%d
 	`, whereClause, argIdx, argIdx+1)
 

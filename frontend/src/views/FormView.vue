@@ -100,11 +100,11 @@
             </el-col>
           </el-row>
 
-          <el-divider>各科成绩</el-divider>
+          <el-divider content-position="center">各科成绩（选填）</el-divider>
 
           <el-row :gutter="20">
             <el-col :xs="24" :sm="8">
-              <el-form-item label="语文">
+              <el-form-item label="语文（选填）">
                 <el-input-number
                   v-model="form.scores.chinese"
                   :min="0"
@@ -115,7 +115,7 @@
               </el-form-item>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-form-item label="数学">
+              <el-form-item label="数学（选填）">
                 <el-input-number
                   v-model="form.scores.math"
                   :min="0"
@@ -126,7 +126,7 @@
               </el-form-item>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-form-item label="外语">
+              <el-form-item label="外语（选填）">
                 <el-input-number
                   v-model="form.scores.foreign"
                   :min="0"
@@ -140,7 +140,7 @@
 
           <el-row :gutter="20">
             <el-col :xs="24" :sm="8">
-              <el-form-item label="综合测试">
+              <el-form-item label="综合测试（选填）">
                 <el-input-number
                   v-model="form.scores.integrated"
                   :min="0"
@@ -151,7 +151,7 @@
               </el-form-item>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-form-item label="道德与法治">
+              <el-form-item label="道德与法治（选填）">
                 <el-input-number
                   v-model="form.scores.ethics"
                   :min="0"
@@ -162,7 +162,7 @@
               </el-form-item>
             </el-col>
             <el-col :xs="24" :sm="8">
-              <el-form-item label="历史">
+              <el-form-item label="历史（选填）">
                 <el-input-number
                   v-model="form.scores.history"
                   :min="0"
@@ -176,7 +176,7 @@
 
           <el-row :gutter="20">
             <el-col :xs="24" :sm="8">
-              <el-form-item label="体育">
+              <el-form-item label="体育（选填）">
                 <el-input-number
                   v-model="form.scores.pe"
                   :min="0"
@@ -189,7 +189,7 @@
           </el-row>
 
           <el-alert
-            v-if="!isScoreValid && calculatedTotal > 0"
+            v-if="hasAnySubjectScore && !isScoreValid"
             title="成绩校验提醒"
             type="warning"
             :closable="false"
@@ -197,7 +197,20 @@
           >
             <p>
               各科成绩合计为 {{ calculatedTotal }} 分，与填写的总分 {{ form.scores.total }} 分不符。
-              请检查各科成绩是否填写正确。
+              请检查各科成绩是否填写正确，或清空所有科目成绩以跳过校验。
+            </p>
+          </el-alert>
+
+          <el-alert
+            v-if="!hasAnySubjectScore && form.scores.total > 0"
+            title="成绩提示"
+            type="info"
+            :closable="false"
+            show-icon
+          >
+            <p>
+              您只填写了总分，各科成绩为选填项。如需填写各科成绩，请在下方输入；
+              如只使用总分进行分析，可直接进入下一步。
             </p>
           </el-alert>
 
@@ -411,6 +424,7 @@ const middleSchoolsLoading = ref(false);
 // 表单数据
 const form = computed(() => store.form);
 const calculatedTotal = computed(() => store.calculatedTotal);
+const hasAnySubjectScore = computed(() => store.hasAnySubjectScore);
 const isScoreValid = computed(() => store.isScoreValid);
 
 // 步骤验证
@@ -419,12 +433,13 @@ const canNext = computed(() => {
     return form.value.districtId !== null && form.value.middleSchoolId !== null;
   }
   if (currentStep.value === 1) {
+    // 成绩步骤：总分必填，排名必填，成绩校验可选（没填科目也能过）
     return (
       form.value.scores.total > 0 &&
-      isScoreValid.value &&
       form.value.ranking.rank > 0 &&
       form.value.ranking.totalStudents > 0 &&
-      form.value.ranking.rank <= form.value.ranking.totalStudents
+      form.value.ranking.rank <= form.value.ranking.totalStudents &&
+      isScoreValid.value
     );
   }
   return true;
@@ -499,7 +514,7 @@ async function submit() {
   
   submitting.value = true;
   try {
-    const request = formatFormToRequest(form.value);
+    const request = await formatFormToRequest(form.value);
     const { analysisId } = await submitAnalysis(request);
     ElMessage.success('分析请求已提交');
     router.push(`/result/${analysisId}`);

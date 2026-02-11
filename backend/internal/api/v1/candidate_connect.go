@@ -72,8 +72,11 @@ func (h *CandidateServiceHandler) GetHistory(
 		pageSize = 20
 	}
 
-	// TODO: 从请求中获取 deviceID
+	// 从请求中获取 deviceID
 	deviceID := ""
+	if req.Msg.DeviceId != nil {
+		deviceID = *req.Msg.DeviceId
+	}
 
 	resp, err := h.service.GetHistory(ctx, deviceID, page, pageSize)
 	if err != nil {

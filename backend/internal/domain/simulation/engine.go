@@ -2,25 +2,29 @@
 package simulation
 
 import (
+	"context"
 	"fmt"
 
 	highschoolv1 "highschool-backend/gen/highschool/v1"
+	"highschool-backend/internal/repository"
 )
 
 // Engine 模拟引擎
 type Engine struct {
 	competitorGenerator *CompetitorGenerator
+	schoolRepo          repository.SchoolRepository
 }
 
 // NewEngine 创建模拟引擎
 func NewEngine() *Engine {
 	return &Engine{
 		competitorGenerator: NewCompetitorGenerator(),
+		schoolRepo:          repository.NewSchoolRepository(),
 	}
 }
 
 // Run 执行模拟分析
-func (e *Engine) Run(req *highschoolv1.SubmitAnalysisRequest) *highschoolv1.SimulationResults {
+func (e *Engine) Run(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) *highschoolv1.SimulationResults {
 	// 1. 计算百分位
 	percentile := float64(req.Ranking.TotalStudents-req.Ranking.Rank) / float64(req.Ranking.TotalStudents) * 100
 
@@ -36,7 +40,7 @@ func (e *Engine) Run(req *highschoolv1.SubmitAnalysisRequest) *highschoolv1.Simu
 	}
 
 	// 3. 计算各志愿概率
-	probabilities := e.calculateProbabilities(req)
+	probabilities := e.calculateProbabilities(ctx, req)
 
 	// 4. 策略分析
 	strategy := e.analyzeStrategy(probabilities)
@@ -64,16 +68,17 @@ func (e *Engine) calculateConfidence(percentile float64) string {
 }
 
 // calculateProbabilities 计算各志愿录取概率
-func (e *Engine) calculateProbabilities(req *highschoolv1.SubmitAnalysisRequest) []*highschoolv1.VolunteerProbability {
+func (e *Engine) calculateProbabilities(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) []*highschoolv1.VolunteerProbability {
 	var probabilities []*highschoolv1.VolunteerProbability
 
 	// 名额分配到区
 	if req.Volunteers.QuotaDistrict != nil {
 		prob := e.calculateProbability(req.Scores.Total, 700)
+		schoolName := e.getSchoolName(ctx, *req.Volunteers.QuotaDistrict)
 		probabilities = append(probabilities, &highschoolv1.VolunteerProbability{
 			Batch:          "QUOTA_DISTRICT",
 			SchoolId:       *req.Volunteers.QuotaDistrict,
-			SchoolName:     getSchoolName(*req.Volunteers.QuotaDistrict),
+			SchoolName:     schoolName,
 			Probability:    prob,
 			RiskLevel:      getRiskLevel(prob),
 			VolunteerIndex: 1,
@@ -83,10 +88,11 @@ func (e *Engine) calculateProbabilities(req *highschoolv1.SubmitAnalysisRequest)
 	// 名额分配到校
 	for i, schoolID := range req.Volunteers.QuotaSchool {
 		prob := e.calculateProbability(req.Scores.Total, 680)
+		schoolName := e.getSchoolName(ctx, schoolID)
 		probabilities = append(probabilities, &highschoolv1.VolunteerProbability{
 			Batch:          "QUOTA_SCHOOL",
 			SchoolId:       schoolID,
-			SchoolName:     getSchoolName(schoolID),
+			SchoolName:     schoolName,
 			Probability:    prob,
 			RiskLevel:      getRiskLevel(prob),
 			VolunteerIndex: int32(i + 1),
@@ -97,10 +103,11 @@ func (e *Engine) calculateProbabilities(req *highschoolv1.SubmitAnalysisRequest)
 	for i, schoolID := range req.Volunteers.Unified {
 		baseScore := 650 - int32(i)*10
 		prob := e.calculateProbability(req.Scores.Total, baseScore)
+		schoolName := e.getSchoolName(ctx, schoolID)
 		probabilities = append(probabilities, &highschoolv1.VolunteerProbability{
 			Batch:          "UNIFIED_1_15",
 			SchoolId:       schoolID,
-			SchoolName:     getSchoolName(schoolID),
+			SchoolName:     schoolName,
 			Probability:    prob,
 			RiskLevel:      getRiskLevel(prob),
 			VolunteerIndex: int32(i + 1),
@@ -108,6 +115,15 @@ func (e *Engine) calculateProbabilities(req *highschoolv1.SubmitAnalysisRequest)
 	}
 
 	return probabilities
+}
+
+// getSchoolName 从数据库获取学校名称
+func (e *Engine) getSchoolName(ctx context.Context, id int32) string {
+	school, err := e.schoolRepo.GetByID(ctx, id)
+	if err != nil || school == nil {
+		return fmt.Sprintf("学校%d", id)
+	}
+	return school.FullName
 }
 
 // calculateProbability 计算单个志愿的录取概率
@@ -165,8 +181,8 @@ func (e *Engine) analyzeStrategy(probabilities []*highschoolv1.VolunteerProbabil
 	}
 
 	return &highschoolv1.StrategyAnalysis{
-		Score:    score,
-		Gradient: gradient,
+		Score:       score,
+		Gradient:    gradient,
 		Suggestions: suggestions,
 		Warnings:    warnings,
 		VolunteerRationality: &highschoolv1.VolunteerRationality{
@@ -189,19 +205,4 @@ func getRiskLevel(prob float64) string {
 		return "risky"
 	}
 	return "high_risk"
-}
-
-// getSchoolName 获取学校名称（简化版，实际应从数据库查询）
-func getSchoolName(id int32) string {
-	names := map[int32]string{
-		31: "上海市大同初级中学",
-		32: "上海市格致初级中学",
-		33: "上海市向明初级中学",
-		34: "上海市卢湾中学",
-		35: "上海市兴业中学",
-	}
-	if name, ok := names[id]; ok {
-		return name
-	}
-	return fmt.Sprintf("学校%d", id)
 }

@@ -4,6 +4,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/google/uuid"
@@ -60,7 +61,7 @@ func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1
 	}
 
 	// 3. 执行模拟分析
-	results := s.simEngine.Run(req)
+	results := s.simEngine.Run(ctx, req)
 
 	// 4. 保存到数据库
 	deviceInfo := map[string]interface{}{} // 简化版
@@ -91,7 +92,7 @@ func (s *candidateService) GetAnalysisResult(ctx context.Context, id string) (*h
 
 	createdAt := record.CreatedAt.Format(time.RFC3339)
 	return &highschoolv1.AnalysisResult{
-		Id:        record.ID,
+		Id:        strconv.FormatInt(record.ID, 10),
 		Status:    "completed",
 		Results:   record.SimulationResult,
 		CreatedAt: createdAt,
@@ -109,7 +110,7 @@ func (s *candidateService) GetHistory(ctx context.Context, deviceID string, page
 	histories := make([]*highschoolv1.HistorySummary, len(records))
 	for i, record := range records {
 		histories[i] = &highschoolv1.HistorySummary{
-			Id:        record.ID,
+			Id:        strconv.FormatInt(record.ID, 10),
 			CreatedAt: record.CreatedAt.Format(time.RFC3339),
 			Summary: &highschoolv1.HistorySummary_Summary{
 				TotalVolunteers: 18,
@@ -143,11 +144,68 @@ func (s *candidateService) DeleteHistory(ctx context.Context, id, deviceID strin
 }
 
 // validateScores 验证成绩
+// 规则：
+// 1. 单科不能超过满分
+// 2. 已填科目之和不能超过总分
+// 3. 只有当所有科目都填了（>0）时，才要求总和等于总分
 func (s *candidateService) validateScores(scores *highschoolv1.CandidateScores) error {
+	// 各科满分
+	const (
+		maxChinese    = 150
+		maxMath       = 150
+		maxForeign    = 150
+		maxIntegrated = 150
+		maxEthics     = 60
+		maxHistory    = 60
+		maxPE         = 30
+		maxTotal      = 750
+	)
+
+	// 校验单科不超过满分
+	if scores.Chinese > maxChinese {
+		return fmt.Errorf("语文成绩(%d)不能超过满分(%d)", scores.Chinese, maxChinese)
+	}
+	if scores.Math > maxMath {
+		return fmt.Errorf("数学成绩(%d)不能超过满分(%d)", scores.Math, maxMath)
+	}
+	if scores.Foreign > maxForeign {
+		return fmt.Errorf("外语成绩(%d)不能超过满分(%d)", scores.Foreign, maxForeign)
+	}
+	if scores.Integrated > maxIntegrated {
+		return fmt.Errorf("综合测试成绩(%d)不能超过满分(%d)", scores.Integrated, maxIntegrated)
+	}
+	if scores.Ethics > maxEthics {
+		return fmt.Errorf("道德与法治成绩(%d)不能超过满分(%d)", scores.Ethics, maxEthics)
+	}
+	if scores.History > maxHistory {
+		return fmt.Errorf("历史成绩(%d)不能超过满分(%d)", scores.History, maxHistory)
+	}
+	if scores.Pe > maxPE {
+		return fmt.Errorf("体育成绩(%d)不能超过满分(%d)", scores.Pe, maxPE)
+	}
+
+	// 校验总分不超过满分
+	if scores.Total > maxTotal {
+		return fmt.Errorf("总分(%d)不能超过满分(%d)", scores.Total, maxTotal)
+	}
+
+	// 计算已填科目之和（>0 的科目）
 	calculatedTotal := scores.Chinese + scores.Math + scores.Foreign +
 		scores.Integrated + scores.Ethics + scores.History + scores.Pe
-	if calculatedTotal != scores.Total {
-		return fmt.Errorf("总分(%d)与各科成绩之和(%d)不符", scores.Total, calculatedTotal)
+
+	// 已填科目之和不能超过总分
+	if calculatedTotal > scores.Total {
+		return fmt.Errorf("各科成绩之和(%d)不能超过总分(%d)", calculatedTotal, scores.Total)
 	}
+
+	// 判断是否所有科目都填了（>0）
+	allSubjectsFilled := scores.Chinese > 0 && scores.Math > 0 && scores.Foreign > 0 &&
+		scores.Integrated > 0 && scores.Ethics > 0 && scores.History > 0 && scores.Pe > 0
+
+	// 只有当所有科目都填了，才要求总和等于总分
+	if allSubjectsFilled && calculatedTotal != scores.Total {
+		return fmt.Errorf("各科成绩之和(%d)与总分(%d)不符", calculatedTotal, scores.Total)
+	}
+
 	return nil
 }

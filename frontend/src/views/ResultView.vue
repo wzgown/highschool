@@ -23,8 +23,18 @@
       </el-result>
     </div>
 
+    <!-- 无数据 -->
+    <div v-else-if="result && !result.results" class="error-container">
+      <el-result icon="warning" title="暂无分析结果" sub-title="分析结果数据不完整">
+        <template #extra>
+          <el-button type="primary" @click="loadResult">重新加载</el-button>
+          <el-button @click="goBack">返回</el-button>
+        </template>
+      </el-result>
+    </div>
+
     <!-- 结果展示 -->
-    <template v-else-if="result">
+    <template v-else-if="result && result.results">
       <div class="result-header">
         <h1 class="result-title">志愿分析报告</h1>
         <p class="result-time">生成时间：{{ formatTime(result.createdAt) }}</p>
@@ -50,8 +60,8 @@
             </el-tag>
           </div>
           <p class="prediction-range">
-            预测区间：{{ result.results?.predictions.districtRankRange[0] }} - 
-            {{ result.results?.predictions.districtRankRange[1] }}
+            预测区间：{{ result.results?.predictions.districtRankRangeLow }} - 
+            {{ result.results?.predictions.districtRankRangeHigh }}
           </p>
         </div>
       </el-card>
@@ -92,7 +102,7 @@
                   {{ getRiskText(item.riskLevel) }}
                 </el-tag>
               </div>
-              <p v-if="item.scoreDiff !== null" class="score-diff">
+              <p v-if="typeof item.scoreDiff === 'number'" class="score-diff">
                 与历年分对比：{{ item.scoreDiff > 0 ? '+' : '' }}{{ item.scoreDiff }}分
               </p>
             </div>
@@ -261,6 +271,9 @@ async function loadResult() {
   
   try {
     const data = await getAnalysisResult(props.id);
+    console.log('API Response:', data);
+    console.log('results:', data.results);
+    console.log('predictions:', data.results?.predictions);
     result.value = data;
     
     // 如果还在处理中，继续轮询
@@ -268,6 +281,7 @@ async function loadResult() {
       setTimeout(loadResult, 3000);
     }
   } catch (e: any) {
+    console.error('Load result error:', e);
     error.value = e.message || '获取分析结果失败';
   } finally {
     loading.value = false;

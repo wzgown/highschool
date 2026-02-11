@@ -97,9 +97,14 @@ func (h *ReferenceServiceHandler) GetMiddleSchools(
 	ctx context.Context,
 	req *connect.Request[highschoolv1.GetMiddleSchoolsRequest],
 ) (*connect.Response[highschoolv1.GetMiddleSchoolsResponse], error) {
-	// TODO: 实现初中学校查询
+	schools, err := h.service.GetMiddleSchools(ctx, req.Msg.DistrictId, nil)
+	if err != nil {
+		logger.Error("get middle schools failed", err)
+		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取初中学校列表失败"))
+	}
+
 	return connect.NewResponse(&highschoolv1.GetMiddleSchoolsResponse{
-		MiddleSchools: []*highschoolv1.MiddleSchool{},
+		MiddleSchools: schools,
 	}), nil
 }
 

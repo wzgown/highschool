@@ -24,19 +24,24 @@ type ReferenceService interface {
 
 	// GetDistrictExamCount 获取区县中考人数
 	GetDistrictExamCount(ctx context.Context, districtID int32, year int32) (*highschoolv1.DistrictExamCountItem, error)
+
+	// GetMiddleSchools 获取初中学校列表
+	GetMiddleSchools(ctx context.Context, districtID *int32, keyword *string) ([]*highschoolv1.MiddleSchool, error)
 }
 
 // referenceService 实现
 type referenceService struct {
-	districtRepo repository.DistrictRepository
-	schoolRepo   repository.SchoolRepository
+	districtRepo      repository.DistrictRepository
+	schoolRepo        repository.SchoolRepository
+	middleSchoolRepo  repository.MiddleSchoolRepository
 }
 
 // NewReferenceService 创建参考数据服务
 func NewReferenceService() ReferenceService {
 	return &referenceService{
-		districtRepo: repository.NewDistrictRepository(),
-		schoolRepo:   repository.NewSchoolRepository(),
+		districtRepo:     repository.NewDistrictRepository(),
+		schoolRepo:       repository.NewSchoolRepository(),
+		middleSchoolRepo: repository.NewMiddleSchoolRepository(),
 	}
 }
 
@@ -75,11 +80,9 @@ func (s *referenceService) GetDistrictExamCount(ctx context.Context, districtID 
 	return s.districtRepo.GetExamCount(ctx, districtID, year)
 }
 
-// GetMiddleSchools 获取初中学校列表 (简化版)
+// GetMiddleSchools 获取初中学校列表
 func (s *referenceService) GetMiddleSchools(ctx context.Context, districtID *int32, keyword *string) ([]*highschoolv1.MiddleSchool, error) {
-	// 这里可以实现具体的查询逻辑
-	// 简化版返回空列表
-	return []*highschoolv1.MiddleSchool{}, nil
+	return s.middleSchoolRepo.List(ctx, districtID, keyword)
 }
 
 
