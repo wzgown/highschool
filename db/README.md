@@ -9,11 +9,12 @@ db/
 │   └── 002_create_history_tables.sql         # 历史数据表（录取分数线等）
 ├── seeds/               # 种子数据SQL
 │   ├── 001_seed_reference_data.sql           # 枚举数据
-│   ├── 002_seed_schools_2025.sql             # 2025年学校数据
+│   ├── 002_seed_schools_2025_full.sql         # 2025年学校全量数据（76所）
 │   ├── 003_seed_quota_allocation_district_2025.sql  # 2025年名额分配到区计划（76所，6724个名额）
 │   ├── 005_seed_exam_summary_2023.sql      # 2023年中考概况（11.9万人）
 │   ├── 006_seed_exam_count_comparison_2024_2025.sql  # 2024-2025年中考报名人数对比
 │   ├── 007_seed_exam_count_projection_2026_2027.sql  # 2026-2027年中考人数预估（14.1万、15.5万）
+│   ├── 008_seed_district_exam_count_2025.sql  # 2025年各区中考报名人数（16区，127,156人）
 │   ├── 010_seed_district_exam_count.sql      # 2024-2025年各区中考人数
 │   ├── 020_seed_2024_jiading_quota_school.sql         # 2024年名额分配到校（嘉定区示例）
 │   ├── 021_seed_2024_jiading_admission_quota_district.sql  # 2024年名额分配到区分数线（嘉定）
@@ -321,6 +322,31 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
 | 招生学校名单 | ✅ | ✅ | - | - |
 
 ## 更新日志
+
+### 2025-02-12 (2025年学校全量数据)
+- **新增2025年学校全量数据**：
+  - 002_seed_schools_2025_full.sql：76所学校信息
+  - 数据来源：original_data/processed/2025/schools/2025年学校信息.csv
+  - 处理脚本：
+    - `scripts/extract_2025_schools_from_sources.py`：Extract步骤，从已验证的CSV获取基础数据
+    - `scripts/generate_2025_schools_sql.py`：Load步骤，生成学校全量SQL
+  - **数据说明**：
+    - 基于2025年名额分配到区招生计划的76所学校
+    - 包含招生代码、名称、所属区、办别、学校类型、寄宿情况
+    - 使用ON CONFLICT (code) DO UPDATE确保幂等性
+    - 全量覆盖ref_school表，支持学校属性更新
+
+### 2025-02-12 (2025年各区中考人数)
+- **新增2025年各区中考报名人数数据**：
+  - 008_seed_district_exam_count_2025.sql：16个区，127,156人
+  - 数据来源：original_data/raw/2025/2025年上海各区中考人数.csv
+- **处理脚本**：
+  - `scripts/etl_2025_district_exam_count.py`：Extract步骤，处理原始CSV表头问题（25年→2025年，列名前导空格）
+  - `scripts/generate_2025_district_exam_count_sql.py`：Load步骤，从processed/CSV生成SQL
+- **数据说明**：
+  - 覆盖全市16个区
+  - 与2025年名额分配到区数据（6724个名额）形成完整招生计划视图
+  - 2025年中考报名总人数：约13.3万人（127,156人）
 
 ### 2025-02-12 (2026-2027年中考人数预估)
 - **新增2026-2027年中考报名人数预估值**：

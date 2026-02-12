@@ -266,6 +266,26 @@ db/seeds/
 - [x] 2024年：完整流程已建立（extract_middle_schools.py → SQL生成）
 - [x] 2023年：总体概况数据已收集（exam_summary_2023.sql）
 - [x] 2025年：名额分配到区数据ETL流程已完成
+- [x] 2025年：各区中考人数数据ETL流程已完成
+- [x] 2025年：学校全量数据ETL流程已完成
+
+### 已完成的脚本
+- `scripts/etl_2025_quota_district_fixed.py` - Extract步骤：从PDF提取到processed/CSV
+- `scripts/generate_2025_quota_district_sql.py` - Load步骤：从processed/CSV生成SQL
+- `scripts/etl_2025_district_exam_count.py` - Extract步骤：从CSV提取到processed/CSV（修复表头问题）
+- `scripts/generate_2025_district_exam_count_sql.py` - Load步骤：从processed/CSV生成SQL
+- `scripts/extract_2025_schools_from_sources.py` - Extract步骤：从已验证CSV获取基础数据并保存
+- `scripts/generate_2025_schools_sql.py` - Load步骤：从processed/CSV生成学校全量SQL
+- `scripts/extract_middle_schools.py` - 2024年初中学校数据提取（16区全覆盖）
+
+### 已完成的数据产物
+- `processed/2025/quota_district/2025年名额分配到区招生计划.csv` - 76所学校，6724个名额
+- `processed/2025/district_exam_count/2025年各区中考人数.csv` - 16个区，127,156人
+- `processed/2025/schools/2025年学校信息.csv` - 76所学校全量信息
+- `db/seeds/003_seed_quota_allocation_district_2025.sql` - 名额分配到区种子文件
+- `db/seeds/008_seed_district_exam_count_2025.sql` - 各区人数种子文件
+- `db/seeds/002_seed_schools_2025_full.sql` - 学校全量更新种子文件
+- `db/seeds/040_seed_middle_schools_2024.sql` - 669所初中学校数据
 
 ### 已完成的脚本
 - `scripts/etl_2025_quota_district_fixed.py` - Extract步骤：从PDF提取到processed/CSV
