@@ -10,7 +10,10 @@ db/
 ├── seeds/               # 种子数据SQL
 │   ├── 001_seed_reference_data.sql           # 枚举数据
 │   ├── 002_seed_schools_2025.sql             # 2025年学校数据
-│   ├── 003_seed_quota_allocation_district_2025.sql  # 2025年名额分配到区计划
+│   ├── 003_seed_quota_allocation_district_2025.sql  # 2025年名额分配到区计划（76所，6724个名额）
+│   ├── 005_seed_exam_summary_2023.sql      # 2023年中考概况（11.9万人）
+│   ├── 006_seed_exam_count_comparison_2024_2025.sql  # 2024-2025年中考报名人数对比
+│   ├── 007_seed_exam_count_projection_2026_2027.sql  # 2026-2027年中考人数预估（14.1万、15.5万）
 │   ├── 010_seed_district_exam_count.sql      # 2024-2025年各区中考人数
 │   ├── 020_seed_2024_jiading_quota_school.sql         # 2024年名额分配到校（嘉定区示例）
 │   ├── 021_seed_2024_jiading_admission_quota_district.sql  # 2024年名额分配到区分数线（嘉定）
@@ -319,6 +322,14 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
 
 ## 更新日志
 
+### 2025-02-12 (2026-2027年中考人数预估)
+- **新增2026-2027年中考报名人数预估值**：
+  - 007_seed_exam_count_projection_2026_2027.sql：基于趋势的预估数据
+  - 2026年：14.1万人（141,000人）
+  - 2027年：15.5万人（155,000人，峰值）
+- **预估依据**：基于2024-2025年增长趋势和2027年官方预测峰值
+- **数据性质**：预估值，非官方公布，用于提前规划教育资源
+
 ### 2025-02-12
 - **新增2024年全市录取分数线数据**：
   - 030_seed_admission_score_unified_2024.sql：1-15志愿录取分数线（35条）
@@ -344,6 +355,41 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
 - 导入2024年嘉定区名额分配到校招生计划（示例）
 - 导入2024年嘉定区录取分数线数据（名额分配到区、到校、1-15志愿）
 
+### 2025-02-12 (2025年名额分配到区招生计划)
+- **从PDF提取并生成2025年名额分配到区数据**：
+  - 003_seed_quota_allocation_district_2025.sql：76所市实验性示范性高中，6724个名额
+- **覆盖区域**：全部16个区
+- **各区名额统计**：
+  - 上海市: 1379 | 嘉定区: 227 | 奉贤区: 130 | 宝山区: 383
+  - 徐汇区: 393 | 普陀区: 280 | 杨浦区: 284 | 松江区: 297
+  - 浦东新区: 805 | 虹口区: 203 | 金山区: 156 | 长宁区: 176
+  - 闵行区: 464 | 青浦区: 273 | 静安区: 428 | 黄浦区: 753
+- **数据来源**：https://www.shmeea.edu.cn/download/20250528/014.pdf
+- **处理脚本**：
+  - scripts/parse_2025_quota_district_pdf.py：使用pdfplumber提取表格
+  - scripts/generate_2025_quota_district_sql.py：从CSV生成SQL
+
+### 2025-02-12 (中考报名人数数据)
+- **从PDF提取2025年名额分配到区招生计划**：
+  - 003_seed_quota_allocation_district_2025.sql：76所市实验性示范性高中，6724个名额
+  - 005_seed_exam_summary_2023.sql：2023年中考概况（11.9万人）
+  - 006_seed_exam_count_comparison_2024_2025.sql：2024-2025年中考报名人数对比
+- **新增数据要点说明**：
+  - 人数激增：2025年达12.7万人，受户籍政策调整及适龄入学高峰影响
+  - 录取规模同步扩大：教育资源同步扩容，维持66%左右录取率
+  - 未来趋势：根据出生人口数据，2026-2027年预计保持高位，2027年可能达15.5万人峰值
+
+### 2025-02-12 (建立标准ETL流程)
+- **创建ETL流程规范文档**：`original_data/docs/ETL_PIPELINE_SOP.md`
+  - 定义三步流程：Extract (raw → processed) → Transform (清洗/合并) → Load (processed → db/seeds)
+  - 目录结构：raw/ → processed/ → db/seeds
+  - 数据质量标准：完整性、准确性、可重复性、可追溯性
+- **2025年名额分配到区数据完成标准ETL**：
+  - Extract: `scripts/etl_2025_quota_district_fixed.py` 从 `policies/2025-名额分配到区招生计划.pdf` 提取到 `processed/2025/quota_district/`
+  - Load: `scripts/generate_2025_quota_district_sql.py` 从 processed CSV 生成 SQL
+  - 产物: `003_seed_quota_allocation_district_2025.sql` (76所学校，6724个名额)
+- **Bug修复**：原始PDF解析脚本列错位（计划区域字段包含名额数值），已修复为9列正确结构
+
 ### 2025-02-12 (初中学校数据)
 - **新增2024年全市初中学校数据**：
   - 040_seed_middle_schools_2024.sql：全市16个区共669所初中学校
@@ -352,3 +398,4 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
   - 12个区来自 quota_school/ 目录（名额分配到校招生计划）
   - 4个区来自 cutoff_scores/ 目录（名额分配到校录取最低分数线）
 - **处理脚本**：scripts/extract_middle_schools.py（穷举法，为每个区单独编写解析函数）
+│   ├── 006_seed_exam_count_comparison_2024_2025.sql  # 2024-2025年中考报名人数对比
