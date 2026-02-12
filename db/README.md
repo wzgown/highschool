@@ -15,7 +15,13 @@ db/
 │   ├── 020_seed_2024_jiading_quota_school.sql         # 2024年名额分配到校（嘉定区示例）
 │   ├── 021_seed_2024_jiading_admission_quota_district.sql  # 2024年名额分配到区分数线（嘉定）
 │   ├── 022_seed_2024_jiading_admission_quota_school.sql   # 2024年名额分配到校分数线（嘉定）
-│   └── 023_seed_2024_jiading_admission_unified.sql       # 2024年1-15志愿分数线（嘉定）
+│   ├── 023_seed_2024_jiading_admission_unified.sql       # 2024年1-15志愿分数线（嘉定）
+│   ├── 030_seed_admission_score_unified_2024.sql          # 2024年1-15志愿录取分数线
+│   ├── 031_seed_admission_score_quota_district_2024.sql    # 2024年名额分配到区录取分数线
+│   ├── 032_seed_admission_score_quota_school_2024.sql      # 2024年名额分配到校录取分数线
+│   ├── 033_seed_quota_allocation_district_2024.sql          # 2024年名额分配到区招生计划
+│   ├── 034_seed_quota_allocation_school_2024.sql            # 2024年名额分配到校招生计划
+│   └── 040_seed_middle_schools_2024.sql        # 2024年全市初中学校名单（582所）
 └── README.md            # 本文档
 ```
 
@@ -337,3 +343,10 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
 - 导入2024-2027年各区中考人数
 - 导入2024年嘉定区名额分配到校招生计划（示例）
 - 导入2024年嘉定区录取分数线数据（名额分配到区、到校、1-15志愿）
+
+### 2025-02-12 (初中学校数据)
+- **新增2024年全市初中学校数据**：
+  - 040_seed_middle_schools_2024.sql：全市12个区共582所初中学校
+- **覆盖区域**：黄浦、徐汇、静安、普陀、杨浦、闵行、宝山、嘉定、浦东、松江、青浦、奉贤
+- **数据来源**：从名额分配到校招生计划CSV文件提取
+- **处理脚本**：scripts/extract_middle_schools.py

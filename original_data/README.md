@@ -27,6 +27,8 @@ original_data/
 ├── processed/                   # 整理后的标准化数据
 │   ├── cutoff_scores/           # 历年分数线
 │   ├── quota/                  # 名额分配数据
+│   ├── quota_school/            # 名额分配到校（包含初中学校）
+│   │   └── middle_schools_2024_unified.csv  # 全市初中学校名单（582所）
 │   └── schools/                # 学校信息
 │
 └── docs/                       # 数据文档和报告
