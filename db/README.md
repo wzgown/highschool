@@ -21,7 +21,7 @@ db/
 │   ├── 032_seed_admission_score_quota_school_2024.sql      # 2024年名额分配到校录取分数线
 │   ├── 033_seed_quota_allocation_district_2024.sql          # 2024年名额分配到区招生计划
 │   ├── 034_seed_quota_allocation_school_2024.sql            # 2024年名额分配到校招生计划
-│   └── 040_seed_middle_schools_2024.sql        # 2024年全市初中学校名单（582所）
+│   └── 040_seed_middle_schools_2024.sql        # 2024年全市初中学校名单（669所，16区完整）
 └── README.md            # 本文档
 ```
 
@@ -346,7 +346,9 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
 
 ### 2025-02-12 (初中学校数据)
 - **新增2024年全市初中学校数据**：
-  - 040_seed_middle_schools_2024.sql：全市12个区共582所初中学校
-- **覆盖区域**：黄浦、徐汇、静安、普陀、杨浦、闵行、宝山、嘉定、浦东、松江、青浦、奉贤
-- **数据来源**：从名额分配到校招生计划CSV文件提取
-- **处理脚本**：scripts/extract_middle_schools.py
+  - 040_seed_middle_schools_2024.sql：全市16个区共669所初中学校
+- **覆盖区域**：黄浦(23)、徐汇(31)、长宁(18)、静安(36)、普陀(40)、虹口(24)、杨浦(39)、闵行(64)、宝山(64)、嘉定(35)、浦东(139)、金山(24)、松江(41)、青浦(29)、奉贤(41)、崇明(21)
+- **数据来源**：
+  - 12个区来自 quota_school/ 目录（名额分配到校招生计划）
+  - 4个区来自 cutoff_scores/ 目录（名额分配到校录取最低分数线）
+- **处理脚本**：scripts/extract_middle_schools.py（穷举法，为每个区单独编写解析函数）

@@ -208,6 +208,25 @@ def parse_fengxian(file_path):
                 schools[code] = name
     return schools
 
+def parse_cutoff_format(file_path, district_code):
+    """解析cutoff_scores目录下的文件格式（长宁、虹口、金山、崇明）"""
+    schools = {}
+    idx = 1
+    with open(file_path, 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        lines = list(reader)
+        # 跳过前两行标题
+        for row in lines[2:]:
+            if len(row) >= 1:
+                name = row[0].strip()
+                if name and name not in ['', '初中学校']:
+                    # 避免重复
+                    if name not in schools.values():
+                        code = f'{district_code}{idx:04d}'
+                        schools[code] = name
+                        idx += 1
+    return schools
+
 # 区名到解析函数的映射
 DISTRICT_PARSERS = {
     '黄浦区': parse_huangpu,
@@ -224,14 +243,24 @@ DISTRICT_PARSERS = {
     '奉贤区': parse_fengxian,
 }
 
+# 需要从cutoff_scores目录提取的区
+CUTOFF_DISTRICTS = {
+    '长宁区': 'CN',
+    '虹口区': 'HK',
+    '金山区': 'JS',
+    '崇明区': 'CM',
+}
+
 def main():
     """主处理函数"""
     base_path = Path('/Users/wangzhigang/workspace/wzgown/highschool/original_data/raw/2024/quota_school')
+    cutoff_path = Path('/Users/wangzhigang/workspace/wzgown/highschool/original_data/raw/2024/cutoff_scores')
     output_path = Path('/Users/wangzhigang/workspace/wzgown/highschool/original_data/processed/quota_school')
     output_path.mkdir(parents=True, exist_ok=True)
 
     all_schools = []
 
+    # 处理quota_school目录的文件
     csv_files = sorted(base_path.glob('*.csv'))
 
     for csv_file in csv_files:
@@ -246,6 +275,33 @@ def main():
 
         parser = DISTRICT_PARSERS[district_name]
         schools = parser(csv_file)
+
+        print(f"  提取到 {len(schools)} 所学校")
+
+        for code, name in schools.items():
+            nature = 'PRIVATE' if '民办' in name else 'PUBLIC'
+            all_schools.append({
+                'code': code,
+                'name': name,
+                'nature': nature,
+                'district_code': district_code,
+                'district_name': district_name,
+            })
+
+    # 处理cutoff_scores目录的文件（长宁、虹口、金山、崇明）
+    cutoff_files = sorted(cutoff_path.glob('*名额分配到校*.csv'))
+
+    for csv_file in cutoff_files:
+        filename = csv_file.name
+        print(f"处理: {filename}")
+
+        district_name, district_code = get_district_from_filename(filename)
+
+        if not district_name or district_name not in CUTOFF_DISTRICTS:
+            print(f"  跳过: 无法识别区名")
+            continue
+
+        schools = parse_cutoff_format(csv_file, district_code)
 
         print(f"  提取到 {len(schools)} 所学校")
 
@@ -293,7 +349,7 @@ def generate_sql(schools):
     sql_lines = []
     sql_lines.append("-- " + "=" * 76)
     sql_lines.append("-- 2024年初中学校名单 - 种子数据（从名额分配到校数据提取）")
-    sql_lines.append("-- 数据来源: raw/2024/quota_school/*.csv（共12个区文件）")
+    sql_lines.append("-- 数据来源: raw/2024/quota_school/*.csv（12个区）+ cutoff_scores/*.csv（4个区）")
     sql_lines.append("-- 注：不选择生源初中默认为TRUE，适用于名额分配到校填报资格判断")
     sql_lines.append("-- 注：此数据仅包含有名额分配到校的初中学校")
     sql_lines.append("-- " + "=" * 76)

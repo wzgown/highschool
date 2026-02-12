@@ -1,6 +1,6 @@
 -- ============================================================================
 -- 2024年初中学校名单 - 种子数据（从名额分配到校数据提取）
--- 数据来源: raw/2024/quota_school/*.csv（共12个区文件）
+-- 数据来源: raw/2024/quota_school/*.csv（12个区）+ cutoff_scores/*.csv（4个区）
 -- 注：不选择生源初中默认为TRUE，适用于名额分配到校填报资格判断
 -- 注：此数据仅包含有名额分配到校的初中学校
 -- ============================================================================
@@ -539,6 +539,186 @@ ON CONFLICT (code, data_year) DO UPDATE SET
 INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
     '045444', '上海师范大学第三附属实验学校', '上海师范大学',
     (SELECT id FROM ref_district WHERE code = 'XH'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市第三女子初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0001', '上海市第三女子初级中学', '上海市第三女',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市天山第二中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0002', '上海市天山第二中学', '上海市天山第',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市姚连生中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0003', '上海市姚连生中学', '上海市姚连生',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市天山初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0004', '上海市天山初级中学', '上海市天山初',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市虹桥中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0005', '上海市虹桥中学', '上海市虹桥中',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市延安实验初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0006', '上海市延安实验初级中学', '上海市延安实',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市复旦初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0007', '上海市复旦初级中学', '上海市复旦初',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市泸定中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0008', '上海市泸定中学', '上海市泸定中',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市娄山中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0009', '上海市娄山中学', '上海市娄山中',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市西延安中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0010', '上海市西延安中学', '上海市西延安',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市新泾中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0011', '上海市新泾中学', '上海市新泾中',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市民办新世纪中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0012', '上海市民办新世纪中学', '上海市民办新',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PRIVATE', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市延安初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0013', '上海市延安初级中学', '上海市延安初',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市建青实验学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0014', '上海市建青实验学校', '上海市建青实',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市西郊学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0015', '上海市西郊学校', '上海市西郊学',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 华东政法大学附属中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0016', '华东政法大学附属中学', '华东政法大学',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市仙霞高级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0017', '上海市仙霞高级中学', '上海市仙霞高',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市开元学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CN0018', '上海市开元学校', '上海市开元学',
+    (SELECT id FROM ref_district WHERE code = 'CN'), 'PUBLIC', TRUE, 2024, TRUE)
 ON CONFLICT (code, data_year) DO UPDATE SET
     name = EXCLUDED.name,
     short_name = EXCLUDED.short_name,
@@ -1299,6 +1479,246 @@ ON CONFLICT (code, data_year) DO UPDATE SET
 INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
     '75113', '上海市万里城实验学校', '上海市万里城',
     (SELECT id FROM ref_district WHERE code = 'PT'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市钟山初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0001', '上海市钟山初级中学', '上海市钟山初',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市江湾初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0002', '上海市江湾初级中学', '上海市江湾初',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市复兴实验中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0003', '上海市复兴实验中学', '上海市复兴实',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市虹口区教育学院实验中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0004', '上海市虹口区教育学院实验中学', '上海市虹口区',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市第五中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0005', '上海市第五中学', '上海市第五中',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市曲阳第二中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0006', '上海市曲阳第二中学', '上海市曲阳第',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市北虹初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0007', '上海市北虹初级中学', '上海市北虹初',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市海南中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0008', '上海市海南中学', '上海市海南中',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市丰镇中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0009', '上海市丰镇中学', '上海市丰镇中',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市澄衷初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0010', '上海市澄衷初级中学', '上海市澄衷初',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市鲁迅初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0011', '上海市鲁迅初级中学', '上海市鲁迅初',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市继光初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0012', '上海市继光初级中学', '上海市继光初',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 华东师范大学第一附属初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0013', '华东师范大学第一附属初级中学', '华东师范大学',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市民办新复兴初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0014', '上海市民办新复兴初级中学', '上海市民办新',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PRIVATE', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市民办新华初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0015', '上海市民办新华初级中学', '上海市民办新',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PRIVATE', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市民办新北郊初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0016', '上海市民办新北郊初级中学', '上海市民办新',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PRIVATE', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市第五十二中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0017', '上海市第五十二中学', '上海市第五十',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市民办迅行中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0018', '上海市民办迅行中学', '上海市民办迅',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PRIVATE', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海外国语大学第一实验学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0019', '上海外国语大学第一实验学校', '上海外国语大',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市北郊学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0020', '上海市北郊学校', '上海市北郊学',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市霍山学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0021', '上海市霍山学校', '上海市霍山学',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市长青学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0022', '上海市长青学校', '上海市长青学',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市虹口实验学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0023', '上海市虹口实验学校', '上海市虹口实',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海世外教育附属虹口区欧阳学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'HK0024', '上海世外教育附属虹口区欧阳学校', '上海世外教育',
+    (SELECT id FROM ref_district WHERE code = 'HK'), 'PUBLIC', TRUE, 2024, TRUE)
 ON CONFLICT (code, data_year) DO UPDATE SET
     name = EXCLUDED.name,
     short_name = EXCLUDED.short_name,
@@ -4723,6 +5143,246 @@ ON CONFLICT (code, data_year) DO UPDATE SET
     district_id = EXCLUDED.district_id,
     updated_at = CURRENT_TIMESTAMP;
 
+-- 上海市罗星中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0001', '上海市罗星中学', '上海市罗星中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市松隐中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0002', '上海市松隐中学', '上海市松隐中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市亭新中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0003', '上海市亭新中学', '上海市亭新中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市漕泾中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0004', '上海市漕泾中学', '上海市漕泾中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市山阳中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0005', '上海市山阳中学', '上海市山阳中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市张堰第二中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0006', '上海市张堰第二中学', '上海市张堰第',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市廊下中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0007', '上海市廊下中学', '上海市廊下中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市蒙山中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0008', '上海市蒙山中学', '上海市蒙山中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市金山区教育学院附属中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0009', '上海市金山区教育学院附属中学', '上海市金山区',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市金山初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0010', '上海市金山初级中学', '上海市金山初',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市西林中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0011', '上海市西林中学', '上海市西林中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市朱行中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0012', '上海市朱行中学', '上海市朱行中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海金山区健桥实验中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0013', '上海金山区健桥实验中学', '上海金山区健',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市金山区青少年业余体育学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0014', '上海市金山区青少年业余体育学校', '上海市金山区',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市同凯中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0015', '上海市同凯中学', '上海市同凯中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市金山实验中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0016', '上海市金山实验中学', '上海市金山实',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 华东师范大学附属枫泾中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0017', '华东师范大学附属枫泾中学', '华东师范大学',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市金卫中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0018', '上海市金卫中学', '上海市金卫中',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市干巷学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0019', '上海市干巷学校', '上海市干巷学',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市新农学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0020', '上海市新农学校', '上海市新农学',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市民办金盟学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0021', '上海市民办金盟学校', '上海市民办金',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PRIVATE', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海金山区世外学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0022', '上海金山区世外学校', '上海金山区世',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市金山区吕巷学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0023', '上海市金山区吕巷学校', '上海市金山区',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市金山区钱圩学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'JS0024', '上海市金山区钱圩学校', '上海市金山区',
+    (SELECT id FROM ref_district WHERE code = 'JS'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
 -- 上海市松江区第七中学
 INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
     '171001', '上海市松江区第七中学', '上海市松江区',
@@ -5829,6 +6489,216 @@ ON CONFLICT (code, data_year) DO UPDATE SET
 INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
     '205099', '柘林学校师大附中教学点', '柘林学校师大',
     (SELECT id FROM ref_district WHERE code = 'FX'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区三星中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0001', '上海市崇明区三星中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区建设中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0002', '上海市崇明区建设中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区合兴中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0003', '上海市崇明区合兴中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区向化中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0004', '上海市崇明区向化中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区崇东中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0005', '上海市崇明区崇东中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区裕安中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0006', '上海市崇明区裕安中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区实验中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0007', '上海市崇明区实验中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明中学附属东门中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0008', '上海市崇明中学附属东门中学', '上海市崇明中',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区城桥中学附属明志初级中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0009', '上海市崇明区城桥中学附属明志初级中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区长兴中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0010', '上海市崇明区长兴中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区长明中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0011', '上海市崇明区长明中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海师范大学附属崇明正大中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0012', '上海师范大学附属崇明正大中学', '上海师范大学',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区庙镇学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0013', '上海市崇明区庙镇学校', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区大新中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0014', '上海市崇明区大新中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区三烈中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0015', '上海市崇明区三烈中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区大公中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0016', '上海市崇明区大公中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海民办民一中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0017', '上海民办民一中学', '上海民办民一',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PRIVATE', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区横沙中学
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0018', '上海市崇明区横沙中学', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海新纪元双语学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0019', '上海新纪元双语学校', '上海新纪元双',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市崇明区新海学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0020', '上海市崇明区新海学校', '上海市崇明区',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
+ON CONFLICT (code, data_year) DO UPDATE SET
+    name = EXCLUDED.name,
+    short_name = EXCLUDED.short_name,
+    district_id = EXCLUDED.district_id,
+    updated_at = CURRENT_TIMESTAMP;
+
+-- 上海市实验学校附属东滩学校
+INSERT INTO ref_middle_school (code, name, short_name, district_id, school_nature_id, is_non_selective, data_year, is_active) VALUES
+    'CM0021', '上海市实验学校附属东滩学校', '上海市实验学',
+    (SELECT id FROM ref_district WHERE code = 'CM'), 'PUBLIC', TRUE, 2024, TRUE)
 ON CONFLICT (code, data_year) DO UPDATE SET
     name = EXCLUDED.name,
     short_name = EXCLUDED.short_name,
