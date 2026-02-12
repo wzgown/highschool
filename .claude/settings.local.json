@@ -38,7 +38,15 @@
       "Bash(' /Users/wangzhigang/workspace/wzgown/highschool/original_data/README.md)",
       "Bash(find:*)",
       "Bash(pdfplumber:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(python:*)",
+      "Bash(chmod:*)",
+      "Bash(makeitdown:*)",
+      "Bash(go install:*)",
+      "Bash(docker run:*)",
+      "Bash(echo:*)",
+      "Bash(zip:*)",
+      "Bash(unzip:*)"
     ]
   }
 }

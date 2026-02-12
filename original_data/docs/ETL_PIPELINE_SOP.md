@@ -47,8 +47,12 @@ flowchart LR
         A3["policies/<br/>政策文件"]
     end
 
+    subgraph Preprocess["Step 0: Preprocess（预处理）"]
+        B0["makeitdown<br/>PDF→Markdown"]
+    end
+
     subgraph Extract["Step 1: Extract（提取）"]
-        B["提取脚本<br/>etl_*.py"]
+        B["解析脚本<br/>etl_*.py"]
     end
 
     subgraph Processed["processed/（清洗后CSV）"]
@@ -69,13 +73,15 @@ flowchart LR
         F["db/seeds/<br/>SQL种子文件"]
     end
 
-    Sources --> Extract
+    Sources --> Preprocess
+    Preprocess --> Extract
     Extract --> Processed
     Processed --> Transform
     Transform --> Load
     Load --> Database
 
     style Sources fill:#e1f5ff
+    style Preprocess fill:#e0f2f1
     style Extract fill:#fff9c4
     style Processed fill:#f3e5f5
     style Transform fill:#fff9c4
@@ -114,7 +120,36 @@ scripts/
 db/seeds/             # 数据库种子文件（ETL 最终产物）
 ```
 
-## ETL 三步骤详解
+## ETL 四步骤详解
+
+### Step 0: Preprocess（预处理：格式转换）
+
+**目标**：将非文本文档（PDF、Excel等）转换为Markdown格式，便于后续解析
+
+**输入**：
+- `original_data/raw/{year}/` - 原始数据目录
+  - PDF文件（官方发布文件）
+  - Excel文件（统计表格）
+  - 其他非纯文本格式
+
+**输出**：
+- `original_data/raw/{year}/` - Markdown文件
+  - 与源文件同名，扩展名为 `.md`
+
+**处理工具**：
+- `makeitdown` - 通用文档转换工具
+  ```bash
+  # 安装
+  go install github.com/e-nikolov/makeitdown@latest
+
+  # 使用
+  makeitdown input.pdf > output.md
+  ```
+
+**验证规则**：
+1. Markdown文件成功生成
+2. 表格结构完整（列数、行数）
+3. 关键数据未丢失（使用肉眼抽查）
 
 ### Step 1: Extract（数据提取）
 
@@ -133,7 +168,9 @@ db/seeds/             # 数据库种子文件（ETL 最终产物）
     - `quota_school/` - 名额分配到校
 
 **处理工具**：
-- `scripts/extract_*.py` - 各类提取脚本
+- `.claude/skills/shanghai-highschool-etl/` - Claude Skill，包含完整的ETL流程指导
+- `scripts/extract_*.py` / `scripts/etl_*.py` - 各类提取脚本
+- 可使用Skill中的 `scripts/convert_to_markdown.py` 工具进行批量转换
 
 **数据格式**：
 - CSV格式（UTF-8编码，Unix换行符）
@@ -243,6 +280,12 @@ db/seeds/
 
 ## 实施检查清单
 
+### Step 0: Preprocess
+- [ ] makeitdown是否已安装
+- [ ] 源文件路径是否正确
+- [ ] Markdown文件是否成功生成
+- [ ] 转换后的表格结构是否完整
+
 ### Step 1: Extract
 - [ ] PDF提取脚本是否正常工作
 - [ ] 是否记录提取统计信息
@@ -303,6 +346,20 @@ db/seeds/
 - [ ] 2023年：完整数据收集和ETL流程建立
 
 ## 更新日志
+
+- 2025-02-12: **增加Step 0预处理步骤**
+  - 引入 makeitdown 工具，将PDF/Excel转换为Markdown
+  - 创建 Claude Skill `shanghai-highschool-etl`，包含完整的ETL流程指导
+  - 更新流程图，新增Preprocess步骤
+  - 更新实施检查清单，增加预处理验证项
+
+- 2025-02-12: **建立标准ETL流程规范**
+  - 创建 `docs/ETL_PIPELINE_SOP.md`：定义 Extract → Transform → Load 三步流程
+  - 2025年名额分配到区数据完成完整ETL流程：
+    - Extract: `scripts/etl_2025_quota_district_fixed.py` 从PDF提取到CSV
+    - Load: `scripts/generate_2025_quota_district_sql.py` 从CSV生成SQL
+    - 产物: `processed/2025/quota_district/2025年名额分配到区招生计划.csv` (76所，6724名额)
+  - 修复PDF解析bug：原始CSV列错位（计划区域字段包含名额数值），已修正
 
 在更新 `db/README.md` 时，请在 **更新日志**部分记录：
 1. 新增的数据类型和数量

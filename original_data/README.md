@@ -4,14 +4,19 @@
 
 ## ETL 数据处理流程
 
-**重要**：本目录的数据处理遵循标准的 ETL (Extract → Transform → Load) 流程。
+**重要**：本目录的数据处理遵循标准的 ETL (Preprocess → Extract → Transform → Load) 流程。
 
 ```
 raw/                  →  processed/           →  db/seeds/
 (原始数据/PDF/Excel)   (清洗后的CSV)          (SQL种子文件)
 ```
 
-### 三步骤说明
+### 四步骤说明
+
+0. **Preprocess（预处理）**：使用 makeitdown 将非文本文档转换为 Markdown
+   - PDF → Markdown
+   - Excel → Markdown
+   - 便于后续解析表格结构
 
 1. **Extract（提取）**：从 raw/ 或 policies/ 的原始文件（PDF、Excel、CSV）提取数据到 `processed/` 目录
    - 输出标准化CSV格式（UTF-8编码，Unix换行符）
@@ -145,6 +150,11 @@ psql -U highschool -d highschool -c "\copy quota_district FROM 'processed/quota/
 - 各区教育局官网
 
 ## 更新日志
+
+- 2025-02-12: **增加Claude Skill支持**
+  - 创建 `.claude/skills/shanghai-highschool-etl/` - 包含完整ETL流程指导
+  - Skill包含：makeitdown转换脚本、区县映射参考、数据质量模式、SQL生成模板
+  - 更新流程文档，新增Step 0预处理步骤
 
 - 2025-02-12: **建立标准ETL流程规范**
   - 创建 `docs/ETL_PIPELINE_SOP.md`：定义 Extract → Transform → Load 三步流程
