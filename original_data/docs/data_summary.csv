@@ -1,0 +1,8 @@
+﻿年份,数据类型,记录数,文件
+2024,1-15志愿分数线,906,scores/cutoff_scores_2024.csv
+2024,名额分配到区分数线,951,scores/quota_to_district_scores_2024.csv
+2024,名额分配到校分数线,3598,scores/quota_to_school_scores_2024.csv
+2024,名额分配到区计划,74,quota/quota_to_district_2024.csv
+2024,名额分配到校计划,80,quota/quota_to_school_2024.csv
+2023,市重点分数线,58,scores/cutoff_scores_2023.csv
+2025,参考人数,16,quota/exam_counts.csv

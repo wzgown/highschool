@@ -313,6 +313,19 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
 
 ## 更新日志
 
+### 2025-02-12
+- **新增2024年全市录取分数线数据**：
+  - 030_seed_admission_score_unified_2024.sql：1-15志愿录取分数线（35条）
+  - 031_seed_admission_score_quota_district_2024.sql：名额分配到区录取分数线
+  - 032_seed_admission_score_quota_school_2024.sql：名额分配到校录取分数线
+- **新增2024年全市招生计划数据**：
+  - 033_seed_quota_allocation_district_2024.sql：名额分配到区招生计划（74条）
+  - 034_seed_quota_allocation_school_2024.sql：名额分配到校招生计划
+- **新增数据生成脚本**：
+  - scripts/generate_cutoff_scores_sql.py：从 processed/cutoff_scores/ 生成 SQL
+  - scripts/generate_quota_sql.py：从 processed/quota/ 生成 SQL
+- **数据来源**：基于 original_data/ 目录重组后的 processed/ 目录数据
+
 ### 2025-02-01
 - 创建初始表结构
 - 导入2025年学校数据（约290+所）
