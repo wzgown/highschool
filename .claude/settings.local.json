@@ -68,7 +68,10 @@
       "mcp__chrome-devtools__list_console_messages",
       "mcp__chrome-devtools__evaluate_script",
       "mcp__chrome-devtools__take_screenshot",
-      "mcp__chrome-devtools__drag"
+      "mcp__chrome-devtools__drag",
+      "Bash(PGPASSWORD=highschool psql:*)",
+      "Bash(docker compose:*)",
+      "Bash(PGPASSWORD='HS2025!db#SecurePass88' psql:*)"
     ]
   }
 }
