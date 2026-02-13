@@ -131,7 +131,108 @@ def is_header_row(row):
     return any(indicator in str(row) for indicator in header_indicators)
 ```
 
-## Data Validation Checklist
+## Schema/DDL Discovery Issues
+
+### Table Structure Mismatches
+
+**Critical**: Seed SQL scripts may reference columns that don't exist in the actual table schema. Always verify table structure before generating INSERT statements.
+
+#### ref_district_exam_count
+
+**Expected** (from seed script):
+```sql
+INSERT INTO ref_district_exam_count (year, district_id, exam_count, data_year, ...)
+```
+
+**Actual** (from migration 002_create_history_tables_v2.sql):
+```sql
+CREATE TABLE ref_district_exam_count (
+    year INTEGER NOT NULL,
+    district_id INTEGER NOT NULL,
+    exam_count INTEGER NOT NULL,
+    data_source VARCHAR(255),  -- NOT data_year!
+    ...
+);
+```
+
+**Issue**: Seed script uses `data_year` but table only has `year` field.
+
+**Fix**: Remove `data_year` from INSERT statements:
+```sql
+-- WRONG
+INSERT INTO ref_district_exam_count (year, district_id, exam_count, data_year, ...)
+SELECT 2025, district_id, 3788, 2025, ...
+
+-- CORRECT
+INSERT INTO ref_district_exam_count (year, district_id, exam_count, ...)
+SELECT 2025, district_id, 3788, ...
+```
+
+#### ref_middle_school
+
+**Expected** (from seed script):
+```sql
+INSERT INTO ref_middle_school (code, name, district_id, school_level_id, is_active, data_year, ...)
+```
+
+**Actual** (from migration 002_create_history_tables_v2.sql):
+```sql
+CREATE TABLE ref_middle_school (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(20),
+    name VARCHAR(200) NOT NULL,
+    short_name VARCHAR(100),
+    district_id INTEGER NOT NULL,
+    school_nature_id VARCHAR(50),  -- NOT school_level_id!
+    is_non_selective BOOLEAN NOT NULL DEFAULT TRUE,
+    data_year INTEGER NOT NULL DEFAULT 2025,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    ...
+);
+```
+
+**Issue**: Seed script uses `school_level_id` but table only has `school_nature_id`.
+
+**Fix**: Remove or correct the field name:
+```sql
+-- WRONG
+INSERT INTO ref_middle_school (code, name, district_id, school_level_id, is_active, ...)
+SELECT 'JD0016', '交大附中附属嘉定洪德中学', district_id, 'MIDDLE', TRUE, ...
+
+-- CORRECT
+INSERT INTO ref_middle_school (code, name, district_id, is_active, data_year, ...)
+SELECT 'JD0016', '交大附中附属嘉定洪德中学', district_id, TRUE, 2025, ...
+```
+
+### How to Verify Table Structure
+
+Before generating seed SQL, always check the actual schema:
+
+```bash
+# Check table structure
+psql -h localhost -U username -d database -c "\d table_name"
+
+# Or read the migration file
+cat db/migrations/XXX_create_XXX_tables_v2.sql
+```
+
+### Pattern: Year vs data_year
+
+Different tables use different conventions:
+
+| Table | Year Field | Convention |
+|--------|-------------|------------|
+| ref_district_exam_count | `year` | Year is the primary dimension |
+| ref_quota_allocation_district | `year` | Year is the primary dimension |
+| ref_quota_allocation_school | `year` | Year is the primary dimension |
+| ref_admission_score_quota_district | `year` | Year is the primary dimension |
+| ref_school | `data_year` | Multi-year history support |
+| ref_middle_school | `data_year` | Multi-year history support |
+| ref_control_score | `data_year` | Multi-year history support |
+
+**Rule**: If table has UNIQUE(code, data_year) constraint, it supports multi-year history and uses `data_year`. If table only has `year` without `data_year`, the year field is the primary dimension.
+
+
 
 ### After Extract
 - [ ] Row count matches source (visible rows)

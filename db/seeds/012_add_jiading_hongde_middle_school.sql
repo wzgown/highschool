@@ -4,8 +4,8 @@
 -- Generated: 2025-02-13
 
 -- 插入交大附中附属嘉定洪德中学
-INSERT INTO ref_middle_school (code, name, district_id, school_level_id, is_active, data_year, created_at, updated_at)
-SELECT 'JD0016', '交大附中附属嘉定洪德中学', d.id, 'MIDDLE', TRUE, 2025, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+INSERT INTO ref_middle_school (code, name, district_id, is_active, data_year, created_at, updated_at)
+SELECT 'JD0016', '交大附中附属嘉定洪德中学', d.id, TRUE, 2025, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 FROM ref_district d WHERE d.code = 'JD';
 
 -- 验证插入
