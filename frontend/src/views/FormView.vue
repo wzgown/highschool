@@ -40,11 +40,14 @@
               class="full-width"
               :disabled="!form.districtId || middleSchoolsLoading"
               :loading="middleSchoolsLoading"
+              filterable
+              :filter-method="filterMiddleSchool"
+              @visible-change="resetMiddleSchoolFilter"
             >
               <el-option
-                v-for="school in middleSchools"
+                v-for="school in filteredMiddleSchools"
                 :key="school.id"
-                :label="school.name"
+                :label="`${school.name} (${school.code})`"
                 :value="school.id"
               />
             </el-select>
@@ -189,28 +192,25 @@
           </el-row>
 
           <el-alert
-            v-if="hasAnySubjectScore && !isScoreValid"
+            v-if="!isScoreValid"
             title="成绩校验提醒"
             type="warning"
             :closable="false"
             show-icon
           >
-            <p>
-              各科成绩合计为 {{ calculatedTotal }} 分，与填写的总分 {{ form.scores.total }} 分不符。
-              请检查各科成绩是否填写正确，或清空所有科目成绩以跳过校验。
-            </p>
+            <p>{{ scoreValidation.message }}</p>
           </el-alert>
 
           <el-alert
-            v-if="!hasAnySubjectScore && form.scores.total > 0"
+            v-if="isScoreValid && hasAnySubjectScore && !hasAllSubjectScores"
             title="成绩提示"
             type="info"
             :closable="false"
             show-icon
           >
             <p>
-              您只填写了总分，各科成绩为选填项。如需填写各科成绩，请在下方输入；
-              如只使用总分进行分析，可直接进入下一步。
+              已填科目合计 {{ calculatedTotal }} 分，总分 {{ form.scores.total }} 分。
+              如需更精确分析，可继续填写其他科目成绩。
             </p>
           </el-alert>
 
@@ -289,13 +289,20 @@
           <div class="volunteer-section" v-if="form.hasQuotaSchoolEligibility">
             <h3 class="section-subtitle">
               <el-tag type="success">名额分配到校</el-tag>
-              <span class="subtitle-hint">2个志愿 | 总分800分 | 校内竞争</span>
+              <span class="subtitle-hint">2个志愿 | 总分800分 | 校内竞争 | 可拖拽排序</span>
             </h3>
             <div
               v-for="(schoolId, index) in form.volunteers.quotaSchool"
               :key="index"
               class="volunteer-item"
+              draggable="true"
+              @dragstart="onDragStart($event, 'quotaSchool', index)"
+              @dragover.prevent="onDragOver($event, index)"
+              @drop="onDrop($event, 'quotaSchool', index)"
+              @dragend="onDragEnd"
+              :class="{ 'drag-over': dragOverIndex === index && dragType === 'quotaSchool' }"
             >
+              <el-icon class="drag-handle"><Rank /></el-icon>
               <span class="volunteer-index">{{ index + 1 }}</span>
               <el-select
                 v-model="form.volunteers.quotaSchool[index]"
@@ -332,13 +339,20 @@
           <div class="volunteer-section">
             <h3 class="section-subtitle">
               <el-tag type="warning">统一招生</el-tag>
-              <span class="subtitle-hint">1-15志愿 | 总分750分 | 平行志愿</span>
+              <span class="subtitle-hint">1-15志愿 | 总分750分 | 平行志愿 | 可拖拽排序</span>
             </h3>
             <div
               v-for="(schoolId, index) in form.volunteers.unified"
               :key="index"
               class="volunteer-item"
+              draggable="true"
+              @dragstart="onDragStart($event, 'unified', index)"
+              @dragover.prevent="onDragOver($event, index)"
+              @drop="onDrop($event, 'unified', index)"
+              @dragend="onDragEnd"
+              :class="{ 'drag-over': dragOverIndex === index && dragType === 'unified' }"
             >
+              <el-icon class="drag-handle"><Rank /></el-icon>
               <span class="volunteer-index">{{ index + 1 }}</span>
               <el-select
                 v-model="form.volunteers.unified[index]"
@@ -403,8 +417,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { User, Document, List, Plus, Delete } from '@element-plus/icons-vue';
+import { User, Document, List, Plus, Delete, Rank } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
+import { pinyin } from 'pinyin-pro';
 import { useCandidateStore } from '@/stores/candidate';
 import { getDistricts, getMiddleSchools, getSchools } from '@/api/reference';
 import { submitAnalysis, formatFormToRequest } from '@/api/candidate';
@@ -418,13 +433,21 @@ const currentStep = ref(0);
 const submitting = ref(false);
 const districts = ref<District[]>([]);
 const middleSchools = ref<MiddleSchool[]>([]);
+const filteredMiddleSchools = ref<MiddleSchool[]>([]);
 const highSchools = ref<School[]>([]);
 const middleSchoolsLoading = ref(false);
+
+// 拖拽排序状态
+const dragIndex = ref<number | null>(null);
+const dragOverIndex = ref<number | null>(null);
+const dragType = ref<'quotaSchool' | 'unified' | null>(null);
 
 // 表单数据
 const form = computed(() => store.form);
 const calculatedTotal = computed(() => store.calculatedTotal);
 const hasAnySubjectScore = computed(() => store.hasAnySubjectScore);
+const hasAllSubjectScores = computed(() => store.hasAllSubjectScores);
+const scoreValidation = computed(() => store.scoreValidation);
 const isScoreValid = computed(() => store.isScoreValid);
 
 // 步骤验证
@@ -466,17 +489,48 @@ async function loadDistricts() {
 async function onDistrictChange() {
   form.value.middleSchoolId = null;
   middleSchools.value = [];
-  
+  filteredMiddleSchools.value = [];
+
   if (!form.value.districtId) return;
-  
+
   middleSchoolsLoading.value = true;
   try {
     const data = await getMiddleSchools({ districtId: form.value.districtId });
     middleSchools.value = data.middleSchools;
+    filteredMiddleSchools.value = data.middleSchools;
   } catch (error) {
     ElMessage.error('加载初中学校失败');
   } finally {
     middleSchoolsLoading.value = false;
+  }
+}
+
+// 初中学校筛选：支持中文、拼音、代码
+function filterMiddleSchool(query: string) {
+  if (!query) {
+    filteredMiddleSchools.value = middleSchools.value;
+    return;
+  }
+
+  const queryLower = query.toLowerCase();
+  filteredMiddleSchools.value = middleSchools.value.filter(school => {
+    // 中文匹配
+    if (school.name.includes(query)) return true;
+
+    // 代码匹配
+    if (school.code.toLowerCase().includes(queryLower)) return true;
+
+    // 拼音匹配（全拼和首字母）
+    const fullPinyin = pinyin(school.name, { toneType: 'none' }).replace(/\s/g, '').toLowerCase();
+    const initialPinyin = pinyin(school.name, { pattern: 'first', toneType: 'none' }).replace(/\s/g, '').toLowerCase();
+
+    return fullPinyin.includes(queryLower) || initialPinyin.includes(queryLower);
+  });
+}
+
+function resetMiddleSchoolFilter(visible: boolean) {
+  if (visible) {
+    filteredMiddleSchools.value = middleSchools.value;
   }
 }
 
@@ -507,6 +561,53 @@ function addVolunteer(batch: 'quotaDistrict' | 'quotaSchool' | 'unified') {
 
 function removeVolunteer(batch: 'quotaDistrict' | 'quotaSchool' | 'unified', index?: number) {
   store.removeVolunteer(batch, index);
+}
+
+// 拖拽排序方法
+function onDragStart(event: DragEvent, type: 'quotaSchool' | 'unified', index: number) {
+  dragIndex.value = index;
+  dragType.value = type;
+  if (event.dataTransfer) {
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', String(index));
+  }
+}
+
+function onDragOver(event: DragEvent, index: number) {
+  event.preventDefault();
+  if (dragIndex.value !== null && dragIndex.value !== index) {
+    dragOverIndex.value = index;
+  }
+}
+
+function onDrop(event: DragEvent, type: 'quotaSchool' | 'unified', index: number) {
+  event.preventDefault();
+  if (dragIndex.value === null || dragIndex.value === index || dragType.value !== type) {
+    return;
+  }
+
+  const list = form.value.volunteers[type];
+  const draggedItem = list[dragIndex.value];
+  if (draggedItem !== undefined) {
+    // 创建新数组并交换位置
+    const newList = [...list];
+    newList.splice(dragIndex.value, 1);
+    newList.splice(index, 0, draggedItem);
+
+    // 更新 store
+    store.updateVolunteers({ [type]: newList });
+  }
+
+  // 重置状态
+  dragIndex.value = null;
+  dragOverIndex.value = null;
+  dragType.value = null;
+}
+
+function onDragEnd() {
+  dragIndex.value = null;
+  dragOverIndex.value = null;
+  dragType.value = null;
 }
 
 async function submit() {
@@ -611,6 +712,35 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
+  cursor: grab;
+  transition: all 0.2s ease;
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.drag-over {
+    background: #ecf5ff;
+    border: 2px dashed #409EFF;
+  }
+
+  &:hover .drag-handle {
+    color: #409EFF;
+  }
+}
+
+.drag-handle {
+  color: #c0c4cc;
+  cursor: grab;
+  font-size: 18px;
+  transition: color 0.2s;
+
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .volunteer-index {
