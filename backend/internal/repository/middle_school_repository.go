@@ -65,7 +65,7 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 		var school highschoolv1.MiddleSchool
 		var shortName *string
 
-		var schoolNatureId string
+		var schoolNatureId *string // Changed to pointer to handle NULL
 		err := rows.Scan(
 			&school.Id,
 			&school.Code,

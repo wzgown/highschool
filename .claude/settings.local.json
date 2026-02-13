@@ -48,7 +48,15 @@
       "Bash(zip:*)",
       "Bash(unzip:*)",
       "Bash(sort:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker ps:*)",
+      "Bash(docker port:*)",
+      "Bash(psql:*)",
+      "Bash(pgrep:*)",
+      "Bash(lsof:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(pkill:*)"
     ]
   }
 }
