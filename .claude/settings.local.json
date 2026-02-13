@@ -46,7 +46,9 @@
       "Bash(docker run:*)",
       "Bash(echo:*)",
       "Bash(zip:*)",
-      "Bash(unzip:*)"
+      "Bash(unzip:*)",
+      "Bash(sort:*)",
+      "Bash(test:*)"
     ]
   }
 }
