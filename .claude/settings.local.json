@@ -71,7 +71,11 @@
       "mcp__chrome-devtools__drag",
       "Bash(PGPASSWORD=highschool psql:*)",
       "Bash(docker compose:*)",
-      "Bash(PGPASSWORD='HS2025!db#SecurePass88' psql:*)"
+      "Bash(PGPASSWORD='HS2025!db#SecurePass88' psql:*)",
+      "Bash(buf generate:*)",
+      "Bash(go build:*)",
+      "Bash(while read:*)",
+      "Bash(do if head -3 \"$f\")"
     ]
   }
 }

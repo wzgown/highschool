@@ -48,7 +48,7 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 	}
 
 	query := fmt.Sprintf(`
-		SELECT id, code, name, short_name, district_id, school_nature_id, is_non_selective
+		SELECT id, code, name, short_name, district_id, school_nature_id, is_non_selective, exact_student_count, estimated_student_count
 		FROM ref_middle_school
 		%s
 		ORDER BY id
@@ -64,6 +64,8 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 	for rows.Next() {
 		var school highschoolv1.MiddleSchool
 		var shortName *string
+		var exactCount *int32
+		var estimatedCount *int32
 
 		var schoolNatureId *string // Changed to pointer to handle NULL
 		err := rows.Scan(
@@ -74,12 +76,16 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 			&school.DistrictId,
 			&schoolNatureId,
 			&school.IsNonSelective,
+			&exactCount,
+			&estimatedCount,
 		)
 		if err != nil {
 			continue
 		}
 
 		school.ShortName = shortName
+		school.ExactStudentCount = exactCount
+		school.EstimatedStudentCount = estimatedCount
 		schools = append(schools, &school)
 	}
 

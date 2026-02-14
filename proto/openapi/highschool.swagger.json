@@ -387,6 +387,16 @@
         },
         "isNonSelective": {
           "type": "boolean"
+        },
+        "exactStudentCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "准确考生人数（从ETL数据解析）"
+        },
+        "estimatedStudentCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "估算考生人数（基于名额分配占比）"
         }
       },
       "title": "初中学校"

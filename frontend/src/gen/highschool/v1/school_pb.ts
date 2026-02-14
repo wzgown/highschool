@@ -47,6 +47,20 @@ export class MiddleSchool extends Message<MiddleSchool> {
    */
   isNonSelective = false;
 
+  /**
+   * 准确考生人数（从ETL数据解析）
+   *
+   * @generated from field: optional int32 exact_student_count = 8;
+   */
+  exactStudentCount?: number;
+
+  /**
+   * 估算考生人数（基于名额分配占比）
+   *
+   * @generated from field: optional int32 estimated_student_count = 9;
+   */
+  estimatedStudentCount?: number;
+
   constructor(data?: PartialMessage<MiddleSchool>) {
     super();
     proto3.util.initPartial(data, this);
@@ -62,6 +76,8 @@ export class MiddleSchool extends Message<MiddleSchool> {
     { no: 5, name: "district_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 6, name: "district_name", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 7, name: "is_non_selective", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "exact_student_count", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 9, name: "estimated_student_count", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MiddleSchool {

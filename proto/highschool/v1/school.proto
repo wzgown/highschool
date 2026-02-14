@@ -13,6 +13,8 @@ message MiddleSchool {
   int32 district_id = 5;
   optional string district_name = 6;
   bool is_non_selective = 7;
+  optional int32 exact_student_count = 8;      // 准确考生人数（从ETL数据解析）
+  optional int32 estimated_student_count = 9;  // 估算考生人数（基于名额分配占比）
 }
 
 // 高中学校
