@@ -2,14 +2,39 @@
 package simulation
 
 import (
+	"context"
 	"testing"
 
 	highschoolv1 "highschool-backend/gen/highschool/v1"
 	"github.com/stretchr/testify/assert"
 )
 
+// mockSchoolRepo 用于测试的模拟学校仓库
+type mockSchoolRepo struct{}
+
+func (m *mockSchoolRepo) GetByID(ctx context.Context, id int32) (*highschoolv1.School, error) {
+	return &highschoolv1.School{
+		Id:       id,
+		FullName: "测试学校",
+		Code:     "TEST001",
+	}, nil
+}
+
+func (m *mockSchoolRepo) List(ctx context.Context, districtID *int32, schoolTypeID, schoolNatureID *string,
+	hasInternationalCourse *bool, keyword *string, page, pageSize int32) ([]*highschoolv1.School, int32, error) {
+	return nil, 0, nil
+}
+
+func (m *mockSchoolRepo) GetDetail(ctx context.Context, id int32) (*highschoolv1.SchoolDetail, error) {
+	return nil, nil
+}
+
+func (m *mockSchoolRepo) GetHistoryScores(ctx context.Context, schoolID int32) ([]*highschoolv1.HistoryScore, error) {
+	return nil, nil
+}
+
 func TestEngine_Run(t *testing.T) {
-	engine := NewEngine()
+	engine := NewEngine(WithSchoolRepo(&mockSchoolRepo{}))
 
 	t.Run("should calculate percentile correctly", func(t *testing.T) {
 		// Arrange
@@ -27,7 +52,7 @@ func TestEngine_Run(t *testing.T) {
 		}
 
 		// Act
-		results := engine.Run(req)
+		results := engine.Run(context.Background(), req)
 
 		// Assert
 		assert.NotNil(t, results)
@@ -52,7 +77,7 @@ func TestEngine_Run(t *testing.T) {
 		}
 
 		// Act
-		results := engine.Run(req)
+		results := engine.Run(context.Background(), req)
 
 		// Assert
 		// 区内排名 = 100 * 12.5 = 1250
@@ -78,7 +103,7 @@ func TestEngine_Run(t *testing.T) {
 		}
 
 		// Act
-		results := engine.Run(req)
+		results := engine.Run(context.Background(), req)
 
 		// Assert
 		assert.Len(t, results.Probabilities, 6) // 1 + 2 + 3 = 6
@@ -100,7 +125,7 @@ func TestEngine_Run(t *testing.T) {
 		}
 
 		// Act
-		results := engine.Run(req)
+		results := engine.Run(context.Background(), req)
 
 		// Assert
 		assert.NotNil(t, results.Strategy)
@@ -125,7 +150,7 @@ func TestEngine_Run(t *testing.T) {
 		}
 
 		// Act
-		results := engine.Run(req)
+		results := engine.Run(context.Background(), req)
 
 		// Assert
 		assert.NotNil(t, results.Competitors)
@@ -135,7 +160,7 @@ func TestEngine_Run(t *testing.T) {
 }
 
 func TestEngine_calculateProbability(t *testing.T) {
-	engine := NewEngine()
+	engine := NewEngine(WithSchoolRepo(&mockSchoolRepo{}))
 
 	tests := []struct {
 		name           string
@@ -161,7 +186,7 @@ func TestEngine_calculateProbability(t *testing.T) {
 }
 
 func TestEngine_calculateConfidence(t *testing.T) {
-	engine := NewEngine()
+	engine := NewEngine(WithSchoolRepo(&mockSchoolRepo{}))
 
 	tests := []struct {
 		percentile       float64

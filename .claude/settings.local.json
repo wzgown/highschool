@@ -75,7 +75,8 @@
       "Bash(buf generate:*)",
       "Bash(go build:*)",
       "Bash(while read:*)",
-      "Bash(do if head -3 \"$f\")"
+      "Bash(do if head -3 \"$f\")",
+      "Bash(go test:*)"
     ]
   }
 }

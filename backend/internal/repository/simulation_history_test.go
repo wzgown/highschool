@@ -4,6 +4,7 @@ package repository
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"testing"
 	"time"
 
@@ -12,35 +13,38 @@ import (
 
 // MockSimulationHistoryRepo 用于测试的 mock 实现
 type MockSimulationHistoryRepo struct {
-	data  map[string]*SimulationHistoryRecord
+	data    map[int64]*SimulationHistoryRecord
 	counter int64
 }
 
 func NewMockSimulationHistoryRepo() *MockSimulationHistoryRepo {
 	return &MockSimulationHistoryRepo{
-		data: make(map[string]*SimulationHistoryRecord),
+		data: make(map[int64]*SimulationHistoryRecord),
 	}
 }
 
 func (m *MockSimulationHistoryRepo) Save(ctx context.Context, deviceID string, deviceInfo map[string]interface{},
 	candidateData *highschoolv1.SubmitAnalysisRequest,
 	result *highschoolv1.SimulationResults) (string, error) {
-	
+
 	m.counter++
-	id := fmt.Sprintf("test-%d", m.counter)
-	m.data[id] = &SimulationHistoryRecord{
-		ID:               id,
+	m.data[m.counter] = &SimulationHistoryRecord{
+		ID:               m.counter,
 		DeviceID:         deviceID,
 		DeviceInfo:       deviceInfo,
 		CandidateData:    candidateData,
 		SimulationResult: result,
 		CreatedAt:        time.Now(),
 	}
-	return id, nil
+	return fmt.Sprintf("%d", m.counter), nil
 }
 
 func (m *MockSimulationHistoryRepo) GetByID(ctx context.Context, id string) (*SimulationHistoryRecord, error) {
-	record, ok := m.data[id]
+	idInt, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	record, ok := m.data[idInt]
 	if !ok {
 		return nil, context.DeadlineExceeded // 简化错误处理
 	}
@@ -58,7 +62,11 @@ func (m *MockSimulationHistoryRepo) ListByDevice(ctx context.Context, deviceID s
 }
 
 func (m *MockSimulationHistoryRepo) DeleteByID(ctx context.Context, id string) error {
-	delete(m.data, id)
+	idInt, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return err
+	}
+	delete(m.data, idInt)
 	return nil
 }
 
@@ -133,8 +141,8 @@ func TestSimulationHistoryRepository_GetByID(t *testing.T) {
 		if err != nil {
 			t.Errorf("Expected no error, got %v", err)
 		}
-		if record.ID != id {
-			t.Errorf("Expected ID %s, got %s", id, record.ID)
+		if fmt.Sprintf("%d", record.ID) != id {
+			t.Errorf("Expected ID %s, got %d", id, record.ID)
 		}
 	})
 

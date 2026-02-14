@@ -15,12 +15,26 @@ type Engine struct {
 	schoolRepo          repository.SchoolRepository
 }
 
+// EngineOption 引擎配置选项
+type EngineOption func(*Engine)
+
+// WithSchoolRepository 设置学校仓库
+func WithSchoolRepo(repo repository.SchoolRepository) EngineOption {
+	return func(e *Engine) {
+		e.schoolRepo = repo
+	}
+}
+
 // NewEngine 创建模拟引擎
-func NewEngine() *Engine {
-	return &Engine{
+func NewEngine(opts ...EngineOption) *Engine {
+	e := &Engine{
 		competitorGenerator: NewCompetitorGenerator(),
 		schoolRepo:          repository.NewSchoolRepository(),
 	}
+	for _, opt := range opts {
+		opt(e)
+	}
+	return e
 }
 
 // Run 执行模拟分析
