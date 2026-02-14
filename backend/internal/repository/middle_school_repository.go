@@ -31,7 +31,8 @@ func NewMiddleSchoolRepository() MiddleSchoolRepository {
 
 // List 获取初中学校列表
 func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword *string) ([]*highschoolv1.MiddleSchool, error) {
-	whereClause := "WHERE is_active = true"
+	// 使用视图，自动过滤 is_active=true 并优先使用最新年份数据
+	whereClause := "WHERE 1=1"
 	args := []interface{}{}
 	argIdx := 1
 
@@ -49,7 +50,7 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 
 	query := fmt.Sprintf(`
 		SELECT id, code, name, short_name, district_id, school_nature_id, is_non_selective, exact_student_count, estimated_student_count
-		FROM ref_middle_school
+		FROM vw_active_middle_schools
 		%s
 		ORDER BY id
 	`, whereClause)

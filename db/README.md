@@ -174,9 +174,44 @@ db/
 | quota_count | INTEGER | 分配到该校的计划数 |
 | data_year | INTEGER | 数据年份 |
 
+#### 12. ref_admission_plan_summary - 招生计划汇总表
+
+用于记录每所高中学校各招生批次的计划招生名额，是招生名额的综合视图。
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| id | SERIAL | 主键 |
+| year | INTEGER | 招生年份 |
+| school_id | INTEGER | 学校ID |
+| school_code | VARCHAR(20) | 学校招生代码 |
+| school_name | VARCHAR(200) | 学校名称 |
+| district_id | INTEGER | 所属区ID |
+| school_type_id | VARCHAR(50) | 学校类型代码 |
+| is_municipal | BOOLEAN | 是否委属学校 |
+| autonomous_count | INTEGER | 自主招生计划数 |
+| autonomous_sports_count | INTEGER | 其中：市级优秀体育学生数 |
+| autonomous_arts_count | INTEGER | 其中：市级艺术骨干学生数 |
+| quota_district_count | INTEGER | 名额分配到区计划数 |
+| quota_school_count | INTEGER | 名额分配到校计划数 |
+| unified_count | INTEGER | 统一招生计划数 |
+| total_plan_count | INTEGER | 总招生计划数 |
+| quota_total_count | INTEGER | 名额分配总计（到区+到校） |
+| quota_ratio | DECIMAL(5,2) | 名额分配比例（%） |
+| autonomous_ratio | DECIMAL(5,2) | 自主招生比例（%） |
+| unified_ratio | DECIMAL(5,2) | 统一招生比例（%） |
+| data_year | INTEGER | 数据年份 |
+| data_source | VARCHAR(255) | 数据来源 |
+
+**招生批次政策说明**：
+- **名额分配**：占市重点高中总计划的65%
+  - 委属市重点：约80%分配到区，20%分配到校
+  - 区属市重点：约30%分配到区，70%分配到校
+- **自主招生**：限制在10%-15%
+- **统一招生**：剩余名额
+
 ### 历史数据表 (History Tables)
 
-#### 12. ref_district_exam_count - 各区中考人数表
+#### 13. ref_district_exam_count - 各区中考人数表
 
 | 字段 | 类型 | 说明 |
 |------|------|------|
@@ -190,7 +225,7 @@ db/
 - 2024年：约112,631人（估算）
 - 2025年：约118,834人（官方数据）
 
-#### 13. ref_admission_score_quota_district - 名额分配到区录取最低分数线表
+#### 14. ref_admission_score_quota_district - 名额分配到区录取最低分数线表
 
 | 字段 | 类型 | 说明 |
 |------|------|------|
@@ -216,7 +251,7 @@ db/
 5. 语文成绩
 6. 综合测试成绩
 
-#### 14. ref_admission_score_quota_school - 名额分配到校录取最低分数线表
+#### 15. ref_admission_score_quota_school - 名额分配到校录取最低分数线表
 
 | 字段 | 类型 | 说明 |
 |------|------|------|
@@ -235,7 +270,7 @@ db/
 | comprehensive_quality_score | DECIMAL(4,1) | 综合素质评价成绩（默认50分） |
 | data_year | INTEGER | 数据年份 |
 
-#### 15. ref_admission_score_unified - 1-15志愿录取分数线表
+#### 16. ref_admission_score_unified - 1-15志愿录取分数线表
 
 | 字段 | 类型 | 说明 |
 |------|------|------|
@@ -424,4 +459,25 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
   - 12个区来自 quota_school/ 目录（名额分配到校招生计划）
   - 4个区来自 cutoff_scores/ 目录（名额分配到校录取最低分数线）
 - **处理脚本**：scripts/extract_middle_schools.py（穷举法，为每个区单独编写解析函数）
+
+### 2025-02-14 (招生计划汇总表)
+- **新增招生计划汇总表**：
+  - 006_create_admission_plan_summary.sql：招生计划汇总表DDL
+  - 052_seed_admission_plan_summary_2025.sql：2025年94所学校招生计划汇总数据
+- **数据来源**：
+  - 自主招生计划：2025年上海市高中自主招生计划.pdf
+  - 名额分配到区：2025年名额分配到区招生计划
+- **招生批次政策**：
+  - 名额分配：市重点高中总计划的65%
+    - 委属：80%到区 + 20%到校
+    - 区属：30%到区 + 70%到校
+  - 自主招生：10%-15%
+  - 统一招生：剩余名额
+- **字段说明**：
+  - autonomous_count：自主招生计划数
+  - quota_district_count：名额分配到区计划数
+  - quota_school_count：名额分配到校计划数
+  - unified_count：统一招生计划数
+  - total_plan_count：总招生计划数
+  - quota_ratio/autonomous_ratio/unified_ratio：各批次比例
 │   ├── 006_seed_exam_count_comparison_2024_2025.sql  # 2024-2025年中考报名人数对比
