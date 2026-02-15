@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Write",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(psql:*)",
+      "Bash(docker:*)",
+      "Bash(ls:*)",
+      "Edit",
+      "Bash(pip3:*)",
+      "Bash(pip3 show:*)",
+      "Bash(pip3 install:*)",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__zcode_internal_tool__new_page",
+      "mcp__chrome-devtools__take_snapshot"
     ]
   },
   "hooks": {

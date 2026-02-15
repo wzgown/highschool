@@ -218,7 +218,7 @@ def main():
     print("=" * 60)
 
     # 查找嘉定区的markdown文件
-    md_files = sorted(glob(os.path.join(MD_DIR, '*嘉定*名额分配到校*.md')))
+    md_files = sorted(glob(os.path.join(MD_DIR, '*jiading*.md')) + glob(os.path.join(MD_DIR, '*Jiading*.md')))
 
     if not md_files:
         print("错误：未找到嘉定区的markdown文件")
