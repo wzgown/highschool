@@ -1,13 +1,34 @@
 -- 005_create_active_middle_schools_view.sql
 -- 创建有效初中学校视图，优先使用最新年份数据
 -- 2025-02-14: 添加排名字段 (district_rank, tier, ranking_remarks)
+-- 2025-02-15: 改进去重策略，按标准化名称去重（处理同一学校不同编码的重复记录）
 
 -- Drop view if exists
 DROP VIEW IF EXISTS vw_active_middle_schools;
 
--- Create view for active middle schools with latest year data
+-- Create view for active middle schools with deduplication by normalized name
+-- 标准化名称用于去重：
+-- 1. 去除括号内容（如"（原黄浦学校）"）
+-- 2. 去除"上海市"前缀
+-- 3. 统一"初级中学"为"中学"
+-- 4. 去除"中学"后缀
+-- 优先保留：新编码格式(011xxx) > 旧编码格式 > 最新数据年份 > 最大ID
 CREATE VIEW vw_active_middle_schools AS
-SELECT DISTINCT ON (code)
+SELECT DISTINCT ON (
+  REGEXP_REPLACE(
+    REGEXP_REPLACE(
+      REGEXP_REPLACE(
+        REGEXP_REPLACE(
+          REGEXP_REPLACE(name, '（[^）]+）', ''),
+          '^上海市', ''
+        ),
+        '初级中学$', '中学'
+      ),
+      '中学$', ''
+    ),
+    '\s+', ''
+  )
+)
     id,
     code,
     name,
@@ -25,6 +46,22 @@ SELECT DISTINCT ON (code)
     updated_at
 FROM ref_middle_school
 WHERE is_active = TRUE
-ORDER BY code, data_year DESC;
+ORDER BY
+  REGEXP_REPLACE(
+    REGEXP_REPLACE(
+      REGEXP_REPLACE(
+        REGEXP_REPLACE(
+          REGEXP_REPLACE(name, '（[^）]+）', ''),
+          '^上海市', ''
+        ),
+        '初级中学$', '中学'
+      ),
+      '中学$', ''
+    ),
+    '\s+', ''
+  ),
+  CASE WHEN code LIKE '011%' THEN 0 ELSE 1 END,
+  data_year DESC,
+  id DESC;
 
-COMMENT ON VIEW vw_active_middle_schools IS '有效初中学校视图，每个学校只保留最新年份数据，包含区内排名和梯队信息';
+COMMENT ON VIEW vw_active_middle_schools IS '有效初中学校视图，按标准化名称去重，优先保留新编码格式的学校数据';
