@@ -33,12 +33,43 @@ func (m *mockSchoolRepo) GetHistoryScores(ctx context.Context, schoolID int32) (
 	return nil, nil
 }
 
+// mockQuotaRepo 用于测试的模拟名额仓库
+type mockQuotaRepo struct{}
+
+func (m *mockQuotaRepo) GetQuotaDistrictPlan(ctx context.Context, schoolID int32, districtID int32, year int) (int, error) {
+	return 10, nil // 返回10个名额
+}
+
+func (m *mockQuotaRepo) GetQuotaSchoolPlan(ctx context.Context, schoolID int32, middleSchoolID int32, year int) (int, error) {
+	return 5, nil // 返回5个名额
+}
+
+func (m *mockQuotaRepo) GetDistrictExamCount(ctx context.Context, districtID int32, year int) (int, error) {
+	return 10000, nil // 返回10000个考生
+}
+
+func (m *mockQuotaRepo) GetMiddleSchoolStudentCount(ctx context.Context, middleSchoolID int32, year int) (int, error) {
+	return 300, nil
+}
+
 func TestEngine_Run(t *testing.T) {
-	engine := NewEngine(WithSchoolRepo(&mockSchoolRepo{}))
+	engine := NewEngine(
+		WithSchoolRepo(&mockSchoolRepo{}),
+		WithQuotaRepo(&mockQuotaRepo{}),
+		WithSimulationCount(10), // 减少模拟次数以加快测试
+	)
+
+	districtID := int32(1)
+	middleSchoolID := int32(1)
 
 	t.Run("should calculate percentile correctly", func(t *testing.T) {
 		// Arrange
+		quotaDistrict := int32(1)
 		req := &highschoolv1.SubmitAnalysisRequest{
+			Candidate: &highschoolv1.CandidateInfo{
+				DistrictId:       districtID,
+				MiddleSchoolId:   middleSchoolID,
+			},
 			Ranking: &highschoolv1.RankingInfo{
 				Rank:         100,
 				TotalStudents: 1000,
@@ -47,7 +78,8 @@ func TestEngine_Run(t *testing.T) {
 				Total: 700,
 			},
 			Volunteers: &highschoolv1.Volunteers{
-				Unified: []int32{1, 2, 3},
+				QuotaDistrict: &quotaDistrict,
+				Unified:       []int32{1, 2, 3},
 			},
 		}
 
@@ -61,9 +93,14 @@ func TestEngine_Run(t *testing.T) {
 		assert.Equal(t, float64(90), results.Predictions.Percentile)
 	})
 
-	t.Run("should calculate district rank correctly", func(t *testing.T) {
+	t.Run("should predict district rank based on school ranking", func(t *testing.T) {
 		// Arrange
+		quotaDistrict := int32(1)
 		req := &highschoolv1.SubmitAnalysisRequest{
+			Candidate: &highschoolv1.CandidateInfo{
+				DistrictId:       districtID,
+				MiddleSchoolId:   middleSchoolID,
+			},
 			Ranking: &highschoolv1.RankingInfo{
 				Rank:         100,
 				TotalStudents: 1000,
@@ -72,7 +109,8 @@ func TestEngine_Run(t *testing.T) {
 				Total: 700,
 			},
 			Volunteers: &highschoolv1.Volunteers{
-				Unified: []int32{1},
+				QuotaDistrict: &quotaDistrict,
+				Unified:       []int32{1},
 			},
 		}
 
@@ -80,14 +118,19 @@ func TestEngine_Run(t *testing.T) {
 		results := engine.Run(context.Background(), req)
 
 		// Assert
-		// 区内排名 = 100 * 12.5 = 1250
-		assert.Equal(t, int32(1250), results.Predictions.DistrictRank)
+		// 区内排名 = 100 / 1000 * 10000 = 1000
+		assert.Equal(t, int32(1000), results.Predictions.DistrictRank)
 	})
 
 	t.Run("should generate probabilities for all volunteers", func(t *testing.T) {
 		// Arrange
 		quotaDistrict := int32(1)
 		req := &highschoolv1.SubmitAnalysisRequest{
+			Candidate: &highschoolv1.CandidateInfo{
+				DistrictId:             districtID,
+				MiddleSchoolId:         middleSchoolID,
+				HasQuotaSchoolEligibility: true,
+			},
 			Scores: &highschoolv1.CandidateScores{
 				Total: 700,
 			},
@@ -111,7 +154,12 @@ func TestEngine_Run(t *testing.T) {
 
 	t.Run("should calculate strategy analysis", func(t *testing.T) {
 		// Arrange
+		quotaDistrict := int32(1)
 		req := &highschoolv1.SubmitAnalysisRequest{
+			Candidate: &highschoolv1.CandidateInfo{
+				DistrictId:       districtID,
+				MiddleSchoolId:   middleSchoolID,
+			},
 			Scores: &highschoolv1.CandidateScores{
 				Total: 700,
 			},
@@ -120,7 +168,8 @@ func TestEngine_Run(t *testing.T) {
 				TotalStudents: 1000,
 			},
 			Volunteers: &highschoolv1.Volunteers{
-				Unified: []int32{1, 2, 3},
+				QuotaDistrict: &quotaDistrict,
+				Unified:       []int32{1, 2, 3},
 			},
 		}
 
@@ -136,7 +185,12 @@ func TestEngine_Run(t *testing.T) {
 
 	t.Run("should generate competitor analysis", func(t *testing.T) {
 		// Arrange
+		quotaDistrict := int32(1)
 		req := &highschoolv1.SubmitAnalysisRequest{
+			Candidate: &highschoolv1.CandidateInfo{
+				DistrictId:       districtID,
+				MiddleSchoolId:   middleSchoolID,
+			},
 			Scores: &highschoolv1.CandidateScores{
 				Total: 700,
 			},
@@ -145,7 +199,8 @@ func TestEngine_Run(t *testing.T) {
 				TotalStudents: 1000,
 			},
 			Volunteers: &highschoolv1.Volunteers{
-				Unified: []int32{1},
+				QuotaDistrict: &quotaDistrict,
+				Unified:       []int32{1},
 			},
 		}
 
@@ -159,46 +214,50 @@ func TestEngine_Run(t *testing.T) {
 	})
 }
 
-func TestEngine_calculateProbability(t *testing.T) {
-	engine := NewEngine(WithSchoolRepo(&mockSchoolRepo{}))
+func TestCandidate_Compare(t *testing.T) {
+	t.Run("tie preference takes precedence", func(t *testing.T) {
+		c1 := &Candidate{HasTiePreference: true, TotalScore: 700}
+		c2 := &Candidate{HasTiePreference: false, TotalScore: 700}
+		assert.Equal(t, 1, c1.Compare(c2))
+		assert.Equal(t, -1, c2.Compare(c1))
+	})
 
-	tests := []struct {
-		name           string
-		candidateScore int32
-		schoolScore    int32
-		expectedProb   float64
-	}{
-		{"much higher", 750, 700, 95.0},   // +50
-		{"higher", 720, 700, 80.0},        // +20
-		{"slightly higher", 710, 700, 80.0}, // +10
-		{"equal", 700, 700, 60.0},         // 0
-		{"slightly lower", 690, 700, 60.0}, // -10
-		{"lower", 670, 700, 35.0},         // -30
-		{"much lower", 650, 700, 15.0},    // -50
-	}
+	t.Run("comprehensive quality breaks tie", func(t *testing.T) {
+		c1 := &Candidate{TotalScore: 700, ComprehensiveQuality: 50}
+		c2 := &Candidate{TotalScore: 700, ComprehensiveQuality: 45}
+		assert.Equal(t, 1, c1.Compare(c2))
+		assert.Equal(t, -1, c2.Compare(c1))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			prob := engine.calculateProbability(tt.candidateScore, tt.schoolScore)
-			assert.Equal(t, tt.expectedProb, prob)
-		})
-	}
+	t.Run("chinese_math_foreign_sum breaks tie", func(t *testing.T) {
+		c1 := &Candidate{TotalScore: 700, ComprehensiveQuality: 50, ChineseScore: 140, MathScore: 140, ForeignScore: 140}
+		c2 := &Candidate{TotalScore: 700, ComprehensiveQuality: 50, ChineseScore: 130, MathScore: 140, ForeignScore: 140}
+		assert.Equal(t, 1, c1.Compare(c2))
+		assert.Equal(t, -1, c2.Compare(c1))
+	})
+
+	t.Run("math score breaks tie", func(t *testing.T) {
+		c1 := &Candidate{TotalScore: 700, ComprehensiveQuality: 50, ChineseScore: 140, MathScore: 145, ForeignScore: 140}
+		c2 := &Candidate{TotalScore: 700, ComprehensiveQuality: 50, ChineseScore: 140, MathScore: 140, ForeignScore: 140}
+		assert.Equal(t, 1, c1.Compare(c2))
+		assert.Equal(t, -1, c2.Compare(c1))
+	})
 }
 
 func TestEngine_calculateConfidence(t *testing.T) {
 	engine := NewEngine(WithSchoolRepo(&mockSchoolRepo{}))
 
 	tests := []struct {
-		percentile       float64
+		percentile          float64
 		expectedConfidence string
 	}{
-		{50.0, "high"},    // 30-70 范围
-		{30.0, "high"},    // 边界
-		{70.0, "high"},    // 边界
-		{20.0, "medium"},  // 15-30 范围
-		{80.0, "medium"},  // 70-85 范围
-		{10.0, "low"},     // <15
-		{90.0, "low"},     // >85
+		{50.0, "high"},   // 30-70 范围
+		{30.0, "high"},   // 边界
+		{70.0, "high"},   // 边界
+		{20.0, "medium"}, // 15-30 范围
+		{80.0, "medium"}, // 70-85 范围
+		{10.0, "low"},    // <15
+		{90.0, "low"},    // >85
 	}
 
 	for _, tt := range tests {
