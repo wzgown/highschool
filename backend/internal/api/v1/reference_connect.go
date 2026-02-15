@@ -140,6 +140,48 @@ func (h *ReferenceServiceHandler) GetDistrictExamCount(
 	}), nil
 }
 
+// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
+func (h *ReferenceServiceHandler) GetSchoolsWithQuotaDistrict(
+	ctx context.Context,
+	req *connect.Request[highschoolv1.GetSchoolsWithQuotaDistrictRequest],
+) (*connect.Response[highschoolv1.GetSchoolsWithQuotaDistrictResponse], error) {
+	year := req.Msg.Year
+	if year == 0 {
+		year = 2025 // 默认年份
+	}
+
+	schools, err := h.service.GetSchoolsWithQuotaDistrict(ctx, req.Msg.DistrictId, year)
+	if err != nil {
+		logger.Error("get schools with quota district failed", err)
+		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取名额分配到区学校列表失败"))
+	}
+
+	return connect.NewResponse(&highschoolv1.GetSchoolsWithQuotaDistrictResponse{
+		Schools: schools,
+	}), nil
+}
+
+// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
+func (h *ReferenceServiceHandler) GetSchoolsWithQuotaSchool(
+	ctx context.Context,
+	req *connect.Request[highschoolv1.GetSchoolsWithQuotaSchoolRequest],
+) (*connect.Response[highschoolv1.GetSchoolsWithQuotaSchoolResponse], error) {
+	year := req.Msg.Year
+	if year == 0 {
+		year = 2025 // 默认年份
+	}
+
+	schools, err := h.service.GetSchoolsWithQuotaSchool(ctx, req.Msg.MiddleSchoolId, year)
+	if err != nil {
+		logger.Error("get schools with quota school failed", err)
+		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取名额分配到校学校列表失败"))
+	}
+
+	return connect.NewResponse(&highschoolv1.GetSchoolsWithQuotaSchoolResponse{
+		Schools: schools,
+	}), nil
+}
+
 // RegisterReferenceService 注册参考数据服务
 func RegisterReferenceService(mux *http.ServeMux) {
 	handler := NewReferenceServiceHandler()

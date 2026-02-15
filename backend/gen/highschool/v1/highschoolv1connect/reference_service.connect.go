@@ -51,6 +51,12 @@ const (
 	// ReferenceServiceGetDistrictExamCountProcedure is the fully-qualified name of the
 	// ReferenceService's GetDistrictExamCount RPC.
 	ReferenceServiceGetDistrictExamCountProcedure = "/highschool.v1.ReferenceService/GetDistrictExamCount"
+	// ReferenceServiceGetSchoolsWithQuotaDistrictProcedure is the fully-qualified name of the
+	// ReferenceService's GetSchoolsWithQuotaDistrict RPC.
+	ReferenceServiceGetSchoolsWithQuotaDistrictProcedure = "/highschool.v1.ReferenceService/GetSchoolsWithQuotaDistrict"
+	// ReferenceServiceGetSchoolsWithQuotaSchoolProcedure is the fully-qualified name of the
+	// ReferenceService's GetSchoolsWithQuotaSchool RPC.
+	ReferenceServiceGetSchoolsWithQuotaSchoolProcedure = "/highschool.v1.ReferenceService/GetSchoolsWithQuotaSchool"
 )
 
 // ReferenceServiceClient is a client for the highschool.v1.ReferenceService service.
@@ -67,6 +73,10 @@ type ReferenceServiceClient interface {
 	GetHistoryScores(context.Context, *connect.Request[v1.GetHistoryScoresRequest]) (*connect.Response[v1.GetHistoryScoresResponse], error)
 	// 获取各区中考人数
 	GetDistrictExamCount(context.Context, *connect.Request[v1.GetDistrictExamCountRequest]) (*connect.Response[v1.GetDistrictExamCountResponse], error)
+	// 获取有名额分配到区的高中列表（按学生所在区过滤）
+	GetSchoolsWithQuotaDistrict(context.Context, *connect.Request[v1.GetSchoolsWithQuotaDistrictRequest]) (*connect.Response[v1.GetSchoolsWithQuotaDistrictResponse], error)
+	// 获取有名额分配到校的高中列表（按学生初中过滤）
+	GetSchoolsWithQuotaSchool(context.Context, *connect.Request[v1.GetSchoolsWithQuotaSchoolRequest]) (*connect.Response[v1.GetSchoolsWithQuotaSchoolResponse], error)
 }
 
 // NewReferenceServiceClient constructs a client for the highschool.v1.ReferenceService service. By
@@ -116,17 +126,31 @@ func NewReferenceServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(referenceServiceMethods.ByName("GetDistrictExamCount")),
 			connect.WithClientOptions(opts...),
 		),
+		getSchoolsWithQuotaDistrict: connect.NewClient[v1.GetSchoolsWithQuotaDistrictRequest, v1.GetSchoolsWithQuotaDistrictResponse](
+			httpClient,
+			baseURL+ReferenceServiceGetSchoolsWithQuotaDistrictProcedure,
+			connect.WithSchema(referenceServiceMethods.ByName("GetSchoolsWithQuotaDistrict")),
+			connect.WithClientOptions(opts...),
+		),
+		getSchoolsWithQuotaSchool: connect.NewClient[v1.GetSchoolsWithQuotaSchoolRequest, v1.GetSchoolsWithQuotaSchoolResponse](
+			httpClient,
+			baseURL+ReferenceServiceGetSchoolsWithQuotaSchoolProcedure,
+			connect.WithSchema(referenceServiceMethods.ByName("GetSchoolsWithQuotaSchool")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // referenceServiceClient implements ReferenceServiceClient.
 type referenceServiceClient struct {
-	getDistricts         *connect.Client[v1.GetDistrictsRequest, v1.GetDistrictsResponse]
-	getMiddleSchools     *connect.Client[v1.GetMiddleSchoolsRequest, v1.GetMiddleSchoolsResponse]
-	getSchools           *connect.Client[v1.GetSchoolsRequest, v1.GetSchoolsResponse]
-	getSchoolDetail      *connect.Client[v1.GetSchoolDetailRequest, v1.GetSchoolDetailResponse]
-	getHistoryScores     *connect.Client[v1.GetHistoryScoresRequest, v1.GetHistoryScoresResponse]
-	getDistrictExamCount *connect.Client[v1.GetDistrictExamCountRequest, v1.GetDistrictExamCountResponse]
+	getDistricts                *connect.Client[v1.GetDistrictsRequest, v1.GetDistrictsResponse]
+	getMiddleSchools            *connect.Client[v1.GetMiddleSchoolsRequest, v1.GetMiddleSchoolsResponse]
+	getSchools                  *connect.Client[v1.GetSchoolsRequest, v1.GetSchoolsResponse]
+	getSchoolDetail             *connect.Client[v1.GetSchoolDetailRequest, v1.GetSchoolDetailResponse]
+	getHistoryScores            *connect.Client[v1.GetHistoryScoresRequest, v1.GetHistoryScoresResponse]
+	getDistrictExamCount        *connect.Client[v1.GetDistrictExamCountRequest, v1.GetDistrictExamCountResponse]
+	getSchoolsWithQuotaDistrict *connect.Client[v1.GetSchoolsWithQuotaDistrictRequest, v1.GetSchoolsWithQuotaDistrictResponse]
+	getSchoolsWithQuotaSchool   *connect.Client[v1.GetSchoolsWithQuotaSchoolRequest, v1.GetSchoolsWithQuotaSchoolResponse]
 }
 
 // GetDistricts calls highschool.v1.ReferenceService.GetDistricts.
@@ -159,6 +183,16 @@ func (c *referenceServiceClient) GetDistrictExamCount(ctx context.Context, req *
 	return c.getDistrictExamCount.CallUnary(ctx, req)
 }
 
+// GetSchoolsWithQuotaDistrict calls highschool.v1.ReferenceService.GetSchoolsWithQuotaDistrict.
+func (c *referenceServiceClient) GetSchoolsWithQuotaDistrict(ctx context.Context, req *connect.Request[v1.GetSchoolsWithQuotaDistrictRequest]) (*connect.Response[v1.GetSchoolsWithQuotaDistrictResponse], error) {
+	return c.getSchoolsWithQuotaDistrict.CallUnary(ctx, req)
+}
+
+// GetSchoolsWithQuotaSchool calls highschool.v1.ReferenceService.GetSchoolsWithQuotaSchool.
+func (c *referenceServiceClient) GetSchoolsWithQuotaSchool(ctx context.Context, req *connect.Request[v1.GetSchoolsWithQuotaSchoolRequest]) (*connect.Response[v1.GetSchoolsWithQuotaSchoolResponse], error) {
+	return c.getSchoolsWithQuotaSchool.CallUnary(ctx, req)
+}
+
 // ReferenceServiceHandler is an implementation of the highschool.v1.ReferenceService service.
 type ReferenceServiceHandler interface {
 	// 获取区县列表
@@ -173,6 +207,10 @@ type ReferenceServiceHandler interface {
 	GetHistoryScores(context.Context, *connect.Request[v1.GetHistoryScoresRequest]) (*connect.Response[v1.GetHistoryScoresResponse], error)
 	// 获取各区中考人数
 	GetDistrictExamCount(context.Context, *connect.Request[v1.GetDistrictExamCountRequest]) (*connect.Response[v1.GetDistrictExamCountResponse], error)
+	// 获取有名额分配到区的高中列表（按学生所在区过滤）
+	GetSchoolsWithQuotaDistrict(context.Context, *connect.Request[v1.GetSchoolsWithQuotaDistrictRequest]) (*connect.Response[v1.GetSchoolsWithQuotaDistrictResponse], error)
+	// 获取有名额分配到校的高中列表（按学生初中过滤）
+	GetSchoolsWithQuotaSchool(context.Context, *connect.Request[v1.GetSchoolsWithQuotaSchoolRequest]) (*connect.Response[v1.GetSchoolsWithQuotaSchoolResponse], error)
 }
 
 // NewReferenceServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -218,6 +256,18 @@ func NewReferenceServiceHandler(svc ReferenceServiceHandler, opts ...connect.Han
 		connect.WithSchema(referenceServiceMethods.ByName("GetDistrictExamCount")),
 		connect.WithHandlerOptions(opts...),
 	)
+	referenceServiceGetSchoolsWithQuotaDistrictHandler := connect.NewUnaryHandler(
+		ReferenceServiceGetSchoolsWithQuotaDistrictProcedure,
+		svc.GetSchoolsWithQuotaDistrict,
+		connect.WithSchema(referenceServiceMethods.ByName("GetSchoolsWithQuotaDistrict")),
+		connect.WithHandlerOptions(opts...),
+	)
+	referenceServiceGetSchoolsWithQuotaSchoolHandler := connect.NewUnaryHandler(
+		ReferenceServiceGetSchoolsWithQuotaSchoolProcedure,
+		svc.GetSchoolsWithQuotaSchool,
+		connect.WithSchema(referenceServiceMethods.ByName("GetSchoolsWithQuotaSchool")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/highschool.v1.ReferenceService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ReferenceServiceGetDistrictsProcedure:
@@ -232,6 +282,10 @@ func NewReferenceServiceHandler(svc ReferenceServiceHandler, opts ...connect.Han
 			referenceServiceGetHistoryScoresHandler.ServeHTTP(w, r)
 		case ReferenceServiceGetDistrictExamCountProcedure:
 			referenceServiceGetDistrictExamCountHandler.ServeHTTP(w, r)
+		case ReferenceServiceGetSchoolsWithQuotaDistrictProcedure:
+			referenceServiceGetSchoolsWithQuotaDistrictHandler.ServeHTTP(w, r)
+		case ReferenceServiceGetSchoolsWithQuotaSchoolProcedure:
+			referenceServiceGetSchoolsWithQuotaSchoolHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -263,4 +317,12 @@ func (UnimplementedReferenceServiceHandler) GetHistoryScores(context.Context, *c
 
 func (UnimplementedReferenceServiceHandler) GetDistrictExamCount(context.Context, *connect.Request[v1.GetDistrictExamCountRequest]) (*connect.Response[v1.GetDistrictExamCountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.ReferenceService.GetDistrictExamCount is not implemented"))
+}
+
+func (UnimplementedReferenceServiceHandler) GetSchoolsWithQuotaDistrict(context.Context, *connect.Request[v1.GetSchoolsWithQuotaDistrictRequest]) (*connect.Response[v1.GetSchoolsWithQuotaDistrictResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.ReferenceService.GetSchoolsWithQuotaDistrict is not implemented"))
+}
+
+func (UnimplementedReferenceServiceHandler) GetSchoolsWithQuotaSchool(context.Context, *connect.Request[v1.GetSchoolsWithQuotaSchoolRequest]) (*connect.Response[v1.GetSchoolsWithQuotaSchoolResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.ReferenceService.GetSchoolsWithQuotaSchool is not implemented"))
 }

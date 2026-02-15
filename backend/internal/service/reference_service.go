@@ -27,6 +27,12 @@ type ReferenceService interface {
 
 	// GetMiddleSchools 获取初中学校列表
 	GetMiddleSchools(ctx context.Context, districtID *int32, keyword *string) ([]*highschoolv1.MiddleSchool, error)
+
+	// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
+	GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error)
+
+	// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
+	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error)
 }
 
 // referenceService 实现
@@ -83,6 +89,16 @@ func (s *referenceService) GetDistrictExamCount(ctx context.Context, districtID 
 // GetMiddleSchools 获取初中学校列表
 func (s *referenceService) GetMiddleSchools(ctx context.Context, districtID *int32, keyword *string) ([]*highschoolv1.MiddleSchool, error) {
 	return s.middleSchoolRepo.List(ctx, districtID, keyword)
+}
+
+// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
+func (s *referenceService) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error) {
+	return s.schoolRepo.GetSchoolsWithQuotaDistrict(ctx, districtID, int(year))
+}
+
+// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
+func (s *referenceService) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error) {
+	return s.schoolRepo.GetSchoolsWithQuotaSchool(ctx, middleSchoolID, int(year))
 }
 
 

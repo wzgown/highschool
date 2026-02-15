@@ -26,6 +26,12 @@ type SchoolRepository interface {
 
 	// GetHistoryScores 获取学校历年分数线
 	GetHistoryScores(ctx context.Context, schoolID int32) ([]*highschoolv1.HistoryScore, error)
+
+	// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
+	GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error)
+
+	// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
+	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error)
 }
 
 // schoolRepo 实现
@@ -218,4 +224,58 @@ func (r *schoolRepo) GetHistoryScores(ctx context.Context, schoolID int32) ([]*h
 	}
 
 	return scores, nil
+}
+
+// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
+func (r *schoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+	rows, err := r.db.Query(ctx, `
+		SELECT DISTINCT s.id, s.full_name, s.code, q.quota_count
+		FROM ref_school s
+		INNER JOIN ref_quota_allocation_district q ON q.school_id = s.id
+		WHERE q.district_id = $1 AND q.year = $2 AND q.quota_count > 0 AND s.is_active = true
+		ORDER BY s.full_name
+	`, districtID, year)
+	if err != nil {
+		return nil, fmt.Errorf("get schools with quota district failed: %w", err)
+	}
+	defer rows.Close()
+
+	var schools []*highschoolv1.SchoolWithQuota
+	for rows.Next() {
+		var school highschoolv1.SchoolWithQuota
+		err := rows.Scan(&school.Id, &school.FullName, &school.Code, &school.QuotaCount)
+		if err != nil {
+			continue
+		}
+		schools = append(schools, &school)
+	}
+
+	return schools, nil
+}
+
+// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
+func (r *schoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+	rows, err := r.db.Query(ctx, `
+		SELECT DISTINCT s.id, s.full_name, s.code, q.quota_count
+		FROM ref_school s
+		INNER JOIN ref_quota_allocation_school q ON q.high_school_id = s.id
+		WHERE q.middle_school_id = $1 AND q.year = $2 AND q.quota_count > 0 AND s.is_active = true
+		ORDER BY s.full_name
+	`, middleSchoolID, year)
+	if err != nil {
+		return nil, fmt.Errorf("get schools with quota school failed: %w", err)
+	}
+	defer rows.Close()
+
+	var schools []*highschoolv1.SchoolWithQuota
+	for rows.Next() {
+		var school highschoolv1.SchoolWithQuota
+		err := rows.Scan(&school.Id, &school.FullName, &school.Code, &school.QuotaCount)
+		if err != nil {
+			continue
+		}
+		schools = append(schools, &school)
+	}
+
+	return schools, nil
 }

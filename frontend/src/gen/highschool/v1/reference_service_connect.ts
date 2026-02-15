@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetDistrictExamCountRequest, GetDistrictExamCountResponse, GetDistrictsRequest, GetDistrictsResponse, GetHistoryScoresRequest, GetHistoryScoresResponse, GetMiddleSchoolsRequest, GetMiddleSchoolsResponse, GetSchoolDetailRequest, GetSchoolDetailResponse, GetSchoolsRequest, GetSchoolsResponse } from "./reference_service_pb.js";
+import { GetDistrictExamCountRequest, GetDistrictExamCountResponse, GetDistrictsRequest, GetDistrictsResponse, GetHistoryScoresRequest, GetHistoryScoresResponse, GetMiddleSchoolsRequest, GetMiddleSchoolsResponse, GetSchoolDetailRequest, GetSchoolDetailResponse, GetSchoolsRequest, GetSchoolsResponse, GetSchoolsWithQuotaDistrictRequest, GetSchoolsWithQuotaDistrictResponse, GetSchoolsWithQuotaSchoolRequest, GetSchoolsWithQuotaSchoolResponse } from "./reference_service_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -78,6 +78,28 @@ export const ReferenceService = {
       name: "GetDistrictExamCount",
       I: GetDistrictExamCountRequest,
       O: GetDistrictExamCountResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 获取有名额分配到区的高中列表（按学生所在区过滤）
+     *
+     * @generated from rpc highschool.v1.ReferenceService.GetSchoolsWithQuotaDistrict
+     */
+    getSchoolsWithQuotaDistrict: {
+      name: "GetSchoolsWithQuotaDistrict",
+      I: GetSchoolsWithQuotaDistrictRequest,
+      O: GetSchoolsWithQuotaDistrictResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 获取有名额分配到校的高中列表（按学生初中过滤）
+     *
+     * @generated from rpc highschool.v1.ReferenceService.GetSchoolsWithQuotaSchool
+     */
+    getSchoolsWithQuotaSchool: {
+      name: "GetSchoolsWithQuotaSchool",
+      I: GetSchoolsWithQuotaSchoolRequest,
+      O: GetSchoolsWithQuotaSchoolResponse,
       kind: MethodKind.Unary,
     },
   }

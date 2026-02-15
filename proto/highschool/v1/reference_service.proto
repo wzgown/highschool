@@ -11,21 +11,27 @@ import "highschool/v1/school.proto";
 service ReferenceService {
   // 获取区县列表
   rpc GetDistricts(GetDistrictsRequest) returns (GetDistrictsResponse);
-  
+
   // 获取初中学校列表
   rpc GetMiddleSchools(GetMiddleSchoolsRequest) returns (GetMiddleSchoolsResponse);
-  
+
   // 获取高中学校列表
   rpc GetSchools(GetSchoolsRequest) returns (GetSchoolsResponse);
-  
+
   // 获取学校详情
   rpc GetSchoolDetail(GetSchoolDetailRequest) returns (GetSchoolDetailResponse);
-  
+
   // 获取历年分数线
   rpc GetHistoryScores(GetHistoryScoresRequest) returns (GetHistoryScoresResponse);
-  
+
   // 获取各区中考人数
   rpc GetDistrictExamCount(GetDistrictExamCountRequest) returns (GetDistrictExamCountResponse);
+
+  // 获取有名额分配到区的高中列表（按学生所在区过滤）
+  rpc GetSchoolsWithQuotaDistrict(GetSchoolsWithQuotaDistrictRequest) returns (GetSchoolsWithQuotaDistrictResponse);
+
+  // 获取有名额分配到校的高中列表（按学生初中过滤）
+  rpc GetSchoolsWithQuotaSchool(GetSchoolsWithQuotaSchoolRequest) returns (GetSchoolsWithQuotaSchoolResponse);
 }
 
 // 获取区县列表请求
@@ -101,4 +107,34 @@ message DistrictExamCountItem {
 message GetDistrictExamCountResponse {
   int32 year = 1;
   repeated DistrictExamCountItem districts = 2;
+}
+
+// 获取有名额分配到区的高中列表请求
+message GetSchoolsWithQuotaDistrictRequest {
+  int32 district_id = 1;  // 学生所在区
+  int32 year = 2;         // 年份
+}
+
+// 获取有名额分配到区的高中列表响应
+message GetSchoolsWithQuotaDistrictResponse {
+  repeated SchoolWithQuota schools = 1;
+}
+
+// 获取有名额分配到校的高中列表请求
+message GetSchoolsWithQuotaSchoolRequest {
+  int32 middle_school_id = 1;  // 学生所在初中
+  int32 year = 2;               // 年份
+}
+
+// 获取有名额分配到校的高中列表响应
+message GetSchoolsWithQuotaSchoolResponse {
+  repeated SchoolWithQuota schools = 1;
+}
+
+// 带名额信息的学校
+message SchoolWithQuota {
+  int32 id = 1;
+  string full_name = 2;
+  string code = 3;
+  int32 quota_count = 4;  // 名额数量
 }

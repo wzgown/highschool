@@ -267,7 +267,7 @@
           <div class="volunteer-section">
             <h3 class="section-subtitle">
               <el-tag type="primary">名额分配到区</el-tag>
-              <span class="subtitle-hint">1个志愿 | 总分800分 | 全区竞争</span>
+              <span class="subtitle-hint">1个志愿 | 总分800分 | 全区竞争 | 仅显示有名额学校</span>
             </h3>
             <el-select
               v-model="form.volunteers.quotaDistrict"
@@ -275,21 +275,25 @@
               class="full-width"
               clearable
               filterable
+              :loading="highSchoolsLoading"
             >
               <el-option
-                v-for="school in highSchools"
+                v-for="school in filteredQuotaDistrictSchools"
                 :key="school.id"
-                :label="`${school.fullName} (${school.code})`"
+                :label="`${school.fullName} (${school.code}) - 名额${school.quotaCount}人`"
                 :value="school.id"
               />
             </el-select>
+            <div v-if="quotaDistrictSchools.length === 0 && !highSchoolsLoading" class="form-tip">
+              暂无名额分配到区的学校数据
+            </div>
           </div>
 
           <!-- 名额分配到校 -->
           <div class="volunteer-section" v-if="form.hasQuotaSchoolEligibility">
             <h3 class="section-subtitle">
               <el-tag type="success">名额分配到校</el-tag>
-              <span class="subtitle-hint">2个志愿 | 总分800分 | 校内竞争 | 可拖拽排序</span>
+              <span class="subtitle-hint">2个志愿 | 总分800分 | 校内竞争 | 可拖拽排序 | 仅显示有名额学校</span>
             </h3>
             <div
               v-for="(schoolId, index) in form.volunteers.quotaSchool"
@@ -309,11 +313,12 @@
                 placeholder="请选择学校"
                 class="volunteer-select"
                 filterable
+                :loading="highSchoolsLoading"
               >
                 <el-option
-                  v-for="school in highSchools"
+                  v-for="school in getFilteredQuotaSchoolSchools(index)"
                   :key="school.id"
-                  :label="`${school.fullName} (${school.code})`"
+                  :label="`${school.fullName} (${school.code}) - 名额${school.quotaCount}人`"
                   :value="school.id"
                 />
               </el-select>
@@ -333,13 +338,16 @@
             >
               添加志愿
             </el-button>
+            <div v-if="quotaSchoolSchools.length === 0 && !highSchoolsLoading && form.hasQuotaSchoolEligibility" class="form-tip">
+              暂无名额分配到校的学校数据
+            </div>
           </div>
 
           <!-- 统一招生1-15志愿 -->
           <div class="volunteer-section">
             <h3 class="section-subtitle">
               <el-tag type="warning">统一招生</el-tag>
-              <span class="subtitle-hint">1-15志愿 | 总分750分 | 平行志愿 | 可拖拽排序</span>
+              <span class="subtitle-hint">1-15志愿 | 总分750分 | 平行志愿 | 可拖拽排序 | 已选学校已过滤</span>
             </h3>
             <div
               v-for="(schoolId, index) in form.volunteers.unified"
@@ -359,9 +367,10 @@
                 placeholder="请选择学校"
                 class="volunteer-select"
                 filterable
+                :loading="highSchoolsLoading"
               >
                 <el-option
-                  v-for="school in highSchools"
+                  v-for="school in getFilteredUnifiedSchools(index)"
                   :key="school.id"
                   :label="`${school.fullName} (${school.code})`"
                   :value="school.id"
@@ -421,7 +430,7 @@ import { User, Document, List, Plus, Delete, Rank } from '@element-plus/icons-vu
 import { ElMessage } from 'element-plus';
 import { pinyin } from 'pinyin-pro';
 import { useCandidateStore } from '@/stores/candidate';
-import { getDistricts, getMiddleSchools, getSchools } from '@/api/reference';
+import { getDistricts, getMiddleSchools, getSchools, getSchoolsWithQuotaDistrict, getSchoolsWithQuotaSchool, type SchoolWithQuota } from '@/api/reference';
 import { submitAnalysis, formatFormToRequest } from '@/api/candidate';
 import type { District, MiddleSchool, School } from '@/api/reference';
 
@@ -437,6 +446,11 @@ const filteredMiddleSchools = ref<MiddleSchool[]>([]);
 const highSchools = ref<School[]>([]);
 const middleSchoolsLoading = ref(false);
 
+// 名额分配学校列表（按批次分离）
+const quotaDistrictSchools = ref<SchoolWithQuota[]>([]); // 名额分配到区
+const quotaSchoolSchools = ref<SchoolWithQuota[]>([]);   // 名额分配到校
+const highSchoolsLoading = ref(false);
+
 // 拖拽排序状态
 const dragIndex = ref<number | null>(null);
 const dragOverIndex = ref<number | null>(null);
@@ -449,6 +463,58 @@ const hasAnySubjectScore = computed(() => store.hasAnySubjectScore);
 const hasAllSubjectScores = computed(() => store.hasAllSubjectScores);
 const scoreValidation = computed(() => store.scoreValidation);
 const isScoreValid = computed(() => store.isScoreValid);
+
+// 已选择的学校ID集合（用于过滤重复）
+const selectedSchoolIds = computed(() => {
+  const ids = new Set<number>();
+
+  // 名额分配到区
+  if (form.value.volunteers.quotaDistrict) {
+    ids.add(form.value.volunteers.quotaDistrict);
+  }
+
+  // 名额分配到校
+  for (const id of form.value.volunteers.quotaSchool) {
+    if (id) ids.add(id);
+  }
+
+  // 统一招生
+  for (const id of form.value.volunteers.unified) {
+    if (id) ids.add(id);
+  }
+
+  return ids;
+});
+
+// 过滤后的名额分配到区学校列表（排除已选择的）
+const filteredQuotaDistrictSchools = computed(() => {
+  const currentSelection = form.value.volunteers.quotaDistrict;
+  return quotaDistrictSchools.value.filter(school =>
+    school.id === currentSelection || !selectedSchoolIds.value.has(school.id)
+  );
+});
+
+// 过滤后的名额分配到校学校列表（排除已选择的，但保留当前志愿的选择）
+function getFilteredQuotaSchoolSchools(currentIndex: number) {
+  const currentValue = form.value.volunteers.quotaSchool[currentIndex];
+  return quotaSchoolSchools.value.filter(school => {
+    // 保留当前选择
+    if (school.id === currentValue) return true;
+    // 排除已在其他志愿中选择的
+    return !selectedSchoolIds.value.has(school.id);
+  });
+}
+
+// 过滤后的统一招生学校列表（排除已选择的，但保留当前志愿的选择）
+function getFilteredUnifiedSchools(currentIndex: number) {
+  const currentValue = form.value.volunteers.unified[currentIndex];
+  return highSchools.value.filter(school => {
+    // 保留当前选择
+    if (school.id === currentValue) return true;
+    // 排除已在其他志愿中选择的
+    return !selectedSchoolIds.value.has(school.id);
+  });
+}
 
 // 步骤验证
 const canNext = computed(() => {
@@ -505,6 +571,31 @@ async function onDistrictChange() {
   }
 }
 
+// 加载名额分配学校（当进入志愿填报步骤时）
+async function loadQuotaSchools() {
+  if (!form.value.districtId) return;
+
+  highSchoolsLoading.value = true;
+  try {
+    // 并行加载三个批次的学校
+    const [quotaDistrictRes, quotaSchoolRes, allSchoolsRes] = await Promise.all([
+      getSchoolsWithQuotaDistrict({ districtId: form.value.districtId, year: 2025 }),
+      form.value.middleSchoolId
+        ? getSchoolsWithQuotaSchool({ middleSchoolId: form.value.middleSchoolId, year: 2025 })
+        : Promise.resolve({ schools: [] }),
+      getSchools({ pageSize: 1000 }) // 统一招生使用全部学校
+    ]);
+
+    quotaDistrictSchools.value = quotaDistrictRes.schools;
+    quotaSchoolSchools.value = quotaSchoolRes.schools;
+    highSchools.value = allSchoolsRes.schools;
+  } catch (error) {
+    ElMessage.error('加载高中学校失败');
+  } finally {
+    highSchoolsLoading.value = false;
+  }
+}
+
 // 初中学校筛选：支持中文、拼音、代码
 function filterMiddleSchool(query: string) {
   if (!query) {
@@ -534,18 +625,13 @@ function resetMiddleSchoolFilter(visible: boolean) {
   }
 }
 
-async function loadHighSchools() {
-  try {
-    const data = await getSchools({ pageSize: 1000 });
-    highSchools.value = data.schools;
-  } catch (error) {
-    ElMessage.error('加载高中学校失败');
-  }
-}
-
 function nextStep() {
   if (currentStep.value < 2) {
     currentStep.value++;
+    // 进入志愿填报步骤时加载名额分配学校
+    if (currentStep.value === 2) {
+      loadQuotaSchools();
+    }
   }
 }
 
@@ -612,7 +698,7 @@ function onDragEnd() {
 
 async function submit() {
   if (submitting.value) return;
-  
+
   submitting.value = true;
   try {
     const request = await formatFormToRequest(form.value);
@@ -636,7 +722,6 @@ watch(() => form.value.districtId, () => {
 // 初始化
 onMounted(() => {
   loadDistricts();
-  loadHighSchools();
 });
 </script>
 

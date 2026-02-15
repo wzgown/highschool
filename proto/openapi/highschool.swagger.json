@@ -317,6 +317,32 @@
       },
       "title": "获取高中学校列表响应"
     },
+    "v1GetSchoolsWithQuotaDistrictResponse": {
+      "type": "object",
+      "properties": {
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SchoolWithQuota"
+          }
+        }
+      },
+      "title": "获取有名额分配到区的高中列表响应"
+    },
+    "v1GetSchoolsWithQuotaSchoolResponse": {
+      "type": "object",
+      "properties": {
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SchoolWithQuota"
+          }
+        }
+      },
+      "title": "获取有名额分配到校的高中列表响应"
+    },
     "v1HistoryScore": {
       "type": "object",
       "properties": {
@@ -537,6 +563,27 @@
         }
       },
       "title": "学校详情"
+    },
+    "v1SchoolWithQuota": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "quotaCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "名额数量"
+        }
+      },
+      "title": "带名额信息的学校"
     },
     "v1ScoreDistributionItem": {
       "type": "object",

@@ -33,6 +33,14 @@ func (m *mockSchoolRepo) GetHistoryScores(ctx context.Context, schoolID int32) (
 	return nil, nil
 }
 
+func (m *mockSchoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+	return nil, nil
+}
+
+func (m *mockSchoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+	return nil, nil
+}
+
 // mockQuotaRepo 用于测试的模拟名额仓库
 type mockQuotaRepo struct{}
 
