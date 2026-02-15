@@ -338,8 +338,9 @@
             >
               添加志愿
             </el-button>
-            <div v-if="quotaSchoolSchools.length === 0 && !highSchoolsLoading && form.hasQuotaSchoolEligibility" class="form-tip">
-              暂无名额分配到校的学校数据
+            <div v-if="quotaSchoolSchools.length === 0 && !highSchoolsLoading && form.hasQuotaSchoolEligibility" class="form-tip quota-warning">
+              <el-icon><Warning /></el-icon>
+              <span>您所在初中暂无名额分配到校数据，可能数据尚未录入或该校今年无名额分配到校计划。您仍可填报统一招生志愿。</span>
             </div>
           </div>
 
@@ -426,7 +427,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { User, Document, List, Plus, Delete, Rank } from '@element-plus/icons-vue';
+import { User, Document, List, Plus, Delete, Rank, Warning } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { pinyin } from 'pinyin-pro';
 import { useCandidateStore } from '@/stores/candidate';
@@ -853,10 +854,34 @@ onMounted(() => {
   padding: 20px;
 }
 
+.quota-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  background: #fdf6ec;
+  border: 1px solid #f5dab1;
+  border-radius: 4px;
+  color: #e6a23c;
+  font-size: 14px;
+  line-height: 1.5;
+
+  .el-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 16px;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
 @media (max-width: 768px) {
   .form-actions {
     flex-direction: column;
-    
+
     .el-button {
       width: 100%;
     }
