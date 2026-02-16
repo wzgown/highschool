@@ -32,6 +32,9 @@ service ReferenceService {
 
   // 获取有名额分配到校的高中列表（按学生初中过滤）
   rpc GetSchoolsWithQuotaSchool(GetSchoolsWithQuotaSchoolRequest) returns (GetSchoolsWithQuotaSchoolResponse);
+
+  // 获取统一招生（1-15志愿）可选学校列表（本区学校 + 面向全市招生的学校）
+  rpc GetSchoolsForUnified(GetSchoolsForUnifiedRequest) returns (GetSchoolsForUnifiedResponse);
 }
 
 // 获取区县列表请求
@@ -129,6 +132,25 @@ message GetSchoolsWithQuotaSchoolRequest {
 // 获取有名额分配到校的高中列表响应
 message GetSchoolsWithQuotaSchoolResponse {
   repeated SchoolWithQuota schools = 1;
+}
+
+// 获取统一招生（1-15志愿）可选学校列表请求
+message GetSchoolsForUnifiedRequest {
+  int32 district_id = 1;  // 学生所在区
+  int32 year = 2;         // 年份
+}
+
+// 获取统一招生（1-15志愿）可选学校列表响应
+message GetSchoolsForUnifiedResponse {
+  repeated SchoolForUnified schools = 1;
+}
+
+// 统一招生学校信息
+message SchoolForUnified {
+  int32 id = 1;
+  string full_name = 2;
+  string code = 3;
+  bool is_district_school = 4;  // 是否为本区学校（vs 面向全市招生的学校）
 }
 
 // 带名额信息的学校

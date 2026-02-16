@@ -33,6 +33,9 @@ type ReferenceService interface {
 
 	// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
 	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error)
+
+	// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
+	GetSchoolsForUnified(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolForUnified, error)
 }
 
 // referenceService 实现
@@ -101,4 +104,7 @@ func (s *referenceService) GetSchoolsWithQuotaSchool(ctx context.Context, middle
 	return s.schoolRepo.GetSchoolsWithQuotaSchool(ctx, middleSchoolID, int(year))
 }
 
-
+// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
+func (s *referenceService) GetSchoolsForUnified(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolForUnified, error) {
+	return s.schoolRepo.GetSchoolsForUnified(ctx, districtID, int(year))
+}

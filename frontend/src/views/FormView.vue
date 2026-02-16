@@ -348,7 +348,7 @@
           <div class="volunteer-section">
             <h3 class="section-subtitle">
               <el-tag type="warning">统一招生</el-tag>
-              <span class="subtitle-hint">1-15志愿 | 总分750分 | 平行志愿 | 可拖拽排序 | 已选学校已过滤</span>
+              <span class="subtitle-hint">1-15志愿 | 总分750分 | 平行志愿 | 仅显示本区学校 | 可拖拽排序</span>
             </h3>
             <div
               v-for="(schoolId, index) in form.volunteers.unified"
@@ -431,9 +431,9 @@ import { User, Document, List, Plus, Delete, Rank, Warning } from '@element-plus
 import { ElMessage } from 'element-plus';
 import { pinyin } from 'pinyin-pro';
 import { useCandidateStore } from '@/stores/candidate';
-import { getDistricts, getMiddleSchools, getSchools, getSchoolsWithQuotaDistrict, getSchoolsWithQuotaSchool, type SchoolWithQuota } from '@/api/reference';
+import { getDistricts, getMiddleSchools, getSchoolsWithQuotaDistrict, getSchoolsWithQuotaSchool, getSchoolsForUnified, type SchoolWithQuota, type SchoolForUnified } from '@/api/reference';
 import { submitAnalysis, formatFormToRequest } from '@/api/candidate';
-import type { District, MiddleSchool, School } from '@/api/reference';
+import type { District, MiddleSchool } from '@/api/reference';
 
 const router = useRouter();
 const store = useCandidateStore();
@@ -444,7 +444,7 @@ const submitting = ref(false);
 const districts = ref<District[]>([]);
 const middleSchools = ref<MiddleSchool[]>([]);
 const filteredMiddleSchools = ref<MiddleSchool[]>([]);
-const highSchools = ref<School[]>([]);
+const unifiedSchools = ref<SchoolForUnified[]>([]); // 统一招生学校列表
 const middleSchoolsLoading = ref(false);
 
 // 名额分配学校列表（按批次分离）
@@ -509,7 +509,7 @@ function getFilteredQuotaSchoolSchools(currentIndex: number) {
 // 过滤后的统一招生学校列表（排除已选择的，但保留当前志愿的选择）
 function getFilteredUnifiedSchools(currentIndex: number) {
   const currentValue = form.value.volunteers.unified[currentIndex];
-  return highSchools.value.filter(school => {
+  return unifiedSchools.value.filter(school => {
     // 保留当前选择
     if (school.id === currentValue) return true;
     // 排除已在其他志愿中选择的
@@ -579,17 +579,18 @@ async function loadQuotaSchools() {
   highSchoolsLoading.value = true;
   try {
     // 并行加载三个批次的学校
-    const [quotaDistrictRes, quotaSchoolRes, allSchoolsRes] = await Promise.all([
+    const [quotaDistrictRes, quotaSchoolRes, unifiedRes] = await Promise.all([
       getSchoolsWithQuotaDistrict({ districtId: form.value.districtId, year: 2025 }),
       form.value.middleSchoolId
         ? getSchoolsWithQuotaSchool({ middleSchoolId: form.value.middleSchoolId, year: 2025 })
         : Promise.resolve({ schools: [] }),
-      getSchools({ pageSize: 1000 }) // 统一招生使用全部学校
+      // 统一招生（1-15志愿）：本区学校 + 面向全市招生的学校
+      getSchoolsForUnified({ districtId: form.value.districtId, year: 2025 })
     ]);
 
     quotaDistrictSchools.value = quotaDistrictRes.schools;
     quotaSchoolSchools.value = quotaSchoolRes.schools;
-    highSchools.value = allSchoolsRes.schools;
+    unifiedSchools.value = unifiedRes.schools;
   } catch (error) {
     ElMessage.error('加载高中学校失败');
   } finally {

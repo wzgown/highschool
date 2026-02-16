@@ -32,6 +32,9 @@ type SchoolRepository interface {
 
 	// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
 	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error)
+
+	// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
+	GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error)
 }
 
 // schoolRepo 实现
@@ -271,6 +274,37 @@ func (r *schoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchool
 	for rows.Next() {
 		var school highschoolv1.SchoolWithQuota
 		err := rows.Scan(&school.Id, &school.FullName, &school.Code, &school.QuotaCount)
+		if err != nil {
+			continue
+		}
+		schools = append(schools, &school)
+	}
+
+	return schools, nil
+}
+
+// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
+// 包括：1. 本区所有高中 2. 面向全市招生的高中（根据历史分数线数据判断）
+func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
+	// 查询该区在统一招生批次可填报的学校
+	// 基于 ref_admission_score_unified 表，该表记录了各区统一招生的学校及其分数线
+	rows, err := r.db.Query(ctx, `
+		SELECT DISTINCT s.id, s.full_name, s.code,
+		       CASE WHEN s.district_id = $1 THEN true ELSE false END as is_district_school
+		FROM ref_school s
+		INNER JOIN ref_admission_score_unified u ON u.school_id = s.id OR u.school_name = s.full_name
+		WHERE u.district_id = $1 AND u.year = $2 AND s.is_active = true
+		ORDER BY is_district_school DESC, s.full_name
+	`, districtID, year-1) // 使用前一年的分数线数据（当年的分数线在录取后才有）
+	if err != nil {
+		return nil, fmt.Errorf("get schools for unified failed: %w", err)
+	}
+	defer rows.Close()
+
+	var schools []*highschoolv1.SchoolForUnified
+	for rows.Next() {
+		var school highschoolv1.SchoolForUnified
+		err := rows.Scan(&school.Id, &school.FullName, &school.Code, &school.IsDistrictSchool)
 		if err != nil {
 			continue
 		}

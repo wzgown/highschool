@@ -758,6 +758,153 @@ export class GetSchoolsWithQuotaSchoolResponse extends Message<GetSchoolsWithQuo
 }
 
 /**
+ * 获取统一招生（1-15志愿）可选学校列表请求
+ *
+ * @generated from message highschool.v1.GetSchoolsForUnifiedRequest
+ */
+export class GetSchoolsForUnifiedRequest extends Message<GetSchoolsForUnifiedRequest> {
+  /**
+   * 学生所在区
+   *
+   * @generated from field: int32 district_id = 1;
+   */
+  districtId = 0;
+
+  /**
+   * 年份
+   *
+   * @generated from field: int32 year = 2;
+   */
+  year = 0;
+
+  constructor(data?: PartialMessage<GetSchoolsForUnifiedRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.GetSchoolsForUnifiedRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "district_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "year", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetSchoolsForUnifiedRequest {
+    return new GetSchoolsForUnifiedRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetSchoolsForUnifiedRequest {
+    return new GetSchoolsForUnifiedRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetSchoolsForUnifiedRequest {
+    return new GetSchoolsForUnifiedRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetSchoolsForUnifiedRequest | PlainMessage<GetSchoolsForUnifiedRequest> | undefined, b: GetSchoolsForUnifiedRequest | PlainMessage<GetSchoolsForUnifiedRequest> | undefined): boolean {
+    return proto3.util.equals(GetSchoolsForUnifiedRequest, a, b);
+  }
+}
+
+/**
+ * 获取统一招生（1-15志愿）可选学校列表响应
+ *
+ * @generated from message highschool.v1.GetSchoolsForUnifiedResponse
+ */
+export class GetSchoolsForUnifiedResponse extends Message<GetSchoolsForUnifiedResponse> {
+  /**
+   * @generated from field: repeated highschool.v1.SchoolForUnified schools = 1;
+   */
+  schools: SchoolForUnified[] = [];
+
+  constructor(data?: PartialMessage<GetSchoolsForUnifiedResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.GetSchoolsForUnifiedResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "schools", kind: "message", T: SchoolForUnified, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetSchoolsForUnifiedResponse {
+    return new GetSchoolsForUnifiedResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetSchoolsForUnifiedResponse {
+    return new GetSchoolsForUnifiedResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetSchoolsForUnifiedResponse {
+    return new GetSchoolsForUnifiedResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetSchoolsForUnifiedResponse | PlainMessage<GetSchoolsForUnifiedResponse> | undefined, b: GetSchoolsForUnifiedResponse | PlainMessage<GetSchoolsForUnifiedResponse> | undefined): boolean {
+    return proto3.util.equals(GetSchoolsForUnifiedResponse, a, b);
+  }
+}
+
+/**
+ * 统一招生学校信息
+ *
+ * @generated from message highschool.v1.SchoolForUnified
+ */
+export class SchoolForUnified extends Message<SchoolForUnified> {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id = 0;
+
+  /**
+   * @generated from field: string full_name = 2;
+   */
+  fullName = "";
+
+  /**
+   * @generated from field: string code = 3;
+   */
+  code = "";
+
+  /**
+   * 是否为本区学校（vs 面向全市招生的学校）
+   *
+   * @generated from field: bool is_district_school = 4;
+   */
+  isDistrictSchool = false;
+
+  constructor(data?: PartialMessage<SchoolForUnified>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.SchoolForUnified";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "full_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "is_district_school", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SchoolForUnified {
+    return new SchoolForUnified().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SchoolForUnified {
+    return new SchoolForUnified().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SchoolForUnified {
+    return new SchoolForUnified().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SchoolForUnified | PlainMessage<SchoolForUnified> | undefined, b: SchoolForUnified | PlainMessage<SchoolForUnified> | undefined): boolean {
+    return proto3.util.equals(SchoolForUnified, a, b);
+  }
+}
+
+/**
  * 带名额信息的学校
  *
  * @generated from message highschool.v1.SchoolWithQuota

@@ -182,6 +182,27 @@ func (h *ReferenceServiceHandler) GetSchoolsWithQuotaSchool(
 	}), nil
 }
 
+// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
+func (h *ReferenceServiceHandler) GetSchoolsForUnified(
+	ctx context.Context,
+	req *connect.Request[highschoolv1.GetSchoolsForUnifiedRequest],
+) (*connect.Response[highschoolv1.GetSchoolsForUnifiedResponse], error) {
+	year := req.Msg.Year
+	if year == 0 {
+		year = 2025 // 默认年份
+	}
+
+	schools, err := h.service.GetSchoolsForUnified(ctx, req.Msg.DistrictId, year)
+	if err != nil {
+		logger.Error("get schools for unified failed", err)
+		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取统一招生学校列表失败"))
+	}
+
+	return connect.NewResponse(&highschoolv1.GetSchoolsForUnifiedResponse{
+		Schools: schools,
+	}), nil
+}
+
 // RegisterReferenceService 注册参考数据服务
 func RegisterReferenceService(mux *http.ServeMux) {
 	handler := NewReferenceServiceHandler()

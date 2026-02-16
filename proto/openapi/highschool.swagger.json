@@ -301,6 +301,19 @@
       },
       "title": "获取学校详情响应"
     },
+    "v1GetSchoolsForUnifiedResponse": {
+      "type": "object",
+      "properties": {
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SchoolForUnified"
+          }
+        }
+      },
+      "title": "获取统一招生（1-15志愿）可选学校列表响应"
+    },
     "v1GetSchoolsResponse": {
       "type": "object",
       "properties": {
@@ -563,6 +576,26 @@
         }
       },
       "title": "学校详情"
+    },
+    "v1SchoolForUnified": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "isDistrictSchool": {
+          "type": "boolean",
+          "title": "是否为本区学校（vs 面向全市招生的学校）"
+        }
+      },
+      "title": "统一招生学校信息"
     },
     "v1SchoolWithQuota": {
       "type": "object",

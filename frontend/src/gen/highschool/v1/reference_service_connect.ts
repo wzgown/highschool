@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetDistrictExamCountRequest, GetDistrictExamCountResponse, GetDistrictsRequest, GetDistrictsResponse, GetHistoryScoresRequest, GetHistoryScoresResponse, GetMiddleSchoolsRequest, GetMiddleSchoolsResponse, GetSchoolDetailRequest, GetSchoolDetailResponse, GetSchoolsRequest, GetSchoolsResponse, GetSchoolsWithQuotaDistrictRequest, GetSchoolsWithQuotaDistrictResponse, GetSchoolsWithQuotaSchoolRequest, GetSchoolsWithQuotaSchoolResponse } from "./reference_service_pb.js";
+import { GetDistrictExamCountRequest, GetDistrictExamCountResponse, GetDistrictsRequest, GetDistrictsResponse, GetHistoryScoresRequest, GetHistoryScoresResponse, GetMiddleSchoolsRequest, GetMiddleSchoolsResponse, GetSchoolDetailRequest, GetSchoolDetailResponse, GetSchoolsForUnifiedRequest, GetSchoolsForUnifiedResponse, GetSchoolsRequest, GetSchoolsResponse, GetSchoolsWithQuotaDistrictRequest, GetSchoolsWithQuotaDistrictResponse, GetSchoolsWithQuotaSchoolRequest, GetSchoolsWithQuotaSchoolResponse } from "./reference_service_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -100,6 +100,17 @@ export const ReferenceService = {
       name: "GetSchoolsWithQuotaSchool",
       I: GetSchoolsWithQuotaSchoolRequest,
       O: GetSchoolsWithQuotaSchoolResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 获取统一招生（1-15志愿）可选学校列表（本区学校 + 面向全市招生的学校）
+     *
+     * @generated from rpc highschool.v1.ReferenceService.GetSchoolsForUnified
+     */
+    getSchoolsForUnified: {
+      name: "GetSchoolsForUnified",
+      I: GetSchoolsForUnifiedRequest,
+      O: GetSchoolsForUnifiedResponse,
       kind: MethodKind.Unary,
     },
   }

@@ -1,9 +1,9 @@
 // 参考数据 API - Connect-RPC 实现
 import { referenceClient } from "./connect";
 import type { District, MiddleSchool, School, SchoolDetail, HistoryScore } from "@/gen/highschool/v1/district_pb";
-import type { SchoolWithQuota } from "@/gen/highschool/v1/reference_service_pb";
+import type { SchoolWithQuota, SchoolForUnified } from "@/gen/highschool/v1/reference_service_pb";
 
-export type { District, MiddleSchool, School, SchoolDetail, HistoryScore, SchoolWithQuota };
+export type { District, MiddleSchool, School, SchoolDetail, HistoryScore, SchoolWithQuota, SchoolForUnified };
 
 // 获取区县列表
 export async function getDistricts(): Promise<{ districts: District[] }> {
@@ -80,6 +80,18 @@ export async function getSchoolsWithQuotaSchool(params: {
 }): Promise<{ schools: SchoolWithQuota[] }> {
   const res = await referenceClient.getSchoolsWithQuotaSchool({
     middleSchoolId: params.middleSchoolId,
+    year: params.year ?? 2025,
+  });
+  return { schools: res.schools };
+}
+
+// 获取统一招生（1-15志愿）可选学校列表
+export async function getSchoolsForUnified(params: {
+  districtId: number;
+  year?: number;
+}): Promise<{ schools: SchoolForUnified[] }> {
+  const res = await referenceClient.getSchoolsForUnified({
+    districtId: params.districtId,
     year: params.year ?? 2025,
   });
   return { schools: res.schools };

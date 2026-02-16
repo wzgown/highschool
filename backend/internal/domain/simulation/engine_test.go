@@ -41,6 +41,10 @@ func (m *mockSchoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSc
 	return nil, nil
 }
 
+func (m *mockSchoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
+	return nil, nil
+}
+
 // mockQuotaRepo 用于测试的模拟名额仓库
 type mockQuotaRepo struct{}
 
