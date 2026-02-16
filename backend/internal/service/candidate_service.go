@@ -38,10 +38,11 @@ type candidateService struct {
 
 // NewCandidateService 创建考生服务
 func NewCandidateService() CandidateService {
+	quotaRepo := repository.NewQuotaRepository()
 	return &candidateService{
 		simRepo:    repository.NewSimulationHistoryRepository(),
 		schoolRepo: repository.NewSchoolRepository(),
-		simEngine:  simulation.NewEngine(),
+		simEngine:  simulation.NewEngine(simulation.WithQuotaRepo(quotaRepo)),
 	}
 }
 

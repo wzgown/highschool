@@ -311,19 +311,21 @@ function getConfidenceText(confidence?: string): string {
 }
 
 function getBatchType(batch: string): 'primary' | 'success' | 'warning' {
+  // 统一招生可能有后缀（如 UNIFIED_1_15）
+  if (batch.startsWith('UNIFIED')) return 'warning';
   const map: Record<string, 'primary' | 'success' | 'warning'> = {
     QUOTA_DISTRICT: 'primary',
     QUOTA_SCHOOL: 'success',
-    UNIFIED: 'warning',
   };
   return map[batch] || 'info';
 }
 
 function getBatchName(batch: string): string {
+  // 统一招生可能有后缀（如 UNIFIED_1_15）
+  if (batch.startsWith('UNIFIED')) return '统一招生';
   const map: Record<string, string> = {
     QUOTA_DISTRICT: '名额分配到区',
     QUOTA_SCHOOL: '名额分配到校',
-    UNIFIED: '统一招生',
   };
   return map[batch] || batch;
 }

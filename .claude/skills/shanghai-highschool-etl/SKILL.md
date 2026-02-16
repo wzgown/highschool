@@ -47,11 +47,51 @@ ETL pipeline for Shanghai high school admission (Zhongkao) data. Processes raw d
    (makeitdown)      (parse MD)     (clean CSV)     (generate SQL)
 ```
 
-### Step 0: Preprocess (makeitdown)
+### Step 0: Preprocess (PDF Extraction)
 
-Convert non-text documents to markdown for easier parsing:
+**Two approaches for PDF data extraction:**
 
-**Using Docker with MarkItDown**:
+#### Approach A: pdfplumber (RECOMMENDED for structured tables)
+
+For PDFs with clear table structures, **pdfplumber** provides the most accurate extraction:
+
+```python
+import pdfplumber
+
+def extract_tables_from_pdf(pdf_path):
+    """Extract tables directly from PDF using pdfplumber"""
+    all_records = []
+
+    with pdfplumber.open(pdf_path) as pdf:
+        for page_num, page in enumerate(pdf.pages):
+            tables = page.extract_tables()
+
+            for table in tables:
+                for row_idx, row in enumerate(table):
+                    # Skip header rows
+                    if row_idx < 2:
+                        continue
+
+                    # Clean and process each row
+                    cells = [str(cell).replace('\n', '').strip() if cell else '' for cell in row]
+                    # Extract data from cells...
+                    all_records.append(processed_record)
+
+    return all_records
+```
+
+**Why pdfplumber?**
+- Preserves table structure accurately
+- Handles multi-column layouts correctly
+- No intermediate markdown conversion needed
+- Direct cell-level data extraction
+
+**Installation**: `pip install pdfplumber`
+
+#### Approach B: MarkItDown (for text-heavy documents)
+
+For text-heavy PDFs or when markdown output is preferred:
+
 ```bash
 # Pull MarkItDown Docker image (official Microsoft tool)
 docker pull adeuxy/markitdown:latest
@@ -62,7 +102,15 @@ docker run --rm -v "$(pwd)/data:/data" adeuxy/markitdown:latest "/data/input.pdf
 
 **Image source**: `adeuxy/markitdown:latest` - [Docker Hub](https://hub.docker.com/r/adeuxy/markitdown)
 
-**Why MarkItDown?** Official Microsoft tool for reliable document conversion
+#### When to Use Which Approach
+
+| Scenario | Recommended Tool |
+|----------|-----------------|
+| Structured tables with clear borders | **pdfplumber** |
+| Multi-column quota allocation tables | **pdfplumber** |
+| Text-heavy policy documents | MarkItDown |
+| Mixed content with headings and tables | Both (try pdfplumber first) |
+| Complex OCR-needed documents | MarkItDown + manual review |
 
 ### Step 1: Extract (markdown → CSV)
 
@@ -257,8 +305,79 @@ Shanghai official PDFs often have these OCR errors:
 | Standalone "院" | `院` alone | Cross-reference with other rows |
 | Merged cells | `黄浦徐汇` (should be 2 rows) | Split by district |
 | Table headers in body | `区名称` repeated | Skip header rows |
+| Newlines in cell values | `上海市嘉定区\n第一中学` | Replace `\n` with empty string |
 
 See `references/data-quality.md` for detailed patterns.
+
+## PDF Table Extraction Patterns
+
+### Pattern 1: Multi-Column Quota Allocation Tables
+
+Many district quota-to-school PDFs use a multi-column layout where each row contains:
+- Column 1: Middle school name
+- Columns 2-4, 5-7, 8-10, 11-13: Groups of (high_school_code, high_school_name, quota_count)
+
+```python
+def parse_quota_row(row):
+    """Parse a multi-column quota allocation row"""
+    middle_name = clean_name(row[0])  # First column is middle school
+
+    # Parse 4 groups of (code, name, quota)
+    groups = [
+        (row[1], row[2], row[3]),   # Group 1
+        (row[4], row[5], row[6]),   # Group 2
+        (row[7], row[8], row[9]),   # Group 3
+        (row[10], row[11], row[12]) if len(row) > 12 else None,  # Group 4 (optional)
+    ]
+
+    records = []
+    for code, name, quota in groups:
+        if not code or not quota:
+            continue
+
+        code = clean_name(str(code))
+        name = clean_name(str(name))
+        quota_str = clean_name(str(quota))
+
+        # Validate: code should be 6 digits, quota should be 1-100
+        if re.match(r'^\d{6}$', code) and quota_str.isdigit():
+            records.append({
+                'middle_school_name': middle_name,
+                'high_school_code': code,
+                'high_school_name': name,
+                'quota_count': int(quota_str)
+            })
+
+    return records
+```
+
+### Pattern 2: Cleaning Cell Values
+
+Always clean cell values before processing:
+
+```python
+def clean_name(name):
+    """Clean cell value from PDF extraction"""
+    if not name:
+        return ""
+    # Remove newlines (common in pdfplumber output)
+    name = str(name).replace('\n', '').strip()
+    return name
+```
+
+### Pattern 3: District-Specific Formats
+
+Some districts have unique formats that require specialized parsers:
+
+| District | Format Description | Script Example |
+|----------|-------------------|----------------|
+| Jiading | Multi-column with 4 high school groups | `extract_jiading_quota_v2.py` |
+| Minhang | Uses `序号` column, has `委属名额` and `区属名额` | `extract_2025_quota_to_school_minhang.py` |
+
+When encountering a new format:
+1. First examine the PDF with pdfplumber to understand structure
+2. Check `references/quota-to-school-formats.md` for known patterns
+3. Create a specialized parser if needed
 
 ## Directory Structure
 
