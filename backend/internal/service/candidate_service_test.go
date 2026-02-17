@@ -83,7 +83,17 @@ func TestCandidateService_SubmitAnalysis(t *testing.T) {
 	t.Run("should reject when total score doesn't match sum", func(t *testing.T) {
 		// Arrange
 		service := NewCandidateService()
+		districtID := int32(7)
+		middleSchoolID := int32(1)
 		req := &highschoolv1.SubmitAnalysisRequest{
+			Candidate: &highschoolv1.CandidateInfo{
+				DistrictId:     districtID,
+				MiddleSchoolId: middleSchoolID,
+			},
+			Ranking: &highschoolv1.RankingInfo{
+				Rank:         100,
+				TotalStudents: 500,
+			},
 			Scores: &highschoolv1.CandidateScores{
 				Total:      700,
 				Chinese:    140,

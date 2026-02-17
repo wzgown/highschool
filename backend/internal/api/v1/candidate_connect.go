@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"connectrpc.com/connect"
+	"connectrpc.com/otelconnect"
 
 	highschoolv1 "highschool-backend/gen/highschool/v1"
 	"highschool-backend/gen/highschool/v1/highschoolv1connect"
@@ -35,7 +36,7 @@ func (h *CandidateServiceHandler) SubmitAnalysis(
 	// 调用服务层
 	resp, err := h.service.SubmitAnalysis(ctx, req.Msg)
 	if err != nil {
-		logger.Error("submit analysis failed", err)
+		logger.Error(ctx, "submit analysis failed", err)
 		return nil, connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("提交分析失败: %w", err))
 	}
 
@@ -49,7 +50,7 @@ func (h *CandidateServiceHandler) GetAnalysisResult(
 ) (*connect.Response[highschoolv1.GetAnalysisResultResponse], error) {
 	result, err := h.service.GetAnalysisResult(ctx, req.Msg.Id)
 	if err != nil {
-		logger.Error("get analysis result failed", err)
+		logger.Error(ctx, "get analysis result failed", err)
 		return nil, connect.NewError(connect.CodeNotFound, fmt.Errorf("未找到分析结果"))
 	}
 
@@ -80,7 +81,7 @@ func (h *CandidateServiceHandler) GetHistory(
 
 	resp, err := h.service.GetHistory(ctx, deviceID, page, pageSize)
 	if err != nil {
-		logger.Error("get history failed", err)
+		logger.Error(ctx, "get history failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取历史记录失败"))
 	}
 
@@ -99,7 +100,7 @@ func (h *CandidateServiceHandler) DeleteHistory(
 
 	err := h.service.DeleteHistory(ctx, id, deviceID)
 	if err != nil {
-		logger.Error("delete history failed", err)
+		logger.Error(ctx, "delete history failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("删除历史记录失败"))
 	}
 
@@ -109,8 +110,12 @@ func (h *CandidateServiceHandler) DeleteHistory(
 }
 
 // RegisterCandidateService 注册考生服务
-func RegisterCandidateService(mux *http.ServeMux) {
+func RegisterCandidateService(mux *http.ServeMux, otelInterceptor *otelconnect.Interceptor) {
 	handler := NewCandidateServiceHandler()
-	path, svc := highschoolv1connect.NewCandidateServiceHandler(handler)
+	opts := []connect.HandlerOption{}
+	if otelInterceptor != nil {
+		opts = append(opts, connect.WithInterceptors(otelInterceptor))
+	}
+	path, svc := highschoolv1connect.NewCandidateServiceHandler(handler, opts...)
 	mux.Handle(path, svc)
 }

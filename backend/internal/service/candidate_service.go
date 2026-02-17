@@ -12,6 +12,7 @@ import (
 	highschoolv1 "highschool-backend/gen/highschool/v1"
 	"highschool-backend/internal/domain/simulation"
 	"highschool-backend/internal/repository"
+	"highschool-backend/pkg/logger"
 )
 
 // CandidateService 考生服务接口
@@ -48,32 +49,68 @@ func NewCandidateService() CandidateService {
 
 // SubmitAnalysis 提交模拟分析
 func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) (*highschoolv1.SubmitAnalysisResponse, error) {
+	startTime := time.Now()
+	logger.Info(ctx, "SubmitAnalysis started",
+		logger.Int("district_id", int(req.Candidate.DistrictId)),
+		logger.Int("middle_school_id", int(req.Candidate.MiddleSchoolId)),
+		logger.Int("total_score", int(req.Scores.Total)),
+	)
+
 	// 1. 验证成绩
+	logger.Debug(ctx, "step 1: validating scores")
 	if err := s.validateScores(req.Scores); err != nil {
+		logger.Error(ctx, "score validation failed", err,
+			logger.Int("total", int(req.Scores.Total)),
+		)
 		return nil, err
 	}
+	logger.Debug(ctx, "score validation passed",
+		logger.Int("total", int(req.Scores.Total)),
+	)
 
 	// 2. 处理设备ID
 	var deviceID string
 	if req.DeviceId != nil {
 		deviceID = *req.DeviceId
+		logger.Debug(ctx, "using existing device_id", logger.String("device_id", deviceID))
 	} else {
 		deviceID = uuid.New().String()
+		logger.Debug(ctx, "generated new device_id", logger.String("device_id", deviceID))
 	}
 
 	// 3. 执行模拟分析
+	logger.Info(ctx, "step 2: running simulation engine",
+		logger.Int("ranking", int(req.Ranking.Rank)),
+		logger.Int("total_students", int(req.Ranking.TotalStudents)),
+		logger.Bool("has_quota_district", req.Volunteers.QuotaDistrict != nil),
+		logger.Int("quota_school_count", len(req.Volunteers.QuotaSchool)),
+		logger.Int("unified_count", len(req.Volunteers.Unified)),
+	)
+
+	simStart := time.Now()
 	results := s.simEngine.Run(ctx, req)
+	logger.Info(ctx, "simulation engine completed",
+		logger.String("duration", time.Since(simStart).String()),
+		logger.Int("probabilities_count", len(results.Probabilities)),
+	)
 
 	// 4. 保存到数据库
+	logger.Debug(ctx, "step 3: saving to database")
+	saveStart := time.Now()
 	deviceInfo := map[string]interface{}{} // 简化版
 	analysisID, err := s.simRepo.Save(ctx, deviceID, deviceInfo, req, results)
 	if err != nil {
+		logger.Error(ctx, "save analysis failed", err)
 		return nil, fmt.Errorf("save analysis failed: %w", err)
 	}
+	logger.Info(ctx, "analysis saved to database",
+		logger.String("analysis_id", analysisID),
+		logger.String("duration", time.Since(saveStart).String()),
+	)
 
 	// 5. 组装响应
 	createdAt := time.Now().Format(time.RFC3339)
-	return &highschoolv1.SubmitAnalysisResponse{
+	response := &highschoolv1.SubmitAnalysisResponse{
 		Result: &highschoolv1.AnalysisResult{
 			Id:          analysisID,
 			Status:      "completed",
@@ -81,7 +118,16 @@ func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1
 			CreatedAt:   createdAt,
 			CompletedAt: &createdAt,
 		},
-	}, nil
+	}
+
+	logger.Info(ctx, "SubmitAnalysis completed",
+		logger.String("analysis_id", analysisID),
+		logger.String("total_duration", time.Since(startTime).String()),
+		logger.String("prediction_confidence", results.Predictions.Confidence),
+		logger.Float64("percentile", results.Predictions.Percentile),
+	)
+
+	return response, nil
 }
 
 // GetAnalysisResult 获取分析结果

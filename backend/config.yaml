@@ -19,5 +19,11 @@ redis:
   db: 0
 
 log:
-  level: info
+  level: debug
   format: json
+
+tracing:
+  enabled: true
+  service_name: highschool-backend
+  otlp_endpoint: localhost:4317
+  sample_rate: 1.0

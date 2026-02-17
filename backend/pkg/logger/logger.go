@@ -1,7 +1,10 @@
 package logger
 
 import (
+	"context"
 	"os"
+
+	"highschool-backend/pkg/tracing"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -65,25 +68,44 @@ func GetLogger() *zap.Logger {
 	return log
 }
 
-// Info 信息日志
-func Info(msg string, fields ...zap.Field) {
-	GetLogger().Info(msg, fields...)
+// withTraceFields extracts trace_id from context and returns a logger with trace field
+func withTraceFields(ctx context.Context) *zap.Logger {
+	logger := GetLogger()
+	if ctx == nil {
+		return logger
+	}
+	traceID := tracing.GetTraceID(ctx)
+	if traceID != "" {
+		return logger.With(zap.String("trace_id", traceID))
+	}
+	return logger
 }
 
-// Error 错误日志
-func Error(msg string, err error, fields ...zap.Field) {
+// Ctx returns a logger with trace_id from context
+// If ctx is nil, returns the default logger without trace_id
+func Ctx(ctx context.Context) *zap.Logger {
+	return withTraceFields(ctx)
+}
+
+// Info 信息日志 - ctx作为第一个参数，可以为nil
+func Info(ctx context.Context, msg string, fields ...zap.Field) {
+	withTraceFields(ctx).Info(msg, fields...)
+}
+
+// Error 错误日志 - ctx作为第一个参数，可以为nil
+func Error(ctx context.Context, msg string, err error, fields ...zap.Field) {
 	if err != nil {
 		fields = append(fields, zap.Error(err))
 	}
-	GetLogger().Error(msg, fields...)
+	withTraceFields(ctx).Error(msg, fields...)
 }
 
-// Debug 调试日志
-func Debug(msg string, fields ...zap.Field) {
-	GetLogger().Debug(msg, fields...)
+// Debug 调试日志 - ctx作为第一个参数，可以为nil
+func Debug(ctx context.Context, msg string, fields ...zap.Field) {
+	withTraceFields(ctx).Debug(msg, fields...)
 }
 
-// Warn 警告日志
-func Warn(msg string, fields ...zap.Field) {
-	GetLogger().Warn(msg, fields...)
+// Warn 警告日志 - ctx作为第一个参数，可以为nil
+func Warn(ctx context.Context, msg string, fields ...zap.Field) {
+	withTraceFields(ctx).Warn(msg, fields...)
 }

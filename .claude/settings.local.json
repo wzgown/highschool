@@ -8,12 +8,10 @@
       "Bash(ls:*)",
       "Edit",
       "Bash(pip3:*)",
-      "Bash(pip3 show:*)",
-      "Bash(pip3 install:*)",
-      "mcp__chrome-devtools__navigate_page",
-      "mcp__zcode_internal_tool__new_page",
-      "mcp__chrome-devtools__take_snapshot",
-      "mcp__plugin_claude-mem_mcp-search__save_memory"
+      "Bash(cd:*)",
+      "Bash(go:*)",
+      "Bash(go build:*)",
+      "Bash(go test:*)"
     ]
   },
   "hooks": {

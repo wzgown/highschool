@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"connectrpc.com/connect"
+	"connectrpc.com/otelconnect"
 
 	highschoolv1 "highschool-backend/gen/highschool/v1"
 	"highschool-backend/gen/highschool/v1/highschoolv1connect"
@@ -34,7 +35,7 @@ func (h *ReferenceServiceHandler) GetDistricts(
 ) (*connect.Response[highschoolv1.GetDistrictsResponse], error) {
 	districts, err := h.service.GetDistricts(ctx)
 	if err != nil {
-		logger.Error("get districts failed", err)
+		logger.Error(ctx, "get districts failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取区县列表失败"))
 	}
 
@@ -50,7 +51,7 @@ func (h *ReferenceServiceHandler) GetSchools(
 ) (*connect.Response[highschoolv1.GetSchoolsResponse], error) {
 	schools, total, err := h.service.GetSchools(ctx, req.Msg)
 	if err != nil {
-		logger.Error("get schools failed", err)
+		logger.Error(ctx, "get schools failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取学校列表失败"))
 	}
 
@@ -83,7 +84,7 @@ func (h *ReferenceServiceHandler) GetSchoolDetail(
 ) (*connect.Response[highschoolv1.GetSchoolDetailResponse], error) {
 	detail, err := h.service.GetSchoolDetail(ctx, req.Msg.Id)
 	if err != nil {
-		logger.Error("get school detail failed", err)
+		logger.Error(ctx, "get school detail failed", err)
 		return nil, connect.NewError(connect.CodeNotFound, fmt.Errorf("学校不存在"))
 	}
 
@@ -99,7 +100,7 @@ func (h *ReferenceServiceHandler) GetMiddleSchools(
 ) (*connect.Response[highschoolv1.GetMiddleSchoolsResponse], error) {
 	schools, err := h.service.GetMiddleSchools(ctx, req.Msg.DistrictId, nil)
 	if err != nil {
-		logger.Error("get middle schools failed", err)
+		logger.Error(ctx, "get middle schools failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取初中学校列表失败"))
 	}
 
@@ -118,7 +119,7 @@ func (h *ReferenceServiceHandler) GetHistoryScores(
 	}
 	scores, err := h.service.GetHistoryScores(ctx, *req.Msg.SchoolId)
 	if err != nil {
-		logger.Error("get history scores failed", err)
+		logger.Error(ctx, "get history scores failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取历史分数线失败"))
 	}
 
@@ -152,7 +153,7 @@ func (h *ReferenceServiceHandler) GetSchoolsWithQuotaDistrict(
 
 	schools, err := h.service.GetSchoolsWithQuotaDistrict(ctx, req.Msg.DistrictId, year)
 	if err != nil {
-		logger.Error("get schools with quota district failed", err)
+		logger.Error(ctx, "get schools with quota district failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取名额分配到区学校列表失败"))
 	}
 
@@ -173,7 +174,7 @@ func (h *ReferenceServiceHandler) GetSchoolsWithQuotaSchool(
 
 	schools, err := h.service.GetSchoolsWithQuotaSchool(ctx, req.Msg.MiddleSchoolId, year)
 	if err != nil {
-		logger.Error("get schools with quota school failed", err)
+		logger.Error(ctx, "get schools with quota school failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取名额分配到校学校列表失败"))
 	}
 
@@ -194,7 +195,7 @@ func (h *ReferenceServiceHandler) GetSchoolsForUnified(
 
 	schools, err := h.service.GetSchoolsForUnified(ctx, req.Msg.DistrictId, year)
 	if err != nil {
-		logger.Error("get schools for unified failed", err)
+		logger.Error(ctx, "get schools for unified failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取统一招生学校列表失败"))
 	}
 
@@ -204,8 +205,12 @@ func (h *ReferenceServiceHandler) GetSchoolsForUnified(
 }
 
 // RegisterReferenceService 注册参考数据服务
-func RegisterReferenceService(mux *http.ServeMux) {
+func RegisterReferenceService(mux *http.ServeMux, otelInterceptor *otelconnect.Interceptor) {
 	handler := NewReferenceServiceHandler()
-	path, svc := highschoolv1connect.NewReferenceServiceHandler(handler)
+	opts := []connect.HandlerOption{}
+	if otelInterceptor != nil {
+		opts = append(opts, connect.WithInterceptors(otelInterceptor))
+	}
+	path, svc := highschoolv1connect.NewReferenceServiceHandler(handler, opts...)
 	mux.Handle(path, svc)
 }

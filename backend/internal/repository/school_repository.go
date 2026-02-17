@@ -12,6 +12,15 @@ import (
 	"highschool-backend/internal/infrastructure/database"
 )
 
+// SchoolRankingInfo 学校排名信息（用于竞争对手志愿生成）
+type SchoolRankingInfo struct {
+	ID           int32   // 学校ID
+	FullName     string  // 学校全称
+	DistrictID   int32   // 所属区ID
+	CutoffScore  float64 // 历史分数线（统一招生）
+	RankingOrder int     // 排名序号（从1开始）
+}
+
 // SchoolRepository 学校仓库接口
 type SchoolRepository interface {
 	// GetByID 根据ID获取学校
@@ -35,6 +44,10 @@ type SchoolRepository interface {
 
 	// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
 	GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error)
+
+	// GetSchoolsByCutoffScoreRanking 获取按分数线排名的学校列表（用于竞争对手志愿生成）
+	// 返回指定区可填报的学校，按分数线从高到低排序
+	GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error)
 }
 
 // schoolRepo 实现
@@ -308,6 +321,41 @@ func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32,
 		if err != nil {
 			continue
 		}
+		schools = append(schools, &school)
+	}
+
+	return schools, nil
+}
+
+// GetSchoolsByCutoffScoreRanking 获取按分数线排名的学校列表（用于竞争对手志愿生成）
+// 返回指定区可填报的学校，按分数线从高到低排序
+func (r *schoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error) {
+	// 使用前一年的统一招生分数线数据作为排名依据
+	// 按分数线从高到低排序，分数线越高说明学校越好
+	rows, err := r.db.Query(ctx, `
+		SELECT DISTINCT s.id, s.full_name, s.district_id, u.min_score
+		FROM ref_school s
+		INNER JOIN ref_admission_score_unified u ON u.school_id = s.id
+		WHERE u.district_id = $1 AND u.year = $2 AND s.is_active = true
+		ORDER BY u.min_score DESC
+	`, districtID, year-1)
+	if err != nil {
+		return nil, fmt.Errorf("get schools by cutoff score ranking failed: %w", err)
+	}
+	defer rows.Close()
+
+	var schools []*SchoolRankingInfo
+	rank := 0
+	for rows.Next() {
+		rank++
+		var school SchoolRankingInfo
+		var cutoffScore float64
+		err := rows.Scan(&school.ID, &school.FullName, &school.DistrictID, &cutoffScore)
+		if err != nil {
+			continue
+		}
+		school.CutoffScore = cutoffScore
+		school.RankingOrder = rank
 		schools = append(schools, &school)
 	}
 

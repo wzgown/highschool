@@ -10,6 +10,7 @@ type Config struct {
 	Database DatabaseConfig `mapstructure:"database"`
 	Redis    RedisConfig    `mapstructure:"redis"`
 	Log      LogConfig      `mapstructure:"log"`
+	Tracing  TracingConfig  `mapstructure:"tracing"`
 }
 
 // ServerConfig 服务器配置
@@ -44,6 +45,14 @@ type LogConfig struct {
 	Format string `mapstructure:"format"`
 }
 
+// TracingConfig 分布式追踪配置
+type TracingConfig struct {
+	Enabled      bool    `mapstructure:"enabled"`
+	ServiceName  string  `mapstructure:"service_name"`
+	OTLPEndpoint string  `mapstructure:"otlp_endpoint"`
+	SampleRate   float64 `mapstructure:"sample_rate"`
+}
+
 // Load 加载配置
 func Load() (*Config, error) {
 	viper.SetConfigName("config")
@@ -65,6 +74,10 @@ func Load() (*Config, error) {
 	viper.SetDefault("redis.db", 0)
 	viper.SetDefault("log.level", "info")
 	viper.SetDefault("log.format", "json")
+	viper.SetDefault("tracing.enabled", false)
+	viper.SetDefault("tracing.service_name", "highschool-backend")
+	viper.SetDefault("tracing.otlp_endpoint", "localhost:4317")
+	viper.SetDefault("tracing.sample_rate", 1.0)
 
 	// 环境变量支持
 	viper.AutomaticEnv()

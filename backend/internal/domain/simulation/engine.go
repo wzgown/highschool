@@ -5,14 +5,17 @@ import (
 	"context"
 	"fmt"
 	"sync"
+	"time"
 
 	highschoolv1 "highschool-backend/gen/highschool/v1"
 	"highschool-backend/internal/repository"
+	"highschool-backend/pkg/logger"
 )
 
 // Engine 模拟引擎
 type Engine struct {
 	competitorGenerator *CompetitorGenerator
+	volunteerGenerator  VolunteerGenerator
 	schoolRepo          repository.SchoolRepository
 	quotaRepo           QuotaRepository
 	simulationCount     int // 模拟次数
@@ -52,6 +55,10 @@ func NewEngine(opts ...EngineOption) *Engine {
 	for _, opt := range opts {
 		opt(e)
 	}
+	// 初始化志愿生成器（如果schoolRepo已设置）
+	if e.schoolRepo != nil {
+		e.volunteerGenerator = NewStrategyVolunteerGenerator(e.schoolRepo, 2025)
+	}
 	return e
 }
 
@@ -63,11 +70,24 @@ func NewEngine(opts ...EngineOption) *Engine {
 // 4. 统计录取概率
 // 5. 分析志愿策略
 func (e *Engine) Run(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) *highschoolv1.SimulationResults {
+	startTime := time.Now()
+	logger.Debug(ctx, "Engine.Run started")
+
 	// 1. 计算百分位
+	stepStart := time.Now()
 	percentile := float64(req.Ranking.TotalStudents-req.Ranking.Rank) / float64(req.Ranking.TotalStudents) * 100
+	logger.Debug(ctx, "step 1: calculated percentile",
+		logger.Float64("percentile", percentile),
+		logger.String("duration", time.Since(stepStart).String()),
+	)
 
 	// 2. 预测区内排名（基于校排名和全区中考人数估算）
+	stepStart = time.Now()
 	districtRank := e.estimateDistrictRank(ctx, req)
+	logger.Debug(ctx, "step 2: estimated district rank",
+		logger.Int("district_rank", int(districtRank)),
+		logger.String("duration", time.Since(stepStart).String()),
+	)
 
 	predictions := &highschoolv1.RankPrediction{
 		DistrictRank:          districtRank,
@@ -78,19 +98,53 @@ func (e *Engine) Run(ctx context.Context, req *highschoolv1.SubmitAnalysisReques
 	}
 
 	// 3. 转换考生信息为内部模型
+	stepStart = time.Now()
 	realCandidate := e.convertToCandidate(req)
+	logger.Debug(ctx, "step 3: converted to candidate model",
+		logger.Float64("total_score", realCandidate.TotalScore),
+		logger.Bool("has_quota_eligibility", realCandidate.HasQuotaSchoolEligible),
+		logger.String("duration", time.Since(stepStart).String()),
+	)
 
 	// 4. 生成竞争对手（基于排名和分数分布）
+	stepStart = time.Now()
 	competitors := e.generateCompetitors(ctx, realCandidate, req)
+	logger.Info(ctx, "step 4: generated competitors",
+		logger.Int("competitor_count", len(competitors)),
+		logger.String("duration", time.Since(stepStart).String()),
+	)
 
 	// 5. 执行多次模拟，统计录取概率
+	stepStart = time.Now()
 	probabilities := e.runSimulations(ctx, realCandidate, competitors, req)
+	logger.Info(ctx, "step 5: simulations completed",
+		logger.Int("simulation_count", e.simulationCount),
+		logger.Int("probabilities_count", len(probabilities)),
+		logger.String("duration", time.Since(stepStart).String()),
+	)
 
 	// 6. 策略分析
+	stepStart = time.Now()
 	strategy := e.analyzeStrategy(probabilities)
+	logger.Debug(ctx, "step 6: strategy analysis completed",
+		logger.Int("strategy_score", int(strategy.Score)),
+		logger.Int("safety_count", int(strategy.Gradient.Safety)),
+		logger.Int("target_count", int(strategy.Gradient.Target)),
+		logger.Int("reach_count", int(strategy.Gradient.Reach)),
+		logger.String("duration", time.Since(stepStart).String()),
+	)
 
 	// 7. 生成竞争对手分析报告
+	stepStart = time.Now()
 	competitorAnalysis := e.competitorGenerator.Generate(req, 100)
+	logger.Debug(ctx, "step 7: competitor analysis generated",
+		logger.String("duration", time.Since(stepStart).String()),
+	)
+
+	logger.Info(ctx, "Engine.Run completed",
+		logger.String("total_duration", time.Since(startTime).String()),
+		logger.String("confidence", predictions.Confidence),
+	)
 
 	return &highschoolv1.SimulationResults{
 		Predictions:   predictions,
@@ -133,6 +187,7 @@ func (e *Engine) convertToCandidate(req *highschoolv1.SubmitAnalysisRequest) *Ca
 }
 
 // generateCompetitors 生成虚拟竞争对手
+// 竞争对手的志愿按照学校排名和冲稳保策略生成
 func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candidate, req *highschoolv1.SubmitAnalysisRequest) []*Candidate {
 	// 获取全区考生数量
 	districtExamCount := 10000 // 默认值
@@ -158,6 +213,9 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 		// 生成各科分数
 		chinese, math, foreign, integrated, ethics, history, pe := gen.GenerateCompetitorScores(totalScore-realCandidate.ComprehensiveQuality, scoreVariation)
 
+		// 随机决定是否有名额分配到校资格（70%概率）
+		hasQuotaSchoolEligible := gen.GenerateRandomScore(0, 1) > 0.3
+
 		competitors[i] = &Candidate{
 			ID:                     int32(i + 1),
 			IsRealCandidate:        false,
@@ -173,15 +231,27 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 			PEScore:                pe,
 			ComprehensiveQuality:   realCandidate.ComprehensiveQuality,
 			HasTiePreference:       false,
-			HasQuotaSchoolEligible: gen.GenerateRandomScore(0, 1) > 0.3, // 70%概率有资格
+			HasQuotaSchoolEligible: hasQuotaSchoolEligible,
 		}
 
-		// 生成随机志愿（简化处理）
-		// 实际应基于历史数据或热点学校分布
-		if req.Volunteers.QuotaDistrict != nil {
-			// 竞争对手有一定概率填报相同学校
-			if gen.GenerateRandomScore(0, 1) > 0.5 {
-				competitors[i].QuotaDistrictSchoolID = req.Volunteers.QuotaDistrict
+		// 使用志愿生成器生成符合冲稳保策略的志愿
+		if e.volunteerGenerator != nil {
+			// 生成统一招生志愿（1-15志愿）
+			competitors[i].UnifiedSchoolIDs = e.volunteerGenerator.GenerateUnifiedVolunteers(ctx, totalScore, realCandidate.DistrictID)
+
+			// 生成名额分配到区志愿
+			competitors[i].QuotaDistrictSchoolID = e.volunteerGenerator.GenerateQuotaDistrictVolunteer(ctx, totalScore, realCandidate.DistrictID)
+
+			// 生成名额分配到校志愿
+			competitors[i].QuotaSchoolIDs = e.volunteerGenerator.GenerateQuotaSchoolVolunteers(
+				ctx, totalScore, realCandidate.DistrictID, realCandidate.MiddleSchoolID, hasQuotaSchoolEligible)
+		} else {
+			// 回退到旧的逻辑：使用考生的志愿
+			if req.Volunteers.QuotaDistrict != nil {
+				// 竞争对手有一定概率填报相同学校
+				if gen.GenerateRandomScore(0, 1) > 0.5 {
+					competitors[i].QuotaDistrictSchoolID = req.Volunteers.QuotaDistrict
+				}
 			}
 		}
 	}
@@ -191,6 +261,11 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 
 // runSimulations 执行多次录取模拟
 func (e *Engine) runSimulations(ctx context.Context, realCandidate *Candidate, competitors []*Candidate, req *highschoolv1.SubmitAnalysisRequest) []*highschoolv1.VolunteerProbability {
+	logger.Debug(ctx, "runSimulations started",
+		logger.Int("total_simulations", e.simulationCount),
+		logger.Int("competitor_count", len(competitors)),
+	)
+
 	// 统计各志愿的录取次数
 	admissionCounts := make(map[string]int) // key: "批次_学校ID"
 	totalSimulations := e.simulationCount
@@ -227,6 +302,10 @@ func (e *Engine) runSimulations(ctx context.Context, realCandidate *Candidate, c
 		}(sim)
 	}
 	wg.Wait()
+
+	logger.Debug(ctx, "runSimulations completed",
+		logger.Int("unique_admission_results", len(admissionCounts)),
+	)
 
 	// 计算各志愿的概率
 	return e.calculateVolunteerProbabilities(ctx, req, admissionCounts, totalSimulations)

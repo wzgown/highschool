@@ -6,6 +6,8 @@ import (
 	"testing"
 
 	highschoolv1 "highschool-backend/gen/highschool/v1"
+	"highschool-backend/internal/repository"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -42,7 +44,35 @@ func (m *mockSchoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSc
 }
 
 func (m *mockSchoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
-	return nil, nil
+	// 返回模拟的统一招生可选学校
+	return []*highschoolv1.SchoolForUnified{
+		{Id: 1, FullName: "上海中学", Code: "001", IsDistrictSchool: false},
+		{Id: 2, FullName: "华二附中", Code: "002", IsDistrictSchool: false},
+		{Id: 3, FullName: "复旦附中", Code: "003", IsDistrictSchool: false},
+		{Id: 4, FullName: "建平中学", Code: "004", IsDistrictSchool: true},
+		{Id: 5, FullName: "进才中学", Code: "005", IsDistrictSchool: true},
+		{Id: 6, FullName: "洋泾中学", Code: "006", IsDistrictSchool: true},
+		{Id: 7, FullName: "川沙中学", Code: "007", IsDistrictSchool: true},
+		{Id: 8, FullName: "高桥中学", Code: "008", IsDistrictSchool: true},
+		{Id: 9, FullName: "南汇中学", Code: "009", IsDistrictSchool: true},
+		{Id: 10, FullName: "东昌中学", Code: "010", IsDistrictSchool: true},
+	}, nil
+}
+
+func (m *mockSchoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*repository.SchoolRankingInfo, error) {
+	// 返回模拟的学校排名数据（按分数线从高到低）
+	return []*repository.SchoolRankingInfo{
+		{ID: 1, FullName: "上海中学", DistrictID: districtID, CutoffScore: 710, RankingOrder: 1},
+		{ID: 2, FullName: "华二附中", DistrictID: districtID, CutoffScore: 706, RankingOrder: 2},
+		{ID: 3, FullName: "复旦附中", DistrictID: districtID, CutoffScore: 708, RankingOrder: 3},
+		{ID: 4, FullName: "七宝中学", DistrictID: districtID, CutoffScore: 691.5, RankingOrder: 4},
+		{ID: 5, FullName: "建平中学", DistrictID: districtID, CutoffScore: 695, RankingOrder: 5},
+		{ID: 6, FullName: "进才中学", DistrictID: districtID, CutoffScore: 690.5, RankingOrder: 6},
+		{ID: 7, FullName: "洋泾中学", DistrictID: districtID, CutoffScore: 670, RankingOrder: 7},
+		{ID: 8, FullName: "川沙中学", DistrictID: districtID, CutoffScore: 665, RankingOrder: 8},
+		{ID: 9, FullName: "高桥中学", DistrictID: districtID, CutoffScore: 660, RankingOrder: 9},
+		{ID: 10, FullName: "南汇中学", DistrictID: districtID, CutoffScore: 655, RankingOrder: 10},
+	}, nil
 }
 
 // mockQuotaRepo 用于测试的模拟名额仓库
