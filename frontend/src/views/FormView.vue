@@ -47,7 +47,7 @@
               <el-option
                 v-for="school in filteredMiddleSchools"
                 :key="school.id"
-                :label="`${school.name} (${school.code})`"
+                :label="school.name"
                 :value="school.id"
               />
             </el-select>

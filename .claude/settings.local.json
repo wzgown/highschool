@@ -24,7 +24,15 @@
       "Bash(# Check for pdfimages which pdfimages && pdfimages -list \"\"original_data/raw/2025/quota_district/2025年名额分配到校-徐汇.pdf\"\")",
       "Bash(# Check all Xuhui related files find original_data -name \"\"*徐汇*\"\" -o -name \"\"*xuhui*\"\" -o -name \"\"*XH*\"\")",
       "Bash(__NEW_LINE_a2ad23aa2506ded2__ echo -e \"\\\\n=== 2025 徐汇区名额总数 ===\")",
-      "Bash(export:*)"
+      "Bash(export:*)",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__take_snapshot",
+      "mcp__chrome-devtools__click",
+      "mcp__chrome-devtools__evaluate_script",
+      "mcp__chrome-devtools__press_key",
+      "mcp__chrome-devtools__fill",
+      "mcp__chrome-devtools__wait_for"
     ]
   },
   "hooks": {
