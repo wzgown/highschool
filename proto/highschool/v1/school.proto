@@ -7,7 +7,6 @@ option go_package = "github.com/highschool/backend/gen/highschool/v1;highschoolv
 // 初中学校
 message MiddleSchool {
   int32 id = 1;
-  optional string code = 2;
   string name = 3;
   optional string short_name = 4;
   int32 district_id = 5;

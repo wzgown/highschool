@@ -408,9 +408,6 @@
           "type": "integer",
           "format": "int32"
         },
-        "code": {
-          "type": "string"
-        },
         "name": {
           "type": "string"
         },

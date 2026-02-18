@@ -12,7 +12,7 @@ DROP VIEW IF EXISTS vw_active_middle_schools;
 -- 2. 去除"上海市"前缀
 -- 3. 统一"初级中学"为"中学"
 -- 4. 去除"中学"后缀
--- 优先保留：新编码格式(011xxx) > 旧编码格式 > 最新数据年份 > 最大ID
+-- 优先保留：最新数据年份 > 最大ID
 CREATE VIEW vw_active_middle_schools AS
 SELECT DISTINCT ON (
   REGEXP_REPLACE(
@@ -30,7 +30,6 @@ SELECT DISTINCT ON (
   )
 )
     id,
-    code,
     name,
     short_name,
     district_id,
@@ -60,8 +59,7 @@ ORDER BY
     ),
     '\s+', ''
   ),
-  CASE WHEN code LIKE '011%' THEN 0 ELSE 1 END,
   data_year DESC,
   id DESC;
 
-COMMENT ON VIEW vw_active_middle_schools IS '有效初中学校视图，按标准化名称去重，优先保留新编码格式的学校数据';
+COMMENT ON VIEW vw_active_middle_schools IS '有效初中学校视图，按标准化名称去重，优先保留最新年份数据';

@@ -43,13 +43,13 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 	}
 
 	if keyword != nil && *keyword != "" {
-		whereClause += fmt.Sprintf(" AND (name ILIKE $%d OR code ILIKE $%d)", argIdx, argIdx)
+		whereClause += fmt.Sprintf(" AND name ILIKE $%d", argIdx)
 		args = append(args, "%"+*keyword+"%")
 		argIdx++
 	}
 
 	query := fmt.Sprintf(`
-		SELECT id, code, name, short_name, district_id, school_nature_id, is_non_selective, exact_student_count, estimated_student_count
+		SELECT id, name, short_name, district_id, school_nature_id, is_non_selective, exact_student_count, estimated_student_count
 		FROM vw_active_middle_schools
 		%s
 		ORDER BY id
@@ -71,7 +71,6 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 		var schoolNatureId *string // Changed to pointer to handle NULL
 		err := rows.Scan(
 			&school.Id,
-			&school.Code,
 			&school.Name,
 			&shortName,
 			&school.DistrictId,

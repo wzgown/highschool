@@ -36,7 +36,6 @@ COMMENT ON COLUMN ref_district_exam_count.data_source IS '数据来源文件';
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ref_middle_school (
     id SERIAL PRIMARY KEY,
-    code VARCHAR(20),
     name VARCHAR(200) NOT NULL,
     short_name VARCHAR(100),
     district_id INTEGER NOT NULL REFERENCES ref_district(id),
@@ -45,8 +44,7 @@ CREATE TABLE IF NOT EXISTS ref_middle_school (
     data_year INTEGER NOT NULL DEFAULT 2025,
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(code, data_year)
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_middle_school_district ON ref_middle_school(district_id);
@@ -54,7 +52,6 @@ CREATE INDEX idx_middle_school_nature ON ref_middle_school(school_nature_id);
 CREATE INDEX idx_middle_school_non_selective ON ref_middle_school(is_non_selective);
 
 COMMENT ON TABLE ref_middle_school IS '初中学校表（用于名额分配到校）';
-COMMENT ON COLUMN ref_middle_school.code IS '学校代码';
 COMMENT ON COLUMN ref_middle_school.name IS '学校全称';
 COMMENT ON COLUMN ref_middle_school.short_name IS '学校简称';
 COMMENT ON COLUMN ref_middle_school.district_id IS '所属区ID';

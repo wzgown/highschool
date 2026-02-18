@@ -18,11 +18,6 @@ export class MiddleSchool extends Message<MiddleSchool> {
   id = 0;
 
   /**
-   * @generated from field: optional string code = 2;
-   */
-  code?: string;
-
-  /**
    * @generated from field: string name = 3;
    */
   name = "";
@@ -70,7 +65,6 @@ export class MiddleSchool extends Message<MiddleSchool> {
   static readonly typeName = "highschool.v1.MiddleSchool";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 2, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 3, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "short_name", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 5, name: "district_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
