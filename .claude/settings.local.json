@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash(*)",
       "Write",
       "Bash(python3:*)",
       "Bash(psql:*)",
@@ -17,7 +18,13 @@
       "Bash(PGPASSWORD=highschool psql:*)",
       "Bash(PGPASSWORD='HS2025!db#SecurePass88' psql:*)",
       "mcp__plugin_claude-mem_mcp-search__search",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(# Check for existing markdown file ls -la original_data/raw/2025/quota_district/markdown/)",
+      "Bash(# Try using poppler''s pdftotext pdftotext \"\"original_data/raw/2025/quota_district/2025年名额分配到校-徐汇.pdf\"\" -)",
+      "Bash(# Check for pdfimages which pdfimages && pdfimages -list \"\"original_data/raw/2025/quota_district/2025年名额分配到校-徐汇.pdf\"\")",
+      "Bash(# Check all Xuhui related files find original_data -name \"\"*徐汇*\"\" -o -name \"\"*xuhui*\"\" -o -name \"\"*XH*\"\")",
+      "Bash(__NEW_LINE_a2ad23aa2506ded2__ echo -e \"\\\\n=== 2025 徐汇区名额总数 ===\")",
+      "Bash(export:*)"
     ]
   },
   "hooks": {
