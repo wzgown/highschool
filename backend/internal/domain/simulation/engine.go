@@ -134,10 +134,11 @@ func (e *Engine) Run(ctx context.Context, req *highschoolv1.SubmitAnalysisReques
 		logger.String("duration", time.Since(stepStart).String()),
 	)
 
-	// 7. 生成竞争对手分析报告
+	// 7. 生成竞争对手分析报告（使用实际生成的竞争对手）
 	stepStart = time.Now()
-	competitorAnalysis := e.competitorGenerator.Generate(req, 100)
+	competitorAnalysis := e.generateCompetitorAnalysis(competitors)
 	logger.Debug(ctx, "step 7: competitor analysis generated",
+		logger.Int("competitor_count", len(competitors)),
 		logger.String("duration", time.Since(stepStart).String()),
 	)
 
@@ -187,6 +188,7 @@ func (e *Engine) convertToCandidate(req *highschoolv1.SubmitAnalysisRequest) *Ca
 }
 
 // generateCompetitors 生成虚拟竞争对手
+// 关键优化：只生成排名在考生之前的竞争对手（他们才会抢走名额）
 // 竞争对手的志愿按照学校排名和冲稳保策略生成
 func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candidate, req *highschoolv1.SubmitAnalysisRequest) []*Candidate {
 	// 获取全区考生数量
@@ -198,20 +200,81 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 		}
 	}
 
-	// 生成竞争对手数量（基于区内排名预测）
-	competitorCount := min(districtExamCount/10, 500) // 最多500个竞争对手
+	// 获取预估区内排名
+	districtRank := e.estimateDistrictRank(ctx, req)
+	if districtRank <= 0 {
+		districtRank = 1 // 至少生成0个竞争对手
+	}
+
+	// 关键：只生成排名在考生之前的竞争对手
+	// 这些人才会抢走考生的名额，排名在考生之后的人不影响录取结果
+	competitorCount := int(districtRank) - 1
+	if competitorCount <= 0 {
+		return []*Candidate{} // 排名第1，没有竞争对手
+	}
+
+	// 限制最大竞争对手数量（性能考虑，但保持正确的比例）
+	maxCompetitors := 2000
+	if competitorCount > maxCompetitors {
+		competitorCount = maxCompetitors
+	}
+
+	logger.Debug(ctx, "generating competitors",
+		logger.Int("district_rank", int(districtRank)),
+		logger.Int("district_total", districtExamCount),
+		logger.Int("competitor_count", competitorCount),
+	)
 
 	// 使用随机分数生成器
 	gen := NewRandomScoreGenerator(int64(realCandidate.TotalScore * 1000))
 
+	// 计算分数分布参数
+	// 假设全区分数服从正态分布，根据考生排名推算其分数在分布中的位置
+	candidatePercentile := float64(districtExamCount-int(districtRank)) / float64(districtExamCount)
+
+	// 使用考生的实际分数（750分制）来校准分布
+	candidateScore750 := realCandidate.TotalScore - realCandidate.ComprehensiveQuality
+
+	// 预加载区县学校数据（优化性能，避免每个竞争对手都查询数据库）
+	if e.volunteerGenerator != nil {
+		e.volunteerGenerator.PreloadDistrictData(ctx, realCandidate.DistrictID, realCandidate.MiddleSchoolID)
+	}
+
+	// 预加载名额分配数据（优化性能，避免每次录取模拟都查询数据库）
+	if e.quotaRepo != nil {
+		e.quotaRepo.PreloadCache(ctx, realCandidate.DistrictID, realCandidate.MiddleSchoolID, 2025)
+	}
+
 	competitors := make([]*Candidate, competitorCount)
 	for i := 0; i < competitorCount; i++ {
-		// 生成分数（以考生分数为中心，正态分布）
-		scoreVariation := 50.0 // 标准差50分
-		totalScore := gen.GenerateNormalScore(realCandidate.TotalScore, scoreVariation)
+		// 计算该竞争对手的排名位置（1到districtRank-1）
+		competitorRank := i + 1
+
+		// 根据排名计算该竞争对手的百分位
+		// 排名第1的人百分位最高，排名接近考生的人百分位接近考生
+		competitorPercentile := float64(districtExamCount-competitorRank) / float64(districtExamCount)
+
+		// 根据百分位推算分数（比考生分数高）
+		// 使用简化的线性映射：百分位差异 → 分数差异
+		percentileDiff := competitorPercentile - candidatePercentile
+
+		// 将百分位差异转换为分数差异（假设每1%的百分位约等于1.5分）
+		scoreDiff := percentileDiff * float64(districtExamCount) * 0.15
+
+		// 添加随机波动（±10分）
+		scoreDiff += gen.GenerateRandomScore(-10, 10)
+
+		// 计算竞争对手的总分（750分制）
+		totalScore750 := candidateScore750 + scoreDiff
+
+		// 确保分数在合理范围内
+		totalScore750 = clamp(totalScore750, 400, 750)
 
 		// 生成各科分数
-		chinese, math, foreign, integrated, ethics, history, pe := gen.GenerateCompetitorScores(totalScore-realCandidate.ComprehensiveQuality, scoreVariation)
+		chinese, math, foreign, integrated, ethics, history, pe := gen.GenerateCompetitorScores(totalScore750, 30)
+
+		// 计算总分（800分制，包含综合素质评价）
+		totalScore800 := chinese + math + foreign + integrated + ethics + history + pe + realCandidate.ComprehensiveQuality
 
 		// 随机决定是否有名额分配到校资格（70%概率）
 		hasQuotaSchoolEligible := gen.GenerateRandomScore(0, 1) > 0.3
@@ -221,7 +284,7 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 			IsRealCandidate:        false,
 			DistrictID:             realCandidate.DistrictID,
 			MiddleSchoolID:         realCandidate.MiddleSchoolID,
-			TotalScore:             chinese + math + foreign + integrated + ethics + history + pe + realCandidate.ComprehensiveQuality,
+			TotalScore:             totalScore800,
 			ChineseScore:           chinese,
 			MathScore:              math,
 			ForeignScore:           foreign,
@@ -237,14 +300,14 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 		// 使用志愿生成器生成符合冲稳保策略的志愿
 		if e.volunteerGenerator != nil {
 			// 生成统一招生志愿（1-15志愿）
-			competitors[i].UnifiedSchoolIDs = e.volunteerGenerator.GenerateUnifiedVolunteers(ctx, totalScore, realCandidate.DistrictID)
+			competitors[i].UnifiedSchoolIDs = e.volunteerGenerator.GenerateUnifiedVolunteers(ctx, totalScore750, realCandidate.DistrictID)
 
 			// 生成名额分配到区志愿
-			competitors[i].QuotaDistrictSchoolID = e.volunteerGenerator.GenerateQuotaDistrictVolunteer(ctx, totalScore, realCandidate.DistrictID)
+			competitors[i].QuotaDistrictSchoolID = e.volunteerGenerator.GenerateQuotaDistrictVolunteer(ctx, totalScore750, realCandidate.DistrictID)
 
 			// 生成名额分配到校志愿
 			competitors[i].QuotaSchoolIDs = e.volunteerGenerator.GenerateQuotaSchoolVolunteers(
-				ctx, totalScore, realCandidate.DistrictID, realCandidate.MiddleSchoolID, hasQuotaSchoolEligible)
+				ctx, totalScore750, realCandidate.DistrictID, realCandidate.MiddleSchoolID, hasQuotaSchoolEligible)
 		} else {
 			// 回退到旧的逻辑：使用考生的志愿
 			if req.Volunteers.QuotaDistrict != nil {
@@ -497,4 +560,50 @@ func min(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// generateCompetitorAnalysis 根据实际竞争对手生成竞争态势分析
+func (e *Engine) generateCompetitorAnalysis(competitors []*Candidate) *highschoolv1.CompetitorAnalysis {
+	// 定义分数区间（750分制）
+	ranges := []struct {
+		min, max float64
+		label    string
+	}{
+		{700, 750, "700-750"},
+		{650, 699.5, "650-699.5"},
+		{600, 649.5, "600-649.5"},
+		{550, 599.5, "550-599.5"},
+		{500, 549.5, "500-549.5"},
+		{0, 499.5, "<500"},
+	}
+
+	counts := make(map[string]int32)
+	for _, r := range ranges {
+		counts[r.label] = 0
+	}
+
+	// 统计各分数区间的人数（使用750分制）
+	for _, c := range competitors {
+		// 转换为750分制（去掉综合素质评价）
+		score750 := c.TotalScore - c.ComprehensiveQuality
+		for _, r := range ranges {
+			if score750 >= r.min && score750 <= r.max {
+				counts[r.label]++
+				break
+			}
+		}
+	}
+
+	var distribution []*highschoolv1.ScoreDistributionItem
+	for _, r := range ranges {
+		distribution = append(distribution, &highschoolv1.ScoreDistributionItem{
+			Range: r.label,
+			Count: counts[r.label],
+		})
+	}
+
+	return &highschoolv1.CompetitorAnalysis{
+		Count:             int32(len(competitors)),
+		ScoreDistribution: distribution,
+	}
 }

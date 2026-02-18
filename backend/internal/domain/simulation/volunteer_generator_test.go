@@ -87,6 +87,10 @@ func (m *mockSchoolRepoForVolunteer) GetSchoolsByCutoffScoreRanking(ctx context.
 	}, nil
 }
 
+func (m *mockSchoolRepoForVolunteer) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+	// mock实现，无需实际操作
+}
+
 func TestStrategyVolunteerGenerator_GenerateUnifiedVolunteers(t *testing.T) {
 	ctx := context.Background()
 	districtID := int32(7) // 浦东新区

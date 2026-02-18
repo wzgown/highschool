@@ -23,7 +23,7 @@ func NewCompetitorGenerator() *CompetitorGenerator {
 
 // Competitor 竞争对手
 type Competitor struct {
-	Score         int32
+	Score         float64
 	VolunteerPrefs []int32 // 志愿偏好
 }
 
@@ -60,10 +60,10 @@ func (g *CompetitorGenerator) generateCompetitors(req *highschoolv1.SubmitAnalys
 
 // generateScore 生成竞争对手分数
 // 使用正态分布在考生分数附近生成
-func (g *CompetitorGenerator) generateScore(candidateScore int32) int32 {
+func (g *CompetitorGenerator) generateScore(candidateScore float64) float64 {
 	// 简化版：在考生分数 ±scoreRange 范围内随机生成
-	minScore := candidateScore - int32(g.scoreRange)
-	maxScore := candidateScore + int32(g.scoreRange)
+	minScore := candidateScore - g.scoreRange
+	maxScore := candidateScore + g.scoreRange
 
 	if minScore < 0 {
 		minScore = 0
@@ -72,7 +72,7 @@ func (g *CompetitorGenerator) generateScore(candidateScore int32) int32 {
 		maxScore = 750
 	}
 
-	return minScore + int32(rand.Intn(int(maxScore-minScore+1)))
+	return minScore + rand.Float64()*(maxScore-minScore)
 }
 
 // generateVolunteerPrefs 生成志愿偏好
@@ -92,15 +92,15 @@ func (g *CompetitorGenerator) generateVolunteerPrefs(req *highschoolv1.SubmitAna
 // calculateDistribution 计算分数分布
 func (g *CompetitorGenerator) calculateDistribution(competitors []*Competitor) []*highschoolv1.ScoreDistributionItem {
 	ranges := []struct {
-		min, max int32
+		min, max float64
 		label    string
 	}{
 		{700, 750, "700-750"},
-		{650, 699, "650-699"},
-		{600, 649, "600-649"},
-		{550, 599, "550-599"},
-		{500, 549, "500-549"},
-		{0, 499, "<500"},
+		{650, 699.5, "650-699.5"},
+		{600, 649.5, "600-649.5"},
+		{550, 599.5, "550-599.5"},
+		{500, 549.5, "500-549.5"},
+		{0, 499.5, "<500"},
 	}
 
 	counts := make(map[string]int32)

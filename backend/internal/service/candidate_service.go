@@ -198,42 +198,42 @@ func (s *candidateService) DeleteHistory(ctx context.Context, id, deviceID strin
 func (s *candidateService) validateScores(scores *highschoolv1.CandidateScores) error {
 	// 各科满分
 	const (
-		maxChinese    = 150
-		maxMath       = 150
-		maxForeign    = 150
-		maxIntegrated = 150
-		maxEthics     = 60
-		maxHistory    = 60
-		maxPE         = 30
-		maxTotal      = 750
+		maxChinese    = 150.0
+		maxMath       = 150.0
+		maxForeign    = 150.0
+		maxIntegrated = 150.0
+		maxEthics     = 60.0
+		maxHistory    = 60.0
+		maxPE         = 30.0
+		maxTotal      = 750.0
 	)
 
 	// 校验单科不超过满分
 	if scores.Chinese > maxChinese {
-		return fmt.Errorf("语文成绩(%d)不能超过满分(%d)", scores.Chinese, maxChinese)
+		return fmt.Errorf("语文成绩(%.1f)不能超过满分(%.0f)", scores.Chinese, maxChinese)
 	}
 	if scores.Math > maxMath {
-		return fmt.Errorf("数学成绩(%d)不能超过满分(%d)", scores.Math, maxMath)
+		return fmt.Errorf("数学成绩(%.1f)不能超过满分(%.0f)", scores.Math, maxMath)
 	}
 	if scores.Foreign > maxForeign {
-		return fmt.Errorf("外语成绩(%d)不能超过满分(%d)", scores.Foreign, maxForeign)
+		return fmt.Errorf("外语成绩(%.1f)不能超过满分(%.0f)", scores.Foreign, maxForeign)
 	}
 	if scores.Integrated > maxIntegrated {
-		return fmt.Errorf("综合测试成绩(%d)不能超过满分(%d)", scores.Integrated, maxIntegrated)
+		return fmt.Errorf("综合测试成绩(%.1f)不能超过满分(%.0f)", scores.Integrated, maxIntegrated)
 	}
 	if scores.Ethics > maxEthics {
-		return fmt.Errorf("道德与法治成绩(%d)不能超过满分(%d)", scores.Ethics, maxEthics)
+		return fmt.Errorf("道德与法治成绩(%.1f)不能超过满分(%.0f)", scores.Ethics, maxEthics)
 	}
 	if scores.History > maxHistory {
-		return fmt.Errorf("历史成绩(%d)不能超过满分(%d)", scores.History, maxHistory)
+		return fmt.Errorf("历史成绩(%.1f)不能超过满分(%.0f)", scores.History, maxHistory)
 	}
 	if scores.Pe > maxPE {
-		return fmt.Errorf("体育成绩(%d)不能超过满分(%d)", scores.Pe, maxPE)
+		return fmt.Errorf("体育成绩(%.1f)不能超过满分(%.0f)", scores.Pe, maxPE)
 	}
 
 	// 校验总分不超过满分
 	if scores.Total > maxTotal {
-		return fmt.Errorf("总分(%d)不能超过满分(%d)", scores.Total, maxTotal)
+		return fmt.Errorf("总分(%.1f)不能超过满分(%.0f)", scores.Total, maxTotal)
 	}
 
 	// 计算已填科目之和（>0 的科目）
@@ -242,7 +242,7 @@ func (s *candidateService) validateScores(scores *highschoolv1.CandidateScores) 
 
 	// 已填科目之和不能超过总分
 	if calculatedTotal > scores.Total {
-		return fmt.Errorf("各科成绩之和(%d)不能超过总分(%d)", calculatedTotal, scores.Total)
+		return fmt.Errorf("各科成绩之和(%.1f)不能超过总分(%.1f)", calculatedTotal, scores.Total)
 	}
 
 	// 判断是否所有科目都填了（>0）
@@ -251,7 +251,7 @@ func (s *candidateService) validateScores(scores *highschoolv1.CandidateScores) 
 
 	// 只有当所有科目都填了，才要求总和等于总分
 	if allSubjectsFilled && calculatedTotal != scores.Total {
-		return fmt.Errorf("各科成绩之和(%d)与总分(%d)不符", calculatedTotal, scores.Total)
+		return fmt.Errorf("各科成绩之和(%.1f)与总分(%.1f)不符", calculatedTotal, scores.Total)
 	}
 
 	return nil

@@ -4,6 +4,7 @@ package repository
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -48,18 +49,70 @@ type SchoolRepository interface {
 	// GetSchoolsByCutoffScoreRanking 获取按分数线排名的学校列表（用于竞争对手志愿生成）
 	// 返回指定区可填报的学校，按分数线从高到低排序
 	GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error)
+
+	// PreloadCache 预加载缓存（在生成大量竞争对手前调用）
+	PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int)
+}
+
+// schoolCache 学校数据缓存
+type schoolCache struct {
+	mu                        sync.RWMutex
+	quotaDistrictSchools      map[int32][]*highschoolv1.SchoolWithQuota    // districtID -> schools
+	quotaSchoolSchools        map[int32][]*highschoolv1.SchoolWithQuota    // middleSchoolID -> schools
+	unifiedSchools            map[int32][]*highschoolv1.SchoolForUnified   // districtID -> schools
+	cutoffScoreRankings       map[int32][]*SchoolRankingInfo               // districtID -> rankings
+	quotaDistrictSchoolsYear  int
+	quotaSchoolSchoolsYear    int
+	unifiedSchoolsYear        int
+	cutoffScoreRankingsYear   int
 }
 
 // schoolRepo 实现
 type schoolRepo struct {
-	db *pgxpool.Pool
+	db    *pgxpool.Pool
+	cache *schoolCache
 }
 
 // NewSchoolRepository 创建学校仓库
 func NewSchoolRepository() SchoolRepository {
 	return &schoolRepo{
 		db: database.GetDB(),
+		cache: &schoolCache{
+			quotaDistrictSchools: make(map[int32][]*highschoolv1.SchoolWithQuota),
+			quotaSchoolSchools:   make(map[int32][]*highschoolv1.SchoolWithQuota),
+			unifiedSchools:       make(map[int32][]*highschoolv1.SchoolForUnified),
+			cutoffScoreRankings:  make(map[int32][]*SchoolRankingInfo),
+		},
 	}
+}
+
+// PreloadCache 预加载缓存
+func (r *schoolRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+	// 并发预加载
+	var wg sync.WaitGroup
+	wg.Add(4)
+
+	go func() {
+		defer wg.Done()
+		r.getSchoolsWithQuotaDistrictWithCache(ctx, districtID, year)
+	}()
+
+	go func() {
+		defer wg.Done()
+		r.getSchoolsWithQuotaSchoolWithCache(ctx, middleSchoolID, year)
+	}()
+
+	go func() {
+		defer wg.Done()
+		r.getSchoolsForUnifiedWithCache(ctx, districtID, year)
+	}()
+
+	go func() {
+		defer wg.Done()
+		r.getSchoolsByCutoffScoreRankingWithCache(ctx, districtID, year)
+	}()
+
+	wg.Wait()
 }
 
 // GetByID 根据ID获取学校
@@ -244,6 +297,21 @@ func (r *schoolRepo) GetHistoryScores(ctx context.Context, schoolID int32) ([]*h
 
 // GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
 func (r *schoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+	// 检查缓存
+	r.cache.mu.RLock()
+	if r.cache.quotaDistrictSchoolsYear == year {
+		if schools, ok := r.cache.quotaDistrictSchools[districtID]; ok {
+			r.cache.mu.RUnlock()
+			return schools, nil
+		}
+	}
+	r.cache.mu.RUnlock()
+
+	// 缓存未命中，查询数据库
+	return r.getSchoolsWithQuotaDistrictWithCache(ctx, districtID, year)
+}
+
+func (r *schoolRepo) getSchoolsWithQuotaDistrictWithCache(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
 	rows, err := r.db.Query(ctx, `
 		SELECT DISTINCT s.id, s.full_name, s.code, q.quota_count
 		FROM ref_school s
@@ -266,11 +334,32 @@ func (r *schoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID
 		schools = append(schools, &school)
 	}
 
+	// 存入缓存
+	r.cache.mu.Lock()
+	r.cache.quotaDistrictSchools[districtID] = schools
+	r.cache.quotaDistrictSchoolsYear = year
+	r.cache.mu.Unlock()
+
 	return schools, nil
 }
 
 // GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
 func (r *schoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+	// 检查缓存
+	r.cache.mu.RLock()
+	if r.cache.quotaSchoolSchoolsYear == year {
+		if schools, ok := r.cache.quotaSchoolSchools[middleSchoolID]; ok {
+			r.cache.mu.RUnlock()
+			return schools, nil
+		}
+	}
+	r.cache.mu.RUnlock()
+
+	// 缓存未命中，查询数据库
+	return r.getSchoolsWithQuotaSchoolWithCache(ctx, middleSchoolID, year)
+}
+
+func (r *schoolRepo) getSchoolsWithQuotaSchoolWithCache(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
 	rows, err := r.db.Query(ctx, `
 		SELECT DISTINCT s.id, s.full_name, s.code, q.quota_count
 		FROM ref_school s
@@ -293,12 +382,33 @@ func (r *schoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchool
 		schools = append(schools, &school)
 	}
 
+	// 存入缓存
+	r.cache.mu.Lock()
+	r.cache.quotaSchoolSchools[middleSchoolID] = schools
+	r.cache.quotaSchoolSchoolsYear = year
+	r.cache.mu.Unlock()
+
 	return schools, nil
 }
 
 // GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
 // 包括：1. 本区所有高中 2. 面向全市招生的高中（根据历史分数线数据判断）
 func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
+	// 检查缓存
+	r.cache.mu.RLock()
+	if r.cache.unifiedSchoolsYear == year {
+		if schools, ok := r.cache.unifiedSchools[districtID]; ok {
+			r.cache.mu.RUnlock()
+			return schools, nil
+		}
+	}
+	r.cache.mu.RUnlock()
+
+	// 缓存未命中，查询数据库
+	return r.getSchoolsForUnifiedWithCache(ctx, districtID, year)
+}
+
+func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
 	// 查询该区在统一招生批次可填报的学校
 	// 基于 ref_admission_score_unified 表，该表记录了各区统一招生的学校及其分数线
 	rows, err := r.db.Query(ctx, `
@@ -324,12 +434,33 @@ func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32,
 		schools = append(schools, &school)
 	}
 
+	// 存入缓存
+	r.cache.mu.Lock()
+	r.cache.unifiedSchools[districtID] = schools
+	r.cache.unifiedSchoolsYear = year
+	r.cache.mu.Unlock()
+
 	return schools, nil
 }
 
 // GetSchoolsByCutoffScoreRanking 获取按分数线排名的学校列表（用于竞争对手志愿生成）
 // 返回指定区可填报的学校，按分数线从高到低排序
 func (r *schoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error) {
+	// 检查缓存
+	r.cache.mu.RLock()
+	if r.cache.cutoffScoreRankingsYear == year {
+		if schools, ok := r.cache.cutoffScoreRankings[districtID]; ok {
+			r.cache.mu.RUnlock()
+			return schools, nil
+		}
+	}
+	r.cache.mu.RUnlock()
+
+	// 缓存未命中，查询数据库
+	return r.getSchoolsByCutoffScoreRankingWithCache(ctx, districtID, year)
+}
+
+func (r *schoolRepo) getSchoolsByCutoffScoreRankingWithCache(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error) {
 	// 使用前一年的统一招生分数线数据作为排名依据
 	// 按分数线从高到低排序，分数线越高说明学校越好
 	rows, err := r.db.Query(ctx, `
@@ -358,6 +489,12 @@ func (r *schoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, distric
 		school.RankingOrder = rank
 		schools = append(schools, &school)
 	}
+
+	// 存入缓存
+	r.cache.mu.Lock()
+	r.cache.cutoffScoreRankings[districtID] = schools
+	r.cache.cutoffScoreRankingsYear = year
+	r.cache.mu.Unlock()
 
 	return schools, nil
 }

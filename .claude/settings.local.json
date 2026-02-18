@@ -11,7 +11,13 @@
       "Bash(cd:*)",
       "Bash(go:*)",
       "Bash(go build:*)",
-      "Bash(go test:*)"
+      "Bash(go test:*)",
+      "Bash(curl:*)",
+      "Bash(buf generate:*)",
+      "Bash(PGPASSWORD=highschool psql:*)",
+      "Bash(PGPASSWORD='HS2025!db#SecurePass88' psql:*)",
+      "mcp__plugin_claude-mem_mcp-search__search",
+      "Bash(xargs:*)"
     ]
   },
   "hooks": {

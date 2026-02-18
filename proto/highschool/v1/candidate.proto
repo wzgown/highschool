@@ -13,14 +13,14 @@ message CandidateInfo {
 
 // 考生成绩
 message CandidateScores {
-  int32 total = 1;
-  int32 chinese = 2;
-  int32 math = 3;
-  int32 foreign = 4;
-  int32 integrated = 5;
-  int32 ethics = 6;
-  int32 history = 7;
-  int32 pe = 8;
+  double total = 1;
+  double chinese = 2;
+  double math = 3;
+  double foreign = 4;
+  double integrated = 5;
+  double ethics = 6;
+  double history = 7;
+  double pe = 8;
 }
 
 // 排名信息

@@ -75,6 +75,10 @@ func (m *mockSchoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, dis
 	}, nil
 }
 
+func (m *mockSchoolRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+	// mock实现，无需实际操作
+}
+
 // mockQuotaRepo 用于测试的模拟名额仓库
 type mockQuotaRepo struct{}
 
@@ -92,6 +96,10 @@ func (m *mockQuotaRepo) GetDistrictExamCount(ctx context.Context, districtID int
 
 func (m *mockQuotaRepo) GetMiddleSchoolStudentCount(ctx context.Context, middleSchoolID int32, year int) (int, error) {
 	return 300, nil
+}
+
+func (m *mockQuotaRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+	// mock实现，无需实际操作
 }
 
 func TestEngine_Run(t *testing.T) {

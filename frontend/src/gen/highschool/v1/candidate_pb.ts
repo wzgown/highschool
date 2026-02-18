@@ -64,42 +64,42 @@ export class CandidateInfo extends Message<CandidateInfo> {
  */
 export class CandidateScores extends Message<CandidateScores> {
   /**
-   * @generated from field: int32 total = 1;
+   * @generated from field: double total = 1;
    */
   total = 0;
 
   /**
-   * @generated from field: int32 chinese = 2;
+   * @generated from field: double chinese = 2;
    */
   chinese = 0;
 
   /**
-   * @generated from field: int32 math = 3;
+   * @generated from field: double math = 3;
    */
   math = 0;
 
   /**
-   * @generated from field: int32 foreign = 4;
+   * @generated from field: double foreign = 4;
    */
   foreign = 0;
 
   /**
-   * @generated from field: int32 integrated = 5;
+   * @generated from field: double integrated = 5;
    */
   integrated = 0;
 
   /**
-   * @generated from field: int32 ethics = 6;
+   * @generated from field: double ethics = 6;
    */
   ethics = 0;
 
   /**
-   * @generated from field: int32 history = 7;
+   * @generated from field: double history = 7;
    */
   history = 0;
 
   /**
-   * @generated from field: int32 pe = 8;
+   * @generated from field: double pe = 8;
    */
   pe = 0;
 
@@ -111,14 +111,14 @@ export class CandidateScores extends Message<CandidateScores> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "highschool.v1.CandidateScores";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "total", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 2, name: "chinese", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 3, name: "math", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 4, name: "foreign", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 5, name: "integrated", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 6, name: "ethics", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 7, name: "history", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 8, name: "pe", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 1, name: "total", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 2, name: "chinese", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 3, name: "math", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 4, name: "foreign", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 5, name: "integrated", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 6, name: "ethics", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 7, name: "history", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 8, name: "pe", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CandidateScores {
