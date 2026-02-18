@@ -49,6 +49,7 @@ temp/
 
 # Go
 backend/bin/
+backend/bin/*
 backend/*.exe
 backend/*.dll
 backend/*.so
