@@ -29,21 +29,19 @@ type VolunteerGenerator interface {
 // StrategyVolunteerGenerator 基于冲稳保策略的志愿生成器
 type StrategyVolunteerGenerator struct {
 	schoolRepo repository.SchoolRepository
-	year       int
 }
 
 // NewStrategyVolunteerGenerator 创建志愿生成器
-func NewStrategyVolunteerGenerator(schoolRepo repository.SchoolRepository, year int) *StrategyVolunteerGenerator {
+func NewStrategyVolunteerGenerator(schoolRepo repository.SchoolRepository) *StrategyVolunteerGenerator {
 	return &StrategyVolunteerGenerator{
 		schoolRepo: schoolRepo,
-		year:       year,
 	}
 }
 
 // PreloadDistrictData 预加载区县数据（在生成大量竞争对手前调用）
 func (g *StrategyVolunteerGenerator) PreloadDistrictData(ctx context.Context, districtID int32, middleSchoolID int32) {
 	// 调用 repository 的预加载方法（缓存逻辑统一在 repository 层）
-	g.schoolRepo.PreloadCache(ctx, districtID, middleSchoolID, g.year)
+	g.schoolRepo.PreloadCache(ctx, districtID, middleSchoolID)
 }
 
 // GenerateUnifiedVolunteers 生成统一招生志愿（1-15志愿）
@@ -54,7 +52,7 @@ func (g *StrategyVolunteerGenerator) PreloadDistrictData(ctx context.Context, di
 // - 保：分数线低于考生分数5-20分的学校（5-8个）
 func (g *StrategyVolunteerGenerator) GenerateUnifiedVolunteers(ctx context.Context, score float64, districtID int32) []int32 {
 	// 获取统一招生可填报学校（repository 有缓存）
-	availableSchools, err := g.schoolRepo.GetSchoolsForUnified(ctx, districtID, g.year)
+	availableSchools, err := g.schoolRepo.GetSchoolsForUnified(ctx, districtID)
 	if err != nil || len(availableSchools) == 0 {
 		logger.Warn(ctx, "failed to get available schools for unified batch",
 			logger.Int("district_id", int(districtID)),
@@ -64,7 +62,7 @@ func (g *StrategyVolunteerGenerator) GenerateUnifiedVolunteers(ctx context.Conte
 	}
 
 	// 获取学校分数线排名（repository 有缓存）
-	allRankings, err := g.schoolRepo.GetSchoolsByCutoffScoreRanking(ctx, districtID, g.year)
+	allRankings, err := g.schoolRepo.GetSchoolsByCutoffScoreRanking(ctx, districtID)
 	if err != nil {
 		logger.Warn(ctx, "failed to get school ranking, using empty volunteers",
 			logger.Int("district_id", int(districtID)),
@@ -181,13 +179,13 @@ func (g *StrategyVolunteerGenerator) GenerateUnifiedVolunteers(ctx context.Conte
 // 策略：选择一个分数线略高于或接近考生分数的好学校
 func (g *StrategyVolunteerGenerator) GenerateQuotaDistrictVolunteer(ctx context.Context, score float64, districtID int32) *int32 {
 	// 获取有名额分配到区的学校（repository 有缓存）
-	schools, err := g.schoolRepo.GetSchoolsWithQuotaDistrict(ctx, districtID, g.year)
+	schools, err := g.schoolRepo.GetSchoolsWithQuotaDistrict(ctx, districtID)
 	if err != nil || len(schools) == 0 {
 		return nil
 	}
 
 	// 获取学校分数线排名（repository 有缓存）
-	rankings, err := g.schoolRepo.GetSchoolsByCutoffScoreRanking(ctx, districtID, g.year)
+	rankings, err := g.schoolRepo.GetSchoolsByCutoffScoreRanking(ctx, districtID)
 	if err != nil {
 		// 如果没有排名数据，随机选择一个
 		idx := rand.Intn(len(schools))
@@ -254,13 +252,13 @@ func (g *StrategyVolunteerGenerator) GenerateQuotaSchoolVolunteers(ctx context.C
 	}
 
 	// 获取有名额分配到校的高中（repository 有缓存）
-	schools, err := g.schoolRepo.GetSchoolsWithQuotaSchool(ctx, middleSchoolID, g.year)
+	schools, err := g.schoolRepo.GetSchoolsWithQuotaSchool(ctx, middleSchoolID)
 	if err != nil || len(schools) == 0 {
 		return nil
 	}
 
 	// 获取学校分数线排名（repository 有缓存）
-	rankings, err := g.schoolRepo.GetSchoolsByCutoffScoreRanking(ctx, districtID, g.year)
+	rankings, err := g.schoolRepo.GetSchoolsByCutoffScoreRanking(ctx, districtID)
 	if err != nil {
 		// 如果没有排名数据，随机选择2个
 		var result []int32

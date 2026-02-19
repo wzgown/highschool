@@ -57,7 +57,7 @@ func NewEngine(opts ...EngineOption) *Engine {
 	}
 	// 初始化志愿生成器（如果schoolRepo已设置）
 	if e.schoolRepo != nil {
-		e.volunteerGenerator = NewStrategyVolunteerGenerator(e.schoolRepo, 2025)
+		e.volunteerGenerator = NewStrategyVolunteerGenerator(e.schoolRepo)
 	}
 	return e
 }

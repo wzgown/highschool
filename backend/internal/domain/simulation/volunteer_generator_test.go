@@ -30,15 +30,15 @@ func (m *mockSchoolRepoForVolunteer) GetHistoryScores(ctx context.Context, schoo
 	return nil, nil
 }
 
-func (m *mockSchoolRepoForVolunteer) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+func (m *mockSchoolRepoForVolunteer) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolWithQuota, error) {
 	return nil, nil
 }
 
-func (m *mockSchoolRepoForVolunteer) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+func (m *mockSchoolRepoForVolunteer) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32) ([]*highschoolv1.SchoolWithQuota, error) {
 	return nil, nil
 }
 
-func (m *mockSchoolRepoForVolunteer) GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
+func (m *mockSchoolRepoForVolunteer) GetSchoolsForUnified(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolForUnified, error) {
 	// 返回模拟的统一招生可选学校
 	return []*highschoolv1.SchoolForUnified{
 		{Id: 1, FullName: "上海中学", Code: "001", IsDistrictSchool: false},
@@ -62,7 +62,7 @@ func (m *mockSchoolRepoForVolunteer) GetSchoolsForUnified(ctx context.Context, d
 	}, nil
 }
 
-func (m *mockSchoolRepoForVolunteer) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*repository.SchoolRankingInfo, error) {
+func (m *mockSchoolRepoForVolunteer) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32) ([]*repository.SchoolRankingInfo, error) {
 	// 返回模拟的学校排名数据（按分数线从高到低）
 	// 模拟浦东新区的学校排名
 	return []*repository.SchoolRankingInfo{
@@ -87,7 +87,7 @@ func (m *mockSchoolRepoForVolunteer) GetSchoolsByCutoffScoreRanking(ctx context.
 	}, nil
 }
 
-func (m *mockSchoolRepoForVolunteer) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+func (m *mockSchoolRepoForVolunteer) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32) {
 	// mock实现，无需实际操作
 }
 
@@ -101,7 +101,7 @@ func TestStrategyVolunteerGenerator_GenerateUnifiedVolunteers(t *testing.T) {
 
 	// 创建志愿生成器
 	mockRepo := &mockSchoolRepoForVolunteer{}
-	generator := NewStrategyVolunteerGenerator(mockRepo, 2025)
+	generator := NewStrategyVolunteerGenerator(mockRepo)
 
 	t.Run("should generate volunteers with reach-target-safety strategy for high score", func(t *testing.T) {
 		// 高分考生：700分
@@ -143,7 +143,7 @@ func TestStrategyVolunteerGenerator_GenerateQuotaDistrictVolunteer(t *testing.T)
 	districtID := int32(7) // 浦东新区
 
 	mockRepo := &mockSchoolRepoForVolunteer{}
-	generator := NewStrategyVolunteerGenerator(mockRepo, 2025)
+	generator := NewStrategyVolunteerGenerator(mockRepo)
 
 	t.Run("should generate quota district volunteer", func(t *testing.T) {
 		volunteer := generator.GenerateQuotaDistrictVolunteer(ctx, 680, districtID)
@@ -160,7 +160,7 @@ func TestStrategyVolunteerGenerator_GenerateQuotaSchoolVolunteers(t *testing.T) 
 	middleSchoolID := int32(1)
 
 	mockRepo := &mockSchoolRepoForVolunteer{}
-	generator := NewStrategyVolunteerGenerator(mockRepo, 2025)
+	generator := NewStrategyVolunteerGenerator(mockRepo)
 
 	t.Run("should return nil if no eligibility", func(t *testing.T) {
 		volunteers := generator.GenerateQuotaSchoolVolunteers(ctx, 680, districtID, middleSchoolID, false)

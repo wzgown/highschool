@@ -35,15 +35,15 @@ func (m *mockSchoolRepo) GetHistoryScores(ctx context.Context, schoolID int32) (
 	return nil, nil
 }
 
-func (m *mockSchoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+func (m *mockSchoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolWithQuota, error) {
 	return nil, nil
 }
 
-func (m *mockSchoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+func (m *mockSchoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32) ([]*highschoolv1.SchoolWithQuota, error) {
 	return nil, nil
 }
 
-func (m *mockSchoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
+func (m *mockSchoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolForUnified, error) {
 	// 返回模拟的统一招生可选学校
 	return []*highschoolv1.SchoolForUnified{
 		{Id: 1, FullName: "上海中学", Code: "001", IsDistrictSchool: false},
@@ -59,7 +59,7 @@ func (m *mockSchoolRepo) GetSchoolsForUnified(ctx context.Context, districtID in
 	}, nil
 }
 
-func (m *mockSchoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*repository.SchoolRankingInfo, error) {
+func (m *mockSchoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32) ([]*repository.SchoolRankingInfo, error) {
 	// 返回模拟的学校排名数据（按分数线从高到低）
 	return []*repository.SchoolRankingInfo{
 		{ID: 1, FullName: "上海中学", DistrictID: districtID, CutoffScore: 710, RankingOrder: 1},
@@ -75,7 +75,7 @@ func (m *mockSchoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, dis
 	}, nil
 }
 
-func (m *mockSchoolRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+func (m *mockSchoolRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32) {
 	// mock实现，无需实际操作
 }
 
@@ -102,7 +102,7 @@ func (m *mockQuotaRepo) GetMiddleSchoolStudentCount(ctx context.Context, middleS
 	return 300, nil
 }
 
-func (m *mockQuotaRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+func (m *mockQuotaRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32) {
 	// mock实现，无需实际操作
 }
 

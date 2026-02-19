@@ -29,13 +29,13 @@ type ReferenceService interface {
 	GetMiddleSchools(ctx context.Context, districtID *int32, keyword *string) ([]*highschoolv1.MiddleSchool, error)
 
 	// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
-	GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error)
+	GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolWithQuota, error)
 
 	// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
-	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error)
+	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32) ([]*highschoolv1.SchoolWithQuota, error)
 
 	// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
-	GetSchoolsForUnified(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolForUnified, error)
+	GetSchoolsForUnified(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolForUnified, error)
 
 	// GetLatestScoreYear 获取数据库中最新的分数线数据年份
 	GetLatestScoreYear(ctx context.Context) (int32, error)
@@ -98,18 +98,18 @@ func (s *referenceService) GetMiddleSchools(ctx context.Context, districtID *int
 }
 
 // GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
-func (s *referenceService) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error) {
-	return s.schoolRepo.GetSchoolsWithQuotaDistrict(ctx, districtID, int(year))
+func (s *referenceService) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolWithQuota, error) {
+	return s.schoolRepo.GetSchoolsWithQuotaDistrict(ctx, districtID)
 }
 
 // GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
-func (s *referenceService) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int32) ([]*highschoolv1.SchoolWithQuota, error) {
-	return s.schoolRepo.GetSchoolsWithQuotaSchool(ctx, middleSchoolID, int(year))
+func (s *referenceService) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32) ([]*highschoolv1.SchoolWithQuota, error) {
+	return s.schoolRepo.GetSchoolsWithQuotaSchool(ctx, middleSchoolID)
 }
 
 // GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
-func (s *referenceService) GetSchoolsForUnified(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolForUnified, error) {
-	return s.schoolRepo.GetSchoolsForUnified(ctx, districtID, int(year))
+func (s *referenceService) GetSchoolsForUnified(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolForUnified, error) {
+	return s.schoolRepo.GetSchoolsForUnified(ctx, districtID)
 }
 
 // GetLatestScoreYear 获取数据库中最新的分数线数据年份

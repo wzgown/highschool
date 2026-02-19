@@ -37,21 +37,21 @@ type SchoolRepository interface {
 	// GetHistoryScores 获取学校历年分数线
 	GetHistoryScores(ctx context.Context, schoolID int32) ([]*highschoolv1.HistoryScore, error)
 
-	// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
-	GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error)
+	// GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表（自动使用最新数据）
+	GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolWithQuota, error)
 
-	// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
-	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error)
+	// GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表（自动使用最新数据）
+	GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32) ([]*highschoolv1.SchoolWithQuota, error)
 
-	// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
-	GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error)
+	// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表（自动使用最新数据）
+	GetSchoolsForUnified(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolForUnified, error)
 
-	// GetSchoolsByCutoffScoreRanking 获取按分数线排名的学校列表（用于竞争对手志愿生成）
+	// GetSchoolsByCutoffScoreRanking 获取按分数线排名的学校列表（自动使用最新数据）
 	// 返回指定区可填报的学校，按分数线从高到低排序
-	GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error)
+	GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32) ([]*SchoolRankingInfo, error)
 
 	// PreloadCache 预加载缓存（在生成大量竞争对手前调用）
-	PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int)
+	PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32)
 
 	// GetLatestScoreYear 获取数据库中最新的分数线数据年份
 	GetLatestScoreYear(ctx context.Context) (int, error)
@@ -59,15 +59,12 @@ type SchoolRepository interface {
 
 // schoolCache 学校数据缓存
 type schoolCache struct {
-	mu                        sync.RWMutex
-	quotaDistrictSchools      map[int32][]*highschoolv1.SchoolWithQuota    // districtID -> schools
-	quotaSchoolSchools        map[int32][]*highschoolv1.SchoolWithQuota    // middleSchoolID -> schools
-	unifiedSchools            map[int32][]*highschoolv1.SchoolForUnified   // districtID -> schools
-	cutoffScoreRankings       map[int32][]*SchoolRankingInfo               // districtID -> rankings
-	quotaDistrictSchoolsYear  int
-	quotaSchoolSchoolsYear    int
-	unifiedSchoolsYear        int
-	cutoffScoreRankingsYear   int
+	mu                   sync.RWMutex
+	quotaDistrictSchools map[int32][]*highschoolv1.SchoolWithQuota  // districtID -> schools
+	quotaSchoolSchools   map[int32][]*highschoolv1.SchoolWithQuota  // middleSchoolID -> schools
+	unifiedSchools       map[int32][]*highschoolv1.SchoolForUnified // districtID -> schools
+	cutoffScoreRankings  map[int32][]*SchoolRankingInfo             // districtID -> rankings
+	cachedYear           int                                       // 缓存使用的年份
 }
 
 // schoolRepo 实现
@@ -85,12 +82,25 @@ func NewSchoolRepository() SchoolRepository {
 			quotaSchoolSchools:   make(map[int32][]*highschoolv1.SchoolWithQuota),
 			unifiedSchools:       make(map[int32][]*highschoolv1.SchoolForUnified),
 			cutoffScoreRankings:  make(map[int32][]*SchoolRankingInfo),
+			cachedYear:           0,
 		},
 	}
 }
 
+// getLatestYear 获取最新年份（内部方法）
+func (r *schoolRepo) getLatestYear(ctx context.Context) int {
+	year, err := r.GetLatestScoreYear(ctx)
+	if err != nil {
+		return 2024 // fallback
+	}
+	return year
+}
+
 // PreloadCache 预加载缓存
-func (r *schoolRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
+func (r *schoolRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32) {
+	// 获取最新年份
+	year := r.getLatestYear(ctx)
+
 	// 并发预加载
 	var wg sync.WaitGroup
 	wg.Add(4)
@@ -116,6 +126,11 @@ func (r *schoolRepo) PreloadCache(ctx context.Context, districtID int32, middleS
 	}()
 
 	wg.Wait()
+
+	// 记录缓存年份
+	r.cache.mu.Lock()
+	r.cache.cachedYear = year
+	r.cache.mu.Unlock()
 }
 
 // GetByID 根据ID获取学校
@@ -299,18 +314,17 @@ func (r *schoolRepo) GetHistoryScores(ctx context.Context, schoolID int32) ([]*h
 }
 
 // GetSchoolsWithQuotaDistrict 获取有名额分配到区的高中列表
-func (r *schoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+func (r *schoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolWithQuota, error) {
 	// 检查缓存
 	r.cache.mu.RLock()
-	if r.cache.quotaDistrictSchoolsYear == year {
-		if schools, ok := r.cache.quotaDistrictSchools[districtID]; ok {
-			r.cache.mu.RUnlock()
-			return schools, nil
-		}
+	if schools, ok := r.cache.quotaDistrictSchools[districtID]; ok && r.cache.cachedYear > 0 {
+		r.cache.mu.RUnlock()
+		return schools, nil
 	}
 	r.cache.mu.RUnlock()
 
 	// 缓存未命中，查询数据库
+	year := r.getLatestYear(ctx)
 	return r.getSchoolsWithQuotaDistrictWithCache(ctx, districtID, year)
 }
 
@@ -340,25 +354,23 @@ func (r *schoolRepo) getSchoolsWithQuotaDistrictWithCache(ctx context.Context, d
 	// 存入缓存
 	r.cache.mu.Lock()
 	r.cache.quotaDistrictSchools[districtID] = schools
-	r.cache.quotaDistrictSchoolsYear = year
 	r.cache.mu.Unlock()
 
 	return schools, nil
 }
 
 // GetSchoolsWithQuotaSchool 获取有名额分配到校的高中列表
-func (r *schoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32, year int) ([]*highschoolv1.SchoolWithQuota, error) {
+func (r *schoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchoolID int32) ([]*highschoolv1.SchoolWithQuota, error) {
 	// 检查缓存
 	r.cache.mu.RLock()
-	if r.cache.quotaSchoolSchoolsYear == year {
-		if schools, ok := r.cache.quotaSchoolSchools[middleSchoolID]; ok {
-			r.cache.mu.RUnlock()
-			return schools, nil
-		}
+	if schools, ok := r.cache.quotaSchoolSchools[middleSchoolID]; ok && r.cache.cachedYear > 0 {
+		r.cache.mu.RUnlock()
+		return schools, nil
 	}
 	r.cache.mu.RUnlock()
 
 	// 缓存未命中，查询数据库
+	year := r.getLatestYear(ctx)
 	return r.getSchoolsWithQuotaSchoolWithCache(ctx, middleSchoolID, year)
 }
 
@@ -388,7 +400,6 @@ func (r *schoolRepo) getSchoolsWithQuotaSchoolWithCache(ctx context.Context, mid
 	// 存入缓存
 	r.cache.mu.Lock()
 	r.cache.quotaSchoolSchools[middleSchoolID] = schools
-	r.cache.quotaSchoolSchoolsYear = year
 	r.cache.mu.Unlock()
 
 	return schools, nil
@@ -396,18 +407,17 @@ func (r *schoolRepo) getSchoolsWithQuotaSchoolWithCache(ctx context.Context, mid
 
 // GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
 // 包括：1. 本区所有高中 2. 面向全市招生的高中（根据历史分数线数据判断）
-func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
+func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32) ([]*highschoolv1.SchoolForUnified, error) {
 	// 检查缓存
 	r.cache.mu.RLock()
-	if r.cache.unifiedSchoolsYear == year {
-		if schools, ok := r.cache.unifiedSchools[districtID]; ok {
-			r.cache.mu.RUnlock()
-			return schools, nil
-		}
+	if schools, ok := r.cache.unifiedSchools[districtID]; ok && r.cache.cachedYear > 0 {
+		r.cache.mu.RUnlock()
+		return schools, nil
 	}
 	r.cache.mu.RUnlock()
 
 	// 缓存未命中，查询数据库
+	year := r.getLatestYear(ctx)
 	return r.getSchoolsForUnifiedWithCache(ctx, districtID, year)
 }
 
@@ -440,7 +450,6 @@ func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, district
 	// 存入缓存
 	r.cache.mu.Lock()
 	r.cache.unifiedSchools[districtID] = schools
-	r.cache.unifiedSchoolsYear = year
 	r.cache.mu.Unlock()
 
 	return schools, nil
@@ -448,18 +457,17 @@ func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, district
 
 // GetSchoolsByCutoffScoreRanking 获取按分数线排名的学校列表（用于竞争对手志愿生成）
 // 返回指定区可填报的学校，按分数线从高到低排序
-func (r *schoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error) {
+func (r *schoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, districtID int32) ([]*SchoolRankingInfo, error) {
 	// 检查缓存
 	r.cache.mu.RLock()
-	if r.cache.cutoffScoreRankingsYear == year {
-		if schools, ok := r.cache.cutoffScoreRankings[districtID]; ok {
-			r.cache.mu.RUnlock()
-			return schools, nil
-		}
+	if schools, ok := r.cache.cutoffScoreRankings[districtID]; ok && r.cache.cachedYear > 0 {
+		r.cache.mu.RUnlock()
+		return schools, nil
 	}
 	r.cache.mu.RUnlock()
 
 	// 缓存未命中，查询数据库
+	year := r.getLatestYear(ctx)
 	return r.getSchoolsByCutoffScoreRankingWithCache(ctx, districtID, year)
 }
 
@@ -496,7 +504,6 @@ func (r *schoolRepo) getSchoolsByCutoffScoreRankingWithCache(ctx context.Context
 	// 存入缓存
 	r.cache.mu.Lock()
 	r.cache.cutoffScoreRankings[districtID] = schools
-	r.cache.cutoffScoreRankingsYear = year
 	r.cache.mu.Unlock()
 
 	return schools, nil

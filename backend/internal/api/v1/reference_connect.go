@@ -28,16 +28,6 @@ func NewReferenceServiceHandler() *ReferenceServiceHandler {
 	}
 }
 
-// getLatestYear 获取数据库中最新的分数线数据年份
-func (h *ReferenceServiceHandler) getLatestYear(ctx context.Context) int32 {
-	year, err := h.service.GetLatestScoreYear(ctx)
-	if err != nil {
-		logger.Warn(ctx, "failed to get latest score year, using default", logger.ErrorField(err))
-		return 2024 // fallback
-	}
-	return year
-}
-
 // GetDistricts 获取区县列表
 func (h *ReferenceServiceHandler) GetDistricts(
 	ctx context.Context,
@@ -156,12 +146,7 @@ func (h *ReferenceServiceHandler) GetSchoolsWithQuotaDistrict(
 	ctx context.Context,
 	req *connect.Request[highschoolv1.GetSchoolsWithQuotaDistrictRequest],
 ) (*connect.Response[highschoolv1.GetSchoolsWithQuotaDistrictResponse], error) {
-	year := req.Msg.Year
-	if year == 0 {
-		year = h.getLatestYear(ctx) // 使用数据库中最新年份
-	}
-
-	schools, err := h.service.GetSchoolsWithQuotaDistrict(ctx, req.Msg.DistrictId, year)
+	schools, err := h.service.GetSchoolsWithQuotaDistrict(ctx, req.Msg.DistrictId)
 	if err != nil {
 		logger.Error(ctx, "get schools with quota district failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取名额分配到区学校列表失败"))
@@ -177,12 +162,7 @@ func (h *ReferenceServiceHandler) GetSchoolsWithQuotaSchool(
 	ctx context.Context,
 	req *connect.Request[highschoolv1.GetSchoolsWithQuotaSchoolRequest],
 ) (*connect.Response[highschoolv1.GetSchoolsWithQuotaSchoolResponse], error) {
-	year := req.Msg.Year
-	if year == 0 {
-		year = h.getLatestYear(ctx) // 使用数据库中最新年份
-	}
-
-	schools, err := h.service.GetSchoolsWithQuotaSchool(ctx, req.Msg.MiddleSchoolId, year)
+	schools, err := h.service.GetSchoolsWithQuotaSchool(ctx, req.Msg.MiddleSchoolId)
 	if err != nil {
 		logger.Error(ctx, "get schools with quota school failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取名额分配到校学校列表失败"))
@@ -198,12 +178,7 @@ func (h *ReferenceServiceHandler) GetSchoolsForUnified(
 	ctx context.Context,
 	req *connect.Request[highschoolv1.GetSchoolsForUnifiedRequest],
 ) (*connect.Response[highschoolv1.GetSchoolsForUnifiedResponse], error) {
-	year := req.Msg.Year
-	if year == 0 {
-		year = h.getLatestYear(ctx) // 使用数据库中最新年份
-	}
-
-	schools, err := h.service.GetSchoolsForUnified(ctx, req.Msg.DistrictId, year)
+	schools, err := h.service.GetSchoolsForUnified(ctx, req.Msg.DistrictId)
 	if err != nil {
 		logger.Error(ctx, "get schools for unified failed", err)
 		return nil, connect.NewError(connect.CodeInternal, fmt.Errorf("获取统一招生学校列表失败"))
