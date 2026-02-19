@@ -52,6 +52,9 @@ type SchoolRepository interface {
 
 	// PreloadCache 预加载缓存（在生成大量竞争对手前调用）
 	PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int)
+
+	// GetLatestScoreYear 获取数据库中最新的分数线数据年份
+	GetLatestScoreYear(ctx context.Context) (int, error)
 }
 
 // schoolCache 学校数据缓存
@@ -497,4 +500,17 @@ func (r *schoolRepo) getSchoolsByCutoffScoreRankingWithCache(ctx context.Context
 	r.cache.mu.Unlock()
 
 	return schools, nil
+}
+
+// GetLatestScoreYear 获取数据库中最新的分数线数据年份
+func (r *schoolRepo) GetLatestScoreYear(ctx context.Context) (int, error) {
+	// 从统一招生分数线表获取最新年份
+	var year int
+	err := r.db.QueryRow(ctx, `
+		SELECT COALESCE(MAX(year), 2024) FROM ref_admission_score_unified
+	`).Scan(&year)
+	if err != nil {
+		return 2024, fmt.Errorf("get latest score year failed: %w", err)
+	}
+	return year, nil
 }

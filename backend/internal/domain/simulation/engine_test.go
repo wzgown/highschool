@@ -79,6 +79,10 @@ func (m *mockSchoolRepo) PreloadCache(ctx context.Context, districtID int32, mid
 	// mock实现，无需实际操作
 }
 
+func (m *mockSchoolRepo) GetLatestScoreYear(ctx context.Context) (int, error) {
+	return 2025, nil
+}
+
 // mockQuotaRepo 用于测试的模拟名额仓库
 type mockQuotaRepo struct{}
 

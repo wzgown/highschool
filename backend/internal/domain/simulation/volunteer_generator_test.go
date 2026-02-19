@@ -91,6 +91,10 @@ func (m *mockSchoolRepoForVolunteer) PreloadCache(ctx context.Context, districtI
 	// mock实现，无需实际操作
 }
 
+func (m *mockSchoolRepoForVolunteer) GetLatestScoreYear(ctx context.Context) (int, error) {
+	return 2025, nil
+}
+
 func TestStrategyVolunteerGenerator_GenerateUnifiedVolunteers(t *testing.T) {
 	ctx := context.Background()
 	districtID := int32(7) // 浦东新区

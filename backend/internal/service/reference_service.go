@@ -36,6 +36,9 @@ type ReferenceService interface {
 
 	// GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
 	GetSchoolsForUnified(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolForUnified, error)
+
+	// GetLatestScoreYear 获取数据库中最新的分数线数据年份
+	GetLatestScoreYear(ctx context.Context) (int32, error)
 }
 
 // referenceService 实现
@@ -107,4 +110,13 @@ func (s *referenceService) GetSchoolsWithQuotaSchool(ctx context.Context, middle
 // GetSchoolsForUnified 获取统一招生（1-15志愿）可选学校列表
 func (s *referenceService) GetSchoolsForUnified(ctx context.Context, districtID int32, year int32) ([]*highschoolv1.SchoolForUnified, error) {
 	return s.schoolRepo.GetSchoolsForUnified(ctx, districtID, int(year))
+}
+
+// GetLatestScoreYear 获取数据库中最新的分数线数据年份
+func (s *referenceService) GetLatestScoreYear(ctx context.Context) (int32, error) {
+	year, err := s.schoolRepo.GetLatestScoreYear(ctx)
+	if err != nil {
+		return 2024, err
+	}
+	return int32(year), nil
 }
