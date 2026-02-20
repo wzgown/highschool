@@ -32,18 +32,22 @@ type CandidateService interface {
 
 // candidateService 实现
 type candidateService struct {
-	simRepo    repository.SimulationHistoryRepository
-	schoolRepo repository.SchoolRepository
-	simEngine  *simulation.Engine
+	simRepo          repository.SimulationHistoryRepository
+	schoolRepo       repository.SchoolRepository
+	middleSchoolRepo repository.MiddleSchoolRepository
+	districtRepo     repository.DistrictRepository
+	simEngine        *simulation.Engine
 }
 
 // NewCandidateService 创建考生服务
 func NewCandidateService() CandidateService {
 	quotaRepo := repository.NewQuotaRepository()
 	return &candidateService{
-		simRepo:    repository.NewSimulationHistoryRepository(),
-		schoolRepo: repository.NewSchoolRepository(),
-		simEngine:  simulation.NewEngine(simulation.WithQuotaRepo(quotaRepo)),
+		simRepo:          repository.NewSimulationHistoryRepository(),
+		schoolRepo:       repository.NewSchoolRepository(),
+		middleSchoolRepo: repository.NewMiddleSchoolRepository(),
+		districtRepo:     repository.NewDistrictRepository(),
+		simEngine:        simulation.NewEngine(simulation.WithQuotaRepo(quotaRepo)),
 	}
 }
 
@@ -56,17 +60,13 @@ func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1
 		logger.Int("total_score", int(req.Scores.Total)),
 	)
 
-	// 1. 验证成绩
-	logger.Debug(ctx, "step 1: validating scores")
-	if err := s.validateScores(req.Scores); err != nil {
-		logger.Error(ctx, "score validation failed", err,
-			logger.Int("total", int(req.Scores.Total)),
-		)
+	// 1. 完整参数校验
+	logger.Debug(ctx, "step 1: validating request")
+	if err := s.validateRequest(ctx, req); err != nil {
+		logger.Error(ctx, "request validation failed", err)
 		return nil, err
 	}
-	logger.Debug(ctx, "score validation passed",
-		logger.Int("total", int(req.Scores.Total)),
-	)
+	logger.Debug(ctx, "request validation passed")
 
 	// 2. 处理设备ID
 	var deviceID string
@@ -208,6 +208,11 @@ func (s *candidateService) validateScores(scores *highschoolv1.CandidateScores) 
 		maxTotal      = 750.0
 	)
 
+	// 校验总分范围
+	if scores.Total < 0 || scores.Total > maxTotal {
+		return fmt.Errorf("总分(%.1f)必须在 0-%.0f 之间", scores.Total, maxTotal)
+	}
+
 	// 校验单科不超过满分
 	if scores.Chinese > maxChinese {
 		return fmt.Errorf("语文成绩(%.1f)不能超过满分(%.0f)", scores.Chinese, maxChinese)
@@ -231,11 +236,6 @@ func (s *candidateService) validateScores(scores *highschoolv1.CandidateScores) 
 		return fmt.Errorf("体育成绩(%.1f)不能超过满分(%.0f)", scores.Pe, maxPE)
 	}
 
-	// 校验总分不超过满分
-	if scores.Total > maxTotal {
-		return fmt.Errorf("总分(%.1f)不能超过满分(%.0f)", scores.Total, maxTotal)
-	}
-
 	// 计算已填科目之和（>0 的科目）
 	calculatedTotal := scores.Chinese + scores.Math + scores.Foreign +
 		scores.Integrated + scores.Ethics + scores.History + scores.Pe
@@ -252,6 +252,142 @@ func (s *candidateService) validateScores(scores *highschoolv1.CandidateScores) 
 	// 只有当所有科目都填了，才要求总和等于总分
 	if allSubjectsFilled && calculatedTotal != scores.Total {
 		return fmt.Errorf("各科成绩之和(%.1f)与总分(%.1f)不符", calculatedTotal, scores.Total)
+	}
+
+	return nil
+}
+
+// validateVolunteers 校验志愿学校是否在允许填报范围内
+func (s *candidateService) validateVolunteers(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) error {
+	districtID := req.Candidate.DistrictId
+	middleSchoolID := req.Candidate.MiddleSchoolId
+
+	// 1. 校验名额分配到区志愿
+	if req.Volunteers.QuotaDistrict != nil {
+		allowedSchools, err := s.schoolRepo.GetSchoolsWithQuotaDistrict(ctx, districtID)
+		if err != nil {
+			logger.Warn(ctx, "failed to get quota district schools for validation", logger.ErrorField(err))
+		} else {
+			allowedIDs := make(map[int32]bool)
+			for _, school := range allowedSchools {
+				allowedIDs[school.Id] = true
+			}
+			if !allowedIDs[*req.Volunteers.QuotaDistrict] {
+				return fmt.Errorf("名额分配到区志愿学校(ID:%d)不在可填报范围内", *req.Volunteers.QuotaDistrict)
+			}
+		}
+	}
+
+	// 2. 校验名额分配到校志愿
+	if len(req.Volunteers.QuotaSchool) > 0 {
+		allowedSchools, err := s.schoolRepo.GetSchoolsWithQuotaSchool(ctx, middleSchoolID)
+		if err != nil {
+			logger.Warn(ctx, "failed to get quota school schools for validation", logger.ErrorField(err))
+		} else {
+			allowedIDs := make(map[int32]bool)
+			for _, school := range allowedSchools {
+				allowedIDs[school.Id] = true
+			}
+			for _, schoolID := range req.Volunteers.QuotaSchool {
+				if !allowedIDs[schoolID] {
+					return fmt.Errorf("名额分配到校志愿学校(ID:%d)不在可填报范围内", schoolID)
+				}
+			}
+		}
+	}
+
+	// 3. 校验统一招生志愿
+	if len(req.Volunteers.Unified) > 0 {
+		allowedSchools, err := s.schoolRepo.GetSchoolsForUnified(ctx, districtID)
+		if err != nil {
+			logger.Warn(ctx, "failed to get unified schools for validation", logger.ErrorField(err))
+		} else {
+			allowedIDs := make(map[int32]bool)
+			for _, school := range allowedSchools {
+				allowedIDs[school.Id] = true
+			}
+			for _, schoolID := range req.Volunteers.Unified {
+				if !allowedIDs[schoolID] {
+					return fmt.Errorf("统一招生志愿学校(ID:%d)不在可填报范围内", schoolID)
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
+// validateRequest 完整参数校验
+func (s *candidateService) validateRequest(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) error {
+	// 1. 校验基本信息
+	if req.Candidate == nil {
+		return fmt.Errorf("缺少考生信息")
+	}
+	if req.Candidate.DistrictId <= 0 {
+		return fmt.Errorf("请选择所属区县")
+	}
+	if req.Candidate.MiddleSchoolId <= 0 {
+		return fmt.Errorf("请选择初中学校")
+	}
+
+	// 2. 校验排名
+	if req.Ranking.Rank <= 0 {
+		return fmt.Errorf("校内排名必须大于0")
+	}
+	if req.Ranking.TotalStudents <= 0 {
+		return fmt.Errorf("校内总人数必须大于0")
+	}
+	if req.Ranking.Rank > req.Ranking.TotalStudents {
+		return fmt.Errorf("校内排名(%d)不能大于总人数(%d)", req.Ranking.Rank, req.Ranking.TotalStudents)
+	}
+
+	// 3. 校验成绩
+	if err := s.validateScores(req.Scores); err != nil {
+		return err
+	}
+
+	// 4. 校验志愿 - 至少填报一个志愿
+	hasVolunteers := req.Volunteers.QuotaDistrict != nil ||
+		len(req.Volunteers.QuotaSchool) > 0 ||
+		len(req.Volunteers.Unified) > 0
+	if !hasVolunteers {
+		return fmt.Errorf("请至少填报一个志愿")
+	}
+
+	// 5. 校验志愿数量限制
+	if len(req.Volunteers.QuotaSchool) > 2 {
+		return fmt.Errorf("名额分配到校志愿最多2个")
+	}
+	if len(req.Volunteers.Unified) > 15 {
+		return fmt.Errorf("统一招生志愿最多15个")
+	}
+
+	// 6. 校验志愿学校是否在允许填报范围内
+	if err := s.validateVolunteers(ctx, req); err != nil {
+		return err
+	}
+
+	// 7. 校验学校总人数（与数据库对比）
+	dbStudentCount, err := s.middleSchoolRepo.GetStudentCount(ctx, req.Candidate.MiddleSchoolId)
+	if err == nil && dbStudentCount > 0 {
+		submittedCount := req.Ranking.TotalStudents
+		// 计算差异比例
+		var diffRatio float64
+		if submittedCount > dbStudentCount {
+			diffRatio = float64(submittedCount-dbStudentCount) / float64(dbStudentCount)
+		} else {
+			diffRatio = float64(dbStudentCount-submittedCount) / float64(dbStudentCount)
+		}
+
+		// 差异超过20%时打印warn日志
+		if diffRatio > 0.2 {
+			logger.Warn(ctx, "submitted total_students differs significantly from database",
+				logger.Int("submitted_count", int(submittedCount)),
+				logger.Int("db_count", int(dbStudentCount)),
+				logger.Float64("diff_ratio", diffRatio),
+				logger.Int("middle_school_id", int(req.Candidate.MiddleSchoolId)),
+			)
+		}
 	}
 
 	return nil

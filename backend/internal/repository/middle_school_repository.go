@@ -15,6 +15,9 @@ import (
 type MiddleSchoolRepository interface {
 	// List 获取初中学校列表
 	List(ctx context.Context, districtID *int32, keyword *string) ([]*highschoolv1.MiddleSchool, error)
+
+	// GetStudentCount 获取初中学校学生人数（优先返回精确值，其次估算值）
+	GetStudentCount(ctx context.Context, middleSchoolID int32) (int32, error)
 }
 
 // middleSchoolRepo 实现
@@ -90,4 +93,30 @@ func (r *middleSchoolRepo) List(ctx context.Context, districtID *int32, keyword 
 	}
 
 	return schools, nil
+}
+
+// GetStudentCount 获取初中学校学生人数（优先返回精确值，其次估算值）
+func (r *middleSchoolRepo) GetStudentCount(ctx context.Context, middleSchoolID int32) (int32, error) {
+	var exactCount *int32
+	var estimatedCount *int32
+
+	err := r.db.QueryRow(ctx, `
+		SELECT exact_student_count, estimated_student_count
+		FROM vw_active_middle_schools
+		WHERE id = $1
+	`, middleSchoolID).Scan(&exactCount, &estimatedCount)
+
+	if err != nil {
+		return 0, fmt.Errorf("get middle school student count failed: %w", err)
+	}
+
+	// 优先返回精确值
+	if exactCount != nil && *exactCount > 0 {
+		return *exactCount, nil
+	}
+	if estimatedCount != nil && *estimatedCount > 0 {
+		return *estimatedCount, nil
+	}
+
+	return 0, fmt.Errorf("no student count data for middle school %d", middleSchoolID)
 }

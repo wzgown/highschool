@@ -102,7 +102,7 @@ func (m *mockQuotaRepo) GetMiddleSchoolStudentCount(ctx context.Context, middleS
 	return 300, nil
 }
 
-func (m *mockQuotaRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32) {
+func (m *mockQuotaRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int) {
 	// mock实现，无需实际操作
 }
 

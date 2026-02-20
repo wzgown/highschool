@@ -424,11 +424,16 @@ func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32)
 func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
 	// 查询该区在统一招生批次可填报的学校
 	// 基于 ref_admission_score_unified 表，该表记录了各区统一招生的学校及其分数线
+	// 使用模糊匹配处理学校名称差异（如 "上海中学" vs "上海市上海中学"）
 	rows, err := r.db.Query(ctx, `
 		SELECT DISTINCT s.id, s.full_name, s.code,
 		       CASE WHEN s.district_id = $1 THEN true ELSE false END as is_district_school
 		FROM ref_school s
-		INNER JOIN ref_admission_score_unified u ON u.school_id = s.id OR u.school_name = s.full_name
+		INNER JOIN ref_admission_score_unified u
+			ON u.school_id = s.id
+			OR u.school_name = s.full_name
+			OR s.full_name LIKE '%' || u.school_name || '%'
+			OR u.school_name LIKE '%' || s.short_name || '%'
 		WHERE u.district_id = $1 AND u.year = $2 AND s.is_active = true
 		ORDER BY is_district_school DESC, s.full_name
 	`, districtID, year-1) // 使用前一年的分数线数据（当年的分数线在录取后才有）
