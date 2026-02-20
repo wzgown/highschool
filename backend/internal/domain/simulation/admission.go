@@ -269,9 +269,10 @@ func (r *UnifiedRule) Execute(ctx context.Context, candidates []*Candidate) []Ad
 				admittedCount := schoolAdmitted[schoolID]
 
 				// 获取该学校的统一招生计划数
-				// 这里简化处理，假设统一招生计划可以从总计划减去名额分配计划得出
-				// 实际应从数据库获取
-				quota := 200 // 默认值，实际应从数据库获取
+				quota, err := r.quotaRepo.GetUnifiedPlan(ctx, schoolID, r.year)
+				if err != nil || quota <= 0 {
+					quota = 100 // 默认值
+				}
 
 				if admittedCount < quota {
 					// 录取

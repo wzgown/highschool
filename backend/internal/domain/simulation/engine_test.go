@@ -94,6 +94,10 @@ func (m *mockQuotaRepo) GetQuotaSchoolPlan(ctx context.Context, schoolID int32, 
 	return 5, nil // 返回5个名额
 }
 
+func (m *mockQuotaRepo) GetUnifiedPlan(ctx context.Context, schoolID int32, year int) (int, error) {
+	return 50, nil // 返回50个统一招生名额
+}
+
 func (m *mockQuotaRepo) GetDistrictExamCount(ctx context.Context, districtID int32, year int) (int, error) {
 	return 10000, nil // 返回10000个考生
 }

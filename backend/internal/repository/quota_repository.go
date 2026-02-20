@@ -9,6 +9,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"highschool-backend/internal/infrastructure/database"
+	"highschool-backend/pkg/logger"
 )
 
 // QuotaRepository 名额分配数据仓库接口
@@ -17,6 +18,8 @@ type QuotaRepository interface {
 	GetQuotaDistrictPlan(ctx context.Context, schoolID int32, districtID int32, year int) (int, error)
 	// GetQuotaSchoolPlan 获取名额分配到校计划数
 	GetQuotaSchoolPlan(ctx context.Context, schoolID int32, middleSchoolID int32, year int) (int, error)
+	// GetUnifiedPlan 获取统一招生计划数
+	GetUnifiedPlan(ctx context.Context, schoolID int32, year int) (int, error)
 	// GetDistrictExamCount 获取区县中考人数
 	GetDistrictExamCount(ctx context.Context, districtID int32, year int) (int, error)
 	// GetMiddleSchoolStudentCount 获取初中学校学生人数
@@ -30,6 +33,7 @@ type quotaCache struct {
 	mu                  sync.RWMutex
 	districtQuotas      map[string]int // key: "schoolID_districtID" -> quota
 	schoolQuotas        map[string]int // key: "schoolID_middleSchoolID" -> quota
+	unifiedQuotas       map[int32]int  // key: schoolID -> quota
 	districtExamCounts  map[int32]int  // key: districtID -> count
 	middleSchoolCounts  map[int32]int  // key: middleSchoolID -> count
 	year                int
@@ -48,6 +52,7 @@ func NewQuotaRepository() QuotaRepository {
 		cache: &quotaCache{
 			districtQuotas:     make(map[string]int),
 			schoolQuotas:       make(map[string]int),
+			unifiedQuotas:      make(map[int32]int),
 			districtExamCounts: make(map[int32]int),
 			middleSchoolCounts: make(map[int32]int),
 		},
@@ -63,6 +68,7 @@ func (r *quotaRepo) PreloadCache(ctx context.Context, districtID int32, middleSc
 	if r.cache.year != year {
 		r.cache.districtQuotas = make(map[string]int)
 		r.cache.schoolQuotas = make(map[string]int)
+		r.cache.unifiedQuotas = make(map[int32]int)
 		r.cache.districtExamCounts = make(map[int32]int)
 		r.cache.middleSchoolCounts = make(map[int32]int)
 		r.cache.year = year
@@ -190,6 +196,49 @@ func (r *quotaRepo) GetQuotaSchoolPlan(ctx context.Context, schoolID int32, midd
 	return quota, nil
 }
 
+// GetUnifiedPlan 获取统一招生计划数
+func (r *quotaRepo) GetUnifiedPlan(ctx context.Context, schoolID int32, year int) (int, error) {
+	// 检查缓存
+	r.cache.mu.RLock()
+	if r.cache.year == year {
+		if quota, ok := r.cache.unifiedQuotas[schoolID]; ok {
+			r.cache.mu.RUnlock()
+			return quota, nil
+		}
+	}
+	r.cache.mu.RUnlock()
+
+	// 查询数据库获取统一招生计划数
+	var quota int
+	err := r.db.QueryRow(ctx, `
+		SELECT COALESCE(unified_count, 0)
+		FROM ref_admission_plan_summary
+		WHERE school_id = $1 AND year = $2
+	`, schoolID, year).Scan(&quota)
+	if err != nil {
+		// 如果没有找到，使用默认值并打印警告
+		quota = 100
+		logger.Warn(ctx, "unified plan not found in database, using default value",
+			logger.Int("school_id", int(schoolID)),
+			logger.Int("year", year),
+			logger.Int("default_quota", quota),
+			logger.ErrorField(err),
+		)
+	}
+
+	// 存入缓存
+	r.cache.mu.Lock()
+	if r.cache.year != year {
+		// 年份变了，重置缓存
+		r.cache.unifiedQuotas = make(map[int32]int)
+		r.cache.year = year
+	}
+	r.cache.unifiedQuotas[schoolID] = quota
+	r.cache.mu.Unlock()
+
+	return quota, nil
+}
+
 // GetDistrictExamCount 获取区县中考人数
 func (r *quotaRepo) GetDistrictExamCount(ctx context.Context, districtID int32, year int) (int, error) {
 	// 检查缓存
@@ -210,8 +259,15 @@ func (r *quotaRepo) GetDistrictExamCount(ctx context.Context, districtID int32, 
 		WHERE district_id = $1 AND year = $2
 	`, districtID, year).Scan(&count)
 	if err != nil {
-		// 如果没有数据，返回默认值
-		return 5000, nil
+		// 如果没有数据，返回默认值并打印警告
+		count = 5000
+		logger.Warn(ctx, "district exam count not found in database, using default value",
+			logger.Int("district_id", int(districtID)),
+			logger.Int("year", year),
+			logger.Int("default_count", count),
+			logger.ErrorField(err),
+		)
+		return count, nil
 	}
 
 	// 存入缓存
@@ -232,8 +288,15 @@ func (r *quotaRepo) GetMiddleSchoolStudentCount(ctx context.Context, middleSchoo
 		WHERE id = $1
 	`, middleSchoolID).Scan(&count)
 	if err != nil {
-		// 如果没有数据，返回默认值
-		return 200, nil
+		// 如果没有数据，返回默认值并打印警告
+		count = 200
+		logger.Warn(ctx, "middle school student count not found in database, using default value",
+			logger.Int("middle_school_id", int(middleSchoolID)),
+			logger.Int("year", year),
+			logger.Int("default_count", count),
+			logger.ErrorField(err),
+		)
+		return count, nil
 	}
 	return count, nil
 }

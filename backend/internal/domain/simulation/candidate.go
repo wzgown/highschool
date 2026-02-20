@@ -105,6 +105,7 @@ type CandidateGeneratorInterface interface {
 type QuotaRepository interface {
 	GetQuotaDistrictPlan(ctx context.Context, schoolID int32, districtID int32, year int) (int, error)
 	GetQuotaSchoolPlan(ctx context.Context, schoolID int32, middleSchoolID int32, year int) (int, error)
+	GetUnifiedPlan(ctx context.Context, schoolID int32, year int) (int, error)
 	GetDistrictExamCount(ctx context.Context, districtID int32, year int) (int, error)
 	GetMiddleSchoolStudentCount(ctx context.Context, middleSchoolID int32, year int) (int, error)
 	PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32, year int)

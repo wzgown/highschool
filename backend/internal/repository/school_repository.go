@@ -11,6 +11,7 @@ import (
 
 	highschoolv1 "highschool-backend/gen/highschool/v1"
 	"highschool-backend/internal/infrastructure/database"
+	"highschool-backend/pkg/logger"
 )
 
 // SchoolRankingInfo 学校排名信息（用于竞争对手志愿生成）
@@ -91,6 +92,10 @@ func NewSchoolRepository() SchoolRepository {
 func (r *schoolRepo) getLatestYear(ctx context.Context) int {
 	year, err := r.GetLatestScoreYear(ctx)
 	if err != nil {
+		logger.Warn(ctx, "failed to get latest score year from database, using fallback value",
+			logger.Int("fallback_year", 2024),
+			logger.ErrorField(err),
+		)
 		return 2024 // fallback
 	}
 	return year
@@ -425,9 +430,11 @@ func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, district
 	// 查询该区在统一招生批次可填报的学校
 	// 基于 ref_admission_score_unified 表，该表记录了各区统一招生的学校及其分数线
 	// 使用模糊匹配处理学校名称差异（如 "上海中学" vs "上海市上海中学"）
+	// 按分数线降序排列（好学校在前）
 	rows, err := r.db.Query(ctx, `
 		SELECT DISTINCT s.id, s.full_name, s.code,
-		       CASE WHEN s.district_id = $1 THEN true ELSE false END as is_district_school
+		       CASE WHEN s.district_id = $1 THEN true ELSE false END as is_district_school,
+		       MAX(u.min_score) as cutoff_score
 		FROM ref_school s
 		INNER JOIN ref_admission_score_unified u
 			ON u.school_id = s.id
@@ -435,7 +442,8 @@ func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, district
 			OR s.full_name LIKE '%' || u.school_name || '%'
 			OR u.school_name LIKE '%' || s.short_name || '%'
 		WHERE u.district_id = $1 AND u.year = $2 AND s.is_active = true
-		ORDER BY is_district_school DESC, s.full_name
+		GROUP BY s.id, s.full_name, s.code, s.district_id
+		ORDER BY cutoff_score DESC, is_district_school DESC, s.full_name
 	`, districtID, year-1) // 使用前一年的分数线数据（当年的分数线在录取后才有）
 	if err != nil {
 		return nil, fmt.Errorf("get schools for unified failed: %w", err)
@@ -445,7 +453,8 @@ func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, district
 	var schools []*highschoolv1.SchoolForUnified
 	for rows.Next() {
 		var school highschoolv1.SchoolForUnified
-		err := rows.Scan(&school.Id, &school.FullName, &school.Code, &school.IsDistrictSchool)
+		var cutoffScore *float64 // 用于排序，不需要返回给前端
+		err := rows.Scan(&school.Id, &school.FullName, &school.Code, &school.IsDistrictSchool, &cutoffScore)
 		if err != nil {
 			continue
 		}

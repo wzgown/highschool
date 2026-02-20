@@ -465,55 +465,48 @@ const hasAllSubjectScores = computed(() => store.hasAllSubjectScores);
 const scoreValidation = computed(() => store.scoreValidation);
 const isScoreValid = computed(() => store.isScoreValid);
 
-// 已选择的学校ID集合（用于过滤重复）
-const selectedSchoolIds = computed(() => {
+// 名额分配到校批次已选择的学校ID集合（仅用于本批次内过滤）
+const selectedQuotaSchoolIds = computed(() => {
   const ids = new Set<number>();
-
-  // 名额分配到区
-  if (form.value.volunteers.quotaDistrict) {
-    ids.add(form.value.volunteers.quotaDistrict);
-  }
-
-  // 名额分配到校
   for (const id of form.value.volunteers.quotaSchool) {
     if (id) ids.add(id);
   }
-
-  // 统一招生
-  for (const id of form.value.volunteers.unified) {
-    if (id) ids.add(id);
-  }
-
   return ids;
 });
 
-// 过滤后的名额分配到区学校列表（排除已选择的）
-const filteredQuotaDistrictSchools = computed(() => {
-  const currentSelection = form.value.volunteers.quotaDistrict;
-  return quotaDistrictSchools.value.filter(school =>
-    school.id === currentSelection || !selectedSchoolIds.value.has(school.id)
-  );
+// 统一招生批次已选择的学校ID集合（仅用于本批次内过滤）
+const selectedUnifiedIds = computed(() => {
+  const ids = new Set<number>();
+  for (const id of form.value.volunteers.unified) {
+    if (id) ids.add(id);
+  }
+  return ids;
 });
 
-// 过滤后的名额分配到校学校列表（排除已选择的，但保留当前志愿的选择）
+// 过滤后的名额分配到区学校列表（本批次只有1个志愿，无需过滤）
+const filteredQuotaDistrictSchools = computed(() => {
+  return quotaDistrictSchools.value;
+});
+
+// 过滤后的名额分配到校学校列表（排除本批次内已选择的，但保留当前志愿的选择）
 function getFilteredQuotaSchoolSchools(currentIndex: number) {
   const currentValue = form.value.volunteers.quotaSchool[currentIndex];
   return quotaSchoolSchools.value.filter(school => {
     // 保留当前选择
     if (school.id === currentValue) return true;
-    // 排除已在其他志愿中选择的
-    return !selectedSchoolIds.value.has(school.id);
+    // 排除本批次内已在其他志愿中选择的
+    return !selectedQuotaSchoolIds.value.has(school.id);
   });
 }
 
-// 过滤后的统一招生学校列表（排除已选择的，但保留当前志愿的选择）
+// 过滤后的统一招生学校列表（排除本批次内已选择的，但保留当前志愿的选择）
 function getFilteredUnifiedSchools(currentIndex: number) {
   const currentValue = form.value.volunteers.unified[currentIndex];
   return unifiedSchools.value.filter(school => {
     // 保留当前选择
     if (school.id === currentValue) return true;
-    // 排除已在其他志愿中选择的
-    return !selectedSchoolIds.value.has(school.id);
+    // 排除本批次内已在其他志愿中选择的
+    return !selectedUnifiedIds.value.has(school.id);
   });
 }
 
