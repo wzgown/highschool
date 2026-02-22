@@ -15,6 +15,7 @@ TASKS_DIR="$RALPH_DIR/tasks"
 CURRENT_TASK="$CURRENT_DIR/task.md"
 STOP_HOOK="$SCRIPTS_DIR/stop-hook.sh"
 TASK_TEMPLATE="$TEMPLATES_DIR/task-template.md"
+VERIFY_TEMPLATE="$TEMPLATES_DIR/verify.sh"
 
 # 参数
 MAX_ITERATIONS=${MAX_ITERATIONS:-20}
@@ -68,12 +69,24 @@ EOF
 new_task() {
     local task_name="${1:-task-$(date +%Y%m%d-%H%M%S)}"
     local task_file="$CURRENT_DIR/task.md"
+    local verify_file="$CURRENT_DIR/verify.sh"
+    local verify_template="$TEMPLATES_DIR/verify.sh"
 
+    # 创建任务文件
     cp "$TASK_TEMPLATE" "$task_file"
-    log_ok "已创建新任务: $task_file"
-    log_info "请编辑文件定义成功标准，然后运行: $0"
+
+    # 创建验证脚本
+    cp "$VERIFY_TEMPLATE" "$verify_file"
+    chmod +x "$verify_file"
+
+    log_ok "已创建新任务:"
     echo ""
-    echo "编辑命令: vim $task_file"
+    echo "  任务描述: $task_file"
+    echo "  验证脚本: $verify_file  ⬅️ 必须编辑！"
+    echo ""
+    echo "编辑命令:"
+    echo "  vim $task_file"
+    echo "  vim $verify_file"
 }
 
 # 指定任务文件
@@ -232,7 +245,10 @@ main() {
         # Stop Hook：客观检查
         log_info "Stop Hook: 客观检查..."
 
-        if bash "$STOP_HOOK" 2>&1 | tee "${log_file}.hook"; then
+        bash "$STOP_HOOK" 2>&1 | tee "${log_file}.hook"
+        HOOK_EXIT_CODE=${PIPESTATUS[0]}
+
+        if [ $HOOK_EXIT_CODE -eq 0 ]; then
             log_ok "════════════════════════════════════════════════════════"
             log_ok "🎉 客观标准达成！循环结束"
             log_ok "总循环: $iter"
