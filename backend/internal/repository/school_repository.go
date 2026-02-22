@@ -103,8 +103,16 @@ func (r *schoolRepo) getLatestYear(ctx context.Context) int {
 
 // PreloadCache 预加载缓存
 func (r *schoolRepo) PreloadCache(ctx context.Context, districtID int32, middleSchoolID int32) {
-	// 获取最新年份
-	year := r.getLatestYear(ctx)
+	// 获取不同数据源的年份
+	quotaYear := r.getLatestQuotaYear(ctx)  // 名额分配数据年份
+	scoreYear := r.getLatestYear(ctx)       // 分数线数据年份
+
+	logger.Debug(ctx, "PreloadCache: starting preload",
+		logger.Int("district_id", int(districtID)),
+		logger.Int("middle_school_id", int(middleSchoolID)),
+		logger.Int("quota_year", quotaYear),
+		logger.Int("score_year", scoreYear),
+	)
 
 	// 并发预加载
 	var wg sync.WaitGroup
@@ -112,29 +120,29 @@ func (r *schoolRepo) PreloadCache(ctx context.Context, districtID int32, middleS
 
 	go func() {
 		defer wg.Done()
-		r.getSchoolsWithQuotaDistrictWithCache(ctx, districtID, year)
+		r.getSchoolsWithQuotaDistrictWithCache(ctx, districtID, quotaYear)
 	}()
 
 	go func() {
 		defer wg.Done()
-		r.getSchoolsWithQuotaSchoolWithCache(ctx, middleSchoolID, year)
+		r.getSchoolsWithQuotaSchoolWithCache(ctx, middleSchoolID, quotaYear)
 	}()
 
 	go func() {
 		defer wg.Done()
-		r.getSchoolsForUnifiedWithCache(ctx, districtID, year)
+		r.getSchoolsForUnifiedWithCache(ctx, districtID, scoreYear)
 	}()
 
 	go func() {
 		defer wg.Done()
-		r.getSchoolsByCutoffScoreRankingWithCache(ctx, districtID, year)
+		r.getSchoolsByCutoffScoreRankingWithCache(ctx, districtID, scoreYear)
 	}()
 
 	wg.Wait()
 
 	// 记录缓存年份
 	r.cache.mu.Lock()
-	r.cache.cachedYear = year
+	r.cache.cachedYear = quotaYear
 	r.cache.mu.Unlock()
 }
 
@@ -328,8 +336,8 @@ func (r *schoolRepo) GetSchoolsWithQuotaDistrict(ctx context.Context, districtID
 	}
 	r.cache.mu.RUnlock()
 
-	// 缓存未命中，查询数据库
-	year := r.getLatestYear(ctx)
+	// 缓存未命中，查询数据库（使用名额分配数据的年份，而非分数线年份）
+	year := r.getLatestQuotaYear(ctx)
 	return r.getSchoolsWithQuotaDistrictWithCache(ctx, districtID, year)
 }
 
@@ -342,6 +350,11 @@ func (r *schoolRepo) getSchoolsWithQuotaDistrictWithCache(ctx context.Context, d
 		ORDER BY s.full_name
 	`, districtID, year)
 	if err != nil {
+		logger.Warn(ctx, "getSchoolsWithQuotaDistrictWithCache: query failed",
+			logger.Int("district_id", int(districtID)),
+			logger.Int("year", year),
+			logger.ErrorField(err),
+		)
 		return nil, fmt.Errorf("get schools with quota district failed: %w", err)
 	}
 	defer rows.Close()
@@ -355,6 +368,12 @@ func (r *schoolRepo) getSchoolsWithQuotaDistrictWithCache(ctx context.Context, d
 		}
 		schools = append(schools, &school)
 	}
+
+	logger.Debug(ctx, "getSchoolsWithQuotaDistrictWithCache: query result",
+		logger.Int("district_id", int(districtID)),
+		logger.Int("year", year),
+		logger.Int("schools_count", len(schools)),
+	)
 
 	// 存入缓存
 	r.cache.mu.Lock()
@@ -374,8 +393,8 @@ func (r *schoolRepo) GetSchoolsWithQuotaSchool(ctx context.Context, middleSchool
 	}
 	r.cache.mu.RUnlock()
 
-	// 缓存未命中，查询数据库
-	year := r.getLatestYear(ctx)
+	// 缓存未命中，查询数据库（使用名额分配数据的年份，而非分数线年份）
+	year := r.getLatestQuotaYear(ctx)
 	return r.getSchoolsWithQuotaSchoolWithCache(ctx, middleSchoolID, year)
 }
 
@@ -534,4 +553,20 @@ func (r *schoolRepo) GetLatestScoreYear(ctx context.Context) (int, error) {
 		return 2024, fmt.Errorf("get latest score year failed: %w", err)
 	}
 	return year, nil
+}
+
+// getLatestQuotaYear 获取最新的名额分配数据年份
+func (r *schoolRepo) getLatestQuotaYear(ctx context.Context) int {
+	var year int
+	err := r.db.QueryRow(ctx, `
+		SELECT COALESCE(MAX(year), 2025) FROM ref_quota_allocation_district
+	`).Scan(&year)
+	if err != nil {
+		logger.Warn(ctx, "failed to get latest quota year from database, using fallback value",
+			logger.Int("fallback_year", 2025),
+			logger.ErrorField(err),
+		)
+		return 2025
+	}
+	return year
 }

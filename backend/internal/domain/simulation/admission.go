@@ -4,6 +4,8 @@ package simulation
 import (
 	"context"
 	"sort"
+
+	"highschool-backend/pkg/logger"
 )
 
 // AdmissionBatch 录取批次类型
@@ -263,6 +265,15 @@ func (r *UnifiedRule) Execute(ctx context.Context, candidates []*Candidate) []Ad
 		for rank, cs := range districtCands {
 			c := cs.candidate
 			admitted := false
+
+			// 记录真实考生的排序位置（用于调试）
+			if c.IsRealCandidate {
+				logger.Info(ctx, "real candidate position in unified admission",
+					logger.Int("rank", rank+1),
+					logger.Float64("score750", cs.score750),
+					logger.Int("volunteer_count", len(c.UnifiedSchoolIDs)),
+				)
+			}
 
 			// 遍历考生的15个志愿（平行志愿）
 			for _, schoolID := range c.UnifiedSchoolIDs {

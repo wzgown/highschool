@@ -3,6 +3,7 @@ package simulation
 
 import (
 	"context"
+	"math/rand"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -102,13 +103,14 @@ func TestStrategyVolunteerGenerator_GenerateUnifiedVolunteers(t *testing.T) {
 	// 创建志愿生成器
 	mockRepo := &mockSchoolRepoForVolunteer{}
 	generator := NewStrategyVolunteerGenerator(mockRepo)
+	rng := rand.New(rand.NewSource(12345)) // 使用固定种子确保测试可重复
 
 	t.Run("should generate volunteers with reach-target-safety strategy for high score", func(t *testing.T) {
 		// 高分考生：700分
 		// 应该冲：710+的学校（分数线高于700分5-15分）
 		// 应该稳：695-705的学校
 		// 应该保：680-695的学校
-		volunteers := generator.GenerateUnifiedVolunteers(ctx, 700, districtID)
+		volunteers := generator.GenerateUnifiedVolunteers(ctx, 700, districtID, rng)
 
 		assert.NotEmpty(t, volunteers, "should generate volunteers")
 		assert.LessOrEqual(t, len(volunteers), 15, "should not exceed 15 volunteers")
@@ -119,7 +121,7 @@ func TestStrategyVolunteerGenerator_GenerateUnifiedVolunteers(t *testing.T) {
 
 	t.Run("should generate volunteers with reach-target-safety strategy for medium score", func(t *testing.T) {
 		// 中等分数：660分
-		volunteers := generator.GenerateUnifiedVolunteers(ctx, 660, districtID)
+		volunteers := generator.GenerateUnifiedVolunteers(ctx, 660, districtID, rng)
 
 		assert.NotEmpty(t, volunteers, "should generate volunteers")
 		assert.LessOrEqual(t, len(volunteers), 15, "should not exceed 15 volunteers")
@@ -129,7 +131,7 @@ func TestStrategyVolunteerGenerator_GenerateUnifiedVolunteers(t *testing.T) {
 
 	t.Run("should generate volunteers with reach-target-safety strategy for low score", func(t *testing.T) {
 		// 低分考生：620分
-		volunteers := generator.GenerateUnifiedVolunteers(ctx, 620, districtID)
+		volunteers := generator.GenerateUnifiedVolunteers(ctx, 620, districtID, rng)
 
 		assert.NotEmpty(t, volunteers, "should generate volunteers")
 		assert.LessOrEqual(t, len(volunteers), 15, "should not exceed 15 volunteers")
@@ -144,9 +146,10 @@ func TestStrategyVolunteerGenerator_GenerateQuotaDistrictVolunteer(t *testing.T)
 
 	mockRepo := &mockSchoolRepoForVolunteer{}
 	generator := NewStrategyVolunteerGenerator(mockRepo)
+	rng := rand.New(rand.NewSource(12345))
 
 	t.Run("should generate quota district volunteer", func(t *testing.T) {
-		volunteer := generator.GenerateQuotaDistrictVolunteer(ctx, 680, districtID)
+		volunteer := generator.GenerateQuotaDistrictVolunteer(ctx, 680, districtID, rng)
 
 		// 注意：由于mock没有实现GetSchoolsWithQuotaDistrict，这里会返回nil
 		// 在实际环境中会返回一个学校ID
@@ -161,17 +164,61 @@ func TestStrategyVolunteerGenerator_GenerateQuotaSchoolVolunteers(t *testing.T) 
 
 	mockRepo := &mockSchoolRepoForVolunteer{}
 	generator := NewStrategyVolunteerGenerator(mockRepo)
+	rng := rand.New(rand.NewSource(12345))
 
 	t.Run("should return nil if no eligibility", func(t *testing.T) {
-		volunteers := generator.GenerateQuotaSchoolVolunteers(ctx, 680, districtID, middleSchoolID, false)
+		volunteers := generator.GenerateQuotaSchoolVolunteers(ctx, 680, districtID, middleSchoolID, false, rng)
 		assert.Nil(t, volunteers, "should return nil if no eligibility")
 	})
 
 	t.Run("should generate quota school volunteers if has eligibility", func(t *testing.T) {
-		volunteers := generator.GenerateQuotaSchoolVolunteers(ctx, 680, districtID, middleSchoolID, true)
+		volunteers := generator.GenerateQuotaSchoolVolunteers(ctx, 680, districtID, middleSchoolID, true, rng)
 
 		// 注意：由于mock没有实现GetSchoolsWithQuotaSchool，这里会返回nil
 		// 在实际环境中会返回最多2个学校ID
 		t.Logf("Generated quota school volunteers: %v", volunteers)
 	})
+}
+
+// TestVolunteerGeneratorRandomness 验证志愿生成的随机性
+// 多次调用应该产生不同的志愿组合
+func TestVolunteerGeneratorRandomness(t *testing.T) {
+	ctx := context.Background()
+	districtID := int32(7)
+	mockRepo := &mockSchoolRepoForVolunteer{}
+	generator := NewStrategyVolunteerGenerator(mockRepo)
+
+	// 生成 100 次志愿，统计多样性
+	volunteerSets := make(map[string]int) // 用于统计不同的志愿组合
+	score := 680.0
+
+	for i := 0; i < 100; i++ {
+		rng := rand.New(rand.NewSource(int64(i + 1))) // 不同的种子
+		volunteers := generator.GenerateUnifiedVolunteers(ctx, score, districtID, rng)
+
+		// 将志愿转换为字符串作为 key
+		key := ""
+		for _, v := range volunteers {
+			key += string(rune(v))
+		}
+		volunteerSets[key]++
+	}
+
+	t.Logf("Generated %d unique volunteer combinations out of 100 simulations", len(volunteerSets))
+
+	// 验证：应该有多个不同的志愿组合
+	// 如果所有志愿都一样，说明随机性不足
+	assert.Greater(t, len(volunteerSets), 1, "should generate more than 1 unique volunteer combination")
+
+	// 统计最常见的志愿组合
+	maxCount := 0
+	for _, count := range volunteerSets {
+		if count > maxCount {
+			maxCount = count
+		}
+	}
+	t.Logf("Most common combination appeared %d times", maxCount)
+
+	// 最常见的组合不应该超过 50%（否则随机性太低）
+	assert.LessOrEqual(t, maxCount, 50, "no single combination should dominate")
 }

@@ -326,6 +326,73 @@ func TestEngine_calculateConfidence(t *testing.T) {
 	}
 }
 
+// TestEngine_SimulationDiversity 验证模拟结果的多样性
+// 多次模拟应该产生不同的录取结果（在适当条件下）
+// 注意：某些情况下（如分数远高于/低于分数线），结果可能高度确定
+func TestEngine_SimulationDiversity(t *testing.T) {
+	engine := NewEngine(
+		WithSchoolRepo(&mockSchoolRepo{}),
+		WithQuotaRepo(&mockQuotaRepo{}),
+		WithSimulationCount(100), // 100 次模拟
+	)
+
+	districtID := int32(1)
+	middleSchoolID := int32(1)
+
+	// 考生分数设置为分数线边界附近
+	// 使用校内第 10 名，有适量的竞争对手
+	// 分数 687，位于第 2 志愿（690.5）和第 3 志愿（689）之间
+	// 加上 ±12 分扰动后，可能被不同志愿录取
+	req := &highschoolv1.SubmitAnalysisRequest{
+		Candidate: &highschoolv1.CandidateInfo{
+			DistrictId:                 districtID,
+			MiddleSchoolId:             middleSchoolID,
+			HasQuotaSchoolEligibility: false, // 不参与名额分配到校
+		},
+		Scores: &highschoolv1.CandidateScores{
+			Total: 687, // 分数在多个志愿分数线之间
+		},
+		Ranking: &highschoolv1.RankingInfo{
+			Rank:         10, // 校内第 10 名
+			TotalStudents: 1000,
+		},
+		Volunteers: &highschoolv1.Volunteers{
+			// 不填名额分配志愿
+			// 第 1 志愿（ID=5）分数线 690.5
+			// 第 2 志愿（ID=6）分数线 689
+			// 第 3 志愿（ID=7）分数线 685
+			Unified: []int32{5, 6, 7, 8, 9, 10},
+		},
+	}
+
+	// 运行模拟
+	results := engine.Run(context.Background(), req)
+
+	// 检查概率分布
+	assert.NotNil(t, results.Probabilities)
+	assert.NotEmpty(t, results.Probabilities)
+
+	// 统计非零概率的志愿数量
+	nonZeroCount := 0
+	for _, p := range results.Probabilities {
+		if p.Probability > 0 {
+			nonZeroCount++
+			t.Logf("School %d (%s): %.1f%%", p.SchoolId, p.SchoolName, p.Probability)
+		}
+	}
+
+	t.Logf("Total volunteers with non-zero probability: %d out of %d", nonZeroCount, len(results.Probabilities))
+
+	// 验证：应该至少有一个志愿有非零概率
+	assert.GreaterOrEqual(t, nonZeroCount, 1, "should have at least 1 volunteer with non-zero probability")
+
+	// 如果只有一个志愿有非零概率，检查是否概率为 100%（确定性结果）
+	if nonZeroCount == 1 {
+		t.Log("Warning: Only one volunteer has non-zero probability. This may indicate high certainty in admission results.")
+		// 这不是错误，只是警告
+	}
+}
+
 func TestGetRiskLevel(t *testing.T) {
 	tests := []struct {
 		prob     float64

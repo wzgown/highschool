@@ -4,6 +4,7 @@ package simulation
 import (
 	"context"
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
 
@@ -225,8 +226,10 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 		logger.Int("competitor_count", competitorCount),
 	)
 
-	// 使用随机分数生成器
-	gen := NewRandomScoreGenerator(int64(realCandidate.TotalScore * 1000))
+	// 使用随机分数生成器（加入时间戳确保每次请求的随机性）
+	seed := time.Now().UnixNano() + int64(realCandidate.TotalScore*1000)
+	gen := NewRandomScoreGenerator(seed)
+	rng := rand.New(rand.NewSource(seed)) // 用于志愿生成
 
 	// 计算分数分布参数
 	// 假设全区分数服从正态分布，根据考生排名推算其分数在分布中的位置
@@ -300,14 +303,14 @@ func (e *Engine) generateCompetitors(ctx context.Context, realCandidate *Candida
 		// 使用志愿生成器生成符合冲稳保策略的志愿
 		if e.volunteerGenerator != nil {
 			// 生成统一招生志愿（1-15志愿）
-			competitors[i].UnifiedSchoolIDs = e.volunteerGenerator.GenerateUnifiedVolunteers(ctx, totalScore750, realCandidate.DistrictID)
+			competitors[i].UnifiedSchoolIDs = e.volunteerGenerator.GenerateUnifiedVolunteers(ctx, totalScore750, realCandidate.DistrictID, rng)
 
 			// 生成名额分配到区志愿
-			competitors[i].QuotaDistrictSchoolID = e.volunteerGenerator.GenerateQuotaDistrictVolunteer(ctx, totalScore750, realCandidate.DistrictID)
+			competitors[i].QuotaDistrictSchoolID = e.volunteerGenerator.GenerateQuotaDistrictVolunteer(ctx, totalScore750, realCandidate.DistrictID, rng)
 
 			// 生成名额分配到校志愿
 			competitors[i].QuotaSchoolIDs = e.volunteerGenerator.GenerateQuotaSchoolVolunteers(
-				ctx, totalScore750, realCandidate.DistrictID, realCandidate.MiddleSchoolID, hasQuotaSchoolEligible)
+				ctx, totalScore750, realCandidate.DistrictID, realCandidate.MiddleSchoolID, hasQuotaSchoolEligible, rng)
 		} else {
 			// 回退到旧的逻辑：使用考生的志愿
 			if req.Volunteers.QuotaDistrict != nil {
@@ -333,6 +336,13 @@ func (e *Engine) runSimulations(ctx context.Context, realCandidate *Candidate, c
 	admissionCounts := make(map[string]int) // key: "批次_学校ID"
 	totalSimulations := e.simulationCount
 
+	// 时间种子：确保每次请求的模拟结果不同
+	baseSeed := time.Now().UnixNano()
+	logger.Debug(ctx, "simulation seeds generated",
+		logger.Int64("base_seed", baseSeed),
+		logger.Int("simulation_count", totalSimulations),
+	)
+
 	// 并发执行模拟
 	var wg sync.WaitGroup
 	var mu sync.Mutex
@@ -340,16 +350,18 @@ func (e *Engine) runSimulations(ctx context.Context, realCandidate *Candidate, c
 	// 限制并发数
 	sem := make(chan struct{}, 10) // 最多10个并发
 
-	// 每次模拟使用不同的随机种子
+	// 每次模拟使用不同的随机种子（时间种子 + 模拟序号）
 	for sim := 0; sim < totalSimulations; sim++ {
 		wg.Add(1)
-		go func(seed int) {
+		go func(simIndex int) {
 			defer wg.Done()
 			sem <- struct{}{}
 			defer func() { <-sem }()
 
-			// 复制考生数据（避免并发修改）
-			candidates := e.cloneCandidates(realCandidate, competitors, seed)
+			// 种子 = 时间种子 + 模拟序号（确保每次请求、每次模拟都不同）
+			seed := int(baseSeed) + simIndex
+			candidates := e.cloneCandidates(ctx, realCandidate, competitors, seed, req)
+
 
 			// 创建模拟器并执行
 			simulator := NewSimulator(e.quotaRepo, 2025)
@@ -366,6 +378,33 @@ func (e *Engine) runSimulations(ctx context.Context, realCandidate *Candidate, c
 	}
 	wg.Wait()
 
+	// 调试：打印录取结果分布和竞争对手统计
+	// 统计各学校被填报的情况
+	school1Count := 0  // 上海中学
+	school4Count := 0  // 华师大二附中
+	school123Count := 0 // 第3志愿学校
+	for _, c := range competitors {
+		for _, sid := range c.UnifiedSchoolIDs {
+			if sid == 1 {
+				school1Count++
+			}
+			if sid == 4 {
+				school4Count++
+			}
+			if sid == 123 {
+				school123Count++
+			}
+		}
+	}
+	logger.Info(ctx, "simulation admission results",
+		logger.Int("unique_schools", len(admissionCounts)),
+		logger.Any("distribution", admissionCounts),
+		logger.Float64("original_score", realCandidate.TotalScore),
+		logger.Int("competitors_with_school1", school1Count),
+		logger.Int("competitors_with_school4", school4Count),
+		logger.Int("competitors_with_school123", school123Count),
+	)
+
 	logger.Debug(ctx, "runSimulations completed",
 		logger.Int("unique_admission_results", len(admissionCounts)),
 	)
@@ -374,21 +413,68 @@ func (e *Engine) runSimulations(ctx context.Context, realCandidate *Candidate, c
 	return e.calculateVolunteerProbabilities(ctx, req, admissionCounts, totalSimulations)
 }
 
-// cloneCandidates 复制考生数据并添加随机扰动
-func (e *Engine) cloneCandidates(realCandidate *Candidate, competitors []*Candidate, seed int) []*Candidate {
+// cloneCandidates 复制考生数据、添加随机扰动、重新生成志愿
+// 志愿的变化是蒙特卡洛模拟的核心不确定因素
+// 分数的微小扰动模拟考试发挥的随机性
+func (e *Engine) cloneCandidates(ctx context.Context, realCandidate *Candidate, competitors []*Candidate, seed int, req *highschoolv1.SubmitAnalysisRequest) []*Candidate {
 	gen := NewRandomScoreGenerator(int64(seed))
+	// 创建用于志愿生成的随机源（使用相同种子确保可重复性）
+	rng := rand.New(rand.NewSource(int64(seed)))
 
-	// 复制真实考生
+	logger.Debug(ctx, "cloneCandidates called",
+		logger.Int("seed", seed),
+		logger.Bool("has_volunteer_generator", e.volunteerGenerator != nil),
+	)
+
+	// 复制真实考生（保持原志愿不变，但分数加入较大扰动）
+	// 使用正态分布扰动，标准差12分，与竞争对手一致
+	// 这样可以模拟考试发挥的不确定性，产生不同的录取结果
 	realCopy := *realCandidate
-	// 添加小扰动模拟分数波动
-	realCopy.TotalScore += gen.GenerateRandomScore(-5, 5)
+	scorePerturbation := gen.GenerateNormalScore(0, 12)
+	realCopy.TotalScore += scorePerturbation // 正态分布，标准差12分
+
+	// 使用 simIndex 来控制日志输出（需要传入）
+	// 这里通过 seed 的低位来判断
+	simIndex := seed % 1000 // 简单提取 simIndex
+	if simIndex < 3 {
+		logger.Info(ctx, "score perturbation",
+			logger.Int("sim_index", simIndex),
+			logger.Float64("perturbation", scorePerturbation),
+			logger.Float64("perturbed_score", realCopy.TotalScore),
+			logger.Float64("original_score", realCandidate.TotalScore),
+		)
+	}
 
 	candidates := []*Candidate{&realCopy}
 
-	// 复制竞争对手
+	// 复制竞争对手并重新生成志愿（核心：志愿的不确定性）
 	for _, c := range competitors {
 		competitorCopy := *c
-		competitorCopy.TotalScore += gen.GenerateRandomScore(-5, 5)
+
+		// 分数扰动（模拟考试发挥的随机性）
+		// 使用较大的标准差以产生更真实的模拟结果
+		// 这意味着约68%的考生分数波动在±12分内，约95%在±24分内
+		competitorCopy.TotalScore += gen.GenerateNormalScore(0, 12) // 正态分布，标准差12分
+
+		// 重新生成志愿 - 这是蒙特卡洛模拟的关键
+		if e.volunteerGenerator != nil {
+			// 使用750分制生成分数（扰动后）
+			score750 := competitorCopy.TotalScore - competitorCopy.ComprehensiveQuality
+			competitorCopy.UnifiedSchoolIDs = e.volunteerGenerator.GenerateUnifiedVolunteers(ctx, score750, competitorCopy.DistrictID, rng)
+			competitorCopy.QuotaDistrictSchoolID = e.volunteerGenerator.GenerateQuotaDistrictVolunteer(ctx, score750, competitorCopy.DistrictID, rng)
+			competitorCopy.QuotaSchoolIDs = e.volunteerGenerator.GenerateQuotaSchoolVolunteers(
+				ctx, score750, competitorCopy.DistrictID, competitorCopy.MiddleSchoolID, competitorCopy.HasQuotaSchoolEligible, rng)
+		} else {
+			// 回退：使用考生的志愿
+			if req.Volunteers.QuotaDistrict != nil {
+				if gen.GenerateRandomScore(0, 1) > 0.5 {
+					competitorCopy.QuotaDistrictSchoolID = req.Volunteers.QuotaDistrict
+				} else {
+					competitorCopy.QuotaDistrictSchoolID = nil
+				}
+			}
+		}
+
 		candidates = append(candidates, &competitorCopy)
 	}
 
