@@ -68,8 +68,8 @@ const defaultState = (): CandidateForm => ({
   comprehensiveQuality: 50,
   volunteers: {
     quotaDistrict: null,
-    quotaSchool: [],
-    unified: [],
+    quotaSchool: [0, 0],  // 默认显示2个志愿输入框
+    unified: Array(15).fill(0),  // 默认显示15个志愿输入框
   },
 });
 

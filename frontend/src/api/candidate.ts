@@ -47,8 +47,8 @@ export async function formatFormToRequest(form: ReturnType<typeof useCandidateSt
     comprehensiveQuality: form.comprehensiveQuality,
     volunteers: {
       quotaDistrict: form.volunteers.quotaDistrict ?? undefined,
-      quotaSchool: form.volunteers.quotaSchool.slice(0, 2),
-      unified: form.volunteers.unified.slice(0, 15),
+      quotaSchool: form.volunteers.quotaSchool.filter(id => id !== 0).slice(0, 2),
+      unified: form.volunteers.unified.filter(id => id !== 0).slice(0, 15),
     },
     deviceId,
   };

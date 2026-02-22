@@ -323,21 +323,13 @@
                 />
               </el-select>
               <el-button
-                type="danger"
-                :icon="Delete"
+                v-if="form.volunteers.quotaSchool[index]"
+                type="info"
+                :icon="CircleClose"
                 circle
-                @click="removeVolunteer('quotaSchool', index)"
+                @click="clearVolunteer('quotaSchool', index)"
               />
             </div>
-            <el-button
-              v-if="form.volunteers.quotaSchool.length < 2"
-              type="primary"
-              plain
-              :icon="Plus"
-              @click="addVolunteer('quotaSchool')"
-            >
-              添加志愿
-            </el-button>
             <div v-if="quotaSchoolSchools.length === 0 && !highSchoolsLoading && form.hasQuotaSchoolEligibility" class="form-tip quota-warning">
               <el-icon><Warning /></el-icon>
               <span>您所在初中暂无名额分配到校数据，可能数据尚未录入或该校今年无名额分配到校计划。您仍可填报统一招生志愿。</span>
@@ -378,21 +370,13 @@
                 />
               </el-select>
               <el-button
-                type="danger"
-                :icon="Delete"
+                v-if="form.volunteers.unified[index]"
+                type="info"
+                :icon="CircleClose"
                 circle
-                @click="removeVolunteer('unified', index)"
+                @click="clearVolunteer('unified', index)"
               />
             </div>
-            <el-button
-              v-if="form.volunteers.unified.length < 15"
-              type="primary"
-              plain
-              :icon="Plus"
-              @click="addVolunteer('unified')"
-            >
-              添加志愿 ({{ form.volunteers.unified.length }}/15)
-            </el-button>
           </div>
         </div>
       </el-card>
@@ -427,7 +411,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { User, Document, List, Plus, Delete, Rank, Warning } from '@element-plus/icons-vue';
+import { User, Document, List, CircleClose, Rank, Warning } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { pinyin } from 'pinyin-pro';
 import { useCandidateStore } from '@/stores/candidate';
@@ -529,11 +513,11 @@ const canNext = computed(() => {
 });
 
 const canSubmit = computed(() => {
-  const hasVolunteers =
-    form.value.volunteers.quotaDistrict !== null ||
-    form.value.volunteers.quotaSchool.length > 0 ||
-    form.value.volunteers.unified.length > 0;
-  return hasVolunteers;
+  // 检查是否有有效志愿（非0值）
+  const hasQuotaDistrict = form.value.volunteers.quotaDistrict !== null;
+  const hasQuotaSchool = form.value.volunteers.quotaSchool.some(id => id !== 0);
+  const hasUnified = form.value.volunteers.unified.some(id => id !== 0);
+  return hasQuotaDistrict || hasQuotaSchool || hasUnified;
 });
 
 // 方法
@@ -642,6 +626,17 @@ function addVolunteer(batch: 'quotaDistrict' | 'quotaSchool' | 'unified') {
 
 function removeVolunteer(batch: 'quotaDistrict' | 'quotaSchool' | 'unified', index?: number) {
   store.removeVolunteer(batch, index);
+}
+
+// 清空指定位置的志愿（不移除输入框）
+function clearVolunteer(batch: 'quotaDistrict' | 'quotaSchool' | 'unified', index?: number) {
+  if (batch === 'quotaDistrict') {
+    form.value.volunteers.quotaDistrict = null;
+  } else if (batch === 'quotaSchool' && index !== undefined) {
+    form.value.volunteers.quotaSchool[index] = 0;
+  } else if (batch === 'unified' && index !== undefined) {
+    form.value.volunteers.unified[index] = 0;
+  }
 }
 
 // 拖拽排序方法
