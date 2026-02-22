@@ -142,6 +142,9 @@ archive_task() {
 # 自动归档（任务完成后调用）
 auto_archive() {
     local total_iterations="$1"
+    local current_dir="$RALPH_DIR/current"
+    local verify_script="$current_dir/verify.sh"
+    local log_dir="$RALPH_DIR/logs"
 
     # 从 task.md 提取任务名称
     local task_name=$(grep "^# 任务：" "$CURRENT_TASK" | head -1 | sed 's/^# 任务：//' | tr -d '[:space:]')
@@ -156,11 +159,16 @@ auto_archive() {
     # 复制任务文件
     cp "$CURRENT_TASK" "$archive_dir/task.md"
 
-    # 复制相关日志
-    local log_dir="$RALPH_DIR/logs"
+    # 复制验证脚本
+    if [ -f "$verify_script" ]; then
+        cp "$verify_script" "$archive_dir/verify.sh"
+    fi
+
+    # 复制相关日志（包括 .log 和 .hook 文件）
     if [ -d "$log_dir" ]; then
         mkdir -p "$archive_dir/logs"
         cp "$log_dir"/*.log "$archive_dir/logs/" 2>/dev/null || true
+        cp "$log_dir"/*.hook "$archive_dir/logs/" 2>/dev/null || true
     fi
 
     # 创建归档摘要
@@ -172,10 +180,16 @@ auto_archive() {
 - 总循环次数: $total_iterations
 - 状态: ✅ 完成
 
+## 文件清单
+
+- task.md - 任务描述
+- verify.sh - 验证脚本
+- logs/ - 循环日志
+
 EOF
 
     # 清理当前任务
-    rm "$CURRENT_TASK"
+    rm -f "$CURRENT_TASK" "$verify_script"
 
     log_ok "📁 已自动归档: $archive_dir"
 
