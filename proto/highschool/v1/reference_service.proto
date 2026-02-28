@@ -1,0 +1,248 @@
+syntax = "proto3";
+
+package highschool.v1;
+
+option go_package = "github.com/highschool/backend/gen/highschool/v1;highschoolv1";
+
+import "highschool/v1/district.proto";
+import "highschool/v1/school.proto";
+
+// 参考数据服务
+service ReferenceService {
+  // 获取区县列表
+  rpc GetDistricts(GetDistrictsRequest) returns (GetDistrictsResponse);
+
+  // 获取初中学校列表
+  rpc GetMiddleSchools(GetMiddleSchoolsRequest) returns (GetMiddleSchoolsResponse);
+
+  // 获取高中学校列表
+  rpc GetSchools(GetSchoolsRequest) returns (GetSchoolsResponse);
+
+  // 获取学校详情
+  rpc GetSchoolDetail(GetSchoolDetailRequest) returns (GetSchoolDetailResponse);
+
+  // 获取历年分数线
+  rpc GetHistoryScores(GetHistoryScoresRequest) returns (GetHistoryScoresResponse);
+
+  // 获取各区中考人数
+  rpc GetDistrictExamCount(GetDistrictExamCountRequest) returns (GetDistrictExamCountResponse);
+
+  // 获取有名额分配到区的高中列表（按学生所在区过滤）
+  rpc GetSchoolsWithQuotaDistrict(GetSchoolsWithQuotaDistrictRequest) returns (GetSchoolsWithQuotaDistrictResponse);
+
+  // 获取有名额分配到校的高中列表（按学生初中过滤）
+  rpc GetSchoolsWithQuotaSchool(GetSchoolsWithQuotaSchoolRequest) returns (GetSchoolsWithQuotaSchoolResponse);
+
+  // 获取统一招生（1-15志愿）可选学校列表（本区学校 + 面向全市招生的学校）
+  rpc GetSchoolsForUnified(GetSchoolsForUnifiedRequest) returns (GetSchoolsForUnifiedResponse);
+
+  // 获取志愿推荐（基于一模/二模成绩）
+  rpc GetVolunteerRecommendations(GetVolunteerRecommendationsRequest) returns (GetVolunteerRecommendationsResponse);
+}
+
+// 获取区县列表请求
+message GetDistrictsRequest {}
+
+// 获取区县列表响应
+message GetDistrictsResponse {
+  repeated District districts = 1;
+}
+
+// 获取初中学校列表请求
+message GetMiddleSchoolsRequest {
+  optional int32 district_id = 1;
+}
+
+// 获取初中学校列表响应
+message GetMiddleSchoolsResponse {
+  repeated MiddleSchool middle_schools = 1;
+}
+
+// 获取高中学校列表请求
+message GetSchoolsRequest {
+  optional int32 district_id = 1;
+  optional string school_type_id = 2;
+  optional string school_nature_id = 3;
+  optional bool has_international_course = 4;
+  optional string keyword = 5;
+  int32 page = 6;
+  int32 page_size = 7;
+}
+
+// 获取高中学校列表响应
+message GetSchoolsResponse {
+  repeated School schools = 1;
+  PaginationMeta meta = 2;
+}
+
+// 获取学校详情请求
+message GetSchoolDetailRequest {
+  int32 id = 1;
+}
+
+// 获取学校详情响应
+message GetSchoolDetailResponse {
+  SchoolDetail school = 1;
+}
+
+// 获取历年分数线请求
+message GetHistoryScoresRequest {
+  optional int32 district_id = 1;
+  optional int32 school_id = 2;
+  optional int32 year = 3;
+}
+
+// 获取历年分数线响应
+message GetHistoryScoresResponse {
+  repeated HistoryScore scores = 1;
+}
+
+// 获取各区中考人数请求
+message GetDistrictExamCountRequest {
+  int32 year = 1;
+}
+
+// 获取各区中考人数项
+message DistrictExamCountItem {
+  int32 district_id = 1;
+  string district_name = 2;
+  int32 exam_count = 3;
+}
+
+// 获取各区中考人数响应
+message GetDistrictExamCountResponse {
+  int32 year = 1;
+  repeated DistrictExamCountItem districts = 2;
+}
+
+// 获取有名额分配到区的高中列表请求
+message GetSchoolsWithQuotaDistrictRequest {
+  int32 district_id = 1;  // 学生所在区
+  int32 year = 2;         // 年份
+}
+
+// 获取有名额分配到区的高中列表响应
+message GetSchoolsWithQuotaDistrictResponse {
+  repeated SchoolWithQuota schools = 1;
+}
+
+// 获取有名额分配到校的高中列表请求
+message GetSchoolsWithQuotaSchoolRequest {
+  int32 middle_school_id = 1;  // 学生所在初中
+  int32 year = 2;               // 年份
+}
+
+// 获取有名额分配到校的高中列表响应
+message GetSchoolsWithQuotaSchoolResponse {
+  repeated SchoolWithQuota schools = 1;
+}
+
+// 获取统一招生（1-15志愿）可选学校列表请求
+message GetSchoolsForUnifiedRequest {
+  int32 district_id = 1;  // 学生所在区
+  int32 year = 2;         // 年份
+}
+
+// 获取统一招生（1-15志愿）可选学校列表响应
+message GetSchoolsForUnifiedResponse {
+  repeated SchoolForUnified schools = 1;
+}
+
+// 统一招生学校信息
+message SchoolForUnified {
+  int32 id = 1;
+  string full_name = 2;
+  string code = 3;
+  bool is_district_school = 4;  // 是否为本区学校（vs 面向全市招生的学校）
+}
+
+// 带名额信息的学校
+message SchoolWithQuota {
+  int32 id = 1;
+  string full_name = 2;
+  string code = 3;
+  int32 quota_count = 4;  // 名额数量
+}
+
+// 考试类型枚举
+enum ExamType {
+  EXAM_TYPE_UNSPECIFIED = 0;
+  EXAM_TYPE_FIRST_MOCK = 1;   // 一模
+  EXAM_TYPE_SECOND_MOCK = 2;  // 二模
+}
+
+// 推荐置信度枚举
+enum RecommendationConfidence {
+  RECOMMENDATION_CONFIDENCE_UNSPECIFIED = 0;
+  RECOMMENDATION_CONFIDENCE_HIGH = 1;     // 高置信度（分数差距 > 15分）
+  RECOMMENDATION_CONFIDENCE_MEDIUM = 2;   // 中置信度（分数差距 5-15分）
+  RECOMMENDATION_CONFIDENCE_LOW = 3;      // 低置信度（分数差距 < 5分或负分）
+}
+
+// 推荐类型枚举
+enum RecommendationType {
+  RECOMMENDATION_TYPE_UNSPECIFIED = 0;
+  RECOMMENDATION_TYPE_REACH = 1;    // 冲刺
+  RECOMMENDATION_TYPE_TARGET = 2;   // 稳妥
+  RECOMMENDATION_TYPE_SAFETY = 3;   // 保底
+}
+
+// 各科成绩（用于同分比较）
+message SubjectScores {
+  float chinese = 1;           // 语文
+  float math = 2;              // 数学
+  float english = 3;           // 英语
+  float physics = 4;           // 物理
+  float chemistry = 5;         // 化学
+  float cross_subject = 6;     // 跨学科
+  float morality = 7;          // 道德与法治
+  float history = 8;           // 历史
+  float pe = 9;                // 体育
+  float comprehensive = 10;    // 综合（物理+化学+跨学科）
+}
+
+// 分数转换说明
+message ScoreConversion {
+  float original_score = 1;              // 原始一模/二模分数
+  float original_total = 2;              // 该区一模/二模总分
+  float converted_score_750 = 3;         // 转换后的750分制分数
+  float converted_score_800 = 4;         // 转换后的800分制分数（含综合素质50分）
+  int32 estimated_rank = 5;              // 估算区排名
+  float estimated_percentile = 6;        // 估算百分位
+  string district_name = 7;              // 区名称
+  int32 district_exam_count = 8;         // 区中考人数
+}
+
+// 推荐学校
+message RecommendedSchool {
+  int32 school_id = 1;
+  string school_name = 2;
+  string school_code = 3;
+  float estimated_score = 4;             // 预估录取分数线
+  float score_gap = 5;                   // 与考生分数的差距（正数表示高于分数线）
+  RecommendationConfidence confidence = 6;  // 录取置信度
+  RecommendationType recommendation_type = 7;  // 推荐类型（冲刺/稳妥/保底）
+  string recommendation_reason = 8;      // 推荐理由
+  int32 quota_count = 9;                 // 名额数量（可选）
+  bool is_district_school = 10;          // 是否为本区学校
+}
+
+// 获取志愿推荐请求
+message GetVolunteerRecommendationsRequest {
+  int32 district_id = 1;                      // 学生所在区（必填）
+  optional int32 middle_school_id = 2;        // 学生所在初中（用于名额到校）
+  ExamType exam_type = 3;                     // 考试类型（一模/二模）
+  float total_score = 4;                      // 一模/二模总分
+  optional SubjectScores subject_scores = 5;  // 各科成绩（用于同分比较）
+  bool has_quota_school_eligibility = 6;      // 是否有名额到校资格
+  optional int32 year = 7;                    // 数据年份（默认使用最新年份）
+}
+
+// 获取志愿推荐响应
+message GetVolunteerRecommendationsResponse {
+  repeated RecommendedSchool quota_district_recommendations = 1;  // 名额到区推荐（最多1所）
+  repeated RecommendedSchool quota_school_recommendations = 2;    // 名额到校推荐（最多2所）
+  repeated RecommendedSchool unified_recommendations = 3;         // 统一招生推荐（最多15所）
+  ScoreConversion score_conversion = 4;                          // 分数转换说明
+  int32 year = 5;                                                // 使用的分数线数据年份
+}

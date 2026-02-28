@@ -1,0 +1,36 @@
+version: v2
+
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: highschool-backend/gen
+
+plugins:
+  # 生成 Go protobuf 代码
+  - local: protoc-gen-go
+    out: ../backend/gen
+    opt: paths=source_relative
+  
+  # 生成 Go Connect-RPC 代码
+  - local: protoc-gen-connect-go
+    out: ../backend/gen
+    opt: paths=source_relative
+  
+  # 生成 TypeScript protobuf 代码 (用于前端)
+  - remote: buf.build/bufbuild/es:v1.7.2
+    out: ../frontend/src/gen
+    opt: target=ts
+  
+  # 生成 TypeScript Connect 代码 (用于前端)
+  - remote: buf.build/connectrpc/es:v1.4.0
+    out: ../frontend/src/gen
+    opt: target=ts
+  
+  # 生成 OpenAPI 规范
+  - remote: buf.build/grpc-ecosystem/openapiv2:v2.21.0
+    out: ./openapi
+    opt:
+      - allow_merge=true
+      - merge_file_name=highschool
+      - output_format=json

@@ -1,0 +1,16 @@
+version: v2
+
+name: buf.build/highschool/api
+
+deps:
+  - buf.build/googleapis/googleapis
+
+breaking:
+  use:
+    - FILE
+
+lint:
+  use:
+    - DEFAULT
+  except:
+    - PACKAGE_VERSION_SUFFIX
