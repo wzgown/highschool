@@ -515,6 +515,17 @@ func distributeUnifiedRecommendations(recommendations []*highschoolv1.Recommende
 		}
 	}
 
+	// 每个类型内部按分差升序排序（分差小的在前）
+	sort.Slice(reach, func(i, j int) bool {
+		return reach[i].ScoreGap < reach[j].ScoreGap
+	})
+	sort.Slice(target, func(i, j int) bool {
+		return target[i].ScoreGap < target[j].ScoreGap
+	})
+	sort.Slice(safety, func(i, j int) bool {
+		return safety[i].ScoreGap < safety[j].ScoreGap
+	})
+
 	var result []*highschoolv1.RecommendedSchool
 
 	// 3冲刺
