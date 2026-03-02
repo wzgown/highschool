@@ -69,16 +69,6 @@
             生成虚拟竞争对手，模拟真实录取环境，更准确地评估录取难度
           </p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <el-icon :size="32" color="#909399"><Histogram /></el-icon>
-          </div>
-          <h3 class="feature-title">历年数据对比</h3>
-          <p class="feature-desc">
-            展示目标学校近2-3年录取分数线，帮助您了解分数变化趋势
-          </p>
-        </div>
       </div>
     </div>
 
@@ -151,7 +141,6 @@ import {
   TrendCharts,
   DataAnalysis,
   User,
-  Histogram,
   Medal,
   OfficeBuilding,
   List,
