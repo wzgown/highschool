@@ -88,7 +88,7 @@
   - 实现handleClick函数使用router.push导航
   - 添加handleSegmentClick函数处理标签点击
   - 传递分数和分数段信息作为query参数
-  - 支持Canvas粒子和顶部标签双入口跳转
+  - 修正 features.json 中的验证命令路径 (Home.vue -> HomeView.vue)
 
 ---
 
