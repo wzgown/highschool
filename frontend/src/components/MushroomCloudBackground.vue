@@ -148,7 +148,7 @@ const initParticles = () => {
         targetY,
         radius,
         color: getColorForScore(segment.scoreValue),
-        alpha: 0.6 + normalizedScore * 0.35,
+        alpha: 0.25 + normalizedScore * 0.25,
         speed: (0.7 + Math.random() * 0.5) * props.animationSpeed,
         phase: Math.random() * Math.PI * 2,
         scoreSegment: segment,
@@ -181,10 +181,10 @@ const resizeCanvas = () => {
 }
 
 const drawBackground = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
-  ctx.fillStyle = COLORS.bg
-  ctx.fillRect(0, 0, width, height)
+  // 清除画布（透明背景）
+  ctx.clearRect(0, 0, width, height)
 
-  // 强烈的顶部辉光
+  // 顶部辉光
   const gradient = ctx.createRadialGradient(
     width / 2,
     height * 0.15,
@@ -193,12 +193,11 @@ const drawBackground = (ctx: CanvasRenderingContext2D, width: number, height: nu
     height * 0.15,
     height * 0.7
   )
-  gradient.addColorStop(0, 'rgba(0, 255, 255, 0.3)')
-  gradient.addColorStop(0.1, 'rgba(0, 191, 255, 0.2)')
-  gradient.addColorStop(0.25, 'rgba(129, 140, 248, 0.12)')
-  gradient.addColorStop(0.45, 'rgba(192, 132, 252, 0.06)')
-  gradient.addColorStop(0.7, 'rgba(244, 114, 182, 0.03)')
-  gradient.addColorStop(1, 'rgba(2, 0, 16, 0)')
+  gradient.addColorStop(0, 'rgba(0, 255, 255, 0.15)')
+  gradient.addColorStop(0.1, 'rgba(0, 191, 255, 0.1)')
+  gradient.addColorStop(0.25, 'rgba(129, 140, 248, 0.06)')
+  gradient.addColorStop(0.45, 'rgba(192, 132, 252, 0.03)')
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
   ctx.fillStyle = gradient
   ctx.fillRect(0, 0, width, height)
 }
