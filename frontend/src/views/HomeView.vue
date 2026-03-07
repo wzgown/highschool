@@ -1,6 +1,5 @@
 <template>
   <div class="home-view">
-    <MushroomCloudBackground />
     <div class="hero-section">
       <div class="hero-content">
         <h1 class="hero-title">
@@ -147,7 +146,6 @@ import {
   List,
   MagicStick,
 } from '@element-plus/icons-vue';
-import MushroomCloudBackground from '@/components/MushroomCloudBackground.vue';
 
 const router = useRouter();
 

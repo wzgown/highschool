@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <SplashScreen v-if="showSplash" @complete="onSplashComplete" />
     <AppHeader />
     <main class="main-content">
       <router-view />
@@ -9,8 +10,25 @@
 </template>
 
 <script setup lang="ts">
-import AppHeader from '@/components/common/AppHeader.vue';
-import AppFooter from '@/components/common/AppFooter.vue';
+import { ref, onMounted } from 'vue'
+import AppHeader from '@/components/common/AppHeader.vue'
+import AppFooter from '@/components/common/AppFooter.vue'
+import SplashScreen from '@/components/SplashScreen.vue'
+
+const showSplash = ref(false)
+
+onMounted(() => {
+  // 检查是否已经显示过开屏特效（使用 sessionStorage）
+  const hasShownSplash = sessionStorage.getItem('splashShown')
+  if (!hasShownSplash) {
+    showSplash.value = true
+  }
+})
+
+const onSplashComplete = () => {
+  showSplash.value = false
+  sessionStorage.setItem('splashShown', 'true')
+}
 </script>
 
 <style lang="scss">
