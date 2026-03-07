@@ -89,3 +89,17 @@
   - 添加handleSegmentClick函数处理标签点击
   - 传递分数和分数段信息作为query参数
   - 支持Canvas粒子和顶部标签双入口跳转
+
+---
+
+## 会话 #20260307-110000
+
+- 时间: 2026-03-07T11:00:00+08:00
+- 循环: #6
+- 状态: ✅ 完成
+- 进度: 5/6
+- 完成功能: F005 - 集成到主页并替换现有粒子特效
+- 详情:
+  - 在 HomeView.vue 中引入 MushroomCloudBackground 组件
+  - 移除旧的 ScoreCloudBackground 引用
+  - 修正 features.json 中的验证命令路径 (Home.vue -> HomeView.vue)
