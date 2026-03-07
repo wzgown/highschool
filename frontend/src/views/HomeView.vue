@@ -169,6 +169,7 @@ function viewHistory() {
   position: relative;
   padding-bottom: 40px;
   overflow: hidden;
+  min-height: calc(100vh - 100px);
 }
 
 .hero-section {
