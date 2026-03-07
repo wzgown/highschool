@@ -285,3 +285,42 @@
 
 **要求**: 修复上述错误后重新运行。
 
+
+---
+
+## 第 8 轮失败
+
+```
+════════════════════════════════════════════════════════
+  Stop Hook: 验证
+════════════════════════════════════════════════════════
+
+[0;34m[1/3][0m 检查完成信号...
+[0;32m✅ AI 已声称完成 (MISSION_COMPLETE)[0m
+
+[0;34m[2/3][0m 检查工作区状态...
+[0;32m✅ 工作区状态干净[0m
+
+[0;34m[3/3][0m 执行功能验证...
+
+正在验证 passes:true 的功能...
+
+  验证 [F001]: Vue组件ScoreCloudBackground.vue已创建并集成到Home...
+    命令: test -f frontend/src/components/ScoreCloudBackground.vue
+    [0;32m✅ 通过[0m
+
+  验证 [F002]: Canvas蘑菇云形态视觉效果 - 粒子基于分数分布呈现蘑菇云形状...
+    命令: grep -q 'canvas' frontend/src/components/ScoreCloudBackground.vue
+    [0;32m✅ 通过[0m
+
+  验证 [F003]: 区县数据展示 - 每个区县用气泡展示详情...
+    命令: grep -q 'district' frontend/src/components/ScoreCloudBackground.vue
+    [0;32m✅ 通过[0m
+
+  验证 [F004]: 悬停交互 - 高亮当前分数段并显示区县详细信息浮层...
+    命令: grep -q 'hover\\|mouseover\\|mouseenter' frontend/src/components/ScoreCloudBackground.vue
+    [0;31m❌ 失败[0m
+```
+
+**要求**: 修复上述错误后重新运行。
+
