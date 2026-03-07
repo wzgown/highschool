@@ -43,8 +43,7 @@ INIT_TEMPLATE="$TEMPLATES_DIR/init-template.sh"
 VERIFY_TEMPLATE="$TEMPLATES_DIR/verify.sh"
 
 # 参数
-MAX_ITERATIONS=${MAX_ITERATIONS:-10}
-MAX_FEATURE_RETRIES=${MAX_FEATURE_RETRIES:-3}
+MAX_FEATURE_RETRIES=${MAX_FEATURE_RETRIES:-3}  # 单个功能最大重试次数
 CLAUDE_TIMEOUT=${CLAUDE_TIMEOUT:-1800}  # 30分钟
 DELAY_SECONDS=${DELAY_SECONDS:-2}
 
@@ -62,6 +61,59 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 mkdir -p "$CURRENT_DIR" "$QUEUE_DIR" "$TASKS_DIR" "$LOGS_DIR"
+
+# ============================================================
+# 功能重试跟踪
+# ============================================================
+init_feature_retries() {
+    if [ ! -f "$FEATURE_RETRIES_FILE" ]; then
+        echo '{}' > "$FEATURE_RETRIES_FILE"
+    fi
+}
+
+increment_feature_retry() {
+    local feature_id="$1"
+    init_feature_retries
+
+    # 读取当前重试次数
+    local current=$(grep -o "\"$feature_id\":[0-9]*" "$FEATURE_RETRIES_FILE" 2>/dev/null | cut -d: -f2 || echo "0")
+    current=$((current + 1))
+
+    # 更新文件（简单方式）
+    local tmp_file=$(mktemp)
+    if grep -q "\"$feature_id\"" "$FEATURE_RETRIES_FILE" 2>/dev/null; then
+        sed "s/\"$feature_id\":[0-9]*/\"$feature_id\":$current/" "$FEATURE_RETRIES_FILE" > "$tmp_file"
+    else
+        # 添加新条目
+        cat "$FEATURE_RETRIES_FILE" | sed "s/}/\"$feature_id\":$current}/" > "$tmp_file"
+    fi
+    mv "$tmp_file" "$FEATURE_RETRIES_FILE"
+
+    echo "$current"
+}
+
+get_feature_retries() {
+    local feature_id="$1"
+    init_feature_retries
+    grep -o "\"$feature_id\":[0-9]*" "$FEATURE_RETRIES_FILE" 2>/dev/null | cut -d: -f2 || echo "0"
+}
+
+should_skip_feature() {
+    local feature_id="$1"
+    local retries=$(get_feature_retries "$feature_id")
+    [ "$retries" -ge "$MAX_FEATURE_RETRIES" ]
+}
+
+get_skipped_features() {
+    init_feature_retries
+    local skipped=""
+    for fid in $(grep -o '"F[0-9]*"' "$CURRENT_FEATURES" 2>/dev/null | tr -d '"'); do
+        if should_skip_feature "$fid"; then
+            skipped="$skipped $fid"
+        fi
+    done
+    echo "$skipped"
+}
 
 # ============================================================
 # 日志函数
@@ -444,10 +496,17 @@ build_coding_prompt() {
         next_feature=$(grep -B 2 -A 8 '"passes": false' "$CURRENT_FEATURES" | head -15)
     fi
 
+    # 获取跳过的功能
+    local skipped_features=$(get_skipped_features)
+    local skipped_info=""
+    if [ -n "$skipped_features" ]; then
+        skipped_info="## ⚠️ 已跳过的功能（达到最大重试次数）\n\n以下功能已跳过，**不要尝试实现**：\n$skipped_features\n\n---\n"
+    fi
+
     cat << EOF
 # Ralph Loop v2.0 - Coding Agent 模式
 
-你是 Ralph Loop 的执行实例（循环 #$iteration/$MAX_ITERATIONS）。
+你是 Ralph Loop 的执行实例（循环 #$iteration）。
 
 ## 🎯 核心原则（必须遵守）
 
@@ -494,6 +553,7 @@ $progress_content
 $next_feature
 \`\`\`
 
+$skipped_info
 ---
 
 ## 📋 工作流程（必须按顺序执行）
@@ -785,7 +845,7 @@ main() {
     log_ralph "════════════════════════════════════════════════════════"
     log_info "项目: $PROJECT_ROOT"
     log_info "任务: $CURRENT_TASK"
-    log_info "熔断: 最大 $MAX_ITERATIONS 次循环"
+    log_info "熔断: 单个功能最多 $MAX_FEATURE_RETRIES 次重试"
     echo ""
 
     # 显示功能统计
@@ -796,7 +856,7 @@ main() {
 
     local iter=0
 
-    while [ $iter -lt $MAX_ITERATIONS ]; do
+    while true; do
         iter=$((iter + 1))
         local log_file="$LOGS_DIR/iteration_$(printf '%03d' $iter).log"
 
@@ -813,6 +873,19 @@ main() {
 
             auto_archive "$iter" "completed"
             exit 0
+        fi
+
+        # 检查是否所有未完成功能都被跳过
+        local skipped=$(get_skipped_features)
+        local skipped_count=$(echo "$skipped" | wc -w | tr -d ' ')
+        if [ "$skipped_count" -ge "$remaining" ]; then
+            log_warn "════════════════════════════════════════════════════════"
+            log_warn "⚠️ 所有未完成功能已达到最大重试次数"
+            log_warn "   跳过的功能:$skipped"
+            log_warn "════════════════════════════════════════════════════════"
+
+            auto_archive "$iter" "partial-skipped"
+            exit 1
         fi
 
         # 构建 prompt
@@ -873,6 +946,18 @@ EOF
                 exit 0
             fi
         else
+            # 失败：增加当前功能的重试计数
+            local current_feature=$(grep -m1 '"passes": false' "$CURRENT_FEATURES" 2>/dev/null | grep -o '"id"[^,]*' | head -1 | sed 's/.*: *"\([^"]*\)".*/\1/')
+
+            if [ -n "$current_feature" ]; then
+                local retries=$(increment_feature_retry "$current_feature")
+                log_warn "功能 $current_feature 重试次数: $retries/$MAX_FEATURE_RETRIES"
+
+                if [ "$retries" -ge "$MAX_FEATURE_RETRIES" ]; then
+                    log_err "功能 $current_feature 已达到最大重试次数，将被跳过"
+                fi
+            fi
+
             # 失败：追加日志
             log_warn "标准未达成，更新任务文件..."
 
@@ -910,15 +995,6 @@ EOF
 
         sleep $DELAY_SECONDS
     done
-
-    # 熔断
-    log_err "════════════════════════════════════════════════════════"
-    log_err "⚠️ 达到最大循环 ($MAX_ITERATIONS)，转人工审查"
-    log_err "日志: $LOGS_DIR"
-    log_err "════════════════════════════════════════════════════════"
-
-    auto_archive "$iter" "failed-max-iterations"
-    exit 1
 }
 
 # ============================================================
