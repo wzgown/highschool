@@ -77,9 +77,9 @@
         "调整布局和样式",
         "确保响应式设计"
       ],
-      "verify_command": "grep -q 'MushroomCloudBackground' frontend/src/views/Home.vue",
-      "passes": false,
-      "completed_at": null,
+      "verify_command": "grep -q 'MushroomCloudBackground' frontend/src/views/HomeView.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T11:00:00+08:00",
       "notes": "第五阶段：集成和替换"
     },
     {
