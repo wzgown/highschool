@@ -1,0 +1,70 @@
+{
+  "task_id": "F-20260307-001",
+  "task_name": "中考成绩蘑菇云背景动效",
+  "created_at": "2026-03-07T10:05:00+08:00",
+  "features": [
+    {
+      "id": "F001",
+      "category": "component",
+      "description": "Vue组件ScoreCloudBackground.vue已创建并集成到HomeView",
+      "priority": "high",
+      "verify_command": "test -f frontend/src/components/ScoreCloudBackground.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T10:05:30+08:00"
+    },
+    {
+      "id": "F002",
+      "category": "visual",
+      "description": "Canvas蘑菇云形态视觉效果 - 粒子基于分数分布呈现蘑菇云形状",
+      "priority": "high",
+      "verify_command": "grep -q 'canvas' frontend/src/components/ScoreCloudBackground.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T10:05:30+08:00"
+    },
+    {
+      "id": "F003",
+      "category": "data",
+      "description": "区县数据展示 - 每个区县用气泡展示详情",
+      "priority": "high",
+      "verify_command": "grep -q 'district' frontend/src/components/ScoreCloudBackground.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T10:10:00+08:00"
+    },
+    {
+      "id": "F004",
+      "category": "interaction",
+      "description": "悬停交互 - 高亮当前分数段并显示区县详细信息浮层",
+      "priority": "high",
+      "verify_command": "grep -q 'hover\\|mouseover\\|mouseenter' frontend/src/components/ScoreCloudBackground.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T10:10:00+08:00"
+    },
+    {
+      "id": "F005",
+      "category": "navigation",
+      "description": "点击交互 - 点击分数段跳转到区详情页",
+      "priority": "medium",
+      "verify_command": "grep -q 'click\\|@click' frontend/src/components/ScoreCloudBackground.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T10:10:00+08:00"
+    },
+    {
+      "id": "F006",
+      "category": "visual",
+      "description": "蓝绿渐变配色方案 - Azure蓝(#0091B)到深紫(#8040c)",
+      "priority": "medium",
+      "verify_command": "grep -q '#0091B\\|#8040c\\|gradient' frontend/src/components/ScoreCloudBackground.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T10:10:00+08:00"
+    },
+    {
+      "id": "F007",
+      "category": "a11y",
+      "description": "支持prefers-reduced-motion无障碍",
+      "priority": "medium",
+      "verify_command": "grep -q 'prefers-reduced-motion\\|reducedMotion' frontend/src/components/ScoreCloudBackground.vue",
+      "passes": true,
+      "completed_at": "2026-03-07T10:05:30+08:00"
+    }
+  ]
+}

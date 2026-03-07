@@ -1,70 +1,103 @@
 {
   "task_id": "F-20260307-001",
-  "task_name": "中考成绩蘑菇云背景动效",
-  "created_at": "2026-03-07T10:05:00+08:00",
+  "task_name": "中考成绩蘑菇云背景动效设计",
+  "created_at": "2025-03-07T10:00:00+08:00",
   "features": [
     {
       "id": "F001",
-      "category": "component",
-      "description": "Vue组件ScoreCloudBackground.vue已创建并集成到HomeView",
+      "category": "data",
+      "description": "分析原始数据文件，理解蘑菇云数据结构",
       "priority": "high",
-      "verify_command": "test -f frontend/src/components/ScoreCloudBackground.vue",
-      "passes": true,
-      "completed_at": "2026-03-07T10:05:30+08:00"
+      "steps": [
+        "读取 original_data/raw/2025/中考成绩蘑菇云分布图.xlsx",
+        "提取数据结构: 分数段、人数",
+        "确定颜色方案和视觉映射",
+        "生成数据配置文件"
+      ],
+      "verify_command": "test -f frontend/src/data/mushroomCloudData.ts",
+      "passes": false,
+      "completed_at": null,
+      "notes": "第一阶段：理解数据"
     },
     {
       "id": "F002",
       "category": "visual",
-      "description": "Canvas蘑菇云形态视觉效果 - 粒子基于分数分布呈现蘑菇云形状",
+      "description": "创建 Canvas 组件实现蘑菇云背景",
       "priority": "high",
-      "verify_command": "grep -q 'canvas' frontend/src/components/ScoreCloudBackground.vue",
-      "passes": true,
-      "completed_at": "2026-03-07T10:05:30+08:00"
+      "steps": [
+        "创建 MushroomCloudBackground.vue 组件",
+        "实现 Canvas 绑制逻辑",
+        "绘制分数段气泡",
+        "实现粒子上升动画",
+        "添加颜色渐变效果"
+      ],
+      "verify_command": "test -f frontend/src/components/MushroomCloudBackground.vue",
+      "passes": false,
+      "completed_at": null,
+      "notes": "第二阶段：Canvas 实现"
     },
     {
       "id": "F003",
-      "category": "data",
-      "description": "区县数据展示 - 每个区县用气泡展示详情",
+      "category": "visual",
+      "description": "实现分数段标签和排名显示",
       "priority": "high",
-      "verify_command": "grep -q 'district' frontend/src/components/ScoreCloudBackground.vue",
-      "passes": true,
-      "completed_at": "2026-03-07T10:10:00+08:00"
+      "steps": [
+        "在顶部添加分数排名前20的区名",
+        "实现悬停高亮效果",
+        "显示分数段详情浮层"
+      ],
+      "verify_command": "grep -q '分数排名' frontend/src/components/MushroomCloudBackground.vue",
+      "passes": false,
+      "completed_at": null,
+      "notes": "第三阶段：标签和交互"
     },
     {
       "id": "F004",
       "category": "interaction",
-      "description": "悬停交互 - 高亮当前分数段并显示区县详细信息浮层",
-      "priority": "high",
-      "verify_command": "grep -q 'hover\\|mouseover\\|mouseenter' frontend/src/components/ScoreCloudBackground.vue",
-      "passes": true,
-      "completed_at": "2026-03-07T10:10:00+08:00"
+      "description": "实现点击跳转到区详情页",
+      "priority": "medium",
+      "steps": [
+        "添加点击事件处理",
+        "实现路由跳转逻辑",
+        "添加返回按钮"
+      ],
+      "verify_command": "grep -q 'router.push' frontend/src/components/MushroomCloudBackground.vue",
+      "passes": false,
+      "completed_at": null,
+      "notes": "第四阶段：页面跳转"
     },
     {
       "id": "F005",
-      "category": "navigation",
-      "description": "点击交互 - 点击分数段跳转到区详情页",
-      "priority": "medium",
-      "verify_command": "grep -q 'click\\|@click' frontend/src/components/ScoreCloudBackground.vue",
-      "passes": true,
-      "completed_at": "2026-03-07T10:10:00+08:00"
+      "category": "visual",
+      "description": "集成到主页并替换现有粒子特效",
+      "priority": "high",
+      "steps": [
+        "在 Home.vue 中引入新组件",
+        "移除旧的粒子特效代码",
+        "调整布局和样式",
+        "确保响应式设计"
+      ],
+      "verify_command": "grep -q 'MushroomCloudBackground' frontend/src/views/Home.vue",
+      "passes": false,
+      "completed_at": null,
+      "notes": "第五阶段：集成和替换"
     },
     {
       "id": "F006",
-      "category": "visual",
-      "description": "蓝绿渐变配色方案 - Azure蓝(#0091B)到深紫(#8040c)",
-      "priority": "medium",
-      "verify_command": "grep -q '#0091B\\|#8040c\\|gradient' frontend/src/components/ScoreCloudBackground.vue",
-      "passes": true,
-      "completed_at": "2026-03-07T10:10:00+08:00"
-    },
-    {
-      "id": "F007",
-      "category": "a11y",
-      "description": "支持prefers-reduced-motion无障碍",
-      "priority": "medium",
-      "verify_command": "grep -q 'prefers-reduced-motion\\|reducedMotion' frontend/src/components/ScoreCloudBackground.vue",
-      "passes": true,
-      "completed_at": "2026-03-07T10:05:30+08:00"
+      "category": "test",
+      "description": "端到端测试验证",
+      "priority": "high",
+      "steps": [
+        "启动开发服务器 npm run dev",
+        "访问 http://localhost:5173 验证效果",
+        "检查移动端响应式",
+        "验证交互功能",
+        "截图保存验证结果"
+      ],
+      "verify_command": "curl -s http://localhost:5173 > /dev/null",
+      "passes": false,
+      "completed_at": null,
+      "notes": "第六阶段：端到端验证"
     }
   ]
 }
