@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "updated_at": "",
+  "tasks": [
+    {
+      "id": "",
+      "name": "",
+      "priority": 5,
+      "status": "pending",
+      "task_file": "",
+      "created_at": "",
+      "started_at": null,
+      "completed_at": null
+    }
+  ]
+}

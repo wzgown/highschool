@@ -1,29 +1,52 @@
 #!/bin/bash
 
-# Ralph Loop 循环脚本 (tmux 版)
-# 支持多任务复用，每个任务一个 task.md 文件
-# 核心原理：结束-重启模式，状态外化到文件
-# tmux 版本：在 tmux 会话中运行 claude，可随时 attach 观察
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# ║  Ralph Loop v2.0 - 长时运行任务调度器                                          ║
+# ║                                                                              ║
+# ║  基于 Anthropic "Effective harnesses for long-running agents" 最佳实践        ║
+# ║  核心设计：                                                                   ║
+# ║  1. Initializer Agent - 首次运行设置环境                                      ║
+# ║  2. Feature List (JSON) - 结构化功能清单，避免过早标记完成                       ║
+# ║  3. Incremental Progress - 每次只做一个功能                                   ║
+# ║  4. Progress File - 记录已完成的工作                                          ║
+# ║  5. Clean State - 每次会话结束留下干净的 git 状态                               ║
+# ╚══════════════════════════════════════════════════════════════════════════════╝
 
 set -e
 
+# ============================================================
+# 配置
+# ============================================================
 RALPH_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PROJECT_ROOT="$(dirname "$RALPH_DIR")"
 SCRIPTS_DIR="$RALPH_DIR/scripts"
 TEMPLATES_DIR="$RALPH_DIR/templates"
 CURRENT_DIR="$RALPH_DIR/current"
+QUEUE_DIR="$RALPH_DIR/queue"
 TASKS_DIR="$RALPH_DIR/tasks"
+LOGS_DIR="$RALPH_DIR/logs"
+
+# 文件路径
 CURRENT_TASK="$CURRENT_DIR/task.md"
+CURRENT_FEATURES="$CURRENT_DIR/features.json"
+CURRENT_PROGRESS="$CURRENT_DIR/progress.md"
+CURRENT_INIT="$CURRENT_DIR/init.sh"
+CURRENT_VERIFY="$CURRENT_DIR/verify.sh"
+TASK_QUEUE="$QUEUE_DIR/task-queue.json"
 STOP_HOOK="$SCRIPTS_DIR/stop-hook.sh"
+
+# 模板
 TASK_TEMPLATE="$TEMPLATES_DIR/task-template.md"
+FEATURES_TEMPLATE="$TEMPLATES_DIR/features-template.json"
+PROGRESS_TEMPLATE="$TEMPLATES_DIR/progress-template.md"
+INIT_TEMPLATE="$TEMPLATES_DIR/init-template.sh"
 VERIFY_TEMPLATE="$TEMPLATES_DIR/verify.sh"
 
 # 参数
-MAX_ITERATIONS=${MAX_ITERATIONS:-5}
-DELAY_SECONDS=${DELAY_SECONDS:-1}
-TMUX_SESSION="ralph-loop"
-CLAUDE_TIMEOUT=${CLAUDE_TIMEOUT:-1200}  # 单次 claude 执行超时（秒）
-POLL_INTERVAL=${POLL_INTERVAL:-3}      # 轮询间隔（秒）
+MAX_ITERATIONS=${MAX_ITERATIONS:-10}
+MAX_FEATURE_RETRIES=${MAX_FEATURE_RETRIES:-3}
+CLAUDE_TIMEOUT=${CLAUDE_TIMEOUT:-1800}  # 30分钟
+DELAY_SECONDS=${DELAY_SECONDS:-2}
 
 # 颜色
 RED='\033[0;31m'
@@ -32,425 +55,825 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 MAGENTA='\033[0;35m'
 CYAN='\033[0;36m'
+BOLD='\033[1m'
 NC='\033[0m'
 
-mkdir -p "$CURRENT_DIR" "$TASKS_DIR"
+mkdir -p "$CURRENT_DIR" "$QUEUE_DIR" "$TASKS_DIR" "$LOGS_DIR"
 
+# ============================================================
+# 日志函数
+# ============================================================
 log_info()    { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_ok()      { echo -e "${GREEN}[OK]${NC} $1"; }
 log_warn()    { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_err()     { echo -e "${RED}[ERR]${NC} $1"; }
-log_ralph()   { echo -e "${MAGENTA}[RALPH]${NC} $1"; }
+log_ralph()   { echo -e "${MAGENTA}${BOLD}[RALPH]${NC} $1"; }
+log_step()    { echo -e "${CYAN}  →${NC} $1"; }
 
-# 显示帮助
+# ============================================================
+# JSON 工具函数 (无 jq 依赖)
+# ============================================================
+json_get() {
+    local file="$1"
+    local key="$2"
+    grep -o "\"$key\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" "$file" 2>/dev/null | \
+        sed 's/.*:[[:space:]]*"\([^"]*\)".*/\1/' | head -1
+}
+
+json_get_number() {
+    local file="$1"
+    local key="$2"
+    grep -o "\"$key\"[[:space:]]*:[[:space:]]*[0-9]*" "$file" 2>/dev/null | \
+        sed 's/.*:[[:space:]]*\([0-9]*\).*/\1/' | head -1
+}
+
+# ============================================================
+# 帮助和状态
+# ============================================================
 show_help() {
-    cat << EOF
-Ralph Loop - 多任务复用的循环框架 (tmux 版)
+    cat << 'EOF'
+Ralph Loop v2.0 - 长时运行任务调度器
 
 用法:
-  $0                          运行当前任务
-  $0 --new                    创建新任务（从模板）
-  $0 --task <file>            指定任务文件
-  $0 --status                 显示状态
-  $0 --archive [name]         归档当前任务
-  $0 --reset                  重置当前任务（清空失败日志）
-  $0 --attach                 附加到 tmux 会话观察
-  $0 --help                   显示帮助
+  ralph                          运行当前任务（增量模式）
+  ralph --init                   初始化新任务（Initializer Agent 模式）
+  ralph --queue                  显示任务队列
+  ralph --enqueue <file>         添加任务到队列
+  ralph --dequeue <id>           从队列移除任务
+  ralph --next                   从队列获取下一个任务
+  ralph --status                 显示当前状态
+  ralph --features               显示功能清单
+  ralph --progress               显示进度日志
+  ralph --tasks                  列出所有任务
+  ralph --archive [name]         归档当前任务
+  ralph --reset                  重置当前任务
+  ralph --clean                  清理工作区（确保干净状态）
+  ralph --help                   显示帮助
 
-tmux 操作:
-  tmux attach -t $TMUX_SESSION    附加到会话
-  Ctrl+B D                         分离会话（保持后台运行）
+工作模式:
+  1. Initializer Agent (--init): 设置环境，创建 features.json 和 init.sh
+  2. Coding Agent (默认): 增量式工作，每次一个功能，保持干净状态
 
 目录结构:
   .ralph/
-  ├── scripts/        # 脚本
-  ├── templates/      # 任务模板
-  ├── current/        # 当前任务
-  ├── tasks/          # 历史任务归档
-  └── logs/           # 循环日志
+  ├── scripts/          # 脚本
+  ├── templates/        # 模板
+  ├── current/          # 当前任务
+  │   ├── task.md       # 任务描述
+  │   ├── features.json # 功能清单 (结构化)
+  │   ├── progress.md   # 进度日志
+  │   ├── init.sh       # 启动脚本
+  │   └── verify.sh     # 验证脚本
+  ├── queue/            # 任务队列
+  │   └── task-queue.json
+  ├── tasks/            # 历史任务归档
+  └── logs/             # 循环日志
 
 参数:
-  MAX_ITERATIONS=$MAX_ITERATIONS    最大循环次数
-  CLAUDE_TIMEOUT=$CLAUDE_TIMEOUT    单次执行超时(秒)
-  POLL_INTERVAL=$POLL_INTERVAL      轮询间隔(秒)
+  MAX_ITERATIONS=10       最大循环次数
+  MAX_FEATURE_RETRIES=3   单个功能最大重试次数
+  CLAUDE_TIMEOUT=1800     单次执行超时(秒)
 
 EOF
 }
 
-# 创建新任务
-new_task() {
-    local task_name="${1:-task-$(date +%Y%m%d-%H%M%S)}"
-    local task_file="$CURRENT_DIR/task.md"
-    local verify_file="$CURRENT_DIR/verify.sh"
-    local verify_template="$TEMPLATES_DIR/verify.sh"
+show_status() {
+    echo "════════════════════════════════════════════════════════"
+    echo "  Ralph Loop v2.0 状态"
+    echo "════════════════════════════════════════════════════════"
+    echo ""
 
-    # 如果有当前任务，先归档
+    # 当前任务
+    echo "📍 当前任务:"
     if [ -f "$CURRENT_TASK" ]; then
-        log_info "发现现有任务，先归档..."
-        auto_archive "0"
+        local task_name=$(grep "^# 任务" "$CURRENT_TASK" | head -1 | sed 's/^# //')
+        echo "   名称: ${task_name:-未命名}"
+        echo "   文件: $CURRENT_TASK"
+
+        # 功能统计
+        if [ -f "$CURRENT_FEATURES" ]; then
+            local total=$(grep -c '"id"' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+            local passed=$(grep -c '"passes": true' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+            echo "   功能: $passed/$total 通过"
+        fi
+
+        # Git 状态
+        if git -C "$PROJECT_ROOT" rev-parse --git-dir >/dev/null 2>&1; then
+            local git_status=$(git -C "$PROJECT_ROOT" status --short 2>/dev/null | wc -l | tr -d ' ')
+            if [ "$git_status" -gt 0 ]; then
+                echo "   Git: ⚠️  有 $git_status 个未提交的更改"
+            else
+                echo "   Git: ✅ 干净状态"
+            fi
+        fi
+    else
+        echo "   无当前任务"
     fi
-
-    # 创建任务文件
-    cp "$TASK_TEMPLATE" "$task_file"
-
-    # 创建验证脚本
-    cp "$VERIFY_TEMPLATE" "$verify_file"
-    chmod +x "$verify_file"
-
-    log_ok "已创建新任务:"
     echo ""
-    echo "  任务描述: $task_file"
-    echo "  验证脚本: $verify_file  ⬅️ 必须编辑！"
-    echo ""
-    echo "编辑命令:"
-    echo "  vim $task_file"
-    echo "  vim $verify_file"
+
+    # 任务队列
+    echo "📋 任务队列:"
+    if [ -f "$TASK_QUEUE" ] && grep -q '"id"' "$TASK_QUEUE"; then
+        local pending=$(grep -c '"status": "pending"' "$TASK_QUEUE" 2>/dev/null || echo "0")
+        echo "   待处理: $pending 个任务"
+    else
+        echo "   队列为空"
+    fi
 }
 
-# 指定任务文件
-set_task() {
+show_features() {
+    echo "════════════════════════════════════════════════════════"
+    echo "  功能清单"
+    echo "════════════════════════════════════════════════════════"
+
+    if [ ! -f "$CURRENT_FEATURES" ]; then
+        echo ""
+        echo "无功能清单。运行 --init 创建。"
+        return
+    fi
+
+    echo ""
+    # 简单解析 JSON 中的功能列表
+    grep -E '"(id|description|priority|passes)"' "$CURRENT_FEATURES" | \
+        paste - - - - | \
+        while read line; do
+            local id=$(echo "$line" | grep -o '"id"[^,]*' | head -1 | sed 's/.*: *"\([^"]*\)".*/\1/')
+            local desc=$(echo "$line" | grep -o '"description"[^,]*' | head -1 | sed 's/.*: *"\([^"]*\)".*/\1/')
+            local passes=$(echo "$line" | grep -o '"passes"[^,}]*' | head -1 | sed 's/.*: *\(true\|false\).*/\1/')
+            local status="⏳"
+            [ "$passes" = "true" ] && status="✅"
+            printf "  %s [%s] %s\n" "$status" "$id" "$desc"
+        done
+}
+
+show_tasks() {
+    echo "════════════════════════════════════════════════════════"
+    echo "  任务列表"
+    echo "════════════════════════════════════════════════════════"
+    echo ""
+
+    # 当前任务
+    if [ -f "$CURRENT_TASK" ]; then
+        echo "📍 当前任务:"
+        local task_title=$(grep "^# 任务" "$CURRENT_TASK" | head -1 | sed 's/^# //')
+        local iter_count=$(grep -c "^## 第.*轮失败" "$CURRENT_TASK" 2>/dev/null || echo "0")
+        echo "   名称: ${task_title:-未命名}"
+        echo "   迭代: $iter_count 次"
+        echo ""
+    fi
+
+    # 队列中的任务
+    if [ -f "$TASK_QUEUE" ] && grep -q '"status": "pending"' "$TASK_QUEUE"; then
+        echo "📋 待处理队列:"
+        grep -A 3 '"status": "pending"' "$TASK_QUEUE" | grep '"name"' | \
+            while read line; do
+                local name=$(echo "$line" | sed 's/.*: *"\([^"]*\)".*/\1/')
+                echo "   • $name"
+            done
+        echo ""
+    fi
+
+    # 历史任务
+    if [ -d "$TASKS_DIR" ] && [ "$(ls -A $TASKS_DIR 2>/dev/null)" ]; then
+        echo "📁 历史任务:"
+        for task_dir in "$TASKS_DIR"/*; do
+            if [ -d "$task_dir" ]; then
+                local name=$(basename "$task_dir")
+                local status=""
+                if [ -f "$task_dir/SUMMARY.md" ]; then
+                    status=$(grep "^- 状态:" "$task_dir/SUMMARY.md" | head -1 | sed 's/^- 状态: //')
+                fi
+                printf "   • %-50s %s\n" "$name" "${status:-已完成}"
+            fi
+        done
+    fi
+}
+
+# ============================================================
+# 任务队列管理
+# ============================================================
+enqueue_task() {
     local task_file="$1"
+
     if [ ! -f "$task_file" ]; then
         log_err "任务文件不存在: $task_file"
         exit 1
     fi
+
+    local task_name=$(grep "^# 任务" "$task_file" | head -1 | sed 's/^# //' || echo "未命名任务")
+    local task_id="T-$(date +%Y%m%d%H%M%S)"
+
+    # 创建或更新队列文件
+    if [ ! -f "$TASK_QUEUE" ]; then
+        cat > "$TASK_QUEUE" << EOF
+{
+  "version": "1.0",
+  "updated_at": "$(date -Iseconds)",
+  "tasks": []
+}
+EOF
+    fi
+
+    # 追加任务（简单方式）
+    local tmp_file=$(mktemp)
+    awk -v id="$task_id" -v name="$task_name" -v file="$task_file" -v date="$(date -Iseconds)" '
+    /^  \]/ {
+        print "    ,{"
+        print "      \"id\": \"" id "\","
+        print "      \"name\": \"" name "\","
+        print "      \"priority\": 5,"
+        print "      \"status\": \"pending\","
+        print "      \"task_file\": \"" file "\","
+        print "      \"created_at\": \"" date "\","
+        print "      \"started_at\": null,"
+        print "      \"completed_at\": null"
+        print "    }"
+    }
+    { print }
+    ' "$TASK_QUEUE" > "$tmp_file"
+    mv "$tmp_file" "$TASK_QUEUE"
+
+    log_ok "已添加任务到队列: $task_name (ID: $task_id)"
+}
+
+dequeue_task() {
+    local task_id="$1"
+
+    if [ ! -f "$TASK_QUEUE" ]; then
+        log_err "任务队列为空"
+        exit 1
+    fi
+
+    # 标记为已移除（简单方式：直接注释或删除）
+    local tmp_file=$(mktemp)
+    awk -v id="$task_id" '
+    /"id": *"'$task_id'"/ { skip=1 }
+    skip && /^\s*}/ { skip=0; next }
+    !skip { print }
+    ' "$TASK_QUEUE" > "$tmp_file"
+    mv "$tmp_file" "$TASK_QUEUE"
+
+    log_ok "已从队列移除任务: $task_id"
+}
+
+get_next_task() {
+    if [ ! -f "$TASK_QUEUE" ]; then
+        return 1
+    fi
+
+    # 获取第一个 pending 任务
+    local task_file=$(grep -B 5 '"status": "pending"' "$TASK_QUEUE" | \
+        grep '"task_file"' | head -1 | \
+        sed 's/.*: *"\([^"]*\)".*/\1/')
+
+    if [ -z "$task_file" ] || [ ! -f "$task_file" ]; then
+        return 1
+    fi
+
+    echo "$task_file"
+    return 0
+}
+
+# ============================================================
+# 任务初始化 (Initializer Agent 模式)
+# ============================================================
+init_task() {
+    local task_file="${1:-$CURRENT_TASK}"
+
+    if [ ! -f "$task_file" ]; then
+        log_err "任务文件不存在: $task_file"
+        log_info "创建新任务: $0 --new"
+        exit 1
+    fi
+
+    log_ralph "════════════════════════════════════════════════════════"
+    log_ralph "  Initializer Agent 模式"
+    log_ralph "════════════════════════════════════════════════════════"
+    echo ""
+
+    # 如果有现有任务，先归档
+    if [ -f "$CURRENT_TASK" ] && [ "$task_file" != "$CURRENT_TASK" ]; then
+        log_info "归档现有任务..."
+        auto_archive "0" "initializer"
+    fi
+
+    # 复制任务文件
     cp "$task_file" "$CURRENT_TASK"
-    log_ok "已设置任务: $task_file"
+
+    # 创建功能清单（如果不存在）
+    if [ ! -f "$CURRENT_FEATURES" ]; then
+        cp "$FEATURES_TEMPLATE" "$CURRENT_FEATURES"
+        # 更新任务信息
+        local task_name=$(grep "^# 任务" "$CURRENT_TASK" | head -1 | sed 's/^# //')
+        local task_id="F-$(date +%Y%m%d%H%M%S)"
+        sed -i '' "s/\"task_id\": \"\"/\"task_id\": \"$task_id\"/" "$CURRENT_FEATURES" 2>/dev/null || \
+            sed -i "s/\"task_id\": \"\"/\"task_id\": \"$task_id\"/" "$CURRENT_FEATURES"
+        sed -i '' "s/\"task_name\": \"\"/\"task_name\": \"$task_name\"/" "$CURRENT_FEATURES" 2>/dev/null || \
+            sed -i "s/\"task_name\": \"\"/\"task_name\": \"$task_name\"/" "$CURRENT_FEATURES"
+        sed -i '' "s/\"created_at\": \"\"/\"created_at\": \"$(date -Iseconds)\"/" "$CURRENT_FEATURES" 2>/dev/null || \
+            sed -i "s/\"created_at\": \"\"/\"created_at\": \"$(date -Iseconds)\"/" "$CURRENT_FEATURES"
+    fi
+
+    # 创建进度文件
+    if [ ! -f "$CURRENT_PROGRESS" ]; then
+        cp "$PROGRESS_TEMPLATE" "$CURRENT_PROGRESS"
+        local task_name=$(grep "^# 任务" "$CURRENT_TASK" | head -1 | sed 's/^# //')
+        local task_id=$(json_get "$CURRENT_FEATURES" "task_id")
+        sed -i '' "s/- \*\*任务ID\*\*:/- **任务ID**: $task_id/" "$CURRENT_PROGRESS" 2>/dev/null || \
+            sed -i "s/- \*\*任务ID\*\*:/- **任务ID**: $task_id/" "$CURRENT_PROGRESS"
+        sed -i '' "s/- \*\*任务名称\*\*:/- **任务名称**: $task_name/" "$CURRENT_PROGRESS" 2>/dev/null || \
+            sed -i "s/- \*\*任务名称\*\*:/- **任务名称**: $task_name/" "$CURRENT_PROGRESS"
+        sed -i '' "s/- \*\*开始时间\*\*:/- **开始时间**: $(date -Iseconds)/" "$CURRENT_PROGRESS" 2>/dev/null || \
+            sed -i "s/- \*\*开始时间\*\*:/- **开始时间**: $(date -Iseconds)/" "$CURRENT_PROGRESS"
+    fi
+
+    # 创建启动脚本
+    if [ ! -f "$CURRENT_INIT" ]; then
+        cp "$INIT_TEMPLATE" "$CURRENT_INIT"
+        chmod +x "$CURRENT_INIT"
+    fi
+
+    # 创建验证脚本
+    if [ ! -f "$CURRENT_VERIFY" ]; then
+        cp "$VERIFY_TEMPLATE" "$CURRENT_VERIFY"
+        chmod +x "$CURRENT_VERIFY"
+    fi
+
+    log_ok "环境初始化完成:"
+    echo ""
+    echo "  📄 任务描述: $CURRENT_TASK"
+    echo "  📋 功能清单: $CURRENT_FEATURES"
+    echo "  📝 进度日志: $CURRENT_PROGRESS"
+    echo "  🚀 启动脚本: $CURRENT_INIT"
+    echo "  ✅ 验证脚本: $CURRENT_VERIFY"
+    echo ""
+    log_info "下一步:"
+    echo "  1. 编辑 features.json 添加功能列表"
+    echo "  2. 编辑 init.sh 设置环境启动命令"
+    echo "  3. 编辑 verify.sh 添加验证逻辑"
+    echo "  4. 运行: $0"
 }
 
-# 显示状态
-show_status() {
-    echo "=== Ralph Loop 状态 ==="
-    echo ""
-    echo "tmux 会话: $TMUX_SESSION"
-    if tmux has-session -t "$TMUX_SESSION" 2>/dev/null; then
-        echo "  状态: 运行中"
-        echo "  附加: tmux attach -t $TMUX_SESSION"
-    else
-        echo "  状态: 未运行"
+# ============================================================
+# 构建上下文 Prompt (Coding Agent 模式)
+# ============================================================
+build_coding_prompt() {
+    local iteration=$1
+    local feature_id=$2
+
+    # 获取 git 状态
+    local git_status=""
+    local git_log=""
+    if git -C "$PROJECT_ROOT" rev-parse --git-dir >/dev/null 2>&1; then
+        git_status=$(git -C "$PROJECT_ROOT" status --short 2>/dev/null || echo "无法获取")
+        git_log=$(git -C "$PROJECT_ROOT" log --oneline -10 2>/dev/null || echo "")
     fi
-    echo ""
-    echo "当前任务: $CURRENT_TASK"
-    if [ -f "$CURRENT_TASK" ]; then
-        echo ""
-        echo "--- 成功标准 ---"
-        grep -A 10 "## 成功标准" "$CURRENT_TASK" | head -15
-        echo ""
-        echo "--- 失败日志行数 ---"
-        wc -l "$CURRENT_TASK" | awk '{print $1 " 行"}'
-    else
-        echo "无当前任务"
-        echo ""
-        echo "创建新任务: $0 --new"
+
+    # 读取进度文件
+    local progress_content=""
+    if [ -f "$CURRENT_PROGRESS" ]; then
+        progress_content=$(tail -50 "$CURRENT_PROGRESS")
     fi
-    echo ""
-    echo "--- 历史任务 ---"
-    ls -la "$TASKS_DIR" 2>/dev/null || echo "无"
+
+    # 获取下一个待处理功能
+    local next_feature=""
+    if [ -f "$CURRENT_FEATURES" ]; then
+        next_feature=$(grep -B 2 -A 8 '"passes": false' "$CURRENT_FEATURES" | head -15)
+    fi
+
+    cat << EOF
+# Ralph Loop v2.0 - Coding Agent 模式
+
+你是 Ralph Loop 的执行实例（循环 #$iteration/$MAX_ITERATIONS）。
+
+## 🎯 核心原则（必须遵守）
+
+1. **增量工作**: 每次只完成 **一个功能**，不要尝试一次完成多个
+2. **干净状态**: 完成后确保代码可提交（无语法错误、测试通过）
+3. **结构化更新**: 只修改 features.json 中的 passes 字段
+4. **端到端验证**: 使用浏览器自动化工具测试功能
+5. **提交进度**: 完成后 git commit 并更新 progress.md
+
+## 📁 项目信息
+
+- 项目目录: \`$PROJECT_ROOT\`
+- 任务文件: \`$CURRENT_TASK\`
+- 功能清单: \`$CURRENT_FEATURES\`
+- 进度日志: \`$CURRENT_PROGRESS\`
+- 启动脚本: \`$CURRENT_INIT\`
+- 验证脚本: \`$CURRENT_VERIFY\`
+
+## 📋 当前任务
+
+$(cat "$CURRENT_TASK")
+
+---
+
+## 🔧 Git 状态
+
+\`\`\`
+$git_status
+\`\`\`
+
+$([ -n "$git_log" ] && echo "### 最近提交" && echo "\`\`\`$git_log\`\`\`" || echo "")
+
+---
+
+## 📝 进度日志（最近）
+
+$progress_content
+
+---
+
+## ⏭️ 下一个待处理功能
+
+\`\`\`json
+$next_feature
+\`\`\`
+
+---
+
+## 📋 工作流程（必须按顺序执行）
+
+1. **获取上下文**
+   \`\`\`bash
+   pwd  # 确认工作目录
+   git log --oneline -10  # 查看最近提交
+   \`\`\`
+
+2. **读取功能清单**
+   - 阅读 \`$CURRENT_FEATURES\`
+   - 选择第一个 \`passes: false\` 的功能
+
+3. **验证基础功能**
+   - 运行 \`init.sh\` 启动开发服务器
+   - 使用浏览器自动化工具测试基本功能
+   - 如果发现现有 bug，先修复
+
+4. **实现单个功能**
+   - 编写代码实现该功能
+   - 运行测试验证
+   - 使用浏览器自动化端到端测试
+
+5. **更新状态**
+   - 只修改 \`passes\` 字段为 \`true\`
+   - **不要**删除或修改其他内容
+
+6. **提交进度**
+   \`\`\`bash
+   git add -A
+   git commit -m "feat: 完成功能 XXX"
+   \`\`\`
+
+7. **更新进度日志**
+   - 在 \`progress.md\` 添加会话记录
+
+8. **输出完成信号**
+   完成后必须单独一行输出:
+   \`\`\`
+   MISSION_COMPLETE
+   \`\`\`
+
+## ⚠️ 禁止事项
+
+- ❌ 不要一次实现多个功能
+- ❌ 不要删除或修改 features.json 中的测试步骤
+- ❌ 不要在未测试的情况下标记 passes: true
+- ❌ 不要留下未提交的代码
+
+EOF
 }
 
-# 归档当前任务
-archive_task() {
-    local name="${1:-task-$(date +%Y%m%d-%H%M%S)}"
-    local archive_dir="$TASKS_DIR/$name"
+# ============================================================
+# 运行 Claude
+# ============================================================
+run_claude() {
+    local context_prompt="$1"
+    local log_file="$2"
 
+    # 将 prompt 写入文件
+    local prompt_id="ralph-$$-$(date +%s)"
+    local prompt_file="$LOGS_DIR/${prompt_id}.txt"
+    echo "$context_prompt" > "$prompt_file"
+
+    log_info "Claude 已启动 (超时: ${CLAUDE_TIMEOUT}s)..."
+    log_step "Prompt: $prompt_file"
+    log_step "日志: $log_file"
+
+    local start_time=$(date +%s)
+
+    # macOS 兼容的超时实现
+    env -u CLAUDECODE claude -p "$prompt_file" >> "$log_file" 2>&1 &
+    local claude_pid=$!
+
+    # 等待进程完成或超时
+    local elapsed=0
+    local completed=0
+    while [ $elapsed -lt $CLAUDE_TIMEOUT ]; do
+        if ! kill -0 $claude_pid 2>/dev/null; then
+            completed=1
+            break
+        fi
+        sleep 1
+        elapsed=$((elapsed + 1))
+
+        # 每30秒显示进度
+        if [ $((elapsed % 30)) -eq 0 ]; then
+            printf "\r${BLUE}[INFO]${NC} 运行中... %ds/%ds " "$elapsed" "$CLAUDE_TIMEOUT"
+        fi
+    done
+    echo ""
+
+    if [ $completed -eq 0 ]; then
+        log_warn "执行超时，终止进程..."
+        kill $claude_pid 2>/dev/null
+        wait $claude_pid 2>/dev/null
+    fi
+
+    local end_time=$(date +%s)
+    local duration=$((end_time - start_time))
+
+    wait $claude_pid 2>/dev/null
+    local exit_code=$?
+
+    if [ $completed -eq 1 ] && [ $exit_code -eq 0 ]; then
+        log_ok "Claude 执行完成 (耗时: ${duration}s)"
+    else
+        log_warn "Claude 执行异常 (code: $exit_code, 耗时: ${duration}s)"
+    fi
+
+    # 清理旧的 prompt 文件
+    find "$LOGS_DIR" -name "ralph-*.txt" -mtime +1 -delete 2>/dev/null
+
+    return 0
+}
+
+# ============================================================
+# 检查干净状态
+# ============================================================
+check_clean_state() {
+    if git -C "$PROJECT_ROOT" rev-parse --git-dir >/dev/null 2>&1; then
+        local changes=$(git -C "$PROJECT_ROOT" status --short 2>/dev/null | wc -l | tr -d ' ')
+        if [ "$changes" -gt 0 ]; then
+            log_warn "工作区有 $changes 个未提交的更改"
+            return 1
+        fi
+    fi
+    return 0
+}
+
+# ============================================================
+# 归档任务
+# ============================================================
+auto_archive() {
+    local total_iterations="$1"
+    local status="${2:-completed}"
+
+    # 检查是否有任务文件
     if [ ! -f "$CURRENT_TASK" ]; then
         log_err "无当前任务可归档"
         exit 1
     fi
 
-    mkdir -p "$archive_dir"
-    cp "$CURRENT_TASK" "$archive_dir/task.md"
-    rm "$CURRENT_TASK"
+    # 提取任务名称（从 task.md 第一行标题）
+    local task_name=$(grep "^# 任务" "$CURRENT_TASK" 2>/dev/null | head -1 | sed 's/^# 任务[：:]//' | tr -d '[:space:]')
+    task_name="${task_name:-task-$(date +%Y%m%d-%H%M%S)}"
 
-    log_ok "已归档: $archive_dir/task.md"
-}
-
-# 自动归档（任务完成后调用）
-auto_archive() {
-    local total_iterations="$1"
-    local current_dir="$RALPH_DIR/current"
-    local verify_script="$current_dir/verify.sh"
-    local log_dir="$RALPH_DIR/logs"
-
-    # 从 task.md 提取任务名称
-    local task_name=$(grep "^# 任务：" "$CURRENT_TASK" | head -1 | sed 's/^# 任务：//' | tr -d '[:space:]')
-    task_name="${task_name:-completed-$(date +%Y%m%d-%H%M%S)}"
-
-    # 创建归档目录名：日期-任务名-循环次数
     local archive_name="$(date +%Y%m%d-%H%M%S)-${task_name}-iter${total_iterations}"
     local archive_dir="$TASKS_DIR/$archive_name"
 
     mkdir -p "$archive_dir"
 
-    # 复制任务文件
-    cp "$CURRENT_TASK" "$archive_dir/task.md"
+    log_info "归档任务到: $archive_dir"
 
-    # 复制验证脚本
-    if [ -f "$verify_script" ]; then
-        cp "$verify_script" "$archive_dir/verify.sh"
+    # 复制所有当前任务文件
+    local files_copied=0
+    if [ -f "$CURRENT_TASK" ]; then
+        cp "$CURRENT_TASK" "$archive_dir/task.md"
+        log_step "task.md"
+        files_copied=$((files_copied + 1))
+    fi
+    if [ -f "$CURRENT_FEATURES" ]; then
+        cp "$CURRENT_FEATURES" "$archive_dir/features.json"
+        log_step "features.json"
+        files_copied=$((files_copied + 1))
+    fi
+    if [ -f "$CURRENT_PROGRESS" ]; then
+        cp "$CURRENT_PROGRESS" "$archive_dir/progress.md"
+        log_step "progress.md"
+        files_copied=$((files_copied + 1))
+    fi
+    if [ -f "$CURRENT_INIT" ]; then
+        cp "$CURRENT_INIT" "$archive_dir/init.sh"
+        log_step "init.sh"
+        files_copied=$((files_copied + 1))
+    fi
+    if [ -f "$CURRENT_VERIFY" ]; then
+        cp "$CURRENT_VERIFY" "$archive_dir/verify.sh"
+        log_step "verify.sh"
+        files_copied=$((files_copied + 1))
     fi
 
-    # 复制相关日志
-    if [ -d "$log_dir" ]; then
+    # 复制日志
+    local logs_copied=0
+    if [ -d "$LOGS_DIR" ]; then
         mkdir -p "$archive_dir/logs"
-        cp "$log_dir"/*.log "$archive_dir/logs/" 2>/dev/null || true
-        cp "$log_dir"/*.hook "$archive_dir/logs/" 2>/dev/null || true
+
+        # 复制 .log 文件
+        for f in "$LOGS_DIR"/*.log; do
+            if [ -f "$f" ]; then
+                cp "$f" "$archive_dir/logs/"
+                logs_copied=$((logs_copied + 1))
+            fi
+        done
+
+        # 复制 .hook 文件
+        for f in "$LOGS_DIR"/*.hook; do
+            if [ -f "$f" ]; then
+                cp "$f" "$archive_dir/logs/"
+            fi
+        done
+
+        # 复制 ralph-*.txt prompt 文件
+        for f in "$LOGS_DIR"/ralph-*.txt; do
+            if [ -f "$f" ]; then
+                cp "$f" "$archive_dir/logs/"
+            fi
+        done
+
+        # 复制截图目录
+        if [ -d "$LOGS_DIR/screenshots" ]; then
+            cp -r "$LOGS_DIR/screenshots" "$archive_dir/logs/"
+        fi
+
+        log_step "logs/ ($logs_copied 个日志文件)"
     fi
 
-    # 创建归档摘要
+    # 计算功能完成率
+    local feature_stats=""
+    if [ -f "$CURRENT_FEATURES" ]; then
+        local total=$(grep -c '"id"' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+        local passed=$(grep -c '"passes": true' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+        feature_stats="- 功能: $passed/$total 通过"
+    fi
+
+    # 创建摘要
     cat > "$archive_dir/SUMMARY.md" << EOF
 # 归档摘要
 
 - 任务: $task_name
 - 完成时间: $(date -Iseconds)
 - 总循环次数: $total_iterations
-- 状态: ✅ 完成
+- 状态: ✅ $status
+$feature_stats
 
 ## 文件清单
 
 - task.md - 任务描述
+- features.json - 功能清单
+- progress.md - 进度日志
+- init.sh - 启动脚本
 - verify.sh - 验证脚本
-- logs/ - 循环日志
+- logs/ - 循环日志 ($logs_copied 个文件)
 
 EOF
 
-    # 清理当前任务
-    rm -f "$CURRENT_TASK" "$verify_script"
+    # 清理当前任务文件
+    rm -f "$CURRENT_TASK" "$CURRENT_FEATURES" "$CURRENT_PROGRESS" "$CURRENT_INIT" "$CURRENT_VERIFY"
 
-    log_ok "📁 已自动归档: $archive_dir"
-}
-
-# 重置当前任务
-reset_task() {
-    if [ ! -f "$CURRENT_TASK" ]; then
-        log_err "无当前任务"
-        exit 1
+    # 清理日志目录（已归档）
+    if [ -d "$LOGS_DIR" ]; then
+        rm -f "$LOGS_DIR"/*.log "$LOGS_DIR"/*.hook "$LOGS_DIR"/ralph-*.txt 2>/dev/null || true
+        rm -rf "$LOGS_DIR/screenshots" 2>/dev/null || true
+        log_step "已清理日志目录"
     fi
 
-    # 只保留失败日志之前的内容
-    sed -i '' '/^## 失败日志/,$d' "$CURRENT_TASK" 2>/dev/null || \
-        sed -i '/^## 失败日志/,$d' "$CURRENT_TASK"
-
-    # 重新添加空的失败日志部分
-    cat >> "$CURRENT_TASK" << 'EOF'
-
-## 失败日志
-
-<!-- 每轮失败后，Ralph Loop 会在此追加日志 -->
-EOF
-
-    log_ok "已重置失败日志"
+    log_ok "📁 已归档: $archive_dir"
+    log_info "文件: $files_copied 个, 日志: $logs_copied 个"
 }
 
-# 构建带上下文的 prompt
-build_context_prompt() {
-    local iteration=$1
-    local log_dir="$RALPH_DIR/logs"
-
-    # 获取 git 状态
-    local git_status=""
-    if git -C "$PROJECT_ROOT" rev-parse --git-dir >/dev/null 2>&1; then
-        git_status=$(git -C "$PROJECT_ROOT" status --short 2>/dev/null || echo "无法获取 git 状态")
-    else
-        git_status="非 git 仓库"
-    fi
-
-    # 获取最近修改的文件
-    local recent_changes=""
-    if git -C "$PROJECT_ROOT" rev-parse --git-dir >/dev/null 2>&1; then
-        recent_changes=$(git -C "$PROJECT_ROOT" diff --name-only HEAD~3 2>/dev/null | head -10 || echo "")
-    fi
-
-    cat << EOF
-# Ralph Loop 上下文
-
-你是 Ralph Loop 的执行实例（循环 #$iteration/$MAX_ITERATIONS）。
-
-Ralph Loop 是一个结束-重启模式的自动化循环框架。每次循环启动一个全新的 AI 实例来解决问题，完成后由外部脚本进行客观验证。若验证失败，失败日志会追加到任务文件供下一轮参考。
-
-## 项目信息
-- 项目目录: \`$PROJECT_ROOT\`
-- 任务文件: \`$CURRENT_TASK\`
-- 验证脚本: \`$CURRENT_DIR/verify.sh\`
-- 日志目录: \`$log_dir/\`
-
-## Git 状态
-\`\`\`
-$git_status
-\`\`\`
-
-$([ -n "$recent_changes" ] && echo "### 最近修改的文件" && echo "\`\`\`$recent_changes\`\`\`" || echo "")
-
-## 工作流程
-1. 阅读下方任务描述和失败日志（如有）
-2. 解决问题，修改代码
-3. 完成后会自动进行客观验证
-4. 若验证失败，失败日志会追加到任务文件
-
----
-
-$(cat "$CURRENT_TASK")
-EOF
-}
-
-# 确保tmux会话存在
-ensure_tmux_session() {
-    if ! tmux has-session -t "$TMUX_SESSION" 2>/dev/null; then
-        tmux new-session -d -s "$TMUX_SESSION" -c "$PROJECT_ROOT"
-        # 设置较大的历史缓冲区
-        tmux set-option -t "$TMUX_SESSION" history-limit 50000
-        log_info "创建 tmux 会话: $TMUX_SESSION"
-    fi
-}
-
-# 终止tmux会话
-kill_tmux_session() {
-    if tmux has-session -t "$TMUX_SESSION" 2>/dev/null; then
-        tmux kill-session -t "$TMUX_SESSION"
-        log_info "终止 tmux 会话: $TMUX_SESSION"
-    fi
-}
-
-# 捕获 tmux pane 内容到文件
-capture_pane() {
-    local output_file="$1"
-    tmux capture-pane -t "$TMUX_SESSION" -p -S -10000 > "$output_file" 2>/dev/null
-}
-
-# 在 tmux 中运行 claude 并等待完成
-run_claude_in_tmux() {
-    local context_prompt="$1"
-    local log_file="$2"
-    local timeout=$CLAUDE_TIMEOUT
-    local elapsed=0
-
-    # 确保会话存在
-    ensure_tmux_session
-
-    # 清空 pane，发送命令
-    tmux send-keys -t "$TMUX_SESSION" "clear" Enter
-    sleep 0.5
-
-    # 将 prompt 写入临时文件，让 claude 读取
-    local prompt_file="/tmp/ralph-prompt-$$.txt"
-    echo "$context_prompt" > "$prompt_file"
-
-    # 发送 claude 命令
-    tmux send-keys -t "$TMUX_SESSION" "claude -p '$prompt_file'" Enter
-
-    log_info "claude 已启动，等待完成 (超时: ${timeout}s)..."
-    log_info "可随时附加观察: tmux attach -t $TMUX_SESSION"
-
-    # 轮询检测完成状态
-    # 检测方式：pane 中出现 shell 提示符，且没有 claude 进程在运行
-    while [ $elapsed -lt $timeout ]; do
-        sleep $POLL_INTERVAL
-        elapsed=$((elapsed + POLL_INTERVAL))
-
-        # 检查 claude 进程是否还在运行
-        local claude_running=$(tmux send-keys -t "$TMUX_SESSION" "" 2>/dev/null && \
-            pgrep -f "claude.*ralph-prompt" > /dev/null 2>&1 && echo "1" || echo "0")
-
-        if [ "$claude_running" = "0" ]; then
-            # 检查是否回到了 shell 提示符
-            local pane_content=$(tmux capture-pane -t "$TMUX_SESSION" -p | tail -5)
-            if echo "$pane_content" | grep -qE '\$|#\s*$|>\s*$'; then
-                log_ok "claude 执行完成 (耗时: ${elapsed}s)"
-                break
-            fi
-        fi
-
-        # 显示进度
-        printf "\r${BLUE}[INFO]${NC} 等待中... %ds/%ds " "$elapsed" "$timeout"
-    done
-    echo ""
-
-    # 超时处理
-    if [ $elapsed -ge $timeout ]; then
-        log_warn "执行超时，发送 Ctrl-C..."
-        tmux send-keys -t "$TMUX_SESSION" C-c
-        sleep 2
-    fi
-
-    # 捕获完整输出
-    capture_pane "$log_file"
-
-    # 清理临时文件
-    rm -f "$prompt_file"
-
-    return 0
-}
-
-# 主循环
+# ============================================================
+# 主循环 (Coding Agent 模式)
+# ============================================================
 main() {
+    # 检查是否有任务
     if [ ! -f "$CURRENT_TASK" ]; then
-        log_err "无当前任务"
-        log_info "创建新任务: $0 --new"
-        exit 1
+        # 尝试从队列获取下一个任务
+        if get_next_task; then
+            local next_task=$(get_next_task)
+            log_info "从队列获取下一个任务: $next_task"
+            init_task "$next_task"
+        else
+            log_err "无当前任务"
+            log_info "创建新任务: $0 --init <task-file>"
+            log_info "添加到队列: $0 --enqueue <task-file>"
+            exit 1
+        fi
+    fi
+
+    # 检查功能清单
+    if [ ! -f "$CURRENT_FEATURES" ]; then
+        log_warn "无功能清单，运行初始化..."
+        init_task "$CURRENT_TASK"
     fi
 
     log_ralph "════════════════════════════════════════════════════════"
-    log_ralph "  Ralph Loop - 结束-重启模式 (tmux 版)"
+    log_ralph "  Ralph Loop v2.0 - Coding Agent 模式"
     log_ralph "════════════════════════════════════════════════════════"
     log_info "项目: $PROJECT_ROOT"
     log_info "任务: $CURRENT_TASK"
     log_info "熔断: 最大 $MAX_ITERATIONS 次循环"
-    log_info "tmux: $TMUX_SESSION (附加: tmux attach -t $TMUX_SESSION)"
+    echo ""
+
+    # 显示功能统计
+    local total_features=$(grep -c '"id"' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+    local passed_features=$(grep -c '"passes": true' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+    log_info "功能进度: $passed_features/$total_features 通过"
     echo ""
 
     local iter=0
-    local log_dir="$RALPH_DIR/logs"
-    mkdir -p "$log_dir"
-
-    # 清理可能存在的旧会话
-    kill_tmux_session
 
     while [ $iter -lt $MAX_ITERATIONS ]; do
         iter=$((iter + 1))
-        local log_file="$log_dir/iteration_$(printf '%03d' $iter).log"
+        local log_file="$LOGS_DIR/iteration_$(printf '%03d' $iter).log"
 
         log_ralph "────────────────────────────────────────────────────"
         log_ralph "循环 #$iter"
         log_ralph "────────────────────────────────────────────────────"
 
-        # 构建上下文
-        local context_prompt=$(build_context_prompt $iter)
-        log_info "注入上下文:"
-        echo "$context_prompt" | head -30
+        # 检查是否还有未完成的功能
+        local remaining=$(grep -c '"passes": false' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+        if [ "$remaining" -eq 0 ]; then
+            log_ok "════════════════════════════════════════════════════════"
+            log_ok "🎉 所有功能已完成！"
+            log_ok "════════════════════════════════════════════════════════"
+
+            auto_archive "$iter" "completed"
+            exit 0
+        fi
+
+        # 构建 prompt
+        local context_prompt=$(build_coding_prompt $iter)
+        log_info "注入上下文..."
+        echo "$context_prompt" | head -40
         echo ""
-        log_info "... (完整内容见任务文件)"
+        log_info "... (完整内容见日志)"
         echo ""
 
-        # 核心：在 tmux 中启动 claude
-        run_claude_in_tmux "$context_prompt" "$log_file"
+        # 运行 Claude
+        run_claude "$context_prompt" "$log_file"
 
         log_info "日志已保存: $log_file"
 
-        # Stop Hook：客观检查
-        log_info "Stop Hook: 客观检查..."
+        # Stop Hook: 验证
+        log_info "Stop Hook: 验证..."
 
         bash "$STOP_HOOK" 2>&1 | tee "${log_file}.hook"
         HOOK_EXIT_CODE=${PIPESTATUS[0]}
 
         if [ $HOOK_EXIT_CODE -eq 0 ]; then
-            log_ok "════════════════════════════════════════════════════════"
-            log_ok "🎉 客观标准达成！循环结束"
-            log_ok "总循环: $iter"
-            log_ok "════════════════════════════════════════════════════════"
+            # 检查功能完成率
+            local new_passed=$(grep -c '"passes": true' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
 
-            # 清理 tmux 会话
-            kill_tmux_session
+            if [ "$new_passed" -gt "$passed_features" ]; then
+                log_ok "════════════════════════════════════════════════════════"
+                log_ok "✅ 功能完成！($passed_features → $new_passed)"
+                log_ok "════════════════════════════════════════════════════════"
 
-            # 自动归档
-            auto_archive "$iter"
+                passed_features=$new_passed
 
-            exit 0
-        fi
+                # 更新进度日志
+                cat >> "$CURRENT_PROGRESS" << EOF
 
-        # 未通过：更新外部状态文件
-        log_warn "标准未达成，更新任务文件..."
+---
 
-        cat >> "$CURRENT_TASK" << EOF
+## 会话 #$(date +%Y%m%d-%H%M%S)
+
+- 时间: $(date -Iseconds)
+- 循环: #$iter
+- 状态: ✅ 功能完成
+- 进度: $passed_features/$total_features
+
+EOF
+            else
+                log_ok "验证通过，但无新功能完成"
+            fi
+
+            # 检查是否全部完成
+            remaining=$(grep -c '"passes": false' "$CURRENT_FEATURES" 2>/dev/null || echo "0")
+            if [ "$remaining" -eq 0 ]; then
+                log_ok "════════════════════════════════════════════════════════"
+                log_ok "🎉 所有功能已完成！任务结束"
+                log_ok "════════════════════════════════════════════════════════"
+
+                auto_archive "$iter" "completed"
+                exit 0
+            fi
+        else
+            # 失败：追加日志
+            log_warn "标准未达成，更新任务文件..."
+
+            cat >> "$CURRENT_TASK" << EOF
 
 ---
 
@@ -464,48 +887,106 @@ $(cat "${log_file}.hook" | head -30)
 
 EOF
 
-        log_info "已追加失败日志到 task.md"
+            # 更新进度日志
+            cat >> "$CURRENT_PROGRESS" << EOF
+
+---
+
+## 会话 #$(date +%Y%m%d-%H%M%S)
+
+- 时间: $(date -Iseconds)
+- 循环: #$iter
+- 状态: ❌ 验证失败
+- 进度: $passed_features/$total_features
+- 错误: $(cat "${log_file}.hook" | head -5)
+
+EOF
+
+            log_info "已追加失败日志"
+        fi
+
         sleep $DELAY_SECONDS
     done
 
     # 熔断
     log_err "════════════════════════════════════════════════════════"
     log_err "⚠️ 达到最大循环 ($MAX_ITERATIONS)，转人工审查"
-    log_err "日志: $log_dir"
-    log_err "tmux 会话保留，可附加查看: tmux attach -t $TMUX_SESSION"
+    log_err "日志: $LOGS_DIR"
     log_err "════════════════════════════════════════════════════════"
+
+    auto_archive "$iter" "failed-max-iterations"
     exit 1
 }
 
-# 附加到 tmux 会话
-attach_tmux() {
-    if tmux has-session -t "$TMUX_SESSION" 2>/dev/null; then
-        tmux attach -t "$TMUX_SESSION"
-    else
-        log_err "tmux 会话 '$TMUX_SESSION' 不存在"
-        exit 1
-    fi
-}
-
-# 参数处理
+# ============================================================
+# 命令处理
+# ============================================================
 case "${1:-}" in
-    --new|-n)
-        new_task "$2"
+    --init|-i)
+        init_task "$2"
         ;;
-    --task|-t)
-        set_task "$2"
+    --queue|-q)
+        cat "$TASK_QUEUE" 2>/dev/null || echo "队列为空"
+        ;;
+    --enqueue|-e)
+        enqueue_task "$2"
+        ;;
+    --dequeue|-d)
+        dequeue_task "$2"
+        ;;
+    --next|-n)
+        if get_next_task; then
+            echo "下一个任务: $(get_next_task)"
+        else
+            echo "队列为空"
+        fi
         ;;
     --status|-s)
         show_status
         ;;
+    --features|-f)
+        show_features
+        ;;
+    --progress|-p)
+        cat "$CURRENT_PROGRESS" 2>/dev/null || echo "无进度日志"
+        ;;
+    --tasks|-l)
+        show_tasks
+        ;;
     --archive|-a)
-        archive_task "$2"
+        auto_archive "0" "${2:-manual}"
         ;;
     --reset|-r)
-        reset_task
+        if [ -f "$CURRENT_TASK" ]; then
+            sed -i '' '/^## 失败日志/,$d' "$CURRENT_TASK" 2>/dev/null || \
+                sed -i '/^## 失败日志/,$d' "$CURRENT_TASK"
+            cat >> "$CURRENT_TASK" << 'EOF'
+
+## 失败日志
+
+<!-- 每轮失败后自动追加 -->
+EOF
+            log_ok "已重置失败日志"
+        else
+            log_err "无当前任务"
+        fi
         ;;
-    --attach)
-        attach_tmux
+    --clean|-c)
+        if check_clean_state; then
+            log_ok "工作区状态干净"
+        else
+            log_warn "请先提交或清理更改"
+            git -C "$PROJECT_ROOT" status --short
+        fi
+        ;;
+    --new)
+        if [ -f "$CURRENT_TASK" ]; then
+            log_info "归档现有任务..."
+            auto_archive "0" "new-task"
+        fi
+        cp "$TASK_TEMPLATE" "$CURRENT_TASK"
+        log_ok "已创建新任务: $CURRENT_TASK"
+        log_info "编辑任务后运行: $0 --init"
         ;;
     --help|-h)
         show_help

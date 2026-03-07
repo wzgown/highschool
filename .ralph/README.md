@@ -1,120 +1,311 @@
-# Ralph Loop 脚手架
+# Ralph Loop v2.0
 
-> 多任务复用的循环框架
-> 每个任务 = task.md + verify.sh
+> 基于 Anthropic "Effective harnesses for long-running agents" 最佳实践
+> 支持多任务队列、结构化功能清单、增量式进度跟踪
+
+## 核心设计
+
+Ralph Loop 是一个**长时运行任务调度器**，解决 AI 代理在多上下文窗口中持续工作的挑战。
+
+### 设计原则（来自 Anthropic 研究）
+
+| 问题 | 解决方案 |
+|------|----------|
+| AI 一次尝试做太多 | **增量工作** - 每次只做一个功能 |
+| AI 过早宣布完成 | **Feature List (JSON)** - 结构化功能清单，客观验证 |
+| AI 留下混乱状态 | **Clean State** - 每次会话结束确保代码可提交 |
+| AI 未正确测试 | **端到端验证** - 使用浏览器自动化工具 |
+| 上下文丢失 | **Progress File** - 记录已完成的工作 |
+
+### 两种工作模式
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  1. Initializer Agent (--init)                              │
+│     • 设置环境                                               │
+│     • 创建 features.json (功能清单)                          │
+│     • 创建 init.sh (启动脚本)                                │
+│     • 创建 progress.md (进度日志)                            │
+│                                                             │
+│  2. Coding Agent (默认)                                     │
+│     • 读取 features.json，选择未完成功能                      │
+│     • 实现单个功能                                           │
+│     • 端到端测试验证                                          │
+│     • 更新 passes: true                                      │
+│     • Git commit + 更新 progress.md                         │
+│     • 循环直到所有功能完成                                    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## 目录结构
 
 ```
 .ralph/
 ├── scripts/
-│   ├── run-ralph.sh      # 主循环脚本
-│   └── stop-hook.sh      # 执行 verify.sh
+│   ├── run-ralph.sh      # 主调度器
+│   └── stop-hook.sh      # 验证执行
 │
 ├── templates/
-│   ├── task-template.md  # 任务模板
-│   └── verify.sh         # 验证脚本模板
+│   ├── task-template.md       # 任务模板
+│   ├── features-template.json # 功能清单模板
+│   ├── progress-template.md   # 进度日志模板
+│   └── init-template.sh       # 启动脚本模板
 │
 ├── current/              # 当前任务
 │   ├── task.md           # 任务描述
-│   └── verify.sh         # 验证脚本 ⬅️ 必须存在
+│   ├── features.json     # 功能清单 ⬅️ 核心
+│   ├── progress.md       # 进度日志
+│   ├── init.sh           # 启动脚本
+│   └── verify.sh         # 验证脚本
+│
+├── queue/                # 任务队列
+│   └── task-queue.json   # 待执行任务列表
 │
 ├── tasks/                # 历史任务归档
 └── logs/                 # 循环日志
 ```
 
-## 核心设计
+## 快速开始
 
-### 每个任务两个文件
-
-| 文件 | 用途 |
-|------|------|
-| `task.md` | AI 读取的任务描述 |
-| `verify.sh` | Stop Hook 执行的验证脚本 |
-
-### 工作流程
-
-```
-┌─────────────────────────────────────────────┐
-│  1. 创建任务                                 │
-│     - current/task.md    (任务描述)         │
-│     - current/verify.sh  (验证脚本)         │
-│                                             │
-│  2. 运行循环                                │
-│     ↓                                       │
-│  ┌───────────────────────────────────────┐ │
-│  │ while 未达到 MAX_ITERATIONS:          │ │
-│  │                                       │ │
-│  │   # AI 读取 task.md                   │ │
-│  │   claude -p task.md                   │ │
-│  │                                       │ │
-│  │   # 执行 verify.sh（客观验证）        │ │
-│  │   bash stop-hook.sh                   │ │
-│  │   if 通过: break                      │ │
-│  │                                       │ │
-│  │   # 追加失败日志到 task.md            │ │
-│  └───────────────────────────────────────┘ │
-│     ↓                                       │
-│  3. 自动归档到 tasks/                       │
-└─────────────────────────────────────────────┘
-```
-
-## 使用方法
-
-### 创建新任务
+### 1. 创建新任务
 
 ```bash
-# 1. 复制模板
-cp .ralph/templates/task-template.md .ralph/current/task.md
-cp .ralph/templates/verify.sh .ralph/current/verify.sh
-
-# 2. 编辑任务描述
+# 方式一：从模板创建
+./.ralph/scripts/run-ralph.sh --new
 vim .ralph/current/task.md
+./.ralph/scripts/run-ralph.sh --init
 
-# 3. 编辑验证脚本 ⬅️ 关键！
-vim .ralph/current/verify.sh
-
-# 4. 运行循环
-./.ralph/scripts/run-ralph.sh
+# 方式二：使用现有任务文件
+./.ralph/scripts/run-ralph.sh --init path/to/task.md
 ```
 
-### verify.sh 示例
+### 2. 配置功能清单
+
+编辑 `.ralph/current/features.json`:
+
+```json
+{
+  "task_id": "F-20260306-001",
+  "task_name": "用户登录功能",
+  "created_at": "2026-03-06T10:00:00+08:00",
+  "features": [
+    {
+      "id": "F001",
+      "category": "functional",
+      "description": "用户可以使用邮箱和密码登录",
+      "priority": "high",
+      "steps": [
+        "打开登录页面",
+        "输入邮箱和密码",
+        "点击登录按钮",
+        "验证跳转到首页"
+      ],
+      "verify_command": "npm run test:e2e -- --grep 'login'",
+      "passes": false,
+      "completed_at": null,
+      "notes": ""
+    }
+  ]
+}
+```
+
+### 3. 配置启动脚本
+
+编辑 `.ralph/current/init.sh`:
+
+```bash
+#!/bin/bash
+echo "=== 初始化任务环境 ==="
+npm run dev &
+sleep 5
+echo "✅ 开发服务器已启动"
+```
+
+### 4. 配置验证脚本
+
+编辑 `.ralph/current/verify.sh`:
 
 ```bash
 #!/bin/bash
 set -e
+echo "=== 验证功能 ==="
 
-echo "=== 验证数据一致性 ==="
-
-# 直接查询数据库
-MISMATCH=$(docker exec db psql -t -c "
-SELECT COUNT(*) FROM table_a a
-JOIN table_b b ON a.id = b.a_id
-WHERE a.name != b.name;
-")
-
-if [ "$MISMATCH" -gt 0 ]; then
-    echo "❌ 发现 $MISMATCH 条不一致"
-    exit 1
-fi
+# 检查完成信号
+# 检查代码编译
+# 运行测试
 
 echo "✅ 验证通过"
+```
+
+### 5. 运行
+
+```bash
+./.ralph/scripts/run-ralph.sh
 ```
 
 ## 命令参考
 
 ```bash
-./.ralph/scripts/run-ralph.sh              # 运行当前任务
-./.ralph/scripts/run-ralph.sh --new        # 创建新任务
-./.ralph/scripts/run-ralph.sh --status     # 显示状态
-./.ralph/scripts/run-ralph.sh --archive    # 归档当前任务
-./.ralph/scripts/run-ralph.sh --reset      # 重置失败日志
-./.ralph/scripts/run-ralph.sh --help       # 显示帮助
+# 任务管理
+ralph                          # 运行当前任务（增量模式）
+ralph --init                   # 初始化新任务（Initializer Agent 模式）
+ralph --new                    # 创建空白任务
+ralph --status                 # 显示当前状态
+ralph --features               # 显示功能清单
+ralph --progress               # 显示进度日志
+ralph --tasks                  # 列出所有任务
+
+# 队列管理
+ralph --queue                  # 显示任务队列
+ralph --enqueue <file>         # 添加任务到队列
+ralph --dequeue <id>           # 从队列移除任务
+ralph --next                   # 从队列获取下一个任务
+
+# 维护
+ralph --archive [name]         # 归档当前任务
+ralph --reset                  # 重置失败日志
+ralph --clean                  # 检查工作区状态
+ralph --help                   # 显示帮助
 ```
+
+## 功能清单 (features.json) 规范
+
+### 为什么用 JSON 而不是 Markdown？
+
+根据 Anthropic 研究，AI 模型更不容易不当地修改或覆盖 JSON 文件，相比 Markdown 文件。
+
+### 字段说明
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `id` | string | 功能唯一标识（如 F001） |
+| `category` | string | 分类：functional, ui, api, etc. |
+| `description` | string | 功能描述 |
+| `priority` | string | 优先级：high, medium, low |
+| `steps` | array | 测试步骤 |
+| `verify_command` | string | 验证命令 |
+| `passes` | boolean | 是否通过（**只修改此字段**） |
+| `completed_at` | string | 完成时间 |
+| `notes` | string | 备注 |
+
+### AI 行为约束
+
+> ⚠️ **重要**：AI 只能修改 `passes` 字段，不允许删除或修改其他内容。
+
+```
+It is unacceptable to remove or edit tests because this could lead to missing or buggy functionality.
+```
+
+## 进度日志 (progress.md)
+
+每个会话结束后，AI 应该更新进度日志：
+
+```markdown
+# Ralph Progress Log
+
+## 任务信息
+- **任务ID**: F-20260306-001
+- **任务名称**: 用户登录功能
+- **开始时间**: 2026-03-06T10:00:00+08:00
+
+---
+
+## 会话记录
+
+### #20260306-101530
+- 时间: 2026-03-06T10:15:30+08:00
+- 循环: #1
+- 状态: ✅ 功能完成
+- 进度: 1/5
+- 完成功能: F001 - 用户登录
+```
+
+## 典型工作流程
+
+### Initializer Agent 会话
+
+```
+[Assistant] 我将初始化任务环境...
+
+[Tool Use] <read - task.md>
+[Tool Use] <write - features.json>  # 创建功能清单
+[Tool Use] <write - init.sh>        # 创建启动脚本
+[Tool Use] <write - progress.md>    # 创建进度日志
+
+[Assistant] 环境初始化完成。请编辑 features.json 添加功能列表。
+```
+
+### Coding Agent 会话
+
+```
+[Assistant] 我将开始工作...
+
+[Tool Use] <bash - pwd>
+[Tool Use] <read - features.json>
+[Tool Use] <bash - git log --oneline -10>
+[Tool Use] <bash - bash init.sh>    # 启动开发服务器
+
+[Assistant] 我看到 F001 (用户登录) 尚未完成，开始实现...
+
+[Tool Use] <edit - src/components/Login.vue>
+[Tool Use] <bash - npm run test>
+
+[Assistant] 功能已实现并测试通过，更新状态...
+
+[Tool Use] <edit - features.json>   # 只修改 passes: true
+
+[Assistant] 提交进度...
+
+[Tool Use] <bash - git add -A && git commit -m "feat: 完成用户登录功能">
+[Tool Use] <edit - progress.md>     # 更新进度日志
+
+MISSION_COMPLETE
+```
+
+## 端到端测试
+
+Anthropic 研究强调，AI 必须使用浏览器自动化工具进行端到端测试：
+
+```javascript
+// 示例：Playwright 测试
+test('用户登录', async ({ page }) => {
+  await page.goto('/login');
+  await page.fill('[data-testid="email"]', 'test@example.com');
+  await page.fill('[data-testid="password"]', 'password123');
+  await page.click('[data-testid="login-button"]');
+  await expect(page).toHaveURL('/');
+});
+```
+
+## 故障排除
+
+### AI 一次做太多
+
+- 检查 features.json 是否功能粒度太粗
+- 确保每个功能可以在一个会话内完成
+
+### AI 过早标记完成
+
+- 强化验证脚本
+- 添加端到端测试命令
+- 使用浏览器自动化验证
+
+### AI 留下混乱状态
+
+- 检查 git status
+- 运行 `ralph --clean` 检查状态
+- 要求 AI 提交前运行测试
+
+## 参考资料
+
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) - Anthropic Engineering Blog
+- [Claude 4 Prompting Guide](https://docs.anthropic.com/claude/docs/prompting)
 
 ## 关键要点
 
-1. **verify.sh 必须存在** - 没有 verify.sh 会报错
-2. **验证脚本直接检查数据** - 不依赖报告文件
-3. **返回 0 = 通过，非 0 = 失败** - 标准 bash 退出码
-4. **MISSION_COMPLETE** - AI 必须输出这个完成信号
+1. **features.json 必须存在** - 没有功能清单会报错
+2. **每次只做一个功能** - 增量式工作
+3. **只修改 passes 字段** - 不要删除测试步骤
+4. **端到端验证** - 使用浏览器自动化
+5. **干净状态** - Git commit + 更新 progress.md
+6. **MISSION_COMPLETE** - AI 必须输出完成信号

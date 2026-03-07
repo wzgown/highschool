@@ -1,0 +1,63 @@
+{
+  "task_id": "F-20260306-001",
+  "task_name": "中考成绩蘑菇云背景动效",
+  "created_at": "2026-03-06T22:45:00+08:00",
+  "features": [
+    {
+      "id": "F001",
+      "category": "component",
+      "description": "Vue 组件 ScoreCloudBackground.vue 已创建",
+      "priority": "high",
+      "passes": true,
+      "completed_at": "2026-03-06T22:30:00+08:00"
+    },
+    {
+      "id": "F002",
+      "category": "visual",
+      "description": "蘑菇云形态视觉效果",
+      "priority": "high",
+      "passes": true,
+      "completed_at": "2026-03-06T22:35:00+08:00"
+    },
+    {
+      "id": "F003",
+      "category": "performance",
+      "description": "动画流畅（FPS >= 30）",
+      "priority": "high",
+      "passes": true,
+      "completed_at": "2026-03-06T22:36:00+08:00"
+    },
+    {
+      "id": "F004",
+      "category": "visual",
+      "description": "暖色系配色（橙/红/金）",
+      "priority": "medium",
+      "passes": true,
+      "completed_at": "2026-03-06T22:37:00+08:00"
+    },
+    {
+      "id": "F005",
+      "category": "integration",
+      "description": "集成到 HomeView.vue",
+      "priority": "high",
+      "passes": true,
+      "completed_at": "2026-03-06T22:38:00+08:00"
+    },
+    {
+      "id": "F006",
+      "category": "responsive",
+      "description": "移动端适配和响应式设计",
+      "priority": "medium",
+      "passes": true,
+      "completed_at": "2026-03-06T22:39:00+08:00"
+    },
+    {
+      "id": "F007",
+      "category": "a11y",
+      "description": "支持 prefers-reduced-motion 无障碍",
+      "priority": "medium",
+      "passes": false,
+      "completed_at": null
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 <template>
   <div class="home-view">
+    <ScoreCloudBackground />
     <div class="hero-section">
       <div class="hero-content">
         <h1 class="hero-title">
@@ -146,6 +147,7 @@ import {
   List,
   MagicStick,
 } from '@element-plus/icons-vue';
+import ScoreCloudBackground from '@/components/ScoreCloudBackground.vue';
 
 const router = useRouter();
 
@@ -164,10 +166,14 @@ function viewHistory() {
 
 <style lang="scss" scoped>
 .home-view {
+  position: relative;
   padding-bottom: 40px;
+  overflow: hidden;
 }
 
 .hero-section {
+  position: relative;
+  z-index: 1;
   background: linear-gradient(135deg, #ecf5ff 0%, #f5f7fa 100%);
   border-radius: 16px;
   padding: 60px 40px;
@@ -208,6 +214,8 @@ function viewHistory() {
 }
 
 .features-section {
+  position: relative;
+  z-index: 1;
   margin-bottom: 40px;
 }
 
@@ -260,6 +268,8 @@ function viewHistory() {
 }
 
 .batch-section {
+  position: relative;
+  z-index: 1;
   margin-bottom: 40px;
 }
 
@@ -300,6 +310,8 @@ function viewHistory() {
 }
 
 .notice-section {
+  position: relative;
+  z-index: 1;
   max-width: 800px;
   margin: 0 auto;
 }
