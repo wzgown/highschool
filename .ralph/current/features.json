@@ -1,0 +1,24 @@
+{
+  "task_id": "TEST-001",
+  "task_name": "验证测试",
+  "features": [
+    {
+      "id": "F001",
+      "description": "文件存在检查",
+      "verify_command": "test -f /etc/passwd",
+      "passes": true
+    },
+    {
+      "id": "F002",
+      "description": "命令失败测试",
+      "verify_command": "false",
+      "passes": true
+    },
+    {
+      "id": "F003",
+      "description": "未完成的功能",
+      "verify_command": "echo 'should not run'",
+      "passes": false
+    }
+  ]
+}
