@@ -2,16 +2,12 @@
   <canvas
     ref="canvasRef"
     class="mushroom-cloud-canvas"
-    @mousemove="handleMouseMove"
-    @mouseleave="hoveredSegment = null"
-    @click="handleClick"
   ></canvas>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { scoreSegments, totalStudents, type ScoreSegment } from '@/data/mushroomCloudData'
+import { scoreSegments, type ScoreSegment } from '@/data/mushroomCloudData'
 
 interface Particle {
   x: number
@@ -41,15 +37,11 @@ const props = withDefaults(
   }
 )
 
-const router = useRouter()
-
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 let animationId: number | null = null
 let particles: Particle[] = []
 let prefersReducedMotion = false
 let startTime = 0
-
-const hoveredSegment = ref<ScoreSegment | null>(null)
 
 // 颜色方案 - 鲜艳的蓝紫渐变
 const COLORS = {
@@ -98,7 +90,7 @@ const initParticles = () => {
 
   const maxCount = Math.max(...scoreSegments.map((s) => s.count))
   const minScore = 400
-  const maxScore = 660
+  const maxScore = 720
 
   scoreSegments.forEach((segment, segIndex) => {
     const normalizedScore = (segment.scoreValue - minScore) / (maxScore - minScore)
@@ -142,8 +134,9 @@ const initParticles = () => {
       const sizeFactor = 0.5 + normalizedScore * 0.5
       const radius = Math.max(2, (2.5 + Math.random() * 4) * sizeFactor)
 
-      // 曳光弹效果 - 更频繁
-      const showScore = Math.random() < 0.2 && normalizedScore > 0.55
+      // 曳光弹效果 - 高分区域减少，低分区域增加
+      const showScoreProbability = normalizedScore > 0.8 ? 0.05 : normalizedScore > 0.6 ? 0.1 : 0.15
+      const showScore = Math.random() < showScoreProbability && normalizedScore > 0.4
 
       const scoreText = segment.label.replace('分', '').replace('以上', '+')
       const delay = segIndex * 15 + Math.random() * 80
@@ -171,53 +164,20 @@ const initParticles = () => {
 const resizeCanvas = () => {
   if (!canvasRef.value) return
   const canvas = canvasRef.value
-  const parent = canvas.parentElement
-  if (!parent) return
 
   const dpr = window.devicePixelRatio || 1
-  const rect = parent.getBoundingClientRect()
+  const width = window.innerWidth
+  const height = window.innerHeight
 
-  canvas.width = rect.width * dpr
-  canvas.height = rect.height * dpr
-  canvas.style.width = `${rect.width}px`
-  canvas.style.height = `${rect.height}px`
+  canvas.width = width * dpr
+  canvas.height = height * dpr
+  canvas.style.width = `${width}px`
+  canvas.style.height = `${height}px`
 
   const ctx = canvas.getContext('2d')
   if (ctx) ctx.scale(dpr, dpr)
 
   initParticles()
-}
-
-const handleMouseMove = (event: MouseEvent) => {
-  if (!canvasRef.value) return
-  const rect = canvasRef.value.getBoundingClientRect()
-  const x = event.clientX - rect.left
-  const y = event.clientY - rect.top
-
-  let closest: Particle | null = null
-  let minDist = Infinity
-
-  for (const p of particles) {
-    const dist = Math.sqrt((p.x - x) ** 2 + (p.y - y) ** 2)
-    if (dist < p.radius + 40 && dist < minDist) {
-      minDist = dist
-      closest = p
-    }
-  }
-
-  hoveredSegment.value = closest?.scoreSegment || null
-}
-
-const handleClick = () => {
-  if (hoveredSegment.value) {
-    router.push({
-      path: '/recommendation',
-      query: {
-        score: hoveredSegment.value.scoreValue.toString(),
-        segment: hoveredSegment.value.label,
-      },
-    })
-  }
 }
 
 const drawBackground = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
@@ -243,20 +203,17 @@ const drawBackground = (ctx: CanvasRenderingContext2D, width: number, height: nu
   ctx.fillRect(0, 0, width, height)
 }
 
-const drawParticle = (ctx: CanvasRenderingContext2D, particle: Particle, isHovered: boolean) => {
+const drawParticle = (ctx: CanvasRenderingContext2D, particle: Particle) => {
   const { x, y, radius, color, alpha, showScore, scoreText } = particle
 
   // 发光
-  const glow = isHovered ? 45 : showScore ? 32 : particle.scoreSegment.scoreValue > 620 ? 20 : 10
+  const glow = showScore ? 32 : particle.scoreSegment.scoreValue > 620 ? 20 : 10
   ctx.shadowBlur = glow
   ctx.shadowColor = color
 
-  const r = isHovered ? radius * 4 : radius
-  const a = isHovered ? 1 : alpha
-
   ctx.beginPath()
-  ctx.arc(x, y, r, 0, Math.PI * 2)
-  ctx.fillStyle = color + Math.round(a * 255).toString(16).padStart(2, '0')
+  ctx.arc(x, y, radius, 0, Math.PI * 2)
+  ctx.fillStyle = color + Math.round(alpha * 255).toString(16).padStart(2, '0')
   ctx.fill()
 
   ctx.shadowBlur = 0
@@ -320,8 +277,7 @@ const animate = (time: number) => {
     }
 
     if (particle.delay < elapsed) {
-      const isHovered = hoveredSegment.value?.id === particle.scoreSegment.id
-      drawParticle(ctx, particle, isHovered)
+      drawParticle(ctx, particle)
     }
   })
 
@@ -345,20 +301,16 @@ onUnmounted(() => {
 watch(() => props.particleDensity, initParticles)
 watch(() => props.animationSpeed, initParticles)
 
-defineExpose({
-  getHoveredSegment: () => hoveredSegment.value,
-  getTotalStudents: () => totalStudents,
-})
 </script>
 
 <style lang="scss" scoped>
 .mushroom-cloud-canvas {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  cursor: crosshair;
-  z-index: 0;
+  z-index: 9999;
+  pointer-events: none;
 }
 </style>
