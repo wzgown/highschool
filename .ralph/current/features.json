@@ -47,8 +47,8 @@
         "显示分数段详情浮层"
       ],
       "verify_command": "grep -q '分数排名' frontend/src/components/MushroomCloudBackground.vue",
-      "passes": false,
-      "completed_at": null,
+      "passes": true,
+      "completed_at": "2026-03-07T10:45:00+08:00",
       "notes": "第三阶段：标签和交互"
     },
     {

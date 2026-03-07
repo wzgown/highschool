@@ -1,5 +1,23 @@
 <template>
   <div class="mushroom-cloud-container" ref="containerRef">
+    <!-- 分数排名头部 -->
+    <div v-if="showLabels" class="score-ranking-header">
+      <div class="ranking-title">分数排名 TOP 20</div>
+      <div class="ranking-segments">
+        <span
+          v-for="segment in top20Segments"
+          :key="segment.id"
+          class="segment-badge"
+          :class="{ active: hoveredSegment?.id === segment.id }"
+          :style="{ backgroundColor: segment.color }"
+          @mouseenter="hoveredSegment = segment"
+          @mouseleave="hoveredSegment = null"
+        >
+          {{ segment.label }}
+        </span>
+      </div>
+    </div>
+
     <canvas
       ref="canvasRef"
       class="mushroom-cloud-canvas"
@@ -7,6 +25,40 @@
       @mouseleave="handleMouseLeave"
       @click="handleClick"
     ></canvas>
+
+    <!-- 分数段详情浮层 -->
+    <Transition name="tooltip-fade">
+      <div
+        v-if="hoveredSegment && showTooltip"
+        class="segment-tooltip"
+        :style="tooltipStyle"
+      >
+        <div class="tooltip-header">
+          <span class="tooltip-score" :style="{ color: hoveredSegment.color }">
+            {{ hoveredSegment.label }}
+          </span>
+        </div>
+        <div class="tooltip-body">
+          <div class="tooltip-row">
+            <span class="tooltip-label">人数:</span>
+            <span class="tooltip-value">{{ hoveredSegment.count }} 人</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-label">占比:</span>
+            <span class="tooltip-value">{{ getPercentage(hoveredSegment.count) }}%</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-label">竞争压力:</span>
+            <span class="tooltip-value" :style="{ color: hoveredSegment.color }">
+              {{ getPressureLevel(hoveredSegment.scoreValue) }}
+            </span>
+          </div>
+        </div>
+        <div class="tooltip-footer">
+          点击查看详情
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -18,6 +70,7 @@ import {
   COLOR_SCHEME,
   maxCount,
   totalStudents,
+  top20Segments,
   type ScoreSegment,
 } from '@/data/mushroomCloudData'
 
@@ -58,6 +111,31 @@ let prefersReducedMotion = false
 // 悬停状态
 const hoveredSegment = ref<ScoreSegment | null>(null)
 const mousePosition = ref({ x: 0, y: 0 })
+
+// 浮层控制
+const showTooltip = ref(true)
+const tooltipPosition = ref({ x: 0, y: 0 })
+
+// 浮层样式
+const tooltipStyle = computed(() => ({
+  left: `${Math.min(tooltipPosition.value.x + 20, (containerRef.value?.clientWidth || 400) - 220)}px`,
+  top: `${Math.min(tooltipPosition.value.y + 20, (containerRef.value?.clientHeight || 400) - 180)}px`,
+}))
+
+// 计算百分比
+const getPercentage = (count: number): string => {
+  return ((count / totalStudents) * 100).toFixed(2)
+}
+
+// 获取竞争压力等级
+const getPressureLevel = (score: number): string => {
+  if (score >= 630) return '极高'
+  if (score >= 600) return '很高'
+  if (score >= 570) return '较高'
+  if (score >= 540) return '中等'
+  if (score >= 510) return '较低'
+  return '低'
+}
 
 // 根据分数计算颜色 (使用配置文件中的方案)
 const getColorForScore = (score: number): string => {
@@ -194,6 +272,7 @@ const handleMouseMove = (event: MouseEvent) => {
   const y = event.clientY - rect.top
 
   mousePosition.value = { x, y }
+  tooltipPosition.value = { x, y }
 
   // 查找最近的粒子对应的分数段
   let closestParticle: Particle | null = null
@@ -363,5 +442,122 @@ defineExpose({
   height: 100%;
   cursor: crosshair;
   z-index: 0;
+}
+
+// 分数排名头部样式
+.score-ranking-header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 10;
+  padding: 15px 20px;
+  background: rgba(10, 10, 26, 0.85);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 145, 255, 0.2);
+}
+
+.ranking-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px rgba(0, 145, 255, 0.5);
+}
+
+.ranking-segments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.segment-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.85;
+
+  &:hover,
+  &.active {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px currentColor;
+  }
+}
+
+// 分数段详情浮层样式
+.segment-tooltip {
+  position: absolute;
+  z-index: 100;
+  min-width: 200px;
+  padding: 16px;
+  background: rgba(10, 10, 26, 0.95);
+  border-radius: 12px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 145, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.tooltip-header {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-score {
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tooltip-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tooltip-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.tooltip-footer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  color: rgba(0, 145, 255, 0.8);
+  text-align: center;
+}
+
+// 浮层过渡动画
+.tooltip-fade-enter-active,
+.tooltip-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tooltip-fade-enter-from,
+.tooltip-fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
 }
 </style>
