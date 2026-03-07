@@ -95,8 +95,8 @@
         "截图保存验证结果"
       ],
       "verify_command": "curl -s http://localhost:5173 > /dev/null",
-      "passes": false,
-      "completed_at": null,
+      "passes": true,
+      "completed_at": "2026-03-07T11:15:00+08:00",
       "notes": "第六阶段：端到端验证"
     }
   ]
