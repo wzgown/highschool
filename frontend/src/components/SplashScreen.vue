@@ -31,7 +31,7 @@ interface Particle {
 
 const props = withDefaults(
   defineProps<{
-    duration?: number // 总持续时间（毫秒）
+    duration?: number
     particleDensity?: number
   }>(),
   {
@@ -50,18 +50,15 @@ let animationId: number | null = null
 let particles: Particle[] = []
 let startTime = 0
 
-// 颜色方案 - 鲜艳的霓虹色，适合深色背景
+// 颜色方案 - 鲜艳的霓虹色
 const COLORS = {
-  top: '#00FFFF',     // 青色 - 最高分
-  high: '#00BFFF',    // 天蓝
-  midHigh: '#8B5CF6',  // 紫色
-  mid: '#EC4899',     // 粉红
-  low: '#F97316',      // 橙色
-  bottom: '#FBBF24',   // 金黄 - 最低分
+  top: '#00FFFF',
+  high: '#00BFFF',
+  midHigh: '#8B5CF6',
+  mid: '#EC4899',
+  low: '#F97316',
+  bottom: '#FBBF24',
 }
-
-// 背景颜色
-const BG_COLOR = '#030712'
 
 const getColorForScore = (score: number): string => {
   const minScore = 400
@@ -162,7 +159,7 @@ const resizeCanvas = () => {
 
 const drawBackground = (ctx: CanvasRenderingContext2D, width: number, height: number, globalAlpha: number) => {
   // 深色半透明背景
-  ctx.fillStyle = `rgba(3, 7, 18, ${0.92 * globalAlpha})`
+  ctx.fillStyle = `rgba(3, 7, 18, ${0.75 * globalAlpha})`
   ctx.fillRect(0, 0, width, height)
 
   // 顶部辉光
@@ -181,7 +178,7 @@ const drawParticle = (ctx: CanvasRenderingContext2D, particle: Particle, globalA
 
   if (finalAlpha < 0.01) return
 
-  const glow = showScore ? 12 : particle.scoreSegment.scoreValue > 620 ? 6 : 0
+  const glow = showScore ? 15 : particle.scoreSegment.scoreValue > 620 ? 10 : 5
   if (glow > 0) {
     ctx.shadowBlur = glow
     ctx.shadowColor = color
@@ -194,7 +191,7 @@ const drawParticle = (ctx: CanvasRenderingContext2D, particle: Particle, globalA
   ctx.shadowBlur = 0
 
   if (showScore && particle.progress > 0.3) {
-    const textAlpha = Math.min(0.6, (particle.progress - 0.3) * 2) * globalAlpha
+    const textAlpha = Math.min(0.8, (particle.progress - 0.3) * 2) * globalAlpha
     const fontSize = Math.max(12, radius * 4)
     ctx.font = `bold ${fontSize}px "SF Pro Display", -apple-system, sans-serif`
     ctx.fillStyle = color + Math.round(textAlpha * 255).toString(16).padStart(2, '0')
