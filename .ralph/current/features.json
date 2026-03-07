@@ -32,8 +32,8 @@
         "添加颜色渐变效果"
       ],
       "verify_command": "test -f frontend/src/components/MushroomCloudBackground.vue",
-      "passes": false,
-      "completed_at": null,
+      "passes": true,
+      "completed_at": "2026-03-07T10:40:00+08:00",
       "notes": "第二阶段：Canvas 实现"
     },
     {
