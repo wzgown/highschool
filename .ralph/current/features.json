@@ -62,8 +62,8 @@
         "添加返回按钮"
       ],
       "verify_command": "grep -q 'router.push' frontend/src/components/MushroomCloudBackground.vue",
-      "passes": false,
-      "completed_at": null,
+      "passes": true,
+      "completed_at": "2026-03-07T10:50:00+08:00",
       "notes": "第四阶段：页面跳转"
     },
     {

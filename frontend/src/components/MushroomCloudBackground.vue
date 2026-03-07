@@ -12,6 +12,7 @@
           :style="{ backgroundColor: segment.color }"
           @mouseenter="hoveredSegment = segment"
           @mouseleave="hoveredSegment = null"
+          @click.stop="handleSegmentClick(segment)"
         >
           {{ segment.label }}
         </span>
@@ -294,12 +295,28 @@ const handleMouseLeave = () => {
   hoveredSegment.value = null
 }
 
-// 点击处理
+// 点击处理 - 跳转到详情页
 const handleClick = () => {
   if (hoveredSegment.value) {
-    console.log('Clicked segment:', hoveredSegment.value.label)
-    // 后续F004会实现路由跳转
+    router.push({
+      path: '/recommendation',
+      query: {
+        score: hoveredSegment.value.scoreValue.toString(),
+        segment: hoveredSegment.value.label,
+      },
+    })
   }
+}
+
+// 点击分数段标签跳转
+const handleSegmentClick = (segment: ScoreSegment) => {
+  router.push({
+    path: '/recommendation',
+    query: {
+      score: segment.scoreValue.toString(),
+      segment: segment.label,
+    },
+  })
 }
 
 // 绘制背景渐变
