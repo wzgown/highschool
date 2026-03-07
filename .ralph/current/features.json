@@ -15,8 +15,8 @@
         "生成数据配置文件"
       ],
       "verify_command": "test -f frontend/src/data/mushroomCloudData.ts",
-      "passes": false,
-      "completed_at": null,
+      "passes": true,
+      "completed_at": "2026-03-07T10:40:00+08:00",
       "notes": "第一阶段：理解数据"
     },
     {
