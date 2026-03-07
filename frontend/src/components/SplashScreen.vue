@@ -50,11 +50,18 @@ let animationId: number | null = null
 let particles: Particle[] = []
 let startTime = 0
 
-// 颜色方案 - 单一蓝色系
+// 颜色方案 - 鲜艳的霓虹色，适合深色背景
 const COLORS = {
-  top: '#60A5FA',
-  bottom: '#1E3A5F',
+  top: '#00FFFF',     // 青色 - 最高分
+  high: '#00BFFF',    // 天蓝
+  midHigh: '#8B5CF6',  // 紫色
+  mid: '#EC4899',     // 粉红
+  low: '#F97316',      // 橙色
+  bottom: '#FBBF24',   // 金黄 - 最低分
 }
+
+// 背景颜色
+const BG_COLOR = '#030712'
 
 const getColorForScore = (score: number): string => {
   const minScore = 400
@@ -127,7 +134,7 @@ const initParticles = () => {
         targetY,
         radius,
         color: getColorForScore(segment.scoreValue),
-        alpha: 0.12 + normalizedScore * 0.15,
+        alpha: 0.95 + normalizedScore * 0.05,
         speed: 0.7 + Math.random() * 0.5,
         phase: Math.random() * Math.PI * 2,
         scoreSegment: segment,
@@ -154,10 +161,15 @@ const resizeCanvas = () => {
 }
 
 const drawBackground = (ctx: CanvasRenderingContext2D, width: number, height: number, globalAlpha: number) => {
-  ctx.clearRect(0, 0, width, height)
+  // 深色半透明背景
+  ctx.fillStyle = `rgba(3, 7, 18, ${0.92 * globalAlpha})`
+  ctx.fillRect(0, 0, width, height)
+
+  // 顶部辉光
   const gradient = ctx.createRadialGradient(width / 2, height * 0.15, 0, width / 2, height * 0.15, height * 0.7)
-  gradient.addColorStop(0, `rgba(96, 165, 250, ${0.15 * globalAlpha})`)
-  gradient.addColorStop(0.3, `rgba(59, 130, 246, ${0.08 * globalAlpha})`)
+  gradient.addColorStop(0, `rgba(0, 255, 255, ${0.35 * globalAlpha})`)
+  gradient.addColorStop(0.2, `rgba(139, 92, 246, ${0.25 * globalAlpha})`)
+  gradient.addColorStop(0.5, `rgba(236, 72, 153, ${0.15 * globalAlpha})`)
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
   ctx.fillStyle = gradient
   ctx.fillRect(0, 0, width, height)
