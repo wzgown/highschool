@@ -68,6 +68,19 @@
   - 更新 main.ts 注册 Pinia 插件
   - 类型检查通过
 
+### #20260308-231000
+- 时间: 2026-03-08T23:10:00+08:00
+- 循环: #4
+- 状态: ✅ 功能完成
+- 进度: 4/20
+- 完成功能: F004 - 迁移工具函数和组合式函数
+- 备注:
+  - 迁移 validators.ts（表单验证逻辑，包含 validateCandidateForm 和 getSubjectMaxScore）
+  - 迁移 useDeviceFingerprint.ts composable（设备指纹获取）
+  - 创建 utils/index.ts 和 composables/index.ts 统一导出
+  - device.ts 已有跨平台版本，无需迁移
+  - 类型检查通过
+
 ---
 
 ## 会话 #20260308-223238
