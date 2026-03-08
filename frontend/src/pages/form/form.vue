@@ -1122,4 +1122,176 @@ onMounted(() => {
   flex: 1;
   max-width: 320rpx;
 }
+
+/* ========================================
+   H5 桌面端优化
+   ======================================== */
+
+/* #ifdef H5 */
+// 桌面端 (>= 1024px)
+@media screen and (min-width: 1024px) {
+  .page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-bottom: 160rpx;
+  }
+
+  .steps {
+    padding: 40rpx 80rpx;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  }
+
+  .step-circle {
+    width: 56rpx;
+    height: 56rpx;
+    font-size: 28rpx;
+  }
+
+  .step-name {
+    font-size: 28rpx;
+  }
+
+  .step-content {
+    padding: 32rpx 48rpx;
+  }
+
+  .form-card {
+    border-radius: 20rpx;
+    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  }
+
+  .card-header {
+    padding: 28rpx 40rpx;
+  }
+
+  .card-title {
+    font-size: 36rpx;
+  }
+
+  .form-body {
+    padding: 32rpx 40rpx;
+  }
+
+  .form-label {
+    font-size: 30rpx;
+    margin-bottom: 20rpx;
+  }
+
+  .form-tip {
+    font-size: 26rpx;
+  }
+
+  .picker-input,
+  .number-input-wrapper {
+    height: 88rpx;
+    padding: 0 28rpx;
+    border-radius: 12rpx;
+    font-size: 30rpx;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      background-color: #f0f2f5;
+    }
+
+    &:focus-within {
+      background-color: #fff;
+      box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+    }
+  }
+
+  .number-input {
+    font-size: 30rpx;
+  }
+
+  .form-row {
+    gap: 32rpx;
+    margin-bottom: 40rpx;
+  }
+
+  .divider text {
+    font-size: 28rpx;
+  }
+
+  .checkbox {
+    width: 44rpx;
+    height: 44rpx;
+  }
+
+  .checkbox-label {
+    font-size: 30rpx;
+  }
+
+  .alert {
+    padding: 24rpx 28rpx;
+    font-size: 28rpx;
+  }
+
+  .volunteer-section {
+    margin-bottom: 48rpx;
+    padding-bottom: 40rpx;
+  }
+
+  .tag {
+    padding: 10rpx 20rpx;
+    font-size: 26rpx;
+  }
+
+  .section-hint {
+    font-size: 26rpx;
+  }
+
+  .volunteer-index {
+    width: 56rpx;
+    height: 56rpx;
+    font-size: 28rpx;
+  }
+
+  .clear-btn {
+    width: 64rpx;
+    height: 64rpx;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #ebedf0;
+    }
+  }
+
+  .form-actions {
+    max-width: 960px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20rpx 20rpx 0 0;
+  }
+
+  .action-btn {
+    max-width: 280rpx;
+    min-width: 200rpx;
+    height: 88rpx;
+    font-size: 32rpx;
+
+    &:hover {
+      transform: translateY(-2rpx);
+    }
+  }
+}
+
+// 大桌面端 (>= 1440px)
+@media screen and (min-width: 1440px) {
+  .page-container {
+    max-width: 1080px;
+  }
+
+  .form-card {
+    border-radius: 24rpx;
+  }
+
+  .form-actions {
+    max-width: 1080px;
+  }
+}
+/* #endif */
 </style>

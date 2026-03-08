@@ -17,6 +17,8 @@ onHide(() => {
 <style lang="scss">
 // 引入响应式样式
 @use './styles/responsive.scss';
+// 引入桌面端样式
+@use './styles/desktop.scss';
 
 /* ========================================
    全局样式
@@ -160,6 +162,30 @@ uni-page-body {
 @media screen and (min-width: 1024px) {
   uni-page-body {
     max-width: 960px;
+  }
+
+  // 桌面端页面内边距
+  .page-content {
+    padding: 32rpx 48rpx;
+  }
+}
+
+// 大桌面端 (>= 1440px)
+@media screen and (min-width: 1440px) {
+  uni-page-body {
+    max-width: 1200px;
+  }
+
+  // 大桌面端更大的内边距
+  .page-content {
+    padding: 48rpx 64rpx;
+  }
+}
+
+// 超大桌面端 (>= 1920px)
+@media screen and (min-width: 1920px) {
+  uni-page-body {
+    max-width: 1320px;
   }
 }
 

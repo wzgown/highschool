@@ -486,6 +486,62 @@ function viewHistory() {
   }
 }
 
+// 大桌面端 (>= 1440px)
+@media screen and (min-width: 1440px) {
+  .home-view {
+    max-width: 1320px;
+    padding: 64rpx 80rpx;
+  }
+
+  .hero-section {
+    padding: 120rpx 100rpx;
+    border-radius: 32rpx;
+  }
+
+  .title-text {
+    font-size: 52rpx;
+  }
+
+  .hero-subtitle {
+    font-size: 34rpx;
+    max-width: 800rpx;
+  }
+
+  .hero-actions {
+    gap: 24rpx;
+  }
+
+  .features-grid {
+    gap: 40rpx;
+  }
+
+  .feature-card {
+    padding: 40rpx;
+
+    &:hover {
+      transform: translateY(-12rpx);
+      box-shadow: 0 16rpx 40rpx rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .feature-title {
+    font-size: 34rpx;
+  }
+
+  .feature-desc {
+    font-size: 28rpx;
+  }
+
+  .batch-list {
+    gap: 32rpx;
+  }
+
+  .section-title {
+    font-size: 44rpx;
+    margin-bottom: 40rpx;
+  }
+}
+
 // 触摸设备优化
 @media (hover: none) and (pointer: coarse) {
   .feature-card {

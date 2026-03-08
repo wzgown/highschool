@@ -1035,4 +1035,286 @@ onMounted(() => {
 .form-actions .app-button {
   flex: 1;
 }
+
+/* ========================================
+   H5 桌面端优化
+   ======================================== */
+
+/* #ifdef H5 */
+// 桌面端 (>= 1024px)
+@media screen and (min-width: 1024px) {
+  .page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48rpx;
+    padding-bottom: 180rpx;
+  }
+
+  .steps-container {
+    padding: 32rpx 48rpx;
+    border-radius: 20rpx;
+    margin-bottom: 32rpx;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  }
+
+  .step-circle {
+    width: 56rpx;
+    height: 56rpx;
+  }
+
+  .step-number {
+    font-size: 28rpx;
+  }
+
+  .step-title {
+    font-size: 28rpx;
+  }
+
+  .step-line {
+    top: 28rpx;
+  }
+
+  .card {
+    border-radius: 20rpx;
+    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4rpx);
+      box-shadow: 0 8rpx 28rpx rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .card-header {
+    padding: 28rpx 40rpx;
+  }
+
+  .card-title {
+    font-size: 34rpx;
+  }
+
+  .card-body {
+    padding: 32rpx 40rpx;
+  }
+
+  .form-body {
+    padding: 24rpx 0;
+  }
+
+  .form-item {
+    margin-bottom: 36rpx;
+  }
+
+  .form-label {
+    font-size: 30rpx;
+    margin-bottom: 16rpx;
+  }
+
+  .picker-input {
+    padding: 24rpx 28rpx;
+    border-radius: 12rpx;
+    font-size: 30rpx;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #ebedf0;
+    }
+  }
+
+  .form-row {
+    gap: 32rpx;
+  }
+
+  .number-input {
+    padding: 24rpx 28rpx;
+    border-radius: 12rpx;
+    font-size: 30rpx;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #ebedf0;
+    }
+
+    &:focus {
+      background-color: #fff;
+      box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+    }
+  }
+
+  .checkbox-item {
+    gap: 20rpx;
+  }
+
+  .checkbox-label {
+    font-size: 30rpx;
+  }
+
+  .form-tip {
+    font-size: 26rpx;
+  }
+
+  .info-banner {
+    padding: 24rpx 32rpx;
+    border-radius: 16rpx;
+    margin-bottom: 32rpx;
+  }
+
+  .info-title {
+    font-size: 30rpx;
+  }
+
+  .info-text {
+    font-size: 26rpx;
+  }
+
+  .score-cards {
+    gap: 32rpx;
+  }
+
+  .score-card-header {
+    margin-bottom: 24rpx;
+  }
+
+  .score-form {
+    padding: 24rpx 0;
+  }
+
+  .score-result {
+    padding: 20rpx 24rpx;
+    border-radius: 12rpx;
+    font-size: 28rpx;
+  }
+
+  .tag {
+    padding: 8rpx 20rpx;
+    font-size: 26rpx;
+  }
+
+  .tag-small {
+    padding: 6rpx 16rpx;
+    font-size: 24rpx;
+  }
+
+  .empty-state.large {
+    padding: 100rpx 0;
+  }
+
+  .empty-text {
+    font-size: 28rpx;
+  }
+
+  .loading-container {
+    padding: 100rpx 0;
+  }
+
+  .loading-spinner {
+    width: 100rpx;
+    height: 100rpx;
+  }
+
+  .loading-text {
+    font-size: 32rpx;
+  }
+
+  .recommendations-container {
+    gap: 32rpx;
+  }
+
+  .segment-control {
+    border-radius: 16rpx;
+    overflow: hidden;
+  }
+
+  .segment-item {
+    padding: 28rpx;
+    font-size: 30rpx;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover:not(.active) {
+      background-color: #f5f7fa;
+    }
+  }
+
+  .conversion-card {
+    margin-bottom: 32rpx;
+  }
+
+  .conversion-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28rpx;
+  }
+
+  .conversion-item {
+    padding: 20rpx;
+    border-radius: 12rpx;
+    background-color: #f5f7fa;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #ebedf0;
+    }
+  }
+
+  .conversion-label {
+    font-size: 26rpx;
+  }
+
+  .conversion-value {
+    font-size: 32rpx;
+  }
+
+  .action-buttons {
+    gap: 32rpx;
+    margin-top: 40rpx;
+
+    .app-button {
+      min-width: 240rpx;
+      max-width: 320rpx;
+
+      &:hover {
+        transform: translateY(-4rpx);
+      }
+    }
+  }
+
+  .form-actions {
+    max-width: 960px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20rpx 20rpx 0 0;
+    padding: 28rpx 48rpx;
+
+    .app-button {
+      max-width: 280rpx;
+      min-width: 200rpx;
+      height: 88rpx;
+      font-size: 32rpx;
+
+      &:hover {
+        transform: translateY(-4rpx);
+      }
+    }
+  }
+}
+
+// 大桌面端 (>= 1440px)
+@media screen and (min-width: 1440px) {
+  .page-container {
+    max-width: 1080px;
+    padding: 64rpx;
+  }
+
+  .card {
+    border-radius: 24rpx;
+  }
+
+  .form-actions {
+    max-width: 1080px;
+  }
+}
+/* #endif */
 </style>

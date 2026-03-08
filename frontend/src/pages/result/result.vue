@@ -858,4 +858,255 @@ onLoad((options) => {
   margin-top: 40rpx;
   padding: 30rpx 0;
 }
+
+/* ========================================
+   H5 桌面端优化
+   ======================================== */
+
+/* #ifdef H5 */
+// 桌面端 (>= 1024px)
+@media screen and (min-width: 1024px) {
+  .result-view {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48rpx;
+  }
+
+  .loading-container,
+  .error-container {
+    padding: 160rpx 80rpx;
+  }
+
+  .status-title {
+    font-size: 44rpx;
+  }
+
+  .status-subtitle {
+    font-size: 32rpx;
+  }
+
+  .loading-hint {
+    font-size: 28rpx;
+  }
+
+  .skeleton {
+    padding: 0 80rpx;
+  }
+
+  .skeleton-item {
+    height: 40rpx;
+    margin-bottom: 32rpx;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    gap: 32rpx;
+
+    :deep(.app-button) {
+      min-width: 200rpx;
+    }
+  }
+
+  .result-header {
+    margin-bottom: 48rpx;
+  }
+
+  .result-title {
+    font-size: 48rpx;
+  }
+
+  .result-time {
+    font-size: 28rpx;
+  }
+
+  .result-section {
+    margin-bottom: 40rpx;
+
+    &:hover {
+      box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .section-title {
+    font-size: 36rpx;
+  }
+
+  .score-tag {
+    padding: 10rpx 24rpx;
+    font-size: 26rpx;
+  }
+
+  .prediction-content {
+    padding: 28rpx;
+  }
+
+  .prediction-label {
+    font-size: 32rpx;
+  }
+
+  .prediction-value {
+    font-size: 64rpx;
+  }
+
+  .status-tag {
+    padding: 10rpx 24rpx;
+    font-size: 26rpx;
+  }
+
+  .prediction-range {
+    font-size: 28rpx;
+  }
+
+  .probability-list {
+    gap: 24rpx;
+  }
+
+  .probability-item {
+    padding: 28rpx;
+    border-radius: 20rpx;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateX(8rpx);
+      box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .batch-tag {
+    padding: 8rpx 20rpx;
+    font-size: 24rpx;
+  }
+
+  .school-name {
+    font-size: 32rpx;
+  }
+
+  .progress-bar {
+    height: 28rpx;
+  }
+
+  .progress-text {
+    font-size: 28rpx;
+    min-width: 100rpx;
+  }
+
+  .risk-tag {
+    padding: 8rpx 20rpx;
+    font-size: 24rpx;
+  }
+
+  .score-diff {
+    margin-top: 16rpx;
+    font-size: 26rpx;
+  }
+
+  .strategy-content {
+    padding: 28rpx;
+  }
+
+  .sub-title {
+    font-size: 32rpx;
+    margin-bottom: 24rpx;
+  }
+
+  .gradient-info {
+    margin-bottom: 48rpx;
+  }
+
+  .gradient-bars {
+    gap: 24rpx;
+  }
+
+  .gradient-label {
+    width: 100rpx;
+    font-size: 28rpx;
+  }
+
+  .gradient-progress {
+    height: 24rpx;
+  }
+
+  .gradient-count {
+    width: 100rpx;
+    font-size: 26rpx;
+  }
+
+  .suggestions,
+  .warnings {
+    margin-top: 40rpx;
+  }
+
+  .list-items {
+    gap: 20rpx;
+  }
+
+  .list-item {
+    gap: 16rpx;
+    font-size: 28rpx;
+  }
+
+  .competitor-content {
+    padding: 28rpx;
+  }
+
+  .competitor-count {
+    font-size: 28rpx;
+    margin-bottom: 40rpx;
+  }
+
+  .distribution-chart {
+    margin-top: 28rpx;
+  }
+
+  .distribution-item {
+    margin-bottom: 20rpx;
+  }
+
+  .distribution-range {
+    width: 180rpx;
+    font-size: 26rpx;
+  }
+
+  .distribution-progress {
+    height: 20rpx;
+  }
+
+  .distribution-count {
+    width: 100rpx;
+    font-size: 26rpx;
+  }
+
+  .result-actions {
+    gap: 40rpx;
+    margin-top: 48rpx;
+    padding: 40rpx 0;
+
+    :deep(.app-button) {
+      min-width: 200rpx;
+
+      &:hover {
+        transform: translateY(-4rpx);
+      }
+    }
+  }
+}
+
+// 大桌面端 (>= 1440px)
+@media screen and (min-width: 1440px) {
+  .result-view {
+    max-width: 1080px;
+    padding: 64rpx;
+  }
+
+  .result-section {
+    border-radius: 24rpx;
+  }
+
+  .probability-item {
+    padding: 32rpx;
+  }
+}
+/* #endif */
 </style>

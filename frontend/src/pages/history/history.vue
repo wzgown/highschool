@@ -482,4 +482,147 @@ onMounted(() => {
     margin-top: 16rpx;
   }
 }
+
+/* ========================================
+   H5 桌面端优化
+   ======================================== */
+
+/* #ifdef H5 */
+// 桌面端 (>= 1024px)
+@media screen and (min-width: 1024px) {
+  .history-view {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48rpx;
+  }
+
+  .page-header {
+    margin-bottom: 40rpx;
+  }
+
+  .page-title {
+    font-size: 44rpx;
+  }
+
+  .page-subtitle {
+    font-size: 30rpx;
+  }
+
+  .summary-section {
+    margin-bottom: 40rpx;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32rpx;
+  }
+
+  .summary-item {
+    padding: 28rpx;
+    border-radius: 20rpx;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4rpx);
+      box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .summary-value {
+    font-size: 48rpx;
+    margin-bottom: 8rpx;
+  }
+
+  .summary-label {
+    font-size: 26rpx;
+  }
+
+  .empty-state {
+    padding: 160rpx 80rpx;
+  }
+
+  .empty-title {
+    font-size: 36rpx;
+  }
+
+  .empty-desc {
+    font-size: 30rpx;
+  }
+
+  .history-list {
+    gap: 28rpx;
+  }
+
+  .history-card {
+    border-radius: 20rpx;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4rpx);
+      box-shadow: 0 12rpx 32rpx rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .history-item {
+    padding: 32rpx;
+    gap: 32rpx;
+  }
+
+  .history-info {
+    gap: 20rpx;
+  }
+
+  .time-text {
+    font-size: 30rpx;
+  }
+
+  .stat-tag {
+    padding: 10rpx 20rpx;
+    font-size: 26rpx;
+  }
+
+  .action-btn {
+    padding: 16rpx 28rpx;
+    font-size: 28rpx;
+    transition: background-color 0.2s ease;
+
+    &.view:hover {
+      background-color: #ecf5ff;
+    }
+
+    &.delete:hover {
+      background-color: #fef0f0;
+    }
+  }
+
+  .load-more {
+    padding: 48rpx 0;
+  }
+
+  .load-more-text {
+    font-size: 30rpx;
+    cursor: pointer;
+
+    &:hover {
+      color: #337ecc;
+    }
+  }
+
+  .no-more {
+    font-size: 28rpx;
+  }
+}
+
+// 大桌面端 (>= 1440px)
+@media screen and (min-width: 1440px) {
+  .history-view {
+    max-width: 1080px;
+    padding: 64rpx;
+  }
+
+  .summary-grid {
+    gap: 40rpx;
+  }
+}
+/* #endif */
 </style>
