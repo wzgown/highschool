@@ -337,6 +337,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, reactive } from 'vue'
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import { AppCard, AppButton } from '@/components/common'
 import RecommendationPanel from '@/components/recommendation/RecommendationPanel.vue'
 import {
@@ -629,6 +630,21 @@ function reset() {
 onMounted(() => {
   loadDistricts()
 })
+
+// 小程序分享功能
+/* #ifdef MP-WEIXIN */
+onShareAppMessage(() => ({
+  title: '上海中考智能志愿推荐',
+  path: '/pages/index/index',
+  imageUrl: '/static/logo.png'
+}))
+
+onShareTimeline(() => ({
+  title: '上海中考招生模拟系统 - 智能志愿推荐',
+  query: '',
+  imageUrl: '/static/logo.png'
+}))
+/* #endif */
 </script>
 
 <style lang="scss" scoped>

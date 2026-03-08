@@ -153,6 +153,7 @@
 
 <script setup lang="ts">
 import { AppButton, AppCard } from '@/components/common'
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 
 function startRecommendation() {
   uni.navigateTo({ url: '/pages/recommendation/recommendation' })
@@ -165,6 +166,21 @@ function startAnalysis() {
 function viewHistory() {
   uni.navigateTo({ url: '/pages/history/history' })
 }
+
+// 小程序分享功能
+/* #ifdef MP-WEIXIN */
+onShareAppMessage(() => ({
+  title: '上海中考招生模拟系统',
+  path: '/pages/index/index',
+  imageUrl: '/static/logo.png'
+}))
+
+onShareTimeline(() => ({
+  title: '上海中考招生模拟系统 - 科学评估录取概率',
+  query: '',
+  imageUrl: '/static/logo.png'
+}))
+/* #endif */
 </script>
 
 <style lang="scss" scoped>

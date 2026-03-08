@@ -229,9 +229,9 @@
         "适配小程序分享功能"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": "使用条件编译 #ifdef MP-WEIXIN"
+      "passes": true,
+      "completed_at": "2026-03-09T01:15:00+08:00",
+      "notes": "使用条件编译 #ifdef MP-WEIXIN 实现分享功能(onShareAppMessage/onShareTimeline)、返回键拦截(onBackPress)、TabBar 配置（首页/填报/历史三个入口）"
     },
     {
       "id": "F015",

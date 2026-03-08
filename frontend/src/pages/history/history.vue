@@ -92,6 +92,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
+import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 import { useHistoryStore } from '@/stores/history';
 import { getHistory, deleteHistory, deleteAllHistory } from '@/api/candidate';
 import type { HistorySummary } from '@/api/candidate';
@@ -237,6 +238,21 @@ async function loadMore() {
 onMounted(() => {
   loadHistory();
 });
+
+// 小程序分享功能
+/* #ifdef MP-WEIXIN */
+onShareAppMessage(() => ({
+  title: '上海中考招生模拟系统 - 历史记录',
+  path: '/pages/index/index',
+  imageUrl: '/static/logo.png'
+}))
+
+onShareTimeline(() => ({
+  title: '上海中考招生模拟系统 - 科学评估录取概率',
+  query: '',
+  imageUrl: '/static/logo.png'
+}))
+/* #endif */
 </script>
 
 <style lang="scss" scoped>

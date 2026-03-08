@@ -245,7 +245,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 import { AppButton, AppCard } from '@/components/common';
 import { getAnalysisResult } from '@/api/candidate';
 import type { AnalysisResult } from '@/api/candidate';
@@ -388,6 +388,21 @@ onLoad((options) => {
     loading.value = false;
   }
 });
+
+// 小程序分享功能
+/* #ifdef MP-WEIXIN */
+onShareAppMessage(() => ({
+  title: '我的中考志愿分析报告',
+  path: '/pages/index/index',
+  imageUrl: '/static/logo.png'
+}))
+
+onShareTimeline(() => ({
+  title: '上海中考招生模拟系统 - 科学评估录取概率',
+  query: '',
+  imageUrl: '/static/logo.png'
+}))
+/* #endif */
 </script>
 
 <style lang="scss" scoped>

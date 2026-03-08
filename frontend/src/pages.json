@@ -15,7 +15,10 @@
 		{
 			"path": "pages/form/form",
 			"style": {
-				"navigationBarTitleText": "志愿填报"
+				"navigationBarTitleText": "志愿填报",
+				"mp-weixin": {
+					"disableScroll": false
+				}
 			}
 		},
 		{
@@ -41,6 +44,32 @@
 			"navigationBarBackgroundColor": "#409EFF",
 			"navigationBarTextStyle": "white"
 		}
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#409EFF",
+		"backgroundColor": "#ffffff",
+		"borderStyle": "black",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/tabbar/home.svg",
+				"selectedIconPath": "static/tabbar/home-active.svg"
+			},
+			{
+				"pagePath": "pages/form/form",
+				"text": "填报",
+				"iconPath": "static/tabbar/form.svg",
+				"selectedIconPath": "static/tabbar/form-active.svg"
+			},
+			{
+				"pagePath": "pages/history/history",
+				"text": "历史",
+				"iconPath": "static/tabbar/history.svg",
+				"selectedIconPath": "static/tabbar/history-active.svg"
+			}
+		]
 	},
 	"easycom": {
 		"autoscan": true,

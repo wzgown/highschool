@@ -436,6 +436,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
+import { onBackPress, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 import { AppButton } from '@/components/common';
 import { useCandidateStore } from '@/stores/candidate';
 import {
@@ -747,6 +748,43 @@ watch(
 onMounted(() => {
   loadDistricts();
 });
+
+// 小程序返回键处理 - 有数据时提示确认
+/* #ifdef MP-WEIXIN */
+onBackPress(() => {
+  // 如果在第一步且没有任何输入，直接返回
+  if (currentStep.value === 0 && !form.value.districtId && !form.value.middleSchoolId) {
+    return false // 允许返回
+  }
+
+  // 否则显示确认对话框
+  uni.showModal({
+    title: '提示',
+    content: '确定要离开吗？当前填写的内容将不会保存。',
+    success: (res) => {
+      if (res.confirm) {
+        // 用户确认离开，重置表单并返回
+        store.reset()
+        uni.navigateBack()
+      }
+    }
+  })
+  return true // 阻止默认返回行为
+})
+
+// 小程序分享功能
+onShareAppMessage(() => ({
+  title: '上海中考志愿填报分析',
+  path: '/pages/index/index',
+  imageUrl: '/static/logo.png'
+}))
+
+onShareTimeline(() => ({
+  title: '上海中考招生模拟系统 - 科学评估录取概率',
+  query: '',
+  imageUrl: '/static/logo.png'
+}))
+/* #endif */
 </script>
 
 <style lang="scss" scoped>
