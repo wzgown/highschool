@@ -95,6 +95,22 @@
   - 创建 components/common/index.ts 统一导出
   - 类型检查通过
 
+### #20260308-233000
+- 时间: 2026-03-08T23:30:00+08:00
+- 循环: #6
+- 状态: ✅ 功能完成
+- 进度: 6/20
+- 完成功能: F006 - 迁移首页 (HomeView)
+- 备注:
+  - 迁移首页到 uni-app 格式，使用 view 替代 div
+  - 使用 AppButton/AppCard 组件替代 Element Plus
+  - 使用 uni-icons 替代 @element-plus/icons-vue
+  - 使用 uni.navigateTo 替代 vue-router
+  - 添加 rpx 响应式单位和 H5 条件编译
+  - 更新 pages.json 添加 5 个页面路由
+  - 创建占位页面（recommendation/form/result/history）
+  - 类型检查通过
+
 ---
 
 ## 会话 #20260308-223238
@@ -119,4 +135,14 @@
 - 循环: #1
 - 状态: ✅ 功能完成
 - 进度: 4/20
+
+
+---
+
+## 会话 #20260308-231339
+
+- 时间: 2026-03-08T23:13:39+08:00
+- 循环: #2
+- 状态: ✅ 功能完成
+- 进度: 5/20
 

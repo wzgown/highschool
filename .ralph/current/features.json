@@ -97,9 +97,9 @@
         "H5 端验证功能正常"
       ],
       "verify_command": "test -f frontend/src/pages/index/index.vue && cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": ""
+      "passes": true,
+      "completed_at": "2026-03-08T23:30:00+08:00",
+      "notes": "迁移首页到 uni-app 格式，使用 AppButton/AppCard 组件，添加占位页面（recommendation/form/result/history），更新 pages.json 路由配置"
     },
     {
       "id": "F007",

@@ -5,6 +5,30 @@
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
+		},
+		{
+			"path": "pages/recommendation/recommendation",
+			"style": {
+				"navigationBarTitleText": "智能志愿推荐"
+			}
+		},
+		{
+			"path": "pages/form/form",
+			"style": {
+				"navigationBarTitleText": "志愿填报"
+			}
+		},
+		{
+			"path": "pages/result/result",
+			"style": {
+				"navigationBarTitleText": "分析结果"
+			}
+		},
+		{
+			"path": "pages/history/history",
+			"style": {
+				"navigationBarTitleText": "历史记录"
+			}
 		}
 	],
 	"globalStyle": {
