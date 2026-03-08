@@ -37,6 +37,9 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "^1.10.0",
+    "@connectrpc/connect": "^1.6.1",
+    "@connectrpc/connect-web": "^1.6.1",
     "@dcloudio/uni-app": "3.0.0-4080420251103001",
     "@dcloudio/uni-app-harmony": "3.0.0-4080420251103001",
     "@dcloudio/uni-app-plus": "3.0.0-4080420251103001",
@@ -54,6 +57,7 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4080420251103001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4080420251103001",
     "@dcloudio/uni-ui": "^1.5.11",
+    "@fingerprintjs/fingerprintjs": "^5.1.0",
     "vue": "^3.4.21",
     "vue-i18n": "^9.1.9"
   },
