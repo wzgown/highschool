@@ -58,18 +58,37 @@ export function isApp(): boolean {
 }
 
 /**
+ * Production API base URL for WeChat mini program
+ * This domain must be configured in WeChat Mini Program Admin Console
+ * under: Development -> Development Settings -> Server Domain -> request合法域名
+ */
+const MP_PRODUCTION_API_URL = 'https://api.shhighschool.example.com';
+
+/**
  * Get platform-specific base URL for API
  */
 export function getApiBaseUrl(): string {
   // In uni-app, we can use environment variables
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
+  const envBaseUrl = import.meta.env.VITE_API_BASE_URL as string | undefined;
 
-  // For mini programs, we might need to use different domains
-  // due to domain whitelist requirements
-  if (isMiniProgram() && !baseUrl) {
-    // Default production URL for mini programs
-    return 'https://api.example.com';
+  // If environment variable is set, use it
+  if (envBaseUrl) {
+    return envBaseUrl;
   }
 
-  return baseUrl;
+  // For mini programs in production without env variable, use production URL
+  // This handles cases where env variables might not be injected in MP builds
+  if (isMiniProgram()) {
+    return MP_PRODUCTION_API_URL;
+  }
+
+  // Default to localhost for H5 development
+  return 'http://localhost:8080';
+}
+
+/**
+ * Check if debug mode is enabled
+ */
+export function isDebugMode(): boolean {
+  return import.meta.env.VITE_DEBUG === 'true';
 }

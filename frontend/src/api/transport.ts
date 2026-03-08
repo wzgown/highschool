@@ -2,7 +2,7 @@
  * Cross-platform transport adapter for Connect-RPC
  * Handles network requests for H5 and mini programs
  */
-import { isH5, isMiniProgram, getApiBaseUrl } from '@/utils/platform';
+import { isH5, isMiniProgram, getApiBaseUrl, isDebugMode } from '@/utils/platform';
 
 /**
  * Custom fetch adapter for uni-app
@@ -21,6 +21,20 @@ export interface TransportResponse {
   status: number;
   headers: Record<string, string>;
   data: ArrayBuffer;
+}
+
+/**
+ * Network error class for mini program specific errors
+ */
+export class MpNetworkError extends Error {
+  constructor(
+    message: string,
+    public readonly code: number,
+    public readonly originalError?: unknown
+  ) {
+    super(message);
+    this.name = 'MpNetworkError';
+  }
 }
 
 /**
@@ -61,6 +75,11 @@ export function createUniFetch(baseUrl: string) {
       }
     }
 
+    // Debug logging
+    if (isDebugMode()) {
+      console.log(`[MP Request] ${method} ${fullUrl}`);
+    }
+
     return new Promise((resolve, reject) => {
       uni.request({
         url: fullUrl,
@@ -70,6 +89,25 @@ export function createUniFetch(baseUrl: string) {
         timeout: init?.signal ? undefined : 30000,
         responseType: 'arraybuffer',
         success: (res) => {
+          // Debug logging
+          if (isDebugMode()) {
+            console.log(`[MP Response] ${res.statusCode}`, res.header);
+          }
+
+          // Handle common HTTP errors
+          if (res.statusCode === 401) {
+            reject(new MpNetworkError('Unauthorized - Please login again', 401));
+            return;
+          }
+          if (res.statusCode === 403) {
+            reject(new MpNetworkError('Access forbidden', 403));
+            return;
+          }
+          if (res.statusCode >= 500) {
+            reject(new MpNetworkError(`Server error: ${res.statusCode}`, res.statusCode));
+            return;
+          }
+
           // Create a Response-like object
           const response = new Response(res.data as ArrayBuffer, {
             status: res.statusCode,
@@ -78,7 +116,39 @@ export function createUniFetch(baseUrl: string) {
           resolve(response);
         },
         fail: (err) => {
-          reject(new Error(err.errMsg || 'Network request failed'));
+          // Handle mini program specific errors
+          const errorMsg = err.errMsg || 'Network request failed';
+          if (isDebugMode()) {
+            console.error(`[MP Error] ${errorMsg}`, err);
+          }
+
+          // Check for common mini program network errors
+          if (errorMsg.includes('url not in domain list')) {
+            reject(new MpNetworkError(
+              'API domain not configured. Please add the domain in WeChat Mini Program Admin Console.',
+              -1,
+              err
+            ));
+            return;
+          }
+          if (errorMsg.includes('request:fail')) {
+            reject(new MpNetworkError(
+              'Network connection failed. Please check your internet connection.',
+              -1,
+              err
+            ));
+            return;
+          }
+          if (errorMsg.includes('timeout')) {
+            reject(new MpNetworkError(
+              'Request timeout. Please try again.',
+              -1,
+              err
+            ));
+            return;
+          }
+
+          reject(new MpNetworkError(errorMsg, -1, err));
         },
       });
     });

@@ -245,9 +245,9 @@
         "验证 API 调用正常"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": ""
+      "passes": true,
+      "completed_at": "2026-03-09T12:30:00+08:00",
+      "notes": "创建 .env.development/.env.production 环境配置文件；更新 platform.ts 支持 VITE_API_BASE_URL 环境变量；更新 transport.ts 添加 MpNetworkError 错误类和详细的错误处理（域名未配置、网络失败、超时等）；更新 manifest.json 添加合法域名配置说明；类型检查通过，小程序构建成功"
     },
     {
       "id": "F016",
