@@ -113,8 +113,23 @@ cat "$FEATURES_FILE" | tr '\n' ' ' | sed -e 's/} *,/}\'$'\n/g' -e 's/} *{/}\'$'\
         echo "  验证 [$FID]: $FDESC..."
         echo "    命令: $VCMD"
 
-        # 执行验证命令
-        if eval "$VCMD" >/dev/null 2>&1; then
+        # 执行验证命令 (带30秒超时，macOS兼容)
+        VERIFY_PID=""
+        ( eval "$VCMD" >/dev/null 2>&1 ) & VERIFY_PID=$!
+        (
+            sleep 30
+            if kill -0 $VERIFY_PID 2>/dev/null; then
+                kill $VERIFY_PID 2>/dev/null
+            fi
+        ) & WATCHDOG_PID=$!
+
+        wait $VERIFY_PID 2>/dev/null
+        VERIFY_EXIT=$?
+
+        kill $WATCHDOG_PID 2>/dev/null
+        wait $WATCHDOG_PID 2>/dev/null
+
+        if [ $VERIFY_EXIT -eq 0 ]; then
             echo -e "    ${GREEN}✅ 通过${NC}"
             echo "pass" >> /tmp/ralph_verify_pass_$$
         else

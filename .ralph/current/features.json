@@ -80,9 +80,9 @@
         "编写组件 Storybook 文档"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": "基于 uni-ui 封装，统一 API"
+      "passes": true,
+      "completed_at": "2026-03-08T23:20:00+08:00",
+      "notes": "创建了 AppButton、AppInput、AppCard、AppLoading 四个通用组件，基于 uni-ui 封装，支持三端适配"
     },
     {
       "id": "F006",
