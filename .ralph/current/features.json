@@ -115,9 +115,9 @@
         "H5 端验证表单提交正常"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": "核心页面，确保功能完整"
+      "passes": true,
+      "completed_at": "2026-03-08T23:45:00+08:00",
+      "notes": "完整迁移三步骤表单：基本信息、成绩信息、志愿填报；使用 uni-app picker 组件替代 Element Plus；添加 formatFormToRequest 函数到 candidate API"
     },
     {
       "id": "F008",

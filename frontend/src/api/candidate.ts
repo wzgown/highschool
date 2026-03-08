@@ -3,13 +3,15 @@
  * Handles candidate analysis, history, and related operations
  */
 import { candidateClient } from './connect';
-import type {
-  AnalysisResult,
-  HistorySummary,
+import {
   CandidateInfo,
   CandidateScores,
   RankingInfo,
   Volunteers,
+} from '@/gen/highschool/v1/candidate_pb';
+import type {
+  AnalysisResult,
+  HistorySummary,
 } from '@/gen/highschool/v1/candidate_pb';
 
 // Re-export types
@@ -102,4 +104,53 @@ export async function deleteHistory(id: string): Promise<void> {
  */
 export async function deleteAllHistory(): Promise<void> {
   await candidateClient.deleteHistory({});
+}
+
+/**
+ * Format form data to API request format
+ */
+export async function formatFormToRequest(form: {
+  districtId: number | null;
+  middleSchoolId: number | null;
+  hasQuotaSchoolEligibility: boolean;
+  scores: {
+    total: number;
+    chinese: number;
+    math: number;
+    foreign: number;
+    integrated: number;
+    ethics: number;
+    history: number;
+    pe: number;
+  };
+  ranking: { rank: number; totalStudents: number };
+  comprehensiveQuality: number;
+  volunteers: {
+    quotaDistrict: number | null;
+    quotaSchool: number[];
+    unified: number[];
+  };
+}): Promise<SubmitAnalysisRequest> {
+  const { getDeviceId } = await import('@/utils/device');
+  const deviceId = await getDeviceId();
+
+  return {
+    candidate: new CandidateInfo({
+      districtId: form.districtId!,
+      middleSchoolId: form.middleSchoolId!,
+      hasQuotaSchoolEligibility: form.hasQuotaSchoolEligibility,
+    }),
+    scores: new CandidateScores({ ...form.scores }),
+    ranking: new RankingInfo({
+      rank: form.ranking.rank,
+      totalStudents: form.ranking.totalStudents,
+    }),
+    comprehensiveQuality: form.comprehensiveQuality,
+    volunteers: new Volunteers({
+      quotaDistrict: form.volunteers.quotaDistrict ?? undefined,
+      quotaSchool: form.volunteers.quotaSchool.filter((id) => id !== 0).slice(0, 2),
+      unified: form.volunteers.unified.filter((id) => id !== 0).slice(0, 15),
+    }),
+    deviceId,
+  };
 }
