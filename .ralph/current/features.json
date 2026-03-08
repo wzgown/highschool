@@ -149,9 +149,9 @@
         "H5 端验证列表操作正常"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": ""
+      "passes": true,
+      "completed_at": "2026-03-08T23:45:00+08:00",
+      "notes": "完整迁移历史记录页：使用 AppCard 替代 el-card，使用 uni.showModal 替代 ElMessageBox，使用 uni.showToast 替代 ElMessage，使用自定义标签替代 el-tag，添加骨架屏加载效果，实现加载更多功能"
     },
     {
       "id": "F010",
