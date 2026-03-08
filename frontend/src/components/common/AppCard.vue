@@ -68,10 +68,12 @@ function handleClick(event: MouseEvent) {
   background-color: #fff;
   border-radius: 16rpx;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  // 移动端触摸优化
+  -webkit-tap-highlight-color: transparent;
 
   &--always {
-    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
   }
 
   &--hover {
@@ -86,11 +88,23 @@ function handleClick(event: MouseEvent) {
     cursor: pointer;
 
     &:active {
-      transform: scale(0.98);
-      box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.12);
+      transform: scale(0.99);
+      box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
     }
   }
 }
+
+/* #ifdef H5 */
+// H5 桌面端 hover 效果
+@media (hover: hover) and (pointer: fine) {
+  .app-card {
+    &--hoverable:hover {
+      transform: translateY(-4rpx);
+      box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+/* #endif */
 
 .app-card__header {
   display: flex;

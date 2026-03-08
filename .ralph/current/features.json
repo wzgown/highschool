@@ -181,9 +181,9 @@
         "测试主流移动设备"
       ],
       "verify_command": "cd frontend && npm run build:h5",
-      "passes": false,
-      "completed_at": null,
-      "notes": "使用 rpx 单位，uni-app 自动转换"
+      "passes": true,
+      "completed_at": "2026-03-09T00:15:00+08:00",
+      "notes": "创建 styles/responsive.scss 全局响应式样式文件；更新 App.vue 全局移动端样式；增强 uni.scss 响应式设计变量；优化 AppButton/AppCard 触摸反馈；添加媒体查询断点（375px/414px/768px/1024px）；安装 sass 依赖"
     },
     {
       "id": "F012",

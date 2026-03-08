@@ -372,9 +372,80 @@ function viewHistory() {
 
 // H5 响应式适配
 /* #ifdef H5 */
-@media (min-width: 768px) {
+// 移动端触摸优化
+.home-view {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.feature-card {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+// 小屏幕手机优化 (< 375px)
+@media screen and (max-width: 374px) {
+  .title-text {
+    font-size: 36rpx;
+  }
+
+  .hero-subtitle {
+    font-size: 26rpx;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+
+    :deep(.app-button) {
+      width: 100%;
+    }
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card--highlight {
+    grid-column: span 1;
+  }
+}
+
+// 大屏幕手机 (>= 414px)
+@media screen and (min-width: 414px) {
+  .hero-section {
+    padding: 80rpx 48rpx;
+  }
+
+  .title-text {
+    font-size: 44rpx;
+  }
+}
+
+// 平板端 (>= 768px)
+@media screen and (min-width: 768px) {
+  .home-view {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32rpx 48rpx;
+  }
+
+  .hero-section {
+    padding: 80rpx 64rpx;
+    margin-bottom: 48rpx;
+  }
+
+  .title-text {
+    font-size: 48rpx;
+  }
+
+  .hero-subtitle {
+    font-size: 32rpx;
+    max-width: 700rpx;
+  }
+
   .features-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 32rpx;
   }
 
   .feature-card--highlight {
@@ -384,7 +455,43 @@ function viewHistory() {
   .batch-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20rpx;
+    gap: 24rpx;
+  }
+
+  .section-title {
+    font-size: 40rpx;
+  }
+}
+
+// 桌面端 (>= 1024px)
+@media screen and (min-width: 1024px) {
+  .home-view {
+    max-width: 1200px;
+    padding: 48rpx 64rpx;
+  }
+
+  .hero-section {
+    padding: 100rpx 80rpx;
+  }
+
+  .features-section {
+    margin-bottom: 56rpx;
+  }
+
+  .feature-card {
+    &:hover {
+      transform: translateY(-8rpx);
+      box-shadow: 0 12rpx 32rpx rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
+// 触摸设备优化
+@media (hover: none) and (pointer: coarse) {
+  .feature-card {
+    &:active {
+      transform: scale(0.98);
+    }
   }
 }
 /* #endif */

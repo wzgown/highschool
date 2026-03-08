@@ -82,27 +82,34 @@ function handleClick(event: MouseEvent) {
   align-items: center;
   justify-content: center;
   gap: 8rpx;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
   font-weight: 500;
   transition: all 0.2s ease;
   border: 1px solid transparent;
   cursor: pointer;
   box-sizing: border-box;
+  // 移动端触摸优化
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 
+  // 移动端最小触摸目标 (WCAG 2.1 标准)
   &--large {
-    height: 88rpx;
+    height: 96rpx;
+    min-height: 88rpx; // 最小触摸目标
     padding: 0 48rpx;
     font-size: 32rpx;
+    border-radius: 16rpx;
   }
 
   &--medium {
-    height: 72rpx;
+    height: 80rpx;
+    min-height: 80rpx;
     padding: 0 32rpx;
     font-size: 28rpx;
   }
 
   &--small {
-    height: 60rpx;
+    height: 64rpx;
     padding: 0 24rpx;
     font-size: 26rpx;
   }
@@ -119,6 +126,7 @@ function handleClick(event: MouseEvent) {
 
     &:active:not(.app-button--disabled) {
       background-color: #337ecc;
+      transform: scale(0.98);
     }
   }
 
@@ -128,6 +136,7 @@ function handleClick(event: MouseEvent) {
 
     &:active:not(.app-button--disabled) {
       background-color: #529b2e;
+      transform: scale(0.98);
     }
   }
 
@@ -137,6 +146,7 @@ function handleClick(event: MouseEvent) {
 
     &:active:not(.app-button--disabled) {
       background-color: #b88230;
+      transform: scale(0.98);
     }
   }
 
@@ -146,6 +156,7 @@ function handleClick(event: MouseEvent) {
 
     &:active:not(.app-button--disabled) {
       background-color: #c45656;
+      transform: scale(0.98);
     }
   }
 
@@ -155,6 +166,7 @@ function handleClick(event: MouseEvent) {
 
     &:active:not(.app-button--disabled) {
       background-color: #73767a;
+      transform: scale(0.98);
     }
   }
 
@@ -167,6 +179,7 @@ function handleClick(event: MouseEvent) {
       color: #409eff;
       border-color: #c6e2ff;
       background-color: #ecf5ff;
+      transform: scale(0.98);
     }
   }
 
@@ -184,6 +197,39 @@ function handleClick(event: MouseEvent) {
     width: 100%;
   }
 }
+
+/* #ifdef H5 */
+// H5 桌面端 hover 效果
+@media (hover: hover) and (pointer: fine) {
+  .app-button {
+    &--primary:hover:not(.app-button--disabled) {
+      background-color: #66b1ff;
+    }
+
+    &--success:hover:not(.app-button--disabled) {
+      background-color: #85ce61;
+    }
+
+    &--warning:hover:not(.app-button--disabled) {
+      background-color: #ebb563;
+    }
+
+    &--danger:hover:not(.app-button--disabled) {
+      background-color: #f78989;
+    }
+
+    &--info:hover:not(.app-button--disabled) {
+      background-color: #a6a9ad;
+    }
+
+    &--default:hover:not(.app-button--disabled) {
+      color: #409eff;
+      border-color: #c6e2ff;
+      background-color: #ecf5ff;
+    }
+  }
+}
+/* #endif */
 
 .loading-icon {
   animation: spin 1s linear infinite;
