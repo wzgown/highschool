@@ -690,8 +690,8 @@ run_claude() {
 
     local start_time=$(date +%s)
 
-    # macOS 兼容的超时实现
-    env -u CLAUDECODE claude -p "$prompt_file" >> "$log_file" 2>&1 &
+    # macOS 兼容的超时实现 (保留 locale 设置)
+    LANG="$LANG" LC_ALL="$LC_ALL" env -u CLAUDECODE claude -p "$prompt_file" >> "$log_file" 2>&1 &
     local claude_pid=$!
 
     # 等待进程完成或超时

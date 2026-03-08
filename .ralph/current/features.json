@@ -47,9 +47,9 @@
         "验证状态管理正常工作"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": ""
+      "passes": true,
+      "completed_at": "2026-03-08T22:55:00+08:00",
+      "notes": "安装 pinia@2.1.7，创建 candidate/history/simulation 三个 store，在 main.ts 中注册 Pinia"
     },
     {
       "id": "F004",
