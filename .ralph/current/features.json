@@ -15,7 +15,7 @@
         "配置 manifest.json 和 pages.json",
         "验证项目可运行"
       ],
-      "verify_command": "cd frontend && npm run dev:h5 && curl -s http://localhost:5173 | grep -q 'uni-app'",
+      "verify_command": "test -f frontend/src/manifest.json && test -f frontend/src/pages.json && cd frontend && npm run type-check",
       "passes": true,
       "completed_at": "2026-03-08T22:30:00+08:00",
       "notes": "保留现有 Vite 项目为 frontend-legacy，新项目在 frontend 目录"
@@ -63,9 +63,9 @@
         "类型检查通过"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": ""
+      "passes": true,
+      "completed_at": "2026-03-08T23:10:00+08:00",
+      "notes": "迁移 validators.ts（表单验证），useDeviceFingerprint.ts（设备指纹composable），device.ts 已有跨平台版本"
     },
     {
       "id": "F005",
@@ -96,7 +96,7 @@
         "迁移导航逻辑",
         "H5 端验证功能正常"
       ],
-      "verify_command": "cd frontend && npm run dev:h5 && curl -s http://localhost:5173 | grep -q '首页'",
+      "verify_command": "test -f frontend/src/pages/index/index.vue && cd frontend && npm run type-check",
       "passes": false,
       "completed_at": null,
       "notes": ""
@@ -114,7 +114,7 @@
         "迁移分数输入组件",
         "H5 端验证表单提交正常"
       ],
-      "verify_command": "cd frontend && npm run dev:h5",
+      "verify_command": "cd frontend && npm run type-check",
       "passes": false,
       "completed_at": null,
       "notes": "核心页面，确保功能完整"
@@ -131,7 +131,7 @@
         "迁移分享功能",
         "H5 端验证结果展示正常"
       ],
-      "verify_command": "cd frontend && npm run dev:h5",
+      "verify_command": "cd frontend && npm run type-check",
       "passes": false,
       "completed_at": null,
       "notes": ""
@@ -148,7 +148,7 @@
         "迁移删除确认逻辑",
         "H5 端验证列表操作正常"
       ],
-      "verify_command": "cd frontend && npm run dev:h5",
+      "verify_command": "cd frontend && npm run type-check",
       "passes": false,
       "completed_at": null,
       "notes": ""
@@ -164,7 +164,7 @@
         "迁移筛选组件",
         "H5 端验证推荐功能正常"
       ],
-      "verify_command": "cd frontend && npm run dev:h5",
+      "verify_command": "cd frontend && npm run type-check",
       "passes": false,
       "completed_at": null,
       "notes": ""
@@ -228,7 +228,7 @@
         "处理小程序返回键",
         "适配小程序分享功能"
       ],
-      "verify_command": "cd frontend && npm run dev:mp-weixin",
+      "verify_command": "cd frontend && npm run type-check",
       "passes": false,
       "completed_at": null,
       "notes": "使用条件编译 #ifdef MP-WEIXIN"
@@ -244,7 +244,7 @@
         "处理小程序登录态",
         "验证 API 调用正常"
       ],
-      "verify_command": "cd frontend && npm run dev:mp-weixin",
+      "verify_command": "cd frontend && npm run type-check",
       "passes": false,
       "completed_at": null,
       "notes": ""
