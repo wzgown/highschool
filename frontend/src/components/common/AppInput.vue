@@ -25,10 +25,10 @@
         :maxlength="maxlength"
         :focus="focus"
         :confirm-type="confirmType"
-        @input="handleInput as any"
+        @input="onInput"
         @focus="handleFocus"
         @blur="handleBlur"
-        @confirm="handleConfirm as any"
+        @confirm="onConfirm"
       />
 
       <view v-if="$slots.suffix || suffixIcon || clearable" class="app-input__suffix">
@@ -119,6 +119,11 @@ function handleInput(event: { detail: { value: string } }) {
   emit('input', value)
 }
 
+// Wrapper for template to avoid type cast issues
+function onInput(event: unknown) {
+  handleInput(event as { detail: { value: string } })
+}
+
 function handleFocus(event: FocusEvent) {
   focused.value = true
   emit('focus', event)
@@ -131,6 +136,11 @@ function handleBlur(event: FocusEvent) {
 
 function handleConfirm(event: { detail: { value: string } }) {
   emit('confirm', event.detail.value)
+}
+
+// Wrapper for template to avoid type cast issues
+function onConfirm(event: unknown) {
+  handleConfirm(event as { detail: { value: string } })
 }
 
 function handleClear() {

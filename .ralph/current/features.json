@@ -213,9 +213,9 @@
         "验证小程序可编译"
       ],
       "verify_command": "cd frontend && npm run build:mp-weixin",
-      "passes": false,
-      "completed_at": null,
-      "notes": "需要微信开发者账号"
+      "passes": true,
+      "completed_at": "2026-03-09T00:50:00+08:00",
+      "notes": "配置 manifest.json 小程序设置（es6/enhance/postcss/minified）、权限声明（scope.userLocation）、优化配置（subPackages）；配置 pages.json 小程序导航栏样式；修复 AppInput.vue 事件处理器类型转换问题；小程序构建成功"
     },
     {
       "id": "F014",

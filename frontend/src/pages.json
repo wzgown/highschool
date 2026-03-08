@@ -35,7 +35,12 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "上海中考招生模拟",
 		"navigationBarBackgroundColor": "#409EFF",
-		"backgroundColor": "#F5F5F5"
+		"backgroundColor": "#F5F5F5",
+		"mp-weixin": {
+			"navigationStyle": "default",
+			"navigationBarBackgroundColor": "#409EFF",
+			"navigationBarTextStyle": "white"
+		}
 	},
 	"easycom": {
 		"autoscan": true,
