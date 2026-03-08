@@ -1,0 +1,48 @@
+{
+  "date": "2026-03-08",
+  "source": "上海招考热线",
+  "url": "https://www.shmeea.edu.cn/page/03000/",
+  "fetchTime": "2026-03-08T00:00:08.729Z",
+  "method": "web_fetch",
+  "status": "success",
+  "importantNotices": [
+    {
+      "title": "转载：上海市教育委员会关于2026年上海市高中阶段学校招生工作...",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+      "date": "2026-02-27",
+      "category": "政策文件"
+    },
+    {
+      "title": "2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+      "url": "/page/03300/20260112/20005.html",
+      "date": "2026-01-12",
+      "category": "报名时间"
+    },
+    {
+      "title": "关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一...",
+      "url": "/page/03300/20251229/19965.html",
+      "date": "2025-12-29",
+      "category": "考试指南"
+    }
+  ],
+  "pdfFiles": [
+    {
+      "title": "2025年上海市民办普通高中国际课程班和中外合作办学学校招生录...",
+      "url": "https://www.shmeea.edu.cn/download/20250528/016.pdf",
+      "year": "2025"
+    },
+    {
+      "title": "2025年上海市中等职业学校自主招收随迁子女五年一贯制和中高职...",
+      "url": "https://www.shmeea.edu.cn/download/20250713/zz/02.pdf",
+      "year": "2025"
+    }
+  ],
+  "keyTopics": [
+    "名额分配",
+    "考试时间",
+    "录取分数线",
+    "报名时间",
+    "招生政策"
+  ],
+  "notes": "市级网站访问成功，发现2026年最新招生政策文件和报名通知。暂未发现2026年名额分配具体方案和考试时间安排。"
+}
