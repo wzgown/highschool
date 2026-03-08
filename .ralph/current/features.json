@@ -165,9 +165,9 @@
         "H5 端验证推荐功能正常"
       ],
       "verify_command": "cd frontend && npm run type-check",
-      "passes": false,
-      "completed_at": null,
-      "notes": ""
+      "passes": true,
+      "completed_at": "2026-03-08T23:55:00+08:00",
+      "notes": "完整迁移志愿推荐页：3步骤向导（基本信息、模考成绩、推荐结果）；使用 uni-app picker 替代 el-select；使用 checkbox 替代 el-checkbox；创建 RecommendationPanel 组件展示推荐结果；使用自定义 segment control 替代 el-tabs；使用 AppCard 替代 el-card；类型检查通过"
     },
     {
       "id": "F011",
