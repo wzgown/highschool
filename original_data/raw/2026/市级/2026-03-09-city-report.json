@@ -1,0 +1,57 @@
+{
+  "date": "2026-03-09",
+  "timestamp": "2026-03-09T00:00:10.358Z",
+  "source": "https://www.shmeea.edu.cn/page/03000/",
+  "title": "上海招考热线-上海市教育考试院官网",
+  "announcements": [
+    {
+      "title": "转载：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+      "date": "2026-02-27",
+      "category": "政策文件",
+      "priority": "high"
+    },
+    {
+      "title": "上海市教育考试院关于印发《2026年上海市成人中等职业教育招生...",
+      "url": "/page/03100/20251226/19962.html",
+      "date": "2025-12-26",
+      "category": "招生政策",
+      "priority": "medium"
+    },
+    {
+      "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招生...",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/27f5a2d54e414ed4b1c6a53719e67865.html",
+      "date": "2025-11-26",
+      "category": "报名通知",
+      "priority": "high"
+    },
+    {
+      "title": "2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+      "url": "/page/03300/20260112/20005.html",
+      "date": "2026-01-12",
+      "category": "重要通知",
+      "priority": "high"
+    },
+    {
+      "title": "关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书...",
+      "url": "/page/03300/20251229/19965.html",
+      "date": "2025-12-29",
+      "category": "考试指南",
+      "priority": "high"
+    }
+  ],
+  "focus_areas": [
+    "名额分配政策",
+    "考试时间",
+    "录取分数线",
+    "报名时间"
+  ],
+  "key_dates": {
+    "报名开始": "2026-01-19",
+    "报名信息确认": "2026年1月"
+  },
+  "pdf_links": [
+    "https://www.shmeea.edu.cn/download/20250528/016.pdf (2025年民办普通高中国际课程班招生录取最低分数线)"
+  ],
+  "status": "2026年中考报名已于1月19日开始，政策文件已发布"
+}
