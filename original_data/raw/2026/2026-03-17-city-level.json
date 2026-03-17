@@ -1,0 +1,65 @@
+{
+  "date": "2026-03-17",
+  "timestamp": "2026-03-17T00:00:00.000Z",
+  "source": "https://www.shmeea.edu.cn/page/03000/",
+  "title": "上海招考热线-上海市教育考试院官网",
+  "announcements": [
+    {
+      "date": "2026-03-12",
+      "title": "转载：上海市教育委员会关于做好2026年上海市特殊教育高中阶段...",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260312/bd228a8895d348d89023d26df0a3b143.html",
+      "category": "特殊教育"
+    },
+    {
+      "date": "2026-02-27",
+      "title": "转载：上海市教育委员会关于2026年上海市高中阶段学校招生工作...",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+      "category": "招生政策"
+    },
+    {
+      "date": "2026-01-12",
+      "title": "2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+      "url": "/page/03300/20260112/20005.html",
+      "category": "报名时间"
+    },
+    {
+      "date": "2025-12-29",
+      "title": "关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一...",
+      "url": "/page/03300/20251229/19965.html",
+      "category": "考试指南"
+    },
+    {
+      "date": "2025-11-26",
+      "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招生...",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/27f5a2d54e414ed4b1c6a53719e67865.html",
+      "category": "招生政策"
+    },
+    {
+      "date": "2025-12-26",
+      "title": "上海市教育考试院关于印发《2026年上海市成人中等职业教育招生...",
+      "url": "/page/03100/20251226/19962.html",
+      "category": "成人教育"
+    }
+  ],
+  "historicalData": {
+    "2025": {
+      "scoreAnnouncement": {
+        "date": "2025-07-08",
+        "title": "2025年上海市初中学业水平考试成绩将于7月8日公布"
+      },
+      "quotaAllocation": {
+        "date": "2025-07-14",
+        "title": "2025年上海市高中学校"名额分配到区""名额分配到校"招生录..."
+      },
+      "applicationFiling": {
+        "date": "2025-06-15",
+        "title": "2025年上海市高中阶段学校招生志愿填报即将开始"
+      }
+    }
+  },
+  "keyDates2026": {
+    "registrationStart": "2026-01-19",
+    "registrationAnnouncement": "2026-01-12"
+  },
+  "keywords": ["名额分配", "考试时间", "录取分数线", "报名", "招生政策"]
+}
