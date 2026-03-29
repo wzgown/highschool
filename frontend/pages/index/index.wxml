@@ -1,10 +1,31 @@
 <view class="container">
   <!-- Hero Section -->
   <view class="hero">
-    <view class="hero-bg"></view>
     <view class="hero-content">
       <text class="hero-title">中考志愿模拟系统</text>
       <text class="hero-subtitle">智能分析录取概率，优化志愿填报策略</text>
+    </view>
+  </view>
+
+  <!-- Connection Status -->
+  <view class="connection-status" wx:if="{{connectionStatus}}">
+    <view wx:if="{{connectionStatus === 'testing'}}" class="status-row">
+      <text class="status-dot testing"></text>
+      <text>正在检测 API 连接...</text>
+    </view>
+    <view wx:elif="{{connectionStatus === 'ok'}}" class="status-row ok">
+      <text class="status-dot ok"></text>
+      <text>API 连接正常</text>
+      <text class="status-url">{{connectionUrl}}</text>
+    </view>
+    <view wx:else class="status-block fail">
+      <view class="status-row">
+        <text class="status-dot fail"></text>
+        <text>API 连接失败</text>
+      </view>
+      <text class="status-hint">请确认后端服务已启动 (端口 3000)</text>
+      <text class="status-hint">微信开发者工具 → 详情 → 本地设置 → 勾选"不校验合法域名"</text>
+      <button class="btn-retry" size="mini" bindtap="onRetryConnection">重试</button>
     </view>
   </view>
 

@@ -47,15 +47,17 @@ Page({
 
         // 映射录取概率
         var probabilities = rawProbabilities.map(function (p) {
+          var prob = (p.probability !== undefined && p.probability !== null)
+            ? Math.round(p.probability) : 0
           return {
             batch: p.batch,
             schoolId: p.schoolId,
             schoolName: p.schoolName,
-            schoolCode: p.schoolCode,
-            probability: Math.round(p.probability),
-            riskLevel: p.riskLevel,
-            scoreDiff: p.scoreDiff,
-            volunteerIndex: p.volunteerIndex,
+            schoolCode: p.schoolCode || '',
+            probability: prob,
+            riskLevel: p.riskLevel || 'unknown',
+            scoreDiff: (p.scoreDiff !== undefined && p.scoreDiff !== null) ? p.scoreDiff : null,
+            volunteerIndex: p.volunteerIndex || 0,
             batchName: self._getBatchName(p.batch),
             batchType: self._getBatchType(p.batch),
             riskText: self._getRiskText(p.riskLevel),
@@ -83,15 +85,17 @@ Page({
           var rawDist = rawCompetitors.scoreDistribution || []
           var maxCount = 1
           rawDist.forEach(function (d) {
-            if (d.count > maxCount) maxCount = d.count
+            var c = d.count || 0
+            if (c > maxCount) maxCount = c
           })
           competitors = {
             count: rawCompetitors.count || 0,
             distributions: rawDist.map(function (d) {
+              var c = d.count || 0
               return {
                 range: d.range,
-                count: d.count,
-                percent: Math.round((d.count / maxCount) * 100)
+                count: c,
+                percent: Math.round((c / maxCount) * 100)
               }
             })
           }
@@ -127,12 +131,12 @@ Page({
   },
 
   _getRiskText: function (risk) {
-    var map = { safe: '安全', moderate: '稳妥', risky: '冲刺', high_risk: '高风险' }
-    return map[risk] || risk
+    var map = { safe: '安全', moderate: '稳妥', risky: '冲刺', high_risk: '高风险', unknown: '待评估' }
+    return map[risk] || '待评估'
   },
 
   _getRiskType: function (risk) {
-    var map = { safe: 'success', moderate: 'warning', risky: 'danger', high_risk: 'info' }
+    var map = { safe: 'success', moderate: 'warning', risky: 'danger', high_risk: 'info', unknown: 'info' }
     return map[risk] || 'info'
   },
 

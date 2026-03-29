@@ -24,6 +24,75 @@
   opacity: 0.85;
 }
 
+/* Connection Status */
+.connection-status {
+  margin-bottom: 24rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  background: #f5f7fa;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.status-row.ok {
+  color: #67C23A;
+}
+
+.status-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.testing {
+  background-color: #E6A23C;
+  animation: pulse 1s infinite;
+}
+
+.status-dot.ok {
+  background-color: #67C23A;
+}
+
+.status-dot.fail {
+  background-color: #F56C6C;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.status-block.fail {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  color: #F56C6C;
+}
+
+.status-url {
+  font-size: 22rpx;
+  color: var(--color-text-secondary);
+}
+
+.status-hint {
+  font-size: 22rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.btn-retry {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  align-self: flex-start;
+}
+
+/* Features */
 .features {
   display: flex;
   flex-direction: column;
@@ -57,6 +126,7 @@
   line-height: 1.5;
 }
 
+/* Actions */
 .actions-main {
   display: flex;
   flex-direction: column;
@@ -69,8 +139,11 @@
   line-height: 96rpx;
   font-size: 32rpx;
   border-radius: 16rpx;
+  padding: 0;
+  margin: 0;
 }
 
+/* Batch Info */
 .batch-info {
   margin-bottom: 32rpx;
 }
@@ -92,6 +165,7 @@
   color: var(--color-text-secondary);
 }
 
+/* Disclaimer */
 .disclaimer {
   padding: 24rpx;
   text-align: center;

@@ -46,6 +46,18 @@ page {
   color: var(--color-primary);
 }
 
+/* 重置 button 默认样式 */
+button {
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+  box-sizing: border-box;
+}
+
+button::after {
+  border: none;
+}
+
 /* 通用按钮 */
 .btn-primary {
   background-color: var(--color-primary);
@@ -53,8 +65,13 @@ page {
   border: none;
   border-radius: 12rpx;
   font-size: 30rpx;
-  padding: 20rpx 40rpx;
+  padding: 0;
+  margin: 0;
+  height: 88rpx;
+  line-height: 88rpx;
   text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .btn-primary::after {
@@ -67,8 +84,13 @@ page {
   border: 2rpx solid var(--color-primary);
   border-radius: 12rpx;
   font-size: 30rpx;
-  padding: 20rpx 40rpx;
+  padding: 0;
+  margin: 0;
+  height: 88rpx;
+  line-height: 88rpx;
   text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .btn-secondary::after {
