@@ -2,7 +2,7 @@
  * 本地存储工具
  */
 
-const STORAGE_KEYS = {
+var STORAGE_KEYS = {
   FORM_DATA: 'form_data',
   ANALYSIS_ID: 'analysis_id'
 }
@@ -12,7 +12,7 @@ function saveFormData(data) {
 }
 
 function loadFormData() {
-  const raw = wx.getStorageSync(STORAGE_KEYS.FORM_DATA)
+  var raw = wx.getStorageSync(STORAGE_KEYS.FORM_DATA)
   if (!raw) return null
   try {
     return JSON.parse(raw)
@@ -34,10 +34,10 @@ function loadAnalysisId() {
 }
 
 module.exports = {
-  STORAGE_KEYS,
-  saveFormData,
-  loadFormData,
-  clearFormData,
-  saveAnalysisId,
-  loadAnalysisId
+  STORAGE_KEYS: STORAGE_KEYS,
+  saveFormData: saveFormData,
+  loadFormData: loadFormData,
+  clearFormData: clearFormData,
+  saveAnalysisId: saveAnalysisId,
+  loadAnalysisId: loadAnalysisId
 }

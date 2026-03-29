@@ -3,68 +3,94 @@
  * Connect-RPC JSON over wx.request
  */
 
-const { callRpc } = require('./api')
-const { getDeviceId } = require('./device')
+var api = require('./api')
+var device = require('./device')
 
-const SERVICE = 'highschool.v1.CandidateService'
+var SERVICE = 'highschool.v1.CandidateService'
 
 /**
  * 提交模拟分析
- * @param {object} formData - 表单数据
- * @returns {Promise<{analysisId: string}>}
  */
-async function submitAnalysis(formData) {
-  const deviceId = getDeviceId()
-  const volunteers = {
+function submitAnalysis(formData) {
+  var deviceId = device.getDeviceId()
+
+  var quotaSchool = (formData.volunteers.quotaSchool || [])
+    .filter(function (id) { return id !== 0 })
+    .slice(0, 2)
+
+  var unified = (formData.volunteers.unified || [])
+    .filter(function (id) { return id !== 0 })
+    .slice(0, 15)
+
+  var volunteers = {
     quotaDistrict: formData.volunteers.quotaDistrict || undefined,
-    quotaSchool: formData.volunteers.quotaSchool.filter(id => id !== 0).slice(0, 2),
-    unified: formData.volunteers.unified.filter(id => id !== 0).slice(0, 15)
+    quotaSchool: quotaSchool,
+    unified: unified
   }
 
-  const res = await callRpc(SERVICE, 'SubmitAnalysis', {
+  // 不具备资格时清除名额到校志愿
+  if (!formData.hasQuotaSchoolEligibility) {
+    volunteers.quotaSchool = []
+  }
+
+  return api.callRpc(SERVICE, 'SubmitAnalysis', {
     candidate: {
       districtId: formData.districtId,
       middleSchoolId: formData.middleSchoolId,
       hasQuotaSchoolEligibility: formData.hasQuotaSchoolEligibility
     },
-    scores: { ...formData.scores },
-    ranking: { ...formData.ranking },
+    scores: {
+      total: formData.scores.total,
+      chinese: formData.scores.chinese || 0,
+      math: formData.scores.math || 0,
+      foreign: formData.scores.foreign || 0,
+      integrated: formData.scores.integrated || 0,
+      ethics: formData.scores.ethics || 0,
+      history: formData.scores.history || 0,
+      pe: formData.scores.pe || 0
+    },
+    ranking: {
+      rank: formData.ranking.rank,
+      totalStudents: formData.ranking.totalStudents
+    },
     comprehensiveQuality: formData.comprehensiveQuality,
-    volunteers,
+    volunteers: volunteers,
     isTiePreferred: false,
-    deviceId
+    deviceId: deviceId
+  }).then(function (res) {
+    var result = res.result || res
+    if (!result || !result.id) {
+      throw new Error('提交分析失败')
+    }
+    return { analysisId: result.id }
   })
-
-  const result = res.result || res
-  if (!result || !result.id) {
-    throw new Error('提交分析失败')
-  }
-  return { analysisId: result.id }
 }
 
 /**
- * 获取分析结果（支持轮询）
- * @param {string} id - 分析 ID
- * @param {number} maxRetries - 最大轮询次数
- * @param {number} interval - 轮询间隔(ms)
- * @returns {Promise<object>} 分析结果
+ * 获取分析结果
  */
 function getAnalysisResult(id) {
-  return callRpc(SERVICE, 'GetAnalysisResult', { id })
+  return api.callRpc(SERVICE, 'GetAnalysisResult', { id: id })
 }
 
 /**
  * 轮询获取分析结果
  */
-function pollAnalysisResult(id, maxRetries = 10, interval = 3000) {
-  return new Promise((resolve, reject) => {
-    let retries = 0
+function pollAnalysisResult(id, maxRetries, interval) {
+  maxRetries = maxRetries || 10
+  interval = interval || 3000
+
+  return new Promise(function (resolve, reject) {
+    var retries = 0
 
     function poll() {
-      getAnalysisResult(id).then(res => {
-        const result = res.result || res
+      getAnalysisResult(id).then(function (res) {
+        var result = res.result || res
+
         if (result && result.status === 'completed') {
           resolve(result)
+        } else if (result && result.status === 'failed') {
+          reject(new Error(result.errorMessage || '分析处理失败'))
         } else if (result && (result.status === 'pending' || result.status === 'processing')) {
           retries++
           if (retries >= maxRetries) {
@@ -73,9 +99,10 @@ function pollAnalysisResult(id, maxRetries = 10, interval = 3000) {
             setTimeout(poll, interval)
           }
         } else {
+          // 未知状态，按完成处理
           resolve(result)
         }
-      }).catch(err => {
+      }).catch(function (err) {
         retries++
         if (retries >= maxRetries) {
           reject(err)
@@ -91,33 +118,33 @@ function pollAnalysisResult(id, maxRetries = 10, interval = 3000) {
 
 /**
  * 获取历史记录
- * @returns {Promise<{histories: Array, total: number}>}
  */
-async function getHistory() {
-  const deviceId = getDeviceId()
-  const res = await callRpc(SERVICE, 'GetHistory', {
+function getHistory() {
+  var deviceId = device.getDeviceId()
+
+  return api.callRpc(SERVICE, 'GetHistory', {
     page: 1,
     pageSize: 50,
-    deviceId
+    deviceId: deviceId
+  }).then(function (res) {
+    return {
+      histories: res.histories || [],
+      total: (res.meta && res.meta.total) ? res.meta.total : 0
+    }
   })
-  return {
-    histories: res.histories || [],
-    total: res.meta ? res.meta.total : 0
-  }
 }
 
 /**
  * 删除历史记录
- * @param {string} id - 历史 ID
  */
 function deleteHistory(id) {
-  return callRpc(SERVICE, 'DeleteHistory', { id })
+  return api.callRpc(SERVICE, 'DeleteHistory', { id: id })
 }
 
 module.exports = {
-  submitAnalysis,
-  getAnalysisResult,
-  pollAnalysisResult,
-  getHistory,
-  deleteHistory
+  submitAnalysis: submitAnalysis,
+  getAnalysisResult: getAnalysisResult,
+  pollAnalysisResult: pollAnalysisResult,
+  getHistory: getHistory,
+  deleteHistory: deleteHistory
 }

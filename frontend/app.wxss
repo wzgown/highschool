@@ -42,8 +42,11 @@ page {
 }
 
 .card-header-icon {
-  font-size: 36rpx;
-  color: var(--color-primary);
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  flex-shrink: 0;
 }
 
 /* 重置 button 默认样式 */

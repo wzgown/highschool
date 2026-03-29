@@ -103,7 +103,12 @@ Page({
 
         self.setData({
           loading: false,
-          result: result,
+          result: {
+            id: result.id,
+            status: result.status,
+            createdAt: format.formatTime(result.createdAt),
+            completedAt: format.formatTime(result.completedAt)
+          },
           predictions: predictions,
           probabilities: probabilities,
           strategy: strategy,

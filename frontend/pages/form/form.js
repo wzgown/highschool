@@ -5,18 +5,14 @@
  * Step 2: 志愿填报（名额到区、名额到校、统一招生）
  */
 
-const {
-  getDistricts,
-  getMiddleSchools,
-  getSchoolsWithQuotaDistrict,
-  getSchoolsWithQuotaSchool,
-  getSchoolsForUnified
-} = require('../../utils/reference')
-const { submitAnalysis } = require('../../utils/candidate')
-const { saveFormData, loadFormData, clearFormData, saveAnalysisId } = require('../../utils/storage')
-const { SCORE_LIMITS } = require('../../utils/constants')
+var reference = require('../../utils/reference')
+var candidate = require('../../utils/candidate')
+var storage = require('../../utils/storage')
+var constants = require('../../utils/constants')
 
-const EMPTY_SCORES = {
+var SCORE_LIMITS = constants.SCORE_LIMITS
+
+var EMPTY_SCORES = {
   total: 0,
   chinese: 0,
   math: 0,
@@ -25,6 +21,23 @@ const EMPTY_SCORES = {
   ethics: 0,
   history: 0,
   pe: 0
+}
+
+function cloneScores(s) {
+  return {
+    total: s.total || 0,
+    chinese: s.chinese || 0,
+    math: s.math || 0,
+    foreign: s.foreign || 0,
+    integrated: s.integrated || 0,
+    ethics: s.ethics || 0,
+    history: s.history || 0,
+    pe: s.pe || 0
+  }
+}
+
+function cloneRanking(r) {
+  return { rank: r.rank || 0, totalStudents: r.totalStudents || 0 }
 }
 
 Page({
@@ -46,22 +59,22 @@ Page({
     middleSchoolName: '',
     hasQuotaSchoolEligibility: false,
 
-    scores: { ...EMPTY_SCORES },
+    scores: cloneScores(EMPTY_SCORES),
     comprehensiveQuality: 50,
     ranking: { rank: 0, totalStudents: 0 },
 
     volunteers: {
       quotaDistrict: null,
       quotaSchool: [0, 0],
-      unified: Array(15).fill(0)
+      unified: new Array(15).fill(0)
     },
 
-    // 学校名称（用于模板展示，WXML 无法调用方法）
+    // 学校名称（用于模板展示）
     volunteerNames: {
       quotaDistrict: '',
       quotaSchool0: '',
       quotaSchool1: '',
-      unified: Array(15).fill('')
+      unified: new Array(15).fill('')
     },
 
     // 校验状态
@@ -79,32 +92,31 @@ Page({
 
   // ======== 生命周期 ========
 
-  onLoad() {
+  onLoad: function () {
     this._loadDistricts()
     this._restoreForm()
   },
 
-  onUnload() {
+  onUnload: function () {
     this._saveForm()
   },
 
   // ======== 数据加载 ========
 
-  _loadDistricts() {
-    getDistricts().then(res => {
-      const districts = (res.districts || []).map(d => ({
-        id: d.id,
-        name: d.name,
-        code: d.code || ''
-      }))
-      this.setData({ districts })
-    }).catch(err => {
+  _loadDistricts: function () {
+    var self = this
+    reference.getDistricts().then(function (res) {
+      var districts = (res.districts || []).map(function (d) {
+        return { id: d.id, name: d.name, code: d.code || '' }
+      })
+      self.setData({ districts: districts })
+    }).catch(function () {
       wx.showToast({ title: '加载区县失败', icon: 'none' })
     })
   },
 
-  _restoreForm() {
-    const saved = loadFormData()
+  _restoreForm: function () {
+    var saved = storage.loadFormData()
     if (!saved) return
 
     this.setData({
@@ -113,13 +125,13 @@ Page({
       middleSchoolId: saved.middleSchoolId || null,
       middleSchoolName: saved.middleSchoolName || '',
       hasQuotaSchoolEligibility: saved.hasQuotaSchoolEligibility || false,
-      scores: saved.scores || { ...EMPTY_SCORES },
+      scores: saved.scores ? cloneScores(saved.scores) : cloneScores(EMPTY_SCORES),
       comprehensiveQuality: saved.comprehensiveQuality || 50,
-      ranking: saved.ranking || { rank: 0, totalStudents: 0 },
-      volunteers: saved.volunteers || {
-        quotaDistrict: null,
-        quotaSchool: [0, 0],
-        unified: Array(15).fill(0)
+      ranking: saved.ranking ? cloneRanking(saved.ranking) : { rank: 0, totalStudents: 0 },
+      volunteers: {
+        quotaDistrict: (saved.volunteers && saved.volunteers.quotaDistrict) || null,
+        quotaSchool: (saved.volunteers && saved.volunteers.quotaSchool) || [0, 0],
+        unified: (saved.volunteers && saved.volunteers.unified) || new Array(15).fill(0)
       }
     })
 
@@ -130,60 +142,75 @@ Page({
     this._validateCurrentStep()
   },
 
-  _saveForm() {
-    const formData = {
+  _saveForm: function () {
+    var formData = {
       districtId: this.data.districtId,
       districtName: this.data.districtName,
       middleSchoolId: this.data.middleSchoolId,
       middleSchoolName: this.data.middleSchoolName,
       hasQuotaSchoolEligibility: this.data.hasQuotaSchoolEligibility,
-      scores: { ...this.data.scores },
+      scores: cloneScores(this.data.scores),
       comprehensiveQuality: this.data.comprehensiveQuality,
-      ranking: { ...this.data.ranking },
+      ranking: cloneRanking(this.data.ranking),
       volunteers: {
         quotaDistrict: this.data.volunteers.quotaDistrict,
-        quotaSchool: [...this.data.volunteers.quotaSchool],
-        unified: [...this.data.volunteers.unified]
+        quotaSchool: this.data.volunteers.quotaSchool.slice(),
+        unified: this.data.volunteers.unified.slice()
       }
     }
-    saveFormData(formData)
+    storage.saveFormData(formData)
   },
 
   // ======== 区县/学校选择 ========
 
-  onDistrictChange(e) {
-    const index = Number(e.detail.value)
-    const district = this.data.districts[index]
+  onDistrictChange: function (e) {
+    var index = Number(e.detail.value)
+    var district = this.data.districts[index]
     if (!district) return
 
+    // 切换区县时清除所有关联数据
     this.setData({
       districtId: district.id,
       districtName: district.name,
       middleSchoolId: null,
       middleSchoolName: '',
-      middleSchools: []
+      middleSchools: [],
+      // 清除志愿数据（区县变更后志愿失效）
+      volunteers: {
+        quotaDistrict: null,
+        quotaSchool: [0, 0],
+        unified: new Array(15).fill(0)
+      },
+      volunteerNames: {
+        quotaDistrict: '',
+        quotaSchool0: '',
+        quotaSchool1: '',
+        unified: new Array(15).fill('')
+      },
+      quotaDistrictSchools: [],
+      quotaSchoolSchools: [],
+      unifiedSchools: []
     })
 
     this._loadMiddleSchools(district.id)
     this._validateCurrentStep()
   },
 
-  _loadMiddleSchools(districtId) {
-    getMiddleSchools(districtId).then(res => {
-      const middleSchools = (res.middleSchools || []).map(s => ({
-        id: s.id,
-        name: s.name,
-        code: s.code || ''
-      }))
-      this.setData({ middleSchools })
-    }).catch(() => {
+  _loadMiddleSchools: function (districtId) {
+    var self = this
+    reference.getMiddleSchools(districtId).then(function (res) {
+      var middleSchools = (res.middleSchools || []).map(function (s) {
+        return { id: s.id, name: s.name, code: s.code || '' }
+      })
+      self.setData({ middleSchools: middleSchools })
+    }).catch(function () {
       wx.showToast({ title: '加载初中列表失败', icon: 'none' })
     })
   },
 
-  onMiddleSchoolChange(e) {
-    const index = Number(e.detail.value)
-    const school = this.data.middleSchools[index]
+  onMiddleSchoolChange: function (e) {
+    var index = Number(e.detail.value)
+    var school = this.data.middleSchools[index]
     if (!school) return
 
     this.setData({
@@ -193,7 +220,7 @@ Page({
     this._validateCurrentStep()
   },
 
-  onQuotaEligibilityChange(e) {
+  onQuotaEligibilityChange: function (e) {
     this.setData({
       hasQuotaSchoolEligibility: e.detail.value
     })
@@ -201,25 +228,25 @@ Page({
 
   // ======== 成绩输入 ========
 
-  onScoreInput(e) {
-    const field = e.currentTarget.dataset.field
-    const value = Math.max(0, Number(e.detail.value) || 0)
+  onScoreInput: function (e) {
+    var field = e.currentTarget.dataset.field
+    var value = Math.max(0, Number(e.detail.value) || 0)
 
-    this.setData({
-      [`scores.${field}`]: value
-    })
+    var updates = {}
+    updates['scores.' + field] = value
+    this.setData(updates)
 
     this._validateScore()
     this._validateCurrentStep()
   },
 
-  onRankInput(e) {
-    const field = e.currentTarget.dataset.field
-    const value = Math.max(0, Number(e.detail.value) || 0)
+  onRankInput: function (e) {
+    var field = e.currentTarget.dataset.field
+    var value = Math.max(0, Number(e.detail.value) || 0)
 
-    this.setData({
-      [`ranking.${field}`]: value
-    })
+    var updates = {}
+    updates['ranking.' + field] = value
+    this.setData(updates)
 
     this._validateRank()
     this._validateCurrentStep()
@@ -227,7 +254,7 @@ Page({
 
   // ======== 校验逻辑 ========
 
-  _validateCurrentStep() {
+  _validateCurrentStep: function () {
     if (this.data.currentStep === 0) {
       this._validateStep0()
     } else if (this.data.currentStep === 1) {
@@ -237,48 +264,50 @@ Page({
     }
   },
 
-  _validateStep0() {
-    const canNext = !!(this.data.districtId && this.data.middleSchoolId)
-    this.setData({ canNext })
+  _validateStep0: function () {
+    var canNext = !!(this.data.districtId && this.data.middleSchoolId)
+    this.setData({ canNext: canNext })
   },
 
-  _validateStep1() {
-    const { scores, ranking } = this.data
+  _validateStep1: function () {
+    var scores = this.data.scores
+    var ranking = this.data.ranking
 
     this._validateScore()
     this._validateRank()
 
-    const scoreValid = scores.total > 0 && scores.total <= SCORE_LIMITS.total
-    const rankValid = ranking.rank > 0 && ranking.totalStudents > 0 && ranking.rank <= ranking.totalStudents
-    const canNext = scoreValid && rankValid && this.data.scoreValidation.valid
+    var scoreValid = scores.total > 0 && scores.total <= SCORE_LIMITS.total
+    var rankValid = ranking.rank > 0 && ranking.totalStudents > 0 && ranking.rank <= ranking.totalStudents
+    var canNext = scoreValid && rankValid && this.data.scoreValidation.valid
 
-    this.setData({ canNext })
+    this.setData({ canNext: canNext })
   },
 
-  _validateStep2() {
-    const { volunteers } = this.data
-    const hasUnified = volunteers.unified.some(id => id !== 0)
+  _validateStep2: function () {
+    var volunteers = this.data.volunteers
+    var hasUnified = volunteers.unified.some(function (id) { return id !== 0 })
     this.setData({ canSubmit: hasUnified })
   },
 
-  _validateScore() {
-    const { scores } = this.data
-    const subjects = ['chinese', 'math', 'foreign', 'integrated', 'ethics', 'history', 'pe']
+  _validateScore: function () {
+    var scores = this.data.scores
+    var subjects = ['chinese', 'math', 'foreign', 'integrated', 'ethics', 'history', 'pe']
 
-    for (const subject of subjects) {
-      const limit = SCORE_LIMITS[subject]
+    for (var i = 0; i < subjects.length; i++) {
+      var subject = subjects[i]
+      var limit = SCORE_LIMITS[subject]
       if (scores[subject] > limit) {
         this.setData({
           scoreValidation: {
             valid: false,
-            message: `${this._subjectLabel(subject)}不能超过${limit}分`
+            message: this._subjectLabel(subject) + '不能超过' + limit + '分'
           }
         })
         return
       }
     }
 
-    const partialSum =
+    var partialSum =
       scores.chinese +
       scores.math +
       scores.foreign +
@@ -287,14 +316,14 @@ Page({
       scores.history +
       scores.pe
 
-    const hasPartial = partialSum > 0
-    const hasTotal = scores.total > 0
+    var hasPartial = partialSum > 0
+    var hasTotal = scores.total > 0
 
     if (hasPartial && hasTotal && partialSum !== scores.total) {
       this.setData({
         scoreValidation: {
           valid: false,
-          message: `各科成绩之和(${partialSum})与总分(${scores.total})不一致`
+          message: '各科成绩之和(' + partialSum + ')与总分(' + scores.total + ')不一致'
         }
       })
       return
@@ -305,8 +334,8 @@ Page({
     })
   },
 
-  _validateRank() {
-    const { ranking } = this.data
+  _validateRank: function () {
+    var ranking = this.data.ranking
 
     if (ranking.rank > 0 && ranking.totalStudents > 0 && ranking.rank > ranking.totalStudents) {
       this.setData({
@@ -323,8 +352,8 @@ Page({
     })
   },
 
-  _subjectLabel(field) {
-    const labels = {
+  _subjectLabel: function (field) {
+    var labels = {
       chinese: '语文',
       math: '数学',
       foreign: '外语',
@@ -338,10 +367,10 @@ Page({
 
   // ======== 步骤导航 ========
 
-  nextStep() {
+  nextStep: function () {
     if (!this.data.canNext) return
 
-    const nextStep = this.data.currentStep + 1
+    var nextStep = this.data.currentStep + 1
     this.setData({ currentStep: nextStep })
 
     if (nextStep === 1) {
@@ -351,7 +380,7 @@ Page({
     }
   },
 
-  prevStep() {
+  prevStep: function () {
     if (this.data.currentStep <= 0) return
     this.setData({
       currentStep: this.data.currentStep - 1
@@ -359,53 +388,46 @@ Page({
     this._validateCurrentStep()
   },
 
-  _loadQuotaSchools() {
-    const { districtId, middleSchoolId } = this.data
+  _loadQuotaSchools: function () {
+    var self = this
+    var districtId = self.data.districtId
+    var middleSchoolId = self.data.middleSchoolId
+
+    if (!districtId || !middleSchoolId) {
+      wx.showToast({ title: '请先完成基本信息', icon: 'none' })
+      return
+    }
 
     wx.showLoading({ title: '加载学校数据...' })
 
     Promise.all([
-      getSchoolsWithQuotaDistrict(districtId),
-      getSchoolsWithQuotaSchool(middleSchoolId),
-      getSchoolsForUnified(districtId)
-    ]).then(([quotaDistrictRes, quotaSchoolRes, unifiedRes]) => {
+      reference.getSchoolsWithQuotaDistrict(districtId),
+      reference.getSchoolsWithQuotaSchool(middleSchoolId),
+      reference.getSchoolsForUnified(districtId)
+    ]).then(function (results) {
       wx.hideLoading()
 
-      const quotaDistrictSchools = (quotaDistrictRes.schools || []).map(s => ({
-        id: s.id,
-        fullName: s.fullName || s.name,
-        code: s.code || '',
-        quotaCount: s.quotaCount || 0
-      }))
-
-      const quotaSchoolSchools = (quotaSchoolRes.schools || []).map(s => ({
-        id: s.id,
-        fullName: s.fullName || s.name,
-        code: s.code || '',
-        quotaCount: s.quotaCount || 0
-      }))
-
-      const unifiedSchools = (unifiedRes.schools || []).map(s => ({
-        id: s.id,
-        fullName: s.fullName || s.name,
-        code: s.code || ''
-      }))
-
-      this.setData({
-        quotaDistrictSchools,
-        quotaSchoolSchools,
-        unifiedSchools
+      var quotaDistrictSchools = (results[0].schools || []).map(function (s) {
+        return { id: s.id, fullName: s.fullName || s.name, code: s.code || '', quotaCount: s.quotaCount || 0 }
       })
 
-      // 解析已保存志愿的学校名称
-      this._resolveVolunteerNames(
-        quotaDistrictSchools,
-        quotaSchoolSchools,
-        unifiedSchools
-      )
+      var quotaSchoolSchools = (results[1].schools || []).map(function (s) {
+        return { id: s.id, fullName: s.fullName || s.name, code: s.code || '', quotaCount: s.quotaCount || 0 }
+      })
 
-      this._validateStep2()
-    }).catch(() => {
+      var unifiedSchools = (results[2].schools || []).map(function (s) {
+        return { id: s.id, fullName: s.fullName || s.name, code: s.code || '' }
+      })
+
+      self.setData({
+        quotaDistrictSchools: quotaDistrictSchools,
+        quotaSchoolSchools: quotaSchoolSchools,
+        unifiedSchools: unifiedSchools
+      })
+
+      self._resolveVolunteerNames(quotaDistrictSchools, quotaSchoolSchools, unifiedSchools)
+      self._validateStep2()
+    }).catch(function () {
       wx.hideLoading()
       wx.showToast({ title: '加载学校数据失败', icon: 'none' })
     })
@@ -413,15 +435,15 @@ Page({
 
   // ======== 学校选择器 ========
 
-  onSchoolPickerOpen(e) {
-    const type = e.currentTarget.dataset.type
-    let schools = []
+  onSchoolPickerOpen: function (e) {
+    var type = e.currentTarget.dataset.type
+    var schools = []
 
     if (type === 'quotaDistrict') {
       schools = this.data.quotaDistrictSchools
     } else if (type === 'quotaSchool0' || type === 'quotaSchool1') {
       schools = this.data.quotaSchoolSchools
-    } else if (type.startsWith('unified')) {
+    } else if (type.indexOf('unified') === 0) {
       schools = this.data.unifiedSchools
     }
 
@@ -433,12 +455,12 @@ Page({
     })
   },
 
-  onPickerSearch(e) {
-    const query = e.detail.value.trim()
+  onPickerSearch: function (e) {
+    var query = e.detail.value.trim()
     this.setData({ pickerSearch: query })
 
-    let allSchools = []
-    const type = this.data.pickerType
+    var allSchools = []
+    var type = this.data.pickerType
 
     if (type === 'quotaDistrict') {
       allSchools = this.data.quotaDistrictSchools
@@ -453,18 +475,18 @@ Page({
       return
     }
 
-    const filtered = allSchools.filter(s =>
-      s.fullName.includes(query) || (s.code && s.code.includes(query))
-    )
+    var filtered = allSchools.filter(function (s) {
+      return s.fullName.indexOf(query) !== -1 || (s.code && s.code.indexOf(query) !== -1)
+    })
     this.setData({ pickerSchools: filtered })
   },
 
-  onSchoolSelect(e) {
-    const schoolId = Number(e.currentTarget.dataset.id)
-    const schoolName = e.currentTarget.dataset.name || ''
-    const type = this.data.pickerType
+  onSchoolSelect: function (e) {
+    var schoolId = Number(e.currentTarget.dataset.id)
+    var schoolName = e.currentTarget.dataset.name || ''
+    var type = this.data.pickerType
 
-    const updates = {
+    var updates = {
       showSchoolPicker: false,
       pickerSearch: ''
     }
@@ -478,27 +500,26 @@ Page({
     } else if (type === 'quotaSchool1') {
       updates['volunteers.quotaSchool[1]'] = schoolId
       updates['volunteerNames.quotaSchool1'] = schoolName
-    } else if (type.startsWith('unified')) {
-      const index = parseInt(type.replace('unified', ''), 10)
-      updates[`volunteers.unified[${index}]`] = schoolId
-      updates[`volunteerNames.unified[${index}]`] = schoolName
+    } else if (type.indexOf('unified') === 0) {
+      var index = parseInt(type.replace('unified', ''), 10)
+      updates['volunteers.unified[' + index + ']'] = schoolId
+      updates['volunteerNames.unified[' + index + ']'] = schoolName
     }
 
     this.setData(updates)
     this._validateStep2()
   },
 
-  onPickerClose() {
+  onPickerClose: function () {
     this.setData({
       showSchoolPicker: false,
       pickerSearch: ''
     })
   },
 
-  onClearVolunteer(e) {
-    const type = e.currentTarget.dataset.type
-
-    const updates = {}
+  onClearVolunteer: function (e) {
+    var type = e.currentTarget.dataset.type
+    var updates = {}
 
     if (type === 'quotaDistrict') {
       updates['volunteers.quotaDistrict'] = null
@@ -509,10 +530,10 @@ Page({
     } else if (type === 'quotaSchool1') {
       updates['volunteers.quotaSchool[1]'] = 0
       updates['volunteerNames.quotaSchool1'] = ''
-    } else if (type.startsWith('unified')) {
-      const index = parseInt(type.replace('unified', ''), 10)
-      updates[`volunteers.unified[${index}]`] = 0
-      updates[`volunteerNames.unified[${index}]`] = ''
+    } else if (type.indexOf('unified') === 0) {
+      var index = parseInt(type.replace('unified', ''), 10)
+      updates['volunteers.unified[' + index + ']'] = 0
+      updates['volunteerNames.unified[' + index + ']'] = ''
     }
 
     this.setData(updates)
@@ -521,95 +542,78 @@ Page({
 
   // ======== 查找学校名称 ========
 
-  _findSchoolName(type, schoolId) {
-    if (!schoolId) return ''
-
-    let schools = []
-    if (type === 'quotaDistrict') {
-      schools = this.data.quotaDistrictSchools
-    } else if (type === 'quotaSchool0' || type === 'quotaSchool1') {
-      schools = this.data.quotaSchoolSchools
-    } else {
-      schools = this.data.unifiedSchools
-    }
-
-    const school = schools.find(s => s.id === schoolId)
-    return school ? school.fullName : ''
-  },
-
-  /**
-   * 加载学校数据后，解析已保存志愿对应的学校名称
-   */
-  _resolveVolunteerNames(quotaDistrictSchools, quotaSchoolSchools, unifiedSchools) {
-    const { volunteers } = this.data
-    const names = {
+  _resolveVolunteerNames: function (quotaDistrictSchools, quotaSchoolSchools, unifiedSchools) {
+    var volunteers = this.data.volunteers
+    var names = {
       quotaDistrict: '',
       quotaSchool0: '',
       quotaSchool1: '',
-      unified: Array(15).fill('')
+      unified: new Array(15).fill('')
     }
 
     if (volunteers.quotaDistrict) {
-      const s = quotaDistrictSchools.find(s => s.id === volunteers.quotaDistrict)
-      names.quotaDistrict = s ? s.fullName : ''
+      var found = quotaDistrictSchools.filter(function (s) { return s.id === volunteers.quotaDistrict })[0]
+      names.quotaDistrict = found ? found.fullName : ''
     }
 
     if (volunteers.quotaSchool[0]) {
-      const s = quotaSchoolSchools.find(s => s.id === volunteers.quotaSchool[0])
-      names.quotaSchool0 = s ? s.fullName : ''
+      var found2 = quotaSchoolSchools.filter(function (s) { return s.id === volunteers.quotaSchool[0] })[0]
+      names.quotaSchool0 = found2 ? found2.fullName : ''
     }
 
     if (volunteers.quotaSchool[1]) {
-      const s = quotaSchoolSchools.find(s => s.id === volunteers.quotaSchool[1])
-      names.quotaSchool1 = s ? s.fullName : ''
+      var found3 = quotaSchoolSchools.filter(function (s) { return s.id === volunteers.quotaSchool[1] })[0]
+      names.quotaSchool1 = found3 ? found3.fullName : ''
     }
 
-    volunteers.unified.forEach((id, idx) => {
-      if (id) {
-        const s = unifiedSchools.find(s => s.id === id)
-        names.unified[idx] = s ? s.fullName : ''
+    for (var idx = 0; idx < volunteers.unified.length; idx++) {
+      var uid = volunteers.unified[idx]
+      if (uid) {
+        var found4 = unifiedSchools.filter(function (s) { return s.id === uid })[0]
+        names.unified[idx] = found4 ? found4.fullName : ''
       }
-    })
+    }
 
     this.setData({ volunteerNames: names })
   },
 
   // ======== 提交分析 ========
 
-  onSubmit() {
+  onSubmit: function () {
     if (!this.data.canSubmit || this.data.submitting) return
 
-    this.setData({ submitting: true })
+    var self = this
+    self.setData({ submitting: true })
     wx.showLoading({ title: '提交分析中...' })
 
-    const formData = {
-      districtId: this.data.districtId,
-      middleSchoolId: this.data.middleSchoolId,
-      hasQuotaSchoolEligibility: this.data.hasQuotaSchoolEligibility,
-      scores: { ...this.data.scores },
-      comprehensiveQuality: this.data.comprehensiveQuality,
-      ranking: { ...this.data.ranking },
+    var formData = {
+      districtId: self.data.districtId,
+      middleSchoolId: self.data.middleSchoolId,
+      hasQuotaSchoolEligibility: self.data.hasQuotaSchoolEligibility,
+      scores: cloneScores(self.data.scores),
+      comprehensiveQuality: self.data.comprehensiveQuality,
+      ranking: cloneRanking(self.data.ranking),
       volunteers: {
-        quotaDistrict: this.data.volunteers.quotaDistrict,
-        quotaSchool: [...this.data.volunteers.quotaSchool],
-        unified: [...this.data.volunteers.unified]
+        quotaDistrict: self.data.volunteers.quotaDistrict,
+        quotaSchool: self.data.volunteers.quotaSchool.slice(),
+        unified: self.data.volunteers.unified.slice()
       }
     }
 
-    submitAnalysis(formData)
-      .then(({ analysisId }) => {
+    candidate.submitAnalysis(formData)
+      .then(function (result) {
         wx.hideLoading()
-        clearFormData()
-        saveAnalysisId(analysisId)
+        storage.clearFormData()
+        storage.saveAnalysisId(result.analysisId)
         wx.redirectTo({
-          url: `/pages/result/result?id=${analysisId}`
+          url: '/pages/result/result?id=' + result.analysisId
         })
       })
-      .catch(err => {
+      .catch(function (err) {
         wx.hideLoading()
-        this.setData({ submitting: false })
+        self.setData({ submitting: false })
         wx.showToast({
-          title: err.message || '提交失败，请重试',
+          title: (err && err.message) || '提交失败，请重试',
           icon: 'none',
           duration: 3000
         })

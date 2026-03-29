@@ -7,7 +7,7 @@
   <!-- Error State -->
   <block wx:elif="{{error}}">
     <view class="error-container">
-      <text class="error-icon-text">⚠</text>
+      <view class="error-icon-dot"></view>
       <text class="error-title">分析失败</text>
       <text class="error-message">{{error}}</text>
       <view class="error-actions">
@@ -20,7 +20,7 @@
   <!-- No Results State -->
   <block wx:elif="{{!loading && !error && !predictions && !probabilities.length}}">
     <view class="empty-container">
-      <text class="empty-icon-text">📋</text>
+      <view class="empty-icon-dot"></view>
       <text class="empty-title">暂无分析结果</text>
       <text class="empty-desc">未获取到有效的分析数据，请重新提交</text>
       <button class="btn-primary" bindtap="goBack">返回重新分析</button>
@@ -38,7 +38,7 @@
     <!-- Rank Prediction Card -->
     <view class="card" wx:if="{{predictions}}">
       <view class="card-header">
-        <text class="card-header-icon">📊</text>
+        <view class="card-header-icon"></view>
         <text>区内排名预测</text>
       </view>
       <view class="prediction-content">
@@ -61,7 +61,7 @@
     <!-- Probability Analysis Card -->
     <view class="card" wx:if="{{probabilities.length}}">
       <view class="card-header">
-        <text class="card-header-icon">🎯</text>
+        <view class="card-header-icon"></view>
         <text>录取概率分析</text>
       </view>
       <view class="probability-list">
@@ -92,7 +92,7 @@
     <!-- Strategy Analysis Card -->
     <view class="card" wx:if="{{strategy}}">
       <view class="card-header">
-        <text class="card-header-icon">📝</text>
+        <view class="card-header-icon"></view>
         <text>志愿策略分析</text>
         <text class="tag tag-{{strategy.score >= 80 ? 'success' : strategy.score >= 60 ? 'warning' : 'danger'}}" wx:if="{{strategy.score}}">
           {{strategy.score}}分
@@ -134,7 +134,7 @@
     <!-- Competitor Analysis Card -->
     <view class="card" wx:if="{{competitors}}">
       <view class="card-header">
-        <text class="card-header-icon">👥</text>
+        <view class="card-header-icon"></view>
         <text>竞争态势分析</text>
       </view>
       <view class="competitor-content">

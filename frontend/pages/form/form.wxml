@@ -8,7 +8,7 @@
   <!-- ==================== Step 0: 基本信息 ==================== -->
   <view wx:if="{{currentStep === 0}}" class="card form-card">
     <view class="card-header">
-      <text class="card-header-icon">&#xe60a;</text>
+      <view class="card-header-icon"></view>
       <text>基本信息</text>
     </view>
 
@@ -88,7 +88,7 @@
   <!-- ==================== Step 1: 成绩信息 ==================== -->
   <view wx:if="{{currentStep === 1}}" class="card form-card">
     <view class="card-header">
-      <text class="card-header-icon">&#xe60a;</text>
+      <view class="card-header-icon"></view>
       <text>成绩信息</text>
     </view>
 
@@ -277,7 +277,7 @@
   <!-- ==================== Step 2: 志愿填报 ==================== -->
   <view wx:if="{{currentStep === 2}}" class="card form-card">
     <view class="card-header">
-      <text class="card-header-icon">&#xe60a;</text>
+      <view class="card-header-icon"></view>
       <text>志愿填报</text>
     </view>
 
