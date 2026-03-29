@@ -1,0 +1,61 @@
+.prob-card {
+  padding: 24rpx;
+  background-color: var(--color-bg);
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.prob-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.school-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+.prob-stats {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.prob-bar-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.prob-bar-bg {
+  flex: 1;
+  height: 16rpx;
+  background-color: #EBEEF5;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.prob-bar-fill {
+  height: 100%;
+  border-radius: 8rpx;
+  transition: width 0.6s ease;
+}
+
+.prob-value {
+  font-size: 26rpx;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  min-width: 72rpx;
+  text-align: right;
+}
+
+.score-diff {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+}

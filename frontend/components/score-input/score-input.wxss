@@ -1,0 +1,10 @@
+.score-input {
+  margin-bottom: 24rpx;
+}
+
+.score-label {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  margin-bottom: 12rpx;
+}

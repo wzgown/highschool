@@ -1,0 +1,260 @@
+/* 志愿填报页面样式 */
+
+/* ======== 表单卡片 ======== */
+
+.form-card {
+  padding-bottom: 0;
+}
+
+/* ======== 开关行 ======== */
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.switch-label {
+  font-size: 28rpx;
+  color: var(--color-text-regular);
+}
+
+/* ======== 成绩输入网格 ======== */
+
+.score-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.score-item {
+  width: calc(33.33% - 12rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-label {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.score-input {
+  width: 100%;
+  height: 72rpx;
+  text-align: center;
+  border: 2rpx solid var(--color-border);
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* ======== 志愿区块 ======== */
+
+.volunteer-section {
+  padding-bottom: 24rpx;
+  margin-bottom: 24rpx;
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.volunteer-section-last {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.section-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-count {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+}
+
+/* ======== 志愿条目 ======== */
+
+.volunteer-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 16rpx;
+  margin-bottom: 12rpx;
+  background-color: var(--color-bg);
+  border-radius: 12rpx;
+}
+
+.volunteer-index {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 16rpx;
+}
+
+.volunteer-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.volunteer-name {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.volunteer-placeholder {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+}
+
+.volunteer-clear {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: 28rpx;
+  flex-shrink: 0;
+  margin-left: 12rpx;
+}
+
+/* ======== 学校选择器弹窗 ======== */
+
+.picker-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+}
+
+.picker-panel {
+  width: 100%;
+  max-height: 80vh;
+  background-color: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 32rpx;
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.picker-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.picker-close {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: 32rpx;
+}
+
+.picker-search-wrap {
+  padding: 16rpx 32rpx;
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.picker-search {
+  width: 100%;
+  height: 72rpx;
+  padding: 0 24rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  box-sizing: border-box;
+}
+
+.picker-list {
+  max-height: 60vh;
+  padding: 0 32rpx;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.picker-item:last-child {
+  border-bottom: none;
+}
+
+.picker-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.picker-item-name {
+  display: block;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-item-code {
+  display: block;
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  margin-top: 4rpx;
+}
+
+.picker-item-quota {
+  font-size: 24rpx;
+  color: var(--color-primary);
+  background-color: rgba(64, 158, 255, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.picker-empty {
+  padding: 64rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+}
+
+/* ======== 禁用选择器状态 ======== */
+
+.form-picker-disabled {
+  background-color: var(--color-bg);
+  opacity: 0.6;
+}

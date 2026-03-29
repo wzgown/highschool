@@ -1,0 +1,65 @@
+<view class="container">
+  <!-- Hero Section -->
+  <view class="hero">
+    <view class="hero-bg"></view>
+    <view class="hero-content">
+      <text class="hero-title">中考志愿模拟系统</text>
+      <text class="hero-subtitle">智能分析录取概率，优化志愿填报策略</text>
+    </view>
+  </view>
+
+  <!-- Feature Cards -->
+  <view class="features">
+    <view class="card feature-card">
+      <text class="feature-icon">🎯</text>
+      <text class="feature-title">模拟分析</text>
+      <text class="feature-desc">输入成绩和志愿，获取录取概率预测和策略建议</text>
+    </view>
+    <view class="card feature-card">
+      <text class="feature-icon">📊</text>
+      <text class="feature-title">录取概率</text>
+      <text class="feature-desc">基于历史数据和模拟算法，预测每所学校的录取概率</text>
+    </view>
+    <view class="card feature-card">
+      <text class="feature-icon">📝</text>
+      <text class="feature-title">策略优化</text>
+      <text class="feature-desc">分析志愿梯度分布，提供冲稳保填报建议</text>
+    </view>
+  </view>
+
+  <!-- Action Buttons -->
+  <view class="actions-main">
+    <button class="btn-primary btn-large" bindtap="onStartAnalysis">
+      开始志愿模拟
+    </button>
+    <button class="btn-secondary btn-large" bindtap="onViewHistory">
+      查看历史记录
+    </button>
+  </view>
+
+  <!-- Batch Info -->
+  <view class="card batch-info">
+    <view class="card-header">
+      <text>录取批次说明</text>
+    </view>
+    <view class="batch-list">
+      <view class="batch-item">
+        <text class="tag tag-primary">名额分配到区</text>
+        <text class="batch-desc">1个志愿 | 全区排名竞争</text>
+      </view>
+      <view class="batch-item">
+        <text class="tag tag-success">名额分配到校</text>
+        <text class="batch-desc">2个志愿 | 校内排名竞争（需具备资格）</text>
+      </view>
+      <view class="batch-item">
+        <text class="tag tag-warning">统一招生</text>
+        <text class="batch-desc">1-15志愿 | 平行志愿投档</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Disclaimer -->
+  <view class="disclaimer">
+    <text class="disclaimer-text">本系统仅供参考，不构成任何录取承诺。实际录取以官方公布结果为准。</text>
+  </view>
+</view>

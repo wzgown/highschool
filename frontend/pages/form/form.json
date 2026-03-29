@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "志愿填报",
+  "usingComponents": {
+    "step-indicator": "/components/step-indicator/step-indicator"
+  }
+}

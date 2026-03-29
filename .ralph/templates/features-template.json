@@ -1,0 +1,25 @@
+{
+  "task_id": "",
+  "task_name": "",
+  "created_at": "",
+  "requirements_dir": "requirements/",
+  "features": [
+    {
+      "id": "F001",
+      "category": "functional",
+      "description": "功能描述",
+      "priority": "high",
+      "requirement_refs": [
+        "requirements/xxx.md#section-name"
+      ],
+      "steps": [
+        "步骤1",
+        "步骤2"
+      ],
+      "verify_command": "echo 'TODO: 添加验证命令'",
+      "passes": false,
+      "completed_at": null,
+      "notes": ""
+    }
+  ]
+}

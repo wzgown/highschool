@@ -1,0 +1,164 @@
+<view class="container">
+  <!-- Loading State -->
+  <block wx:if="{{loading}}">
+    <loading-skeleton loading="{{true}}" title="分析进行中" hint="此过程可能需要 10-30 秒" rows="{{6}}"></loading-skeleton>
+  </block>
+
+  <!-- Error State -->
+  <block wx:elif="{{error}}">
+    <view class="error-container">
+      <text class="error-icon-text">⚠</text>
+      <text class="error-title">分析失败</text>
+      <text class="error-message">{{error}}</text>
+      <view class="error-actions">
+        <button class="btn-primary" bindtap="onRetry">重试</button>
+        <button class="btn-secondary" bindtap="goBack">返回修改</button>
+      </view>
+    </view>
+  </block>
+
+  <!-- No Results State -->
+  <block wx:elif="{{!loading && !error && !predictions && !probabilities.length}}">
+    <view class="empty-container">
+      <text class="empty-icon-text">📋</text>
+      <text class="empty-title">暂无分析结果</text>
+      <text class="empty-desc">未获取到有效的分析数据，请重新提交</text>
+      <button class="btn-primary" bindtap="goBack">返回重新分析</button>
+    </view>
+  </block>
+
+  <!-- Success State -->
+  <block wx:else>
+    <!-- Result Header -->
+    <view class="result-header">
+      <text class="result-title">志愿分析报告</text>
+      <text class="result-time" wx:if="{{result.createdAt}}">{{result.createdAt}}</text>
+    </view>
+
+    <!-- Rank Prediction Card -->
+    <view class="card" wx:if="{{predictions}}">
+      <view class="card-header">
+        <text class="card-header-icon">📊</text>
+        <text>区内排名预测</text>
+      </view>
+      <view class="prediction-content">
+        <view class="prediction-main">
+          <text class="prediction-value">{{predictions.districtRank || '--'}}</text>
+          <text class="prediction-unit">名</text>
+        </view>
+        <view class="prediction-meta" wx:if="{{predictions.confidence}}">
+          <text class="tag tag-{{predictions.confidence === 'high' ? 'success' : predictions.confidence === 'medium' ? 'warning' : 'info'}}">
+            {{predictions.confidence === 'high' ? '准确度高' : predictions.confidence === 'medium' ? '准确度中' : '准确度低'}}
+          </text>
+        </view>
+        <view class="prediction-range" wx:if="{{predictions.rankLow || predictions.rankHigh}}">
+          <text class="prediction-range-label">预测区间</text>
+          <text class="prediction-range-value">{{predictions.rankLow || '?'}} - {{predictions.rankHigh || '?'}} 名</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Probability Analysis Card -->
+    <view class="card" wx:if="{{probabilities.length}}">
+      <view class="card-header">
+        <text class="card-header-icon">🎯</text>
+        <text>录取概率分析</text>
+      </view>
+      <view class="probability-list">
+        <view class="prob-card" wx:for="{{probabilities}}" wx:key="index">
+          <view class="prob-header">
+            <text class="tag tag-{{item.batchType}}">{{item.batchName}}</text>
+            <text class="school-name">{{item.schoolName}}</text>
+          </view>
+          <view class="prob-stats">
+            <view class="prob-bar-wrap">
+              <view class="prob-bar-bg">
+                <view class="prob-bar-fill" style="width: {{item.probability}}%; background-color: {{item.probability >= 80 ? '#67C23A' : item.probability >= 50 ? '#409EFF' : item.probability >= 30 ? '#E6A23C' : '#F56C6C'}};"></view>
+              </view>
+              <text class="prob-value">{{item.probability}}%</text>
+            </view>
+            <text class="tag tag-{{item.riskType}}">{{item.riskText}}</text>
+          </view>
+          <view wx:if="{{item.scoreDiff !== undefined && item.scoreDiff !== null}}" class="score-diff">
+            与历年分对比：{{item.scoreDiff > 0 ? '+' : ''}}{{item.scoreDiff}}分
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Strategy Analysis Card -->
+    <view class="card" wx:if="{{strategy}}">
+      <view class="card-header">
+        <text class="card-header-icon">📝</text>
+        <text>志愿策略分析</text>
+        <text class="tag tag-{{strategy.score >= 80 ? 'success' : strategy.score >= 60 ? 'warning' : 'danger'}}" wx:if="{{strategy.score}}">
+          {{strategy.score}}分
+        </text>
+      </view>
+      <view class="strategy-content">
+        <!-- Gradient Distribution -->
+        <gradient-bar
+          wx:if="{{strategy.reach || strategy.target || strategy.safety}}"
+          reach="{{strategy.reach || 0}}"
+          target="{{strategy.target || 0}}"
+          safety="{{strategy.safety || 0}}"
+        ></gradient-bar>
+
+        <!-- Suggestions -->
+        <view class="suggestion-section" wx:if="{{strategy.suggestions.length}}">
+          <text class="section-label">优化建议</text>
+          <view class="suggestion-list">
+            <view class="suggestion-item" wx:for="{{strategy.suggestions}}" wx:key="index">
+              <text class="suggestion-icon">✓</text>
+              <text class="suggestion-text">{{item}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- Warnings -->
+        <view class="warning-section" wx:if="{{strategy.warnings.length}}">
+          <text class="section-label">风险提示</text>
+          <view class="warning-list">
+            <view class="warning-item" wx:for="{{strategy.warnings}}" wx:key="index">
+              <text class="warning-icon">!</text>
+              <text class="warning-text">{{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Competitor Analysis Card -->
+    <view class="card" wx:if="{{competitors}}">
+      <view class="card-header">
+        <text class="card-header-icon">👥</text>
+        <text>竞争态势分析</text>
+      </view>
+      <view class="competitor-content">
+        <text class="competitor-count">
+          本次模拟生成 {{competitors.count}} 名虚拟竞争对手
+        </text>
+
+        <!-- Score Distribution -->
+        <view class="distribution-chart" wx:if="{{competitors.distributions.length}}">
+          <text class="section-label">竞争对手分数分布</text>
+          <view class="distribution-list">
+            <view class="distribution-item" wx:for="{{competitors.distributions}}" wx:key="index">
+              <text class="distribution-label">{{item.range}}分</text>
+              <view class="distribution-bar-bg">
+                <view class="distribution-bar-fill" style="width: {{item.percent}}%;"></view>
+              </view>
+              <text class="distribution-value">{{item.count}}人</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Action Buttons -->
+    <view class="result-actions">
+      <button class="btn-secondary action-btn" bindtap="goBack">返回修改</button>
+      <button class="btn-primary action-btn" bindtap="viewHistory">查看历史</button>
+    </view>
+  </block>
+</view>

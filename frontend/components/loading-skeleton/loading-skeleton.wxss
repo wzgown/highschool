@@ -1,0 +1,36 @@
+.loading-container {
+  padding: 48rpx 24rpx;
+  text-align: center;
+}
+
+.loading-title {
+  font-size: 32rpx;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  margin-bottom: 12rpx;
+}
+
+.loading-hint {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  margin-bottom: 32rpx;
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.skeleton-row {
+  height: 32rpx;
+  border-radius: 8rpx;
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}

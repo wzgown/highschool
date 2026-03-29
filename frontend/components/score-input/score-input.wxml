@@ -1,0 +1,15 @@
+<view class="score-input">
+  <view class="score-label">
+    <text wx:if="{{required}}" class="form-required">*</text>
+    <text>{{label}}</text>
+  </view>
+  <input
+    class="form-input {{disabled ? 'form-input-disabled' : ''}}"
+    type="digit"
+    value="{{value || ''}}"
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    bindinput="onInput"
+  />
+  <view wx:if="{{tip}}" class="form-tip">{{tip}}</view>
+</view>

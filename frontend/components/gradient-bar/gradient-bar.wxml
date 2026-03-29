@@ -1,0 +1,23 @@
+<view class="gradient-section">
+  <view class="gradient-item">
+    <text class="gradient-label">冲刺</text>
+    <view class="gradient-bar">
+      <view class="gradient-fill reach" style="width: {{reachPercent}}%;"></view>
+    </view>
+    <text class="gradient-count">{{reach}}个</text>
+  </view>
+  <view class="gradient-item">
+    <text class="gradient-label">稳妥</text>
+    <view class="gradient-bar">
+      <view class="gradient-fill target" style="width: {{targetPercent}}%;"></view>
+    </view>
+    <text class="gradient-count">{{target}}个</text>
+  </view>
+  <view class="gradient-item">
+    <text class="gradient-label">保底</text>
+    <view class="gradient-bar">
+      <view class="gradient-fill safety" style="width: {{safetyPercent}}%;"></view>
+    </view>
+    <text class="gradient-count">{{safety}}个</text>
+  </view>
+</view>

@@ -1,0 +1,440 @@
+<view class="container">
+  <!-- Step Indicator -->
+  <step-indicator
+    steps="{{['基本信息', '成绩信息', '志愿填报']}}"
+    current="{{currentStep}}"
+  />
+
+  <!-- ==================== Step 0: 基本信息 ==================== -->
+  <view wx:if="{{currentStep === 0}}" class="card form-card">
+    <view class="card-header">
+      <text class="card-header-icon">&#xe60a;</text>
+      <text>基本信息</text>
+    </view>
+
+    <!-- 区县选择 -->
+    <view class="form-group">
+      <view class="form-label">
+        <text class="form-required">*</text>
+        <text>所在区县</text>
+      </view>
+      <picker
+        mode="selector"
+        range="{{districts}}"
+        range-key="name"
+        bindchange="onDistrictChange"
+      >
+        <view class="form-picker">
+          <text class="{{districtName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+            {{districtName || '请选择区县'}}
+          </text>
+          <text class="form-picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 初中选择 -->
+    <view class="form-group">
+      <view class="form-label">
+        <text class="form-required">*</text>
+        <text>就读初中</text>
+      </view>
+      <picker
+        mode="selector"
+        range="{{middleSchools}}"
+        range-key="name"
+        bindchange="onMiddleSchoolChange"
+        disabled="{{!districtId}}"
+      >
+        <view class="form-picker {{!districtId ? 'form-picker-disabled' : ''}}">
+          <text class="{{middleSchoolName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+            {{middleSchoolName || (!districtId ? '请先选择区县' : '请选择初中')}}
+          </text>
+          <text class="form-picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 名额分配到校资格 -->
+    <view class="form-group">
+      <view class="form-label">
+        <text>名额分配到校资格</text>
+      </view>
+      <view class="switch-row">
+        <switch
+          checked="{{hasQuotaSchoolEligibility}}"
+          bindchange="onQuotaEligibilityChange"
+          color="#409EFF"
+        />
+        <text class="switch-label">{{hasQuotaSchoolEligibility ? '已具备' : '未具备'}}</text>
+      </view>
+      <view class="form-tip">
+        如您具有名额分配到校资格，可填报"名额分配到校"批次志愿
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="actions">
+      <button
+        class="btn-primary {{!canNext ? 'btn-disabled' : ''}}"
+        bindtap="nextStep"
+        disabled="{{!canNext}}"
+      >
+        下一步
+      </button>
+    </view>
+  </view>
+
+  <!-- ==================== Step 1: 成绩信息 ==================== -->
+  <view wx:if="{{currentStep === 1}}" class="card form-card">
+    <view class="card-header">
+      <text class="card-header-icon">&#xe60a;</text>
+      <text>成绩信息</text>
+    </view>
+
+    <!-- 总分 -->
+    <view class="form-group">
+      <view class="form-label">
+        <text class="form-required">*</text>
+        <text>中考总分（满分750）</text>
+      </view>
+      <input
+        class="form-input"
+        type="digit"
+        placeholder="请输入总分"
+        value="{{scores.total || ''}}"
+        bindinput="onScoreInput"
+        data-field="total"
+        maxlength="4"
+      />
+    </view>
+
+    <!-- 综合素质 -->
+    <view class="form-group">
+      <view class="form-label">
+        <text>综合素质评价成绩</text>
+      </view>
+      <input
+        class="form-input form-input-disabled"
+        value="{{comprehensiveQuality}}"
+        disabled
+      />
+      <view class="form-tip">综合素质评价成绩默认为50分（满分50分）</view>
+    </view>
+
+    <!-- 各科成绩 -->
+    <view class="divider-text">
+      <text class="divider-text-text">各科成绩（选填）</text>
+    </view>
+
+    <view class="score-grid">
+      <view class="score-item">
+        <text class="score-label">语文</text>
+        <input
+          class="score-input"
+          type="digit"
+          placeholder="150"
+          value="{{scores.chinese || ''}}"
+          bindinput="onScoreInput"
+          data-field="chinese"
+          maxlength="3"
+        />
+      </view>
+      <view class="score-item">
+        <text class="score-label">数学</text>
+        <input
+          class="score-input"
+          type="digit"
+          placeholder="150"
+          value="{{scores.math || ''}}"
+          bindinput="onScoreInput"
+          data-field="math"
+          maxlength="3"
+        />
+      </view>
+      <view class="score-item">
+        <text class="score-label">外语</text>
+        <input
+          class="score-input"
+          type="digit"
+          placeholder="150"
+          value="{{scores.foreign || ''}}"
+          bindinput="onScoreInput"
+          data-field="foreign"
+          maxlength="3"
+        />
+      </view>
+      <view class="score-item">
+        <text class="score-label">综合测试</text>
+        <input
+          class="score-input"
+          type="digit"
+          placeholder="150"
+          value="{{scores.integrated || ''}}"
+          bindinput="onScoreInput"
+          data-field="integrated"
+          maxlength="3"
+        />
+      </view>
+      <view class="score-item">
+        <text class="score-label">道德与法治</text>
+        <input
+          class="score-input"
+          type="digit"
+          placeholder="60"
+          value="{{scores.ethics || ''}}"
+          bindinput="onScoreInput"
+          data-field="ethics"
+          maxlength="2"
+        />
+      </view>
+      <view class="score-item">
+        <text class="score-label">历史</text>
+        <input
+          class="score-input"
+          type="digit"
+          placeholder="60"
+          value="{{scores.history || ''}}"
+          bindinput="onScoreInput"
+          data-field="history"
+          maxlength="2"
+        />
+      </view>
+      <view class="score-item">
+        <text class="score-label">体育</text>
+        <input
+          class="score-input"
+          type="digit"
+          placeholder="30"
+          value="{{scores.pe || ''}}"
+          bindinput="onScoreInput"
+          data-field="pe"
+          maxlength="2"
+        />
+      </view>
+    </view>
+
+    <!-- 成绩校验提示 -->
+    <view wx:if="{{!scoreValidation.valid}}" class="alert alert-error">
+      {{scoreValidation.message}}
+    </view>
+
+    <!-- 校内排名 -->
+    <view class="divider-text">
+      <text class="divider-text-text">校内排名</text>
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">
+        <text class="form-required">*</text>
+        <text>年级排名</text>
+      </view>
+      <input
+        class="form-input"
+        type="digit"
+        placeholder="请输入年级排名"
+        value="{{ranking.rank || ''}}"
+        bindinput="onRankInput"
+        data-field="rank"
+        maxlength="5"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">
+        <text class="form-required">*</text>
+        <text>年级总人数</text>
+      </view>
+      <input
+        class="form-input"
+        type="digit"
+        placeholder="请输入年级总人数"
+        value="{{ranking.totalStudents || ''}}"
+        bindinput="onRankInput"
+        data-field="totalStudents"
+        maxlength="5"
+      />
+    </view>
+
+    <!-- 排名校验提示 -->
+    <view wx:if="{{!rankValidation.valid}}" class="alert alert-error">
+      {{rankValidation.message}}
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="actions">
+      <button class="btn-secondary" bindtap="prevStep">上一步</button>
+      <button
+        class="btn-primary {{!canNext ? 'btn-disabled' : ''}}"
+        bindtap="nextStep"
+        disabled="{{!canNext}}"
+      >
+        下一步
+      </button>
+    </view>
+  </view>
+
+  <!-- ==================== Step 2: 志愿填报 ==================== -->
+  <view wx:if="{{currentStep === 2}}" class="card form-card">
+    <view class="card-header">
+      <text class="card-header-icon">&#xe60a;</text>
+      <text>志愿填报</text>
+    </view>
+
+    <!-- 名额分配到区 -->
+    <view class="volunteer-section">
+      <view class="section-subtitle">
+        <text class="tag tag-primary">名额分配到区</text>
+        <text class="section-count">1个志愿</text>
+      </view>
+
+      <view class="volunteer-item" bindtap="onSchoolPickerOpen" data-type="quotaDistrict">
+        <view class="volunteer-index">1</view>
+        <view class="volunteer-content">
+          <text class="{{volunteerNames.quotaDistrict ? 'volunteer-name' : 'volunteer-placeholder'}}">
+            {{volunteerNames.quotaDistrict || '点击选择学校'}}
+          </text>
+        </view>
+        <view
+          wx:if="{{volunteers.quotaDistrict}}"
+          class="volunteer-clear"
+          catchtap="onClearVolunteer"
+          data-type="quotaDistrict"
+        >
+          <text>✕</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 名额分配到校 -->
+    <view wx:if="{{hasQuotaSchoolEligibility}}" class="volunteer-section">
+      <view class="section-subtitle">
+        <text class="tag tag-success">名额分配到校</text>
+        <text class="section-count">2个志愿</text>
+      </view>
+
+      <view class="volunteer-item" bindtap="onSchoolPickerOpen" data-type="quotaSchool0">
+        <view class="volunteer-index">1</view>
+        <view class="volunteer-content">
+          <text class="{{volunteerNames.quotaSchool0 ? 'volunteer-name' : 'volunteer-placeholder'}}">
+            {{volunteerNames.quotaSchool0 || '点击选择学校'}}
+          </text>
+        </view>
+        <view
+          wx:if="{{volunteers.quotaSchool[0]}}"
+          class="volunteer-clear"
+          catchtap="onClearVolunteer"
+          data-type="quotaSchool0"
+        >
+          <text>✕</text>
+        </view>
+      </view>
+
+      <view class="volunteer-item" bindtap="onSchoolPickerOpen" data-type="quotaSchool1">
+        <view class="volunteer-index">2</view>
+        <view class="volunteer-content">
+          <text class="{{volunteerNames.quotaSchool1 ? 'volunteer-name' : 'volunteer-placeholder'}}">
+            {{volunteerNames.quotaSchool1 || '点击选择学校'}}
+          </text>
+        </view>
+        <view
+          wx:if="{{volunteers.quotaSchool[1]}}"
+          class="volunteer-clear"
+          catchtap="onClearVolunteer"
+          data-type="quotaSchool1"
+        >
+          <text>✕</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 统一招生 -->
+    <view class="volunteer-section volunteer-section-last">
+      <view class="section-subtitle">
+        <text class="tag tag-warning">统一招生</text>
+        <text class="section-count">1-15个志愿</text>
+      </view>
+
+      <!-- 显示已填写的志愿 + 下一个空志愿 -->
+      <block wx:for="{{volunteers.unified}}" wx:key="index">
+        <view
+          wx:if="{{item !== 0 || index === 0 || volunteers.unified[index - 1] !== 0}}"
+          class="volunteer-item"
+          bindtap="onSchoolPickerOpen"
+          data-type="unified{{index}}"
+        >
+          <view class="volunteer-index">{{index + 1}}</view>
+          <view class="volunteer-content">
+            <text class="{{item ? 'volunteer-name' : 'volunteer-placeholder'}}">
+              {{item ? volunteerNames.unified[index] : '点击选择学校'}}
+            </text>
+          </view>
+          <view
+            wx:if="{{item}}"
+            class="volunteer-clear"
+            catchtap="onClearVolunteer"
+            data-type="unified{{index}}"
+          >
+            <text>✕</text>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="actions">
+      <button class="btn-secondary" bindtap="prevStep">上一步</button>
+      <button
+        class="btn-primary {{!canSubmit ? 'btn-disabled' : ''}}"
+        bindtap="onSubmit"
+        disabled="{{!canSubmit || submitting}}"
+      >
+        {{submitting ? '提交中...' : '开始分析'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- ==================== 学校选择器弹窗 ==================== -->
+  <view wx:if="{{showSchoolPicker}}" class="picker-overlay" bindtap="onPickerClose">
+    <view class="picker-panel" catchtap="">
+      <!-- 搜索栏 -->
+      <view class="picker-header">
+        <text class="picker-title">选择学校</text>
+        <view class="picker-close" bindtap="onPickerClose">
+          <text>✕</text>
+        </view>
+      </view>
+      <view class="picker-search-wrap">
+        <input
+          class="picker-search"
+          placeholder="搜索学校名称或代码"
+          value="{{pickerSearch}}"
+          bindinput="onPickerSearch"
+          confirm-type="search"
+        />
+      </view>
+
+      <!-- 学校列表 -->
+      <scroll-view class="picker-list" scroll-y>
+        <view
+          wx:for="{{pickerSchools}}"
+          wx:key="id"
+          class="picker-item"
+          bindtap="onSchoolSelect"
+          data-id="{{item.id}}"
+          data-name="{{item.fullName}}"
+        >
+          <view class="picker-item-info">
+            <text class="picker-item-name">{{item.fullName}}</text>
+            <text wx:if="{{item.code}}" class="picker-item-code">代码: {{item.code}}</text>
+          </view>
+          <text wx:if="{{item.quotaCount}}" class="picker-item-quota">名额: {{item.quotaCount}}</text>
+        </view>
+
+        <view wx:if="{{pickerSchools.length === 0}}" class="picker-empty">
+          <text>暂无匹配的学校</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

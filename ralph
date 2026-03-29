@@ -1,2 +1,6 @@
 #!/bin/bash
-./.ralph/scripts/run-ralph.sh "$@"
+# Ralph Loop v3.0 - Shell wrapper
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export PYTHONIOENCODING="utf-8"
+exec python3 "./.ralph/scripts/ralph.py" "$@"

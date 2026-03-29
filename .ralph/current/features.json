@@ -1,0 +1,335 @@
+{
+  "task_id": "F-20260308-001",
+  "task_name": "前端多端适配重构 (Web/H5/微信小程序)",
+  "created_at": "2026-03-08T22:15:00+08:00",
+  "features": [
+    {
+      "id": "F001",
+      "category": "setup",
+      "description": "创建 uni-app 项目基础结构",
+      "priority": "high",
+      "steps": [
+        "在 frontend 目录创建 uni-app Vue 3 + TypeScript 项目",
+        "配置 Vite 构建工具",
+        "安装 uni-ui 组件库",
+        "配置 manifest.json 和 pages.json",
+        "验证项目可运行"
+      ],
+      "verify_command": "test -f frontend/src/manifest.json && test -f frontend/src/pages.json && cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T22:30:00+08:00",
+      "notes": "保留现有 Vite 项目为 frontend-legacy，新项目在 frontend 目录"
+    },
+    {
+      "id": "F002",
+      "category": "setup",
+      "description": "迁移 Connect-RPC API 层",
+      "priority": "high",
+      "steps": [
+        "复制现有 api/ 目录到新项目",
+        "创建小程序网络请求适配器",
+        "封装平台检测工具函数",
+        "验证 API 调用在 H5 端正常"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T22:45:00+08:00",
+      "notes": "创建了跨平台 transport 适配器，支持 H5 和小程序网络请求"
+    },
+    {
+      "id": "F003",
+      "category": "setup",
+      "description": "迁移 Pinia Stores",
+      "priority": "high",
+      "steps": [
+        "复制 stores/ 目录到新项目",
+        "适配 uni-app 存储API (uni.setStorage)",
+        "验证状态管理正常工作"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T22:55:00+08:00",
+      "notes": "安装 pinia@2.1.7，创建 candidate/history/simulation 三个 store，在 main.ts 中注册 Pinia"
+    },
+    {
+      "id": "F004",
+      "category": "setup",
+      "description": "迁移工具函数和组合式函数",
+      "priority": "high",
+      "steps": [
+        "复制 utils/ 目录",
+        "复制 composables/ 目录",
+        "适配平台相关 API",
+        "类型检查通过"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T23:10:00+08:00",
+      "notes": "迁移 validators.ts（表单验证），useDeviceFingerprint.ts（设备指纹composable），device.ts 已有跨平台版本"
+    },
+    {
+      "id": "F005",
+      "category": "component",
+      "description": "创建通用 UI 组件库",
+      "priority": "high",
+      "steps": [
+        "创建 Button 组件（三端适配）",
+        "创建 Input 组件（三端适配）",
+        "创建 Card 组件（三端适配）",
+        "创建 Loading 组件",
+        "编写组件 Storybook 文档"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T23:20:00+08:00",
+      "notes": "创建了 AppButton、AppInput、AppCard、AppLoading 四个通用组件，基于 uni-ui 封装，支持三端适配"
+    },
+    {
+      "id": "F006",
+      "category": "page",
+      "description": "迁移首页 (HomeView)",
+      "priority": "high",
+      "steps": [
+        "创建 pages/index/index.vue",
+        "迁移首页布局和样式",
+        "迁移开屏动画组件",
+        "迁移导航逻辑",
+        "H5 端验证功能正常"
+      ],
+      "verify_command": "test -f frontend/src/pages/index/index.vue && cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T23:30:00+08:00",
+      "notes": "迁移首页到 uni-app 格式，使用 AppButton/AppCard 组件，添加占位页面（recommendation/form/result/history），更新 pages.json 路由配置"
+    },
+    {
+      "id": "F007",
+      "category": "page",
+      "description": "迁移志愿填报页 (FormView)",
+      "priority": "high",
+      "steps": [
+        "创建 pages/form/form.vue",
+        "迁移表单组件",
+        "迁移表单验证逻辑",
+        "迁移学校选择器",
+        "迁移分数输入组件",
+        "H5 端验证表单提交正常"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T23:45:00+08:00",
+      "notes": "完整迁移三步骤表单：基本信息、成绩信息、志愿填报；使用 uni-app picker 组件替代 Element Plus；添加 formatFormToRequest 函数到 candidate API"
+    },
+    {
+      "id": "F008",
+      "category": "page",
+      "description": "迁移分析结果页 (ResultView)",
+      "priority": "high",
+      "steps": [
+        "创建 pages/result/result.vue",
+        "迁移结果展示组件",
+        "迁移图表组件（如有）",
+        "迁移分享功能",
+        "H5 端验证结果展示正常"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T23:35:00+08:00",
+      "notes": "完整迁移分析结果页：排名预测、录取概率分析、策略分析、竞争态势分析；使用 AppCard 组件替代 el-card，自定义进度条替代 el-progress，自定义标签替代 el-tag"
+    },
+    {
+      "id": "F009",
+      "category": "page",
+      "description": "迁移历史记录页 (HistoryView)",
+      "priority": "high",
+      "steps": [
+        "创建 pages/history/history.vue",
+        "迁移列表展示组件",
+        "迁移分页/加载更多",
+        "迁移删除确认逻辑",
+        "H5 端验证列表操作正常"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T23:45:00+08:00",
+      "notes": "完整迁移历史记录页：使用 AppCard 替代 el-card，使用 uni.showModal 替代 ElMessageBox，使用 uni.showToast 替代 ElMessage，使用自定义标签替代 el-tag，添加骨架屏加载效果，实现加载更多功能"
+    },
+    {
+      "id": "F010",
+      "category": "page",
+      "description": "迁移志愿推荐页 (RecommendationView)",
+      "priority": "high",
+      "steps": [
+        "创建 pages/recommendation/recommendation.vue",
+        "迁移推荐算法展示",
+        "迁移筛选组件",
+        "H5 端验证推荐功能正常"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-08T23:55:00+08:00",
+      "notes": "完整迁移志愿推荐页：3步骤向导（基本信息、模考成绩、推荐结果）；使用 uni-app picker 替代 el-select；使用 checkbox 替代 el-checkbox；创建 RecommendationPanel 组件展示推荐结果；使用自定义 segment control 替代 el-tabs；使用 AppCard 替代 el-card；类型检查通过"
+    },
+    {
+      "id": "F011",
+      "category": "style",
+      "description": "H5 响应式布局优化",
+      "priority": "medium",
+      "steps": [
+        "添加移动端适配样式",
+        "优化触摸交互",
+        "调整字体大小和间距",
+        "测试主流移动设备"
+      ],
+      "verify_command": "cd frontend && npm run build:h5",
+      "passes": true,
+      "completed_at": "2026-03-09T00:15:00+08:00",
+      "notes": "创建 styles/responsive.scss 全局响应式样式文件；更新 App.vue 全局移动端样式；增强 uni.scss 响应式设计变量；优化 AppButton/AppCard 触摸反馈；添加媒体查询断点（375px/414px/768px/1024px）；安装 sass 依赖"
+    },
+    {
+      "id": "F012",
+      "category": "style",
+      "description": "Web 端桌面布局优化",
+      "priority": "medium",
+      "steps": [
+        "配置 Web 端条件编译",
+        "优化桌面端布局",
+        "适配大屏幕显示",
+        "测试主流浏览器"
+      ],
+      "verify_command": "cd frontend && npm run build:h5",
+      "passes": true,
+      "completed_at": "2026-03-09T00:35:00+08:00",
+      "notes": "创建 styles/desktop.scss 桌面端专用样式文件；更新 App.vue 导入桌面样式并添加 1440px/1920px 大屏幕断点；为首页、表单页、结果页、历史页、推荐页添加桌面端优化样式，包括最大宽度容器、网格布局、hover 效果、桌面端间距调整；类型检查通过，H5 构建成功"
+    },
+    {
+      "id": "F013",
+      "category": "miniprogram",
+      "description": "微信小程序基础配置",
+      "priority": "medium",
+      "steps": [
+        "配置 manifest.json 小程序信息",
+        "配置微信小程序 AppID",
+        "处理小程序权限声明",
+        "验证小程序可编译"
+      ],
+      "verify_command": "cd frontend && npm run build:mp-weixin",
+      "passes": true,
+      "completed_at": "2026-03-09T00:50:00+08:00",
+      "notes": "配置 manifest.json 小程序设置（es6/enhance/postcss/minified）、权限声明（scope.userLocation）、优化配置（subPackages）；配置 pages.json 小程序导航栏样式；修复 AppInput.vue 事件处理器类型转换问题；小程序构建成功"
+    },
+    {
+      "id": "F014",
+      "category": "miniprogram",
+      "description": "小程序特有功能适配",
+      "priority": "medium",
+      "steps": [
+        "适配小程序导航栏",
+        "适配小程序 TabBar",
+        "处理小程序返回键",
+        "适配小程序分享功能"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-09T01:15:00+08:00",
+      "notes": "使用条件编译 #ifdef MP-WEIXIN 实现分享功能(onShareAppMessage/onShareTimeline)、返回键拦截(onBackPress)、TabBar 配置（首页/填报/历史三个入口）"
+    },
+    {
+      "id": "F015",
+      "category": "miniprogram",
+      "description": "小程序网络请求适配",
+      "priority": "high",
+      "steps": [
+        "配置小程序合法域名",
+        "适配小程序请求 API",
+        "处理小程序登录态",
+        "验证 API 调用正常"
+      ],
+      "verify_command": "cd frontend && npm run type-check",
+      "passes": true,
+      "completed_at": "2026-03-09T12:30:00+08:00",
+      "notes": "创建 .env.development/.env.production 环境配置文件；更新 platform.ts 支持 VITE_API_BASE_URL 环境变量；更新 transport.ts 添加 MpNetworkError 错误类和详细的错误处理（域名未配置、网络失败、超时等）；更新 manifest.json 添加合法域名配置说明；类型检查通过，小程序构建成功"
+    },
+    {
+      "id": "F016",
+      "category": "test",
+      "description": "E2E 测试 - Web 端核心流程",
+      "priority": "medium",
+      "steps": [
+        "编写首页加载测试",
+        "编写志愿填报流程测试",
+        "编写结果查看测试",
+        "编写历史记录测试",
+        "测试通过率 100%"
+      ],
+      "verify_command": "cd frontend && npm run test:e2e",
+      "passes": false,
+      "completed_at": null,
+      "notes": "使用 Playwright"
+    },
+    {
+      "id": "F017",
+      "category": "test",
+      "description": "E2E 测试 - H5 端移动端流程",
+      "priority": "medium",
+      "steps": [
+        "配置移动端设备模拟",
+        "编写触摸交互测试",
+        "编写移动端表单测试",
+        "测试通过率 100%"
+      ],
+      "verify_command": "cd frontend && npm run test:e2e:mobile",
+      "passes": false,
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "F018",
+      "category": "deploy",
+      "description": "构建与部署配置",
+      "priority": "high",
+      "steps": [
+        "配置 H5 构建脚本",
+        "配置 Web 构建脚本",
+        "配置小程序构建脚本",
+        "编写部署文档",
+        "验证构建产物正确"
+      ],
+      "verify_command": "cd frontend && npm run build:h5 && npm run build:mp-weixin",
+      "passes": false,
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "F019",
+      "category": "docs",
+      "description": "更新项目文档",
+      "priority": "low",
+      "steps": [
+        "更新 CLAUDE.md 前端开发命令",
+        "更新 README.md 多端说明",
+        "编写多端开发指南",
+        "编写小程序发布流程"
+      ],
+      "verify_command": "cat frontend/README.md | grep -q 'uni-app'",
+      "passes": false,
+      "completed_at": null,
+      "notes": ""
+    },
+    {
+      "id": "F020",
+      "category": "cleanup",
+      "description": "清理旧代码并归档",
+      "priority": "low",
+      "steps": [
+        "删除 frontend-legacy 目录",
+        "清理未使用的依赖",
+        "更新 .gitignore",
+        "最终验证所有功能正常"
+      ],
+      "verify_command": "cd frontend && npm run build:h5 && npm run build:mp-weixin",
+      "passes": false,
+      "completed_at": null,
+      "notes": "最后一步，确保新版本稳定后再执行"
+    }
+  ]
+}

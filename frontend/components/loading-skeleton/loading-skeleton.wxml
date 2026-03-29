@@ -1,0 +1,7 @@
+<view wx:if="{{loading}}" class="loading-container">
+  <view wx:if="{{title}}" class="loading-title">{{title}}</view>
+  <view wx:if="{{hint}}" class="loading-hint">{{hint}}</view>
+  <view class="skeleton">
+    <view wx:for="{{rows}}" wx:key="index" class="skeleton-row" style="width: {{item === 0 ? '80%' : '100%'}}"></view>
+  </view>
+</view>

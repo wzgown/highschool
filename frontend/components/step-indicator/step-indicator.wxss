@@ -1,0 +1,73 @@
+.steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32rpx 24rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.step-circle {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #ffffff;
+  background-color: #C0C4CC;
+  margin-bottom: 12rpx;
+  z-index: 1;
+}
+
+.step-active .step-circle {
+  background-color: #409EFF;
+}
+
+.step-completed .step-circle {
+  background-color: #67C23A;
+}
+
+.step-check {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.step-title {
+  font-size: 24rpx;
+  color: #909399;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.step-active .step-title {
+  color: #409EFF;
+  font-weight: 500;
+}
+
+.step-completed .step-title {
+  color: #67C23A;
+}
+
+.step-line {
+  position: absolute;
+  top: 28rpx;
+  left: calc(50% + 36rpx);
+  right: calc(-50% + 36rpx);
+  height: 4rpx;
+  background-color: #C0C4CC;
+}
+
+.step-line-active {
+  background-color: #67C23A;
+}

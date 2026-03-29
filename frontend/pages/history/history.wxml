@@ -1,0 +1,70 @@
+<view class="container">
+  <!-- Loading State -->
+  <view wx:if="{{loading}}" class="loading-wrapper">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- Empty State -->
+  <empty-state
+    wx:elif="{{isEmpty}}"
+    icon="📋"
+    title="暂无分析记录"
+    description="完成志愿模拟分析后，记录将显示在这里"
+    buttonText="开始分析"
+    bind:action="onStartAnalysis"
+  />
+
+  <!-- History List -->
+  <block wx:else>
+    <!-- Header -->
+    <view class="history-header">
+      <text class="history-count">共 {{total}} 条记录</text>
+      <view class="refresh-btn" bindtap="onRefresh">
+        <text class="refresh-icon">↻</text>
+        <text class="refresh-text">刷新</text>
+      </view>
+    </view>
+
+    <!-- History Cards -->
+    <view class="history-list">
+      <view
+        wx:for="{{histories}}"
+        wx:key="id"
+        class="history-card card"
+      >
+        <!-- Card Top: Time + Delete -->
+        <view class="card-top">
+          <text class="card-time">{{item.createdTime}}</text>
+          <view class="delete-btn" bindtap="onDelete" data-id="{{item.id}}">
+            <text class="delete-icon">✕</text>
+          </view>
+        </view>
+
+        <!-- Card Summary -->
+        <view class="card-summary">
+          <text class="summary-volunteers">{{item.summary.totalVolunteers}}个志愿</text>
+          <view class="summary-tags">
+            <text wx:if="{{item.summary.safeCount > 0}}" class="tag tag-success">
+              稳 {{item.summary.safeCount}}
+            </text>
+            <text wx:if="{{item.summary.moderateCount > 0}}" class="tag tag-warning">
+              冲 {{item.summary.moderateCount}}
+            </text>
+            <text wx:if="{{item.summary.riskyCount > 0}}" class="tag tag-danger">
+              保 {{item.summary.riskyCount}}
+            </text>
+          </view>
+        </view>
+
+        <!-- Card Actions -->
+        <view class="card-actions">
+          <view class="detail-btn" bindtap="onViewDetail" data-id="{{item.id}}">
+            <text class="detail-text">查看详情</text>
+            <text class="detail-arrow">›</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

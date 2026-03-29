@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "分析结果",
+  "usingComponents": {
+    "loading-skeleton": "/components/loading-skeleton/loading-skeleton",
+    "gradient-bar": "/components/gradient-bar/gradient-bar"
+  }
+}

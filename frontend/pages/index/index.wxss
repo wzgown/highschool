@@ -1,0 +1,104 @@
+.hero {
+  position: relative;
+  margin: -24rpx -24rpx 32rpx -24rpx;
+  padding: 64rpx 48rpx;
+  background: linear-gradient(135deg, #409EFF 0%, #337ECC 100%);
+  color: #ffffff;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: 28rpx;
+  opacity: 0.85;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40rpx 32rpx;
+}
+
+.feature-icon {
+  font-size: 56rpx;
+  margin-bottom: 16rpx;
+}
+
+.feature-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 8rpx;
+}
+
+.feature-desc {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.actions-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.btn-large {
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 32rpx;
+  border-radius: 16rpx;
+}
+
+.batch-info {
+  margin-bottom: 32rpx;
+}
+
+.batch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.batch-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.batch-desc {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+}
+
+.disclaimer {
+  padding: 24rpx;
+  text-align: center;
+}
+
+.disclaimer-text {
+  font-size: 22rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
