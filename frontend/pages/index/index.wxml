@@ -53,6 +53,9 @@
     <button class="btn-primary btn-large" bindtap="onStartAnalysis">
       开始志愿模拟
     </button>
+    <button class="btn-recommend btn-large" bindtap="onSmartRecommend">
+      智能志愿推荐
+    </button>
     <button class="btn-secondary btn-large" bindtap="onViewHistory">
       查看历史记录
     </button>

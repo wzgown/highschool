@@ -1,0 +1,290 @@
+<template name="rec-section">
+  <view wx:if="{{results.quotaDistrictRecommendations.length > 0}}" class="card">
+    <view class="card-header">
+      <view class="card-header-icon"></view>
+      <text>名额分配到区 推荐</text>
+    </view>
+    <view class="rec-list">
+      <view wx:for="{{results.quotaDistrictRecommendations}}" wx:key="schoolId" class="rec-item">
+        <view class="rec-header">
+          <text class="rec-school">{{item.schoolName}}</text>
+          <text class="tag tag-{{item.typeTag}}">{{item.typeText}}</text>
+        </view>
+        <view class="rec-details">
+          <text class="rec-detail">预估分数线：{{item.estimatedScore}}分</text>
+          <text class="rec-detail">分差：{{item.scoreGap}}分</text>
+        </view>
+        <text wx:if="{{item.recommendationReason}}" class="rec-reason">{{item.recommendationReason}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{results.quotaSchoolRecommendations.length > 0}}" class="card">
+    <view class="card-header">
+      <view class="card-header-icon"></view>
+      <text>名额分配到校 推荐</text>
+    </view>
+    <view class="rec-list">
+      <view wx:for="{{results.quotaSchoolRecommendations}}" wx:key="schoolId" class="rec-item">
+        <view class="rec-header">
+          <text class="rec-school">{{item.schoolName}}</text>
+          <text class="tag tag-{{item.typeTag}}">{{item.typeText}}</text>
+        </view>
+        <view class="rec-details">
+          <text class="rec-detail">预估分数线：{{item.estimatedScore}}分</text>
+          <text class="rec-detail">分差：{{item.scoreGap}}分</text>
+        </view>
+        <text wx:if="{{item.recommendationReason}}" class="rec-reason">{{item.recommendationReason}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{results.unifiedRecommendations.length > 0}}" class="card">
+    <view class="card-header">
+      <view class="card-header-icon"></view>
+      <text>统一招生 推荐（{{results.unifiedRecommendations.length}}所）</text>
+    </view>
+    <view class="rec-list">
+      <view wx:for="{{results.unifiedRecommendations}}" wx:key="schoolId" class="rec-item">
+        <view class="rec-header">
+          <text class="rec-school">{{item.schoolName}}</text>
+          <text class="tag tag-{{item.typeTag}}">{{item.typeText}}</text>
+        </view>
+        <view class="rec-details">
+          <text class="rec-detail">预估分数线：{{item.estimatedScore}}分</text>
+          <text class="rec-detail">分差：{{item.scoreGap}}分</text>
+        </view>
+        <text wx:if="{{item.recommendationReason}}" class="rec-reason">{{item.recommendationReason}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{results.quotaDistrictRecommendations.length === 0 && results.quotaSchoolRecommendations.length === 0 && results.unifiedRecommendations.length === 0}}" class="card">
+    <text class="empty-text">暂无推荐结果</text>
+  </view>
+</template>
+
+<view class="container">
+  <!-- 步骤指示器 -->
+  <view class="steps">
+    <view class="step-item {{currentStep === 0 ? 'active' : (currentStep > 0 ? 'done' : '')}}">
+      <view class="step-circle">{{currentStep > 0 ? '✓' : '1'}}</view>
+      <text class="step-text">基本信息</text>
+    </view>
+    <view class="step-line {{currentStep > 0 ? 'done' : ''}}"></view>
+    <view class="step-item {{currentStep === 1 ? 'active' : (currentStep > 1 ? 'done' : '')}}">
+      <view class="step-circle">{{currentStep > 1 ? '✓' : '2'}}</view>
+      <text class="step-text">模考成绩</text>
+    </view>
+    <view class="step-line {{currentStep > 1 ? 'done' : ''}}"></view>
+    <view class="step-item {{currentStep === 2 ? 'active' : ''}}">
+      <view class="step-circle">3</view>
+      <text class="step-text">推荐结果</text>
+    </view>
+  </view>
+
+  <!-- Step 0: 基本信息 -->
+  <view wx:if="{{currentStep === 0}}" class="step-content">
+    <view class="card">
+      <view class="card-header">
+        <view class="card-header-icon"></view>
+        <text>考生基本信息</text>
+      </view>
+
+      <!-- 区县选择 -->
+      <view class="form-group">
+        <view class="form-label">
+          <text class="form-required">*</text>
+          <text>所属区县</text>
+        </view>
+        <picker mode="selector" range="{{districts}}" range-key="name" bindchange="onDistrictChange">
+          <view class="form-picker">
+            <text class="{{districtName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+              {{districtName || '请选择所属区县'}}
+            </text>
+            <text class="form-picker-arrow">▸</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 初中选择 -->
+      <view class="form-group">
+        <view class="form-label">
+          <text>初中学校</text>
+        </view>
+        <picker mode="selector" range="{{middleSchools}}" range-key="name" bindchange="onMiddleSchoolChange" disabled="{{!districtId}}">
+          <view class="form-picker {{!districtId ? 'form-input-disabled' : ''}}">
+            <text class="{{middleSchoolName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+              {{middleSchoolName || '请先选择区县（选填）'}}
+            </text>
+            <text class="form-picker-arrow">▸</text>
+          </view>
+        </picker>
+        <text class="form-tip">选填，用于名额到校推荐</text>
+      </view>
+
+      <!-- 名额到校资格 -->
+      <view class="form-group">
+        <view class="checkbox-row">
+          <switch checked="{{hasQuotaSchoolEligibility}}" bindchange="onQuotaEligibilityChange" color="#409EFF" />
+          <text class="checkbox-label">具备名额分配到校填报资格</text>
+        </view>
+        <text class="form-tip">仅限"不选择生源初中在籍在读满3年的应届初三学生"</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Step 1: 模考成绩 -->
+  <view wx:if="{{currentStep === 1}}" class="step-content">
+    <view class="alert alert-info">
+      请填写一模、二模成绩（至少填写一项）。各区总分不同，系统将自动转换为中考等效分数。
+    </view>
+
+    <!-- 一模成绩 -->
+    <view class="card score-card">
+      <view class="score-card-header">
+        <view class="score-title-row">
+          <text class="tag tag-primary">一模</text>
+          <text class="score-max-hint">{{districtName}}总分：{{firstMockMax}}分</text>
+        </view>
+        <switch checked="{{firstMockHasScore}}" bindchange="onFirstMockToggle" color="#409EFF" />
+      </view>
+
+      <view wx:if="{{firstMockHasScore}}" class="score-body">
+        <view class="form-group">
+          <view class="form-label"><text>一模总分</text></view>
+          <input class="form-input" type="digit" placeholder="请输入总分" value="{{firstMockTotalScore || ''}}" bindinput="onFirstMockScoreInput" maxlength="4" />
+        </view>
+        <view class="form-group">
+          <view class="form-label"><text>区排名（选填）</text></view>
+          <input class="form-input" type="number" placeholder="请输入区排名" value="{{firstMockDistrictRank || ''}}" bindinput="onFirstMockRankInput" maxlength="5" />
+        </view>
+        <view wx:if="{{firstMockConverted}}" class="conversion-hint conversion-hint-primary">
+          预估中考等效：约 {{firstMockConverted}} 分（750分制）
+        </view>
+      </view>
+      <view wx:else class="score-empty">
+        <text class="score-empty-text">未参加一模或成绩暂未公布</text>
+      </view>
+    </view>
+
+    <!-- 二模成绩 -->
+    <view class="card score-card">
+      <view class="score-card-header">
+        <view class="score-title-row">
+          <text class="tag tag-success">二模</text>
+          <text class="score-max-hint">{{districtName}}总分：{{secondMockMax}}分</text>
+        </view>
+        <switch checked="{{secondMockHasScore}}" bindchange="onSecondMockToggle" color="#409EFF" />
+      </view>
+
+      <view wx:if="{{secondMockHasScore}}" class="score-body">
+        <view class="form-group">
+          <view class="form-label"><text>二模总分</text></view>
+          <input class="form-input" type="digit" placeholder="请输入总分" value="{{secondMockTotalScore || ''}}" bindinput="onSecondMockScoreInput" maxlength="4" />
+        </view>
+        <view class="form-group">
+          <view class="form-label"><text>区排名（选填）</text></view>
+          <input class="form-input" type="number" placeholder="请输入区排名" value="{{secondMockDistrictRank || ''}}" bindinput="onSecondMockRankInput" maxlength="5" />
+        </view>
+        <view wx:if="{{secondMockConverted}}" class="conversion-hint conversion-hint-success">
+          预估中考等效：约 {{secondMockConverted}} 分（750分制）
+        </view>
+      </view>
+      <view wx:else class="score-empty">
+        <text class="score-empty-text">未参加二模或成绩暂未公布</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Step 2: 推荐结果 -->
+  <view wx:if="{{currentStep === 2}}" class="step-content">
+    <view wx:if="{{loading}}" class="loading-box">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在生成智能推荐...</text>
+    </view>
+
+    <view wx:elif="{{firstMockResults || secondMockResults}}">
+      <!-- Tab 切换 -->
+      <view wx:if="{{firstMockResults && secondMockResults}}" class="result-tabs">
+        <view class="result-tab {{activeResultTab === 'firstMock' ? 'active' : ''}}" bindtap="onTabChange" data-tab="firstMock">
+          <text class="tag tag-primary" style="margin-right: 8rpx;">一模</text>
+          <text>推荐结果</text>
+        </view>
+        <view class="result-tab {{activeResultTab === 'secondMock' ? 'active' : ''}}" bindtap="onTabChange" data-tab="secondMock">
+          <text class="tag tag-success" style="margin-right: 8rpx;">二模</text>
+          <text>推荐结果</text>
+        </view>
+      </view>
+
+      <!-- 一模结果 -->
+      <view wx:if="{{activeResultTab === 'firstMock' && firstMockResults}}">
+        <view wx:if="{{firstMockResults.scoreConversion}}" class="card">
+          <view class="card-header">
+            <view class="card-header-icon"></view>
+            <text>分数转换</text>
+          </view>
+          <view class="conversion-grid">
+            <view class="conversion-item">
+              <text class="conversion-label">原始分数</text>
+              <text class="conversion-value">{{firstMockResults.scoreConversion.originalScore}} 分</text>
+            </view>
+            <view class="conversion-item">
+              <text class="conversion-label">转换后750分制</text>
+              <text class="tag tag-primary">{{firstMockResults.scoreConversion.convertedScore750}} 分</text>
+            </view>
+            <view class="conversion-item">
+              <text class="conversion-label">转换后800分制</text>
+              <text class="tag tag-success">{{firstMockResults.scoreConversion.convertedScore800}} 分</text>
+            </view>
+          </view>
+        </view>
+
+        <template is="rec-section" data="{{results: firstMockResults}}" />
+      </view>
+
+      <!-- 二模结果 -->
+      <view wx:if="{{activeResultTab === 'secondMock' && secondMockResults}}">
+        <view wx:if="{{secondMockResults.scoreConversion}}" class="card">
+          <view class="card-header">
+            <view class="card-header-icon"></view>
+            <text>分数转换</text>
+          </view>
+          <view class="conversion-grid">
+            <view class="conversion-item">
+              <text class="conversion-label">原始分数</text>
+              <text class="conversion-value">{{secondMockResults.scoreConversion.originalScore}} 分</text>
+            </view>
+            <view class="conversion-item">
+              <text class="conversion-label">转换后750分制</text>
+              <text class="tag tag-primary">{{secondMockResults.scoreConversion.convertedScore750}} 分</text>
+            </view>
+            <view class="conversion-item">
+              <text class="conversion-label">转换后800分制</text>
+              <text class="tag tag-success">{{secondMockResults.scoreConversion.convertedScore800}} 分</text>
+            </view>
+          </view>
+        </view>
+
+        <template is="rec-section" data="{{results: secondMockResults}}" />
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="actions">
+        <button class="btn-primary" bindtap="goToSimulation">去模拟填报</button>
+        <button class="btn-secondary" bindtap="onReset">重新推荐</button>
+      </view>
+    </view>
+
+    <view wx:else class="card">
+      <text class="empty-text">暂无推荐结果，请先填写模考成绩</text>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view wx:if="{{currentStep < 2}}" class="actions">
+    <button wx:if="{{currentStep === 1}}" class="btn-secondary" bindtap="prevStep">上一步</button>
+    <button wx:if="{{currentStep === 0}}" class="btn-primary {{canNext ? '' : 'btn-disabled'}}" bindtap="nextStep" disabled="{{!canNext}}">下一步</button>
+    <button wx:if="{{currentStep === 1}}" class="btn-primary {{canSubmit ? '' : 'btn-disabled'}}" bindtap="onSubmit" disabled="{{!canSubmit || loading}}" loading="{{loading}}">获取推荐</button>
+  </view>
+</view>

@@ -35,6 +35,10 @@ Page({
     wx.switchTab({ url: '/pages/form/form' })
   },
 
+  onSmartRecommend: function () {
+    wx.navigateTo({ url: '/pages/recommendation/recommendation' })
+  },
+
   onViewHistory: function () {
     wx.switchTab({ url: '/pages/history/history' })
   },

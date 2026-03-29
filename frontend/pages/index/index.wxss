@@ -134,6 +134,25 @@
   margin-bottom: 32rpx;
 }
 
+.btn-recommend {
+  background-color: var(--color-success);
+  color: #ffffff;
+  border: none;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  padding: 0;
+  margin: 0;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.btn-recommend::after {
+  border: none;
+}
+
 .btn-large {
   height: 96rpx;
   line-height: 96rpx;
