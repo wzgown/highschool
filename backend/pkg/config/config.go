@@ -1,6 +1,8 @@
 package config
 
 import (
+	"strings"
+
 	"github.com/spf13/viper"
 )
 
@@ -22,13 +24,13 @@ type ServerConfig struct {
 
 // DatabaseConfig 数据库配置
 type DatabaseConfig struct {
-	Host      string `mapstructure:"host"`
-	Port      int    `mapstructure:"port"`
-	Name      string `mapstructure:"name"`
-	User      string `mapstructure:"user"`
-	Password  string `mapstructure:"password"`
-	SSLMode   string `mapstructure:"ssl_mode"`
-	MaxConns  int32  `mapstructure:"max_conns"`
+	Host     string `mapstructure:"host"`
+	Port     int    `mapstructure:"port"`
+	Name     string `mapstructure:"name"`
+	User     string `mapstructure:"user"`
+	Password string `mapstructure:"password"`
+	SSLMode  string `mapstructure:"ssl_mode"`
+	MaxConns int32  `mapstructure:"max_conns"`
 }
 
 // RedisConfig Redis配置
@@ -67,6 +69,8 @@ func Load() (*Config, error) {
 	viper.SetDefault("server.mode", "development")
 	viper.SetDefault("database.host", "localhost")
 	viper.SetDefault("database.port", 5432)
+	viper.SetDefault("database.name", "highschool")
+	viper.SetDefault("database.user", "highschool")
 	viper.SetDefault("database.ssl_mode", "disable")
 	viper.SetDefault("database.max_conns", 10)
 	viper.SetDefault("redis.host", "localhost")
@@ -79,9 +83,10 @@ func Load() (*Config, error) {
 	viper.SetDefault("tracing.otlp_endpoint", "localhost:4317")
 	viper.SetDefault("tracing.sample_rate", 1.0)
 
-	// 环境变量支持
-	viper.AutomaticEnv()
+	// 环境变量支持 - 使用 EnvKeyReplacer 将 database.host 映射到 HS_DATABASE_HOST
 	viper.SetEnvPrefix("HS")
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {

@@ -1,6 +1,5 @@
-version: '3.8'
-
 services:
+  # PostgreSQL 数据库
   postgres:
     image: postgres:17-alpine
     container_name: highschool_postgres
@@ -22,6 +21,7 @@ services:
       timeout: 5s
       retries: 5
 
+  # Redis 缓存
   redis:
     image: redis:7-alpine
     container_name: highschool_redis
@@ -34,10 +34,54 @@ services:
     networks:
       - highschool_net
     healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      test: ["CMD", "redis-cli", "-a", "HS2025!redis#SecurePass88", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+  # Go 后端 API 服务
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: highschool_backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - TZ=Asia/Shanghai
+      # Server
+      - HS_SERVER_HOST=0.0.0.0
+      - HS_SERVER_PORT=3000
+      - HS_SERVER_MODE=production
+      # Database
+      - HS_DATABASE_HOST=postgres
+      - HS_DATABASE_PORT=5432
+      - HS_DATABASE_NAME=highschool
+      - HS_DATABASE_USER=highschool
+      - HS_DATABASE_PASSWORD=HS2025!db#SecurePass88
+      - HS_DATABASE_SSL_MODE=disable
+      - HS_DATABASE_MAX_CONNS=20
+      # Redis
+      - HS_REDIS_HOST=redis
+      - HS_REDIS_PORT=6379
+      - HS_REDIS_PASSWORD=HS2025!redis#SecurePass88
+      - HS_REDIS_DB=0
+      # Log
+      - HS_LOG_LEVEL=info
+      - HS_LOG_FORMAT=json
+      # Tracing
+      - HS_TRACING_ENABLED=false
+      - HS_TRACING_SERVICE_NAME=highschool-backend
+      - HS_TRACING_OTLP_ENDPOINT=localhost:4317
+      - HS_TRACING_SAMPLE_RATE=0.1
+    networks:
+      - highschool_net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
 volumes:
   postgres_data:

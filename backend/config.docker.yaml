@@ -1,0 +1,29 @@
+server:
+  host: 0.0.0.0
+  port: 3000
+  mode: production
+
+database:
+  host: postgres
+  port: 5432
+  name: highschool
+  user: highschool
+  password: HS2025!db#SecurePass88
+  ssl_mode: disable
+  max_conns: 10
+
+redis:
+  host: redis
+  port: 6379
+  password: "HS2025!redis#SecurePass88"
+  db: 0
+
+log:
+  level: info
+  format: json
+
+tracing:
+  enabled: false
+  service_name: highschool-backend
+  otlp_endpoint: localhost:4317
+  sample_rate: 0.1
