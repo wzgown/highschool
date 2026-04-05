@@ -71,14 +71,11 @@
             <text class="school-name">{{item.schoolName}}</text>
           </view>
           <view class="prob-stats">
-            <view class="prob-bar-wrap" wx:if="{{item.probability > 0}}">
+            <view class="prob-bar-wrap">
               <view class="prob-bar-bg">
                 <view class="prob-bar-fill" style="width: {{item.probability}}%; background-color: {{item.probability >= 80 ? '#67C23A' : item.probability >= 50 ? '#409EFF' : item.probability >= 30 ? '#E6A23C' : '#F56C6C'}};"></view>
               </view>
               <text class="prob-value">{{item.probability}}%</text>
-            </view>
-            <view class="prob-bar-wrap" wx:else>
-              <text class="prob-value prob-no-data">暂无数据</text>
             </view>
             <text class="tag tag-{{item.riskType}}">{{item.riskText}}</text>
           </view>

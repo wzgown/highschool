@@ -7,58 +7,32 @@
     </view>
   </view>
 
-  <!-- Connection Status -->
-  <view class="connection-status" wx:if="{{connectionStatus}}">
-    <view wx:if="{{connectionStatus === 'testing'}}" class="status-row">
-      <text class="status-dot testing"></text>
-      <text>正在检测 API 连接...</text>
-    </view>
-    <view wx:elif="{{connectionStatus === 'ok'}}" class="status-row ok">
-      <text class="status-dot ok"></text>
-      <text>API 连接正常</text>
-      <text class="status-url">{{connectionUrl}}</text>
-    </view>
-    <view wx:else class="status-block fail">
-      <view class="status-row">
-        <text class="status-dot fail"></text>
-        <text>API 连接失败</text>
+  <!-- Action Cards -->
+  <view class="actions">
+    <view class="card action-card action-card-primary" bindtap="onStartAnalysis">
+      <text class="action-icon">🎯</text>
+      <view class="action-text">
+        <text class="action-title">志愿模拟</text>
+        <text class="action-desc">输入成绩和志愿，获取录取概率预测</text>
       </view>
-      <text class="status-hint">请确认后端服务已启动 (端口 3000)</text>
-      <text class="status-hint">微信开发者工具 → 详情 → 本地设置 → 勾选"不校验合法域名"</text>
-      <button class="btn-retry" size="mini" bindtap="onRetryConnection">重试</button>
+      <text class="action-arrow">›</text>
     </view>
-  </view>
-
-  <!-- Feature Cards -->
-  <view class="features">
-    <view class="card feature-card">
-      <text class="feature-icon">🎯</text>
-      <text class="feature-title">模拟分析</text>
-      <text class="feature-desc">输入成绩和志愿，获取录取概率预测和策略建议</text>
+    <view class="card action-card action-card-recommend" bindtap="onSmartRecommend">
+      <text class="action-icon">✨</text>
+      <view class="action-text">
+        <text class="action-title">智能推荐</text>
+        <text class="action-desc">AI 分析历年数据，推荐冲稳保志愿</text>
+      </view>
+      <text class="action-arrow">›</text>
     </view>
-    <view class="card feature-card">
-      <text class="feature-icon">📊</text>
-      <text class="feature-title">录取概率</text>
-      <text class="feature-desc">基于历史数据和模拟算法，预测每所学校的录取概率</text>
+    <view class="card action-card" bindtap="onViewHistory">
+      <text class="action-icon">📋</text>
+      <view class="action-text">
+        <text class="action-title">历史记录</text>
+        <text class="action-desc">查看之前的志愿分析结果</text>
+      </view>
+      <text class="action-arrow">›</text>
     </view>
-    <view class="card feature-card">
-      <text class="feature-icon">📝</text>
-      <text class="feature-title">策略优化</text>
-      <text class="feature-desc">分析志愿梯度分布，提供冲稳保填报建议</text>
-    </view>
-  </view>
-
-  <!-- Action Buttons -->
-  <view class="actions-main">
-    <button class="btn-primary btn-large" bindtap="onStartAnalysis">
-      开始志愿模拟
-    </button>
-    <button class="btn-recommend btn-large" bindtap="onSmartRecommend">
-      智能志愿推荐
-    </button>
-    <button class="btn-secondary btn-large" bindtap="onViewHistory">
-      查看历史记录
-    </button>
   </view>
 
   <!-- Batch Info -->

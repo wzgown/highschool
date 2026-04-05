@@ -100,12 +100,12 @@
       </view>
       <input
         class="form-input"
-        type="digit"
-        placeholder="请输入总分"
+        type="text"
+        placeholder="请输入总分，如 669.5"
         value="{{scores.total || ''}}"
         bindinput="onScoreInput"
         data-field="total"
-        maxlength="4"
+        maxlength="6"
       />
     </view>
 

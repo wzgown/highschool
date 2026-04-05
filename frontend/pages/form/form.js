@@ -230,11 +230,22 @@ Page({
 
   onScoreInput: function (e) {
     var field = e.currentTarget.dataset.field
-    var value = Math.max(0, Number(e.detail.value) || 0)
+    var raw = e.detail.value
 
-    var updates = {}
-    updates['scores.' + field] = value
-    this.setData(updates)
+    // 允许输入中的状态（如 "669." "669.5"）
+    if (field === 'total') {
+      if (raw && !/^\d*\.?\d*$/.test(raw)) {
+        return
+      }
+      var updates = {}
+      updates['scores.' + field] = raw
+      this.setData(updates)
+    } else {
+      var value = Math.max(0, Number(raw) || 0)
+      var updates = {}
+      updates['scores.' + field] = value
+      this.setData(updates)
+    }
 
     this._validateScore()
     this._validateCurrentStep()
@@ -316,10 +327,11 @@ Page({
       scores.history +
       scores.pe
 
+    var totalNum = Number(scores.total) || 0
     var hasPartial = partialSum > 0
-    var hasTotal = scores.total > 0
+    var hasTotal = totalNum > 0
 
-    if (hasPartial && hasTotal && partialSum !== scores.total) {
+    if (hasPartial && hasTotal && Math.abs(partialSum - totalNum) > 0.01) {
       this.setData({
         scoreValidation: {
           valid: false,
