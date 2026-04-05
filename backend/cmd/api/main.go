@@ -73,6 +73,17 @@ func main() {
 	// 创建 HTTP 路由
 	mux := http.NewServeMux()
 
+	// 根路径
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			http.NotFound(w, r)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"service":"highschool-backend","version":"1.0.0","status":"running"}`))
+	})
+
 	// 健康检查
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
