@@ -3,8 +3,8 @@
     <div class="hero-section">
       <div class="hero-content">
         <h1 class="hero-title">
-          <el-icon :size="48" color="#409EFF"><School /></el-icon>
-          上海中考招生模拟系统
+          <img src="/logo.png" alt="金榜折桂" class="logo-icon-hero" />
+          金榜折桂
         </h1>
         <p class="hero-subtitle">
           基于历年录取数据和智能算法，帮助考生科学评估录取概率，优化志愿填报策略
@@ -135,7 +135,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import {
-  School,
   EditPen,
   Clock,
   TrendCharts,
@@ -178,6 +177,11 @@ function viewHistory() {
   padding: 60px 40px;
   margin-bottom: 40px;
   text-align: center;
+}
+
+.logo-icon-hero {
+  width: 48px;
+  height: 48px;
 }
 
 .hero-title {

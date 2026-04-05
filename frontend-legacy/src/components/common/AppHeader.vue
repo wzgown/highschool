@@ -2,8 +2,8 @@
   <header class="app-header">
     <div class="header-content">
       <div class="logo" @click="goHome">
-        <el-icon :size="28" color="#409EFF"><School /></el-icon>
-        <span class="title">中考志愿模拟</span>
+        <img src="/logo.png" alt="金榜折桂" class="logo-icon" />
+        <span class="title">金榜折桂</span>
       </div>
       
       <nav class="nav-menu" v-if="!isMobile">
@@ -54,7 +54,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { Menu, School, HomeFilled, EditPen, Clock } from '@element-plus/icons-vue';
+import { Menu, HomeFilled, EditPen, Clock } from '@element-plus/icons-vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -92,6 +92,11 @@ function goHome() {
   gap: 10px;
   cursor: pointer;
   
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+
   .title {
     font-size: 20px;
     font-weight: 600;

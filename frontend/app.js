@@ -1,6 +1,6 @@
 App({
   globalData: {
-    apiBaseUrl: 'http://127.0.0.1:3000',
+    apiBaseUrl: 'http://36.150.236.225:3000',
     formData: null,
     analysisId: null
   },

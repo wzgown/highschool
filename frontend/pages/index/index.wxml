@@ -2,7 +2,7 @@
   <!-- Hero Section -->
   <view class="hero">
     <view class="hero-content">
-      <text class="hero-title">中考志愿模拟系统</text>
+      <text class="hero-title">金榜折桂</text>
       <text class="hero-subtitle">智能分析录取概率，优化志愿填报策略</text>
     </view>
   </view>

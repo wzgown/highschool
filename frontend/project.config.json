@@ -1,5 +1,5 @@
 {
-  "description": "上海中考志愿模拟系统",
+  "description": "金榜折桂 - 上海中考志愿模拟系统",
   "packOptions": {
     "ignore": [],
     "include": []
@@ -48,8 +48,8 @@
   },
   "compileType": "miniprogram",
   "libVersion": "3.7.3",
-  "appid": "wx9b9c973ede73943e",
-  "projectname": "highschool-miniprogram",
+  "appid": "wx75a71eee586a2ad3",
+  "projectname": "jinbangzhegui-miniprogram",
   "condition": {},
   "simulatorPluginLibVersion": {},
   "editorSetting": {}
