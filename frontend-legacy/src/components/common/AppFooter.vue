@@ -2,7 +2,7 @@
   <footer class="app-footer">
     <div class="footer-content">
       <p class="copyright">
-        © 2025 金榜折桂 | 仅供参考，请以官方发布为准
+        © 2025 一味远志 | 仅供参考，请以官方发布为准
       </p>
       <p class="disclaimer">
         数据来源：上海招考热线

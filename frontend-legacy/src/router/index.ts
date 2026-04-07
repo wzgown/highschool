@@ -50,7 +50,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const title = to.meta.title as string;
   if (title) {
-    document.title = `${title} - 金榜折桂`;
+    document.title = `${title} - 一味远志`;
   }
   next();
 });
