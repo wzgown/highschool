@@ -1,6 +1,6 @@
 App({
   globalData: {
-    apiBaseUrl: 'http://36.150.236.225:3000',
+    apiBaseUrl: 'https://zg.mkfriend.top',
     formData: null,
     analysisId: null
   },
@@ -17,7 +17,7 @@ App({
     }
 
     if (envVersion === 'release') {
-      this.globalData.apiBaseUrl = 'https://api.shhighschool.example.com'
+      this.globalData.apiBaseUrl = 'https://zg.mkfriend.top'
     }
   }
 })
