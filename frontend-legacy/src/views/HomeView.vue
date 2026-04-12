@@ -9,65 +9,37 @@
         <p class="hero-subtitle">
           基于历年录取数据和智能算法，帮助考生科学评估录取概率，优化志愿填报策略
         </p>
-        <div class="hero-actions">
-          <el-button type="success" size="large" @click="startRecommendation">
-            <el-icon><MagicStick /></el-icon>
-            智能志愿推荐
-          </el-button>
-          <el-button type="primary" size="large" @click="startAnalysis">
-            <el-icon><EditPen /></el-icon>
-            志愿模拟分析
-          </el-button>
-          <el-button size="large" @click="viewHistory">
-            <el-icon><Clock /></el-icon>
-            历史记录
-          </el-button>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-section">
-      <h2 class="section-title">核心功能</h2>
-      <div class="features-grid">
-        <div class="feature-card feature-card-highlight" @click="startRecommendation">
-          <div class="feature-icon">
-            <el-icon :size="32" color="#67C23A"><MagicStick /></el-icon>
+        <div class="features-grid">
+          <div class="feature-card feature-card-highlight" @click="startRecommendation">
+            <div class="feature-icon">
+              <el-icon :size="32" color="#67C23A"><MagicStick /></el-icon>
+            </div>
+            <h3 class="feature-title">智能志愿推荐</h3>
+            <p class="feature-desc">
+              输入成绩信息，智能推荐三个批次的志愿学校，包含"冲稳保"梯度建议
+            </p>
+            <el-tag type="success" size="small">推荐使用</el-tag>
           </div>
-          <h3 class="feature-title">智能志愿推荐</h3>
-          <p class="feature-desc">
-            输入一模/二模成绩，智能推荐三个批次的志愿学校，包含"冲稳保"梯度建议
-          </p>
-          <el-tag type="success" size="small">热门推荐</el-tag>
-        </div>
 
-        <div class="feature-card" @click="startAnalysis">
-          <div class="feature-icon">
-            <el-icon :size="32" color="#409EFF"><TrendCharts /></el-icon>
+          <div class="feature-card" @click="startAnalysis">
+            <div class="feature-icon">
+              <el-icon :size="32" color="#409EFF"><EditPen /></el-icon>
+            </div>
+            <h3 class="feature-title">志愿模拟分析</h3>
+            <p class="feature-desc">
+              填写志愿后基于蒙特卡洛模拟，预测每个志愿的录取概率与竞争态势
+            </p>
           </div>
-          <h3 class="feature-title">录取概率模拟</h3>
-          <p class="feature-desc">
-            基于蒙特卡洛模拟，预测每个志愿的录取概率，帮助您了解被各校录取的可能性
-          </p>
-        </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <el-icon :size="32" color="#E6A23C"><DataAnalysis /></el-icon>
+          <div class="feature-card" @click="viewHistory">
+            <div class="feature-icon">
+              <el-icon :size="32" color="#E6A23C"><Clock /></el-icon>
+            </div>
+            <h3 class="feature-title">历史记录</h3>
+            <p class="feature-desc">
+              查看之前的分析与推荐记录，对比不同策略的录取概率
+            </p>
           </div>
-          <h3 class="feature-title">志愿策略分析</h3>
-          <p class="feature-desc">
-            分析志愿梯度分布，识别风险点，提供科学的志愿填报优化建议
-          </p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <el-icon :size="32" color="#F56C6C"><User /></el-icon>
-          </div>
-          <h3 class="feature-title">竞争态势模拟</h3>
-          <p class="feature-desc">
-            生成虚拟竞争对手，模拟真实录取环境，更准确地评估录取难度
-          </p>
         </div>
       </div>
     </div>
@@ -137,13 +109,10 @@ import { useRouter } from 'vue-router';
 import {
   EditPen,
   Clock,
-  TrendCharts,
-  DataAnalysis,
-  User,
+  MagicStick,
   Medal,
   OfficeBuilding,
   List,
-  MagicStick,
 } from '@element-plus/icons-vue';
 
 const router = useRouter();
@@ -174,7 +143,7 @@ function viewHistory() {
   z-index: 1;
   background: linear-gradient(135deg, #ecf5ff 0%, #f5f7fa 100%);
   border-radius: 16px;
-  padding: 60px 40px;
+  padding: 48px 40px 40px;
   margin-bottom: 40px;
   text-align: center;
 }
@@ -187,7 +156,7 @@ function viewHistory() {
 .hero-title {
   font-size: 36px;
   color: #303133;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,47 +164,29 @@ function viewHistory() {
 }
 
 .hero-subtitle {
-  font-size: 18px;
+  font-size: 16px;
   color: #606266;
   max-width: 600px;
-  margin: 0 auto 30px;
+  margin: 0 auto 36px;
   line-height: 1.6;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.section-title {
-  font-size: 24px;
-  color: #303133;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.features-section {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 40px;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .feature-card {
   background: #fff;
   border-radius: 12px;
-  padding: 30px;
+  padding: 28px 24px;
   text-align: center;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s, box-shadow 0.3s;
-  cursor: default;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-4px);
@@ -243,7 +194,6 @@ function viewHistory() {
   }
 
   &.feature-card-highlight {
-    cursor: pointer;
     border: 2px solid #67C23A;
     background: linear-gradient(135deg, #f0f9eb 0%, #fff 100%);
 
@@ -321,7 +271,7 @@ function viewHistory() {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 40px 20px;
+    padding: 32px 20px 24px;
   }
 
   .hero-title {
@@ -331,7 +281,7 @@ function viewHistory() {
   }
 
   .hero-subtitle {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .features-grid {

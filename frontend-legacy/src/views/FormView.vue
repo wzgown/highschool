@@ -75,6 +75,12 @@
           </div>
         </template>
 
+        <!-- 前一步摘要 -->
+        <div class="step-summary">
+          <span class="step-summary-item"><em class="step-summary-label">区县</em> {{ districtName }}</span>
+          <span class="step-summary-item"><em class="step-summary-label">初中</em> {{ middleSchoolName }}</span>
+        </div>
+
         <el-form :model="form" label-position="top" class="form-body">
           <el-row :gutter="20">
             <el-col :xs="24" :sm="12">
@@ -262,6 +268,22 @@
           </div>
         </template>
 
+        <!-- 前两步摘要 -->
+        <div class="step-summary">
+          <span class="step-summary-item"><em class="step-summary-label">区县</em> {{ districtName }}</span>
+          <span class="step-summary-item"><em class="step-summary-label">初中</em> {{ middleSchoolName }}</span>
+          <span class="step-summary-item"><em class="step-summary-label">总分</em> <strong>{{ form.scores.total || '-' }}</strong></span>
+          <span class="step-summary-item">
+            <em class="step-summary-label">排名</em>
+            {{ form.ranking.rank && form.ranking.totalStudents ? `${form.ranking.rank}/${form.ranking.totalStudents}` : '-' }}
+          </span>
+          <span class="step-summary-item">
+            <el-tag :type="form.hasQuotaSchoolEligibility ? 'success' : 'info'" size="small">
+              {{ form.hasQuotaSchoolEligibility ? '名额到校: 已具备' : '名额到校: 未具备' }}
+            </el-tag>
+          </span>
+        </div>
+
         <div class="form-body">
           <!-- 名额分配到区 -->
           <div class="volunteer-section">
@@ -448,6 +470,16 @@ const hasAnySubjectScore = computed(() => store.hasAnySubjectScore);
 const hasAllSubjectScores = computed(() => store.hasAllSubjectScores);
 const scoreValidation = computed(() => store.scoreValidation);
 const isScoreValid = computed(() => store.isScoreValid);
+
+// 摘要显示用的名称
+const districtName = computed(() => {
+  if (!form.value.districtId) return '';
+  return districts.value.find(d => d.id === form.value.districtId)?.name || '';
+});
+const middleSchoolName = computed(() => {
+  if (!form.value.middleSchoolId) return '';
+  return middleSchools.value.find(s => s.id === form.value.middleSchoolId)?.name || '';
+});
 
 // 名额分配到校批次已选择的学校ID集合（仅用于本批次内过滤）
 const selectedQuotaSchoolIds = computed(() => {
@@ -745,6 +777,34 @@ onMounted(() => {
 
 .form-body {
   padding: 10px 0;
+}
+
+.step-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.step-summary-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #303133;
+
+  strong {
+    color: #409EFF;
+  }
+}
+
+.step-summary-label {
+  font-style: normal;
+  font-size: 12px;
+  color: #909399;
 }
 
 .full-width {

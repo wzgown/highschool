@@ -92,6 +92,22 @@
       <text>成绩信息</text>
     </view>
 
+    <!-- 前一步摘要 -->
+    <view class="step-summary">
+      <view class="step-summary-item">
+        <text class="step-summary-label">区县</text>
+        <text class="step-summary-value">{{districtName}}</text>
+      </view>
+      <view class="step-summary-item">
+        <text class="step-summary-label">初中</text>
+        <text class="step-summary-value">{{middleSchoolName}}</text>
+      </view>
+      <view class="step-summary-item">
+        <text class="step-summary-label">名额到校资格</text>
+        <text class="step-summary-value {{hasQuotaSchoolEligibility ? 'text-success' : 'text-muted'}}">{{hasQuotaSchoolEligibility ? '已具备' : '未具备'}}</text>
+      </view>
+    </view>
+
     <!-- 总分 -->
     <view class="form-group">
       <view class="form-label">
@@ -279,6 +295,26 @@
     <view class="card-header">
       <view class="card-header-icon"></view>
       <text>志愿填报</text>
+    </view>
+
+    <!-- 前两步摘要 -->
+    <view class="step-summary">
+      <view class="step-summary-item">
+        <text class="step-summary-label">区县</text>
+        <text class="step-summary-value">{{districtName}}</text>
+      </view>
+      <view class="step-summary-item">
+        <text class="step-summary-label">初中</text>
+        <text class="step-summary-value">{{middleSchoolName}}</text>
+      </view>
+      <view class="step-summary-item">
+        <text class="step-summary-label">总分</text>
+        <text class="step-summary-value text-primary">{{scores.total || '-'}}</text>
+      </view>
+      <view class="step-summary-item">
+        <text class="step-summary-label">校内排名</text>
+        <text class="step-summary-value">{{ranking.rank && ranking.totalStudents ? ranking.rank + '/' + ranking.totalStudents : '-'}}</text>
+      </view>
     </view>
 
     <!-- 名额分配到区 -->
