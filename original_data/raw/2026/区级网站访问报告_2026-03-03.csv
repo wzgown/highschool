@@ -1,9 +1,0 @@
-区域,网站名称,URL,访问状态,错误信息,主要内容,备注
-闵行区,闵行教育,https://www.mhedu.sh.cn/zsksxxgkzl/,失败,403 Forbidden,页面正在维护,第一优先级区
-黄浦区,黄浦教育,https://www.hpe.cn/zszp/,失败,404 Not Found,页面不存在,第一优先级区
-松江区,松江教育,http://www.sjedu.cn/,成功,无,仅获取到标题信息,第一优先级区
-金山区,金山教育,http://www.jsedu.sh.cn/,成功,无,仅获取到页脚联系信息,第一优先级区
-奉贤区,奉贤教育,https://www.fengxian.gov.cn/jyj/,成功,无,获取到2026年2月新闻信息,第一优先级区
-长宁区,长宁教育,http://www.chneic.sh.cn/,部分成功,跳转至登录页,上海长宁教育数字基座,第一优先级区
-虹口区,虹口区政府,https://www.shhk.gov.cn/,成功,无,虹口区政府门户网站,第一优先级区
-宝山区,宝山区政府,https://www.shbsq.gov.cn/,成功,无,获取到便民信息、招生政策链接等,第一优先级区
