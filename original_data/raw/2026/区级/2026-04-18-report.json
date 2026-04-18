@@ -1,0 +1,139 @@
+{
+  "date": "2026-04-18",
+  "timestamp": "2026-04-18T08:05:00.000Z",
+  "method": "curl (direct, no playwright)",
+  "target_districts": ["闵行区", "浦东新区", "徐汇区", "黄浦区", "静安区", "杨浦区", "宝山区", "嘉定区"],
+  "total": 8,
+  "success": 5,
+  "failed": 3,
+  "failed_districts": ["浦东新区", "黄浦区", "杨浦区"],
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "http_code": 200,
+      "size": 30113,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 (2026-04-07)",
+        "高中阶段学校招生栏目有更新"
+      ],
+      "latest_dates": ["2026-04-15", "2026-04-10", "2026-04-08", "2026-04-07"],
+      "changes_since_2026_04_17": "无新变化"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "http_code": 412,
+      "success": false,
+      "method": "curl",
+      "error": "HTTP 412 Precondition Failed - 反爬机制阻止访问",
+      "alternative_urls_tried": [
+        "http://www.pudong-edu.sh.cn/ (connection timeout)",
+        "https://www.pudong.gov.cn/shpd/jyj/ (412)",
+        "https://www.pudong.gov.cn/jyj/gk/index.html (412)"
+      ]
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/jyj/",
+      "http_code": 200,
+      "size": 89811,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+        "2026年徐汇区中考报名往届生返沪生现场确认须知",
+        "中考招生栏目: https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216"
+      ],
+      "changes_since_2026_04_17": "新增2026年招生考试中心接待时间和报名须知（具体发布日期待确认）"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "http_code": 200,
+      "size": 484,
+      "success": false,
+      "method": "curl",
+      "error": "页面内容异常（仅484字节），可能需要JS渲染",
+      "alternative_urls_tried": [
+        "https://www.huangpu.gov.cn/hu/shpd/zwgk/jyj/ (connection timeout)",
+        "https://www.huangpu.gov.cn/zwgk/jyj/jygk/index.html (connection timeout)"
+      ],
+      "note": "昨日通过playwright成功访问，今日curl仅获取到空壳页面"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "http_code": 200,
+      "size": 2063,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "note": "仅获取到教育局简介页面，无中考相关动态内容"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "http_code": 0,
+      "success": false,
+      "method": "curl",
+      "error": "连接超时/失败",
+      "alternative_urls_tried": [
+        "https://www.shyp.gov.cn/col/col717/index.html (404)",
+        "https://www.shyp.gov.cn/shyp/gk/jyj/ (404)",
+        "https://www.shyp.gov.cn/shyp/gk/xxgk/jyj/ (404)",
+        "https://www.shyp.gov.cn/col/col2269/index.html (404)"
+      ]
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "http_code": 200,
+      "size": 199297,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "2026年上海市初中学业水平考试英语听说测试线上模拟练习平台即将开通",
+          "source": "上海发布",
+          "date": "2026-04-16",
+          "url": "https://www.shbsq.gov.cn/shbs/bmxx/20260417/429515.html",
+          "summary": "英语听说测试将于2026年5月16日-17日开考，采用人机对话方式，考试时间10分钟，满分10分。4月16日至5月15日开放模拟练习平台（上海招考热线网站）。提供三套练习题，每套可作答5次。要求Windows PC + 360极速浏览器。",
+          "isNew": true
+        }
+      ],
+      "changes_since_2026_04_17": "新发现：英语听说测试模拟练习平台通知（2026-04-16发布）"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "http_code": 200,
+      "size": 56942,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "note": "页面内容为一般教育新闻和幼儿园招生，未发现中考相关公告",
+      "latest_content": [
+        "2026年嘉定区教育系统集中整治工作部署会召开",
+        "上海市嘉定区教育局关于2026年嘉定区幼儿园招生入园工作…"
+      ]
+    }
+  ],
+  "key_findings": {
+    "english_listening_test": {
+      "title": "2026年上海市初中学业水平考试英语听说测试",
+      "exam_date": "2026-05-16 至 2026-05-17",
+      "format": "人机对话",
+      "duration": "10分钟",
+      "max_score": 10,
+      "practice_platform_open": "2026-04-16 至 2026-05-15",
+      "practice_url": "上海招考热线网站",
+      "practice_details": "三套练习题，每套可作答5次",
+      "tech_requirements": "Windows PC + 360极速浏览器 + 耳机耳麦",
+      "source": "宝山区政府网（转载上海发布）",
+      "source_url": "https://www.shbsq.gov.cn/shbs/bmxx/20260417/429515.html"
+    }
+  }
+}
