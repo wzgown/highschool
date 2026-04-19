@@ -1,0 +1,104 @@
+{
+  "date": "2026-04-19",
+  "timestamp": "2026-04-19T00:03:45.000Z",
+  "method": "curl (direct, no playwright)",
+  "target_districts": ["闵行区", "浦东新区", "徐汇区", "黄浦区", "静安区", "杨浦区", "宝山区", "嘉定区"],
+  "total": 8,
+  "success": 5,
+  "failed": 3,
+  "failed_districts": ["浦东新区", "黄浦区", "杨浦区"],
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "http_code": 200,
+      "size": 33399,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 (2026-04-07)"
+      ],
+      "latest_dates": ["2026-04-15", "2026-04-10", "2026-04-08", "2026-04-07"],
+      "changes_since_2026_04_18": "无新变化"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "http_code": 412,
+      "success": false,
+      "method": "curl",
+      "error": "HTTP 412 Precondition Failed - 反爬机制阻止访问"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/jyj/",
+      "http_code": 200,
+      "size": 89811,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+        "2026年徐汇区中考报名往届生返沪生现场确认须知",
+        "中考招生栏目: https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216"
+      ],
+      "changes_since_2026_04_18": "无新变化"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "http_code": 200,
+      "size": 499,
+      "success": false,
+      "method": "curl",
+      "error": "页面内容异常（仅499字节），需JS渲染",
+      "note": "连续多日curl仅获取空壳页面，需playwright或浏览器访问"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "http_code": 200,
+      "size": 3247,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "note": "仅教育局简介页面，无中考相关动态内容",
+      "changes_since_2026_04_18": "无新变化"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "http_code": 0,
+      "success": false,
+      "method": "curl",
+      "error": "连接超时/失败"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "http_code": 200,
+      "size": 217322,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "2026年上海市初中学业水平考试英语听说测试线上模拟练习平台即将开通 (2026-04-16, 来源: 上海发布)"
+      ],
+      "latest_dates": ["2026-04-17", "2026-04-16", "2026-04-15"],
+      "changes_since_2026_04_18": "无新变化"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "http_code": 200,
+      "size": 56942,
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "note": "页面内容为一般教育新闻，未发现中考相关公告",
+      "latest_content": [
+        "2026年嘉定区教育系统集中整治工作部署会召开",
+        "上海市嘉定区教育局关于2026年嘉定区幼儿园招生入园工作…"
+      ],
+      "changes_since_2026_04_18": "无新变化"
+    }
+  ]
+}
