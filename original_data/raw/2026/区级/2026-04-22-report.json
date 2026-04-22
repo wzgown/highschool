@@ -1,0 +1,82 @@
+{
+  "date": "2026-04-22",
+  "total": 8,
+  "success": 6,
+  "failed": 2,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 (2026-04-07)"
+      ],
+      "changes_since_2026-04-21": "无新变化"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": null,
+      "zhongkao_content": [],
+      "note": "curl返回3458字节但无中考内容（可能被反爬拦截），browser也无法访问"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "2026年徐汇区教育局招生考试中心接待时间与咨询电话 (04/07)",
+        "2026年徐汇区中考报名往届生返沪生现场确认须知 (02/24)"
+      ],
+      "changes_since_2026-04-21": "无新变化"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "method": null,
+      "zhongkao_content": [],
+      "note": "网站持续无法访问(ERR_EMPTY_RESPONSE)"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "note": "仅简介页，无动态内容",
+      "changes_since_2026-04-21": "无新变化"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": null,
+      "zhongkao_content": [],
+      "note": "curl超时/404，所有已知URL均失败"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "2026年上海市初中学业水平考试英语听说测试线上模拟练习平台即将开通 (来源: 上海发布)"
+      ],
+      "changes_since_2026-04-21": "无新变化"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "上海市嘉定区教育局关于2026年本区高中阶段学校考试招生工作的实施细则 (2026-04-13)"
+      ],
+      "changes_since_2026-04-21": "无新变化"
+    }
+  ]
+}
