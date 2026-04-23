@@ -3,8 +3,8 @@
     <div class="hero-section">
       <div class="hero-content">
         <h1 class="hero-title">
-          <img src="/logo.png" alt="一味远志" class="logo-icon-hero" />
-          一味远志
+          <img src="/logo.png" alt="折桂登高" class="logo-icon-hero" />
+          折桂登高
         </h1>
         <p class="hero-subtitle">
           基于历年录取数据和智能算法，帮助考生科学评估录取概率，优化志愿填报策略

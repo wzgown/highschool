@@ -2,8 +2,8 @@
   <header class="app-header">
     <div class="header-content">
       <div class="logo" @click="goHome">
-        <img src="/logo.png" alt="一味远志" class="logo-icon" />
-        <span class="title">一味远志</span>
+        <img src="/logo.png" alt="折桂登高" class="logo-icon" />
+        <span class="title">折桂登高</span>
       </div>
       
       <nav class="nav-menu" v-if="!isMobile">
