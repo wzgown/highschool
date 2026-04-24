@@ -1,0 +1,79 @@
+{
+  "date": "2026-04-24",
+  "total": 8,
+  "success": 5,
+  "failed": 3,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+        "2026年闵行区高中阶段学校考试招生\u201c持外国护照以外籍身份报名学生\u201d招生方案"
+      ],
+      "changes_since_2026-04-23": "无新变化"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "http_code": 412,
+      "zhongkao_content": [],
+      "changes_since_2026-04-23": "N/A - 反爬拦截(HTTP 412)"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+        "2026年徐汇区中考报名往届生返沪生现场确认须知"
+      ],
+      "changes_since_2026-04-23": "无新变化"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "method": "curl+browser",
+      "zhongkao_content": [],
+      "changes_since_2026-04-23": "N/A - curl仅获空壳(484B)，browser ERR_EMPTY_RESPONSE"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_2026-04-23": "无中考相关内容"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_2026-04-23": "N/A - 所有URL均失败(timeout/404)"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_2026-04-23": "无中考相关内容（此前发现英语听说内容已不在首页）"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_2026-04-23": "无中考相关内容（此前4/13实施细则已不在首页）"
+    }
+  ]
+}

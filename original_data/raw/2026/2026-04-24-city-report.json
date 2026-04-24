@@ -1,0 +1,436 @@
+{
+  "date": "2026-04-24",
+  "scrape_time": "2026-04-24T08:00:00+08:00",
+  "sections": {
+    "zhao_sheng_zheng_ce": [
+      {
+        "title": "中招政策",
+        "url": "https://www.shmeea.edu.cn/page/zh00/",
+        "date": "",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260331/00af813278714810959cbc4069f86f01.html",
+        "date": "2026-03-31",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20260325/4b275ac9af5f488da02ca525a45cbe59.html",
+        "date": "2026-03-25",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：上海市教育委员会关于做好2026年上海市全日制普通中等职业学校自主招收上海市初中应届毕业生中来沪人员随迁子女工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260325/bc14fe73790248a69ee507d71c26bbda.html",
+        "date": "2026-03-25",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：上海市教育委员会 上海市体育局关于做好2026年上海市高中阶段学校招收优秀体育学生工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260318/77189879eaa4443a9554e13c000bd6cc.html",
+        "date": "2026-03-18",
+        "is_pdf": false
+      },
+      {
+        "title": "《2026年上海市高中阶段学校考试招生工作实施细则》问答",
+        "url": "https://www.shmeea.edu.cn/page/03100/20260320/20120.html",
+        "date": "2026-03-20",
+        "is_pdf": false
+      },
+      {
+        "title": "上海市教育考试院关于印发《2026年上海市高中阶段学校考试招生工作实施细则》的通知（沪教考院中招〔2026〕3号）",
+        "url": "https://www.shmeea.edu.cn/page/03100/20260320/20117.html",
+        "date": "2026-03-20",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：上海市教育委员会关于做好2026年上海市特殊教育高中阶段招生入学工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260312/bd228a8895d348d89023d26df0a3b143.html",
+        "date": "2026-03-12",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+        "date": "2026-02-27",
+        "is_pdf": false
+      },
+      {
+        "title": "上海市教育考试院关于印发《2026年上海市成人中等职业教育招生工作实施细则》的通知（沪教考院中招〔2025〕27号）",
+        "url": "https://www.shmeea.edu.cn/page/03100/20251226/19962.html",
+        "date": "2025-12-26",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招生报名工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/27f5a2d54e414ed4b1c6a53719e67865.html",
+        "date": "2025-11-26",
+        "is_pdf": false
+      }
+    ],
+    "zhao_sheng_gong_shi": [
+      {
+        "title": "招生公示",
+        "url": "https://www.shmeea.edu.cn/page/zh00/",
+        "date": "",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市成人中等职业教育（秋季）招生学校名单",
+        "url": "https://www.shmeea.edu.cn/page/03200/20250701/19567.html",
+        "date": "2025-07-01",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市特殊教育高中阶段学校和中职校附设特教班招生方案",
+        "url": "https://www.shmeea.edu.cn/page/03200/20250530/19416.html",
+        "date": "2025-05-30",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市特殊教育高中阶段学校和中职校附设特教班招生计划",
+        "url": "https://www.shmeea.edu.cn/page/03200/20250530/19415.html",
+        "date": "2025-05-30",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市民办普通高中国际课程班和中外合作办学学校招生录取方案",
+        "url": "https://www.shmeea.edu.cn/download/20250528/016.pdf",
+        "date": "2025-05-28",
+        "is_pdf": true
+      },
+      {
+        "title": "2025年上海市高中学校自主招生录取方案",
+        "url": "https://www.shmeea.edu.cn/download/20250528/015.pdf",
+        "date": "2025-05-28",
+        "is_pdf": true
+      },
+      {
+        "title": "2025年上海市高中名额分配到区招生计划",
+        "url": "https://www.shmeea.edu.cn/download/20250528/014.pdf",
+        "date": "2025-05-28",
+        "is_pdf": true
+      },
+      {
+        "title": "2025年上海市高中自主招生计划（不含国际课程班）",
+        "url": "https://www.shmeea.edu.cn/download/20250528/013.pdf",
+        "date": "2025-05-28",
+        "is_pdf": true
+      },
+      {
+        "title": "2025年上海市高中国际课程班和中外合作办学学校招生计划",
+        "url": "https://www.shmeea.edu.cn/download/20250528/012.pdf",
+        "date": "2025-05-28",
+        "is_pdf": true
+      },
+      {
+        "title": "2025年上海市中等职业学校自主招收随迁子女招生计划",
+        "url": "https://www.shmeea.edu.cn/page/03200/20250526/19387.html",
+        "date": "2025-05-26",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市中等职业学校自主招生计划",
+        "url": "https://www.shmeea.edu.cn/page/03200/20250526/19386.html",
+        "date": "2025-05-26",
+        "is_pdf": false
+      }
+    ],
+    "bao_ming_xu_zhi": [
+      {
+        "title": "报名须知",
+        "url": "https://www.shmeea.edu.cn/page/ba00/",
+        "date": "",
+        "is_pdf": false
+      },
+      {
+        "title": "2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+        "url": "https://www.shmeea.edu.cn/page/03300/20260112/20005.html",
+        "date": "2026-01-12",
+        "is_pdf": false
+      },
+      {
+        "title": "关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+        "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html",
+        "date": "2025-12-29",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年本市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+        "url": "https://www.shmeea.edu.cn/page/03300/20250515/19348.html",
+        "date": "2025-05-15",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年本市高中阶段学校招生网上报名及信息确认于2月20日开始",
+        "url": "https://www.shmeea.edu.cn/page/03300/20250220/19110.html",
+        "date": "2025-02-20",
+        "is_pdf": false
+      },
+      {
+        "title": "关于《2025年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+        "url": "https://www.shmeea.edu.cn/page/03300/20250107/19027.html",
+        "date": "2025-01-07",
+        "is_pdf": false
+      },
+      {
+        "title": "2024年本市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+        "url": "https://www.shmeea.edu.cn/page/03300/20240520/18461.html",
+        "date": "2024-05-20",
+        "is_pdf": false
+      },
+      {
+        "title": "2024年本市高中阶段学校招生网上报名及信息确认将于2月22日开始",
+        "url": "https://www.shmeea.edu.cn/page/03300/20240220/18198.html",
+        "date": "2024-02-20",
+        "is_pdf": false
+      },
+      {
+        "title": "关于《2024年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+        "url": "https://www.shmeea.edu.cn/page/03300/20240115/18148.html",
+        "date": "2024-01-15",
+        "is_pdf": false
+      },
+      {
+        "title": "2023年本市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+        "url": "https://www.shmeea.edu.cn/page/03300/20230602/17569.html",
+        "date": "2023-06-02",
+        "is_pdf": false
+      },
+      {
+        "title": "2023年上海市初中学业水平考试报名报考问答",
+        "url": "https://www.shmeea.edu.cn/page/03300/20230308/17286.html",
+        "date": "2023-03-08",
+        "is_pdf": false
+      }
+    ],
+    "zhi_yuan_tian_bao": [
+      {
+        "title": "志愿填报",
+        "url": "https://www.shmeea.edu.cn/page/zh00/",
+        "date": "",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市中职校招收随迁子女志愿填报即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03400/20250615/19504.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市高中阶段学校招生志愿填报即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03400/20250615/19503.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "关于《2025年上海中考中招指南（志愿篇、备考篇、计划篇、录取篇）》一书发行的通知",
+        "url": "https://www.shmeea.edu.cn/page/03400/20250604/19428.html",
+        "date": "2025-06-04",
+        "is_pdf": false
+      },
+      {
+        "title": "2024年上海市中职校招收随迁子女志愿填报即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03400/20240617/18576.html",
+        "date": "2024-06-17",
+        "is_pdf": false
+      },
+      {
+        "title": "2024年上海市高中阶段学校招生录取志愿填报即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03400/20240617/18575.html",
+        "date": "2024-06-17",
+        "is_pdf": false
+      },
+      {
+        "title": "转载：关于随迁子女报考上海第二工业大学附属浦东振华外经职业技术学校《学前教育》、《婴幼儿托育服务与管理》中高职贯通专业无需面试的公告",
+        "url": "https://www.vszhh.pudong-edu.sh.cn/main/web/index.php/article/detail?id=4755",
+        "date": "",
+        "is_pdf": false
+      },
+      {
+        "title": "关于《2024年上海中考中招指南（志愿篇、备考篇、计划篇、录取篇）》一书发行的通知",
+        "url": "https://www.shmeea.edu.cn/page/03400/20240604/18526.html",
+        "date": "2024-06-04",
+        "is_pdf": false
+      },
+      {
+        "title": "2023年上海市中职校招收随迁子女志愿填报即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03400/20230629/17686.html",
+        "date": "2023-06-29",
+        "is_pdf": false
+      },
+      {
+        "title": "2023年上海市中等职业学校自主招生志愿填报即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03400/20230629/17685.html",
+        "date": "2023-06-29",
+        "is_pdf": false
+      },
+      {
+        "title": "2023年上海市高中学校自主招生录取志愿填报即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03400/20230629/17684.html",
+        "date": "2023-06-29",
+        "is_pdf": false
+      }
+    ],
+    "zhao_sheng_lu_qu": [
+      {
+        "title": "招生录取",
+        "url": "https://www.shmeea.edu.cn/page/zh00/",
+        "date": "",
+        "is_pdf": false
+      },
+      {
+        "title": "关于2025年上海市1所民办高中降低最低投档控制分数线的公告",
+        "url": "https://www.shmeea.edu.cn/page/03600/20250715/19630.html",
+        "date": "2025-07-15",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+        "url": "https://www.shmeea.edu.cn/page/03600/20250714/19623.html",
+        "date": "2025-07-14",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市中等职业学校自主招收随迁子女征求志愿即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03600/20250713/19606.html",
+        "date": "2025-07-13",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市中等职业学校自主招收随迁子女五年一贯制和中高职贯通各专业最低录取分数线",
+        "url": "https://www.shmeea.edu.cn/download/20250713/zz/02.pdf",
+        "date": "2025-07-13",
+        "is_pdf": true
+      },
+      {
+        "title": "2025年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+        "url": "https://www.shmeea.edu.cn/download/20250713/zz/01.pdf",
+        "date": "2025-07-13",
+        "is_pdf": true
+      },
+      {
+        "title": "2025年上海市高中阶段学校招生最低投档控制分数线确定",
+        "url": "https://www.shmeea.edu.cn/page/03600/20250708/19583.html",
+        "date": "2025-07-08",
+        "is_pdf": false
+      },
+      {
+        "title": "上海市教育考试院负责人就2025年本市高中阶段学校招生录取工作答学生问",
+        "url": "https://www.shmeea.edu.cn/page/03600/20250708/19582.html",
+        "date": "2025-07-08",
+        "is_pdf": false
+      },
+      {
+        "title": "关于2024年上海市1所民办高中降低最低投档控制分数线的公告",
+        "url": "https://www.shmeea.edu.cn/page/03600/20240716/18683.html",
+        "date": "2024-07-16",
+        "is_pdf": false
+      },
+      {
+        "title": "2024年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+        "url": "https://www.shmeea.edu.cn/download/20240715/1.pdf",
+        "date": "2024-07-15",
+        "is_pdf": true
+      },
+      {
+        "title": "2024年上海市中等职业学校自主招收随迁子女征求志愿即将开始",
+        "url": "https://www.shmeea.edu.cn/page/03600/20240714/18673.html",
+        "date": "2024-07-14",
+        "is_pdf": false
+      }
+    ],
+    "kao_shi_gui_ding": [
+      {
+        "title": "考试规定",
+        "url": "https://www.shmeea.edu.cn/page/ka00/",
+        "date": "",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市初中学业水平考试成绩将于7月8日公布",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250704/19575.html",
+        "date": "2025-07-04",
+        "is_pdf": false
+      },
+      {
+        "title": "专家点评2025年上海市初中学业水平考试道德与法治科目试卷",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250615/19520.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "专家点评2025年上海市初中学业水平考试数学科目试卷",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250615/19519.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "专家点评2025年上海市初中学业水平考试英语科目试卷",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250615/19513.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "专家点评2025年上海市初中学业水平考试历史科目试卷",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250615/19512.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "专家点评2025年上海市初中学业水平考试综合测试试卷",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250615/19511.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "专家点评2025年上海市初中学业水平考试语文科目试卷",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250615/19510.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "专家点评2025年上海市初中学业水平考试语文作文试题",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250615/19509.html",
+        "date": "2025-06-15",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市初中学业水平考试平稳开考 ",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250614/19501.html",
+        "date": "2025-06-14",
+        "is_pdf": false
+      },
+      {
+        "title": "2025年上海市初中学业水平考试即将举行",
+        "url": "https://www.shmeea.edu.cn/page/03500/20250610/19478.html",
+        "date": "2025-06-10",
+        "is_pdf": false
+      }
+    ]
+  },
+  "index_translations": [
+    {
+      "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的通知",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260331/00af813278714810959cbc4069f86f01.html",
+      "date": "2026-03-31"
+    },
+    {
+      "title": "转载：上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20260325/4b275ac9af5f488da02ca525a45cbe59.html",
+      "date": "2026-03-25"
+    },
+    {
+      "title": "转载：上海市教育委员会关于做好2026年上海市全日制普通中等职业学校自主招收上海市初中应届毕业生中来沪人员随迁子女工作的通知",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260325/bc14fe73790248a69ee507d71c26bbda.html",
+      "date": "2026-03-25"
+    },
+    {
+      "title": "转载：上海市教育委员会 上海市体育局关于做好2026年上海市高中阶段学校招收优秀体育学生工作的通知",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260318/77189879eaa4443a9554e13c000bd6cc.html",
+      "date": "2026-03-18"
+    }
+  ]
+}
