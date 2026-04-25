@@ -1,0 +1,92 @@
+{
+  "date": "2026-04-25",
+  "total": 8,
+  "success": 5,
+  "failed": 3,
+  "method_stats": {
+    "curl": 8,
+    "browser": 0
+  },
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [
+        "【2026-04-24 新】关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知（闵教字〔2026〕55号）",
+        "【2026-04-22 新】2026年闵行区高中阶段学校考试招生"持外国护照以外籍身份报名学生"招生方案",
+        "【此前已发现】闵行区体育考试实施方案（04-07）"
+      ],
+      "changes_since_2026-04-24": "发现2条新内容：区级实施细则(04-24)和外籍身份招生方案(04-22)"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "http_status": "timeout/412",
+      "zhongkao_content": [],
+      "changes_since_2026-04-24": "不可访问，WAF拦截"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [
+        "2026年徐汇区高中阶段学校体育考试实施方案（04-07，此前已发现）",
+        "2026年徐汇区中考报名信息（02-24，此前已发现）"
+      ],
+      "changes_since_2026-04-24": "无新变化"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-24": "curl仅获空壳页面（JS渲染），无中考内容"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-24": "无中考内容，仅简介页"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "http_status": "connection refused/404",
+      "zhongkao_content": [],
+      "changes_since_2026-04-24": "所有URL均不可用"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-24": "216KB大页面中未检索到中考关键词，内容可能已滚动下线"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-24": "首页未发现中考内容（04-13实施细则已滚动下线），仅幼儿园和小学招生信息"
+    }
+  ],
+  "new_findings_summary": "闵行区发现2条新内容：区级中考实施细则(04-24)和外籍身份招生方案(04-22)"
+}
