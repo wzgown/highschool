@@ -1,0 +1,91 @@
+{
+  "date": "2026-04-28",
+  "total": 8,
+  "success": 5,
+  "failed": 3,
+  "method_stats": {
+    "curl": 8,
+    "browser": 0
+  },
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [
+        "2026-04-24 关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知(闵教字〔2026〕55号)",
+        "2026-04-22 2026年闵行区高中阶段学校考试招生持外国护照以外籍身份报名学生招生方案",
+        "2026-04-07 关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知"
+      ],
+      "changes_since_2026-04-27": "无新变化，最新内容仍为04-24实施细则"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "http_status": 412,
+      "zhongkao_content": [],
+      "changes_since_2026-04-27": "不可访问，WAF拦截(HTTP 412)"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [
+        "2026-04-07 2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+        "2026-02-24 2026年徐汇区中考报名往届生返沪生现场确认须知"
+      ],
+      "changes_since_2026-04-27": "无新变化"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-27": "JS渲染页面，curl仅获空壳(484B)，无中考内容可提取"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-27": "无中考内容，仅简介页"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "http_status": "DNS解析失败",
+      "zhongkao_content": [],
+      "changes_since_2026-04-27": "域名无法解析，所有URL不可用"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-27": "199KB大页面中未检索到高中阶段中考关键词，仅匹配到政府综合信息和义务教育内容"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "zhongkao_content": [],
+      "changes_since_2026-04-27": "教育频道无高中阶段中考专题内容，仅匹配到幼儿园和义务教育招生入学信息"
+    }
+  ]
+}
