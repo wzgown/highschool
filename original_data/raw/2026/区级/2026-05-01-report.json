@@ -1,0 +1,200 @@
+{
+  "scrape_date": "2026-05-01",
+  "timestamp": "2026-05-01T08:00:37.915278",
+  "districts": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "http_status_code": 200,
+      "page_size_bytes": 33332,
+      "error": null,
+      "zhongkao_content": [
+        {
+          "snippet": "考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知"
+        },
+        {
+          "snippet": "2026年闵行区义务教育阶段学校“校园开放日”信息汇总\">义务教育招生|2026年闵行区义务教育阶段学校“校园开放日”信息汇总"
+        },
+        {
+          "snippet": "2026年闵行区义务教育阶段民办学校招生计划\">义务教育招生|2026年闵行区义务教育阶段民办学校招生计划"
+        },
+        {
+          "snippet": "招生计划\">义务教育招生|2026年闵行区义务教育阶段民办学校招生计划"
+        },
+        {
+          "snippet": "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知"
+        },
+        {
+          "snippet": "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知"
+        },
+        {
+          "snippet": "高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案"
+        },
+        {
+          "snippet": "2026年闵行区义务教育阶段民办学校招生简章\">义务教育招生|2026年闵行区义务教育阶段民办学校招生简章"
+        },
+        {
+          "snippet": "20268d8e25d.htm\" title=\"2026年闵行区义务教育阶段学校（初中和一贯制）学校教育教学、校舍场地条件、后勤设施设备和师资配置基本情况\">义务教育招生|2026年闵行区义务教育阶段学校（初中和一贯制）学校教育教学、校舍场地条件、后勤设施设备和师资配置"
+        },
+        {
+          "snippet": "a href=\"../../xxgk_jyj_ywxx_8_03/List/index.htm\" title=\"高中阶段学校招生\""
+        },
+        {
+          "snippet": "招生计划数\">义务教育招生|2026年闵行区公办初中招生计划数"
+        },
+        {
+          "snippet": "招生|2026年闵行区义务教育阶段学校（初中和一贯制）学校教育教学、校舍场地条件、后勤设施设备和师资配置基本情况"
+        },
+        {
+          "snippet": "/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm\" title=\"关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知\""
+        },
+        {
+          "snippet": "高中阶段学校招生"
+        },
+        {
+          "snippet": "2026年闵行区公办初中招生计划数\">义务教育招生|2026年闵行区公办初中招生计划数"
+        },
+        {
+          "snippet": "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案\">高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案"
+        },
+        {
+          "snippet": "2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知"
+        },
+        {
+          "snippet": "招生|2026年闵行区义务教育阶段学校“校园开放日”信息汇总"
+        },
+        {
+          "snippet": "高中阶段学校考试招生工作实施细则》的通知\">高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知"
+        },
+        {
+          "snippet": "高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案\">高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案"
+        },
+        {
+          "snippet": "2026年闵行区高中阶段学校考试招生工作实施细则》的通知\">高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知"
+        },
+        {
+          "snippet": "招生简章\">义务教育招生|2026年闵行区义务教育阶段民办学校招生简章"
+        }
+      ],
+      "zhongkao_match_count": 22
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "http_status_code": 412,
+      "page_size_bytes": 3442,
+      "error": null,
+      "zhongkao_content": [],
+      "zhongkao_match_count": 0
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "http_status_code": 200,
+      "page_size_bytes": 11816,
+      "error": null,
+      "zhongkao_content": [
+        {
+          "snippet": "关于2024徐汇区高中阶段学校招生计划发放的通知（跨区生）"
+        },
+        {
+          "snippet": "徐汇区2025年名额分配到校招生计划"
+        },
+        {
+          "snippet": "徐汇区2025年上海市高中名额分配到区招生计划"
+        },
+        {
+          "snippet": "关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ..."
+        },
+        {
+          "snippet": "2025年徐汇区中考报名往届生返沪生现场确认须知"
+        },
+        {
+          "snippet": "2026年徐汇区教育局招生考试中心接待时间与咨询电话"
+        },
+        {
+          "snippet": "2026年徐汇区中考报名往届生返沪生现场确认须知"
+        }
+      ],
+      "zhongkao_match_count": 7
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status_code": 200,
+      "page_size_bytes": 499,
+      "error": null,
+      "zhongkao_content": [],
+      "zhongkao_match_count": 0
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status_code": 200,
+      "page_size_bytes": 3247,
+      "error": null,
+      "zhongkao_content": [],
+      "zhongkao_match_count": 0
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "http_status_code": 0,
+      "page_size_bytes": 0,
+      "error": null,
+      "zhongkao_content": [],
+      "zhongkao_match_count": 0
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status_code": 200,
+      "page_size_bytes": 216944,
+      "error": null,
+      "zhongkao_content": [],
+      "zhongkao_match_count": 0
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "http_status_code": 200,
+      "page_size_bytes": 57264,
+      "error": null,
+      "zhongkao_content": [
+        {
+          "snippet": "2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：1621 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "date": "2026-04-07"
+        },
+        {
+          "snippet": "招生入学政策问答 点击数：155 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "date": "2026-04-07"
+        },
+        {
+          "snippet": "2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：155 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "date": "2026-04-07"
+        },
+        {
+          "snippet": "招生入学政策问答 点击数：1621 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "date": "2026-04-07"
+        }
+      ],
+      "zhongkao_match_count": 4
+    }
+  ]
+}
