@@ -1,0 +1,215 @@
+{
+  "date": "2026-05-02",
+  "scan_period": "2026年3-4月 (checking for new content since ~2026-04-26)",
+  "total": 8,
+  "success": 5,
+  "failed": 3,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "status_detail": "OK, 33332 bytes fetched",
+      "zhongkao_content": [
+        {
+          "title": "高中阶段学校招生",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/List/index.htm",
+          "dates": []
+        },
+        {
+          "title": "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "dates": [
+            "2026-04-24",
+            "2026-04-22"
+          ]
+        },
+        {
+          "title": "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "dates": [
+            "2026-04-22",
+            "2026-04-15"
+          ]
+        },
+        {
+          "title": "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "dates": [
+            "2026-04-07"
+          ]
+        }
+      ],
+      "new_content": "No new items dated after 2026-04-26",
+      "known_items": [
+        "实施细则(04-24)",
+        "外籍招生方案(04-22)",
+        "体育考试实施方案(04-07)"
+      ]
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "status_detail": "HTTP 412 - WAF blocked (3458B response body)",
+      "zhongkao_content": [],
+      "new_content": "Inaccessible - WAF returns 412 Precondition Failed"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "status_detail": "OK, 11816 bytes - 中考招生子页面",
+      "zhongkao_content": [
+        {
+          "title": "中考招生",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216",
+          "dates": []
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+          "dates": []
+        },
+        {
+          "title": "关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ...",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1133",
+          "dates": []
+        },
+        {
+          "title": "徐汇区2025年名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1132",
+          "dates": []
+        },
+        {
+          "title": "徐汇区2025年上海市高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1131",
+          "dates": []
+        },
+        {
+          "title": "2025年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1090",
+          "dates": []
+        },
+        {
+          "title": "关于2024徐汇区高中阶段学校招生计划发放的通知（跨区生）",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1059",
+          "dates": []
+        }
+      ],
+      "new_content": "No new items dated after 2026-04-26"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "method": "curl",
+      "status_detail": "JS shell only (499B) - site requires JavaScript rendering",
+      "zhongkao_content": [],
+      "new_content": "Cannot access with curl - needs Playwright/browser"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "status_detail": "OK, 3247 bytes - Static intro page only (2063B). Keywords found: none",
+      "zhongkao_content": [],
+      "new_content": "No 中考 content on static intro page"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "status_detail": "DNS failure / connection refused - 0 bytes received",
+      "zhongkao_content": [],
+      "new_content": "Inaccessible - DNS resolution failure"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "status_detail": "OK, 216944 bytes - Main portal (199173B), no 中考 keywords found. Education links found: 0",
+      "zhongkao_content": [],
+      "new_content": "No 中考 keywords found on main government portal page. Education subpage may contain relevant content."
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "status_detail": "OK, 57374 bytes",
+      "zhongkao_content": [
+        {
+          "title": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：1628 发表时间：2026-04-07",
+          "dates": [
+            "2026-04-07",
+            "2025-04-15"
+          ]
+        },
+        {
+          "title": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：157 发表时间：2026-04-07",
+          "dates": [
+            "2026-04-07",
+            "2025-04-07"
+          ]
+        }
+      ],
+      "new_content": "No new 中考 items dated after 2026-04-26",
+      "note": "2026-05-01 content found: 副区长检查高中学业水平等级性考试(高考相关,非中考); 高中语文学科基地展示(非招生)",
+      "all_found_items": [
+        {
+          "title": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：1628 发表时间：2026-04-07",
+          "dates": [
+            "2026-04-07",
+            "2025-04-15"
+          ]
+        },
+        {
+          "title": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：157 发表时间：2026-04-07",
+          "dates": [
+            "2026-04-07",
+            "2025-04-07"
+          ]
+        }
+      ],
+      "known_items": [
+        "实施细则(04-13, was off main page by 04-26)"
+      ]
+    }
+  ],
+  "summary": {
+    "accessible_districts": [
+      "闵行区",
+      "徐汇区",
+      "静安区",
+      "宝山区",
+      "嘉定区"
+    ],
+    "inaccessible_districts": [
+      {
+        "district": "浦东新区",
+        "reason": "HTTP 412 WAF blocked"
+      },
+      {
+        "district": "黄浦区",
+        "reason": "JS rendering required"
+      },
+      {
+        "district": "杨浦区",
+        "reason": "DNS failure"
+      }
+    ],
+    "districts_with_zhongkao_content": [
+      "闵行区",
+      "徐汇区",
+      "嘉定区"
+    ],
+    "new_content_since_0426": "No new 中考-specific content found dated after 2026-04-26. 嘉定区 had 2026-05-01 content but related to 高考 (高中学业水平等级性考试), not 中考."
+  }
+}
