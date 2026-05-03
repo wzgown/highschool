@@ -1,0 +1,250 @@
+{
+  "scan_date": "2026-05-03",
+  "scan_time": "2026-05-03T08:03:27.196919",
+  "total_districts": 16,
+  "successful": 12,
+  "needs_playwright": 1,
+  "failed": 4,
+  "total_new_findings": 11,
+  "key_discovery": "青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则 (发布日期: 2026.04.27, 发文字号: 青教〔2026〕36号) - NEW since last check",
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 30090,
+      "zhongkao_content_count": 14,
+      "zhongkao_content": [
+        "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知 -> ../../xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+        "高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案 -> ../../xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+        "义务教育招生|2026年闵行区义务教育阶段学校“校园开放日”信息汇总 -> ../../xxgk_jyj_ywxx_8_02/content/9e6568d5-4c43-40ed-8117-75f753700f7c.htm",
+        "义务教育招生|2026年闵行区义务教育阶段民办学校招生计划 -> ../../xxgk_jyj_ywxx_8_02/content/ff64fcf6-ac5a-4e94-8e89-2a795746fa74.htm",
+        "义务教育招生|2026年闵行区义务教育阶段民办学校招生简章 -> ../../xxgk_jyj_ywxx_8_02/content/673f4e9f-7e96-4775-9f9a-2c60427cafac.htm",
+        "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 -> ../../xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+        "义务教育招生|2026年闵行区义务教育阶段学校（小学）教育教学、校舍场地条件、后勤设施设备和师资配置基本情况公示 -> ../../xxgk_jyj_ywxx_8_02/content/bd17abd2-7776-4df0-9e0c-4251b67de760.htm",
+        "义务教育招生|2026年闵行区义务教育阶段学校（初中和一贯制）学校教育教学、校舍场地条件、后勤设施设备和师资配置基本情况 -> ../../xxgk_jyj_ywxx_8_02/content/313073a2-ae9d-426e-8af7-820268d8e25d.htm",
+        "义务教育招生|2026年闵行区公办小学招生计划数 -> ../../xxgk_jyj_ywxx_8_02/content/60145752-57e8-4d01-8409-f6a78e30fefb.htm",
+        "义务教育招生|2026年闵行区公办初中招生计划数 -> ../../xxgk_jyj_ywxx_8_02/content/2c95daa4-5294-42f7-bccd-2eed35ecacd8.htm",
+        "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+        "高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+        "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+        "/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm\" title=\"关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知"
+      ],
+      "new_findings_count": 6,
+      "new_findings": [
+        "[2026] 高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+        "[2026] 高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+        "[2026] 高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+        "[2026 dated] 高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知 2026-04-24 高中阶段学校招生|关于印发《2026年闵行区高中阶段",
+        "[2026 dated] 高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案 2026-04-22 高中阶段学校招生|2026年闵行区高中阶段",
+        "[2026 dated] 高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 2026-04-07 高中阶段学校招生|关于印发《2026年上海市闵"
+      ]
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "http_412",
+      "http_status": 412,
+      "html_size": 3507,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 10822,
+      "zhongkao_content_count": 3,
+      "zhongkao_content": [
+        "2026年徐汇区教育局招生考试中心接待时间与咨询电话 -> https://www.xuhui.gov.cn/egov/front2018/doc/1165",
+        "2026年徐汇区中考报名往届生返沪生现场确认须知 -> https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+        "a href=\"https://www.xuhui.gov.cn/egov/front2018/doc/1163\">2026年徐汇区中考报名往届生返沪生现场确认须知"
+      ],
+      "new_findings_count": 2,
+      "new_findings": [
+        "[2026] a href=\"https://www.xuhui.gov.cn/egov/front2018/doc/1163\">2026年徐汇区中考报名往届生返沪生现场确认",
+        "[2026 dated] 2026年徐汇区中考报名往届生返沪生现场确认须知 hui.gov.cn/egov/xuhui/2018/imgs/time.jpg\" />04/07 2026年"
+      ]
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "method": "needs_playwright",
+      "http_status": 200,
+      "html_size": 484,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": [],
+      "note": "JS-rendered page, only 484 bytes"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 2063,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "timeout",
+      "http_status": 0,
+      "html_size": 0,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 199173,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 48104,
+      "zhongkao_content_count": 7,
+      "zhongkao_content": [
+        "2026年嘉定区义务教育阶段学校招生入学政策问答 -> /jiaoyu/bmfw/zcjd/content_960968",
+        "2026年嘉定区义务教育阶段学校招生入学政策问答 -> /jiaoyu/bmfw/bmwd/content_961708",
+        "2026年高中学业水平等级性考试的准备工作进行全面视察。嘉定区教育局局长李娟、区府办副主任沈雅玲、南翔镇副镇长季琪昕陪同检查。...",
+        "2026-05-01\">\n        副区长汤东英检查高中学业水平等级性考试考点准备工作",
+        "2026-05-01\">\n        嘉定区举行高中语文学科基地展示活动",
+        "2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：1628\n发表时间：2026-04-07\">\n        2026年嘉定区义务教育阶段学校招生入学政策问答",
+        "2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：157\n发表时间：2026-04-07\">\n        2026年嘉定区义务教育阶段学校招生入学政策问答"
+      ],
+      "new_findings_count": 3,
+      "new_findings": [
+        "[2026] 2026年高中学业水平等级性考试的准备工作进行全面视察。嘉定区教育局局长李娟、区府办副主任沈雅玲、南翔镇副镇长季琪昕陪同检查。...",
+        "[2026 dated] 2026-05-01\"> 副区长汤东英检查高中学业水平等级性考试考点准备工作",
+        "[2026 dated] 副区长汤东英检查高中学业水平等级性考试考点准备工作 t\"> 2026-05-01 副区长汤东英检查高中学业水平等级性考试考点准备工作 2026-05-01 <a"
+      ]
+    },
+    {
+      "district": "长宁区",
+      "url": "http://www.chneic.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 1846,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "普陀区",
+      "url": "https://www.shpt.gov.cn/jyj/",
+      "success": false,
+      "method": "http_404",
+      "http_status": 404,
+      "html_size": 975,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.shhk.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 79477,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "松江区",
+      "url": "http://www.sjedu.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 2022,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "金山区",
+      "url": "http://www.jsedu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 18762,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://www.fengxian.gov.cn/jyj/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 19957,
+      "zhongkao_content_count": 1,
+      "zhongkao_content": [
+        "2026年奉贤区义务教育招生入学汇总 -> /jyj/gsgg/20260401/105015.html"
+      ],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "青浦区",
+      "url": "https://www.shqp.gov.cn/edu/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 31057,
+      "zhongkao_content_count": 1,
+      "zhongkao_content": [
+        "青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则 -> /edu/eduzwgk/lm/jy/zs/gz/20260420/1369386.html"
+      ],
+      "new_findings_count": 0,
+      "new_findings": []
+    },
+    {
+      "district": "崇明区",
+      "url": "https://www.shcm.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "html_size": 59255,
+      "zhongkao_content_count": 0,
+      "zhongkao_content": [],
+      "new_findings_count": 0,
+      "new_findings": []
+    }
+  ]
+}
