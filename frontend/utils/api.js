@@ -3,9 +3,7 @@
  * 使用 wx.request 直接调用 Connect-RPC JSON 端点
  */
 
-var API_URL = __wxConfig && __wxConfig.envVersion !== 'develop'
-  ? 'https://zg.mkfriend.top'
-  : 'http://127.0.0.1:3000'
+var API_URL = 'https://zg.mkfriend.top'
 
 /**
  * 调用 Connect-RPC 服务方法
