@@ -106,9 +106,9 @@ func main() {
 	v1.RegisterCandidateService(mux, otelInterceptor)
 
 	// 添加中间件
-	// 顺序（从外到内）：OTel HTTP tracing -> 日志 -> CORS -> handler
-	handler := withCORS(mux)
-	handler = withLogging(handler)
+	// 顺序（从外到内）：OTel HTTP tracing -> 日志 -> handler
+	// CORS 由 Nginx 反代层处理，后端不再设置
+	handler := withLogging(mux)
 
 	// 如果启用 tracing，添加 OTel HTTP 中间件
 	if cfg.Tracing.Enabled {
@@ -147,28 +147,6 @@ func main() {
 	}
 
 	logger.Info(ctx, "server exited")
-}
-
-// CORS 中间件
-func withCORS(h http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		origin := r.Header.Get("Origin")
-		if origin == "" {
-			origin = "*"
-		}
-		w.Header().Set("Access-Control-Allow-Origin", origin)
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization, X-Requested-With, Connect-Protocol-Version, Connect-Timeout-Ms")
-		w.Header().Set("Access-Control-Expose-Headers", "Content-Length, Content-Type")
-		w.Header().Set("Access-Control-Allow-Credentials", "true")
-
-		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusNoContent)
-			return
-		}
-
-		h.ServeHTTP(w, r)
-	})
 }
 
 // responseWriter 包装 http.ResponseWriter 以捕获状态码
