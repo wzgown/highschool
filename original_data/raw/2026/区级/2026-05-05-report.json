@@ -1,0 +1,269 @@
+{
+  "date": "2026-05-05",
+  "total": 8,
+  "success": 5,
+  "failed": 3,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "http_status": 200,
+      "response_size": 33332,
+      "method": "curl",
+      "zhongkao_content": [
+        "...教育改革发展重点工作推进 基础教育 职业与终身教育 民办教育 学校德育 体卫艺科 教育法治 依法治教 教育收费 招生管理 学前教育适龄幼儿入园 义务教育招生 高中阶段学校招生 普通高校招生 学生管理 教师管理 教育督导 后勤保卫 权力事项 服务事项 教育改革 基础教育 职业与终身教育 民办教育 学校德育 体卫艺科 教育法治 教育收费...",
+        "...教育改革 基础教育 职业与终身教育 民办教育 学校德育 体卫艺科 教育法治 教育收费 招生管理 学生管理 教师管理 教育督导 后勤保卫 2026-04-24 高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知 2026-04-22 高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以...",
+        "...教师管理 教育督导 后勤保卫 2026-04-24 高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知 2026-04-22 高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案 2026-04-15 学前教育适龄幼儿入园|2026年闵行区幼儿园招生范围信息表...",
+        "...教育招生|2026年闵行区义务教育阶段民办学校招生计划 2026-04-07 义务教育招生|2026年闵行区义务教育阶段民办学校招生简章 2026-04-07 高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 2026-04-07 义务教育招生|2026年闵行区义务教育阶段学校（小学）教育教学...",
+        "...6-04-07 义务教育招生|2026年闵行区义务教育阶段民办学校招生简章 2026-04-07 高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 2026-04-07 义务教育招生|2026年闵行区义务教育阶段学校（小学）教育教学、校舍场地条件、后勤设施设备和师资配置基本情况公示 2..."
+      ],
+      "new_urls_found": [
+        "//www.shmh.gov.cn/shmh/index.html",
+        "//www.shmh.gov.cn/shmh_English/index.html",
+        "/shmh/shmh_help.html#div0",
+        "http://www.mhrd.gov.cn/sites/mhrd/dyn/ViewIndex.ashx",
+        "http://www.shmh.gov.cn/shmh/bmfw/index.html",
+        "http://www.shmh.gov.cn/shmh/hdjl/index.html",
+        "http://www.shmh.gov.cn/shmh/index.html",
+        "http://www.shmh.gov.cn/shmh/mhdjzt/index.html",
+        "http://www.shmh.gov.cn/shmh/mhgl/index.html",
+        "http://www.shmh.gov.cn/shmh/mhslh/",
+        "http://www.shmh.gov.cn/shmh/tzmh/index.html",
+        "http://www.shmh.gov.cn/shmh/xwzx/index.html",
+        "http://www.shmhzx.gov.cn/mhzx/index.html",
+        "http://zwdt.sh.gov.cn/govPortals/stRegionIndex.do?stRegion=SH00MH",
+        "https://ask.shmh.gov.cn/bot/",
+        "https://weibo.com/minhang?s=6cm7D0&is_all=1",
+        "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/portal/index/index.htm",
+        "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_qlsx/content/3c255866-3afa-4864-b2e4-06e901a56580.htm"
+      ],
+      "changes_since_2026-05-04": "5项新内容"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "http_status": 412,
+      "response_size": 3534,
+      "method": "curl",
+      "zhongkao_content": [
+        "HTTP 412 - blocked or error response"
+      ],
+      "new_urls_found": [],
+      "changes_since_2026-05-04": "1项新内容"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "http_status": 200,
+      "response_size": 11816,
+      "method": "curl",
+      "zhongkao_content": [
+        "...aseUrl = \"https://www.xuhui.gov.cn/egov/\"; 微门户 邮箱 市民云 办公邮箱 首页 / 信息公开目录 / 单位业务 / 中考招生 2026年徐汇区教育局招生考试中心接待时间与咨询电话 04/07 2026年徐汇区中考报名往届生返沪生现场确认须知 02/24 2025年上海市高中学校1...",
+        "...邮箱 市民云 办公邮箱 首页 / 信息公开目录 / 单位业务 / 中考招生 2026年徐汇区教育局招生考试中心接待时间与咨询电话 04/07 2026年徐汇区中考报名往届生返沪生现场确认须知 02/24 2025年上海市高中学校1至15志愿统一招生录取最低分数线（徐汇区） 07/17 地址变更通知 06/16 关于202...",
+        "...则 05/09 2025年徐汇区中招跨区报名（跨入）学生注意事项 05/07 2025年徐汇区教育局招生考试中心接待时间与咨询电话 02/28 2025年徐汇区中考报名往届生返沪生现场确认须知 02/20 2024年上海市高中学校“1至15志愿”统一招生录取最低分数线（徐汇区） 07/18 关于2024徐汇区高中阶段学校招...",
+        "...海市高中学校1至15志愿统一招生录取最低分数线（徐汇区） 07/17 地址变更通知 06/16 关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ... 05/30 徐汇区2025年名额分配到校招生计划 05/29 徐汇区2025年上海市高中名额分配到区招生计划 05/29 徐汇区教育局关于2025...",
+        "...5年徐汇区中考报名往届生返沪生现场确认须知 02/20 2024年上海市高中学校“1至15志愿”统一招生录取最低分数线（徐汇区） 07/18 关于2024徐汇区高中阶段学校招生计划发放的通知（跨区生） 06/05 徐汇区2024年跨区生档案材料交接 05/31 共 317 篇文章 1 2 3 4 5 6 7 8 9 10 11 &ra...",
+        "...07/17 地址变更通知 06/16 关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ... 05/30 徐汇区2025年名额分配到校招生计划 05/29 徐汇区2025年上海市高中名额分配到区招生计划 05/29 徐汇区教育局关于2025年本区中等学校高中阶段外籍学生招生办法202503...",
+        "...招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ... 05/30 徐汇区2025年名额分配到校招生计划 05/29 徐汇区2025年上海市高中名额分配到区招生计划 05/29 徐汇区教育局关于2025年本区中等学校高中阶段外籍学生招生办法20250313 05/09 徐教〔2025〕6号徐汇区教育局关于202...",
+        "...5/29 徐汇区教育局关于2025年本区中等学校高中阶段外籍学生招生办法20250313 05/09 徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则 05/09 2025年徐汇区中招跨区报名（跨入）学生注意事项 05/07 2025年徐汇区教育局招生考试中心接待时间与咨询电话 02/28 20...",
+        "...l = \"https://www.xuhui.gov.cn/egov/\"; 微门户 邮箱 市民云 办公邮箱 首页 / 信息公开目录 / 单位业务 / 中考招生 2026年徐汇区教育局招生考试中心接待时间与咨询电话 04/07 2026年徐汇区中考报名往届生返沪生现场确认须知 02/24 2025年上海市高中学校1至15志愿统一招生录取最低分数线（徐汇区） 07/17 地址变更通知 06/16 关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ... 05/30 徐汇区2025年名额分配到校招生计划 05/29 徐汇区2025年上海市高中名额分配到区招..."
+      ],
+      "new_urls_found": [
+        "http://app.eshimin.com/",
+        "http://bszs.conac.cn/sitename?method=show&id=1DA55243075647D1E053012819ACDFB9",
+        "http://mail.xh.sh.cn",
+        "http://www.xuhui.gov.cn/ztzl_xht",
+        "https://www.xuhui.gov.cn/egov/front2018/cat/1",
+        "https://www.xuhui.gov.cn/egov/front2018/cat/205",
+        "https://www.xuhui.gov.cn/egov/front2018/cat/216",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1058",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1059",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1068",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1090",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1092",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1124",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1125",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1126",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1131",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1132",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1133",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1142",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1143",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+        "https://www.xuhui.gov.cn/egov/front2018/doc/1165",
+        "https://www.xuhui.gov.cn/egov/front2018/index"
+      ],
+      "changes_since_2026-05-04": "9项新内容"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "http_status": 200,
+      "response_size": 499,
+      "method": "curl",
+      "zhongkao_content": [
+        "Response too small (499 bytes) - likely JS-rendered shell, no content"
+      ],
+      "new_urls_found": [],
+      "changes_since_2026-05-04": "1项新内容"
+    },
+    {
+      "district": "静安区",
+      "district_en": "Jing'an",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "http_status": 200,
+      "method": "curl",
+      "content_size_bytes": 2063,
+      "page_type": "static_intro",
+      "notes": "Page is a static introduction page (静安区教育局简介) with no dynamic content or news articles. No 中考 or 2026 exam-related content found.",
+      "zhongkao_content": [],
+      "new_urls": [],
+      "error": null,
+      "changes_since_2026-05-04": "无新变化"
+    },
+    {
+      "district": "杨浦区",
+      "district_en": "Yangpu",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "http_status": 0,
+      "method": "curl",
+      "content_size_bytes": 0,
+      "page_type": "dns_failure",
+      "notes": "DNS resolution failed (exit code 97, HTTP status 000). Website has been unreachable since approximately 2025-04-26. No content retrieved.",
+      "zhongkao_content": [],
+      "new_urls": [],
+      "error": "DNS failure - curl exit code 97, HTTP status 000",
+      "changes_since_2026-05-04": "无新变化"
+    },
+    {
+      "district": "宝山区",
+      "district_en": "Baoshan",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "http_status": 200,
+      "method": "curl",
+      "content_size_bytes": 199173,
+      "page_type": "government_portal",
+      "notes": "Large government portal page (~217KB). Only found generic '招生政策' link and '教育科研' section. No specific 2026 中考 content. Education content appears to be on subpages.",
+      "zhongkao_content": [],
+      "new_urls": [
+        "/shbs/zszc/index.html"
+      ],
+      "error": null,
+      "changes_since_2026-05-04": "无新变化"
+    },
+    {
+      "district": "嘉定区",
+      "district_en": "Jiading",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "http_status": 200,
+      "method": "curl",
+      "content_size_bytes": 48104,
+      "page_type": "education_section",
+      "notes": "Active education section with recent news. Found 2026 高中学业水平等级性考试 inspection content (2026-05-01). Also found 2026 义务教育招生入学政策 but no specific 中考 policy announcements yet.",
+      "zhongkao_content": [
+        {
+          "snippet": "副区长汤东英检查高中学业水平等级性考试考点准备工作",
+          "keyword": "学业水平"
+        },
+        {
+          "snippet": "qxw/content_963747\" title=\"副区长汤东英检查高中学业水平等级性考试考点准备工作\" target=\"_blank\">副区长汤东英检查高中学业水平等级性考试考点准备工作",
+          "keyword": "学业水平"
+        },
+        {
+          "snippet": "4月30日下午，嘉定区副区长汤东英一行来到嘉定二中考点，对2026年高中学业水平等级性考试的准备工作进行全面视察。嘉定区教育局局长李娟、区府办副主任沈雅玲、南翔镇副镇长季琪昕陪同检查。...",
+          "keyword": "中考"
+        },
+        {
+          "snippet": "ontent_963747\" target=\"_blank\"> <img alt=\"副区长汤东英检查高中学业水平等级性考试考点准备工作\" src=\"/upload/jiaoyu/contentmanage/article/image/624bbad3f74d4dbc95f",
+          "keyword": "学业水平"
+        },
+        {
+          "snippet": "\"title\"> 副区长汤东英检查高中学业水平等级性考试考点准备…",
+          "keyword": "学业水平"
+        },
+        {
+          "snippet": "qxw/content_963747\" title=\"副区长汤东英检查高中学业水平等级性考试考点准备工作\" target=\"_blank\">副区长汤东英检查高中学业水平等级性考试考点准备…",
+          "keyword": "学业水平"
+        },
+        {
+          "snippet": "副区长汤东英检查高中学业水平等级性考试考点准备工作 <",
+          "keyword": "学业水平"
+        },
+        {
+          "snippet": "\" title=\"标题：副区长汤东英检查高中学业水平等级性考试考点准备工作 点击数：1 发表时间：2026-05-01\"> 副区长汤东英检查高中学业水平等级性考试考点准备工作 2026-05-",
+          "keyword": "学业水平"
+        },
+        {
+          "snippet": "嘉定区举行高中语文学科基地展示活动",
+          "keyword": "title_attr"
+        },
+        {
+          "snippet": "标题：副区长汤东英检查高中学业水平等级性考试考点准备工作 点击数：1 发表时间：2026-05-01",
+          "keyword": "title_attr"
+        },
+        {
+          "snippet": "标题：嘉定区举行高中语文学科基地展示活动 点击数：3 发表时间：2026-05-01",
+          "keyword": "title_attr"
+        },
+        {
+          "snippet": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：1628 发表时间：2026-04-07",
+          "keyword": "title_attr"
+        },
+        {
+          "snippet": "标题：2025年嘉定区义务教育阶段学校招生入学政策问答 点击数：0 发表时间：2025-04-07",
+          "keyword": "title_attr"
+        },
+        {
+          "snippet": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：157 发表时间：2026-04-07",
+          "keyword": "title_attr"
+        },
+        {
+          "snippet": "2026年高中学业水平等级性考试的准备工作进行全面视察。嘉定区教育局局长李娟、区府办副主任沈雅玲、南翔镇副镇长季琪昕陪同检查。...",
+          "keyword": "2026_fallback"
+        },
+        {
+          "snippet": "2026-05-01\"> 副区长汤东英检查高中学业水平等级性考试考点准备工作",
+          "keyword": "2026_fallback"
+        },
+        {
+          "snippet": "2026-05-01\"> 嘉定区举行高中语文学科基地展示活动",
+          "keyword": "2026_fallback"
+        },
+        {
+          "snippet": "2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：1628 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "keyword": "2026_fallback"
+        },
+        {
+          "snippet": "2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：157 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "keyword": "2026_fallback"
+        }
+      ],
+      "new_urls": [
+        "/jiaoyu/tzgg/gg/content_955105",
+        "/jiaoyu/tzgg/gs/content_962458",
+        "/jiaoyu/bmfw/zcjd/content_960968",
+        "/jiaoyu/publicity/zwgkbzml/zhzw/czzj/czzx/196949",
+        "/jiaoyu/bmfw/zcjd",
+        "/content/jiaoyu/base/css/default.css?v=Cm6o1y8rmMx_N-nGm9seRpS2gB0db3sFb06q6durgiI",
+        "/jiaoyu/tzgg/gg",
+        "/jiaoyu/jydj",
+        "/jiaoyu/bmfw",
+        "/jiaoyu/jyxw/bqxw/content_963745",
+        "/jiaoyu/publicity/zwgkbzml/zhzw/czzj/czzx/196948",
+        "/jiaoyu/publicity/zwgkbzml/zhzw/zcwj/zfwj/jjb166/196827",
+        "/jiaoyu/publicity",
+        "/jiaoyu/jyxw/xxdt"
+      ],
+      "error": null,
+      "changes_since_2026-05-04": "19项新内容"
+    }
+  ]
+}
