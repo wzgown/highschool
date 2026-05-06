@@ -1,0 +1,257 @@
+{
+  "date": "2026-05-06",
+  "total": 16,
+  "success": 9,
+  "failed": 7,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "32.6 KB",
+      "zhongkao_content": [
+        "2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+        "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案\">高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+        "2026年闵行区高中阶段学校考试招生工作实施细则》的通知\">高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+        "育收费 招生管理 学生管理 教师管理 教育督导 后勤保卫 2026-04-24 高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知 2026-04-22 高中阶段学校招生|2026年",
+        "高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案\">高中阶段学校招生|2026",
+        "高中阶段学校考试招生工作实施细则》的通知\">高中阶段学校招生|关于印发《2026"
+      ],
+      "has_2026_content": true,
+      "error": null,
+      "title_attr_content": []
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "status_code": 412,
+      "page_size": "3.4 KB",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "error": "HTTP 412",
+      "title_attr_content": []
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "11.5 KB",
+      "zhongkao_content": [
+        "026年徐汇区教育局招生考试中心接待时间与咨询电话 04/07 2026年徐汇区中考报名往届生返沪生现场确认须知 02/24 2025年上海市高中学校1至15志愿统一招生录取最低分数线（徐汇区） 07/1",
+        "2026年徐汇区中考报名往届生返沪生现场确认须知",
+        "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+        "政府 微门户 邮箱 市民云 办公邮箱 首页 / 信息公开目录 / 单位业务 / 中考招生 2026年徐汇区教育局招生考试中心接待时间与咨询电话 04/07 2026年徐汇区中考报名往届生返沪生现场确认须知"
+      ],
+      "has_2026_content": true,
+      "error": null,
+      "title_attr_content": []
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "method": "curl (insufficient - needs Playwright)",
+      "status_code": 200,
+      "page_size": "499 B",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "error": "JS shell page (only 499 B, needs Playwright)",
+      "title_attr_content": []
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "3.2 KB",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "error": null,
+      "title_attr_content": []
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "status_code": null,
+      "page_size": "0 B",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "error": "DNS failure - unable to resolve host (since 2026-04-26)",
+      "title_attr_content": []
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "211.9 KB",
+      "zhongkao_content": [],
+      "has_2026_content": true,
+      "error": null,
+      "title_attr_content": []
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "56.0 KB",
+      "zhongkao_content": [
+        "中考点，对2026",
+        "学业水平等级性考试考点准备工作 4月30日下午，嘉定区副区长汤东英一行来到嘉定二中考点，对2026年高中学业水平等级性考试的准备工作进行全面视察。嘉定区教育局局长李娟、区府办副主任沈雅玲、南翔镇副镇长季琪",
+        "招生入学政策问答 点击数：157 发表时间：2026-04-07\"> 2026",
+        "招生入学政策问答 点击数：1628 发表时间：2026-04-07\"> 2026"
+      ],
+      "has_2026_content": true,
+      "error": null,
+      "title_attr_content": []
+    },
+    {
+      "district": "长宁区",
+      "url": "http://www.chneic.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "1.9 KB",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "notes": "curl returns login page (1.9KB). No 中考 or 2026 content. Needs Playwright/headless browser for access.",
+      "requires_playwright": true
+    },
+    {
+      "district": "普陀区",
+      "url": "https://www.shpt.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "status_code": 404,
+      "page_size": "1.1 KB",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "notes": "HTTP 404. /jyj/ path not found as of 2026-05-06. Page may have moved or been restructured.",
+      "requires_playwright": false
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.shhk.gov.cn/",
+      "success": false,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "86.5 KB",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "notes": "JS-rendered portal shell (86.5KB, 24 external scripts, OAuth.js present). curl gets HTML skeleton with no education content, no 中考 or 初中/高中 references. Needs Playwright. 2026 content found is about construction projects, not education.",
+      "requires_playwright": true
+    },
+    {
+      "district": "松江区",
+      "url": "http://www.sjedu.cn/",
+      "success": false,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "2.0 KB",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "notes": "JS-rendered page, curl gets minimal content (2.0KB). No 中考 or 2026 content. Needs Playwright/headless browser.",
+      "requires_playwright": true
+    },
+    {
+      "district": "金山区",
+      "url": "http://www.jsedu.sh.cn/zsks",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "50.5 KB",
+      "zhongkao_content": [
+        "中考志愿填报系统 (链接在页面上)",
+        "中考志愿录取查询系统 (链接在页面上)",
+        "2026年上海市高中阶段学校考试招生工作实施细则 问答",
+        "2026年上海市普通高校面向应届中等职业学校毕业生招生...",
+        "2026年上海市普通高等学校秋季统一考试..."
+      ],
+      "has_2026_content": true,
+      "notes": "招生考试子页 has 7 中考 references. Found 2026年高中阶段学校考试招生实施细则 问答 and other 2026 exam content. Has dedicated sub-pages: chuzhongzhaosheng (初中招生), gaokaozhaosheng (高考招生). 中考-related sub-articles mostly from older years (2012-2020) on the 初中招生 index page, but main page has 2026 content.",
+      "sub_pages": {
+        "初中招生_index": "http://www.jsedu.sh.cn/zsks/chuzhongzhaosheng/index.html",
+        "status": "200, 26.9KB, has 中考 references (older content) and 2026 content on main zsks page"
+      }
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://www.fengxian.gov.cn/jyj/",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "21.9 KB",
+      "zhongkao_content": [
+        "2026年奉贤区义务教育招生入学汇总 (found on main jyj page)"
+      ],
+      "has_2026_content": true,
+      "notes": "Main jyj page has 2026 义务教育招生入学汇总 but no 中考-specific content. Links to separate 招生考试网: https://zsks.shfxjy.cn/",
+      "sub_pages": {
+        "招生考试网": {
+          "url": "https://zsks.shfxjy.cn/",
+          "status": "200, 21.4KB",
+          "zhongkao_content": [
+            "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+            "体育中考 section exists"
+          ],
+          "has_2026_zhongkao": true,
+          "notes": "Found 2026年奉贤区中招个别报名 content. Also has 体育中考 service section. Main content still shows 2025 中招 data as latest archived results."
+        }
+      }
+    },
+    {
+      "district": "青浦区",
+      "url": "https://www.shqp.gov.cn/edu/",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "34.8 KB",
+      "zhongkao_content": [
+        "青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则 (published 2026-04-20, file: 1369386.html)"
+      ],
+      "has_2026_content": true,
+      "notes": "KEY FINDING: 实施细则 found on main page. Full article at /edu/eduzwgk/lm/jy/zs/gz/20260420/1369386.html (144.5KB). Document number: 青教〔2026〕36号. Covers: 考试安排, 自主招生(10%), 名额分配(65%), 志愿填报, 特殊教育, etc.",
+      "sub_pages": {
+        "实施细则全文": {
+          "url": "https://www.shqp.gov.cn/edu/eduzwgk/lm/jy/zs/gz/20260420/1369386.html",
+          "status": "200, 144.5KB",
+          "document_number": "青教〔2026〕36号",
+          "publish_date": "2026-04-20",
+          "key_content": [
+            "2026年本区高中阶段学校考试招生工作实施细则",
+            "市实验性示范性高中自主招生计划约占本校招生计划的10%",
+            "市实验性示范性高中名额分配招生计划约占本校招生计划的65%",
+            "中招志愿填报统一在学业考试后、成绩发布前进行",
+            "考试全部安排在标准化考点进行"
+          ],
+          "has_2026_zhongkao": true
+        }
+      }
+    },
+    {
+      "district": "崇明区",
+      "url": "https://www.shcm.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "status_code": 200,
+      "page_size": "68.5 KB",
+      "zhongkao_content": [],
+      "has_2026_content": false,
+      "notes": "区政府门户网站 (68.5KB). No 中考, 初中, or 高中 references found in page content. 2026 content is about 服务业发展措施, not education. 中考 content may be on a sub-page or sub-domain not linked from homepage. Needs deeper crawling or Playwright.",
+      "requires_playwright": true,
+      "note_for_followup": "Try sub-pages like /cmjyj/ or search for education bureau sub-site"
+    }
+  ]
+}
