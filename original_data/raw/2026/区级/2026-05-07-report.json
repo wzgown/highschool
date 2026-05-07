@@ -1,0 +1,288 @@
+{
+  "date": "2026-05-07",
+  "total": 14,
+  "success": 9,
+  "failed": 5,
+  "results": [
+    {
+      "total_districts": 8,
+      "districts_with_content": 2,
+      "scrape_timestamp": "2026-05-07T08:01:00+08:00",
+      "results": [
+        {
+          "district": "闵行区",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "success": true,
+          "method": "html_page",
+          "content_length": 30100,
+          "http_code": null,
+          "zhongkao_content": [
+            "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+            "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+            "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知"
+          ],
+          "notes": []
+        },
+        {
+          "district": "浦东新区",
+          "url": "https://www.pudong.gov.cn/jyj/",
+          "success": false,
+          "method": "html_page",
+          "content_length": 3430,
+          "http_code": null,
+          "zhongkao_content": [],
+          "notes": [
+            "Small response (3430 bytes), likely blocked or redirected (no 412 but no content)"
+          ]
+        },
+        {
+          "district": "徐汇区",
+          "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+          "success": true,
+          "method": "html_page",
+          "content_length": 10822,
+          "http_code": null,
+          "zhongkao_content": [
+            "2026年徐汇区中考报名往届生返沪生现场确认须知",
+            "关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ...",
+            "徐汇区2025年名额分配到校招生计划",
+            "徐汇区2025年上海市高中名额分配到区招生计划",
+            "徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则",
+            "2025年徐汇区中招跨区报名（跨入）学生注意事项",
+            "2025年徐汇区中考报名往届生返沪生现场确认须知"
+          ],
+          "notes": []
+        },
+        {
+          "district": "黄浦区",
+          "url": "https://www.hpe.cn/",
+          "success": false,
+          "method": "html_page",
+          "content_length": 484,
+          "http_code": null,
+          "zhongkao_content": [],
+          "notes": [
+            "Minimal content (484 bytes), likely JS-rendered shell page"
+          ]
+        },
+        {
+          "district": "静安区",
+          "url": "http://www.ja.edu.sh.cn/",
+          "success": false,
+          "method": "html_page",
+          "content_length": 2063,
+          "http_code": null,
+          "zhongkao_content": [],
+          "notes": [
+            "No 中考 content found in page"
+          ]
+        },
+        {
+          "district": "杨浦区",
+          "url": "http://www.yp.edu.sh.cn/",
+          "success": false,
+          "method": "curl_error",
+          "content_length": 0,
+          "http_code": null,
+          "zhongkao_content": [],
+          "notes": [
+            "DNS/connection failure (curl exit code 97)"
+          ]
+        },
+        {
+          "district": "宝山区",
+          "url": "https://www.shbsq.gov.cn/",
+          "success": false,
+          "method": "html_page",
+          "content_length": 199173,
+          "http_code": null,
+          "zhongkao_content": [],
+          "notes": [
+            "No 中考 content found in page"
+          ]
+        },
+        {
+          "district": "嘉定区",
+          "url": "https://www.jiading.gov.cn/jiaoyu/",
+          "success": false,
+          "method": "html_page",
+          "content_length": 47870,
+          "http_code": null,
+          "zhongkao_content": [],
+          "notes": [
+            "Page has 义务教育招生 content but no specific 中考/高中阶段招生 content found"
+          ]
+        }
+      ]
+    },
+    {
+      "district": "长宁区",
+      "url": "http://www.chneic.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "content_length": 1846,
+      "exit_code": 0,
+      "page_type": "login_page",
+      "notes": "Page type: login_page; charset=utf-8",
+      "has_zhongkao": false,
+      "quality": "none",
+      "zhongkao_content": []
+    },
+    {
+      "district": "普陀区",
+      "url": "https://www.shpt.gov.cn/jyj/",
+      "success": true,
+      "method": "curl",
+      "content_length": 975,
+      "exit_code": 0,
+      "page_type": "html_content",
+      "notes": "Page type: html_content; charset=UTF-8",
+      "has_zhongkao": false,
+      "quality": "none",
+      "zhongkao_content": []
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.shhk.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "content_length": 79377,
+      "exit_code": 0,
+      "page_type": "html_content",
+      "notes": "Page type: html_content; charset=UTF-8",
+      "has_zhongkao": false,
+      "quality": "none",
+      "zhongkao_content": []
+    },
+    {
+      "district": "松江区",
+      "url": "http://www.sjedu.cn/",
+      "success": true,
+      "method": "curl",
+      "content_length": 2022,
+      "exit_code": 0,
+      "page_type": "js_heavy_shell",
+      "notes": "Page type: js_heavy_shell; charset=utf-8",
+      "has_zhongkao": false,
+      "quality": "none",
+      "zhongkao_content": []
+    },
+    {
+      "district": "金山区",
+      "url": "http://www.jsedu.sh.cn/zsks",
+      "success": true,
+      "method": "curl",
+      "content_length": 48324,
+      "exit_code": 0,
+      "page_type": "js_heavy_shell",
+      "notes": "Page type: js_heavy_shell; charset=UTF-8",
+      "has_zhongkao": true,
+      "quality": "high",
+      "zhongkao_content": [
+        "业生招生... 2026-05-05 上海市教育委员会关于印发《2026年上海市普通高等学... 2026-04-24 最新资讯 学校信息 --> / --> 高中招生 / 高考招生 / 中小幼招生 / 转学申请 / 便民服务 20 2012-04 华师大三附中 上海市华师大三附中名称：华师大三附中电话：(021)57961564地址：石化卫新路115号邮编：200540网址... 了解更多> 17 20",
+        "26年上海市普通高校面向应届中等职业学校毕业生招生统... 中华人民共和国教育部 上海教育云管理平台 上海金山 金山教育 中国教育考试网 上海招考热线 --> 中考志愿填报系统 --> 中考志愿录取查询系统 --> --> 上海市学业水平成绩查询 沪公网安备 31011602001015号 沪ICP备17057573号-1 地址:金山区石化二村289号（南楼） 邮编：200540 电话:5793132",
+        "届中等职业学校毕业生招生统... 中华人民共和国教育部 上海教育云管理平台 上海金山 金山教育 中国教育考试网 上海招考热线 --> 中考志愿填报系统 --> 中考志愿录取查询系统 --> --> 上海市学业水平成绩查询 沪公网安备 31011602001015号 沪ICP备17057573号-1 地址:金山区石化二村289号（南楼） 邮编：200540 电话:57931325 邮箱:jsqjyjxf",
+        "2026年上海市高中阶",
+        "2026年上海市高中阶段学校考试招生 工作实施细则》问答",
+        "[链接] https://www.jsedu.sh.cn/zsks",
+        "[链接] https://www.jsedu.sh.cn/zsks/zuixingongkaixinxi/index.html",
+        "[链接] https://www.jsedu.sh.cn/zsks/zhuanxueshenqing/index.html",
+        "[链接] https://www.jsedu.sh.cn/zsks/xxgkml/index.html",
+        "[链接] https://www.jsedu.sh.cn/zsks/xuexiaoxinxi/index.html",
+        "[链接] https://www.jsedu.sh.cn/zsks/wangzhanlianjie/index.html",
+        "[链接] https://www.jsedu.sh.cn/zsks/zhengfuxinxigongkail/index.html",
+        "[链接] https://www.jsedu.sh.cn/zsks/wangshangbanshi/index.html",
+        "[链接] https://www.jsedu.sh.cn/zsks/danweiyewu/index.html"
+      ]
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://www.fengxian.gov.cn/jyj/",
+      "success": true,
+      "method": "curl",
+      "content_length": 19947,
+      "exit_code": 0,
+      "page_type": "html_content",
+      "notes": "Page type: html_content; charset=UTF-8",
+      "has_zhongkao": true,
+      "quality": "medium",
+      "zhongkao_content": [
+        "[链接] https://zsks.shfxjy.cn/"
+      ]
+    },
+    {
+      "district": "青浦区",
+      "url": "https://www.shqp.gov.cn/edu/",
+      "success": true,
+      "method": "curl",
+      "content_length": 31278,
+      "exit_code": 0,
+      "page_type": "html_content",
+      "notes": "Page type: html_content; charset=UTF-8",
+      "has_zhongkao": true,
+      "quality": "high",
+      "zhongkao_content": [
+        "20260420/1369386.html\" target=\"_blank\" title=\"青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则\">青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则",
+        "青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则"
+      ]
+    },
+    {
+      "district": "崇明区",
+      "url": "https://www.shcm.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "content_length": 59204,
+      "exit_code": 0,
+      "page_type": "html_content",
+      "notes": "Page type: html_content; charset=UTF-8",
+      "has_zhongkao": false,
+      "quality": "none",
+      "zhongkao_content": []
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "method": "browser",
+      "zhongkao_content": [],
+      "notes": "ERR_EMPTY_RESPONSE"
+    },
+    {
+      "district": "长宁区",
+      "url": "http://www.chneic.sh.cn/",
+      "success": false,
+      "method": "browser",
+      "zhongkao_content": [],
+      "notes": "ERR_EMPTY_RESPONSE"
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.shhk.gov.cn/",
+      "success": false,
+      "method": "browser",
+      "zhongkao_content": [],
+      "notes": "ERR_EMPTY_RESPONSE"
+    },
+    {
+      "district": "松江区",
+      "url": "http://www.sjedu.cn/",
+      "success": false,
+      "method": "browser",
+      "zhongkao_content": [],
+      "notes": "ERR_EMPTY_RESPONSE"
+    },
+    {
+      "district": "奉贤区(招生考试网)",
+      "url": "https://zsks.shfxjy.cn/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+        "高中名额分配到校招生计划（奉贤区）",
+        "高中名额分配到区招生计划（奉贤区）",
+        "高中最低录取分数线"
+      ],
+      "notes": "招生考试子站zsks.shfxjy.cn可curl访问，含2026年中招个别报名通知"
+    }
+  ]
+}
