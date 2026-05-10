@@ -1,0 +1,258 @@
+{
+  "date": "2026-05-10",
+  "total": 9,
+  "success": 4,
+  "failed": 5,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "[2026-05-06] 2026年闵行区中招跨区生报名及后续工作注意事项",
+        "[2026-04-22] 关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+        "[2026-04-15] 2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+        "[2026-04-07] 关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知"
+      ],
+      "changes_since_last": "发现: 2026年闵行区中招多项通知(跨区生报名、招生实施细则、体育考试实施方案、外籍生招生方案)"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_last": "HTTP 412 - 服务器拒绝请求(反爬机制)"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "[待确认] 徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的...",
+        "[待确认] 2026年徐汇区中考报名往届生返沪生现场确认须知",
+        "[待确认] 关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ...",
+        "[待确认] 徐汇区2025年名额分配到校招生计划",
+        "[待确认] 徐汇区2025年上海市高中名额分配到区招生计划",
+        "[待确认] 徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则",
+        "[待确认] 2025年徐汇区中考报名往届生返沪生现场确认须知"
+      ],
+      "changes_since_last": "发现: 徐汇区2026年中考招生实施细则已发布(徐教〔2026〕5号, 05/09); 往届生返沪生报名须知(02/24)"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_last": "页面仅返回499B空壳(JS渲染SPA页面，curl无法获取实际内容)"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_last": "页面仅为教育局介绍页(3247B)，无中考相关内容"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_last": "DNS解析失败(curl exit code 97，域名yp.edu.sh.cn无法解析)"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "changes_since_last": "区政府门户首页(215KB)，含'招生政策'栏目链接但无直接中考内容，需进一步定位教育局子站"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        "[2026-05-01] 副区长汤东英检查高中学业水平等级性考试考点准备工作",
+        "[2026-05-01] 嘉定区举行高中语文学科基地展示活动"
+      ],
+      "changes_since_last": "发现: 2026年高中学业水平等级性考试相关新闻(2026-05-01 副区长检查考点准备工作)"
+    },
+    {
+      "batch": 2,
+      "scrape_date": "2026-05-10",
+      "total_districts": 8,
+      "successful": 3,
+      "failed": 5,
+      "results": [
+        {
+          "district": "长宁区",
+          "url": "http://www.chneic.sh.cn/",
+          "success": false,
+          "method": "curl",
+          "failure_reason": "SPA/数字基座页面，curl仅获取空壳HTML(1902B)，标题='上海长宁教育数字基座'，需要Playwright渲染",
+          "zhongkao_content": [],
+          "changes_since_last": "无新变化"
+        },
+        {
+          "district": "普陀区",
+          "url": "https://www.shpt.gov.cn/jiaoyu/",
+          "success": false,
+          "method": "curl",
+          "failure_reason": "/jyj/返回404('您访问的页面不存在')，/jiaoyu/为Vue.js SPA页面，curl仅获取模板框架(6668B)，无实际新闻/通知内容",
+          "zhongkao_content": [],
+          "changes_since_last": "无新变化"
+        },
+        {
+          "district": "虹口区",
+          "url": "https://www.shhk.gov.cn/",
+          "success": false,
+          "method": "curl",
+          "failure_reason": "JS-only渲染页面，curl获取88KB HTML但提取文本仅2210字符，无中考关键词命中",
+          "zhongkao_content": [],
+          "changes_since_last": "无新变化"
+        },
+        {
+          "district": "松江区",
+          "url": "http://www.sjedu.cn/",
+          "success": false,
+          "method": "curl",
+          "failure_reason": "Angular SPA(ng-app)，curl仅获取空壳HTML(2048B)，提取文本仅9字符",
+          "zhongkao_content": [],
+          "changes_since_last": "无新变化"
+        },
+        {
+          "district": "金山区",
+          "url": "http://www.jsedu.sh.cn/zsks",
+          "success": true,
+          "method": "curl",
+          "zhongkao_content": [
+            {
+              "title": "2026年金山区中招跨入考生报名后注意事项",
+              "date": "2026-05-09",
+              "source": "最新公开栏目",
+              "url": "http://www.jsedu.sh.cn/zsks"
+            },
+            {
+              "title": "【转载】2026年上海市初中学业水平考试英语听力试运转即将举行",
+              "date": "2026-05-09",
+              "source": "最新资讯栏目",
+              "url": "http://www.jsedu.sh.cn/zsks"
+            },
+            {
+              "title": "2026年普通高等学校招生全国统一考试外语听说测试在线模拟练习系统上线",
+              "date": "2026-05-07",
+              "source": "最新资讯栏目",
+              "url": "http://www.jsedu.sh.cn/zsks"
+            },
+            {
+              "title": "【转载】2026年上海市中职校招生学校名单",
+              "date": "2026-05-09",
+              "source": "最新资讯栏目",
+              "url": "http://www.jsedu.sh.cn/zsks"
+            },
+            {
+              "title": "上海市2026年普通高校招生公安类院校报考意向网上登记即将开始",
+              "date": "2026-05-05",
+              "source": "最新资讯栏目",
+              "url": "http://www.jsedu.sh.cn/zsks"
+            },
+            {
+              "title": "中考志愿填报系统 / 中考志愿录取查询系统",
+              "date": null,
+              "source": "侧边栏工具链接",
+              "url": "https://www.jsedu.sh.cn/zsks/kscfbmhtdlqcx"
+            }
+          ],
+          "changes_since_last": "发现: 2026-05-09发布'金山区中招跨入考生报名后注意事项'及'初中学业水平考试英语听力试运转'通知；2026-05-07发布高考外语听说模拟练习系统上线通知"
+        },
+        {
+          "district": "奉贤区",
+          "url": "https://zsks.shfxjy.cn/",
+          "success": true,
+          "method": "curl",
+          "zhongkao_content": [
+            {
+              "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+              "date": "2026年(发布日期未在列表显示)",
+              "source": "招考动态/公告栏",
+              "url": "https://zsks.shfxjy.cn/",
+              "note": "标题多次出现，为主要政策文件"
+            },
+            {
+              "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+              "date": "2026-05-07",
+              "source": "招考动态",
+              "url": "https://zsks.shfxjy.cn/"
+            },
+            {
+              "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+              "date": "2026-02-04",
+              "source": "招考动态",
+              "url": "https://zsks.shfxjy.cn/1770171232.html"
+            },
+            {
+              "title": "2025年奉贤区统一批次普通高中最低录取分数线",
+              "date": "2025-07-17",
+              "source": "招生信息",
+              "url": "https://zsks.shfxjy.cn/1752717788.html",
+              "note": "2025年历史数据，供参考"
+            },
+            {
+              "title": "2025年上海市高中名额分配到校招生计划（奉贤区）",
+              "date": "2025-05-29",
+              "source": "公告栏",
+              "url": "https://zsks.shfxjy.cn/1748502095.html",
+              "note": "2025年数据"
+            },
+            {
+              "title": "2025年上海市高中名额分配到区招生计划（奉贤区）",
+              "date": "2025-05-29",
+              "source": "公告栏",
+              "url": "https://zsks.shfxjy.cn/1748497543.html",
+              "note": "2025年数据"
+            },
+            {
+              "title": "体育中考",
+              "date": null,
+              "source": "侧边栏链接",
+              "url": "http://10.155.80.232",
+              "note": "内网地址，curl不可达"
+            }
+          ],
+          "changes_since_last": "发现: 2026年奉贤区高中阶段学校考试招生工作实施细则已发布；2026-05-07发布中招跨区考生注意事项；2026-02-04发布中招个别报名现场确认注意事项"
+        },
+        {
+          "district": "青浦区",
+          "url": "https://www.shqp.gov.cn/edu/",
+          "success": true,
+          "method": "curl",
+          "zhongkao_content": [
+            {
+              "title": "关于印发《青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则》的通知",
+              "date": "2026-04-20",
+              "source": "政务公开-招生工作",
+              "url": "https://www.shqp.gov.cn/edu/eduzwgk/lm/jy/zs/gz/20260420/1369386.html"
+            }
+          ],
+          "changes_since_last": "发现: 2026-04-20发布《青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则》"
+        },
+        {
+          "district": "崇明区",
+          "url": "https://www.shcm.gov.cn/",
+          "success": false,
+          "method": "curl",
+          "failure_reason": "区政府门户主站(70KB)无中考关键词命中；尝试教育局子页/col/col7228/返回404；/shcm/jyj/也返回404。该区教育局可能使用独立域名或内部系统",
+          "zhongkao_content": [],
+          "changes_since_last": "无新变化"
+        }
+      ]
+    }
+  ]
+}
