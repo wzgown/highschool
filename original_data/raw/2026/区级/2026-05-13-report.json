@@ -1,0 +1,252 @@
+{
+  "date": "2026-05-13",
+  "total": 16,
+  "success": 10,
+  "failed": 6,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 33410,
+      "zhongkao_content": [
+        "6年上海市闵行区初中毕业升学体育考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实",
+        "2026年闵行区义务教育阶段学校“校园开放日”信息汇总\">义务教育招生",
+        "2026年闵行区义务教育阶段民办学校招生计划",
+        "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+        "50-af0ad1331090.htm\" title=\"关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考...",
+        "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+        "2026年闵行区高中阶段学校考试招生工作实施细则》的通知\">高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生",
+        "阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案\">高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份",
+        "2026年闵行区中招跨区生报名及后续工作注意事项\">高中阶段学校招生",
+        "高中阶段学校招生",
+        "20268d8e25d.htm\" title=\"2026年闵行区义务教育阶段学校（初中和一贯制）学校教育教学、校舍场地条件、后勤设施设备和师资配置基本情况\">义务教育招生",
+        "义务教育招生",
+        "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+        "x_8_03/List/index.htm\" title=\"高中阶段学校招生\">高中阶段学校招生",
+        "2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试",
+        "业升学体育考试工作实施方案》的通知\">高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知 <",
+        "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+        "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+        "le=\"2026年闵行区中招跨区生报名及后续工作注意事项\">高中阶段学校招生|2026年闵行区中招跨区生报名及后续工作注意事项<"
+      ],
+      "changes_since_2026-05-12": "已发现2026年中考相关内容"
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 11863,
+      "zhongkao_content": [
+        "2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ... <span cl",
+        "徐汇区2025年上海市高中名额分配到区招生计划",
+        "徐汇区2025年名额分配到校招生计划",
+        "\"https://www.xuhui.gov.cn/egov/front2018/cat/216\">中考招生 <div class=\"clearfix",
+        "2026年本区中等学校高中阶段外籍学生招生",
+        "2025年徐汇区中考报名往届生返沪生现场确认须知",
+        "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的...",
+        "徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则",
+        "2026年徐汇区中考报名往届生返沪生现场确认须知",
+        "www.xuhui.gov.cn/egov/front2018/doc/1132\">徐汇区2025年名额分配到校招生计划 <img src=",
+        "www.xuhui.gov.cn/egov/front2018/doc/1090\">2025年徐汇区中考报名往届生返沪生现场确认须知 <",
+        "中考招生",
+        ">徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则 <span c",
+        "026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的... <span cl",
+        "2026年徐汇区教育局招生考试",
+        "www.xuhui.gov.cn/egov/front2018/doc/1163\">2026年徐汇区中考报名往届生返沪生现场确认须知 <",
+        "2026年徐汇区中考",
+        "2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生",
+        "uhui.gov.cn/egov/front2018/doc/1131\">徐汇区2025年上海市高中名额分配到区招生计划 <img src=",
+        "关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ..."
+      ],
+      "changes_since_2026-05-12": "已发现2026年中考相关内容"
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 215460,
+      "zhongkao_content": [
+        "招生政策"
+      ],
+      "changes_since_2026-05-12": "仅含2025年或更早历史信息"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 54545,
+      "zhongkao_content": [
+        "2026-05-01\"> 嘉定区举行高中",
+        "标题：副区长汤东英检查高中学业水平等级性考试考点准备工作 点击数：389 发表时间：2026-05-01",
+        "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：1891 发表时间：2026-04-07",
+        "嘉定区举行高中语文学科基地展示活动",
+        "标题：2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：239 发表时间：2026-04-07",
+        "2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：1891 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生",
+        "2026-05-01\"> 副区长汤东英检查高中学业水平等级性考试",
+        "副区长汤东英检查高中学业水平等级性考试考点准备工作",
+        "标题：2025年嘉定区义务教育阶段学校招生入学政策问答 点击数：0 发表时间：2025-04-07",
+        "标题：嘉定区举行高中语文学科基地展示活动 点击数：283 发表时间：2026-05-01",
+        "2026年嘉定区义务教育阶段学校招生入学政策问答 点击数：239 发表时间：2026-04-07\"> 2026年嘉定区义务教育阶段学校招生"
+      ],
+      "changes_since_2026-05-12": "已发现2026年中考相关内容"
+    },
+    {
+      "district": "金山区",
+      "url": "http://www.jsedu.sh.cn/zsks",
+      "success": false,
+      "method": "curl",
+      "http_status": 301,
+      "response_size": 166,
+      "zhongkao_content": [
+        "HTTP 301重定向"
+      ],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://zsks.shfxjy.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 21944,
+      "zhongkao_content": [
+        "2025年上海市高中名额分配到校招生计划（奉贤区） </",
+        "2026年奉贤区高中阶段学校考试招生",
+        "target=\"_blank\" class=\"nav-link \"> 体育中考 <li class=",
+        "2025年上海市高中名额分配到区招生计划（奉贤区）",
+        "2025年上海市高中名额分配到校招生计划（奉贤区）",
+        "体育中考",
+        "2025年上海市高中名额分配到区招生计划（奉贤区） </"
+      ],
+      "changes_since_2026-05-12": "已发现2026年中考相关内容"
+    },
+    {
+      "district": "青浦区",
+      "url": "https://www.shqp.gov.cn/edu/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 36417,
+      "zhongkao_content": [
+        "招生信息",
+        "关于印发《青浦区教育局关于2026年本区高中阶段学校考试招生工作的实施细则》的通知",
+        "2026年本区高中阶段学校考试招生",
+        "20260420/1369386.html\" target=\"_blank\" title=\"关于印发《青浦区教育局关于2026年本区高中阶段学校考试招生",
+        "招生考试"
+      ],
+      "changes_since_2026-05-12": "已发现2026年中考相关内容"
+    },
+    {
+      "district": "崇明区",
+      "url": "https://www.shcm.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 70344,
+      "zhongkao_content": [],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 3247,
+      "zhongkao_content": [],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "http_status": 412,
+      "response_size": 3448,
+      "zhongkao_content": [
+        "WAF拦截 HTTP 412"
+      ],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 499,
+      "zhongkao_content": [],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "杨浦区",
+      "url": "http://www.yp.edu.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "http_status": 0,
+      "response_size": 0,
+      "zhongkao_content": [
+        "DNS解析失败或连接超时"
+      ],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "长宁区",
+      "url": "http://www.chneic.sh.cn/",
+      "success": false,
+      "method": "curl",
+      "http_status": 302,
+      "response_size": 192,
+      "zhongkao_content": [
+        "HTTP 302重定向，可能需登录"
+      ],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.shhk.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "http_status": 200,
+      "response_size": 88098,
+      "zhongkao_content": [],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "松江区",
+      "url": "http://www.sjedu.cn/",
+      "success": false,
+      "method": "curl",
+      "http_status": 301,
+      "response_size": 169,
+      "zhongkao_content": [
+        "HTTP 301重定向"
+      ],
+      "changes_since_2026-05-12": "无新变化"
+    },
+    {
+      "district": "普陀区",
+      "url": "https://www.shpt.gov.cn/jyj/",
+      "success": false,
+      "method": "curl",
+      "http_status": 404,
+      "response_size": 1077,
+      "zhongkao_content": [
+        "页面返回HTTP 404"
+      ],
+      "changes_since_2026-05-12": "无新变化"
+    }
+  ],
+  "methods": {
+    "curl": 16
+  }
+}
