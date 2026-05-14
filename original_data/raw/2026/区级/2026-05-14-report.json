@@ -1,0 +1,227 @@
+{
+  "date": "2026-05-14",
+  "scrape_time": "2026-05-14T08:02:00+08:00",
+  "method": "curl + shmeea跨区报名汇总页",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 1,
+  "partial_count": 1,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年黄浦区中招跨区生报名后注意事项及安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/702867.htm",
+          "date": "2026-01-19"
+        },
+        {
+          "title": "2026年黄浦区中招个别考生（往届生、返沪生）现场确认注意事项及携带资料",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/",
+          "date": "2026-01-23"
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+          "date": "2026-05-09"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年长宁区中招跨区跨入考生注意事项",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2053016656192675841",
+          "date": "2026-05-09"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年静安区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260511/844002be-03ae-49e4-8e99-da11c531fd5a.html",
+          "date": "2026-05-11"
+        }
+      ]
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [
+        {
+          "title": "跨区生、往届生、应届返沪生注意事项",
+          "url": "https://kszx.pte.sh.cn/a/0b7f3af64c744b65bccdd4a966c7aa2d/default.html",
+          "date": "2026-05"
+        }
+      ]
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年虹口区中招跨区报名（跨入）学生注意事项",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=8&id=2132",
+          "date": "2026-05"
+        }
+      ]
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年杨浦区中考跨区报名（跨入）学生注意事项",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+          "date": "2026-05-09"
+        }
+      ],
+      "contact": {
+        "address": "杨浦区延吉东路55号",
+        "phone": "55833009*8015"
+      }
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "2026-05-09"
+        }
+      ],
+      "contact": {
+        "address": "山花路128号",
+        "phone": "64921788"
+      }
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项",
+          "url": "https://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": "2026-05-11"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中招嘉定区跨区生报名后注意事项及安排",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "2026-05"
+        },
+        {
+          "title": "上海市嘉定区教育局关于2026年本区高中阶段学校考试招生工作的实施细则",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196666",
+          "date": "2026"
+        },
+        {
+          "title": "2026年嘉定区高中阶段学校招收艺术骨干学生工作实施办法",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196330",
+          "date": "2026"
+        },
+        {
+          "title": "2026年嘉定区高中阶段学校招收优秀体育学生工作实施办法",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196329",
+          "date": "2026"
+        },
+        {
+          "title": "2026年嘉定区高中阶段学校招收持外国护照并以外籍身份报名学生录取办法",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196331",
+          "date": "2026"
+        },
+        {
+          "title": "2026年中招嘉定区个别报名考生现场报名确认注意事项及所需携带材料",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/194015",
+          "date": "2026"
+        }
+      ]
+    },
+    {
+      "name": "浦东新区",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年浦东新区中招跨区考生注意事项",
+          "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/2026/131/355040.html",
+          "date": "2026-05"
+        }
+      ]
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年金山区中招跨入考生报名后注意事项",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "2026-05"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年松江区中招跨区报名考生注意事项",
+          "url": "https://zsb.sjedu.cn/gzjdzs/zsxx/detail_2026050914580940211523.html",
+          "date": "2026-05-09"
+        }
+      ]
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年青浦区中考跨区(跨入)考生考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/515396.htm",
+          "date": "2026-05"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "failed",
+      "error": "TLS连接失败",
+      "items": [
+        {
+          "title": "2026年奉贤区中招跨区报名(跨入)学生注意事项",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": "2026-05"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "partial",
+      "note": "通过微信公众号发布",
+      "items": [
+        {
+          "title": "2026年崇明区中招跨区报名(跨入)学生注意事项",
+          "url": "https://mp.weixin.qq.com/s/Z87qGHMq-ZfXYjYmzZJiAA",
+          "date": "2026-05"
+        }
+      ]
+    }
+  ]
+}
