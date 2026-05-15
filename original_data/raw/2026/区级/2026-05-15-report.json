@@ -1,0 +1,847 @@
+{
+  "date": "2026-05-15",
+  "total": 16,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "高中阶段学校招生",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/List/index.htm",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": "2026-05-06",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "date": "2026-04-24",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "2026年闵行区义务教育阶段民办学校招生计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/ff64fcf6-ac5a-4e94-8e89-2a795746fa74.htm",
+          "date": "2026-04-08",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "2026年闵行区义务教育阶段民办学校招生简章",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/673f4e9f-7e96-4775-9f9a-2c60427cafac.htm",
+          "date": "2026-04-07",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "date": "2026-04-07",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "2026-05-09",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": "2026-05-06",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "date": "2026-04-22",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "date": "2026-04-07",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年上海市高中阶段学校统一招生录取招生计划（高中学校）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/87e8cd35-43c8-4002-a02b-f7476a49bdca.htm",
+          "date": "2024-06-04",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年闵行区高中阶段学校招收区级艺术骨干学生、优秀体育学生计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/d93b5edb-7b3a-4648-acdc-ac31529d10fd.htm",
+          "date": "2024-06-04",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年上海市高中阶段学校名额分配综合评价录取“名额分配到校”招生计划（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/5703f5f3-bc6c-47a7-8e7d-c69c2b1c5dc6.htm",
+          "date": "2024-05-31",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年上海市高中名额分配到区招生计划 （闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/0d8cc263-4283-4710-9cca-772e0aa2103d.htm",
+          "date": "2024-05-31",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年闵行区高中阶段学校招收区级优秀体育学生资格确认汇总表",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/812fa0fd-9f5e-4d0d-84ff-e21a63469a9f.htm",
+          "date": "2024-05-28",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年闵行区高中阶段学校招收区级艺术骨干学生资格确认汇总表",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/1256d0ea-fd0a-43a2-a0d6-3ea5f4911afa.htm",
+          "date": "2024-05-28",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年闵行区高中学校“校园开放日”信息汇总",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/f1b9b6bb-488d-4733-ab5e-b8db5e45251c.htm",
+          "date": "2024-05-20",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/187578ef-3ae6-4f3f-8b53-1930f3b2507d.htm",
+          "date": "2024-05-20",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2024年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/c3732f0f-8a30-4004-a181-aefaaf5208dd.htm",
+          "date": "2024-04-09",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2024年闵行区高中阶段学校考试招生工作的实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/41be5d91-32e2-472a-b84f-42ea704a95d6.htm",
+          "date": "2024-04-07",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/448f7647-0bfd-4977-968e-a10975639b39.htm",
+          "date": "2024-04-01",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于做好2024年闵行区高中阶段学校招收区级优秀体育学生工作的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/f289d7f4-d342-4b76-a885-a340715283d1.htm",
+          "date": "2024-03-29",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于做好2024年闵行区高中阶段学校招收区级艺术骨干学生工作的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/b84ffd7d-ebbf-45fb-af31-41970c15b7fa.htm",
+          "date": "2024-03-29",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年闵行区中招（往届生、返沪生）报名现场确认注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/ad8440ae-3358-47dd-a3c6-86ce0ec9d469.htm",
+          "date": "2024-02-22",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于做好2025年闵行区高中阶段学校招收区级艺术骨干学生工作的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/cee97b58-15eb-4ede-98e1-7175a2cdba7d.htm",
+          "date": "2025-04-10",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于做好2025年闵行区高中阶段学校招收区级优秀体育学生工作的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/9e2fecb2-452e-48be-96ee-8ee71a665a4f.htm",
+          "date": "2025-04-10",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2025年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/d0bd3fb6-d97c-46f1-987c-3cd2d665cb13.htm",
+          "date": "2025-04-08",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|闵行区中考招生工作咨询、监督、信访接待",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/4238371e-f969-406a-83e0-178e882e5fd5.htm",
+          "date": "2025-04-07",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育委员会关于做好2025年上海市中等职业学校自主招生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20250317/2cd183c173d74f74af9be986b50bc961.html",
+          "date": "2025-03-19",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育委员会关于做好2025年上海市全日制普通中等职业学校自主招收本市初中应届毕业生中来沪人员随迁子女工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20250317/8b5f75a058244f51a75805e4fd4fcfd6.html",
+          "date": "2025-03-19",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育委员会 上海市体育局关于做好2025年本市高中阶段学校招收优秀体育学生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20250313/3397fa89099141ef84178d499d9cf9b3.html",
+          "date": "2025-03-19",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育委员会关于做好2025年本市高中阶段学校招收艺术骨干学生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20250313/6b24aba280bf45beb3db5fc1b2dbd37d.html",
+          "date": "2025-03-19",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发《2025年上海市高中阶段学校考试招生工作实施细则》问答",
+          "url": "https://www.shmeea.edu.cn/page/08000/20250307/19163.html",
+          "date": "2025-03-07",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育考试院关于印发《2025年上海市高中阶段学校考试招生工作实施细则》的通知 （沪教考院中招〔2025〕4号）",
+          "url": "https://www.shmeea.edu.cn/page/08000/20250307/19164.html",
+          "date": "2025-03-07",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育委员会关于2025年本市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20250227/3c7070cb012f44d19b1683b50be33071.html",
+          "date": "2025-02-28",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年闵行区中招（往届生、返沪生）报名现场确认注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/27f23c58-ea83-45ae-8b2c-2f207e853c7d.htm",
+          "date": "2025-02-20",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年上海市中等学校高中阶段招生（闵行区）中职校投档分数线",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/9d32f44b-9670-44d1-9389-596feb9f9e98.htm",
+          "date": "2024-07-18",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|  2024年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/957bd820-c6b9-45c2-a04c-f1e7bc729bf5.htm",
+          "date": "2024-07-18",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2024年上海市高中阶段学校统一招生录取招生计划（中职校）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/a36fc04f-018b-4f91-9a72-845e4f403e4b.htm",
+          "date": "2024-06-04",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+          "date": "2026-02-27",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2026年闵行区中招（往届生、返沪生）报名现场确认注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/2e2c9b3f-745b-409c-9480-d84aade1165e.htm",
+          "date": "2026-02-12",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育委员会关于做好2026年上海市高中阶段学校招生报名工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/27f5a2d54e414ed4b1c6a53719e67865.html",
+          "date": "2025-11-28",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "普通高校招生|上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水平考试的实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_04/content/51bd6045-d3aa-48af-b833-fd2731cce31f.htm",
+          "date": "2025-11-07",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "高中阶段学校招生|2025年上海市中等学校高中阶段招生（闵行区）中职校投档分数线",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/53f31aae-5e62-4cde-abc5-b2abb95f50c1.htm",
+          "date": "2025-07-17",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/fd106ef7-1181-40e4-8a90-a76e3081fb48.htm",
+          "date": "2025-07-17",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发上海市教育考试院负责人就2025年本市高中阶段学校招生录取工作答学生问",
+          "url": "https://www.shmeea.edu.cn/page/08000/20250708/19585.html",
+          "date": "2025-07-08",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|转发2025年上海市高中阶段学校招生最低投档控制分数线确定",
+          "url": "https://www.shmeea.edu.cn/page/08000/20250708/19584.html",
+          "date": "2025-07-08",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|闵行区教育考试中心办公地址变更公告",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/8fc54607-6680-41d0-b6ae-3411af0afe46.htm",
+          "date": "2025-07-08",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年上海市高中阶段学校统一招生录取招生计划（中职校）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/dad37b59-a0ec-476a-8bda-fcde35faa316.htm",
+          "date": "2025-07-03",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年上海市高中阶段学校统一招生录取招生计划（高中学校）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/ed743415-1ad7-4d1e-b9cb-04473940f0da.htm",
+          "date": "2025-06-17",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年闵行区高中阶段学校招收区级艺术骨干学生、优秀体育学生计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/11594f57-6557-4937-815b-d15c19d5d5cc.htm",
+          "date": "2025-06-17",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年上海市高中阶段学校名额分配综合评价“名额分配到校”招生计划（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/41dcc986-51f7-4a99-9072-718b43139ef0.htm",
+          "date": "2025-05-29",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年上海市高中名额分配到区招生计划 （闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/6d57d2ea-679c-4a37-a871-40486f3f7025.htm",
+          "date": "2025-05-29",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年闵行区高中阶段学校招收区级优秀体育学生资格确认汇总表",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/213f6908-6f38-46c8-8379-6073f7bf1e37.htm",
+          "date": "2025-05-29",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年闵行区高中阶段学校招收区级艺术骨干学生资格确认汇总表",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/18e35310-003b-47a5-91e9-140cb91ab0a3.htm",
+          "date": "2025-05-16",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/fdab2335-c075-41fc-9a1c-e36028ca9b9e.htm",
+          "date": "2025-05-07",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2025年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/769c81f2-f134-4cde-9f01-392bcc62a0f3.htm",
+          "date": "2025-04-14",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "高中阶段学校招生|2025年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/4dac04fe-b6c3-4011-9785-69afe0e25eeb.htm",
+          "date": "2025-04-11",
+          "match_type": "zhongkao_pattern"
+        }
+      ],
+      "page_size": 30116,
+      "error": null
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/zwgk/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 46369,
+      "error": null
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的...",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ...",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1133",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "徐汇区2025年名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1132",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "徐汇区2025年上海市高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1131",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1125",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "2025年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1090",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的...            05/09",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知            02/24",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ...            05/30",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1133",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "徐汇区2025年名额分配到校招生计划            05/29",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1132",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "徐汇区2025年上海市高中名额分配到区招生计划            05/29",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1131",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则            05/09",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1125",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "2025年徐汇区中考报名往届生返沪生现场确认须知            02/20",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1090",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1164",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "2026年上海市普通高校春季考试招生符合政策性照顾加分资格考生名单公示",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1162",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "上海市教育考试院关于印发《2026年上海市普通高校考试招生报名实施办法》的通知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1156",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "上海市教育委员会关于做好2026年 上海市普通高校考试招生报名工作的通知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1155",
+          "date": "",
+          "match_type": "broad_2026"
+        }
+      ],
+      "page_size": 10841,
+      "error": null
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://zhaoban.hpe.cn",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第二批公示)",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第一批公示)",
+          "url": "https://zhaoban.hpe.cn/sx/gql/705943.htm",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "2026年上海市普通高等学校春季考试招生符合政策性加分考生名单",
+          "url": "https://zhaoban.hpe.cn/sx/gql/701155.htm",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：2026年上海市普通高校春季考试招生志愿填报将于1月30日9:00开始",
+          "url": "https://www.shmeea.edu.cn/page/02300/20260127/20050.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：2026年上海市普通高校春季考试招生志愿填报及录取问答",
+          "url": "https://www.shmeea.edu.cn/page/02300/20260127/20052.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：上海市教育委员会关于印发《2026年上海市部分普通高校专科层次实行依法自主招生改革试点方案》的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_04/20260115/0a7286d8a7e2473097a1125ba34a82de.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：上海市教育考试院关于印发《上海市2026年普通高校体育类专业考试招生实施办法》的通知（沪教考院高招〔2025〕40号）",
+          "url": "https://www.shmeea.edu.cn/page/02500/20260105/19985.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：2026年黄浦区初中阶段学校招生入学工作政策问答",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004002/009002004002003/20260407/deabd078-e634-4823-8c90-8331040977a3.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：2026年黄浦区民办初中招生计划",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/692aabe6-f260-42a2-b79a-12b99ee20c1c.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水平考试的实施细则》的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_jcjy_02/20251031/3a523fcf871d42a79e8e0d49344baf74.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+          "url": "https://www.shmeea.edu.cn/page/02100/20251105/19831.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260331/00af813278714810959cbc4069f86f01.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "2026年黄浦区高中阶段持外国护照学生招生录取方案",
+          "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20260325/4b275ac9af5f488da02ca525a45cbe59.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转载：《2026年上海市高中阶段学校考试招生工作实施细则》问答",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260320/20121.html",
+          "date": "",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试测试项目网报时间：\n3月9日 9：00——3月10日 16：00",
+          "url": "https://hpzy.hpe.cn/",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试...",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "-->\n              \n                2026年黄浦区初中毕业升学体育考试测试项目网报时间：\n3月9日 9：00——3月10日 16：00",
+          "url": "https://hpzy.hpe.cn/",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试...\n                05-07",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试...\n                04-07",
+          "url": "https://zhaoban.hpe.cn/sx/gql/705943.htm",
+          "date": "",
+          "match_type": "block_scan"
+        }
+      ],
+      "page_size": 31230,
+      "error": null
+    },
+    {
+      "district": "静安区",
+      "url": "https://www.jingan.gov.cn/sy/",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 0,
+      "error": "Failed to fetch (timeout or connection error)"
+    },
+    {
+      "district": "杨浦区",
+      "url": "https://www.shyp.gov.cn/shypq/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 57857,
+      "error": null
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "5月16—17日举行！2026年上海中考理化实验及外语听说测试温馨提示",
+          "url": "https://www.shbsq.gov.cn/shbs/bmxx/20260514/431261.html",
+          "date": "2026-05-14",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "5月16—17日举行！2026年上海中考理化实验及外语听说测试温馨提示\n                                        2026-05-14",
+          "url": "https://www.shbsq.gov.cn/shbs/bmxx/20260514/431261.html",
+          "date": "2026-05-14",
+          "match_type": "block_scan"
+        }
+      ],
+      "page_size": 198451,
+      "error": null
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 46069,
+      "error": null
+    },
+    {
+      "district": "长宁区",
+      "url": "https://kszx.chneic.sh.cn",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 0,
+      "error": "Failed to fetch (timeout or connection error)"
+    },
+    {
+      "district": "普陀区",
+      "url": "https://kszx.pte.sh.cn",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 148,
+      "error": null
+    },
+    {
+      "district": "虹口区",
+      "url": "https://kszx.hongkouedu.com",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "2026年虹口区中考个别报名考生（往届生、返沪生）体育考试通知",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=10&id=2149",
+          "date": "2026-04-01",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "虹口区高中阶段统一招生录取结果查询",
+          "url": "https://kszx.hongkouedu.com:8090/login/StudentLogin",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        }
+      ],
+      "page_size": 10474,
+      "error": null
+    },
+    {
+      "district": "松江区",
+      "url": "https://zsb.sjedu.cn",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 2065,
+      "error": null
+    },
+    {
+      "district": "金山区",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "中考填报与查询",
+          "url": "https://www.jsedu.sh.cn/zsks/kscfbmhtdlqcx",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "中考志愿填报系统",
+          "url": "https://czks.jsedu.sh.cn/zytb/",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "中考志愿录取查询",
+          "url": "https://czks.jsedu.sh.cn/cjcx/query",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        }
+      ],
+      "page_size": 48263,
+      "error": null
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://zsks.shfxjy.cn",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 0,
+      "error": "TLS failure expected"
+    },
+    {
+      "district": "青浦区",
+      "url": "https://kszx.qpedu.cn",
+      "success": true,
+      "method": "curl",
+      "zhongkao_content": [
+        {
+          "title": "中考中招",
+          "url": "https://kszx.qpedu.cn/info/iIndex.jsp?cat_id=16938",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "中考",
+          "url": "https://kszx.qpedu.cn/info/iList.jsp?cat_id=16944",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+          "date": "2026-03-03",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "转：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+          "url": "https://www.shmeea.edu.cn/page/02100/20251105/19831.html",
+          "date": "2025-11-29",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "转：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水平考试的实施细则》的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_jcjy_02/20251031/3a523fcf871d42a79e8e0d49344baf74.html",
+          "date": "2025-11-29",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/sx/qkxx/515397.htm",
+          "date": "2026-05-11",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/509555.htm",
+          "date": "2026-05-11",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html",
+          "date": "2026-01-28",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "转：上海市教育考试院关于印发《2026年上海市普通高校春季考试招生实施办法》的通知(沪教考院高招〔2025〕29号)",
+          "url": "https://www.shmeea.edu.cn/page/02300/20251118/19862.html",
+          "date": "2025-11-19",
+          "match_type": "broad_2026"
+        },
+        {
+          "title": "中考录取查询",
+          "url": "http://info.qpedu.cn/zhaosheng/",
+          "date": "",
+          "match_type": "zhongkao_pattern"
+        },
+        {
+          "title": "中考中招\n                \n                                                  中考",
+          "url": "https://kszx.qpedu.cn/info/iIndex.jsp?cat_id=16938",
+          "date": "",
+          "match_type": "block_scan"
+        },
+        {
+          "title": "中考成绩查询",
+          "url": "http://info.qpedu.cn/zhaosheng/",
+          "date": "",
+          "match_type": "block_scan"
+        }
+      ],
+      "page_size": 13303,
+      "error": null
+    },
+    {
+      "district": "崇明区",
+      "url": "",
+      "success": false,
+      "method": "curl",
+      "zhongkao_content": [],
+      "page_size": 0,
+      "error": "WeChat only, inaccessible"
+    }
+  ]
+}
