@@ -1,0 +1,33 @@
+{
+  "date": "2026-05-16",
+  "scrape_time": "2026-05-16T08:03:30+08:00",
+  "method": "curl (browser_navigate failed - ERR_EMPTY_RESPONSE)",
+  "districts_monitored": 16,
+  "success": 16,
+  "failed": 0,
+  "results": [
+    {"district": "黄浦", "url": "https://www.shhuangpu.gov.cn/yqzwfw/jyj/", "status": "accessed", "has_2026_content": false, "note": "区政府网站为动态JS渲染，curl无法获取有效内容"},
+    {"district": "徐汇", "url": "https://www.xuhui.gov.cn/H5/xhjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "长宁", "url": "https://www.shcn.gov.cn/ShcnJyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "静安", "url": "https://www.jingan.gov.cn/jyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "普陀", "url": "https://www.shpt.gov.cn/shptjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "虹口", "url": "https://www.shhk.gov.cn/hkjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "杨浦", "url": "https://www.shyp.gov.cn/shypqyjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "闵行", "url": "https://www.shmh.gov.cn/mhjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "宝山", "url": "https://www.shbsq.gov.cn/bsjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "嘉定", "url": "https://www.jiading.gov.cn/jdjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "浦东新区", "url": "https://www.pudong.gov.cn/pdjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "金山", "url": "https://www.jinshan.gov.cn/jinsjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "松江", "url": "https://www.songjiang.gov.cn/sjjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "青浦", "url": "https://www.shqp.gov.cn/shqpjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "奉贤", "url": "https://www.fengxian.gov.cn/fxjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"},
+    {"district": "崇明", "url": "https://www.shcm.gov.cn/cmjyj/", "status": "accessed", "has_2026_content": false, "note": "同上"}
+  ],
+  "method_stats": {
+    "curl": 16,
+    "browser": 0,
+    "playwright": 0
+  },
+  "issue": "所有16个区政府教育局网站均为前端JS动态渲染，curl仅能获取空白HTML骨架。browser_navigate也因网络问题(ERR_EMPTY_RESPONSE)无法访问。区级信息需通过市级招考热线跨区报名页面间接获取。",
+  "note": "市级网站已发布'2026年上海市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表'，包含16区招考机构联系方式和注意事项链接。"
+}
