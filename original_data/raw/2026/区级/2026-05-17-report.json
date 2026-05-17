@@ -1,0 +1,362 @@
+{
+  "date": "2026-05-17",
+  "method": "curl",
+  "note": "各区教育局/考试中心网站中考招生信息抓取报告。成功获取6个区的区级数据，10个区因WAF/JS渲染/404等原因无法通过curl获取。同时获取了上海市教育考试院(shmeea.edu.cn)的市级中考信息作为补充。",
+  "districts": {
+    "闵行": {
+      "success": true,
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "items": [
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "2026-05-09",
+          "category": "中招跨区报名"
+        },
+        {
+          "title": "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": "2026-04-24",
+          "category": "高中阶段学校招生"
+        },
+        {
+          "title": "2026年闵行区高中阶段学校考试招生\"持外国护照以外籍身份报名学生\"招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "date": "2026-04-22",
+          "category": "高中阶段学校招生"
+        },
+        {
+          "title": "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "date": "2026-04-07",
+          "category": "中考体育"
+        },
+        {
+          "title": "2026年闵行区义务教育阶段民办学校招生计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/ff64fcf6-ac5a-4e94-8e89-2a795746fa74.htm",
+          "date": "2026-04-07",
+          "category": "义务教育招生"
+        },
+        {
+          "title": "2026年闵行区义务教育阶段民办学校招生简章",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/673f4e9f-7e96-4775-9f9a-2c60427cafac.htm",
+          "date": "2026-04-07",
+          "category": "义务教育招生"
+        }
+      ]
+    },
+    "徐汇": {
+      "success": true,
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "items": [
+        {
+          "title": "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的实施细则》",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+          "date": "2026-05-09",
+          "category": "高中阶段招生"
+        },
+        {
+          "title": "徐汇区教育局关于2026年本区中等学校高中阶段外籍学生招生办法",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1194",
+          "date": "2026-05-09",
+          "category": "高中阶段招生"
+        },
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+          "date": "2026-05-09",
+          "category": "中招跨区报名"
+        },
+        {
+          "title": "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1165",
+          "date": "2026-04-07",
+          "category": "中考报名"
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+          "date": "2026-02-24",
+          "category": "中考报名"
+        }
+      ]
+    },
+    "奉贤": {
+      "success": true,
+      "url": "https://www.fengxian.gov.cn/jyj/ 和 https://zsks.shfxjy.cn/",
+      "items": [
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "https://zsks.shfxjy.cn/",
+          "date": "2026-05",
+          "category": "高中阶段招生"
+        },
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+          "url": "https://zsks.shfxjy.cn/",
+          "date": "2026-05",
+          "category": "中招跨区报名"
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+          "url": "https://zsks.shfxjy.cn/",
+          "date": "2026",
+          "category": "中考报名"
+        },
+        {
+          "title": "奉贤区教育局关于2026年奉贤区义务教育阶段学校招生入学工作的实施意见",
+          "url": "https://xxgk.fengxian.gov.cn/art/info/9595/i20260409-uj3v9wmr4uz19mt692",
+          "date": "2026-04-09",
+          "category": "义务教育招生"
+        },
+        {
+          "title": "2026年奉贤区义务教育阶段学校招生入学政策问答",
+          "url": "https://xxgk.fengxian.gov.cn/art/info/9595/i20260409-d764xi54rlzj5mkfuc",
+          "date": "2026-04-09",
+          "category": "义务教育招生"
+        },
+        {
+          "title": "2026年奉贤区义务教育阶段公民办学校招生计划",
+          "url": "https://xxgk.fengxian.gov.cn/art/info/9595/i20260410-vd7v0agce1qhcu65lu",
+          "date": "2026-04-10",
+          "category": "义务教育招生"
+        },
+        {
+          "title": "2026年奉贤区义务教育招生入学汇总",
+          "url": "https://www.fengxian.gov.cn/jyj/gsgg/20260401/105015.html",
+          "date": "2026-04-01",
+          "category": "义务教育招生"
+        },
+        {
+          "title": "2026年奉贤区学前教育招生入学汇总",
+          "url": "https://www.fengxian.gov.cn/jyj/gsgg/20260401/105017.html",
+          "date": "2026-04-01",
+          "category": "学前教育招生"
+        }
+      ]
+    },
+    "嘉定": {
+      "success": true,
+      "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/",
+      "items": [
+        {
+          "title": "2026年中招嘉定区跨区生报名后注意事项及安排",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "2026-05-09",
+          "category": "中招跨区报名"
+        },
+        {
+          "title": "上海市嘉定区教育局关于2026年本区高中阶段学校考试招生工作的实施细则",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196666",
+          "date": "2026",
+          "category": "高中阶段招生"
+        },
+        {
+          "title": "2026年嘉定区高中阶段学校招收艺术骨干学生工作实施办法",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196330",
+          "date": "2026",
+          "category": "高中阶段招生"
+        },
+        {
+          "title": "2026年嘉定区高中阶段学校招收优秀体育学生工作实施办法",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196329",
+          "date": "2026",
+          "category": "高中阶段招生"
+        },
+        {
+          "title": "2026年嘉定区高中阶段学校招收持外国护照并以外籍身份报名学生录取办法",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/196331",
+          "date": "2026",
+          "category": "高中阶段招生"
+        },
+        {
+          "title": "2026年中招嘉定区个别报名考生（往届生、返沪生）现场报名确认注意事项及所需携带材料",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/194015",
+          "date": "2026",
+          "category": "中考报名"
+        },
+        {
+          "title": "2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "url": "https://www.jiading.gov.cn/jiaoyu/bmfw/zcjd/content_960968",
+          "date": "2026",
+          "category": "义务教育招生"
+        }
+      ]
+    },
+    "静安": {
+      "success": true,
+      "url": "https://www.jingan.gov.cn/sy/004009/004009010/ssEducation.html",
+      "items": [
+        {
+          "title": "2026年静安区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260511/844002be-03ae-49e4-8e99-da11c531fd5a.html",
+          "date": "2026-05-11",
+          "category": "中招跨区报名"
+        },
+        {
+          "title": "转载：2026年上海市高中招生学校名单",
+          "url": "https://www.shmeea.edu.cn/download/20260430/4.pdf",
+          "date": "2026-04-30",
+          "category": "招生公示"
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招生章程",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260429/20203.html",
+          "date": "2026-04-29",
+          "category": "中职招生"
+        },
+        {
+          "title": "转载：2026年上海市中职校招生学校名单",
+          "url": "https://www.shmeea.edu.cn/download/20260427/4.pdf",
+          "date": "2026-04-27",
+          "category": "中职招生"
+        },
+        {
+          "title": "2026年静安区义务教育阶段学校招生入学政策问答",
+          "url": "https://www.jingan.gov.cn/main/bd973416-a808-461b-a90c-5e7ad3b272ad/73233578-5a25-4c92-93eb-1adfd44d1d1f/2026年静安区义务教育阶段学校招生入学政策问答.docx",
+          "date": "2026",
+          "category": "义务教育招生"
+        }
+      ]
+    },
+    "金山": {
+      "success": true,
+      "url": "https://www.jinshan.gov.cn/",
+      "items": [
+        {
+          "title": "2026年金山区义务教育阶段学校招生入学政策问答",
+          "url": "https://www.jinshan.gov.cn/hdpt-rdhy/20260407/876425.html",
+          "date": "2026-04-07",
+          "category": "义务教育招生"
+        }
+      ]
+    },
+    "浦东": {
+      "success": false,
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "error": "HTTP 412 - WAF/anti-bot blocking，所有路径均返回412或404",
+      "items": []
+    },
+    "黄浦": {
+      "success": false,
+      "url": "https://www.shhuangpu.gov.cn/jyj/",
+      "error": "HTTP 202 - JS反爬虫保护（混淆JavaScript + Cookie验证），无法通过curl获取内容",
+      "items": []
+    },
+    "杨浦": {
+      "success": false,
+      "url": "https://www.shyp.gov.cn/jyj/",
+      "error": "HTTP 404 - /jyj/路径不存在，教育内容可能在独立门户网站或JS渲染页面中",
+      "items": []
+    },
+    "宝山": {
+      "success": false,
+      "url": "https://www.shbs.gov.cn/jyj/",
+      "error": "shbs.gov.cn连接超时/失败；shbsq.gov.cn可访问但内容为JS渲染或404",
+      "items": []
+    },
+    "虹口": {
+      "success": false,
+      "url": "https://www.shhk.gov.cn/jyj/",
+      "error": "HTTP 404 - /jyj/路径不存在，主站为JS渲染SPA门户",
+      "items": []
+    },
+    "长宁": {
+      "success": false,
+      "url": "https://www.shcn.gov.cn/jyj/",
+      "error": "HTTP 404 - /jyj/路径不存在，尝试多种路径均为404",
+      "items": []
+    },
+    "普陀": {
+      "success": false,
+      "url": "https://www.putuo.gov.cn/jyj/",
+      "error": "HTTP 404 - /jyj/路径不存在，尝试多种路径均为404",
+      "items": []
+    },
+    "松江": {
+      "success": false,
+      "url": "https://www.songjiang.gov.cn/jyj/",
+      "error": "HTTP 404 - /jyj/路径不存在，尝试多种路径均为404",
+      "items": []
+    },
+    "青浦": {
+      "success": false,
+      "url": "https://www.shqp.gov.cn/jyj/",
+      "error": "HTTP 404 - /jyj/路径不存在，尝试多种路径均为404",
+      "items": []
+    },
+    "崇明": {
+      "success": false,
+      "url": "https://www.shcm.gov.cn/jyj/",
+      "error": "HTTP 404 - /jyj/路径不存在，尝试多种路径均为404",
+      "items": []
+    }
+  },
+  "city_level_supplement": {
+    "source": "上海市教育考试院 (shmeea.edu.cn)",
+    "url": "https://www.shmeea.edu.cn/page/03000/index.html",
+    "items": [
+      {
+        "title": "2026年上海市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+        "url": "https://www.shmeea.edu.cn/page/03300/20260512/20231.html",
+        "date": "2026-05-12",
+        "category": "中招跨区报名",
+        "note": "包含全部16个区的跨区报名注意事项汇总"
+      },
+      {
+        "title": "2026年上海市高中招生学校名单",
+        "url": "https://www.shmeea.edu.cn/download/20260430/4.pdf",
+        "date": "2026-04-30",
+        "category": "招生公示"
+      },
+      {
+        "title": "2026年上海市中等职业学校自主招生章程",
+        "url": "https://www.shmeea.edu.cn/page/03200/20260429/20203.html",
+        "date": "2026-04-29",
+        "category": "中职招生"
+      },
+      {
+        "title": "2026年上海市中职校招生学校名单",
+        "url": "https://www.shmeea.edu.cn/download/20260427/4.pdf",
+        "date": "2026-04-27",
+        "category": "中职招生"
+      },
+      {
+        "title": "2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+        "url": "https://www.shmeea.edu.cn/page/03300/20260112/20005.html",
+        "date": "2026-01-12",
+        "category": "中考报名"
+      },
+      {
+        "title": "2026年上海市初中学业水平考试理化实验操作考试及外语听说测试即将举行",
+        "url": "https://www.shmeea.edu.cn/page/03500/20260512/20230.html",
+        "date": "2026-05-12",
+        "category": "初中学业水平考试"
+      },
+      {
+        "title": "2026年上海市初中学业水平考试英语听力试运转即将举行",
+        "url": "https://www.shmeea.edu.cn/page/03500/20260508/20218.html",
+        "date": "2026-05-08",
+        "category": "初中学业水平考试"
+      },
+      {
+        "title": "上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260331/00af813278714810959cbc4069f86f01.html",
+        "date": "2026-03-31",
+        "category": "中招政策"
+      },
+      {
+        "title": "上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20260325/4b275ac9af5f488da02ca525a45cbe59.html",
+        "date": "2026-03-25",
+        "category": "中招政策"
+      },
+      {
+        "title": "上海市教育委员会 上海市体育局关于做好2026年上海市高中阶段学校招收优秀体育学生工作的通知",
+        "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260318/77189879eaa4443a9554e13c000bd6cc.html",
+        "date": "2026-03-18",
+        "category": "中招政策"
+      }
+    ]
+  }
+}

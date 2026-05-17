@@ -1,0 +1,28 @@
+{
+  "source": "上海市教育考试院 - 招生公示",
+  "source_url": "https://www.shmeea.edu.cn/page/03200/index.html",
+  "scrape_date": "2026-05-17",
+  "total_entries": 4,
+  "entries": [
+    {
+      "title": "2026年上海市高中招生学校名单",
+      "url": "https://www.shmeea.edu.cn/download/20260430/4.pdf",
+      "date": "2026-04-30"
+    },
+    {
+      "title": "2026年上海市中等职业学校自主招收随迁子女章程",
+      "url": "https://www.shmeea.edu.cn/page/03200/20260429/20204.html",
+      "date": "2026-04-29"
+    },
+    {
+      "title": "2026年上海市中等职业学校自主招生章程",
+      "url": "https://www.shmeea.edu.cn/page/03200/20260429/20203.html",
+      "date": "2026-04-29"
+    },
+    {
+      "title": "2026年上海市中职校招生学校名单",
+      "url": "https://www.shmeea.edu.cn/download/20260427/4.pdf",
+      "date": "2026-04-28"
+    }
+  ]
+}

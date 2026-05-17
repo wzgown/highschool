@@ -1,0 +1,60 @@
+{
+  "source": "招生录取",
+  "base_url": "https://www.shmeea.edu.cn/page/03600/index.html",
+  "crawl_date": "2026-05-17",
+  "total_items": 10,
+  "items_2026": 0,
+  "all_items": [
+    {
+      "title": "关于2025年上海市1所民办高中降低最低投档控制分数线的公告",
+      "url": "https://www.shmeea.edu.cn/page/03600/20250715/19630.html",
+      "date": "2025-07-15"
+    },
+    {
+      "title": "2025年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+      "url": "https://www.shmeea.edu.cn/page/03600/20250714/19623.html",
+      "date": "2025-07-14"
+    },
+    {
+      "title": "2025年上海市中等职业学校自主招收随迁子女征求志愿即将开始",
+      "url": "https://www.shmeea.edu.cn/page/03600/20250713/19606.html",
+      "date": "2025-07-13"
+    },
+    {
+      "title": "2025年上海市中等职业学校自主招收随迁子女五年一贯制和中高职贯通各专业最低录取分数线",
+      "url": "https://www.shmeea.edu.cn/download/20250713/zz/02.pdf",
+      "date": "2025-07-13"
+    },
+    {
+      "title": "2025年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+      "url": "https://www.shmeea.edu.cn/download/20250713/zz/01.pdf",
+      "date": "2025-07-13"
+    },
+    {
+      "title": "2025年上海市高中阶段学校招生最低投档控制分数线确定",
+      "url": "https://www.shmeea.edu.cn/page/03600/20250708/19583.html",
+      "date": "2025-07-08"
+    },
+    {
+      "title": "上海市教育考试院负责人就2025年本市高中阶段学校招生录取工作答学生问",
+      "url": "https://www.shmeea.edu.cn/page/03600/20250708/19582.html",
+      "date": "2025-07-08"
+    },
+    {
+      "title": "关于2024年上海市1所民办高中降低最低投档控制分数线的公告",
+      "url": "https://www.shmeea.edu.cn/page/03600/20240716/18683.html",
+      "date": "2024-07-16"
+    },
+    {
+      "title": "2024年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+      "url": "https://www.shmeea.edu.cn/download/20240715/1.pdf",
+      "date": "2024-07-15"
+    },
+    {
+      "title": "2024年上海市中等职业学校自主招收随迁子女征求志愿即将开始",
+      "url": "https://www.shmeea.edu.cn/page/03600/20240714/18673.html",
+      "date": "2024-07-14"
+    }
+  ],
+  "filtered_2026": []
+}
