@@ -1,0 +1,295 @@
+{
+  "date": "2026-05-18",
+  "scrape_time": "2026-05-18T08:32:19.441103",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 7,
+  "partial_count": 2,
+  "failed_count": 7,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260331/00af813278714810959cbc4069f86f01.html",
+          "date": "2026-04-02"
+        },
+        {
+          "title": "2026年黄浦区高中阶段持外国护照学生招生录取方案",
+          "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+          "date": "2026-03-31"
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20260325/4b275ac9af5f488da02ca525a45cbe59.html",
+          "date": "2026-03-27"
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市全日制普通中等职业学校自主招收上海市初中应届毕业生中来沪人员随迁子女工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260325/bc14fe73790248a69ee507d71c26bbda.html",
+          "date": "2026-03-27"
+        },
+        {
+          "title": "转载：《2026年上海市高中阶段学校考试招生工作实施细则》问答",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260320/20121.html",
+          "date": "2026-03-20"
+        },
+        {
+          "title": "转载：上海市教育考试院关于印发《2026年上海市高中阶段学校考试招生工作实施细则》的通知（沪教考院中招〔2026〕3号）",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260320/20119.html",
+          "date": "2026-03-20"
+        },
+        {
+          "title": "转载：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+          "date": "2026-03-02"
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招生报名工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/27f5a2d54e414ed4b1c6a53719e67865.html",
+          "date": "2025-12-01"
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市全日制普通中等职业学校自主招收上海市初中应届毕业生中来沪人员随迁子女报名工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/fbeaa9affca540fe874ad41d75aa5110.html",
+          "date": "2025-12-01"
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的实施细则》的通知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+          "date": "2026-05-09"
+        },
+        {
+          "title": "徐汇区教育局关于2026年本区中等学校高中阶段外籍学生招生办法",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1194",
+          "date": "2026-05-09"
+        },
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+          "date": "2026-05-09"
+        },
+        {
+          "title": "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1165",
+          "date": "2026-04-07"
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+          "date": "2026-02-24"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年静安区高中阶段学校考试招生工作实施细则",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260420/aa7b2d6c-218c-4a50-95d8-ca0745da0647.html",
+          "date": "2026-04-20"
+        },
+        {
+          "title": "2026年静安区高中学校区级优秀体育学生、艺术骨干学生招生实施细则",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260420/a83470e7-d415-4e36-8608-986e72da64a9.html",
+          "date": "2026-04-20"
+        },
+        {
+          "title": "转载：2026年上海市高中招生学校名单",
+          "url": "https://www.shmeea.edu.cn/download/20260430/4.pdf",
+          "date": "2026-04-30"
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招生章程",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260429/20203.html",
+          "date": "2026-04-29"
+        },
+        {
+          "title": "转载：2026年上海市中职校招生学校名单",
+          "url": "https://www.shmeea.edu.cn/download/20260427/4.pdf",
+          "date": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "name": "普陀",
+      "status": "partial",
+      "items": [
+        {
+          "title": "转载：《2026年上海市高中阶段学校考试招生工作实施细则》问答",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260320/20121.html",
+          "date": ""
+        },
+        {
+          "title": "转载：上海市教育考试院关于印发《2026年上海市高中阶段学校考试招生工作实施细则》的通知（沪教考院中招〔2026〕3号）",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260320/20119.html",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260112/20006.html",
+          "date": ""
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招生报名工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/27f5a2d54e414ed4b1c6a53719e67865.html",
+          "date": ""
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市全日制普通中等职业学校自主招收随迁子女报名工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/fbeaa9affca540fe874ad41d75aa5110.html",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "虹口",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "partial",
+      "items": [
+        {
+          "title": "关于2026年寒假期间杨浦区教育招生考试中心接待大厅暂停电话咨询、现场接待的通知",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260122/498626.html",
+          "date": "2026-01-22"
+        }
+      ]
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "2026-05-09"
+        },
+        {
+          "title": "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": "2026-04-24"
+        },
+        {
+          "title": "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "date": "2026-04-22"
+        },
+        {
+          "title": "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": "2026-05-11"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "【转载】2026年上海市初中学业水平考试理化实验操作考试及外语听说测试即将举行",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3135.html",
+          "date": "2026-05-12"
+        },
+        {
+          "title": "2026年金山区中招跨入考生报名后注意事项",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "2026-05-09"
+        },
+        {
+          "title": "【转载】2026年上海市初中学业水平考试英语听力试运转即将举行",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3133.html",
+          "date": "2026-05-09"
+        },
+        {
+          "title": "【转载】2026年上海市中职校招生学校名单",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3132.html",
+          "date": "2026-05-09"
+        },
+        {
+          "title": "【转载】2026年上海市中等职业学校自主招收随迁子女章程",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3131.html",
+          "date": "2026-05-09"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/info/iList.jsp?cat_id=16944",
+          "date": "2026-05-11"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/info/iList.jsp?cat_id=16944",
+          "date": "2026-01-28"
+        },
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://kszx.qpedu.cn/info/iList.jsp?cat_id=16945",
+          "date": "2026-03-03"
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://kszx.qpedu.cn/info/iList.jsp?cat_id=16945",
+          "date": "2025-12-31"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "skipped",
+      "items": []
+    }
+  ]
+}
