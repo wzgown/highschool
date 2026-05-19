@@ -1,0 +1,276 @@
+{
+  "date": "2026-05-19",
+  "scrape_time": "2026-05-19T00:11:03.954974+00:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 4,
+  "partial_count": 5,
+  "failed_count": 7,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "failed",
+      "items": [],
+      "error": "curl return code: 0, content length: 0"
+    },
+    {
+      "name": "徐汇",
+      "status": "failed",
+      "items": [],
+      "error": "Page returned 404/403 or not found"
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "items": [],
+      "error": "Page returned 404/403 or not found"
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "items": [],
+      "error": "Page returned 404/403 or not found"
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "items": [],
+      "error": "Page returned 404/403 or not found"
+    },
+    {
+      "name": "虹口",
+      "status": "partial",
+      "url_fetched": "https://www.shhk.gov.cn/hkjy/zsks/index.html",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "url_fetched": "https://www.shyp.gov.cn/shypq/jyj-gsgg/index.html",
+      "items": [
+        {
+          "title": "关于2024—2025年度上海市“新时代好少年”候选人推荐人选的公示",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260409/503307.html",
+          "date": ""
+        },
+        {
+          "title": "杨浦区中小学食堂供餐服务单位遴选公告",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260409/503306.html",
+          "date": ""
+        },
+        {
+          "title": "2026年杨浦区义务教育阶段招生在线咨询方式、咨询、监督电话及信访接待地址",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260320/503034.html",
+          "date": ""
+        },
+        {
+          "title": "中共上海市杨浦区教育工作委员会 关于张田岚等同志职务任免的通知",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260316/501571.html",
+          "date": ""
+        },
+        {
+          "title": "关于2026年寒假期间杨浦区教育招生考试中心接待大厅暂停电话咨询、现场接待的通知",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260122/498626.html",
+          "date": ""
+        },
+        {
+          "title": "杨浦区义务教育阶段2026年寒假转学办理通知",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260108/497770.html",
+          "date": ""
+        },
+        {
+          "title": "中共上海市杨浦区教育工作委员会 关于徐音等同志职务任免的通知",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260316/501566.html",
+          "date": ""
+        },
+        {
+          "title": "中共上海市杨浦区教育工作委员会 关于陈怡等同志职务任命的通知",
+          "url": "https://www.shyp.gov.cn/shypq/jyj-gsgg/20260316/501568.html",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "url_fetched": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/",
+      "items": [
+        {
+          "title": "上海市闵行区市场监督管理局撤销登记（备案）决定书沪市监注闵撤登字〔2026〕068号",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/xxgk_scjdgl_ywxx_zcxk/content/e200966e-737e-429e-9a62-988bb71348b7.htm",
+          "date": ""
+        },
+        {
+          "title": "上海市闵行区市场监督管理局撤销登记（备案）决定书沪市监注闵撤登字〔2026〕062号",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/xxgk_scjdgl_ywxx_zcxk/content/d8b818d0-53c5-43fd-8012-673e3c407728.htm",
+          "date": ""
+        },
+        {
+          "title": "闵行区人民政府办公室关于印发《2026年闵行区推进政府职能转变和行政审批制度改革工作任务分工表》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/qzfwj_zdgk/content/3693fce2-3002-4e46-a03a-e668dd5beca5.htm",
+          "date": ""
+        },
+        {
+          "title": "闵行区人民政府办公室关于做好2026年区人大、区政协有关会议议题准备工作的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/qzfwj_zdgk/content/ef94be97-f89c-43ef-9ec7-eb3555f8bb61.htm",
+          "date": ""
+        },
+        {
+          "title": "闵行区人民政府办公室关于印发《2026年闵行区政务服务“一网通办”实事项目》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/qzfwj_zdgk/content/5cdeec54-e960-4e81-8750-d5e0616ddca5.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年4月30日下午，区委副书记、区长吴强主持召开区政府常务会议",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/qzfwy_chhy/content/f317646a-ab9a-4001-a3aa-b8c810d5e572.htm",
+          "date": ""
+        },
+        {
+          "title": "区政府召开2026年二季度工作会议",
+          "url": "http://www.shmh.gov.cn/shmh/zdtp/20260422/594360.html",
+          "date": ""
+        },
+        {
+          "title": "2026年4月9日上午，区委副书记、区长吴强主持召开区政府常务会议",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/qzfwy_chhy/content/86069ad2-90ca-49c6-a95b-dae9eb1fb104.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年3月24日上午，区委副书记、区长吴强主持召开区政府常务会议",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/qzfwy_chhy/content/4b6c48ce-bb26-40b9-9974-f98017f91dbc.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年3月3日下午，区委副书记、区长吴强主持召开区政府常务会议",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/qzfwy_chhy/content/2b99ac16-af2a-4dd3-b059-6800cf12a957.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年闵行学前招生政策发布，入园报名全攻略",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/zcjd_tj/content/4ff0b4db-61cb-4393-9e14-5699430ddcfe.htm",
+          "date": ""
+        },
+        {
+          "title": "一张图看懂2026年上海市义务教育报名入学流程",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/zcjd_tj/content/e3869c24-e7f0-434b-a32c-259a1ccfe229.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年5月行政许可情况公示（5.11-5.15）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/xzxk11/content/fcd9814c-6dab-45ca-beed-4afeaff93695.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年5月行政许可情况公示（5.6-5.9）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/xzxk11/content/f65a4989-6ddc-4dd5-831f-c07ab74d810b.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年4月行政许可情况公示（4.27-4.30）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/xzxk11/content/14cd75cc-3328-47be-ae31-e4022ea16f34.htm",
+          "date": ""
+        },
+        {
+          "title": "闵行区生态环境局执法大队2026年4月份“双随机、一公开”执法检查情况公开",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/zdly_ssjcc_ccjg/content/ed07c420-9338-4129-b46a-7c3001f57d8e.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年5月闵行区建设和管理委员会涉企行政检查计划公示",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/zdly_ssjcc_ccfa/content/226c8989-c070-4809-b50b-21d8adfa1bf3.htm",
+          "date": ""
+        },
+        {
+          "title": "审计局2026年度审计项目计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/sjgk_ndzdsjxm/content/7ad91e73-1ffe-49b8-b998-846d8ff8bcf9.htm",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "partial",
+      "url_fetched": "http://www.bsedu.org.cn/baoshan/gzzs/",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "failed",
+      "items": [],
+      "error": "Page returned 404/403 or not found"
+    },
+    {
+      "name": "浦东",
+      "status": "partial",
+      "url_fetched": "https://www.pudong.gov.cn/pdqjyj/zszc/index.html",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url_fetched": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/",
+      "items": [
+        {
+          "title": "【转载】2026年上海市初中学业水平考试理化实验操作考试及外语听说测...",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3135.html",
+          "date": ""
+        },
+        {
+          "title": "2026年金山区中招跨入考生报名后注意事项",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": ""
+        },
+        {
+          "title": "【转载】2026年上海市初中学业水平考试英语听力试运转即将举行",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3133.html",
+          "date": ""
+        },
+        {
+          "title": "【转载】2026年上海市中职校招生学校名单",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3132.html",
+          "date": ""
+        },
+        {
+          "title": "【转载】2026年上海市中等职业学校自主招收随迁子女章程",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3131.html",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "partial",
+      "url_fetched": "https://www.songjiang.gov.cn/sjzsjy/zsks/index.html",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url_fetched": "https://kszx.qpedu.cn/info/iList.jsp?cat_id=16944",
+      "items": [
+        {
+          "title": "2026-05-11 2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/515396.htm",
+          "date": "2026-05-11"
+        },
+        {
+          "title": "2026-01-28 2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/509555.htm",
+          "date": "2026-01-28"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "failed",
+      "items": [],
+      "error": "Page returned 404/403 or not found"
+    },
+    {
+      "name": "崇明",
+      "status": "partial",
+      "url_fetched": "https://www.shcm.gov.cn/cmjyj/zsks/index.html",
+      "items": []
+    }
+  ]
+}
