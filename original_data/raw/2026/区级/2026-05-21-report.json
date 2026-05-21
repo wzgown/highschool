@@ -1,0 +1,163 @@
+{
+  "date": "2026-05-21",
+  "scrape_time": "2026-05-21T08:06:32.471820",
+  "method": "curl",
+  "districts_monitored": 16,
+  "success": 16,
+  "failed": 0,
+  "results": [
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm"
+        },
+        {
+          "title": "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm"
+        },
+        {
+          "title": "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm"
+        },
+        {
+          "title": "2026年闵行区高中阶段学校考试招生持外国护照以外籍身份报名学生招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm"
+        },
+        {
+          "title": "2026年民办一贯制学校直升电脑随机录取结果",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/5b124a1f-545d-4aea-9f18-6fd9e87c9c97.htm"
+        }
+      ]
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://zsks.shfxjy.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "https://zsks.shfxjy.cn/1778311811.html"
+        },
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+          "url": "https://zsks.shfxjy.cn/1778142868.html"
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+          "url": "https://zsks.shfxjy.cn/1770171232.html"
+        }
+      ]
+    },
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "网站内容较少"
+    },
+    {
+      "district": "松江区",
+      "url": "https://www.songjiang.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "政府门户首页无中考相关链接"
+    },
+    {
+      "district": "金山区",
+      "url": "https://www.jinshan.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": []
+    },
+    {
+      "district": "长宁区",
+      "url": "https://www.shcn.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "政府门户首页无直接中考信息"
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.shhk.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": []
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": []
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "教育局频道内容较少"
+    },
+    {
+      "district": "静安区",
+      "url": "https://www.jingan.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": []
+    },
+    {
+      "district": "杨浦区",
+      "url": "https://www.shyp.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "网站返回简短页面"
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": []
+    },
+    {
+      "district": "青浦区",
+      "url": "https://www.shqp.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "网站返回极简页面"
+    },
+    {
+      "district": "崇明区",
+      "url": "https://www.shcm.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": []
+    },
+    {
+      "district": "普陀区",
+      "url": "https://www.shpt.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": []
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "HTTP 412限制，获取有限内容"
+    }
+  ]
+}
