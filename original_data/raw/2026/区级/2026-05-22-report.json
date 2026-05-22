@@ -1,0 +1,194 @@
+{
+  "date": "2026-05-22",
+  "scrape_time": "2026-05-22T08:03:12.430084",
+  "method": "curl",
+  "districts_monitored": 16,
+  "success": 15,
+  "failed": 1,
+  "results": [
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 483,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xuhui.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 21322,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "长宁区",
+      "url": "https://www.shcn.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 9915,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "静安区",
+      "url": "https://www.jingan.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 15986,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "普陀区",
+      "url": "https://www.shpt.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 10757,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.shhk.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 18129,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "杨浦区",
+      "url": "https://www.shyp.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 332,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "闵行区",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "status": "success",
+      "method": "curl",
+      "html_size": 14639,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.shbsq.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 16150,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jiading.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 15135,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 3105,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "金山区",
+      "url": "https://www.jinshan.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 19026,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "松江区",
+      "url": "https://www.songjiang.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 14144,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "青浦区",
+      "url": "https://www.shqp.gov.cn/",
+      "status": "empty",
+      "method": "curl",
+      "relevant_links": [],
+      "note": "页面内容为空或过短"
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://zsks.shfxjy.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 15069,
+      "relevant_links": [
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则 ...[详细]",
+          "url": "https://zsks.shfxjy.cn/1778311811.html"
+        },
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+          "url": "https://zsks.shfxjy.cn/1778142868.html"
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+          "url": "https://zsks.shfxjy.cn/1770171232.html"
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项 ...[详细]",
+          "url": "https://zsks.shfxjy.cn/1770171232.html"
+        },
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "https://zsks.shfxjy.cn/1778311811.html"
+        },
+        {
+          "title": "体育中考",
+          "url": "http://10.155.80.232"
+        },
+        {
+          "title": "2026年奉贤区社会考生高考报名现场确认注意事项",
+          "url": "https://zsks.shfxjy.cn/1760944825.html"
+        },
+        {
+          "title": "2025年奉贤区中招统一批次征求志愿投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1752949062.html"
+        },
+        {
+          "title": "2025年奉贤区中招统一批投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1752718924.html"
+        },
+        {
+          "title": "2024年奉贤区中招统一批次征求志愿投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1721604692.html"
+        }
+      ],
+      "all_relevant_count": 11
+    },
+    {
+      "district": "崇明区",
+      "url": "https://www.shcm.gov.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 16404,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    }
+  ]
+}
