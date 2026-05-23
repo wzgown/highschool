@@ -1,0 +1,172 @@
+{
+  "date": "2026-05-23",
+  "scrape_time": "2026-05-23T08:06:08.491634",
+  "method": "curl",
+  "districts_monitored": 16,
+  "success": 6,
+  "failed": 10,
+  "results": [
+    {
+      "district": "黄浦区",
+      "url": "https://www.hpe.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 483,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "徐汇区",
+      "url": "https://www.xhedu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "长宁区",
+      "url": "https://www.jnzjedu.com/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "静安区",
+      "url": "http://www.ja.edu.sh.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 2063,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "普陀区",
+      "url": "https://www.pte.sh.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 1020,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "虹口区",
+      "url": "https://www.hkedu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "杨浦区",
+      "url": "https://www.yp.edu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "闵行区",
+      "url": "https://www.mhedu.sh.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 24142,
+      "relevant_links": [
+        {
+          "url": "/zsksxxgk/",
+          "text": "招生考试"
+        },
+        {
+          "url": "/appeal/chengji.jsp",
+          "text": "中考查分"
+        },
+        {
+          "url": "http://www.mhedu.sh.cn/school/list.jsp?tm_id=475",
+          "text": "招生简章"
+        }
+      ],
+      "all_relevant_count": 6
+    },
+    {
+      "district": "宝山区",
+      "url": "https://www.ebs.edu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "嘉定区",
+      "url": "https://www.jd.edu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "浦东新区",
+      "url": "https://www.pudong-edu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "金山区",
+      "url": "https://www.jsedu.sh.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 18761,
+      "relevant_links": [
+        {
+          "url": "/node2/node4/1/node388/index.html",
+          "text": "招生考试"
+        }
+      ],
+      "all_relevant_count": 1
+    },
+    {
+      "district": "松江区",
+      "url": "https://www.sjedu.cn/",
+      "status": "success",
+      "method": "curl",
+      "html_size": 2021,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "青浦区",
+      "url": "https://www.qp.edu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "奉贤区",
+      "url": "https://www.fxedu.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    },
+    {
+      "district": "崇明区",
+      "url": "https://www.cm.edu.sh.cn/",
+      "status": "failed",
+      "method": "curl",
+      "html_size": 0,
+      "relevant_links": [],
+      "all_relevant_count": 0
+    }
+  ]
+}
