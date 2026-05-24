@@ -5,6 +5,16 @@
 
 var API_URL = 'https://zg.mkfriend.top'
 
+function getApiUrl() {
+  try {
+    var app = getApp()
+    if (app && app.globalData && app.globalData.apiBaseUrl) {
+      return app.globalData.apiBaseUrl
+    }
+  } catch (e) {}
+  return API_URL
+}
+
 /**
  * 调用 Connect-RPC 服务方法
  * @param {string} service
@@ -15,7 +25,7 @@ var API_URL = 'https://zg.mkfriend.top'
 function callRpc(service, method, data) {
   return new Promise(function (resolve, reject) {
     wx.request({
-      url: API_URL + '/' + service + '/' + method,
+      url: getApiUrl() + '/' + service + '/' + method,
       method: 'POST',
       data: data || {},
       timeout: 8000,
@@ -42,16 +52,16 @@ function callRpc(service, method, data) {
 function testConnection() {
   return callRpc('highschool.v1.ReferenceService', 'GetDistricts', {})
     .then(function () {
-      return { ok: true, msg: 'API 连接正常', url: API_URL }
+      return { ok: true, msg: 'API 连接正常', url: getApiUrl() }
     })
     .catch(function (err) {
-      return { ok: false, msg: err.message || 'API 连接失败', url: API_URL }
+      return { ok: false, msg: err.message || 'API 连接失败', url: getApiUrl() }
     })
 }
 
 module.exports = {
   callRpc: callRpc,
   testConnection: testConnection,
-  getActiveUrl: function () { return API_URL },
+  getActiveUrl: function () { return getApiUrl() },
   API_URL: API_URL
 }
