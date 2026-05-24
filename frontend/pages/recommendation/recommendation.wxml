@@ -274,6 +274,8 @@
         <button class="btn-primary" bindtap="goToSimulation">去模拟填报</button>
         <button class="btn-secondary" bindtap="onReset">重新推荐</button>
       </view>
+
+      <tip-section />
     </view>
 
     <view wx:else class="card">

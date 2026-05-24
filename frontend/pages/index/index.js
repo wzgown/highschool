@@ -45,5 +45,9 @@ Page({
 
   onRetryConnection: function () {
     this._testApiConnection()
+  },
+
+  goAbout: function () {
+    wx.navigateTo({ url: '/pages/about/about' })
   }
 })

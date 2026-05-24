@@ -160,5 +160,7 @@
       <button class="btn-secondary action-btn" bindtap="goBack">返回修改</button>
       <button class="btn-primary action-btn" bindtap="viewHistory">查看历史</button>
     </view>
+
+    <tip-section />
   </block>
 </view>

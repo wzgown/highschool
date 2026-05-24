@@ -1,0 +1,10 @@
+<view class="tip-section">
+  <view class="tip-toggle" bindtap="onToggle">
+    <text class="tip-label">觉得有帮助？支持开发者</text>
+    <text class="tip-arrow {{expanded ? 'expanded' : ''}}">›</text>
+  </view>
+  <view class="tip-content" wx:if="{{expanded}}">
+    <image class="tip-qr" src="/images/tip-qr.jpg" mode="widthFix" bindlongpress="onLongPress" />
+    <text class="tip-hint">长按识别二维码</text>
+  </view>
+</view>

@@ -1,0 +1,45 @@
+.tip-section {
+  margin-top: 32rpx;
+  padding: 0;
+}
+
+.tip-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 20rpx 0;
+}
+
+.tip-label {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+}
+
+.tip-arrow {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  transition: transform 0.2s;
+}
+
+.tip-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.tip-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 0 32rpx;
+}
+
+.tip-qr {
+  width: 320rpx;
+  border-radius: 12rpx;
+}
+
+.tip-hint {
+  font-size: 22rpx;
+  color: var(--color-text-secondary);
+  margin-top: 12rpx;
+}

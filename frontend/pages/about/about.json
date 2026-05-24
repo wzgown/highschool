@@ -1,6 +1,6 @@
 {
+  "navigationBarTitleText": "关于",
   "usingComponents": {
     "tip-section": "/components/tip-section/tip-section"
-  },
-  "navigationBarTitleText": "智能志愿推荐"
+  }
 }
