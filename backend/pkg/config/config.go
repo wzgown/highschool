@@ -13,6 +13,14 @@ type Config struct {
 	Redis    RedisConfig    `mapstructure:"redis"`
 	Log      LogConfig      `mapstructure:"log"`
 	Tracing  TracingConfig  `mapstructure:"tracing"`
+	Tip      TipConfig      `mapstructure:"tip"`
+}
+
+// TipConfig 打赏码配置
+type TipConfig struct {
+	Enabled        bool     `mapstructure:"enabled"`
+	QrURL          string   `mapstructure:"qr_url"`
+	ReviewVersions []string `mapstructure:"review_versions"`
 }
 
 // ServerConfig 服务器配置
@@ -82,6 +90,9 @@ func Load() (*Config, error) {
 	viper.SetDefault("tracing.service_name", "highschool-backend")
 	viper.SetDefault("tracing.otlp_endpoint", "localhost:4317")
 	viper.SetDefault("tracing.sample_rate", 1.0)
+	viper.SetDefault("tip.enabled", true)
+	viper.SetDefault("tip.qr_url", "")
+	viper.SetDefault("tip.review_versions", []string{})
 
 	// 环境变量支持 - 使用 EnvKeyReplacer 将 database.host 映射到 HS_DATABASE_HOST
 	viper.SetEnvPrefix("HS")

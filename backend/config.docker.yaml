@@ -27,3 +27,8 @@ tracing:
   service_name: highschool-backend
   otlp_endpoint: localhost:4317
   sample_rate: 0.1
+
+tip:
+  enabled: true
+  qr_url: ""
+  review_versions: []

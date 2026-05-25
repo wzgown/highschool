@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -91,6 +92,23 @@ func main() {
 		w.Write([]byte(`{"status":"ok","time":` + fmt.Sprintf("%d", time.Now().Unix()) + `}`))
 	})
 
+	// 打赏码配置
+	tipCfg := cfg.Tip
+	mux.HandleFunc("/tip-config", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+
+		url := ""
+		if tipCfg.Enabled && tipCfg.QrURL != "" {
+			version := r.URL.Query().Get("version")
+			if !containsString(tipCfg.ReviewVersions, version) {
+				url = tipCfg.QrURL
+			}
+		}
+
+		json.NewEncoder(w).Encode(map[string]string{"url": url})
+	})
+
 	// 创建 OpenTelemetry 拦截器
 	var otelInterceptor *otelconnect.Interceptor
 	if cfg.Tracing.Enabled {
@@ -147,6 +165,15 @@ func main() {
 	}
 
 	logger.Info(ctx, "server exited")
+}
+
+func containsString(slice []string, s string) bool {
+	for _, v := range slice {
+		if v == s {
+			return true
+		}
+	}
+	return false
 }
 
 // responseWriter 包装 http.ResponseWriter 以捕获状态码
