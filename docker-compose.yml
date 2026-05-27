@@ -75,6 +75,9 @@ services:
       - HS_TRACING_SERVICE_NAME=highschool-backend
       - HS_TRACING_OTLP_ENDPOINT=localhost:4317
       - HS_TRACING_SAMPLE_RATE=0.1
+      # Tip
+      - HS_TIP_ENABLED=true
+      - HS_TIP_QR_URL=https://zg.mkfriend.top/static/tip-qr.jpg
     networks:
       - highschool_net
     depends_on:
