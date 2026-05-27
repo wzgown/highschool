@@ -1,0 +1,182 @@
+{
+  "date": "2026-05-27",
+  "scrape_time": "2026-05-27T08:15:50.737183",
+  "method": "curl",
+  "total_districts": 15,
+  "success_count": 13,
+  "failed_count": 2,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/708093.htm",
+          "date": ""
+        },
+        {
+          "title": "黄浦区教育考试中心2026年寒假期间窗口开放安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/703425.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第二批公示)",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第一批公示)",
+          "url": "https://zhaoban.hpe.cn/sx/gql/705943.htm",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的...",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年本区中等学校高中阶段外籍学生招生办法",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年虹口区高中阶段学校区级优秀体育学生公示名单",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年虹口区高中阶段学校区级艺术骨干学生公示名单",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市初中学业水平考试理化实验操作考试及外语听说测...",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市初中学业水平考试英语听力试运转即将举行",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+          "date": "2026-02-27"
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/sx/qkxx/515397.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/509555.htm",
+          "date": ""
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html",
+          "date": "2025-12-29"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则 ...[详细]",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}
