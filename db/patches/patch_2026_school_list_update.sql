@@ -55,4 +55,14 @@ UPDATE ref_school SET is_active = false, updated_at = CURRENT_TIMESTAMP WHERE co
 UPDATE ref_school SET is_active = false, updated_at = CURRENT_TIMESTAMP WHERE code = '182002'; -- 复旦大学附属中学青浦分校
 UPDATE ref_school SET is_active = false, updated_at = CURRENT_TIMESTAMP WHERE code = '205006'; -- 上海奉贤区博华高级中学
 
+-- ============================================================================
+-- 名称修正 (根据PDF原文校验)
+-- ============================================================================
+
+UPDATE ref_school SET full_name = '复旦附中静安高级中学', updated_at = CURRENT_TIMESTAMP WHERE code = '064016';
+UPDATE ref_school SET full_name = '上海体育大学附属中学', short_name = '体育大学附中', updated_at = CURRENT_TIMESTAMP WHERE code = '104073';
+UPDATE ref_school SET full_name = '上海市浦东临港科技高级中学', updated_at = CURRENT_TIMESTAMP WHERE code = '153014';
+UPDATE ref_school SET full_name = '上海应用技术大学附属奉贤奉城高级中学', updated_at = CURRENT_TIMESTAMP WHERE code = '204005';
+UPDATE ref_school SET full_name = '上海奉贤区博华高级中学', updated_at = CURRENT_TIMESTAMP WHERE code = '204021';
+
 COMMIT;
