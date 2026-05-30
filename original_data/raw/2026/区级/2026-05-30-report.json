@@ -1,0 +1,748 @@
+{
+  "date": "2026-05-30",
+  "scrape_time": "2026-05-30T08:03:18.102475",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 15,
+  "failed_count": 1,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "初中招生",
+          "url": "https://zhaoban.hpe.cn/info/iList.jsp?cat_id=20920",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "中招信息",
+          "url": "https://zhaoban.hpe.cn/info/iList.jsp?cat_id=20921",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年黄浦区中招跨区生报名后注意事项及安排.pdf",
+          "url": "https://zhaoban.hpe.cn/wcm.files/upload/CMSkszx/202601/2026011909372650272.pdf",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年黄浦区中招个别考生（往届生、返沪生）现场确认注意事项及携带资料",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/703130.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026 年黄浦区中招跨区生报名后注意事项及安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/702867.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/708093.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试测试项目网报时间：\n3月9日 9：00——3月10日 16：00",
+          "url": "https://hpzy.hpe.cn/",
+          "date": "",
+          "keyword": "体育考试"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试...",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": "",
+          "keyword": "体育考试"
+        },
+        {
+          "title": "转载：2026年黄浦区民办初中招生计...",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/692aabe6-f260-42a2-b79a-12b99ee20c1c.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年黄浦区高中阶段持外国护照学...",
+          "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "转载：《2026年上海市高中阶段学校...",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260320/20121.html",
+          "date": "",
+          "keyword": "2026招生考试"
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "中考招生",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项.docx",
+          "url": "https://www.xuhui.gov.cn/egov/uploads/info/1/0/10422b352153848.docx",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+          "date": "",
+          "keyword": "中招"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年长宁区中招跨区跨入考生注意事项",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2053016656192675841",
+          "date": "2026-05-09",
+          "keyword": "中招"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [
+        {
+          "title": "高中阶段招生考试",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/ssAnnounce.html",
+          "date": "",
+          "keyword": "高中阶段招生"
+        },
+        {
+          "title": "2026年静安区中招跨区报名（跨入）学生注意事项.pdf",
+          "url": "https://www.jingan.gov.cn/main/844002be-03ae-49e4-8e99-da11c531fd5a/8af719d1-cec4-4cec-a88f-8fd99e68d403/2026年静安区中招跨区报名（跨入）学生注意事项.pdf",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年静安区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260511/844002be-03ae-49e4-8e99-da11c531fd5a.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "《2026年静安区中招跨区报名（跨入）学生注意事项》详见附件！",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260511/844002be-03ae-49e4-8e99-da11c531fd5a.html",
+          "date": "",
+          "keyword": "中招"
+        }
+      ]
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [
+        {
+          "title": "高中招生",
+          "url": "https://kszx.pte.sh.cn/c/73d59f3c84ef4e8c98d7a8de3d9b0f2f/default.html",
+          "date": "",
+          "keyword": "高中招生"
+        },
+        {
+          "title": "初中招生",
+          "url": "https://kszx.pte.sh.cn/c/eecb8a2b8c574e8888d0465c4d6a3ddf/default.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "中考查询",
+          "url": "https://kszx.pte.sh.cn/a/b898e0c8f5464d5fb98a416f9af51edf/default.html",
+          "date": "",
+          "keyword": "中考"
+        }
+      ]
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [
+        {
+          "title": "中招信息",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=3",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "中招政策",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=6",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "中招咨询电话：021-63061213&nbsp;&nbsp;高招咨询电话：021-63063079&nbsp;&nbsp;",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=8&id=2132",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年上海市初中学业水平考试体育与健康科目成绩，道德与法治、历史日常考核成绩及综合素质评价结果将于6月1日公布",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260522/20264.html",
+          "date": "",
+          "keyword": "初中学业"
+        },
+        {
+          "title": "2026年虹口区高中阶段学校区级优秀体育学生公示名单",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=7&id=2159",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "2026年虹口区高中阶段学校区级艺术骨干学生公示名单",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=7&id=2158",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "虹口区高中阶段统一招生录取结果查询",
+          "url": "https://kszx.hongkouedu.com:8090/login/StudentLogin",
+          "date": "",
+          "keyword": "高中阶段统一招生"
+        }
+      ]
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "/ 初中学业考与高中阶段招生考试",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/index.html",
+          "date": "",
+          "keyword": "初中学业"
+        },
+        {
+          "title": "2026年杨浦区中考跨区报名（跨入）学生注意事项_上海市杨浦区人民政府",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "&nbsp;/&nbsp;初中学业考与高中阶段招生考试",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+          "date": "",
+          "keyword": "初中学业"
+        },
+        {
+          "title": "2026年杨浦区中考跨区报名（跨入）学生注意事项",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "请跨入杨浦区报名中考的学生，于",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "6月上旬（具体日期会短信通知）前来杨浦区教育招生考试中心（延吉东路55号）凭报名信息表领取《2026年杨浦区高中阶段各类学校招生计划》，同时递交学生个人档案材料袋。",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+          "date": "",
+          "keyword": "招生考试"
+        },
+        {
+          "title": "初中招生",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-czzs/index.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "初中学业考与高中阶段招生考试",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/index.html",
+          "date": "",
+          "keyword": "初中学业"
+        }
+      ]
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "年本市外区初中学籍毕业生，如在学籍学校完成“2026年中招报名并选择回闵行区的跨区考生”，请务必仔细阅读以下提醒和安排。",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "跨区报名的应届初三学生不能填报名额分配到校志愿。",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "名额分配"
+        },
+        {
+          "title": "选择跨区升学的学生及家长，应已充分了解过中招政策，包括各招生类型及录取方式。",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "、家长和学生务必确认“招生考试信息确认表”上信息完整无误，手机号、通讯地址等信息须确保正常接听和收发信件。如发现信息有误，请及时与学籍学校联系并更正。",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "招生考试"
+        },
+        {
+          "title": "、学籍学校所在区招考机构（中招办）负责实施事项：跨区学生的所有考试、成绩公布复核、政策性照顾加分申请，高中、中职校自主招生相关事项。",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "、闵行区教育考试中心（中招办）负责实施事项：统一招生录取相关工作。",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "、《2026年闵行区高中阶段学校招生计划》的领取将通过短信方式通知，请及时关注（预计在6月初下发）。",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "高中阶段学校招生",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/List/index.htm",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "高中阶段学校招生|2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "义务教育招生|2026年闵行区义务教育阶段民办学校招生计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/ff64fcf6-ac5a-4e94-8e89-2a795746fa74.htm",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "义务教育招生|2026年闵行区义务教育阶段民办学校招生简章",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/673f4e9f-7e96-4775-9f9a-2c60427cafac.htm",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "高中招生",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/index.jhtml",
+          "date": "",
+          "keyword": "高中招生"
+        },
+        {
+          "title": "初中招生",
+          "url": "http://www.bsedu.org.cn/baoshan/czzs/index.jhtml",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "关于2025年宝山区中考无录取去向考生征求...",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144359.jhtml",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "年宝山区高中阶段学校招生计划》并",
+          "url": "https://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "高中招生 - 宝山教育信息网",
+          "url": "https://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": "",
+          "keyword": "高中招生"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中招嘉定区跨区生报名后注意事项及安排_高中阶段考试招生_招生入学_重点工作_政务公开标准目录_嘉定区教育局_上海市嘉定区教育局",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "",
+          "keyword": "高中阶段考试招生"
+        },
+        {
+          "title": "已在本市其他区初中学籍学校完成2026年中招报名并选择跨入嘉定区参加录取的考生。",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "1、跨区报名的应届初三学生不能填报名额分配到校志愿。",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "",
+          "keyword": "名额分配"
+        },
+        {
+          "title": "2、跨区学生和家长务必确保《招生考试信息确认表》上信息完整无误，嘉定区中招办将根据信息确认表上联系方式通知相关考生家长加入钉钉群。",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "3、嘉定区中招办负责跨区考生统一招生录取相关工作。跨区考生考试安排、成绩复核、政策性照顾加分申请、高中中职校自主招生等相关事项如有疑问请咨询原学籍学校。",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "url": "https://www.jiading.gov.cn/jiaoyu/bmfw/zcjd/content_960968",
+          "date": "",
+          "keyword": "2026招生考试"
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": [
+        {
+          "title": "招生考试",
+          "url": "https://www.pudong.gov.cn/zwgk/zsks-jyjzdgz/index.html",
+          "date": "",
+          "keyword": "招生考试"
+        },
+        {
+          "title": "中招中考",
+          "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/index.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "2026年浦东新区中招跨区考生注意事项.pdf",
+          "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/2026/131/355040/8bc69302f602460cb843a85a444d288f.pdf",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年浦东新区中招跨区考生注意事项_中招中考",
+          "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/2026/131/355040.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "2026年浦东新区中招跨区考生注意事项",
+          "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/2026/131/355040.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "中招中考_政务公开-上海市浦东新区门户网站",
+          "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/",
+          "date": "",
+          "keyword": "中考"
+        }
+      ]
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "中考填报与查询",
+          "url": "https://www.jsedu.sh.cn/zsks/kscfbmhtdlqcx",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "初中招生",
+          "url": "https://www.jsedu.sh.cn/zsks/chuzhongzhaosheng/index.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "高中招生",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/index.html",
+          "date": "",
+          "keyword": "高中招生"
+        },
+        {
+          "title": "中考志愿填报系统",
+          "url": "https://czks.jsedu.sh.cn/zytb/",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "中考志愿录取查询",
+          "url": "https://czks.jsedu.sh.cn/cjcx/query",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "2026年金山区中招跨入考生报名后注意事项_招生考试",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年金山区中招跨入考生报名后注意事项",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "已在学籍所在初中学校完成2026年中招报名的外区跨回金山区考生，请注意以下提醒及安排：",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "一、关于领取《2026年金山区高中阶段学校招生计划》书",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "请家长带上学校盖章的学生《招生考试信息确认表》于6月12日（上午9:00-11:00；下午1:30-3:30）到金山区招生办领取招生计划书，学生无需到场。如有变化另行通知。",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "",
+          "keyword": "招生考试"
+        },
+        {
+          "title": "中考查分",
+          "url": "http://www.shmeea.edu.cn/page/24300/20210719/15480.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "2022金山区中考学生投档查询",
+          "url": "https://www.shmeea.edu.cn/page/24300/20220804/16627.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "【转载】2026年上海市初中学业水平考试体育与健康科目成绩，道德与法...",
+          "url": "https://www.jsedu.sh.cn/zsks/",
+          "date": "",
+          "keyword": "初中学业"
+        },
+        {
+          "title": "【转载】2026年上海市初中学业水平考试理化实验操作考试及外语听说测...",
+          "url": "https://www.jsedu.sh.cn/zsks/",
+          "date": "",
+          "keyword": "初中学业"
+        },
+        {
+          "title": "招生考试",
+          "url": "https://www.jsedu.sh.cn/zsks/",
+          "date": "",
+          "keyword": "招生考试"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年松江区中招跨区报名（跨入）学生注意事项",
+          "url": "https://zsb.sjedu.cn/gzjdzs/zsxx/detail_2026050914580940211523.html",
+          "date": "2026-05-09",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年松江区高中阶段\"持外国护照考生\"招生录取方案",
+          "url": "https://zsb.sjedu.cn/gzjdzs/zsxx/detail_2026050810263144964619.html",
+          "date": "2026-05-08",
+          "keyword": "高中招生"
+        },
+        {
+          "title": "2026年松江区中招个别报名考生（往届生、返沪生）网上报名及现场确认须知",
+          "url": "https://zsb.sjedu.cn/gzjdzs/zsxx/detail_2026012016093439896172.html",
+          "date": "2026-01-20",
+          "keyword": "中招"
+        },
+        {
+          "title": "2025年松江区中招跨区报名（跨入）学生注意事项",
+          "url": "https://zsb.sjedu.cn/gzjdzs/zsxx/detail_2025050813270636618799.html",
+          "date": "2025-05-08",
+          "keyword": "中招"
+        }
+      ]
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "中考中招",
+          "url": "https://kszx.qpedu.cn/info/iIndex.jsp?cat_id=16938",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/515396.htm",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "年青浦区高中阶段学校招生计划》（此书志愿填报时用）领取时间为",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/515396.htm",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+          "date": "",
+          "keyword": "高中阶段学校招生"
+        },
+        {
+          "title": "转：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水...",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_jcjy_02/20251031/3a523fcf871d42a79e8e0d49344baf74.html",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/509555.htm",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "青浦区教育招生考试服务中心",
+          "url": "https://kszx.qpedu.cn",
+          "date": "",
+          "keyword": "招生考试"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项 - 招生考试网",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "体育中考",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": "",
+          "keyword": "中考"
+        },
+        {
+          "title": "高中招生",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": "",
+          "keyword": "高中招生"
+        },
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则 ...[详细]",
+          "url": "https://zsks.shfxjy.cn/1778311811.html",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+          "url": "https://zsks.shfxjy.cn/1770171232.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2025年奉贤区中招统一批次征求志愿投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1752949062.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项 ...[详细]",
+          "url": "https://zsks.shfxjy.cn/1770171232.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "https://zsks.shfxjy.cn/1778311811.html",
+          "date": "",
+          "keyword": "2026招生考试"
+        },
+        {
+          "title": "2025年奉贤区中招统一批投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1752718924.html",
+          "date": "",
+          "keyword": "中招"
+        },
+        {
+          "title": "2024年奉贤区中招统一批次征求志愿投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1721604692.html",
+          "date": "",
+          "keyword": "中招"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "failed",
+      "items": []
+    }
+  ]
+}
