@@ -1,0 +1,318 @@
+{
+  "date": "2026-05-31",
+  "scrape_time": "2026-05-31T00:08:46Z",
+  "method": "curl",
+  "golden_source_url": "https://www.shmeea.edu.cn/page/03300/20260512/20231.html",
+  "golden_source_title": "2026年上海市中招跨区报名（跨入）各区注意事项链接汇总",
+  "total_districts": 16,
+  "success_count": 15,
+  "failed_count": 0,
+  "partial_count": 0,
+  "skipped_count": 1,
+  "districts": [
+    {
+      "name": "黄浦",
+      "pinyin": "huangpu",
+      "status": "success",
+      "url": "https://zhaoban.hpe.cn/sx/ggl/702867.htm",
+      "source_site": "黄浦区教育考试中心",
+      "items": [
+        {
+          "title": "2026 年黄浦区中招跨区生报名后注意事项及安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/702867.htm",
+          "date": "2026-01-19",
+          "has_attachment": true,
+          "attachment_url": "https://zhaoban.hpe.cn/wcm.files/upload/CMSkszx/202601/2026011909372650272.pdf",
+          "attachment_name": "2026年黄浦区中招跨区生报名后注意事项及安排.pdf",
+          "content_type": "pdf_attachment",
+          "body_text": "详见附件PDF"
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "pinyin": "xuhui",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+      "source_site": "徐汇区人民政府",
+      "items": [
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+          "date": "2026-05-09",
+          "has_attachment": true,
+          "attachment_url": "https://www.xuhui.gov.cn/egov/uploads/info/1/0/10422b352153848.docx",
+          "attachment_name": "2026年徐汇区中招跨区报名（跨入）学生注意事项.docx",
+          "content_type": "docx_attachment",
+          "body_text": "详见附件"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "pinyin": "changning",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2053016656192675841",
+      "source_site": "长宁区教育考试中心",
+      "items": [
+        {
+          "title": "2026年长宁区中招跨区跨入考生注意事项",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2053016656192675841",
+          "date": "2026-05-09",
+          "has_attachment": true,
+          "attachment_url": "https://kszx.chneic.sh.cn/sys/downloadAttachment.action?attachment.id=0866678c53a10d4397735a3df1e5c30d",
+          "attachment_name": "2026年长宁区中招跨区跨入考生注意事项.docx",
+          "content_type": "docx_attachment",
+          "body_text": "详见附件",
+          "ssl_insecure": true
+        }
+      ],
+      "ssl_insecure": true
+    },
+    {
+      "name": "静安",
+      "pinyin": "jingan",
+      "status": "success",
+      "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260511/844002be-03ae-49e4-8e99-da11c531fd5a.html",
+      "source_site": "静安区人民政府",
+      "items": [
+        {
+          "title": "2026年静安区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.jingan.gov.cn/sy/004009/004009010/004009010008/004009010008003/004009010008003003/20260511/844002be-03ae-49e4-8e99-da11c531fd5a.html",
+          "date": "2026-05-11",
+          "has_attachment": true,
+          "attachment_url": "https://www.jingan.gov.cn/main/844002be-03ae-49e4-8e99-da11c531fd5a/8af719d1-cec4-4cec-a88f-8fd99e68d403/2026年静安区中招跨区报名（跨入）学生注意事项.pdf",
+          "attachment_name": "2026年静安区中招跨区报名（跨入）学生注意事项.pdf",
+          "content_type": "pdf_attachment",
+          "body_text": "详见附件"
+        }
+      ]
+    },
+    {
+      "name": "普陀",
+      "pinyin": "putuo",
+      "status": "success",
+      "url": "https://kszx.pte.sh.cn/a/0b7f3af64c744b65bccdd4a966c7aa2d/default.html",
+      "source_site": "普陀区教育考试中心",
+      "items": [
+        {
+          "title": "跨区生、往届生、应届返沪生注意事项",
+          "url": "https://kszx.pte.sh.cn/a/0b7f3af64c744b65bccdd4a966c7aa2d/default.html",
+          "date": "2026-05-09",
+          "has_attachment": true,
+          "attachment_url": "https://kszx.pte.sh.cn/upload/2026/05/947e75de05a5453f88bba03ab7f9829e.pdf",
+          "attachment_name": "跨区生往届生应届返沪生注意事项.pdf",
+          "content_type": "pdf_attachment",
+          "body_text": "详见附件PDF"
+        }
+      ]
+    },
+    {
+      "name": "虹口",
+      "pinyin": "hongkou",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=8&id=2132",
+      "source_site": "虹口区教育考试中心",
+      "items": [
+        {
+          "title": "2026 年虹口区中招跨区生报名后注意事项及安排",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=8&id=2132",
+          "date": "2026-03-03",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "1.凭本通知于2026年5月下旬（具体日期以虹口区教育考试中心网站https://kszx.hongkouedu.com通知为准）到虹口区教育考试中心领取《2026年虹口区中等学校招生计划》。按相关操作手册在指定网站上进行中考志愿网上填报。请跨区考生于当天递交考生档案材料。2.跨区报考考生加分及所有考试（体育、理化实验、外语听说、笔试科目）随就读学校所在区进行。3.请考生及家长及时关注虹口区教育考试中心网站；咨询电话：63061213（工作日上午9:00-11:00；下午13:30-16:30）；跨入虹口区考生QQ联系群：1054117075。",
+          "contact_phone": "63061213",
+          "contact_hours": "工作日上午9:00-11:00, 下午13:30-16:30",
+          "contact_qq": "1054117075"
+        }
+      ],
+      "content_loaded_via_ajax": "https://kszx.hongkouedu.com/content.aspx?id=2132&typeId=8"
+    },
+    {
+      "name": "杨浦",
+      "pinyin": "yangpu",
+      "status": "success",
+      "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+      "source_site": "杨浦区人民政府",
+      "items": [
+        {
+          "title": "2026年杨浦区中考跨区报名（跨入）学生注意事项",
+          "url": "https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl-ypzs-gzjdzs/20260509/505193.html",
+          "date": "2026-05-09",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "请跨入杨浦区报名中考的学生，于6月上旬（具体日期会短信通知）前来杨浦区教育招生考试中心（延吉东路55号）凭报名信息表领取《2026年杨浦区高中阶段各类学校招生计划》，同时递交学生个人档案材料袋。跨入学生的志愿填报及志愿确认：在学籍所在学校完成。1、材料袋在学籍所在校领取，须密封，并盖学校公章，任何人不得随意拆封。2、材料袋上考生个人信息须完整，材料袋内所含内容须在材料袋上标注清晰。3、材料袋由考生或家长本人前来交接，不接受快递、闪送、邮寄等寄递方式。",
+          "contact_address": "延吉东路55号"
+        }
+      ]
+    },
+    {
+      "name": "闵行",
+      "pinyin": "minhang",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+      "source_site": "闵行区人民政府",
+      "items": [
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": "2026-05-09",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "2026年本市外区初中学籍毕业生，如在学籍学校完成2026年中招报名并选择回闵行区的跨区考生，请务必仔细阅读以下提醒和安排。1、参加报名的学生只限在1个区参加报名，报名完成后不可更改。跨区报名的应届初三学生不能填报名额分配到校志愿。选择跨区升学的学生及家长，应已充分了解过中招政策，包括各招生类型及录取方式。2、家长和学生务必确认招生考试信息确认表上信息完整无误，手机号、通讯地址等信息须确保正常接听和收发信件。3、学籍学校所在区招考机构负责实施事项：跨区学生的所有考试、成绩公布复核、政策性照顾加分申请，高中、中职校自主招生相关事项。4、闵行区教育考试中心负责实施事项：统一招生录取相关工作。5、后续日程安排及通知将通过电话或短信方式及时通知。6、《2026年闵行区高中阶段学校招生计划》的领取将通过短信方式通知（预计在6月初下发）。7、如需查询中招相关政策，可登录上海市教育考试院上海招考热线网站查看。8、如需了解市区两级优秀体育学生、艺术骨干学生招生录取信息，请关注相关高中学校网站等渠道。9、上述事项如与市教委发布的文件不同，以市相关文件为准。10、联系方式：闵行区教育考试中心咨询电话：64921788，地址：山花路128号，接待咨询时间：周一至周五上午9:00-11:00,下午13:00-16:00。",
+          "contact_phone": "64921788",
+          "contact_address": "山花路128号",
+          "contact_hours": "周一至周五上午9:00-11:00, 下午13:00-16:00"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "pinyin": "baoshan",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+      "source_site": "宝山教育信息网",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项",
+          "url": "https://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": "2026-05-11",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "中考跨入宝山区的考生及家长：凭考生本人的中考信息确认表于2026年5月下旬6月上旬（具体日期以宝山教育信息网招生专栏的通知为准）到宝山区教育考试中心（宝山七村88号）领取《2026年宝山区高中阶段学校招生计划》并于当天递交考生档案材料。2026年本市中招所有批次志愿填报在市级统一平台进行网上填报。提醒：中考跨入宝山区的外区考生的政策性照顾加分申请、所有考试（体育、理化实验、外语听说、笔试科目）以及志愿填报现场确认均随就读学校所在区进行。咨询电话：66593210（工作日上午9:00-11:00；下午13:00-16:00）。",
+          "contact_phone": "66593210",
+          "contact_address": "宝山七村88号",
+          "contact_hours": "工作日上午9:00-11:00, 下午13:00-16:00"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "pinyin": "jiading",
+      "status": "success",
+      "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+      "source_site": "上海市嘉定区教育局",
+      "items": [
+        {
+          "title": "2026年中招嘉定区跨区生报名后注意事项及安排",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197181",
+          "date": "2026-05-09",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "一、注意对象：已在本市其他区初中学籍学校完成2026年中招报名并选择跨入嘉定区参加录取的考生。二、注意事项：1、跨区报名的应届初三学生不能填报名额分配到校志愿。2、跨区学生和家长务必确保招生考试信息确认表上信息完整无误，嘉定区中招办将根据信息确认表上联系方式通知相关考生家长加入钉钉群。3、嘉定区中招办负责跨区考生统一招生录取相关工作。跨区考生考试安排、成绩复核、政策性照顾加分申请、高中中职校自主招生等相关事项如有疑问请咨询原学籍学校。4、如需查询中招相关政策，可登录上海市教育考试院上海招考热线网站查看。5、嘉定中招咨询电话：59593666。咨询时间：工作日9:00-11:00,13:30-16:30。特别提醒：如遇上述电话来电，请及时接听。",
+          "contact_phone": "59593666",
+          "contact_hours": "工作日9:00-11:00, 13:30-16:30",
+          "source_org": "上海市嘉定区智慧教育与考试中心"
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "pinyin": "pudong",
+      "status": "success",
+      "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/2026/131/355040.html",
+      "source_site": "浦东新区人民政府",
+      "items": [
+        {
+          "title": "2026年浦东新区中招跨区考生注意事项",
+          "url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/2026/131/355040.html",
+          "date": "2026-05-11",
+          "has_attachment": true,
+          "attachment_url": "https://www.pudong.gov.cn/zwgk/zzzk-jyjzdgz/2026/131/355040/8bc69302f602460cb843a85a444d288f.pdf",
+          "attachment_name": "2026年浦东新区中招跨区考生注意事项.pdf",
+          "content_type": "pdf_attachment",
+          "body_text": "详见附件PDF"
+        }
+      ]
+    },
+    {
+      "name": "金山",
+      "pinyin": "jinshan",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+      "source_site": "金山教育",
+      "items": [
+        {
+          "title": "2026年金山区中招跨入考生报名后注意事项",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3134.html",
+          "date": "2026-05-09",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "已在学籍所在初中学校完成2026年中招报名的外区跨回金山区考生，请注意以下提醒及安排：一、关于领取《2026年金山区高中阶段学校招生计划》书：请家长带上学校盖章的学生《招生考试信息确认表》于6月12日（上午9:00-11:00；下午1:30-3:30）到金山区招生办领取招生计划书，学生无需到场。二、关于递交学生档案材料袋：学生家长在学校完成志愿书面确认后，由学校完成档案制作，学生家长领取档案袋后于6月30日前送交金山招办。注意：档案袋上学生个人信息必须完整，材料袋内所含内容必须在材料袋上清楚标注，档案袋由学校密封，学生家长不得拆封。自主招生、名额分配录取结果查询在上海市教育考试院网站查询。统一招生录取结果查询在金山招办网站查询。四、金山区招生办公室联系方式：地址：金山区石化二村289号南楼，电话：57952056。",
+          "contact_phone": "57952056",
+          "contact_address": "金山区石化二村289号南楼"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "pinyin": "songjiang",
+      "status": "success",
+      "url": "https://zsb.sjedu.cn/gzjdzs/zsxx/detail_2026050914580940211523.html",
+      "source_site": "松江区教育考试中心",
+      "items": [
+        {
+          "title": "2026年松江区中招跨区报名（跨入）学生注意事项",
+          "url": "https://zsb.sjedu.cn/gzjdzs/zsxx/detail_2026050914580940211523.html",
+          "date": "2026-05-09",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "一、关于领取《2026年松江区高中阶段学校招生计划》书：请家长带上学校盖章的学生《招生考试信息确认表》于6月12日（上午9:00-11:00；下午1:30-3:30）到松江区教育考试中心领取招生计划书，学生无需到场。二、关于递交学生档案材料袋：学生家长在学校完成志愿书面确认后，由学校完成档案制作，学生家长领取档案袋后于6月30日（上午9:00-11:00；下午1:30-3:30）送交松江区教育考试中心，学生无需到场。注意：档案袋上学生个人信息必须完整，材料袋内所含内容必须在材料袋上清楚标注，档案袋由学校密封，学生家长不得拆封。三、关于录取结果查询：自主招生、名额分配录取结果查询在上海市教育考试院网站查询，密码为报名时所用密码。统一招生录取结果查询在松江区教育考试中心网站录取查询栏查询，密码为出生日期（八位数）。四、关于松江区教育考试中心联系方式：地址：松江区中山二路590号，电话：57815945。",
+          "contact_phone": "57815945",
+          "contact_address": "松江区中山二路590号",
+          "api_endpoint": "https://zsb.sjedu.cn/data/gzjdzs/zsxx/detail_2026050914580940211523.data",
+          "api_type": "POST_json"
+        }
+      ],
+      "api_endpoint": "https://zsb.sjedu.cn/data/gzjdzs/zsxx/detail_2026050914580940211523.data",
+      "api_type": "POST_json"
+    },
+    {
+      "name": "青浦",
+      "pinyin": "qingpu",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn/zkzq/zk/515396.htm",
+      "source_site": "青浦区教育考试服务中心",
+      "items": [
+        {
+          "title": "2026年青浦区中考跨区（跨入）考生 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/515396.htm",
+          "date": "2026-05-09",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "各位跨入青浦的考生及考生家长：现将2026年中考后相关事宜注意事项告知如下：《2026年青浦区高中阶段学校招生计划》（此书志愿填报时用）领取时间为6月11日（周四）、12日（周五）上午9:00-11:00；下午1:30-3:30。领取时，请考生家长带好有关证件（考生身份证或考生报名信息确认表）和家长本人身份证。领取计划书的同时，可递交考生本人档案材料（提前到学籍所在学校领取）。注意：档案材料袋上考生个人信息必须完整，材料袋内相关材料必须在材料袋上清楚标注，档案袋必须是密封的，不得随意拆封。没有档案材料，无法进行投档录取。请相关考生加入2026青浦区中考跨区（跨入）考生群（群号：241910979），入群时请备注考生或考生家长（请用实名）。青浦招考中心地址：北淀浦河路1000号；咨询电话：59205052，69220499。",
+          "contact_phone": "59205052, 69220499",
+          "contact_address": "北淀浦河路1000号",
+          "contact_qq": "241910979"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "pinyin": "fengxian",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn/1778142868.html",
+      "source_site": "奉贤区教育事务受理中心",
+      "items": [
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": "2026-05-09",
+          "has_attachment": false,
+          "content_type": "inline_html",
+          "body_text": "请中招报考区选择为奉贤区的外区就读应届初三学生家长加入QQ群2026奉贤区跨区考生家长通知群，群号为：1091600675。为方便统计，每位学生仅限一名家长入群，入群验证消息为：就读区+学生实名+家长称谓（例：闵行区王小小妈妈），后续领取奉贤区招生计划书、移交毕业生档案袋等通知都将在QQ群内发布。",
+          "contact_qq": "1091600675"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "pinyin": "chongming",
+      "status": "skipped",
+      "url": "https://mp.weixin.qq.com/s/Z87qGHMq-ZfXYjYmzZJiAA",
+      "source_site": "崇明区教育考试中心（微信公众号）",
+      "items": [],
+      "reason": "微信公众号文章，无法通过curl直接访问"
+    }
+  ]
+}
