@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+    <title>上海市虹口区教育考试中心</title>
+</head>
+<body>
+    <link rel="stylesheet" type="text/css" href="Css/website.css" />
+<div class="top">
+    <img src="images/logo.png" />
+</div>
+
+<div class="top_menu">
+    <div>
+        <ul class="menuBar">
+            <li>
+                <a href="index.aspx">首页</a>
+            </li>
+            <li><a href="articleList.aspx?typeId=2">高招信息</a><span></span><ul><li><a href="articleList.aspx?typeId=12">高招政策</a></li>
+<li><a href="articleList.aspx?typeId=13">招生公示</a></li>
+<li><a href="articleList.aspx?typeId=14">报名须知</a></li>
+<li><a href="articleList.aspx?typeId=37">志愿填报</a></li>
+<li><a href="articleList.aspx?typeId=38">考试规定</a></li>
+<li><a href="articleList.aspx?typeId=39">招生录取</a></li>
+</ul>
+</li>
+<li><a href="articleList.aspx?typeId=3">中招信息</a><span></span><ul><li><a href="articleList.aspx?typeId=6">中招政策</a></li>
+<li><a href="articleList.aspx?typeId=7">招生公示</a></li>
+<li><a href="articleList.aspx?typeId=8">报名须知</a></li>
+<li><a href="articleList.aspx?typeId=9">志愿填报</a></li>
+<li><a href="articleList.aspx?typeId=10">考试规定</a></li>
+<li><a href="articleList.aspx?typeId=11">招生录取</a></li>
+</ul>
+</li>
+<li><a href="articleList.aspx?typeId=4">学业考试</a><span></span><ul><li><a href="articleList.aspx?typeId=34">高中学业考</a></li>
+</ul>
+</li>
+<li><a href="articleList.aspx?typeId=24">信息公开</a><span></span><ul><li><a href="articleList.aspx?typeId=26">单位业务</a><ul><li><a href="articleList.aspx?typeId=28">学业考</a></li>
+<li><a href="articleList.aspx?typeId=29">中考</a></li>
+<li><a href="articleList.aspx?typeId=30">高考</a></li>
+</ul>
+</li>
+<li><a href="articleList.aspx?typeId=27">单位概况</a><ul><li><a href="articleList.aspx?typeId=31">单位介绍</a></li>
+<li><a href="articleList.aspx?typeId=32">内设机构</a></li>
+<li><a href="articleList.aspx?typeId=33">联系方式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+        </ul>
+
+        <form  action="searchResult.aspx" method="post">
+            <input id="txtKeyWord" placeholder="搜索" name="keyWord" />
+            <input id="btnSearch" type="submit" value="" />
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="Scripts/jquery v3.7.1.js"></script>
+<script type="text/javascript">
+    $(".menuBar li").hover(function () {
+        $(this).find("a").first().addClass("hover");
+        //$(this).find("ul").first().show();
+    }, function () {
+        $(this).find("ul").first().hide();
+        $(this).find("a").first().removeClass("hover");
+    });
+</script>
+
+
+    <div class="list">
+
+        <div class="list_l">
+            <div>
+                中招信息
+            </div>
+
+            <ul>
+                <li><a menuUrl="articleinfo.aspx?typeId=6" state="1" typeId="6">中招政策</a></li>
+<li><a menuUrl="articleinfo.aspx?typeId=7" state="1" typeId="7">招生公示</a></li>
+<li><a menuUrl="articleinfo.aspx?typeId=8" state="1" typeId="8">报名须知</a></li>
+<li><a menuUrl="articleinfo.aspx?typeId=9" state="1" typeId="9">志愿填报</a></li>
+<li><a menuUrl="articleinfo.aspx?typeId=10" state="1" typeId="10">考试规定</a></li>
+<li><a menuUrl="articleinfo.aspx?typeId=11" state="1" typeId="11">招生录取</a></li>
+
+            </ul>
+        </div>
+
+        <div class="list_r">
+            <div class="list_r_top">
+                <a href="index.aspx">首页</a><span>&gt;</span><a href="articleList.aspx?typeId=3">中招信息</a><span>&gt;</span><a href="articleList.aspx?typeId=11">招生录取</a>
+            </div>
+
+            <div class="list_r_data"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div class="down">
+    <div>
+        <img class="blue" src="images/blue.png" />
+        <img class="beian" src="images/beian.png" />
+        <span>
+            沪ICP备
+            <br />
+            18035672号
+        </span>
+        <p>
+            中招咨询电话：021-63061213&nbsp;&nbsp;高招咨询电话：021-63063079&nbsp;&nbsp;<a>地址：上海市虹口区大连西路203号</a><br />
+            接&nbsp;&nbsp;待&nbsp;&nbsp;时&nbsp;&nbsp;间：每周一、三、五，上午9:00-11:00.<a>版权所有 上海市虹口区教育考试中心</a>
+        </p>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var url = "articleinfo.aspx?typeId=11";
+    if (url != "")
+        if (2162 > 0)
+            $(".list_r_data").load("content.aspx?id=2162&typeId=11");
+        else
+            $(".list_r_data").load(url);
+
+    $(".list_l ul li dl dt").hover(function () {
+        $(this).addClass("hover");
+    }, function () {
+        $(this).removeClass("hover");
+    });
+
+    $(".list_l ul li a").click(function () {
+        $(this).next().slideToggle();
+
+        var state = $(this).attr("state");
+        var menuUrl = $(this).attr("menuUrl");
+
+        if (state == "0") {
+            open(menuUrl);
+            return;
+        }
+
+        var typeId = $(this).attr("typeId");
+        var menuName = "<a href=\"articleList.aspx?typeId=" + typeId + "\">" + $(this).html() + "</a>";
+
+        $(".list_r_top").html('<a href="index.aspx">首页</a><span>&gt;</span><a href="articleList.aspx?typeId=3">中招信息</a><span>&gt;</span>' + menuName);
+
+        url = menuUrl;
+        $(".list_r_data").load(url, function () {
+            scrollTo(0, 0);
+        });
+    });
+
+    $(".list_l ul li dl dt").click(function () {
+        var state = $(this).attr("state");
+        var menuUrl = $(this).attr("menuUrl");
+
+        if (state == "0") {
+            open(menuUrl);
+            return;
+        }
+
+        url = menuUrl;
+
+        var typeId = $(this).attr("typeId");
+        var menuName = "<a href=\"articleList.aspx?typeId=" + typeId + "\">" + $(this).html() + "</a>";
+
+        var parent = $(this).parents("dl").prev();
+        state = parent.attr("state");
+        menuUrl = parent.attr("menuUrl");
+
+        var parentMenuName;
+        if(state == "0")
+            parentMenuName = "<a href=\"" + menuUrl + "\" target=\"_blank\">" + parent.html() + "</a>";
+        else {
+            typeId = parent.attr("typeId");
+            parentMenuName = "<a href=\"articleList.aspx?typeId=" + typeId + "\">" + parent.html() + "</a>";
+        }
+
+        $(".list_r_top").html('<a href="index.aspx">首页</a><span>&gt;</span><a href="articleList.aspx?typeId=3">中招信息</a><span>&gt;</span>' + parentMenuName + "<span>&gt;</span>" + menuName);
+
+        $(".list_r_data").load(url, function () {
+            scrollTo(0, 0);
+        });
+    });
+</script>
+</html>
