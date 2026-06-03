@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+高中招生 - 宝山教育信息网</title>
+<link rel="stylesheet" href="/r/cms/www/front/bootstrap-3.3.2-dist/css/bootstrap.css" />
+<link rel="stylesheet" href="/r/cms/www/front/css/swiper.min.css" />
+<link rel="stylesheet" href="/r/cms/www/front/css/style.css" />
+<script src="/r/cms/jquery.js" type="text/javascript"></script>
+<script src="/r/cms/www/front/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<script src="/r/cms/www/front/js/swiper.min.js"></script>
+<script src="/r/cms/front.js" type="text/javascript"></script>
+<!--新增漂浮窗广告-->
+<script src="/r/cms/www/front/js/move_port.js"></script>
+
+<!--[if lt IE 9]>
+	<script src="/r/cms/www/front/bootstrap-3.3.2-dist/js/html5shiv.min.js"> </script>
+	<script src="/r/cms/www/front/bootstrap-3.3.2-dist/js/respond.min.js"> </script>
+<![endif]--><script type="text/javascript">
+	$(function() {
+		Cms.checkPerm("", "145808");
+		Cms.collectCsi("", "collectCsiDiv", "collect_csi",
+				"145808");
+		Cms.attachment("", "145808",
+				"0", "attach");
+		Cms.viewCount("", "145808");
+		Cms.siteFlow("", location.href, document.referrer,
+				"true");
+	});
+</script>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$('.content-comment').click(function() {
+			$('html,body').animate({
+				scrollTop : $('#comments-text').offset().top
+			}, 1000)
+			$('#comments-text').focus();
+		});
+	});
+
+	$(function() {
+		//设置一个定时器，为BUTTON点击事件用
+		var timer = null;
+		var number1 = 0;
+
+		//文本输入时改变
+		$('#comments-text').keyup(function() {
+			if (!$(this).val() == '') {
+				$('.submit-on').attr("class", "submit-out");
+			} else {
+				$(".submit-out").attr("class", "submit-on");
+			}
+		});
+
+		//处理输入的内容是文字还是字母的函数
+		function getLength(str) {
+			return String(str).replace(/[^\x00-\xff]/g, 'aa').length;
+		}
+
+	});
+</script>
+<head>
+<body>
+<div class="indexTopBox">
+		<div class="container topContainer">
+			<div class="logoBox">
+				<img src="/r/cms/www/front/images/logo.png" alt="" />
+			</div>
+			<div class="bannerSwfBox">
+				<embed src="/r/cms/www/front/images/banner.swf" class="swfBox" type="application/x-shockwave-flash" quality="high" wmode="transparent" />
+			</div>
+		</div>
+	</div>
+<div class="guiderBox navbar">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#example-navbar-collapse">
+				<span class="sr-only"> 切换导航 </span> <span class="icon-bar"> </span>
+				<span class="icon-bar"> </span> <span class="icon-bar"> </span>
+			</button>
+			<a class="navbar-brand" href="/"> 宝山教育信息网</a>
+		</div>
+		<div class="collapse navbar-collapse" id="example-navbar-collapse">
+			<ul class="nav navbar-nav" id="navBarBox">
+				<li><a href="/baoshan/index.jhtml"  >首页</a></li>
+						<li>
+							<a href="http://www.bsedu.org.cn/baoshan/bjdt/index.jhtml"        >宝教动态</a>
+						</li>
+						<li>
+							<a href="http://www.bsedu.org.cn/baoshan/bjtz/index.jhtml"        >宝教通知</a>
+						</li>
+						<li>
+							<a href="http://www.bsedu.org.cn/baoshan/dcwj.jhtml"        >调查问卷</a>
+						</li>
+						<li>
+							<a href="http://www.bsedu.org.cn/baoshan/zszl/index.jhtml"   class= "active"       >招生专栏</a>
+						</li>
+						<li>
+							<a href="http://www.bsedu.org.cn/baoshan/map.jhtml"        >宝教地图</a>
+						</li>
+			</ul>
+			<div class="navSearchBox">
+
+        <!--登录-->
+     	<!--<a href="https://login.bsedu.org.cn/platform/app/login.php?url=http://121.52.219.125:9048/loginSuccess/.jspx" class="navSearchBtn navLoginBtn">登录</a>-->
+				<a id="login"  href = "javascript:void(0);" class="navSearchBtn navLoginBtn">登录</a>
+					<form action="/search.jspx"  name="searchForm" id="searchForm">
+        <input type="hidden" name="token" id="token" value="" />
+        <input type="button" class="navSearchBtn" onclick="query()" value="搜索"  >
+        <input type="text" name="q" value=""   maxlength="50" class="form-control searchInput" >
+        </form>
+								
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+function query(){
+	$.post("/createToken.jspx", {}, function(data) {
+		$("#token").val(data.token);
+		$("#searchForm").submit();
+	}, "json");
+}
+
+$("#logout").click(function () {
+    var url = 'https://login.bsedu.org.cn/platform/app/logout_do.php?url=';
+    var host = 'https://'+window.location.host;
+    var callback = host+'/logout.jspx?returnUrl='+host+'/baoshan/index.jhtml';
+	window.location.href=url+encodeURIComponent(callback);
+
+});
+
+
+$("#login").click(function () {
+    var url = 'https://login.bsedu.org.cn/platform/app/login.php?url=';
+    var host = 'https://'+window.location.host;
+    var callback = host+'/loginSuccess/.jspx?siteId=1';
+    window.location.href=url+encodeURIComponent(callback);
+
+});
+
+
+
+
+
+
+$(function() {
+    var userName = $("#loginUser").val();
+    if(userName!=''){
+        localStorage.setItem('userName',userName);
+	}
+});
+
+</script>
+	<div class="conBoxWrap">
+		<div class="container">
+			<div class="positonBox">
+				<span>您现在的位置：</span><a href="/">首页</a>>>  <a href='http://www.bsedu.org.cn/baoshan/zszl/index.jhtml'>招生专栏</a>  >>   <a href='http://www.bsedu.org.cn/baoshan/zkxx/index.jhtml'>招考信息</a>  >>   <a href='http://www.bsedu.org.cn/baoshan/gzzs/index.jhtml'>高中招生</a>  
+			</div>
+<!-- 			<div class="col-sm-3"> -->
+<!-- 				<div class="slideLeftBox"> -->
+<!-- 					  -->
+<!-- 						 -->
+<!-- 								  -->
+<!-- 						<h3>招考信息 </h3> -->
+<!-- 					<ul> -->
+<!-- 							 -->
+<!-- 								<li  ><a href="http://www.bsedu.org.cn/baoshan/zhgz/index.jhtml">综合工作</a></li>  -->
+<!-- 							 -->
+<!-- 								<li  ><a href="http://www.bsedu.org.cn/baoshan/yeyzs/index.jhtml">幼儿园招生</a></li>  -->
+<!-- 							 -->
+<!-- 								<li  ><a href="http://www.bsedu.org.cn/baoshan/xxzs/index.jhtml">小学招生</a></li>  -->
+<!-- 							 -->
+<!-- 								<li  ><a href="http://www.bsedu.org.cn/baoshan/czzs/index.jhtml">初中招生</a></li>  -->
+<!-- 							 -->
+<!-- 								<li  class="cur"  ><a href="http://www.bsedu.org.cn/baoshan/gzzs/index.jhtml">高中招生</a></li>  -->
+<!-- 							 -->
+<!-- 								<li  ><a href="http://www.bsedu.org.cn/baoshan/gkzs/index.jhtml">高考招生</a></li>  -->
+<!-- 							 -->
+<!-- 								 -->
+<!-- 								</ul> -->
+<!-- 							 -->
+<!-- 						 -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			<div class="rightConListBox col-sm-12">
+				<div class="newsContentWrap">
+					<div class="newsConTopBox">
+						<h3 style="color: ">2026年上海市高中名额分配到区、到校招生计划 （宝山区）</h3>
+						<p class="newsDateBox">
+							<span>作者:招生办</span> <span>来源:本站原创</span>
+							<span>发布时间:2026-05-31 15:00:38 </span> <span>点击数: <span id="views"></span></span>
+						</p>
+					</div>
+					<div class="newsConDetail">
+						  <p style="line-height: 16px;"><br/></p><p style="line-height: 16px;"><br/></p><p style="line-height: 16px; text-align: center;"><img src="/u/cms/www/202605/31115714ltxh.gif" title="icon_pdf.gif" alt="icon_pdf.gif"/><a style="color: rgb(0, 102, 204); font-size: 24px; text-decoration: underline;" href="/u/cms/www/202605/3111570256ac.pdf" title="2026年上海市高中名额分配到区招生计划（宝山区）.pdf"><span style="font-size: 24px;">2026年上海市高中名额分配到区招生计划（宝山区）.pdf</span></a></p><p style="line-height: 16px;"><br/></p><p style="line-height: 16px;"><br/></p><p style="line-height: 16px; text-align: center;"><img style="vertical-align: middle; margin-right: 2px;" src="../../jeeadmin/jeecms/static/ueditor/dialogs/attachment/fileTypeImages/icon_pdf.gif"/><a style="color: rgb(0, 102, 204); font-size: 24px; text-decoration: underline;" href="/u/cms/www/202605/31115702nwcy.pdf" title="2026年上海市高中名额分配到校招生计划（宝山区）.pdf"><span style="font-size: 24px;">2026年上海市高中名额分配到校招生计划（宝山区）.pdf</span></a></p><p><br/></p> 
+					</div>
+				</div>
+			</div>
+			 <div class="content-link clearfix">
+      <span class="prev-content"><i></i>上一篇：<a href="http://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml">2026年中考跨入宝山区的外区考生的注意事项</a></span>
+      <span class="next-content">下一篇：<a href="http://www.bsedu.org.cn/baoshan/gzzs/145810.jhtml">2026年上海市初中学业水平考试考点安排表</a><i></i></span>
+    </div>
+		</div>
+	</div>
+	
+	<div class="footerBox">
+<div class="container">
+				<div class="footerLeftBox">
+					<ul>
+						<!--<li>
+							<a href="#"><img src="/r/cms/www/front/images/foot-dzjgImg.png" alt=""></a>
+							<a href="#"><img src="/r/cms/www/front/images/shjbzx.jpg" alt=""></a>
+						</li>
+-->
+						<li><a href="http://beian.miit.gov.cn"><img src="/r/cms/www/front/images/t31.gif" alt=""></a>
+							<p>沪ICP备<br/>10030286号-3</p>
+						</li>
+						<!--<li><a href="#"><img src="/r/cms/www/front/images/t31.gif" alt=""></a>
+							<p>沪教Y2</br>-20100037号</p>
+						</li>
+						<li><a href="#"><img src="/r/cms/www/front/images/foot-findSite.png" alt=""></a></li>
+                                               -->
+					</ul>
+				</div>
+				<div class="footerRightBox">
+						<!--<p>-->
+            <!--<a href="#">网站主页</a>-->
+            <!--<a onclick="SetHome(window.location)" href="javascript:void(0)">设为首页</a>-->
+            <!--<a onclick="AddFavorite(window.location,document.title)" href="javascript:void(0)">加入收藏</a>-->
+            <!--<a href="#">网站介绍</a>-->
+            <!--<a href="#">网站声明</a>-->
+            <!--<a href="">网站地图</a>-->
+        <!--</p>-->
+        <p>上海市宝山区教育学院 Copyright 2018 Shanghai Baoshan District Education Institute All Right Reserverd</p>
+        <p>地址：宝山区宝林路29号 邮政编码：201999 不良信息举报电话：36210838 </p>
+        <p>工作时间：周一至周五：8:30-11:00,13:00-17:00 <img src="/r/cms/www/front/images/gonganIcon.png" alt="">沪公网安备 31011302004818号<a href="https://xyt.xcc.cn/getpcInfo?sn=1967795248474017792&language=CN&certType=8&url=www.bsedu.org.cn"><embed src="/www.bsedu.org.cn.svg"width="103" height="38" type="image/svg+xml" pluginspage="//www.adobe.com/svg/viewer/install/"/></a>
+</p>
+        
+				</div>
+			</div>
+<script type="text/javascript" language="javascript">
+    //加入收藏
+    function AddFavorite(sURL, sTitle) {
+        sURL =encodeURI(sURL);
+        try{
+            window.external.addFavorite(sURL, sTitle);
+        }catch(e) {
+            try{
+                window.sidebar.addPanel(sTitle, sURL, "");
+            }catch (e){
+                alert("您的浏览器不支持自动加入收藏功能，请使用Ctrl+D进行添加，或手动在浏览器里进行设置！");
+            }
+        }
+    }
+
+    //设为首页
+    function SetHome(url){
+        if (document.all) {
+            document.body.style.behavior='url(#default#homepage)';
+            document.body.setHomePage(url);
+        }else{
+            alert("您的浏览器不支持自动设置页面为首页功能，请您手动在浏览器里设置该页面为首页！");
+        }
+    }
+</script>
+	</div>
+</body>
+</html>
