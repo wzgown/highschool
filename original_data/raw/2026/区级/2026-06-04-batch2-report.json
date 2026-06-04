@@ -1,0 +1,171 @@
+{
+  "date": "2026-06-04",
+  "scan_time": "2026-06-04 08:45 CST",
+  "batch": 2,
+  "districts": [
+    {
+      "name": "长宁区",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/info/gateMenu.action?menu.menuCode=030105",
+      "notes": "需--insecure，高中招生页面可访问。与上次报告(2026-06-05)相比无新增文章，最新文章仍为2026-05-31",
+      "items": []
+    },
+    {
+      "name": "普陀区",
+      "status": "success",
+      "url": "https://kszx.pte.sh.cn/c/2d9cfdf888b64877907a20785ec13ff6/default.html",
+      "notes": "高中招生-招生信息页面可访问。2026-06-01新增6篇转载文章（市级内容），无新增区级原创文章",
+      "items": [
+        {
+          "title": "转载：2026年上海市中等职业学校自主招收随迁子女招生计划",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260531/20297.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招生计划",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260531/20296.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市民办普通高中国际课程班和中外合作办学学校招生录取方案",
+          "url": "https://www.shmeea.edu.cn/download/20260529/8.pdf",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市高中学校自主招生录取方案",
+          "url": "https://www.shmeea.edu.cn/download/20260529/7.pdf",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市高中国际课程班和中外合作办学学校招生计划",
+          "url": "https://www.shmeea.edu.cn/download/20260529/3.pdf",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市高中自主招生计划（不含国际课程班）",
+          "url": "https://www.shmeea.edu.cn/download/20260529/5.pdf",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        }
+      ]
+    },
+    {
+      "name": "虹口区",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com",
+      "notes": "首页可访问，最新文章仍为2026-06-03，与上次报告内容一致，无新增文章",
+      "items": []
+    },
+    {
+      "name": "松江区",
+      "status": "failed",
+      "url": "https://zsb.sjedu.cn",
+      "notes": "AngularJS SPA，数据端点.data需POST但curl访问均返回SPA HTML外壳，服务器级catch-all路由阻止外部数据获取，无法通过curl获取任何文章内容"
+    },
+    {
+      "name": "金山区",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/index.html",
+      "notes": "高中招生页面可访问。与上次报告相比，首页新增3篇2026-06-01转载文章（特殊教育招生方案、中职随迁子女计划、中职自主招生计划、民办高中国际课程班招生）。第2页新增3篇2026-06-01转载（自主招生录取方案、国际课程班招生计划、高中自主招生计划）和2篇2026-05-31区级文章（名额分配到区/到校）",
+      "items": [
+        {
+          "title": "【转载】2026年上海市特殊教育高中阶段学校和中职校附设特教班招生方案",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3151.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "【转载】2026年上海市特殊教育高中阶段学校和中职校附设特教班招生计划",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3150.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "【转载】2026年上海市中等职业学校自主招收随迁子女招生计划",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3149.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "【转载】2026年上海市中等职业学校自主招生计划",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3148.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "【转载】2026年上海市民办普通高中国际课程班和中外合作办学学校招生录取方案",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3147.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "【转载】2026年上海市高中学校自主招生录取方案",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3146.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "【转载】2026年上海市高中国际课程班和中外合作办学学校招生计划",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3145.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        },
+        {
+          "title": "【转载】2026年上海市高中自主招生计划（不含国际课程班）",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/p/3144.html",
+          "date": "2026-06-01",
+          "type": "转载市级",
+          "is_new": true
+        }
+      ]
+    },
+    {
+      "name": "奉贤区",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn",
+      "notes": "首页和招生信息页面可访问。与上次报告相比无新增文章，最新文章仍为2026-05-31（名额分配到区/到校）",
+      "items": []
+    },
+    {
+      "name": "青浦区",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn/info/iIndex.jsp?cat_id=16938",
+      "notes": "中考中招页面可访问，WCM CMS结构。与上次报告相比无新增文章，最新文章仍为2026-05-11（跨区考生注意事项）",
+      "items": []
+    },
+    {
+      "name": "崇明区",
+      "status": "failed",
+      "url": "https://www.shcm.gov.cn",
+      "notes": "shcm.gov.cn所有页面返回404NotFound；cmedu.sh.cn返回空响应（HTTP 000连接失败）。两个崇明区域名均不可用，该区主要使用微信公众号发布信息"
+    }
+  ],
+  "summary": {
+    "total_districts": 8,
+    "successful": 6,
+    "failed": 2,
+    "new_items_total": 14,
+    "new_items_by_type": {
+      "转载市级": 14
+    },
+    "notes": "本次扫描未发现任何新的区级原创文章。所有新增内容均为2026-06-01各转载的市级招生信息（中职招生计划、高中自主招生方案、国际课程班招生等），这些为市级统一发布内容。崇明区网站持续不可用。松江区为AngularJS SPA无法通过curl获取数据。"
+  }
+}
