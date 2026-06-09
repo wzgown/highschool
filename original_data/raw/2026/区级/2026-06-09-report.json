@@ -1,0 +1,554 @@
+{
+  "date": "2026-06-09",
+  "scrape_time": "2026-06-09T00:04:43.505880+00:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 12,
+  "failed_count": 3,
+  "partial_count": 1,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "base_url": "https://zhaoban.hpe.cn",
+      "response_bytes": 18466,
+      "items": [
+        {
+          "title": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/708093.htm",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年黄浦区中招个别考生（往届生、返沪生）现场确认注意事项及携带资料",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/703130.htm",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试测试项目网报时间： 3月9日 9：00——3月10日 16：00",
+          "url": "https://hpzy.hpe.cn/",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试...",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": "",
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "base_url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "response_bytes": 11883,
+      "items": [
+        {
+          "title": "关于2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划 ...",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1201",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1200",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1199",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的...",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区高中阶段学校招生计划 ...",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1133",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "徐汇区2025年名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1132",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "徐汇区2025年上海市高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1131",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校高中阶段招生工作的实施细则",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1125",
+          "date": "",
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "base_url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "response_bytes": 21210,
+      "items": [
+        {
+          "title": "[初中招生]",
+          "url": "https://kszx.chneic.sh.cn/info/gateMenu.action?menu.menuCode=030104&from=1",
+          "date": "",
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "base_url": "https://www.jingan.gov.cn/sy/egov/front2018/doc/list.jsp?channelId=82277",
+      "response_bytes": 986,
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "base_url": "https://kszx.pte.sh.cn",
+      "response_bytes": 21275,
+      "items": [
+        {
+          "title": "转载：2026年上海市中等职业学校自主招收随迁子女招生计划",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260531/20297.html",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招生计划",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260531/20296.html",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市高中学校自主招生录取方案",
+          "url": "https://www.shmeea.edu.cn/download/20260529/7.pdf",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市高中国际课程班和中外合作办学学校招生计划",
+          "url": "https://www.shmeea.edu.cn/download/20260529/3.pdf",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "转载：2026年上海市高中自主招生计划（不含国际课程班）",
+          "url": "https://www.shmeea.edu.cn/download/20260529/5.pdf",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "上海市普陀区2026年“市实验性示范性高中名额分配综合评价录取招生计划分配到普陀区不选择生源学校”的结果公示",
+          "url": "https://kszx.pte.sh.cn/a/e4798c1b5c1e49ed96819b241e521fea/default.html",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（普陀区）",
+          "url": "https://kszx.pte.sh.cn/a/f874bb771f57418ebd83c7349d239425/default.html",
+          "date": "",
+          "is_new": true
+        }
+      ]
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "base_url": "https://kszx.hongkouedu.com",
+      "response_bytes": 11880,
+      "items": [
+        {
+          "title": "2026年虹口区跨区考生领取中招计划书及档案材料交接安排",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=39&id=2164",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年虹口区往届生、返沪生领取中招计划书及档案材料交接安排",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=11&id=2165",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "关于2026年虹口区市实验性示范性高中名额分配综合评价录取计划分配结果的公示",
+          "url": "https://www.shhk.gov.cn/hkjy/zfxx/001016/20260531/bea19d54-4532-4de3-bea4-ceffcd0a8bfb.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（虹口区）",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=11&id=2162",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年上海市初中学业水平考试体育与健康科目成绩，道德与法治、历史日常考核成绩及综合素质评价结果将于6月1日公布",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260522/20264.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "虹口区高中阶段统一招生录取结果查询",
+          "url": "https://kszx.hongkouedu.com:8090/login/StudentLogin",
+          "date": "",
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "base_url": "https://www.shyp.gov.cn/shypq/zwgk/jyj/zsks/ggzs/index.html",
+      "response_bytes": 1107,
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "base_url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "response_bytes": 23382,
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "base_url": "https://www.bsedu.org.cn/baoshan/gzzs/index.jhtml",
+      "response_bytes": 15091,
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145825.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年上海市初中学业水平考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145810.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划 （宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145808.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "关于2025年宝山区中考无录取去向考生征求志愿的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144359.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2025年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144151.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2025年上海市高中名额分配到区、到校招生计划 （宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144140.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2025年上海市初中学业水平考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144069.jhtml",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "2025年中考跨入宝山区的外区考生的注意事项",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/143986.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "关于2024年宝山区中考无录取去向考生征求志愿的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/142195.jhtml",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2024年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/141988.jhtml",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "2024年上海市高中名额分配到区、到校招生计划 （宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/141919.jhtml",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "2024年上海市初中学业水平考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/141837.jhtml",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "2024年中考跨入宝山区的外区考生的注意事项",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/141663.jhtml",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "关于2023年宝山区中考无录取去向考生征求志愿的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/139456.jhtml",
+          "date": "",
+          "is_new": true
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "base_url": "https://www.jiading.gov.cn/jiaoyu/",
+      "response_bytes": 19653,
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "base_url": "https://www.pudong.gov.cn/jyj/",
+      "response_bytes": 3114,
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "base_url": "https://www.jsedu.sh.cn/zsks/",
+      "response_bytes": 42485,
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "partial",
+      "base_url": "https://zsb.sjedu.cn",
+      "response_bytes": 2097,
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "base_url": "https://kszx.qpedu.cn",
+      "response_bytes": 15347,
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "转：上海市教育考试院关于做好2025年上海市中等职业学校学业水平考试报名工作的通...",
+          "url": "https://www.shmeea.edu.cn/page/21000/20251020/19814.html",
+          "date": "",
+          "is_new": true
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/sx/qkxx/515397.htm",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/509555.htm",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html",
+          "date": "",
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "base_url": "https://zsks.shfxjy.cn/",
+      "response_bytes": 21860,
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划 ...[详细]",
+          "url": "https://zsks.shfxjy.cn/1780211045.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划",
+          "url": "https://zsks.shfxjy.cn/1780210911.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+          "url": "https://zsks.shfxjy.cn/1770171232.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划",
+          "url": "https://zsks.shfxjy.cn/1780211045.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2025年奉贤区中招统一批投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1752718924.html",
+          "date": "",
+          "is_new": false
+        },
+        {
+          "title": "2024年奉贤区中招统一批次征求志愿投档去向查询",
+          "url": "https://zsks.shfxjy.cn/1721604692.html",
+          "date": "",
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "base_url": "https://www.shcm.gov.cn/",
+      "response_bytes": 31346,
+      "items": []
+    }
+  ],
+  "new_items_count": 15,
+  "new_items": [
+    {
+      "title": "2026年黄浦区初中毕业升学体育考试测试项目网报时间： 3月9日 9：00——3月10日 16：00",
+      "url": "https://hpzy.hpe.cn/",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "转载：2026年上海市中等职业学校自主招收随迁子女招生计划",
+      "url": "https://www.shmeea.edu.cn/page/03200/20260531/20297.html",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "转载：2026年上海市中等职业学校自主招生计划",
+      "url": "https://www.shmeea.edu.cn/page/03200/20260531/20296.html",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "转载：2026年上海市高中学校自主招生录取方案",
+      "url": "https://www.shmeea.edu.cn/download/20260529/7.pdf",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "转载：2026年上海市高中国际课程班和中外合作办学学校招生计划",
+      "url": "https://www.shmeea.edu.cn/download/20260529/3.pdf",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "转载：2026年上海市高中自主招生计划（不含国际课程班）",
+      "url": "https://www.shmeea.edu.cn/download/20260529/5.pdf",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "上海市普陀区2026年“市实验性示范性高中名额分配综合评价录取招生计划分配到普陀区不选择生源学校”的结果公示",
+      "url": "https://kszx.pte.sh.cn/a/e4798c1b5c1e49ed96819b241e521fea/default.html",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "2026年上海市高中名额分配到区招生计划（普陀区）",
+      "url": "https://kszx.pte.sh.cn/a/f874bb771f57418ebd83c7349d239425/default.html",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "2025年上海市初中学业水平考试考点安排表",
+      "url": "http://www.bsedu.org.cn/baoshan/gzzs/144069.jhtml",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "2024年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+      "url": "http://www.bsedu.org.cn/baoshan/gzzs/141988.jhtml",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "2024年上海市高中名额分配到区、到校招生计划 （宝山区）",
+      "url": "http://www.bsedu.org.cn/baoshan/gzzs/141919.jhtml",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "2024年上海市初中学业水平考试考点安排表",
+      "url": "http://www.bsedu.org.cn/baoshan/gzzs/141837.jhtml",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "2024年中考跨入宝山区的外区考生的注意事项",
+      "url": "http://www.bsedu.org.cn/baoshan/gzzs/141663.jhtml",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "关于2023年宝山区中考无录取去向考生征求志愿的通知",
+      "url": "http://www.bsedu.org.cn/baoshan/gzzs/139456.jhtml",
+      "date": "",
+      "is_new": true
+    },
+    {
+      "title": "转：上海市教育考试院关于做好2025年上海市中等职业学校学业水平考试报名工作的通...",
+      "url": "https://www.shmeea.edu.cn/page/21000/20251020/19814.html",
+      "date": "",
+      "is_new": true
+    }
+  ]
+}
