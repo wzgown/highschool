@@ -1,0 +1,198 @@
+{
+  "date": "2026-06-10",
+  "scrape_time": "2026-06-10T08:04:09.007870",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 16,
+  "failed_count": 0,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年黄浦区中招跨区生领取志愿填报计划书日程安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/708093.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区高中阶段持外国护照学生招生录取方案",
+          "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "徐汇区2026年高中名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1200",
+          "date": ""
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1199",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校名额分配到校招生计划表(长宁区)",
+          "url": "",
+          "date": "2026-05-31"
+        },
+        {
+          "title": "2026年上海市高中学校名额分配到区招生计划表（长宁区）",
+          "url": "",
+          "date": "2026-05-31"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [
+        {
+          "title": "关于2026年虹口区市实验性示范性高中名额分配综合评价录取计划分配结果的公示",
+          "url": "https://www.shhk.gov.cn/hkjy/zfxx/001016/20260531/bea19d54-4532-4de3-bea4-ceffcd0a8bfb.html",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（虹口区）",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=11&id=2162",
+          "date": "2026-05-31"
+        }
+      ]
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": "2026-04-24"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145825.jhtml",
+          "date": "2026-06-05"
+        },
+        {
+          "title": "2026年上海市初中学业水平考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145810.jhtml",
+          "date": "2026-06-05"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145808.jhtml",
+          "date": "2026-06-01"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（嘉定区）",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197813",
+          "date": "2026-05-31"
+        },
+        {
+          "title": "2026年上海市高中名额分配到校招生计划（嘉定区）",
+          "url": "https://www.jiading.gov.cn/jiaoyu/publicity/zwgkbzml/zdgz/zsks/gzjysjy/197812",
+          "date": "2026-05-31"
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "高中招生",
+          "url": "https://www.jsedu.sh.cn/zsks/gaozhongzhaosheng/index.html",
+          "date": ""
+        },
+        {
+          "title": "中考志愿填报系统",
+          "url": "https://czks.jsedu.sh.cn/zytb/",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年青浦区中考跨区（跨入）考生考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/sx/qkxx/515397.htm",
+          "date": "2026-05-11"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划",
+          "url": "https://zsks.shfxjy.cn/1780211045.html",
+          "date": "2026-05-31"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划",
+          "url": "https://zsks.shfxjy.cn/1780210911.html",
+          "date": "2026-05-31"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ],
+  "new_since_last_check": "无新公告。24项差异均为子代理抓取范围差异，非真正新内容。",
+  "note": "静安/普陀/杨浦/浦东/松江/崇明主站curl返回空壳或JS渲染页面，需browser访问。"
+}
