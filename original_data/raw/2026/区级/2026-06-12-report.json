@@ -1,0 +1,776 @@
+{
+  "date": "2026-06-12",
+  "scrape_time": "2026-06-12T08:10:32.877818",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 15,
+  "failed_count": 0,
+  "partial_count": 1,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/708093.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区中招个别考生（往届生、返沪生）现场确认注意事项及携带资料",
+          "url": "https://zhaoban.hpe.cn/sx/ggl/703130.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试测试项目网报时间： 3月9日 9：00——3月10日 16：00",
+          "url": "https://hpzy.hpe.cn/",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年黄浦区民办初中招生计",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/692aabe6-f260-42a2-b79a-12b99ee20c1c.html",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年上海市高中名额分配到",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/9259c0bd-d949-4d3d-a570-3a4085b3a041.html",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年黄浦区名额分配综合评",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/6b834dfa-8a74-4524-8f2e-43ae384e9380.html",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区高中阶段持外国护照学",
+          "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第二批公示)",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第一批公示)",
+          "url": "https://zhaoban.hpe.cn/sx/gql/705943.htm",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年黄浦区初中阶段学校招生入学工作政策问答",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004002/009002004002003/20260407/deabd078-e634-4823-8c90-8331040977a3.html",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年黄浦区民办初中招生计划",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/692aabe6-f260-42a2-b79a-12b99ee20c1c.html",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年上海市高中名额分配到区招生计划（黄浦区）",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/9259c0bd-d949-4d3d-a570-3a4085b3a041.html",
+          "date": ""
+        },
+        {
+          "title": "转载：2026年黄浦区名额分配综合评价录取到校计划公示",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/6b834dfa-8a74-4524-8f2e-43ae384e9380.html",
+          "date": ""
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260331/00af813278714810959cbc4069f86f01.html",
+          "date": ""
+        },
+        {
+          "title": "2026年黄浦区高中阶段持外国护照学生招生录取方案",
+          "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+          "date": ""
+        },
+        {
+          "title": "转载：上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20260325/4b275ac9af5f488da02ca525a45cbe59.html",
+          "date": ""
+        }
+      ],
+      "url": "https://zhaoban.hpe.cn"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "关于2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1201",
+          "date": ""
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1200",
+          "date": ""
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1199",
+          "date": ""
+        },
+        {
+          "title": "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+          "date": ""
+        },
+        {
+          "title": "徐汇区教育局关于2026年本区中等学校高中阶段外籍学生招生办法",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1194",
+          "date": ""
+        },
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+          "date": ""
+        },
+        {
+          "title": "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1165",
+          "date": ""
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1163",
+          "date": ""
+        }
+      ],
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校\"名额分配到校\"招生计划表(长宁区)",
+          "url": "javascript:view('2060971634832171009')",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中学校\"名额分配到区\"招生计划表（长宁区）",
+          "url": "javascript:view('2060972590658945026')",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市民办初中\"报名志愿\"电脑随机录取名单",
+          "url": "javascript:view('2056997281463521282')",
+          "date": ""
+        },
+        {
+          "title": "2026年长宁区中招跨区跨入考生注意事项",
+          "url": "javascript:view('2053016656192675841')",
+          "date": ""
+        },
+        {
+          "title": "上海市长宁区2026年民办直升电脑随机录取结果",
+          "url": "javascript:view('2051848024837726210')",
+          "date": ""
+        }
+      ],
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action"
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [],
+      "url": "https://www.jingan.gov.cn/sy/"
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [
+        {
+          "title": "关于跨区考生领取《2026年普陀区高中阶段学校计划书》及递交档案材料的通知",
+          "url": "https://kszx.pte.sh.cn/a/cc23249a5d7441e9a1cedbf634bf60ac/default.html",
+          "date": "2026年06月09日"
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招收随迁子女招生计划",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260531/20297.html",
+          "date": "2026年06月01日"
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招生计划",
+          "url": "https://www.shmeea.edu.cn/page/03200/20260531/20296.html",
+          "date": "2026年06月01日"
+        },
+        {
+          "title": "转载：2026年上海市民办普通高中国际课程班和中外合作办学学校招生录取方案",
+          "url": "https://www.shmeea.edu.cn/download/20260529/8.pdf",
+          "date": "2026年06月01日"
+        },
+        {
+          "title": "转载：2026年上海市高中学校自主招生录取方案",
+          "url": "https://www.shmeea.edu.cn/download/20260529/7.pdf",
+          "date": "2026年06月01日"
+        },
+        {
+          "title": "转载：2026年上海市高中国际课程班和中外合作办学学校招生计划",
+          "url": "https://www.shmeea.edu.cn/download/20260529/3.pdf",
+          "date": "2026年06月01日"
+        },
+        {
+          "title": "转载：2026年上海市高中自主招生计划（不含国际课程班）",
+          "url": "https://www.shmeea.edu.cn/download/20260529/5.pdf",
+          "date": "2026年06月01日"
+        },
+        {
+          "title": "上海市普陀区2026年“市实验性示范性高中名额分配综合评价录取招生计划分配到普陀区不选择生源学校”的结果公示",
+          "url": "https://kszx.pte.sh.cn/a/e4798c1b5c1e49ed96819b241e521fea/default.html",
+          "date": "2026年05月31日"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（普陀区）",
+          "url": "https://kszx.pte.sh.cn/a/f874bb771f57418ebd83c7349d239425/default.html",
+          "date": "2026年05月31日"
+        },
+        {
+          "title": "转载：普陀区教育局关于印发《2026年普陀区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://www.shpt.gov.cn/zhengwu/gzjdzs-jyjrxbkyzs/2026/128/203546.html",
+          "date": "2026年05月11日"
+        }
+      ],
+      "url": "https://kszx.pte.sh.cn/c/2d9cfdf888b64877907a20785ec13ff6/default.html"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年虹口区跨区考生领取中招计划书及档案材料交接安排",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=39&id=2164",
+          "date": ""
+        },
+        {
+          "title": "2026年虹口区往届生、返沪生领取中招计划书及档案材料交接安排",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=11&id=2165",
+          "date": ""
+        },
+        {
+          "title": "关于2026年虹口区市实验性示范性高中名额分配综合评价录取计划分配结果的公示",
+          "url": "https://www.shhk.gov.cn/hkjy/zfxx/001016/20260531/bea19d54-4532-4de3-bea4-ceffcd0a8bfb.html",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（虹口区）",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=11&id=2162",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市初中学业水平考试体育与健康科目成绩，道德与法治、历史日常考核成绩及综合素质评价结果将于6月1日公布",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260522/20264.html",
+          "date": ""
+        },
+        {
+          "title": "2026年虹口区高中阶段学校区级优秀体育学生公示名单",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=7&id=2159",
+          "date": ""
+        },
+        {
+          "title": "2026年虹口区高中阶段学校区级艺术骨干学生公示名单",
+          "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=7&id=2158",
+          "date": ""
+        }
+      ],
+      "url": "https://kszx.hongkouedu.com"
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [],
+      "url": "https://www.shyp.gov.cn/shypq/index.html"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "高中阶段学校招生|2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": ""
+        },
+        {
+          "title": "义务教育招生|2026年民办一贯制学校直升电脑随机录取结果",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/5b124a1f-545d-4aea-9f18-6fd9e87c9c97.htm",
+          "date": ""
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": ""
+        },
+        {
+          "title": "高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "date": ""
+        },
+        {
+          "title": "义务教育招生|2026年闵行区义务教育阶段民办学校招生计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/ff64fcf6-ac5a-4e94-8e89-2a795746fa74.htm",
+          "date": ""
+        },
+        {
+          "title": "义务教育招生|2026年闵行区义务教育阶段民办学校招生简章",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/673f4e9f-7e96-4775-9f9a-2c60427cafac.htm",
+          "date": ""
+        },
+        {
+          "title": "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年民办一贯制学校直升电脑随机录取结果",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/5b124a1f-545d-4aea-9f18-6fd9e87c9c97.htm",
+          "date": ""
+        },
+        {
+          "title": "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年闵行区义务教育阶段民办学校招生计划",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/ff64fcf6-ac5a-4e94-8e89-2a795746fa74.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年闵行区义务教育阶段民办学校招生简章",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/673f4e9f-7e96-4775-9f9a-2c60427cafac.htm",
+          "date": ""
+        },
+        {
+          "title": "关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+          "date": ""
+        }
+      ],
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145825.jhtml",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市初中学业水平考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145810.jhtml",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划 （宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145808.jhtml",
+          "date": ""
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": ""
+        }
+      ],
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml"
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "url": "https://www.jiading.gov.cn/jiaoyu/bmfw/zcjd/content_960968",
+          "date": ""
+        }
+      ],
+      "url": "https://www.jiading.gov.cn/jiaoyu/"
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": [],
+      "url": "https://www.pudong.gov.cn/zwgk/"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市特殊教育高中阶段学校和中职校附设特教班招生方",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市中等职业学校自主招收随迁子女招生计划",
+          "url": "",
+          "date": ""
+        }
+      ],
+      "url": "https://www.jsedu.sh.cn/zsks/"
+    },
+    {
+      "name": "松江",
+      "status": "partial",
+      "items": [],
+      "url": "https://zsb.sjedu.cn",
+      "error": "Angular SPA, all routes return shell HTML (2097B). Content requires JS rendering."
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html",
+          "date": ""
+        },
+        {
+          "title": "转：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_jcjy_02/20251031/3a523fcf871d42a79e8e0d49344baf74.html",
+          "date": ""
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/sx/qkxx/515397.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/509555.htm",
+          "date": ""
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html",
+          "date": ""
+        }
+      ],
+      "url": "https://kszx.qpedu.cn"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划",
+          "url": "https://zsks.shfxjy.cn/1780211045.html",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划",
+          "url": "https://zsks.shfxjy.cn/1780210911.html",
+          "date": ""
+        },
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "https://zsks.shfxjy.cn/1778311811.html",
+          "date": ""
+        },
+        {
+          "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+          "url": "https://zsks.shfxjy.cn/1778142868.html",
+          "date": ""
+        },
+        {
+          "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+          "url": "https://zsks.shfxjy.cn/1770171232.html",
+          "date": ""
+        }
+      ],
+      "url": "https://zsks.shfxjy.cn"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": [],
+      "url": "https://www.shcm.gov.cn"
+    }
+  ],
+  "new_items": [
+    {
+      "district": "黄浦",
+      "title": "2026年黄浦区初中毕业升学体育考试测试项目网报时间： 3月9日 9：00——3月10日 16：00",
+      "url": "https://hpzy.hpe.cn/",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "转载：2026年上海市高中名额分配到",
+      "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/9259c0bd-d949-4d3d-a570-3a4085b3a041.html",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "转载：2026年黄浦区名额分配综合评",
+      "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/6b834dfa-8a74-4524-8f2e-43ae384e9380.html",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "2026年黄浦区高中阶段持外国护照学",
+      "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "转载：2026年上海市高中名额分配到区招生计划（黄浦区）",
+      "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/9259c0bd-d949-4d3d-a570-3a4085b3a041.html",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "转载：2026年黄浦区名额分配综合评价录取到校计划公示",
+      "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/6b834dfa-8a74-4524-8f2e-43ae384e9380.html",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的通知",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260331/00af813278714810959cbc4069f86f01.html",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "2026年黄浦区高中阶段持外国护照学生招生录取方案",
+      "url": "https://zhaoban.hpe.cn/clyw/zqxx/705631.htm",
+      "date": ""
+    },
+    {
+      "district": "黄浦",
+      "title": "转载：上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知",
+      "url": "https://edu.sh.gov.cn/xxgk2_zdgz_zyjy_03/20260325/4b275ac9af5f488da02ca525a45cbe59.html",
+      "date": ""
+    },
+    {
+      "district": "徐汇",
+      "title": "关于2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划",
+      "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1201",
+      "date": ""
+    },
+    {
+      "district": "徐汇",
+      "title": "徐汇区2026年高中名额分配到校招生计划",
+      "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1200",
+      "date": ""
+    },
+    {
+      "district": "徐汇",
+      "title": "徐汇区2026年高中名额分配到区招生计划",
+      "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1199",
+      "date": ""
+    },
+    {
+      "district": "徐汇",
+      "title": "徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的",
+      "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+      "date": ""
+    },
+    {
+      "district": "徐汇",
+      "title": "徐汇区教育局关于2026年本区中等学校高中阶段外籍学生招生办法",
+      "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1194",
+      "date": ""
+    },
+    {
+      "district": "徐汇",
+      "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+      "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1193",
+      "date": ""
+    },
+    {
+      "district": "长宁",
+      "title": "2026年上海市高中学校\"名额分配到校\"招生计划表(长宁区)",
+      "url": "javascript:view('2060971634832171009')",
+      "date": ""
+    },
+    {
+      "district": "长宁",
+      "title": "2026年上海市高中学校\"名额分配到区\"招生计划表（长宁区）",
+      "url": "javascript:view('2060972590658945026')",
+      "date": ""
+    },
+    {
+      "district": "长宁",
+      "title": "2026年上海市民办初中\"报名志愿\"电脑随机录取名单",
+      "url": "javascript:view('2056997281463521282')",
+      "date": ""
+    },
+    {
+      "district": "长宁",
+      "title": "2026年长宁区中招跨区跨入考生注意事项",
+      "url": "javascript:view('2053016656192675841')",
+      "date": ""
+    },
+    {
+      "district": "长宁",
+      "title": "上海市长宁区2026年民办直升电脑随机录取结果",
+      "url": "javascript:view('2051848024837726210')",
+      "date": ""
+    },
+    {
+      "district": "普陀",
+      "title": "关于跨区考生领取《2026年普陀区高中阶段学校计划书》及递交档案材料的通知",
+      "url": "https://kszx.pte.sh.cn/a/cc23249a5d7441e9a1cedbf634bf60ac/default.html",
+      "date": "2026年06月09日"
+    },
+    {
+      "district": "普陀",
+      "title": "转载：2026年上海市中等职业学校自主招收随迁子女招生计划",
+      "url": "https://www.shmeea.edu.cn/page/03200/20260531/20297.html",
+      "date": "2026年06月01日"
+    },
+    {
+      "district": "普陀",
+      "title": "转载：2026年上海市中等职业学校自主招生计划",
+      "url": "https://www.shmeea.edu.cn/page/03200/20260531/20296.html",
+      "date": "2026年06月01日"
+    },
+    {
+      "district": "普陀",
+      "title": "转载：2026年上海市民办普通高中国际课程班和中外合作办学学校招生录取方案",
+      "url": "https://www.shmeea.edu.cn/download/20260529/8.pdf",
+      "date": "2026年06月01日"
+    },
+    {
+      "district": "普陀",
+      "title": "转载：2026年上海市高中学校自主招生录取方案",
+      "url": "https://www.shmeea.edu.cn/download/20260529/7.pdf",
+      "date": "2026年06月01日"
+    },
+    {
+      "district": "普陀",
+      "title": "转载：2026年上海市高中国际课程班和中外合作办学学校招生计划",
+      "url": "https://www.shmeea.edu.cn/download/20260529/3.pdf",
+      "date": "2026年06月01日"
+    },
+    {
+      "district": "普陀",
+      "title": "转载：2026年上海市高中自主招生计划（不含国际课程班）",
+      "url": "https://www.shmeea.edu.cn/download/20260529/5.pdf",
+      "date": "2026年06月01日"
+    },
+    {
+      "district": "普陀",
+      "title": "上海市普陀区2026年“市实验性示范性高中名额分配综合评价录取招生计划分配到普陀区不选择生源学校”的结果公示",
+      "url": "https://kszx.pte.sh.cn/a/e4798c1b5c1e49ed96819b241e521fea/default.html",
+      "date": "2026年05月31日"
+    },
+    {
+      "district": "普陀",
+      "title": "2026年上海市高中名额分配到区招生计划（普陀区）",
+      "url": "https://kszx.pte.sh.cn/a/f874bb771f57418ebd83c7349d239425/default.html",
+      "date": "2026年05月31日"
+    },
+    {
+      "district": "普陀",
+      "title": "转载：普陀区教育局关于印发《2026年普陀区高中阶段学校考试招生工作实施细则》的通知",
+      "url": "https://www.shpt.gov.cn/zhengwu/gzjdzs-jyjrxbkyzs/2026/128/203546.html",
+      "date": "2026年05月11日"
+    },
+    {
+      "district": "虹口",
+      "title": "2026年虹口区跨区考生领取中招计划书及档案材料交接安排",
+      "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=39&id=2164",
+      "date": ""
+    },
+    {
+      "district": "虹口",
+      "title": "2026年虹口区往届生、返沪生领取中招计划书及档案材料交接安排",
+      "url": "https://kszx.hongkouedu.com/articleList.aspx?typeId=11&id=2165",
+      "date": ""
+    },
+    {
+      "district": "虹口",
+      "title": "关于2026年虹口区市实验性示范性高中名额分配综合评价录取计划分配结果的公示",
+      "url": "https://www.shhk.gov.cn/hkjy/zfxx/001016/20260531/bea19d54-4532-4de3-bea4-ceffcd0a8bfb.html",
+      "date": ""
+    },
+    {
+      "district": "虹口",
+      "title": "2026年上海市初中学业水平考试体育与健康科目成绩，道德与法治、历史日常考核成绩及综合素质评价结果将于6月1日公布",
+      "url": "https://www.shmeea.edu.cn/page/08000/20260522/20264.html",
+      "date": ""
+    },
+    {
+      "district": "闵行",
+      "title": "高中阶段学校招生|2026年闵行区中招跨区生报名及后续工作注意事项",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm",
+      "date": ""
+    },
+    {
+      "district": "闵行",
+      "title": "义务教育招生|2026年民办一贯制学校直升电脑随机录取结果",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/5b124a1f-545d-4aea-9f18-6fd9e87c9c97.htm",
+      "date": ""
+    },
+    {
+      "district": "闵行",
+      "title": "高中阶段学校招生|关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3e6ce264-1b39-497a-a40f-1730f6bfe815.htm",
+      "date": ""
+    },
+    {
+      "district": "闵行",
+      "title": "高中阶段学校招生|2026年闵行区高中阶段学校考试招生“持外国护照以外籍身份报名学生”招生方案",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/bb7b86e5-5ee3-4cad-9a26-9be47b67b38e.htm",
+      "date": ""
+    },
+    {
+      "district": "闵行",
+      "title": "义务教育招生|2026年闵行区义务教育阶段民办学校招生计划",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/ff64fcf6-ac5a-4e94-8e89-2a795746fa74.htm",
+      "date": ""
+    },
+    {
+      "district": "闵行",
+      "title": "义务教育招生|2026年闵行区义务教育阶段民办学校招生简章",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_02/content/673f4e9f-7e96-4775-9f9a-2c60427cafac.htm",
+      "date": ""
+    },
+    {
+      "district": "闵行",
+      "title": "高中阶段学校招生|关于印发《2026年上海市闵行区初中毕业升学体育考试工作实施方案》的通知",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/239f9cb9-3a9d-4834-9250-af0ad1331090.htm",
+      "date": ""
+    },
+    {
+      "district": "嘉定",
+      "title": "2026年嘉定区义务教育阶段学校招生入学政策问答",
+      "url": "https://www.jiading.gov.cn/jiaoyu/bmfw/zcjd/content_960968",
+      "date": ""
+    },
+    {
+      "district": "奉贤",
+      "title": "2026年中招跨区（跨入奉贤区）考生注意事项",
+      "url": "https://zsks.shfxjy.cn/1778142868.html",
+      "date": ""
+    },
+    {
+      "district": "奉贤",
+      "title": "2026年奉贤区中招个别报名（往届生、返沪生）现场确认注意事项",
+      "url": "https://zsks.shfxjy.cn/1770171232.html",
+      "date": ""
+    }
+  ],
+  "total_items": 78
+}
