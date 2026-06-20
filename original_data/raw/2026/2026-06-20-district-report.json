@@ -1,0 +1,181 @@
+{
+  "date": "2026-06-20",
+  "scrape_time": "2026-06-20T08:02:11.278793",
+  "method": "curl",
+  "total_districts": 16,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年黄浦区中招跨区生领取志愿填报计划书日程安排",
+          "url": "https://zhaoban.hpe.cn"
+        },
+        {
+          "title": "2026年黄浦区中招个别考生现场确认注意事项",
+          "url": "https://zhaoban.hpe.cn"
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年高中名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/zsks/"
+        },
+        {
+          "title": "2026年高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/zsks/"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [
+        {
+          "title": "中央司法警官学院(高考相关)",
+          "url": "https://kszx.hongkouedu.com"
+        }
+      ]
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年政策性照顾同分优待名单公示(闵行区)",
+          "url": "https://zwgk.shmh.gov.cn"
+        },
+        {
+          "title": "2026年政策性照顾加分名单公示(闵行区)",
+          "url": "https://zwgk.shmh.gov.cn"
+        },
+        {
+          "title": "名额分配到校招生计划(闵行区)",
+          "url": "https://zwgk.shmh.gov.cn"
+        },
+        {
+          "title": "名额分配到区招生计划(闵行区)",
+          "url": "https://zwgk.shmh.gov.cn"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区外区考生领取招生计划递交档案通知",
+          "url": "https://www.bsedu.org.cn"
+        },
+        {
+          "title": "2026年初中学业水平考试考点安排表",
+          "url": "https://www.bsedu.org.cn"
+        },
+        {
+          "title": "名额分配到区到校招生计划(宝山区)",
+          "url": "https://www.bsedu.org.cn"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年统一招生录取外区普通高中在本区招生计划",
+          "url": "https://www.jiading.gov.cn/jiaoyu/"
+        },
+        {
+          "title": "2026年统一招生录取本区普通高中招生计划",
+          "url": "https://www.jiading.gov.cn/jiaoyu/"
+        },
+        {
+          "title": "2026年政策性照顾加分名单(嘉定)",
+          "url": "https://www.jiading.gov.cn/jiaoyu/"
+        },
+        {
+          "title": "2026年政策性照顾同分优待名单(嘉定)",
+          "url": "https://www.jiading.gov.cn/jiaoyu/"
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年初中学业水平考试即将举行",
+          "url": "https://www.jsedu.sh.cn/zsks/"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "上海市教育委员会关于2026年高中阶段学校招生工作的若干意见",
+          "url": "https://kszx.qpedu.cn"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划",
+          "url": "https://zsks.shfxjy.cn"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划",
+          "url": "https://zsks.shfxjy.cn"
+        },
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "https://zsks.shfxjy.cn"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ]
+}
