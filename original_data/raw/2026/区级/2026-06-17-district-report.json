@@ -1,0 +1,289 @@
+{
+  "date": "2026-06-17",
+  "scrape_time": "2026-06-17T08:05:30.847599",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 16,
+  "failed_count": 0,
+  "districts": [
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [],
+      "html_len": 63
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划",
+          "url": "https://zsks.shfxjy.cn"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划",
+          "url": "https://zsks.shfxjy.cn"
+        },
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划 ...[详细]",
+          "url": "https://zsks.shfxjy.cn"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾同分优待名单",
+          "url": "https://zsks.shfxjy.cn"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾加分名单",
+          "url": "https://zsks.shfxjy.cn"
+        }
+      ],
+      "html_len": 20718
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾加分名单和同分优待名单",
+          "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml"
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml"
+        },
+        {
+          "title": "2026年上海市初中学业水平考试考点安排表",
+          "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划 （宝山区）",
+          "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml"
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项",
+          "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml"
+        }
+      ],
+      "html_len": 13331
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": [],
+      "html_len": 535
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾同分优待名单",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾加分名单",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216"
+        },
+        {
+          "title": "2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划 ...",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216"
+        },
+        {
+          "title": "2026年高中名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216"
+        },
+        {
+          "title": "2026年高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216"
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/cat/216"
+        }
+      ],
+      "html_len": 10848
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [],
+      "html_len": 148
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [],
+      "html_len": 1007
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": [],
+      "html_len": 2065
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": [],
+      "html_len": 535
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [],
+      "html_len": 10502
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市初中学业水平考试即将举行",
+          "url": "https://www.jsedu.sh.cn/zsks/"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾同分优待名单（金山区）",
+          "url": "https://www.jsedu.sh.cn/zsks/"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾加分名单（金山区）",
+          "url": "https://www.jsedu.sh.cn/zsks/"
+        },
+        {
+          "title": "2026年上海市初中学业水平考试即将举行\"/>",
+          "url": "https://www.jsedu.sh.cn/zsks/"
+        }
+      ],
+      "html_len": 48219
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾加分名单",
+          "url": "https://kszx.chneic.sh.cn/IndexAction.action"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾同分优待名单",
+          "url": "https://kszx.chneic.sh.cn/IndexAction.action"
+        },
+        {
+          "title": "2026年上海市高中学校&ldquo;名额分配到校&rdquo;招生计划表(长宁区)",
+          "url": "https://kszx.chneic.sh.cn/IndexAction.action"
+        },
+        {
+          "title": "2026年上海市高中学校&quot;名额分配到区&quot;招生计划表（长宁区）",
+          "url": "https://kszx.chneic.sh.cn/IndexAction.action"
+        }
+      ],
+      "html_len": 28818
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [],
+      "html_len": 0
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html"
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "/sx/qkxx/515397.htm"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "/zkzq/zk/509555.htm"
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html"
+        },
+        {
+          "title": "中考录取查询",
+          "url": "http://info.qpedu.cn/zhaosheng/"
+        },
+        {
+          "title": "中考成绩查询",
+          "url": ""
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生工作的若干意见\">转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://kszx.qpedu.cn"
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项\">2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知\">2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn"
+        },
+        {
+          "title": "2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知\">转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://kszx.qpedu.cn"
+        }
+      ],
+      "html_len": 13303
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [],
+      "html_len": 1054
+    },
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾加分名单（黄浦区）",
+          "url": "/sx/gql/709406.htm"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾同分优待名单（黄浦区）",
+          "url": "/sx/gql/709405.htm"
+        },
+        {
+          "title": "转载：2026年黄浦区民办初中招生计划",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/692aabe6-f260-42a2-b79a-12b99ee20c1c.html"
+        },
+        {
+          "title": "转载：2026年上海市高中名额分配到区招生计划（黄浦区）",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/9259c0bd-d949-4d3d-a570-3a4085b3a041.html"
+        },
+        {
+          "title": "转载：2026年黄浦区名额分配综合评价录取到校计划公示",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003003/20260531/6b834dfa-8a74-4524-8f2e-43ae384e9380.html"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾加分名单（黄浦区）\">2026年上海市高中阶段学校招生录取...",
+          "url": "https://zhaoban.hpe.cn"
+        },
+        {
+          "title": "2026年上海市高中阶段学校招生录取政策性照顾同分优待名单（黄浦区）\">2026年上海市高中阶段学校招生录取...",
+          "url": "https://zhaoban.hpe.cn"
+        },
+        {
+          "title": "2026年黄浦区民办初中招生计划\">转载：2026年黄浦区民办初中招生计...",
+          "url": "https://zhaoban.hpe.cn"
+        },
+        {
+          "title": "20260531/9259c0bd-d949-4d3d-a570-3a4085b3a041.html\" target=\"_blank\"\n            ",
+          "url": "https://zhaoban.hpe.cn"
+        },
+        {
+          "title": "20260531/6b834dfa-8a74-4524-8f2e-43ae384e9380.html\" target=\"_blank\"\n            ",
+          "url": "https://zhaoban.hpe.cn"
+        }
+      ],
+      "html_len": 31355
+    }
+  ]
+}
