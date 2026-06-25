@@ -1,0 +1,60 @@
+{
+  "date": "2026-06-25",
+  "scrape_time": "2026-06-25T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 10,
+  "empty_count": 6,
+  "failed_count": 0,
+  "districts": [
+    {"name": "黄浦", "status": "404", "html_size": 1670, "note": "zhaoban.hpe.cn/zkxx/ 返回404，页面已下线"},
+    {"name": "徐汇", "status": "empty", "html_size": 118, "note": "/zsks/ 返回极小页面(126B)，可能JS重定向"},
+    {"name": "长宁", "status": "success", "html_size": 1846, "items_2026": [], "note": "页面从28KB缩至1.8KB"},
+    {"name": "静安", "status": "empty", "html_size": 138, "items_2026": []},
+    {"name": "普陀", "status": "empty", "html_size": 147, "items_2026": []},
+    {"name": "虹口", "status": "success", "html_size": 3194, "items_2026": [], "note": "页面从10KB缩至3KB"},
+    {"name": "杨浦", "status": "empty", "html_size": 1007, "items_2026": []},
+    {"name": "闵行", "status": "success", "html_size": 30078, "items_2026": [
+      "2026年上海市高中阶段学校招生录取政策性照顾同分优待名单公示（闵行区）",
+      "2026年上海市高中阶段学校招生录取政策性照顾加分名单公示（闵行区）",
+      "2026年上海市高中阶段学校名额分配综合评价名额分配到校招生计划（闵行区）",
+      "2026年上海市高中名额分配到区招生计划（闵行区）",
+      "2026年上海市闵行区民办初中调剂志愿录取名单",
+      "2026年闵行区高中阶段学校招收区级优秀体育学生、艺术骨干学生资格确认汇总表",
+      "2026年闵行区民办初中电脑随机录取结果公示",
+      "2026年闵行区高中学校校园开放日信息汇总",
+      "2026年闵行区中招跨区生报名及后续工作注意事项",
+      "2026年民办一贯制学校直升电脑随机录取结果",
+      "关于印发《2026年闵行区高中阶段学校考试招生工作实施细则》的通知",
+      "2026年闵行区高中阶段学校考试招生持外国护照以外籍身份报名学生招生方案",
+      "2026年上海市闵行区高中阶段学校名额分配综合评价录取到校综合考查注意事项"
+    ], "note": "稳定，与06-22一致"},
+    {"name": "宝山", "status": "success", "html_size": 3456, "items_2026": [], "note": "页面从13KB缩至3.5KB"},
+    {"name": "嘉定", "status": "404", "html_size": 147, "note": "jiading.gov.cn/zsks/ 返回404，页面已下线"},
+    {"name": "浦东", "status": "success", "html_size": 3091, "items_2026": []},
+    {"name": "金山", "status": "success", "html_size": 20542, "items_2026": []},
+    {"name": "松江", "status": "success", "html_size": 2065, "items_2026": []},
+    {"name": "青浦", "status": "404", "html_size": 146, "note": "shqp.gov.cn/zsks/ 返回404，页面已下线"},
+    {"name": "奉贤", "status": "success", "html_size": 21923, "items_2026": [
+      "2026年奉贤区高中学校名额分配到校招生计划",
+      "2026年上海市高中名额分配到区招生计划",
+      "2026年奉贤区高中阶段学校考试招生工作实施细则",
+      "2026年中招跨区（跨入奉贤区）考生注意事项",
+      "2026年奉贤区高中学校名额分配到校招生计划 ...[详细]",
+      "2026年奉贤区中考报名往届生返沪生现场确认须知",
+      "2026年奉贤区高中阶段持外国护照学生招生录取方案",
+      "2026年奉贤区高中阶段学校招生录取政策性照顾同分优待名单"
+    ], "note": "稳定，与06-22一致"},
+    {"name": "崇明", "status": "minimal", "html_size": 3100, "items_2026": [], "note": "页面从59KB缩至3KB"}
+  ],
+  "changes_since_2026-06-22": {
+    "new_quota_data": false,
+    "structural_changes": [
+      "黄浦 zhaoban.hpe.cn/zkxx/ 返回404（志愿填报结束后页面下线）",
+      "嘉定 jiading.gov.cn/zsks/ 返回404",
+      "青浦 shqp.gov.cn/zsks/ 返回404",
+      "徐汇/长宁/虹口/宝山/崇明 页面内容大幅缩减"
+    ],
+    "summary": "无新增名额分配数据。多个区/zsks/子页面在志愿填报截止后已下线或缩减。闵行和奉贤保持稳定。招生录取子页(shmeea /page/03600/)暂无2026内容。"
+  }
+}
