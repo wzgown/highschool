@@ -1,36 +1,45 @@
 .loading-container {
-  padding: 48rpx 24rpx;
+  padding: 64rpx 24rpx;
   text-align: center;
 }
 
 .loading-title {
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: var(--color-text-primary);
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 12rpx;
 }
 
 .loading-hint {
   font-size: 26rpx;
   color: var(--color-text-secondary);
-  margin-bottom: 32rpx;
+  margin-bottom: 34rpx;
 }
 
 .skeleton {
   display: flex;
   flex-direction: column;
-  gap: 24rpx;
+  gap: 20rpx;
+  padding: 28rpx;
+  border-radius: var(--radius-lg);
+  background-color: #FFFFFF;
+  border: 2rpx solid rgba(227, 232, 239, 0.92);
+  box-shadow: var(--shadow-card);
 }
 
 .skeleton-row {
   height: 32rpx;
-  border-radius: 8rpx;
-  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+  border-radius: 999rpx;
+  background: linear-gradient(90deg, #EEF2F6 25%, #E3E8EF 37%, #EEF2F6 63%);
   background-size: 400% 100%;
   animation: skeleton-loading 1.4s ease infinite;
 }
 
 @keyframes skeleton-loading {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0 50%; }
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
 }

@@ -71,7 +71,7 @@ Page({
   },
 
   onStartAnalysis: function () {
-    wx.switchTab({ url: '/pages/form/form' })
+    wx.navigateTo({ url: '/pages/form/form' })
   },
 
   onRefresh: function () {

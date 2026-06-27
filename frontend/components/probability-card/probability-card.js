@@ -1,4 +1,8 @@
 Component({
+  options: {
+    addGlobalClass: true
+  },
+
   properties: {
     batch: { type: String, value: '' },
     batchName: { type: String, value: '' },
@@ -9,7 +13,7 @@ Component({
     riskLevel: { type: String, value: '' },
     riskText: { type: String, value: '' },
     riskType: { type: String, value: 'info' },
-    scoreDiff: { type: Number, optional: true }
+    scoreDiff: { type: null, value: null }
   },
 
   methods: {

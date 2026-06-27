@@ -9,27 +9,21 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#F6F8FA",
     "navigationBarTitleText": "折桂登高",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#409EFF",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
+    "color": "#7C8794",
+    "selectedColor": "#1F7A68",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home-active.png"
-      },
-      {
-        "pagePath": "pages/form/form",
-        "text": "填报",
-        "iconPath": "images/form.png",
-        "selectedIconPath": "images/form-active.png"
       },
       {
         "pagePath": "pages/history/history",

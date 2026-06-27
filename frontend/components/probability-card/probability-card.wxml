@@ -1,18 +1,23 @@
 <view class="prob-card">
   <view class="prob-header">
+    <view class="prob-school">
+      <text class="school-name">{{schoolName}}</text>
+      <text wx:if="{{schoolCode}}" class="school-code">代码 {{schoolCode}}</text>
+    </view>
     <text class="tag tag-{{batchType}}">{{batchName}}</text>
-    <text class="school-name">{{schoolName}}</text>
   </view>
+
   <view class="prob-stats">
     <view class="prob-bar-wrap">
       <view class="prob-bar-bg">
-        <view class="prob-bar-fill" style="width: {{probability}}%; background-color: {{probability >= 80 ? '#67C23A' : probability >= 50 ? '#409EFF' : probability >= 30 ? '#E6A23C' : '#F56C6C'}};"></view>
+        <view class="prob-bar-fill" style="width: {{probability}}%; background-color: {{probability >= 80 ? '#248A5A' : probability >= 50 ? '#1F7A68' : probability >= 30 ? '#C97818' : '#D94B4B'}};"></view>
       </view>
       <text class="prob-value">{{probability}}%</text>
     </view>
     <text class="tag tag-{{riskType}}">{{riskText}}</text>
   </view>
+
   <view wx:if="{{scoreDiff !== undefined && scoreDiff !== null}}" class="score-diff">
-    与历年分对比：{{scoreDiff > 0 ? '+' : ''}}{{scoreDiff}}分
+    与历年分对比：{{scoreDiff > 0 ? '+' : ''}}{{scoreDiff}} 分
   </view>
 </view>

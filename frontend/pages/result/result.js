@@ -146,7 +146,7 @@ Page({
   },
 
   goBack: function () {
-    wx.switchTab({ url: '/pages/form/form' })
+    wx.redirectTo({ url: '/pages/form/form' })
   },
 
   viewHistory: function () {

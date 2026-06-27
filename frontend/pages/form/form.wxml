@@ -1,5 +1,10 @@
 <view class="container">
-  <!-- Step Indicator -->
+  <view class="page-hero form-hero">
+    <text class="page-eyebrow">志愿模拟</text>
+    <text class="page-title">录取概率分析</text>
+    <text class="page-subtitle">按基本信息、成绩排名和志愿顺序完成录入，系统将按批次生成分析报告。</text>
+  </view>
+
   <step-indicator
     steps="{{['基本信息', '成绩信息', '志愿填报']}}"
     current="{{currentStep}}"
@@ -18,19 +23,12 @@
         <text class="form-required">*</text>
         <text>所在区县</text>
       </view>
-      <picker
-        mode="selector"
-        range="{{districts}}"
-        range-key="name"
-        bindchange="onDistrictChange"
-      >
-        <view class="form-picker">
-          <text class="{{districtName ? 'form-picker-value' : 'form-picker-placeholder'}}">
-            {{districtName || '请选择区县'}}
-          </text>
-          <text class="form-picker-arrow">▼</text>
-        </view>
-      </picker>
+      <view class="form-picker" bindtap="onDistrictPickerOpen">
+        <text class="{{districtName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+          {{districtName || '请选择区县'}}
+        </text>
+        <text class="form-picker-arrow">›</text>
+      </view>
     </view>
 
     <!-- 初中选择 -->
@@ -39,20 +37,12 @@
         <text class="form-required">*</text>
         <text>就读初中</text>
       </view>
-      <picker
-        mode="selector"
-        range="{{middleSchools}}"
-        range-key="name"
-        bindchange="onMiddleSchoolChange"
-        disabled="{{!districtId}}"
-      >
-        <view class="form-picker {{!districtId ? 'form-picker-disabled' : ''}}">
-          <text class="{{middleSchoolName ? 'form-picker-value' : 'form-picker-placeholder'}}">
-            {{middleSchoolName || (!districtId ? '请先选择区县' : '请选择初中')}}
-          </text>
-          <text class="form-picker-arrow">▼</text>
-        </view>
-      </picker>
+      <view class="form-picker {{!districtId ? 'form-picker-disabled' : ''}}" bindtap="onMiddleSchoolPickerOpen">
+        <text class="{{middleSchoolName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+          {{middleSchoolName || (!districtId ? '请先选择区县' : '请选择初中')}}
+        </text>
+        <text class="form-picker-arrow">›</text>
+      </view>
     </view>
 
     <!-- 名额分配到校资格 -->
@@ -64,7 +54,7 @@
         <switch
           checked="{{hasQuotaSchoolEligibility}}"
           bindchange="onQuotaEligibilityChange"
-          color="#409EFF"
+          color="#1F7A68"
         />
         <text class="switch-label">{{hasQuotaSchoolEligibility ? '已具备' : '未具备'}}</text>
       </view>
@@ -325,19 +315,23 @@
       </view>
 
       <view class="volunteer-item" bindtap="onSchoolPickerOpen" data-type="quotaDistrict">
-        <view class="volunteer-index">1</view>
-        <view class="volunteer-content">
-          <text class="{{volunteerNames.quotaDistrict ? 'volunteer-name' : 'volunteer-placeholder'}}">
-            {{volunteerNames.quotaDistrict || '点击选择学校'}}
-          </text>
+        <view class="volunteer-index-cell">
+          <view class="volunteer-index">1</view>
         </view>
-        <view
-          wx:if="{{volunteers.quotaDistrict}}"
-          class="volunteer-clear"
-          catchtap="onClearVolunteer"
-          data-type="quotaDistrict"
-        >
-          <text>✕</text>
+        <view class="volunteer-content">
+          <view class="{{volunteerNames.quotaDistrict ? 'volunteer-name' : 'volunteer-placeholder'}}">
+            {{volunteerNames.quotaDistrict || '点击选择学校'}}
+          </view>
+        </view>
+        <view class="volunteer-action">
+          <view
+            wx:if="{{volunteers.quotaDistrict}}"
+            class="volunteer-clear"
+            catchtap="onClearVolunteer"
+            data-type="quotaDistrict"
+          >
+            <text>×</text>
+          </view>
         </view>
       </view>
     </view>
@@ -350,36 +344,44 @@
       </view>
 
       <view class="volunteer-item" bindtap="onSchoolPickerOpen" data-type="quotaSchool0">
-        <view class="volunteer-index">1</view>
-        <view class="volunteer-content">
-          <text class="{{volunteerNames.quotaSchool0 ? 'volunteer-name' : 'volunteer-placeholder'}}">
-            {{volunteerNames.quotaSchool0 || '点击选择学校'}}
-          </text>
+        <view class="volunteer-index-cell">
+          <view class="volunteer-index">1</view>
         </view>
-        <view
-          wx:if="{{volunteers.quotaSchool[0]}}"
-          class="volunteer-clear"
-          catchtap="onClearVolunteer"
-          data-type="quotaSchool0"
-        >
-          <text>✕</text>
+        <view class="volunteer-content">
+          <view class="{{volunteerNames.quotaSchool0 ? 'volunteer-name' : 'volunteer-placeholder'}}">
+            {{volunteerNames.quotaSchool0 || '点击选择学校'}}
+          </view>
+        </view>
+        <view class="volunteer-action">
+          <view
+            wx:if="{{volunteers.quotaSchool[0]}}"
+            class="volunteer-clear"
+            catchtap="onClearVolunteer"
+            data-type="quotaSchool0"
+          >
+            <text>×</text>
+          </view>
         </view>
       </view>
 
       <view class="volunteer-item" bindtap="onSchoolPickerOpen" data-type="quotaSchool1">
-        <view class="volunteer-index">2</view>
-        <view class="volunteer-content">
-          <text class="{{volunteerNames.quotaSchool1 ? 'volunteer-name' : 'volunteer-placeholder'}}">
-            {{volunteerNames.quotaSchool1 || '点击选择学校'}}
-          </text>
+        <view class="volunteer-index-cell">
+          <view class="volunteer-index">2</view>
         </view>
-        <view
-          wx:if="{{volunteers.quotaSchool[1]}}"
-          class="volunteer-clear"
-          catchtap="onClearVolunteer"
-          data-type="quotaSchool1"
-        >
-          <text>✕</text>
+        <view class="volunteer-content">
+          <view class="{{volunteerNames.quotaSchool1 ? 'volunteer-name' : 'volunteer-placeholder'}}">
+            {{volunteerNames.quotaSchool1 || '点击选择学校'}}
+          </view>
+        </view>
+        <view class="volunteer-action">
+          <view
+            wx:if="{{volunteers.quotaSchool[1]}}"
+            class="volunteer-clear"
+            catchtap="onClearVolunteer"
+            data-type="quotaSchool1"
+          >
+            <text>×</text>
+          </view>
         </view>
       </view>
     </view>
@@ -399,19 +401,23 @@
           bindtap="onSchoolPickerOpen"
           data-type="unified{{index}}"
         >
-          <view class="volunteer-index">{{index + 1}}</view>
-          <view class="volunteer-content">
-            <text class="{{item ? 'volunteer-name' : 'volunteer-placeholder'}}">
-              {{item ? volunteerNames.unified[index] : '点击选择学校'}}
-            </text>
+          <view class="volunteer-index-cell">
+            <view class="volunteer-index">{{index + 1}}</view>
           </view>
-          <view
-            wx:if="{{item}}"
-            class="volunteer-clear"
-            catchtap="onClearVolunteer"
-            data-type="unified{{index}}"
-          >
-            <text>✕</text>
+          <view class="volunteer-content">
+            <view class="{{item ? 'volunteer-name' : 'volunteer-placeholder'}}">
+              {{item ? volunteerNames.unified[index] : '点击选择学校'}}
+            </view>
+          </view>
+          <view class="volunteer-action">
+            <view
+              wx:if="{{item}}"
+              class="volunteer-clear"
+              catchtap="onClearVolunteer"
+              data-type="unified{{index}}"
+            >
+              <text>×</text>
+            </view>
           </view>
         </view>
       </block>
@@ -425,25 +431,99 @@
         bindtap="onSubmit"
         disabled="{{!canSubmit || submitting}}"
       >
-        {{submitting ? '提交中...' : '开始分析'}}
+        {{submitting ? '分析中...' : '开始分析'}}
       </button>
+    </view>
+  </view>
+
+  <!-- ==================== 区县选择器弹窗 ==================== -->
+  <view wx:if="{{showDistrictPicker}}" class="quick-picker-overlay" bindtap="onDistrictPickerClose">
+    <view class="quick-picker-panel" catchtap="noop">
+      <view class="quick-picker-header">
+        <text class="quick-picker-title">选择所在区县</text>
+        <view class="quick-picker-close" bindtap="onDistrictPickerClose">
+          <text>×</text>
+        </view>
+      </view>
+      <view class="quick-picker-search-wrap">
+        <input
+          class="quick-picker-search"
+          placeholder="输入区名或拼音缩写，如 黄浦 / hp"
+          value="{{districtSearch}}"
+          bindinput="onDistrictSearch"
+          confirm-type="search"
+          focus="{{showDistrictPicker}}"
+        />
+      </view>
+      <scroll-view class="quick-picker-list" scroll-y>
+        <view
+          wx:for="{{filteredDistricts}}"
+          wx:key="id"
+          class="quick-picker-item"
+          bindtap="onDistrictSelect"
+          data-id="{{item.id}}"
+        >
+          <text class="quick-picker-name">{{item.name}}</text>
+          <text wx:if="{{item.code}}" class="quick-picker-code">{{item.code}}</text>
+        </view>
+        <view wx:if="{{filteredDistricts.length === 0}}" class="quick-picker-empty">
+          <text>暂无匹配区县</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- ==================== 初中选择器弹窗 ==================== -->
+  <view wx:if="{{showMiddleSchoolPicker}}" class="quick-picker-overlay" bindtap="onMiddleSchoolPickerClose">
+    <view class="quick-picker-panel" catchtap="noop">
+      <view class="quick-picker-header">
+        <text class="quick-picker-title">选择就读初中</text>
+        <view class="quick-picker-close" bindtap="onMiddleSchoolPickerClose">
+          <text>×</text>
+        </view>
+      </view>
+      <view class="quick-picker-search-wrap">
+        <input
+          class="quick-picker-search"
+          placeholder="输入学校名称或代码"
+          value="{{middleSchoolSearch}}"
+          bindinput="onMiddleSchoolSearch"
+          confirm-type="search"
+          focus="{{showMiddleSchoolPicker}}"
+        />
+      </view>
+      <scroll-view class="quick-picker-list" scroll-y>
+        <view
+          wx:for="{{filteredMiddleSchools}}"
+          wx:key="id"
+          class="quick-picker-item"
+          bindtap="onMiddleSchoolSelect"
+          data-id="{{item.id}}"
+        >
+          <text class="quick-picker-name">{{item.name}}</text>
+          <text wx:if="{{item.code}}" class="quick-picker-code">{{item.code}}</text>
+        </view>
+        <view wx:if="{{filteredMiddleSchools.length === 0}}" class="quick-picker-empty">
+          <text>暂无匹配初中</text>
+        </view>
+      </scroll-view>
     </view>
   </view>
 
   <!-- ==================== 学校选择器弹窗 ==================== -->
   <view wx:if="{{showSchoolPicker}}" class="picker-overlay" bindtap="onPickerClose">
-    <view class="picker-panel" catchtap="">
+    <view class="picker-panel" catchtap="noop">
       <!-- 搜索栏 -->
       <view class="picker-header">
         <text class="picker-title">选择学校</text>
         <view class="picker-close" bindtap="onPickerClose">
-          <text>✕</text>
+          <text>×</text>
         </view>
       </view>
       <view class="picker-search-wrap">
         <input
           class="picker-search"
-          placeholder="搜索学校名称或代码"
+          placeholder="输入学校名称或代码"
           value="{{pickerSearch}}"
           bindinput="onPickerSearch"
           confirm-type="search"

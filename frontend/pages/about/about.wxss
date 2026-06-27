@@ -1,67 +1,109 @@
-.about-header {
+.about-hero {
   display: flex;
   align-items: center;
   gap: 20rpx;
-  margin-bottom: 24rpx;
+  padding: 20rpx 4rpx 30rpx;
 }
 
 .about-logo {
-  width: 72rpx;
-  height: 72rpx;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 20rpx;
+  background-color: #FFFFFF;
+  box-shadow: var(--shadow-card);
+  flex-shrink: 0;
+}
+
+.about-copy {
+  flex: 1;
+  min-width: 0;
 }
 
 .about-title {
-  font-size: 36rpx;
-  font-weight: 700;
+  display: block;
+  font-size: 44rpx;
+  line-height: 1.2;
+  font-weight: 760;
   color: var(--color-text-primary);
 }
 
 .about-desc {
   display: block;
-  font-size: 28rpx;
-  color: var(--color-text-regular);
-  line-height: 1.6;
-  margin-bottom: 24rpx;
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
 }
 
-.about-info {
+.info-list {
   display: flex;
   flex-direction: column;
-  gap: 8rpx;
-  padding: 20rpx;
-  background-color: var(--color-bg);
-  border-radius: 8rpx;
+  gap: 14rpx;
 }
 
-.about-item {
-  font-size: 24rpx;
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 18rpx 0;
+  border-top: 2rpx solid rgba(227, 232, 239, 0.76);
+}
+
+.info-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.info-label {
+  font-size: 25rpx;
   color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.info-value {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+  font-size: 26rpx;
+  color: var(--color-text-primary);
   line-height: 1.5;
+  font-weight: 600;
 }
 
 .feature-list {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
+  gap: 18rpx;
 }
 
 .feature-item {
   display: flex;
   align-items: flex-start;
   gap: 16rpx;
+  padding: 18rpx;
+  border-radius: var(--radius-md);
+  background-color: #F7FAF9;
+  border: 2rpx solid rgba(227, 232, 239, 0.76);
 }
 
-.feature-dot {
-  width: 12rpx;
-  height: 12rpx;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-  margin-top: 14rpx;
+.feature-index {
+  width: 54rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 20rpx;
+  font-weight: 700;
   flex-shrink: 0;
 }
 
 .feature-text {
-  font-size: 28rpx;
+  flex: 1;
+  min-width: 0;
+  font-size: 27rpx;
   color: var(--color-text-regular);
   line-height: 1.6;
 }

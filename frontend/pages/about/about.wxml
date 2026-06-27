@@ -1,33 +1,47 @@
-<view class="container">
-  <view class="card">
-    <view class="about-header">
-      <image class="about-logo" src="/images/logo.png" mode="aspectFit" />
+<view class="container about-page">
+  <view class="about-hero">
+    <image class="about-logo" src="/images/logo.png" mode="aspectFit" />
+    <view class="about-copy">
+      <text class="page-eyebrow">关于</text>
       <text class="about-title">折桂登高</text>
-    </view>
-    <text class="about-desc">上海中考招生模拟系统，帮助考生评估录取概率、优化志愿填报策略。</text>
-    <view class="about-info">
-      <text class="about-item">数据来源：上海市教育考试院历年公开数据</text>
-      <text class="about-item">免责声明：本系统仅供参考，不构成任何录取承诺</text>
+      <text class="about-desc">面向上海中考志愿填报的模拟分析工具。</text>
     </view>
   </view>
 
   <view class="card">
     <view class="card-header">
       <view class="card-header-icon"></view>
-      <text>功能说明</text>
+      <text>数据与边界</text>
+    </view>
+    <view class="info-list">
+      <view class="info-row">
+        <text class="info-label">数据来源</text>
+        <text class="info-value">上海市教育考试院历年公开数据</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">结果性质</text>
+        <text class="info-value">仅供参考，不构成任何录取承诺</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <view class="card-header-icon"></view>
+      <text>覆盖范围</text>
     </view>
     <view class="feature-list">
       <view class="feature-item">
-        <text class="feature-dot"></text>
-        <text class="feature-text">志愿模拟 — 输入成绩和志愿，预测各校录取概率</text>
+        <text class="feature-index">01</text>
+        <text class="feature-text">志愿模拟：输入成绩和志愿，预测各校录取概率</text>
       </view>
       <view class="feature-item">
-        <text class="feature-dot"></text>
-        <text class="feature-text">智能推荐 — 基于模考成绩，AI 推荐"冲稳保"志愿方案</text>
+        <text class="feature-index">02</text>
+        <text class="feature-text">智能推荐：基于模考成绩，生成冲稳保参考方案</text>
       </view>
       <view class="feature-item">
-        <text class="feature-dot"></text>
-        <text class="feature-text">录取规则 — 涵盖名额到区、名额到校、统一招生三个批次</text>
+        <text class="feature-index">03</text>
+        <text class="feature-text">录取规则：覆盖名额到区、名额到校、统一招生批次</text>
       </view>
     </view>
   </view>

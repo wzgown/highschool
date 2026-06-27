@@ -1,8 +1,12 @@
 var api = require('../../utils/api.js')
 
 Component({
+  options: {
+    addGlobalClass: true
+  },
+
   data: {
-    expanded: true,
+    expanded: false,
     tipQrUrl: ''
   },
 

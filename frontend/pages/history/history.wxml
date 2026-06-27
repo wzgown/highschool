@@ -1,24 +1,26 @@
-<view class="container">
-  <!-- Loading State -->
+<view class="container history-page">
+  <view class="page-hero history-hero">
+    <text class="page-eyebrow">历史记录</text>
+    <text class="page-title">分析方案归档</text>
+    <text class="page-subtitle">回看已提交的志愿模拟，便于对比不同方案的风险结构。</text>
+  </view>
+
   <view wx:if="{{loading}}" class="loading-wrapper">
     <view class="loading-spinner"></view>
     <text class="loading-text">加载中...</text>
   </view>
 
-  <!-- Empty State -->
   <empty-state
     wx:elif="{{isEmpty}}"
-    icon="📋"
+    icon="∅"
     title="暂无分析记录"
-    description="完成志愿模拟分析后，记录将显示在这里"
+    description="完成志愿模拟分析后，记录将显示在这里。"
     buttonText="开始分析"
     bind:action="onStartAnalysis"
   />
 
-  <!-- History List -->
   <block wx:else>
-    <!-- Header -->
-    <view class="history-header">
+    <view class="history-toolbar">
       <text class="history-count">共 {{total}} 条记录</text>
       <view class="refresh-btn" bindtap="onRefresh">
         <text class="refresh-icon">↻</text>
@@ -26,41 +28,36 @@
       </view>
     </view>
 
-    <!-- History Cards -->
     <view class="history-list">
-      <view
-        wx:for="{{histories}}"
-        wx:key="id"
-        class="history-card card"
-      >
-        <!-- Card Top: Time + Delete -->
+      <view wx:for="{{histories}}" wx:key="id" class="history-card">
         <view class="card-top">
-          <text class="card-time">{{item.createdTime}}</text>
+          <view class="card-meta">
+            <text class="card-time">{{item.createdTime}}</text>
+            <text wx:if="{{item.districtName}}" class="card-district">{{item.districtName}}</text>
+          </view>
           <view class="delete-btn" bindtap="onDelete" data-id="{{item.id}}">
-            <text class="delete-icon">✕</text>
+            <text class="delete-icon">×</text>
           </view>
         </view>
 
-        <!-- Card Summary -->
         <view class="card-summary">
-          <text class="summary-volunteers">{{item.summary.totalVolunteers}}个志愿</text>
-          <view class="summary-tags">
-            <text wx:if="{{item.summary.safeCount > 0}}" class="tag tag-success">
-              稳 {{item.summary.safeCount}}
-            </text>
-            <text wx:if="{{item.summary.moderateCount > 0}}" class="tag tag-warning">
-              冲 {{item.summary.moderateCount}}
-            </text>
-            <text wx:if="{{item.summary.riskyCount > 0}}" class="tag tag-danger">
-              保 {{item.summary.riskyCount}}
-            </text>
+          <view class="score-block">
+            <text class="score-value">{{item.totalScore || '--'}}</text>
+            <text class="score-unit">分</text>
+          </view>
+          <view class="summary-copy">
+            <text class="summary-volunteers">{{item.summary.totalVolunteers}} 个志愿</text>
+            <view class="summary-tags">
+              <text wx:if="{{item.summary.riskyCount > 0}}" class="tag tag-danger">冲 {{item.summary.riskyCount}}</text>
+              <text wx:if="{{item.summary.moderateCount > 0}}" class="tag tag-warning">稳 {{item.summary.moderateCount}}</text>
+              <text wx:if="{{item.summary.safeCount > 0}}" class="tag tag-success">保 {{item.summary.safeCount}}</text>
+            </view>
           </view>
         </view>
 
-        <!-- Card Actions -->
         <view class="card-actions">
           <view class="detail-btn" bindtap="onViewDetail" data-id="{{item.id}}">
-            <text class="detail-text">查看详情</text>
+            <text class="detail-text">查看报告</text>
             <text class="detail-arrow">›</text>
           </view>
         </view>

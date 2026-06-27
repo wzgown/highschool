@@ -1,4 +1,8 @@
 Component({
+  options: {
+    addGlobalClass: true
+  },
+
   properties: {
     reach: { type: Number, value: 0 },
     target: { type: Number, value: 0 },

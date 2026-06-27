@@ -1,8 +1,9 @@
 <template name="rec-section">
-  <view wx:if="{{results.quotaDistrictRecommendations.length > 0}}" class="card">
+  <view wx:if="{{results.quotaDistrictRecommendations.length > 0}}" class="card rec-card">
     <view class="card-header">
       <view class="card-header-icon"></view>
-      <text>名额分配到区 推荐</text>
+      <text>名额分配到区</text>
+      <text class="tag tag-info">{{results.quotaDistrictRecommendations.length}} 所</text>
     </view>
     <view class="rec-list">
       <view wx:for="{{results.quotaDistrictRecommendations}}" wx:key="schoolId" class="rec-item">
@@ -10,19 +11,26 @@
           <text class="rec-school">{{item.schoolName}}</text>
           <text class="tag tag-{{item.typeTag}}">{{item.typeText}}</text>
         </view>
-        <view class="rec-details">
-          <text class="rec-detail">预估分数线：{{item.estimatedScore}}分</text>
-          <text class="rec-detail">分差：{{item.scoreGap}}分</text>
+        <view class="rec-metrics">
+          <view class="rec-metric">
+            <text class="rec-metric-label">预估线</text>
+            <text class="rec-metric-value">{{item.estimatedScore}} 分</text>
+          </view>
+          <view class="rec-metric">
+            <text class="rec-metric-label">分差</text>
+            <text class="rec-metric-value">{{item.scoreGap}} 分</text>
+          </view>
         </view>
         <text wx:if="{{item.recommendationReason}}" class="rec-reason">{{item.recommendationReason}}</text>
       </view>
     </view>
   </view>
 
-  <view wx:if="{{results.quotaSchoolRecommendations.length > 0}}" class="card">
+  <view wx:if="{{results.quotaSchoolRecommendations.length > 0}}" class="card rec-card">
     <view class="card-header">
       <view class="card-header-icon"></view>
-      <text>名额分配到校 推荐</text>
+      <text>名额分配到校</text>
+      <text class="tag tag-info">{{results.quotaSchoolRecommendations.length}} 所</text>
     </view>
     <view class="rec-list">
       <view wx:for="{{results.quotaSchoolRecommendations}}" wx:key="schoolId" class="rec-item">
@@ -30,19 +38,26 @@
           <text class="rec-school">{{item.schoolName}}</text>
           <text class="tag tag-{{item.typeTag}}">{{item.typeText}}</text>
         </view>
-        <view class="rec-details">
-          <text class="rec-detail">预估分数线：{{item.estimatedScore}}分</text>
-          <text class="rec-detail">分差：{{item.scoreGap}}分</text>
+        <view class="rec-metrics">
+          <view class="rec-metric">
+            <text class="rec-metric-label">预估线</text>
+            <text class="rec-metric-value">{{item.estimatedScore}} 分</text>
+          </view>
+          <view class="rec-metric">
+            <text class="rec-metric-label">分差</text>
+            <text class="rec-metric-value">{{item.scoreGap}} 分</text>
+          </view>
         </view>
         <text wx:if="{{item.recommendationReason}}" class="rec-reason">{{item.recommendationReason}}</text>
       </view>
     </view>
   </view>
 
-  <view wx:if="{{results.unifiedRecommendations.length > 0}}" class="card">
+  <view wx:if="{{results.unifiedRecommendations.length > 0}}" class="card rec-card">
     <view class="card-header">
       <view class="card-header-icon"></view>
-      <text>统一招生 推荐（{{results.unifiedRecommendations.length}}所）</text>
+      <text>统一招生</text>
+      <text class="tag tag-info">{{results.unifiedRecommendations.length}} 所</text>
     </view>
     <view class="rec-list">
       <view wx:for="{{results.unifiedRecommendations}}" wx:key="schoolId" class="rec-item">
@@ -50,40 +65,38 @@
           <text class="rec-school">{{item.schoolName}}</text>
           <text class="tag tag-{{item.typeTag}}">{{item.typeText}}</text>
         </view>
-        <view class="rec-details">
-          <text class="rec-detail">预估分数线：{{item.estimatedScore}}分</text>
-          <text class="rec-detail">分差：{{item.scoreGap}}分</text>
+        <view class="rec-metrics">
+          <view class="rec-metric">
+            <text class="rec-metric-label">预估线</text>
+            <text class="rec-metric-value">{{item.estimatedScore}} 分</text>
+          </view>
+          <view class="rec-metric">
+            <text class="rec-metric-label">分差</text>
+            <text class="rec-metric-value">{{item.scoreGap}} 分</text>
+          </view>
         </view>
         <text wx:if="{{item.recommendationReason}}" class="rec-reason">{{item.recommendationReason}}</text>
       </view>
     </view>
   </view>
 
-  <view wx:if="{{results.quotaDistrictRecommendations.length === 0 && results.quotaSchoolRecommendations.length === 0 && results.unifiedRecommendations.length === 0}}" class="card">
+  <view wx:if="{{results.quotaDistrictRecommendations.length === 0 && results.quotaSchoolRecommendations.length === 0 && results.unifiedRecommendations.length === 0}}" class="card empty-card">
     <text class="empty-text">暂无推荐结果</text>
   </view>
 </template>
 
-<view class="container">
-  <!-- 步骤指示器 -->
-  <view class="steps">
-    <view class="step-item {{currentStep === 0 ? 'active' : (currentStep > 0 ? 'done' : '')}}">
-      <view class="step-circle">{{currentStep > 0 ? '✓' : '1'}}</view>
-      <text class="step-text">基本信息</text>
-    </view>
-    <view class="step-line {{currentStep > 0 ? 'done' : ''}}"></view>
-    <view class="step-item {{currentStep === 1 ? 'active' : (currentStep > 1 ? 'done' : '')}}">
-      <view class="step-circle">{{currentStep > 1 ? '✓' : '2'}}</view>
-      <text class="step-text">模考成绩</text>
-    </view>
-    <view class="step-line {{currentStep > 1 ? 'done' : ''}}"></view>
-    <view class="step-item {{currentStep === 2 ? 'active' : ''}}">
-      <view class="step-circle">3</view>
-      <text class="step-text">推荐结果</text>
-    </view>
+<view class="container recommendation-page">
+  <view class="page-hero recommendation-hero">
+    <text class="page-eyebrow">智能推荐</text>
+    <text class="page-title">冲稳保志愿参考</text>
+    <text class="page-subtitle">根据模考分数和所在区，生成可继续模拟的志愿候选清单。</text>
   </view>
 
-  <!-- Step 0: 基本信息 -->
+  <step-indicator
+    steps="{{['基本信息', '模考成绩', '推荐结果']}}"
+    current="{{currentStep}}"
+  />
+
   <view wx:if="{{currentStep === 0}}" class="step-content">
     <view class="card">
       <view class="card-header">
@@ -91,63 +104,52 @@
         <text>考生基本信息</text>
       </view>
 
-      <!-- 区县选择 -->
       <view class="form-group">
         <view class="form-label">
           <text class="form-required">*</text>
           <text>所属区县</text>
         </view>
-        <picker mode="selector" range="{{districts}}" range-key="name" bindchange="onDistrictChange">
-          <view class="form-picker">
-            <text class="{{districtName ? 'form-picker-value' : 'form-picker-placeholder'}}">
-              {{districtName || '请选择所属区县'}}
-            </text>
-            <text class="form-picker-arrow">▸</text>
-          </view>
-        </picker>
+        <view class="form-picker" bindtap="onDistrictPickerOpen">
+          <text class="{{districtName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+            {{districtName || '请选择所属区县'}}
+          </text>
+          <text class="form-picker-arrow">›</text>
+        </view>
       </view>
 
-      <!-- 初中选择 -->
       <view class="form-group">
         <view class="form-label">
           <text>初中学校</text>
         </view>
-        <picker mode="selector" range="{{middleSchools}}" range-key="name" bindchange="onMiddleSchoolChange" disabled="{{!districtId}}">
-          <view class="form-picker {{!districtId ? 'form-input-disabled' : ''}}">
-            <text class="{{middleSchoolName ? 'form-picker-value' : 'form-picker-placeholder'}}">
-              {{middleSchoolName || '请先选择区县（选填）'}}
-            </text>
-            <text class="form-picker-arrow">▸</text>
-          </view>
-        </picker>
-        <text class="form-tip">选填，用于名额到校推荐</text>
+        <view class="form-picker {{!districtId ? 'form-input-disabled' : ''}}" bindtap="onMiddleSchoolPickerOpen">
+          <text class="{{middleSchoolName ? 'form-picker-value' : 'form-picker-placeholder'}}">
+            {{middleSchoolName || '请先选择区县（选填）'}}
+          </text>
+          <text class="form-picker-arrow">›</text>
+        </view>
+        <text class="form-tip">选填，用于名额到校推荐。</text>
       </view>
 
-      <!-- 名额到校资格 -->
       <view class="form-group">
         <view class="checkbox-row">
-          <switch checked="{{hasQuotaSchoolEligibility}}" bindchange="onQuotaEligibilityChange" color="#409EFF" />
+          <switch checked="{{hasQuotaSchoolEligibility}}" bindchange="onQuotaEligibilityChange" color="#1F7A68" />
           <text class="checkbox-label">具备名额分配到校填报资格</text>
         </view>
-        <text class="form-tip">仅限"不选择生源初中在籍在读满3年的应届初三学生"</text>
+        <text class="form-tip">关闭后不生成名额到校推荐。</text>
       </view>
     </view>
   </view>
 
-  <!-- Step 1: 模考成绩 -->
   <view wx:if="{{currentStep === 1}}" class="step-content">
-    <view class="alert alert-info">
-      请填写一模、二模成绩（至少填写一项）。各区总分不同，系统将自动转换为中考等效分数。
-    </view>
+    <view class="alert alert-info">一模、二模至少填写一项；系统会换算为 750 分制。</view>
 
-    <!-- 一模成绩 -->
     <view class="card score-card">
       <view class="score-card-header">
         <view class="score-title-row">
           <text class="tag tag-primary">一模</text>
           <text class="score-max-hint">{{districtName}}总分：{{firstMockMax}}分</text>
         </view>
-        <switch checked="{{firstMockHasScore}}" bindchange="onFirstMockToggle" color="#409EFF" />
+        <switch checked="{{firstMockHasScore}}" bindchange="onFirstMockToggle" color="#1F7A68" />
       </view>
 
       <view wx:if="{{firstMockHasScore}}" class="score-body">
@@ -160,22 +162,21 @@
           <input class="form-input" type="number" placeholder="请输入区排名" value="{{firstMockDistrictRank || ''}}" bindinput="onFirstMockRankInput" maxlength="5" />
         </view>
         <view wx:if="{{firstMockConverted}}" class="conversion-hint conversion-hint-primary">
-          预估中考等效：约 {{firstMockConverted}} 分（750分制）
+          预估中考等效：约 {{firstMockConverted}} 分
         </view>
       </view>
       <view wx:else class="score-empty">
-        <text class="score-empty-text">未参加一模或成绩暂未公布</text>
+        <text class="score-empty-text">未填写一模成绩</text>
       </view>
     </view>
 
-    <!-- 二模成绩 -->
     <view class="card score-card">
       <view class="score-card-header">
         <view class="score-title-row">
           <text class="tag tag-success">二模</text>
           <text class="score-max-hint">{{districtName}}总分：{{secondMockMax}}分</text>
         </view>
-        <switch checked="{{secondMockHasScore}}" bindchange="onSecondMockToggle" color="#409EFF" />
+        <switch checked="{{secondMockHasScore}}" bindchange="onSecondMockToggle" color="#1F7A68" />
       </view>
 
       <view wx:if="{{secondMockHasScore}}" class="score-body">
@@ -188,16 +189,15 @@
           <input class="form-input" type="number" placeholder="请输入区排名" value="{{secondMockDistrictRank || ''}}" bindinput="onSecondMockRankInput" maxlength="5" />
         </view>
         <view wx:if="{{secondMockConverted}}" class="conversion-hint conversion-hint-success">
-          预估中考等效：约 {{secondMockConverted}} 分（750分制）
+          预估中考等效：约 {{secondMockConverted}} 分
         </view>
       </view>
       <view wx:else class="score-empty">
-        <text class="score-empty-text">未参加二模或成绩暂未公布</text>
+        <text class="score-empty-text">未填写二模成绩</text>
       </view>
     </view>
   </view>
 
-  <!-- Step 2: 推荐结果 -->
   <view wx:if="{{currentStep === 2}}" class="step-content">
     <view wx:if="{{loading}}" class="loading-box">
       <view class="loading-spinner"></view>
@@ -205,21 +205,17 @@
     </view>
 
     <view wx:elif="{{firstMockResults || secondMockResults}}">
-      <!-- Tab 切换 -->
       <view wx:if="{{firstMockResults && secondMockResults}}" class="result-tabs">
         <view class="result-tab {{activeResultTab === 'firstMock' ? 'active' : ''}}" bindtap="onTabChange" data-tab="firstMock">
-          <text class="tag tag-primary" style="margin-right: 8rpx;">一模</text>
-          <text>推荐结果</text>
+          <text>一模推荐</text>
         </view>
         <view class="result-tab {{activeResultTab === 'secondMock' ? 'active' : ''}}" bindtap="onTabChange" data-tab="secondMock">
-          <text class="tag tag-success" style="margin-right: 8rpx;">二模</text>
-          <text>推荐结果</text>
+          <text>二模推荐</text>
         </view>
       </view>
 
-      <!-- 一模结果 -->
       <view wx:if="{{activeResultTab === 'firstMock' && firstMockResults}}">
-        <view wx:if="{{firstMockResults.scoreConversion}}" class="card">
+        <view wx:if="{{firstMockResults.scoreConversion}}" class="card conversion-card">
           <view class="card-header">
             <view class="card-header-icon"></view>
             <text>分数转换</text>
@@ -230,12 +226,12 @@
               <text class="conversion-value">{{firstMockResults.scoreConversion.originalScore}} 分</text>
             </view>
             <view class="conversion-item">
-              <text class="conversion-label">转换后750分制</text>
-              <text class="tag tag-primary">{{firstMockResults.scoreConversion.convertedScore750}} 分</text>
+              <text class="conversion-label">750分制</text>
+              <text class="conversion-value text-primary">{{firstMockResults.scoreConversion.convertedScore750}} 分</text>
             </view>
             <view class="conversion-item">
-              <text class="conversion-label">转换后800分制</text>
-              <text class="tag tag-success">{{firstMockResults.scoreConversion.convertedScore800}} 分</text>
+              <text class="conversion-label">800分制</text>
+              <text class="conversion-value text-success">{{firstMockResults.scoreConversion.convertedScore800}} 分</text>
             </view>
           </view>
         </view>
@@ -243,9 +239,8 @@
         <template is="rec-section" data="{{results: firstMockResults}}" />
       </view>
 
-      <!-- 二模结果 -->
       <view wx:if="{{activeResultTab === 'secondMock' && secondMockResults}}">
-        <view wx:if="{{secondMockResults.scoreConversion}}" class="card">
+        <view wx:if="{{secondMockResults.scoreConversion}}" class="card conversion-card">
           <view class="card-header">
             <view class="card-header-icon"></view>
             <text>分数转换</text>
@@ -256,12 +251,12 @@
               <text class="conversion-value">{{secondMockResults.scoreConversion.originalScore}} 分</text>
             </view>
             <view class="conversion-item">
-              <text class="conversion-label">转换后750分制</text>
-              <text class="tag tag-primary">{{secondMockResults.scoreConversion.convertedScore750}} 分</text>
+              <text class="conversion-label">750分制</text>
+              <text class="conversion-value text-primary">{{secondMockResults.scoreConversion.convertedScore750}} 分</text>
             </view>
             <view class="conversion-item">
-              <text class="conversion-label">转换后800分制</text>
-              <text class="tag tag-success">{{secondMockResults.scoreConversion.convertedScore800}} 分</text>
+              <text class="conversion-label">800分制</text>
+              <text class="conversion-value text-success">{{secondMockResults.scoreConversion.convertedScore800}} 分</text>
             </view>
           </view>
         </view>
@@ -269,7 +264,6 @@
         <template is="rec-section" data="{{results: secondMockResults}}" />
       </view>
 
-      <!-- 操作按钮 -->
       <view class="actions">
         <button class="btn-primary" bindtap="goToSimulation">去模拟填报</button>
         <button class="btn-secondary" bindtap="onReset">重新推荐</button>
@@ -278,12 +272,83 @@
       <tip-section />
     </view>
 
-    <view wx:else class="card">
+    <view wx:else class="card empty-card">
       <text class="empty-text">暂无推荐结果，请先填写模考成绩</text>
     </view>
   </view>
 
-  <!-- 底部操作按钮 -->
+  <view wx:if="{{showDistrictPicker}}" class="quick-picker-overlay" bindtap="onDistrictPickerClose">
+    <view class="quick-picker-panel" catchtap="noop">
+      <view class="quick-picker-header">
+        <text class="quick-picker-title">选择所属区县</text>
+        <view class="quick-picker-close" bindtap="onDistrictPickerClose">
+          <text>×</text>
+        </view>
+      </view>
+      <view class="quick-picker-search-wrap">
+        <input
+          class="quick-picker-search"
+          placeholder="输入区名或拼音缩写，如 黄浦 / hp"
+          value="{{districtSearch}}"
+          bindinput="onDistrictSearch"
+          confirm-type="search"
+          focus="{{showDistrictPicker}}"
+        />
+      </view>
+      <scroll-view class="quick-picker-list" scroll-y>
+        <view
+          wx:for="{{filteredDistricts}}"
+          wx:key="id"
+          class="quick-picker-item"
+          bindtap="onDistrictSelect"
+          data-id="{{item.id}}"
+        >
+          <text class="quick-picker-name">{{item.name}}</text>
+          <text wx:if="{{item.code}}" class="quick-picker-code">{{item.code}}</text>
+        </view>
+        <view wx:if="{{filteredDistricts.length === 0}}" class="quick-picker-empty">
+          <text>暂无匹配区县</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view wx:if="{{showMiddleSchoolPicker}}" class="quick-picker-overlay" bindtap="onMiddleSchoolPickerClose">
+    <view class="quick-picker-panel" catchtap="noop">
+      <view class="quick-picker-header">
+        <text class="quick-picker-title">选择初中学校</text>
+        <view class="quick-picker-close" bindtap="onMiddleSchoolPickerClose">
+          <text>×</text>
+        </view>
+      </view>
+      <view class="quick-picker-search-wrap">
+        <input
+          class="quick-picker-search"
+          placeholder="输入学校名称或代码"
+          value="{{middleSchoolSearch}}"
+          bindinput="onMiddleSchoolSearch"
+          confirm-type="search"
+          focus="{{showMiddleSchoolPicker}}"
+        />
+      </view>
+      <scroll-view class="quick-picker-list" scroll-y>
+        <view
+          wx:for="{{filteredMiddleSchools}}"
+          wx:key="id"
+          class="quick-picker-item"
+          bindtap="onMiddleSchoolSelect"
+          data-id="{{item.id}}"
+        >
+          <text class="quick-picker-name">{{item.name}}</text>
+          <text wx:if="{{item.code}}" class="quick-picker-code">{{item.code}}</text>
+        </view>
+        <view wx:if="{{filteredMiddleSchools.length === 0}}" class="quick-picker-empty">
+          <text>暂无匹配初中</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
   <view wx:if="{{currentStep < 2}}" class="actions">
     <button wx:if="{{currentStep === 1}}" class="btn-secondary" bindtap="prevStep">上一步</button>
     <button wx:if="{{currentStep === 0}}" class="btn-primary {{canNext ? '' : 'btn-disabled'}}" bindtap="nextStep" disabled="{{!canNext}}">下一步</button>

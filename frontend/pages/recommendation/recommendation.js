@@ -6,6 +6,8 @@
  */
 
 var reference = require('../../utils/reference')
+var districtUtil = require('../../utils/district')
+var pickerUtil = require('../../utils/picker')
 
 // 区总分配置：{ firstMock: 一模总分, secondMock: 二模总分 }
 var DISTRICT_SCORE_CONFIG = {
@@ -47,11 +49,17 @@ Page({
 
     // 下拉选项
     districts: [],
+    filteredDistricts: [],
     middleSchools: [],
+    filteredMiddleSchools: [],
 
     // 表单数据
     districtId: null,
     districtName: '',
+    showDistrictPicker: false,
+    districtSearch: '',
+    showMiddleSchoolPicker: false,
+    middleSchoolSearch: '',
     middleSchoolId: null,
     middleSchoolName: '',
     hasQuotaSchoolEligibility: true,
@@ -84,15 +92,18 @@ Page({
     this._loadDistricts()
   },
 
+  noop: function () {},
+
   // ======== 数据加载 ========
 
   _loadDistricts: function () {
     var self = this
     reference.getDistricts().then(function (res) {
-      var districts = (res.districts || []).map(function (d) {
-        return { id: d.id, name: d.name, code: d.code || '' }
+      var districts = districtUtil.filterDistricts(res.districts || [])
+      self.setData({
+        districts: districts,
+        filteredDistricts: districtUtil.searchDistricts(districts, self.data.districtSearch)
       })
-      self.setData({ districts: districts })
     }).catch(function () {
       wx.showToast({ title: '加载区县失败', icon: 'none' })
     })
@@ -101,10 +112,11 @@ Page({
   _loadMiddleSchools: function (districtId) {
     var self = this
     reference.getMiddleSchools(districtId).then(function (res) {
-      var middleSchools = (res.middleSchools || []).map(function (s) {
-        return { id: s.id, name: s.name, code: s.code || '' }
+      var middleSchools = pickerUtil.mapOptions(res.middleSchools || [])
+      self.setData({
+        middleSchools: middleSchools,
+        filteredMiddleSchools: pickerUtil.searchOptions(middleSchools, self.data.middleSchoolSearch)
       })
-      self.setData({ middleSchools: middleSchools })
     }).catch(function () {
       wx.showToast({ title: '加载初中列表失败', icon: 'none' })
     })
@@ -116,15 +128,53 @@ Page({
     var index = Number(e.detail.value)
     var district = this.data.districts[index]
     if (!district) return
+    this._selectDistrict(district)
+  },
 
+  onDistrictPickerOpen: function () {
+    this.setData({
+      showDistrictPicker: true,
+      districtSearch: '',
+      filteredDistricts: this.data.districts
+    })
+  },
+
+  onDistrictPickerClose: function () {
+    this.setData({
+      showDistrictPicker: false,
+      districtSearch: ''
+    })
+  },
+
+  onDistrictSearch: function (e) {
+    var query = e.detail.value || ''
+    this.setData({
+      districtSearch: query,
+      filteredDistricts: districtUtil.searchDistricts(this.data.districts, query)
+    })
+  },
+
+  onDistrictSelect: function (e) {
+    var district = districtUtil.findDistrictById(this.data.districts, e.currentTarget.dataset.id)
+    if (!district) return
+    this._selectDistrict(district)
+  },
+
+  _selectDistrict: function (district) {
     var config = getScoreConfig(district.id)
 
     this.setData({
       districtId: district.id,
       districtName: district.name,
+      showDistrictPicker: false,
+      districtSearch: '',
+      filteredDistricts: this.data.districts,
       middleSchoolId: null,
       middleSchoolName: '',
       middleSchools: [],
+      filteredMiddleSchools: [],
+      showMiddleSchoolPicker: false,
+      middleSchoolSearch: '',
       firstMockMax: config.firstMock,
       secondMockMax: config.secondMock,
       firstMockTotalScore: 0,
@@ -145,6 +195,46 @@ Page({
     this.setData({
       middleSchoolId: school.id,
       middleSchoolName: school.name
+    })
+  },
+
+  onMiddleSchoolPickerOpen: function () {
+    if (!this.data.districtId) {
+      wx.showToast({ title: '请先选择区县', icon: 'none' })
+      return
+    }
+
+    this.setData({
+      showMiddleSchoolPicker: true,
+      middleSchoolSearch: '',
+      filteredMiddleSchools: this.data.middleSchools
+    })
+  },
+
+  onMiddleSchoolPickerClose: function () {
+    this.setData({
+      showMiddleSchoolPicker: false,
+      middleSchoolSearch: ''
+    })
+  },
+
+  onMiddleSchoolSearch: function (e) {
+    var query = e.detail.value || ''
+    this.setData({
+      middleSchoolSearch: query,
+      filteredMiddleSchools: pickerUtil.searchOptions(this.data.middleSchools, query)
+    })
+  },
+
+  onMiddleSchoolSelect: function (e) {
+    var school = pickerUtil.findById(this.data.middleSchools, e.currentTarget.dataset.id)
+    if (!school) return
+
+    this.setData({
+      middleSchoolId: school.id,
+      middleSchoolName: school.name,
+      showMiddleSchoolPicker: false,
+      middleSchoolSearch: ''
     })
   },
 
@@ -387,7 +477,7 @@ Page({
   // ======== 操作 ========
 
   goToSimulation: function () {
-    wx.switchTab({ url: '/pages/form/form' })
+    wx.navigateTo({ url: '/pages/form/form' })
   },
 
   onReset: function () {

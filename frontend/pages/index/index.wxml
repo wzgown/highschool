@@ -1,67 +1,46 @@
-<view class="container">
-  <!-- Hero Section -->
-  <view class="hero">
-    <view class="hero-content">
-      <text class="hero-title">
-        <image class="hero-logo" src="/images/logo.png" mode="aspectFit" />
-        折桂登高
-      </text>
-      <text class="hero-subtitle">智能分析录取概率，优化志愿填报策略</text>
+<view class="container home-page">
+  <view class="hero-band">
+    <view class="hero-topline">
+      <image class="hero-logo" src="/images/logo.png" mode="aspectFit" />
+      <text class="hero-eyebrow">上海中考志愿模拟</text>
+    </view>
+
+    <text class="home-title">折桂登高</text>
+    <text class="home-subtitle">围绕成绩、排名和志愿顺序，形成可复盘的录取概率分析。</text>
+
+    <view class="hero-action" bindtap="onStartAnalysis">
+      <view class="hero-action-copy">
+        <text class="hero-action-title">开始志愿模拟</text>
+        <text class="hero-action-desc">适合已有目标学校和志愿顺序</text>
+      </view>
+      <text class="hero-action-arrow">›</text>
     </view>
   </view>
 
-  <!-- Action Cards -->
-  <view class="actions">
-    <view class="card action-card action-card-primary" bindtap="onStartAnalysis">
-      <text class="action-icon">🎯</text>
-      <view class="action-text">
-        <text class="action-title">志愿模拟</text>
-        <text class="action-desc">输入成绩和志愿，获取录取概率预测</text>
+  <view class="secondary-actions">
+    <view class="secondary-card" bindtap="onSmartRecommend">
+      <view class="secondary-glyph recommend-glyph">
+        <view class="glyph-node"></view>
+        <view class="glyph-node small"></view>
       </view>
-      <text class="action-arrow">›</text>
+      <text class="secondary-title">智能推荐</text>
+      <text class="secondary-desc">根据模考成绩生成冲稳保参考</text>
+      <text class="secondary-arrow">›</text>
     </view>
-    <view class="card action-card action-card-recommend" bindtap="onSmartRecommend">
-      <text class="action-icon">✨</text>
-      <view class="action-text">
-        <text class="action-title">智能推荐</text>
-        <text class="action-desc">AI 分析历年数据，推荐冲稳保志愿</text>
+
+    <view class="secondary-card" bindtap="onViewHistory">
+      <view class="secondary-glyph history-glyph">
+        <view class="glyph-line"></view>
+        <view class="glyph-line short"></view>
       </view>
-      <text class="action-arrow">›</text>
-    </view>
-    <view class="card action-card" bindtap="onViewHistory">
-      <text class="action-icon">📋</text>
-      <view class="action-text">
-        <text class="action-title">历史记录</text>
-        <text class="action-desc">查看之前的志愿分析结果</text>
-      </view>
-      <text class="action-arrow">›</text>
+      <text class="secondary-title">历史分析</text>
+      <text class="secondary-desc">对比之前提交的志愿方案</text>
+      <text class="secondary-arrow">›</text>
     </view>
   </view>
 
-  <!-- Batch Info -->
-  <view class="card batch-info">
-    <view class="card-header">
-      <text>录取批次说明</text>
-    </view>
-    <view class="batch-list">
-      <view class="batch-item">
-        <text class="tag tag-primary">名额分配到区</text>
-        <text class="batch-desc">1个志愿 | 全区排名竞争</text>
-      </view>
-      <view class="batch-item">
-        <text class="tag tag-success">名额分配到校</text>
-        <text class="batch-desc">2个志愿 | 校内排名竞争（需具备资格）</text>
-      </view>
-      <view class="batch-item">
-        <text class="tag tag-warning">统一招生</text>
-        <text class="batch-desc">1-15志愿 | 平行志愿投档</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- Disclaimer -->
   <view class="disclaimer">
-    <text class="disclaimer-text">本系统仅供参考，不构成任何录取承诺。实际录取以官方公布结果为准。</text>
-    <text class="about-link" bindtap="goAbout">关于</text>
+    <text class="disclaimer-text">分析结果仅供参考，实际录取以官方公布结果为准。</text>
+    <text class="about-link" bindtap="goAbout">关于数据与规则</text>
   </view>
 </view>

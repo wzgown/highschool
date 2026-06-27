@@ -2,6 +2,7 @@
   "navigationBarTitleText": "分析结果",
   "usingComponents": {
     "loading-skeleton": "/components/loading-skeleton/loading-skeleton",
+    "probability-card": "/components/probability-card/probability-card",
     "gradient-bar": "/components/gradient-bar/gradient-bar",
     "tip-section": "/components/tip-section/tip-section"
   }

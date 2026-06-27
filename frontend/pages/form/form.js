@@ -9,6 +9,8 @@ var reference = require('../../utils/reference')
 var candidate = require('../../utils/candidate')
 var storage = require('../../utils/storage')
 var constants = require('../../utils/constants')
+var districtUtil = require('../../utils/district')
+var pickerUtil = require('../../utils/picker')
 
 var SCORE_LIMITS = constants.SCORE_LIMITS
 
@@ -47,7 +49,9 @@ Page({
 
     // 下拉选项
     districts: [],
+    filteredDistricts: [],
     middleSchools: [],
+    filteredMiddleSchools: [],
     quotaDistrictSchools: [],
     quotaSchoolSchools: [],
     unifiedSchools: [],
@@ -84,6 +88,10 @@ Page({
     rankValidation: { valid: true, message: '' },
 
     // 学校选择器
+    showDistrictPicker: false,
+    districtSearch: '',
+    showMiddleSchoolPicker: false,
+    middleSchoolSearch: '',
     showSchoolPicker: false,
     pickerType: '',
     pickerSchools: [],
@@ -101,15 +109,30 @@ Page({
     this._saveForm()
   },
 
+  noop: function () {},
+
   // ======== 数据加载 ========
 
   _loadDistricts: function () {
     var self = this
     reference.getDistricts().then(function (res) {
-      var districts = (res.districts || []).map(function (d) {
-        return { id: d.id, name: d.name, code: d.code || '' }
-      })
-      self.setData({ districts: districts })
+      var districts = districtUtil.filterDistricts(res.districts || [])
+      var updates = {
+        districts: districts,
+        filteredDistricts: districtUtil.searchDistricts(districts, self.data.districtSearch)
+      }
+
+      if (self.data.districtId && !districtUtil.findDistrictById(districts, self.data.districtId)) {
+        updates.districtId = null
+        updates.districtName = ''
+        updates.middleSchoolId = null
+        updates.middleSchoolName = ''
+        updates.middleSchools = []
+        updates.filteredMiddleSchools = []
+      }
+
+      self.setData(updates)
+      self._validateCurrentStep()
     }).catch(function () {
       wx.showToast({ title: '加载区县失败', icon: 'none' })
     })
@@ -118,12 +141,16 @@ Page({
   _restoreForm: function () {
     var saved = storage.loadFormData()
     if (!saved) return
+    var savedIsCityLevel = districtUtil.isCityLevel({
+      id: saved.districtId,
+      name: saved.districtName
+    })
 
     this.setData({
-      districtId: saved.districtId || null,
-      districtName: saved.districtName || '',
-      middleSchoolId: saved.middleSchoolId || null,
-      middleSchoolName: saved.middleSchoolName || '',
+      districtId: savedIsCityLevel ? null : (saved.districtId || null),
+      districtName: savedIsCityLevel ? '' : (saved.districtName || ''),
+      middleSchoolId: savedIsCityLevel ? null : (saved.middleSchoolId || null),
+      middleSchoolName: savedIsCityLevel ? '' : (saved.middleSchoolName || ''),
       hasQuotaSchoolEligibility: saved.hasQuotaSchoolEligibility || false,
       scores: saved.scores ? cloneScores(saved.scores) : cloneScores(EMPTY_SCORES),
       comprehensiveQuality: saved.comprehensiveQuality || 50,
@@ -135,7 +162,7 @@ Page({
       }
     })
 
-    if (saved.districtId) {
+    if (saved.districtId && !savedIsCityLevel) {
       this._loadMiddleSchools(saved.districtId)
     }
 
@@ -167,14 +194,52 @@ Page({
     var index = Number(e.detail.value)
     var district = this.data.districts[index]
     if (!district) return
+    this._selectDistrict(district)
+  },
 
+  onDistrictPickerOpen: function () {
+    this.setData({
+      showDistrictPicker: true,
+      districtSearch: '',
+      filteredDistricts: this.data.districts
+    })
+  },
+
+  onDistrictPickerClose: function () {
+    this.setData({
+      showDistrictPicker: false,
+      districtSearch: ''
+    })
+  },
+
+  onDistrictSearch: function (e) {
+    var query = e.detail.value || ''
+    this.setData({
+      districtSearch: query,
+      filteredDistricts: districtUtil.searchDistricts(this.data.districts, query)
+    })
+  },
+
+  onDistrictSelect: function (e) {
+    var district = districtUtil.findDistrictById(this.data.districts, e.currentTarget.dataset.id)
+    if (!district) return
+    this._selectDistrict(district)
+  },
+
+  _selectDistrict: function (district) {
     // 切换区县时清除所有关联数据
     this.setData({
       districtId: district.id,
       districtName: district.name,
+      showDistrictPicker: false,
+      districtSearch: '',
+      filteredDistricts: this.data.districts,
       middleSchoolId: null,
       middleSchoolName: '',
       middleSchools: [],
+      filteredMiddleSchools: [],
+      showMiddleSchoolPicker: false,
+      middleSchoolSearch: '',
       // 清除志愿数据（区县变更后志愿失效）
       volunteers: {
         quotaDistrict: null,
@@ -199,10 +264,11 @@ Page({
   _loadMiddleSchools: function (districtId) {
     var self = this
     reference.getMiddleSchools(districtId).then(function (res) {
-      var middleSchools = (res.middleSchools || []).map(function (s) {
-        return { id: s.id, name: s.name, code: s.code || '' }
+      var middleSchools = pickerUtil.mapOptions(res.middleSchools || [])
+      self.setData({
+        middleSchools: middleSchools,
+        filteredMiddleSchools: pickerUtil.searchOptions(middleSchools, self.data.middleSchoolSearch)
       })
-      self.setData({ middleSchools: middleSchools })
     }).catch(function () {
       wx.showToast({ title: '加载初中列表失败', icon: 'none' })
     })
@@ -216,6 +282,47 @@ Page({
     this.setData({
       middleSchoolId: school.id,
       middleSchoolName: school.name
+    })
+    this._validateCurrentStep()
+  },
+
+  onMiddleSchoolPickerOpen: function () {
+    if (!this.data.districtId) {
+      wx.showToast({ title: '请先选择区县', icon: 'none' })
+      return
+    }
+
+    this.setData({
+      showMiddleSchoolPicker: true,
+      middleSchoolSearch: '',
+      filteredMiddleSchools: this.data.middleSchools
+    })
+  },
+
+  onMiddleSchoolPickerClose: function () {
+    this.setData({
+      showMiddleSchoolPicker: false,
+      middleSchoolSearch: ''
+    })
+  },
+
+  onMiddleSchoolSearch: function (e) {
+    var query = e.detail.value || ''
+    this.setData({
+      middleSchoolSearch: query,
+      filteredMiddleSchools: pickerUtil.searchOptions(this.data.middleSchools, query)
+    })
+  },
+
+  onMiddleSchoolSelect: function (e) {
+    var school = pickerUtil.findById(this.data.middleSchools, e.currentTarget.dataset.id)
+    if (!school) return
+
+    this.setData({
+      middleSchoolId: school.id,
+      middleSchoolName: school.name,
+      showMiddleSchoolPicker: false,
+      middleSchoolSearch: ''
     })
     this._validateCurrentStep()
   },
@@ -419,17 +526,9 @@ Page({
     ]).then(function (results) {
       wx.hideLoading()
 
-      var quotaDistrictSchools = (results[0].schools || []).map(function (s) {
-        return { id: s.id, fullName: s.fullName || s.name, code: s.code || '', quotaCount: s.quotaCount || 0 }
-      })
-
-      var quotaSchoolSchools = (results[1].schools || []).map(function (s) {
-        return { id: s.id, fullName: s.fullName || s.name, code: s.code || '', quotaCount: s.quotaCount || 0 }
-      })
-
-      var unifiedSchools = (results[2].schools || []).map(function (s) {
-        return { id: s.id, fullName: s.fullName || s.name, code: s.code || '' }
-      })
+      var quotaDistrictSchools = pickerUtil.mapOptions(results[0].schools || [])
+      var quotaSchoolSchools = pickerUtil.mapOptions(results[1].schools || [])
+      var unifiedSchools = pickerUtil.mapOptions(results[2].schools || [])
 
       self.setData({
         quotaDistrictSchools: quotaDistrictSchools,
@@ -487,10 +586,7 @@ Page({
       return
     }
 
-    var filtered = allSchools.filter(function (s) {
-      return s.fullName.indexOf(query) !== -1 || (s.code && s.code.indexOf(query) !== -1)
-    })
-    this.setData({ pickerSchools: filtered })
+    this.setData({ pickerSchools: pickerUtil.searchOptions(allSchools, query) })
   },
 
   onSchoolSelect: function (e) {
