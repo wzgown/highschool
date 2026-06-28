@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-28",
+  "scrape_time": "2026-06-28T08:02:18.155346",
+  "city_level": {
+    "shmeea_index_2026_items": 18,
+    "shmeea_subpage_03100_2026_items": 10,
+    "shmeea_subpage_03200_2026_items": 10,
+    "shmeea_subpage_03600_2026_items": 0,
+    "new_vs_yesterday": 0
+  },
+  "district_level": {
+    "total": 16,
+    "success": 14,
+    "seasonal_offline": 5,
+    "empty_or_404": 3,
+    "new_items": 0
+  },
+  "db_state": {
+    "quota_district": {
+      "records": 945,
+      "quota": 7416
+    },
+    "quota_school": {
+      "records": 3883,
+      "quota": 12861
+    },
+    "unified": {
+      "records": 54,
+      "quota": 4051
+    },
+    "admission_scores": 0
+  },
+  "summary": "无新数据。招生录取结果尚未公布。"
+}

@@ -1,0 +1,93 @@
+{
+  "date": "2026-06-28",
+  "scrape_time": "2026-06-28T08:02:18.155545",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 0,
+  "partial_count": 2,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "黄浦",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ],
+  "new_items": 0,
+  "notes": "黄浦/静安/普陀/杨浦 seasonally offline; 闵行/奉贤/金山/宝山/徐汇/长宁 still serving known content. No new 中考 items across all districts."
+}
