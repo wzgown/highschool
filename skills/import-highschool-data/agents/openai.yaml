@@ -1,0 +1,4 @@
+interface:
+  display_name: "Import Highschool Data"
+  short_description: "Build source-specific admissions imports"
+  default_prompt: "Use $import-highschool-data to inspect local Shanghai admissions source files, generate source-specific parsers, and import verified data into the database."

@@ -95,7 +95,7 @@ UPDATE ref_school SET full_name = '上海宋庆龄学校', short_name = '宋庆�
 -- 奉贤区
 UPDATE ref_school SET full_name = '华东师范大学第二附属中学临港奉贤分校', short_name = '华二奉贤', updated_at = NOW() WHERE code = '202002';
 UPDATE ref_school SET full_name = '东华大学附属奉贤致远中学', short_name = '东华致远', updated_at = NOW() WHERE code = '204001';
-UPDATE ref_school SET full_name = '上海市奉贤区奉城高级中学', short_name = '奉城高中', updated_at = NOW() WHERE code = '204005';
+UPDATE ref_school SET full_name = '上海应用技术大学附属奉贤奉城高级中学', short_name = '奉城高中', updated_at = NOW() WHERE code = '204005';
 UPDATE ref_school SET full_name = '上海师范大学第四附属中学', short_name = '上师大四附', updated_at = NOW() WHERE code = '204006';
 UPDATE ref_school SET full_name = '上海市奉贤区景秀高级中学', short_name = '景秀高中', updated_at = NOW() WHERE code = '204008';
 
