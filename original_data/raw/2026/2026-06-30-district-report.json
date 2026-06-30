@@ -1,0 +1,194 @@
+{
+  "date": "2026-06-30",
+  "scrape_time": "2026-06-30T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 1,
+  "partial_count": 0,
+  "reduced_count": 1,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [],
+      "url": "https://zhaoban.hpe.cn/zkxx/",
+      "note": "zhaoban.hpe.cn恢复200(1.5KB)，但内容极简"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划..."
+        },
+        {
+          "title": "2026年高中名额分配到校招生计划"
+        },
+        {
+          "title": "2026年高中名额分配到区招生计划"
+        }
+      ],
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校名额分配到校招生计划表(长宁区)"
+        },
+        {
+          "title": "2026年上海市高中学校名额分配到区招生计划表（长宁区）"
+        }
+      ],
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action"
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [],
+      "url": "https://www.jingan.gov.cn/sy/xxgk/jyj/zsks/",
+      "note": "534B极简响应"
+    },
+    {
+      "name": "普陀",
+      "status": "reduced",
+      "items": [],
+      "url": "https://kszx.pte.sh.cn/",
+      "note": "147B极简响应，季节性下线"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [],
+      "url": "https://kszx.hongkouedu.com/",
+      "note": "10KB响应但无中考关键词匹配"
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [],
+      "url": "https://www.shyp.gov.cn/shypq/jyj/zsks/index.html",
+      "note": "1KB响应，季节性下线"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价名额分配到校招生计划（闵行区）"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）"
+        }
+      ],
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划 （宝山区）"
+        }
+      ],
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml"
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026-06-29 一般教育新闻(非中考)"
+        }
+      ],
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "note": "06-29内容为教育新闻，非中考"
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": [],
+      "url": "https://www.pudong.gov.cn/zwgk/jyj/zsxx/index.html",
+      "note": "534B极简响应"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [],
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "note": "48KB但无中考关键词"
+    },
+    {
+      "name": "松江",
+      "status": "failed",
+      "items": [],
+      "url": "https://zsb.sjedu.cn/",
+      "note": "0B响应"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年青浦区中考跨区（跨入）考生考后相关事宜注意事项"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知"
+        }
+      ],
+      "url": "https://kszx.qpedu.cn/"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划"
+        }
+      ],
+      "url": "https://zsks.shfxjy.cn/"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": [],
+      "url": "https://www.shcm.gov.cn/",
+      "note": "50KB但无中考关键词，仅公众号内容"
+    }
+  ],
+  "city_level": {
+    "shmeea_03000": "无新公告",
+    "shmeea_03600": "仍无2026内容（招生录取）",
+    "note": "考试已于6/20-21完成，录取分数线预计7月公布"
+  },
+  "db_state": {
+    "quota_district": {
+      "year": 2026,
+      "records": 945,
+      "quota": 7416,
+      "coverage": "17区全覆盖"
+    },
+    "quota_school": {
+      "year": 2026,
+      "records": 3883,
+      "quota": 12861,
+      "coverage": "16区全覆盖"
+    },
+    "unified_district": {
+      "year": 2026,
+      "records": 54,
+      "quota": 4051,
+      "coverage": "仅嘉定"
+    }
+  },
+  "new_items": [],
+  "change_summary": "无新数据。所有发现的内容均为已知（名额分配到区/到校已导入）。多区/zsks/页面因志愿填报结束(6/26)后季节性下线，内容大幅缩减或返回404。"
+}
