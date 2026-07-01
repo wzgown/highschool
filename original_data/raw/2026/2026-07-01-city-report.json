@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-01",
+  "scrape_time": "2026-07-01T08:04:31.634831",
+  "method": "curl",
+  "pages": [
+    {
+      "page": "zhao_sheng_zheng_ce",
+      "code": "03100",
+      "status": "success",
+      "items_2026": 11,
+      "new_since_last": 0
+    },
+    {
+      "page": "zhao_sheng_gong_shi",
+      "code": "03200",
+      "status": "success",
+      "items_2026": 0,
+      "new_since_last": 0
+    },
+    {
+      "page": "bao_ming_xu_zhi",
+      "code": "03300",
+      "status": "success",
+      "items_2026": 0,
+      "new_since_last": 0
+    },
+    {
+      "page": "zhi_yuan_tian_bao",
+      "code": "03400",
+      "status": "success",
+      "items_2026": 0,
+      "new_since_last": 0
+    },
+    {
+      "page": "kao_shi_gui_ding",
+      "code": "03500",
+      "status": "success",
+      "items_2026": 0,
+      "new_since_last": 0
+    },
+    {
+      "page": "zhao_sheng_lu_qu",
+      "code": "03600",
+      "status": "success",
+      "items_2026": 0,
+      "new_since_last": 0
+    }
+  ],
+  "notes": "招生录取(page/03600)仍无2026内容，最新仍为2025年数据。2026年录取分数线预计7月中旬发布（2025年于7/13发布）。"
+}

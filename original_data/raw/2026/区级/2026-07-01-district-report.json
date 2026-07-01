@@ -1,0 +1,127 @@
+{
+  "date": "2026-07-01",
+  "scrape_time": "2026-07-01T08:04:31.634857",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 2,
+  "partial_count": 0,
+  "new_items_since_last": 0,
+  "notes": "所有区级内容均与6/27报告一致，无新公告。徐汇本次未提取到关键词匹配项（与6/27不同），可能为爬取正则差异。长宁/普陀访问失败（与往期一致）。",
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "total_size": 1569,
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "total_size": 10853,
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "total_size": 0,
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "total_size": 116525,
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "total_size": 148,
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "total_size": 10511,
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "total_size": 45289,
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "total_size": 7632,
+      "items": [
+        {
+          "title": "名额分配到校招生计划（闵行区）"
+        },
+        {
+          "title": "名额分配到区招生计划（闵行区）"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "total_size": 13333,
+      "items": [
+        {
+          "title": "名额分配到区、到校招生计划（宝山区）"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "total_size": 45873,
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "total_size": 3071,
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "total_size": 48255,
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "total_size": 2065,
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "total_size": 13303,
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "total_size": 20698,
+      "items": [
+        {
+          "title": "名额分配到校招生计划"
+        },
+        {
+          "title": "名额分配到区招生计划"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "total_size": 59168,
+      "items": []
+    }
+  ]
+}
