@@ -1,0 +1,156 @@
+{
+  "date": "2026-07-03",
+  "scrape_time": "2026-07-03T08:02:01.892546",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 16,
+  "failed_count": 0,
+  "partial_count": 0,
+  "new_items_since_last": 0,
+  "notes": "所有区级内容均与6/24报告一致，无新公告。长宁今日恢复访问(30KB,到区/到校计划标题可见)。普陀仅返回159B空壳(与往期一致)。虹口/杨浦无中考关键词匹配(内容已减少为考前公告/历史页面)。",
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "total_size": 1670,
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "total_size": 11883,
+      "items": [
+        {
+          "title": "2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划"
+        },
+        {
+          "title": "2026年高中名额分配到校招生计划"
+        },
+        {
+          "title": "2026年高中名额分配到区招生计划"
+        },
+        {
+          "title": "2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校高中阶段招生工作的"
+        },
+        {
+          "title": "2026年本区中等学校高中阶段外籍学生招生办法"
+        },
+        {
+          "title": "2026年徐汇区教育局招生考试中心接待时间与咨询电话"
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "total_size": 30995,
+      "items": [
+        {
+          "title": "2026年上海市高中学校名额分配到校招生计划表(长宁区)"
+        },
+        {
+          "title": "2026年上海市高中学校名额分配到区招生计划表（长宁区）"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "total_size": 1175,
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "total_size": 159,
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "total_size": 11853,
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "total_size": 1107,
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "total_size": 33200,
+      "items": [
+        {
+          "title": "名额分配到校招生计划（闵行区）"
+        },
+        {
+          "title": "名额分配到区招生计划（闵行区）"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "total_size": 14854,
+      "items": [
+        {
+          "title": "名额分配到区、到校招生计划（宝山区）"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "total_size": 55366,
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "total_size": 3087,
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "total_size": 51528,
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "total_size": 2097,
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "total_size": 15347,
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "total_size": 21863,
+      "items": [
+        {
+          "title": "名额分配到校招生计划"
+        },
+        {
+          "title": "名额分配到区招生计划"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "total_size": 70210,
+      "items": []
+    }
+  ]
+}

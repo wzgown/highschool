@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-03",
+  "scrape_time": "2026-07-03T08:00:00+08:00",
+  "method": "curl",
+  "pages": [
+    {
+      "name": "index",
+      "url": "/page/03000/",
+      "items": []
+    },
+    {
+      "name": "zhao_sheng_zheng_ce",
+      "url": "/page/03100/index.html",
+      "items": []
+    },
+    {
+      "name": "zhao_sheng_gong_shi",
+      "url": "/page/03200/index.html",
+      "items": []
+    },
+    {
+      "name": "bao_ming_xu_zhi",
+      "url": "/page/03300/index.html",
+      "items": []
+    },
+    {
+      "name": "zhi_yuan_tian_bao",
+      "url": "/page/03400/index.html",
+      "items": []
+    },
+    {
+      "name": "kao_shi_gui_ding",
+      "url": "/page/03500/index.html",
+      "items": []
+    },
+    {
+      "name": "zhao_sheng_lu_qu",
+      "url": "/page/03600/index.html",
+      "items": []
+    }
+  ],
+  "notes": "招生录取(page/03600)仍无2026内容，最新仍为2025年数据(07-14发布名额分配最低分数线)。2026年录取分数线预计7月中旬发布(参照2025年于7/13-14发布)。首页和子页无新公告。"
+}
