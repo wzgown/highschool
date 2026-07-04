@@ -1,0 +1,142 @@
+{
+  "date": "2026-07-04",
+  "scrape_time": "2026-07-04T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 2,
+  "partial_count": 0,
+  "new_items_since_last": 0,
+  "notes": "6 districts returning 404/empty shell (seasonal page removal post-enrollment deadline): 黄浦404, 长宁0B, 普陀148B, 静安0 items from 113KB, 虹口0 from 10KB, 杨浦0 from 44KB. All detected items are old content (名额分配/报名/志愿 already processed). No new data.",
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [],
+      "url": "https://zhaoban.hpe.cn/zkxx/",
+      "size": 1024,
+      "note": "404/empty - seasonal removal"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年高中名额分配到校招生计划",
+          "date": "known"
+        },
+        {
+          "title": "2026年高中名额分配到区招生计划",
+          "date": "known"
+        },
+        {
+          "title": "2026年徐汇区高中阶段学校招生计划",
+          "date": "known"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "items": [],
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "size": 0
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [],
+      "url": "https://www.jingan.gov.cn/sy/",
+      "size": 113000
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "items": [],
+      "url": "https://kszx.pte.sh.cn",
+      "size": 148
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [],
+      "url": "https://kszx.hongkouedu.com",
+      "size": 10000
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [],
+      "url": "https://www.shyp.gov.cn/shypq/",
+      "size": 44000
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "名额分配到校招生计划（闵行区）",
+          "date": "known"
+        },
+        {
+          "title": "名额分配到区招生计划（闵行区）",
+          "date": "known"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "名额分配到区、到校招生计划（宝山区）",
+          "date": "known"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "名额分配到校招生计划",
+          "date": "known"
+        },
+        {
+          "title": "名额分配到区招生计划",
+          "date": "known"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ]
+}
