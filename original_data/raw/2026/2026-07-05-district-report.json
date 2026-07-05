@@ -1,0 +1,182 @@
+{
+  "date": "2026-07-05",
+  "scrape_time": "2026-07-05T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 9,
+  "failed_count": 7,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "404",
+      "url": "zhaoban.hpe.cn/zkxx/",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "404",
+      "url": "xuhui.gov.cn/zsks/",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "404",
+      "url": "kszx.chneic.sh.cn",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "url": "jingan.gov.cn",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "404",
+      "url": "kszx.pte.sh.cn",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "url": "kszx.hongkouedu.com",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "url": "shyp.gov.cn",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "zwgk.shmh.gov.cn",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "bsedu.org.cn",
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市初中学业水平考试考点安排表",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划 （宝山区）",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年高中学业等级性考试考点安排",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "404",
+      "url": "jiading.gov.cn/jiaoyu/zsxx/",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "404",
+      "url": "pudong.gov.cn",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "jsedu.sh.cn/zsks/",
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校招生志愿填报即将开始",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市初中学业水平考试即将举行",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市特殊教育高中阶段学校和中职校附设特教班招生方案",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "url": "zsb.sjedu.cn",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "kszx.qpedu.cn",
+      "items": [
+        {
+          "title": "2026年青浦区中考跨区（跨入）考生考后相关事宜注意事项",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "中考录取查询",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "中考成绩查询",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "zsks.shfxjy.cn",
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年奉贤区高中阶段学校考试招生工作实施细则",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "404",
+      "url": "shcm.gov.cn",
+      "items": []
+    }
+  ],
+  "notes": "7区404(季节性页面移除：黄浦/徐汇/长宁/普陀/嘉定/浦东/崇明)。其余9区可访问，内容均为已导入的已知数据，无新公告。虹口无中考关键词匹配（可能内容已更新）。闵行虽返回200但未检测到关键词（可能是政务公开列表翻页导致旧内容不在首页）。"
+}
