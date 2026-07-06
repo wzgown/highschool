@@ -1,0 +1,123 @@
+{
+  "date": "2026-07-06",
+  "scrape_time": "2026-07-06T08:01:53.544469",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 13,
+  "failed_count": 3,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "404",
+      "url": "https://zhaoban.hpe.cn/zkxx/",
+      "items": [],
+      "size": 1569
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/zsks/",
+      "items": [],
+      "size": 119
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "items": [],
+      "size": 0
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "url": "https://www.jingan.gov.cn/sy/",
+      "items": [],
+      "size": 116441
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "url": "https://kszx.pte.sh.cn/",
+      "items": [],
+      "size": 148
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com/",
+      "items": [],
+      "size": 10511
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "url": "https://www.shyp.gov.cn/shypq/",
+      "items": [],
+      "size": 45570
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "items": [],
+      "size": 30046
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "items": [],
+      "size": 13333
+    },
+    {
+      "name": "嘉定",
+      "status": "404",
+      "url": "https://www.jiading.gov.cn/jiaoyu/zsxx/",
+      "items": [],
+      "size": 147
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "url": "https://www.pudong.gov.cn/zwgk/",
+      "items": [],
+      "size": 46182
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "http://www.jsedu.sh.cn/zsks/",
+      "items": [],
+      "size": 48255
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "url": "https://zsb.sjedu.cn/",
+      "items": [],
+      "size": 2065
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn/",
+      "items": [],
+      "size": 13303
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn/",
+      "items": [],
+      "size": 20698
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "url": "https://www.shcm.gov.cn/",
+      "items": [],
+      "size": 59208
+    }
+  ]
+}
