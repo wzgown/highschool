@@ -1,0 +1,195 @@
+{
+  "date": "2026-07-07",
+  "scrape_time": "2026-07-07T08:04:39.644380",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 15,
+  "failed_count": 1,
+  "notes": "普陀 kszx.pte.sh.cn returned empty (148B), likely seasonally offline. 嘉定 /zsks/ 404. 6 districts returning 404: 黄浦,静安,杨浦,浦东,崇明,嘉定.",
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "failed",
+      "success": false,
+      "items": [],
+      "notes": "zhaoban.hpe.cn/zkxx/ 404, seasonal removal"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "中考报名往届生返沪生现场确认须知",
+          "url": "xuhui.gov.cn/zsks/egov/front2018/cat/216"
+        },
+        {
+          "title": "名额分配到校招生计划",
+          "url": "xuhui.gov.cn/zsks/egov/front2018/cat/216"
+        },
+        {
+          "title": "名额分配到区招生计划",
+          "url": "xuhui.gov.cn/zsks/egov/front2018/cat/216"
+        }
+      ],
+      "notes": "zsks page reduced (126B), only zsks/egov/cat/216 still serving content"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "名额分配到区招生计划表(长宁区)",
+          "url": "kszx.chneic.sh.cn"
+        },
+        {
+          "title": "名额分配到校招生计划表(长宁区)",
+          "url": "kszx.chneic.sh.cn"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "success": false,
+      "items": [],
+      "notes": "jingan.gov.cn 404/offline"
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "success": false,
+      "items": [],
+      "notes": "kszx.pte.sh.cn 148B empty shell"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "统一招生录取结果查询",
+          "url": "kszx.hongkouedu.com"
+        },
+        {
+          "title": "录取结果查询",
+          "url": "kszx.hongkouedu.com"
+        }
+      ],
+      "notes": "查询入口已上线但无数据URL可curl"
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "success": false,
+      "items": [],
+      "notes": "shyp.gov.cn 1KB reduced"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "名额分配到校招生计划(闵行区)",
+          "url": "zwgk.shmh.gov.cn"
+        },
+        {
+          "title": "名额分配到区招生计划(闵行区)",
+          "url": "zwgk.shmh.gov.cn"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "bsedu.org.cn/baoshan/gzzs/145825.jhtml"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划（宝山区）",
+          "url": "bsedu.org.cn/baoshan/gzzs/145808.jhtml"
+        }
+      ],
+      "notes": "统一招生录取最低分数线尚未发布（仅有2025年旧数据）"
+    },
+    {
+      "name": "嘉定",
+      "status": "partial",
+      "success": true,
+      "items": [
+        {
+          "title": "2026年嘉定区义务教育阶段学校招生入学政策问答",
+          "url": "jiading.gov.cn/jiaoyu/"
+        }
+      ],
+      "notes": "/zsks/ 404, /jiaoyu/ only has义务教育内容"
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "success": false,
+      "items": [],
+      "notes": "pudong.gov.cn offline/404"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "中考填报与查询",
+          "url": "jsedu.sh.cn/zsks/"
+        },
+        {
+          "title": "中考志愿填报系统",
+          "url": "jsedu.sh.cn/zsks/"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "success": true,
+      "items": [],
+      "notes": "zsb.sjedu.cn minimal content (2065B)"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "中考跨区考生考后相关事宜注意事项",
+          "url": "shqp.gov.cn"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "success": true,
+      "items": [
+        {
+          "title": "名额分配到校招生计划",
+          "url": "zsks.shfxjy.cn"
+        },
+        {
+          "title": "名额分配到区招生计划",
+          "url": "zsks.shfxjy.cn"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "success": true,
+      "items": [],
+      "notes": "shcm.gov.cn 59KB but no 中考 keywords found"
+    }
+  ]
+}
