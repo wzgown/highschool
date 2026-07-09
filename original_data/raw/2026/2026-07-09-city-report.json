@@ -1,0 +1,29 @@
+{
+  "date": "2026-07-09",
+  "new_items": [
+    {
+      "title": "2026年上海市高中学校自主招生预录取学生名单公示",
+      "url": "/page/03200/20260706/20407.html",
+      "date": "2026-07-06",
+      "pdf_url": "https://www.shmeea.edu.cn/resource/upload/www/20260706/yH8cz2pi/7328yf78c.pdf",
+      "local_pdf": "original_data/raw/2026/pdfs/2026_autonomous_pre_admission_list.pdf",
+      "notes": "预录取名单公示，附件含各校预录取学生名单(点击查看)。最低投档控制分数线7月14日公布。"
+    },
+    {
+      "title": "2026年上海市成人中等职业教育（秋季）招生学校名单",
+      "url": "/page/03200/20260707/20410.html",
+      "date": "2026-07-07",
+      "notes": "成人中职招生学校名单，非中考核心数据。"
+    }
+  ],
+  "key_date": "7月14日公布最低投档控制分数线",
+  "zhao_sheng_lu_qu_2026_items": 0,
+  "sections_summary": {
+    "zhao_sheng_zheng_ce": 10,
+    "zhao_sheng_gong_shi": 10,
+    "bao_ming_xu_zhi": 3,
+    "zhi_yuan_tian_bao": 3,
+    "kao_shi_gui_ding": 5,
+    "zhao_sheng_lu_qu": 0
+  }
+}

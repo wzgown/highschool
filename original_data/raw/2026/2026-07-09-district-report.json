@@ -1,0 +1,172 @@
+{
+  "date": "2026-07-09",
+  "total_districts": 16,
+  "success_count": 10,
+  "failed_count": 6,
+  "districts": [
+    {
+      "name": "黄浦",
+      "url": "https://zhaoban.hpe.cn/zkxx/",
+      "status": "404",
+      "size": 1569,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "徐汇",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "status": "ok",
+      "size": 10853,
+      "matches": [
+        "徐汇区2026年高中名额分配到校招生计划",
+        "徐汇区2026年高中名额分配到区招生计划",
+        "徐汇区2025年名额分配到校招生计划",
+        "关于2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划 ...",
+        "2025年上海市高中学校1至15志愿统一招生录取最低分数线（徐汇区）"
+      ],
+      "match_count": 5
+    },
+    {
+      "name": "长宁",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "status": "ok",
+      "size": 28799,
+      "matches": [
+        "2026年上海市高中学校&ldquo;名额分配到校&rdquo;招生计划表(长宁区)",
+        "2026年上海市高中学校&quot;名额分配到区&quot;招生计划表（长宁区）",
+        "上海市长宁区2026年民办直升电脑随机录取结果"
+      ],
+      "match_count": 3
+    },
+    {
+      "name": "静安",
+      "url": "https://www.jingan.gov.cn/zsks/",
+      "status": "404",
+      "size": 535,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "普陀",
+      "url": "https://kszx.pte.sh.cn/",
+      "status": "empty",
+      "size": 148,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "虹口",
+      "url": "https://kszx.hongkouedu.com/",
+      "status": "ok",
+      "size": 10511,
+      "matches": [
+        "市教育考试院负责人就上海市2026年普通高校招生录取工作答记者问",
+        "虹口区高中阶段统一招生录取结果查询"
+      ],
+      "match_count": 2
+    },
+    {
+      "name": "杨浦",
+      "url": "https://www.shyp.gov.cn/shypq/zwgk/jyj/zsks/index.html",
+      "status": "ok",
+      "size": 1007,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "闵行",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "status": "ok",
+      "size": 30046,
+      "matches": [
+        "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+        "2026年上海市高中名额分配到区招生计划（闵行区）",
+        "-4cd8-a8a6-74635475e752.htm\" title=\"2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）\"",
+        "高中阶段学校招生|2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+        "8729-4db2-950f-40b7b632f058.htm\" title=\"2026年上海市高中名额分配到区招生计划（闵行区）\"",
+        "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+        "2026年上海市高中名额分配到区招生计划（闵行区）",
+        "475e752.htm\" title=\"2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）\"",
+        "db2-950f-40b7b632f058.htm\" title=\"2026年上海市高中名额分配到区招生计划（闵行区）\"",
+        "2026年闵行区民办初中电脑随机录取结果公示"
+      ],
+      "match_count": 15
+    },
+    {
+      "name": "宝山",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "status": "ok",
+      "size": 13333,
+      "matches": [
+        "2026年上海市高中名额分配到区、到校招生计划 （宝山区）",
+        "2025年上海市高中名额分配到区、到校招生计划 （宝山区）",
+        "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+        "2025年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+        "2025年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区）",
+        "2025年上海市高中学校“1至15志愿”统一招生录取最低分数线（宝山区）",
+        "2024年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区）"
+      ],
+      "match_count": 7
+    },
+    {
+      "name": "嘉定",
+      "url": "https://www.jiading.gov.cn/zsks/",
+      "status": "404",
+      "size": 147,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "浦东",
+      "url": "https://www.pudong.gov.cn/zwgk/jyj/zsks/xxgk/index.html",
+      "status": "404",
+      "size": 535,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "金山",
+      "url": "http://www.jsedu.sh.cn/zsks/",
+      "status": "ok",
+      "size": 48255,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "松江",
+      "url": "https://zsb.sjedu.cn/",
+      "status": "ok",
+      "size": 2065,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "青浦",
+      "url": "https://kszx.qpedu.cn/",
+      "status": "ok",
+      "size": 13303,
+      "matches": [],
+      "match_count": 0
+    },
+    {
+      "name": "奉贤",
+      "url": "https://zsks.shfxjy.cn/",
+      "status": "ok",
+      "size": 20698,
+      "matches": [
+        "2026年奉贤区高中学校名额分配到校招生计划",
+        "2026年上海市高中名额分配到区招生计划",
+        "2025年奉贤区统一批次普通高中最低录取分数线"
+      ],
+      "match_count": 3
+    },
+    {
+      "name": "崇明",
+      "url": "https://www.shcm.gov.cn/zsks/",
+      "status": "404",
+      "size": 449,
+      "matches": [],
+      "match_count": 0
+    }
+  ]
+}
