@@ -1,0 +1,159 @@
+{
+  "date": "2026-07-08",
+  "scrape_time": "2026-07-08T08:02:28.654950",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 15,
+  "failed_count": 1,
+  "partial_count": 0,
+  "new_items_since_last": 0,
+  "notes": "无新数据。6区页面仍返回404/空壳（志愿填报后季节性下线）。青浦/闵行检测到的内容为已知旧内容（查询入口/政策转载）。金山超时失败。距7月14日最低投档控制分数线公布还有6天。",
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [],
+      "url": "https://zhaoban.hpe.cn/zkxx/",
+      "size": 1568,
+      "note": "still minimal post-removal"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [],
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "size": 10852,
+      "note": "no new items"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [],
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "size": 19625,
+      "note": "no zhongkao keywords"
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [],
+      "url": "https://www.jingan.gov.cn/sy/",
+      "size": 23974,
+      "note": "no zhongkao keywords"
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [],
+      "url": "https://kszx.pte.sh.cn",
+      "size": 147,
+      "note": "empty shell"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [],
+      "url": "https://kszx.hongkouedu.com",
+      "size": 10508,
+      "note": "no new items"
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [],
+      "url": "https://www.shyp.gov.cn/shypq/",
+      "size": 28437,
+      "note": "no zhongkao keywords"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "高中阶段学校招生",
+          "date": "known"
+        }
+      ],
+      "url": "https://zwgk.shmh.gov.cn/...",
+      "size": 21930,
+      "note": "generic nav label only"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [],
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/",
+      "size": 13333,
+      "note": "no new items"
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [],
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "size": 17971,
+      "note": "no new items"
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": [],
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "size": 3077,
+      "note": "minimal content"
+    },
+    {
+      "name": "金山",
+      "status": "failed",
+      "items": [],
+      "url": "http://www.jsedu.sh.cn/zsks/",
+      "size": 0,
+      "note": "timeout/0B"
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": [],
+      "url": "https://zsb.sjedu.cn",
+      "size": 2064,
+      "note": "minimal content"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "录取查询",
+          "date": "known"
+        },
+        {
+          "title": "中考成绩查询",
+          "date": "known"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "date": "known"
+        }
+      ],
+      "url": "https://kszx.qpedu.cn",
+      "size": 13303,
+      "note": "known persistent content (query links, old notices)"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [],
+      "url": "https://zsks.shfxjy.cn/",
+      "size": 20697,
+      "note": "no new items detected"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": [],
+      "url": "https://www.shcm.gov.cn/",
+      "size": 26934,
+      "note": "no zhongkao keywords in 27KB"
+    }
+  ]
+}
