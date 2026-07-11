@@ -1,0 +1,169 @@
+{
+  "date": "2026-07-11",
+  "scrape_time": "2026-07-11T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 15,
+  "failed_count": 1,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "empty(148B)",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "高中阶段学校招生",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市闵行区民办初中 “调剂志愿”录取名单",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年闵行区民办初中电脑随机录取结果公示",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": ""
+        },
+        {
+          "title": "2026年民办一贯制学校直升电脑随机录取结果",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：3299\n发表时间：2026-04-07",
+          "url": "https://www.jiading.gov.cn/jiaoyu/",
+          "date": ""
+        },
+        {
+          "title": "标题：2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：476\n发表时间：2026-04-07",
+          "url": "https://www.jiading.gov.cn/jiaoyu/",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://kszx.qpedu.cn",
+          "date": ""
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn",
+          "date": ""
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn",
+          "date": ""
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://kszx.qpedu.cn",
+          "date": ""
+        },
+        {
+          "title": "中考录取查询",
+          "url": "https://kszx.qpedu.cn",
+          "date": ""
+        },
+        {
+          "title": "中考录取查询",
+          "url": "https://kszx.qpedu.cn",
+          "date": ""
+        },
+        {
+          "title": "中考成绩查询",
+          "url": "https://kszx.qpedu.cn",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ]
+}
