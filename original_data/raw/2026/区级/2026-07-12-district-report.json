@@ -1,0 +1,198 @@
+{
+  "date": "2026-07-12",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 10,
+  "failed_count": 6,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "404",
+      "size": 1568,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": 10852,
+      "items": [
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知            <img src=\"h"
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到校招生计划            <img src=\"https://w"
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到区招生计划            <img src=\"https://w"
+        },
+        {
+          "title": "徐汇区2025年名额分配到校招生计划            <img src=\"https://w"
+        },
+        {
+          "title": "徐汇区2025年上海市高中名额分配到区招生计划            <img src=\"https://w"
+        },
+        {
+          "title": "tps://www.xuhui.gov.cn/egov/front2018/doc/1201\">关于2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区"
+        },
+        {
+          "title": "s://www.xuhui.gov.cn/egov/front2018/doc/1195\">徐教〔2026〕5号关于印发《徐汇区教育局关于2026年本区中等学校"
+        },
+        {
+          "title": "tps://www.xuhui.gov.cn/egov/front2018/doc/1133\">关于2025年徐汇区中招跨区（跨入徐汇）学生收取《2025徐汇区"
+        },
+        {
+          "title": "\"https://www.xuhui.gov.cn/egov/front2018/doc/1125\">徐教〔2025〕6号徐汇区教育局关于2025年本区中等学校"
+        },
+        {
+          "title": "a href=\"https://www.xuhui.gov.cn/egov/front2018/doc/1143\">2025年上海市高中学校1至15志愿统一招生"
+        }
+      ],
+      "item_count": 12
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": 5960,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "静安",
+      "status": "404",
+      "size": 534,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "普陀",
+      "status": "empty",
+      "size": 147,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "size": 7562,
+      "items": [
+        {
+          "title": "虹口区高中阶段统一招生录取结果查询"
+        }
+      ],
+      "item_count": 1
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "size": 1007,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": 10420,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "size": 9720,
+      "items": [
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知  <span"
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项  <span"
+        },
+        {
+          "title": "关于2025年宝山区中考无录取去向考生征求志愿的通知  <span"
+        },
+        {
+          "title": "2025年中考跨入宝山区的外区考生领取招生计划递交档案的通知  <span"
+        },
+        {
+          "title": "2025年中考跨入宝山区的外区考生的注意事项  <span"
+        },
+        {
+          "title": "关于2024年宝山区中考无录取去向考生征求志愿的通知  <span"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划 （宝山区）  <span"
+        },
+        {
+          "title": "2025年上海市高中名额分配到区、到校招生计划 （宝山区）  <span"
+        },
+        {
+          "title": "2026年上海市初中学业水平考试考点安排表  <span"
+        },
+        {
+          "title": "2025年上海市初中学业水平考试考点安排表  <span"
+        }
+      ],
+      "item_count": 12
+    },
+    {
+      "name": "嘉定",
+      "status": "404",
+      "size": 147,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "size": 3099,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "金山",
+      "status": "empty",
+      "size": 0,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "size": 2064,
+      "items": [],
+      "item_count": 0
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "size": 9037,
+      "items": [
+        {
+          "title": "title=\"转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见\">转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见"
+        },
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见"
+        }
+      ],
+      "item_count": 2
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 8945,
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划"
+        }
+      ],
+      "item_count": 1
+    },
+    {
+      "name": "崇明",
+      "status": "404",
+      "size": 449,
+      "items": [],
+      "item_count": 0
+    }
+  ]
+}
