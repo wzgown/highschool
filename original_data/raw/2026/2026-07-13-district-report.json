@@ -1,0 +1,114 @@
+{
+  "date": "2026-07-13",
+  "scrape_time": "2026-07-13T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 2,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "404/small(148B)",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价名额分配到校招生计划（闵行区）",
+          "url": "zwgk.shmh.gov.cn",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+          "url": "zwgk.shmh.gov.cn",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "404/small(147B)",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "中考录取查询",
+          "url": "kszx.qpedu.cn",
+          "date": ""
+        },
+        {
+          "title": "中考成绩查询",
+          "url": "kszx.qpedu.cn",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "empty(449B)",
+      "items": []
+    }
+  ],
+  "notes": "与07-11报告一致，无新内容。嘉定/崇明季节性下线，普陀空壳。"
+}
