@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-16",
+  "scrape_time": "2026-07-16T08:00:00+08:00",
+  "method": "curl",
+  "sections": {
+    "zhao_sheng_zheng_ce": [],
+    "zhao_sheng_gong_shi": [],
+    "bao_ming_xu_zhi": [],
+    "zhi_yuan_tian_bao": [],
+    "kao_shi_gui_ding": [],
+    "zhao_sheng_lu_qu": [
+      {
+        "title": "2026年上海市高中阶段学校招生最低投档控制分数线确定",
+        "url": "https://www.shmeea.edu.cn/page/03600/20260714/20441.html",
+        "date": "2026-07-14"
+      },
+      {
+        "title": "上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+        "url": "https://www.shmeea.edu.cn/page/03600/20260714/20438.html",
+        "date": "2026-07-14"
+      }
+    ]
+  },
+  "changes_since": "2026-07-15",
+  "new_items": [],
+  "control_scores": {
+    "AUTONOMOUS": 615,
+    "QUOTA_DISTRICT": 615,
+    "UNIFIED_1_15": 501,
+    "ZHONGBEN": 501,
+    "WUNIAN_ZHIGAO": 400,
+    "ZHONGZHUAN": 300
+  },
+  "control_scores_db_status": "already_imported_2026-07-15",
+  "admission_timeline": {
+    "07-14_18:00": "成绩公布",
+    "07-15~16": "成绩复核申请",
+    "07-17~23": "自主招生正式录取公示",
+    "07-19_afternoon": "中职校自主招生录取结果",
+    "07-20_afternoon": "名额分配到区/到校录取结果",
+    "07-23": "统一招生录取结果",
+    "07-25_evening": "民办高中余额公布",
+    "07-26_18:00": "民办高中申请截止"
+  },
+  "notes": "分数线已于07-15导入DB。名额分配录取分数线预计07-20下午公布，统一招生录取结果07-23。截至07-16无新数据。"
+}

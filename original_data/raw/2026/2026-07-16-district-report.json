@@ -1,0 +1,108 @@
+{
+  "date": "2026-07-16",
+  "scrape_time": "2026-07-16T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 16,
+  "failed_count": 0,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [],
+      "note": "zhaoban.hpe.cn 31KB, all items previously known"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [],
+      "note": "xuhui.gov.cn 699B, minimal content"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [],
+      "note": "chneic.sh.cn 28KB, all items previously known"
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [],
+      "note": "jingan.gov.cn 1KB, minimal content"
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [],
+      "note": "kszx.pte.sh.cn 148B, empty"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [],
+      "note": "hongkouedu.com 10KB, no new items"
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [],
+      "note": "shyp.gov.cn 1KB, minimal content"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [],
+      "note": "shmh.gov.cn 30KB, all items previously known"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [],
+      "note": "bsedu.org.cn 13KB, all items previously known"
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [],
+      "note": "jiading.gov.cn 147B, empty (seasonal removal)"
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": [],
+      "note": "pudong.gov.cn 535B, minimal"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [],
+      "note": "jsedu.sh.cn 48KB, all items previously known"
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": [],
+      "note": "sjedu.cn 0B, empty"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [],
+      "note": "qpedu.cn 13KB, all items previously known"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [],
+      "note": "shfxjy.cn 21KB, all items previously known"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": [],
+      "note": "shcm.gov.cn 59KB, no 中考 items (gov news only)"
+    }
+  ],
+  "notes": "多数区级页面已进入季节性下线(志愿填报后)。无新中考数据。"
+}
