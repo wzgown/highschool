@@ -1,0 +1,136 @@
+{
+  "date": "2026-07-17",
+  "scrape_time": "2026-07-17T08:05:07.451907",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 13,
+  "failed_count": 3,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "黄浦",
+      "status": "404",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年徐汇区教育局招生考试中心接待时间与咨询电话",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年徐汇区中考报名往届生返沪生现场确认须知",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年徐汇区中招跨区（跨入徐汇）学生收取招生计划",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校名额分配到校招生计划表(长宁区)",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中学校名额分配到区招生计划表（长宁区）",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "404",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年青浦区中考跨区考生考后相关事宜注意事项",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区高中学校名额分配到校招生计划",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ],
+  "notes": "8个区/zsks页面返回404或空响应（季节性下线）。检测到的所有中考相关内容均为已知旧数据（名额分配到区/到校计划等），无新公告。各区录取结果尚未发布。"
+}

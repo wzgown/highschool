@@ -1,0 +1,39 @@
+{
+  "date": "2026-07-17",
+  "scrape_time": "2026-07-17T08:05:07.451907",
+  "method": "curl",
+  "sections": {
+    "zhao_sheng_zheng_ce": [],
+    "zhao_sheng_gong_shi": [
+      {
+        "title": "2026年上海市成人中等职业教育（秋季）招生学校名单",
+        "url": "https://www.shmeea.edu.cn/page/03200/20260707/20410.html",
+        "date": "2026-07-07"
+      }
+    ],
+    "bao_ming_xu_zhi": [],
+    "zhi_yuan_tian_bao": [],
+    "kao_shi_gui_ding": [
+      {
+        "title": "2026年上海市初中学业水平考试成绩将于7月14日公布",
+        "url": "https://www.shmeea.edu.cn/page/03500/20260710/20417.html",
+        "date": "2026-07-10"
+      }
+    ],
+    "zhao_sheng_lu_qu": [
+      {
+        "title": "2026年上海市高中阶段学校招生最低投档控制分数线确定",
+        "url": "https://www.shmeea.edu.cn/page/03600/20260714/20441.html",
+        "date": "2026-07-14"
+      },
+      {
+        "title": "上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+        "url": "https://www.shmeea.edu.cn/page/03600/20260714/20438.html",
+        "date": "2026-07-14"
+      }
+    ]
+  },
+  "changes_since": "2026-07-16",
+  "new_items": [],
+  "notes": "无新公告。招生录取子页(/page/03600/)仍只有07-14的两篇（分数线+答记者问）。录取结果尚未公布，按timeline预计：07-17~23自主招生录取公示，07-20下午名额分配到区/到校录取结果，07-23统一招生录取结果。"
+}
