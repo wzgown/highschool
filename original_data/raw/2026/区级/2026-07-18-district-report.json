@@ -1,0 +1,108 @@
+{
+  "date": "2026-07-18",
+  "scrape_time": "2026-07-18T08:07:52.340500",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 2,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [],
+      "note": "zhaoban.hpe.cn/zkxx/ 返回1568B, 季节性下线"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [],
+      "note": "zsks子页可访问但仅标题链接"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [],
+      "note": "5960B, 内容有限"
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [],
+      "note": "534B, 季节性下线"
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [],
+      "note": "147B, 季节性下线"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [],
+      "note": "7558B, 含2026-07关键词但无新公告"
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": [],
+      "note": "1007B, 季节性下线"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [],
+      "note": "10420B, 政务公开平台正常"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [],
+      "note": "0B, 季节性下线"
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [],
+      "note": "8529B, 教育局页面"
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": [],
+      "note": "3144B, 内容有限"
+    },
+    {
+      "name": "金山",
+      "status": "failed",
+      "items": [],
+      "note": "NO RESPONSE, DNS超时"
+    },
+    {
+      "name": "松江",
+      "status": "failed",
+      "items": [],
+      "note": "NO RESPONSE, DNS超时"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [],
+      "note": "9037B, 含旧政策转载"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [],
+      "note": "8945B, 名额分配关键词但无新内容"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": [],
+      "note": "10092B, 区政府主页"
+    }
+  ],
+  "notes": "全部16区无新公告。多数区/zsks/子页已季节性下线(7月后)。虹口有2026-07关键词但为已有内容。金山/松江DNS无响应。"
+}
