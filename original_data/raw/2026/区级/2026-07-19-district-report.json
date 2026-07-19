@@ -1,0 +1,97 @@
+{
+  "date": "2026-07-19",
+  "scan_time": "2026-07-19T08:05:00+08:00",
+  "mode": "full_16_districts",
+  "results": {
+    "黄浦": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2025年统一招生分数线(历史参考), 2026名额到校计划(已知)"
+    },
+    "徐汇": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2026名额到校计划(已知)"
+    },
+    "长宁": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2026招生政策(已知)"
+    },
+    "静安": {
+      "status": "failed",
+      "bytes": 139,
+      "error": "Near-empty response (seasonal)"
+    },
+    "普陀": {
+      "status": "failed",
+      "bytes": 148,
+      "error": "Near-empty response (seasonal)"
+    },
+    "虹口": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2026名额到校计划(已知)"
+    },
+    "杨浦": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2026招生政策(已知)"
+    },
+    "闵行": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "转发自主招生名单(07-17,已知)"
+    },
+    "宝山": {
+      "status": "failed",
+      "bytes": 0,
+      "error": "Empty response (seasonal)"
+    },
+    "嘉定": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2026名额到校计划(已知)"
+    },
+    "浦东": {
+      "status": "failed",
+      "bytes": 139,
+      "error": "Near-empty response (seasonal)"
+    },
+    "金山": {
+      "status": "failed",
+      "bytes": 0,
+      "error": "DNS timeout (consistent)"
+    },
+    "松江": {
+      "status": "failed",
+      "bytes": 0,
+      "error": "DNS timeout (consistent)"
+    },
+    "青浦": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2026招生政策(已知)"
+    },
+    "奉贤": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "2026名额到校计划(已知)"
+    },
+    "崇明": {
+      "status": "ok",
+      "bytes": 0,
+      "findings": "无2026相关内容"
+    }
+  },
+  "summary": {
+    "success": 11,
+    "failed": 5,
+    "new_content_found": 0
+  },
+  "change_vs_previous": {
+    "previous_date": "2026-07-18",
+    "failure_change": "Failure rate increased from 2/16 (金山/松江) to 5/16 (+静安/普陀/宝山/浦东) - seasonal site shutdown deepening",
+    "new_district_content": 0
+  }
+}

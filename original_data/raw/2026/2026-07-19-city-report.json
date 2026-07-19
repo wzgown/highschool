@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-19",
+  "scan_time": "2026-07-19T08:05:00+08:00",
+  "pages_scanned": [
+    {
+      "url": "https://www.shmeea.edu.cn/page/03000/",
+      "status": "ok",
+      "items": 26
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03200/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03300/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03400/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03500/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03600/",
+      "status": "ok"
+    }
+  ],
+  "change_vs_previous": {
+    "previous_date": "2026-07-18",
+    "genuinely_new_items": 0,
+    "notes": "Index page shows 26 items (vs 5 captured in 07-18 report), but all are older 2026 content (Jan-Jun) that existed before 07-18. Subpage scan (03200-03600) found only the same 07-17 autonomous admission PDF already known. No 07-19 dated content anywhere."
+  },
+  "key_upcoming": "7/20下午 名额分配到区/到校录取结果查询",
+  "sections": {
+    "control_scores": "Already in DB (6 records for 2026, imported 07-15)",
+    "autonomous_admission": "PDF published 07-17, already downloaded",
+    "quota_results": "Not yet published (expected 7/20 afternoon)",
+    "unified_results": "Not yet published (expected 7/23)"
+  }
+}
