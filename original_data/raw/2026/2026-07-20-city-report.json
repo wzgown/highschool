@@ -1,0 +1,63 @@
+{
+  "date": "2026-07-20",
+  "scan_time": "2026-07-20T08:00:00+08:00",
+  "pages_scanned": [
+    {
+      "url": "https://www.shmeea.edu.cn/page/03000/",
+      "status": "ok",
+      "items": 38
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03200/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03300/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03400/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03500/",
+      "status": "ok"
+    },
+    {
+      "url": "https://www.shmeea.edu.cn/page/03600/",
+      "status": "ok"
+    }
+  ],
+  "change_vs_previous": {
+    "previous_date": "2026-07-19",
+    "genuinely_new_items": 0,
+    "notes": "No new content. 03600 still shows 2025 名额分配录取分数线 (dated 20250714) as the only 名额分配+录取 content. No 07-20 dated articles found (checked IDs 20467-20474, all 404)."
+  },
+  "key_upcoming": "名额分配到区/到校录取结果 - expected 7/20 afternoon (NOT YET published as of 8:00 AM)",
+  "sections": {
+    "control_scores": "Already in DB (6 records for 2026, imported 07-15)",
+    "autonomous_admission": "PDF published 07-17, already downloaded",
+    "quota_results": "NOT YET published (expected 7/20 afternoon)",
+    "unified_results": "Not yet published (expected 7/23)"
+  },
+  "latest_2026_articles": [
+    {
+      "id": "20466",
+      "date": "07-19",
+      "title": "上海市中等职业学校自主招收随迁子女征求志愿即将开始",
+      "url": "/page/03600/20260719/20466.html"
+    },
+    {
+      "id": "20460",
+      "date": "07-19",
+      "title": "上海市中等职业学校自主招收随迁子女五年一贯制和中高职贯通各专业最低录取分数线",
+      "url": "/page/03600/20260719/20460.html"
+    },
+    {
+      "id": "20461",
+      "date": "07-19",
+      "title": "上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+      "url": "/page/03600/20260719/20461.html"
+    }
+  ]
+}

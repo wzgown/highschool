@@ -1,0 +1,124 @@
+{
+  "date": "2026-07-20",
+  "scrape_time": "2026-07-20T08:01:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 13,
+  "failed_count": 2,
+  "partial_count": 1,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "size": 8954,
+      "items": [],
+      "notes": "中招信息 category links visible, no new content"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": 10852,
+      "items": [],
+      "notes": "Existing 2026 名额分配到区/到校 plans visible"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": 10815,
+      "items": [],
+      "notes": "高中招生 menu visible"
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "size": 15973,
+      "items": [],
+      "notes": "No 中考 keywords"
+    },
+    {
+      "name": "普陀",
+      "status": "partial",
+      "size": 147,
+      "items": [],
+      "notes": "Empty shell (SSL/connectivity issue)"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "size": 10365,
+      "items": [],
+      "notes": "统一招生录取结果查询 link visible"
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "size": 12385,
+      "items": [],
+      "notes": "No 中考 keywords"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": 14639,
+      "items": [],
+      "notes": "No new 中考 content"
+    },
+    {
+      "name": "宝山",
+      "status": "failed",
+      "size": 0,
+      "items": [],
+      "notes": "Connection failed (DNS timeout)"
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "size": 11397,
+      "items": [],
+      "notes": "No new 中考 content"
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "size": 14249,
+      "items": [],
+      "notes": "No new 中考 content"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "size": 27439,
+      "items": [],
+      "notes": "高中招生 menu, existing 2026 content"
+    },
+    {
+      "name": "松江",
+      "status": "failed",
+      "size": 0,
+      "items": [],
+      "notes": "Connection failed (DNS timeout)"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "size": 13303,
+      "items": [],
+      "notes": "中考中招 category, existing 2026 content"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 15042,
+      "items": [],
+      "notes": "Existing 2026 名额分配到区/到校 plans visible"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "size": 16404,
+      "items": [],
+      "notes": "No 中考 keywords"
+    }
+  ],
+  "summary": "13/16 districts reachable, 0 new items found. 宝山 and 松江 DNS timeout (known issue). No new 2026 content published by any district."
+}
