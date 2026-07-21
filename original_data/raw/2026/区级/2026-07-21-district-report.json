@@ -1,0 +1,98 @@
+{
+  "date": "2026-07-21",
+  "scrape_time": "2026-07-21T08:07:16.950609",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 10,
+  "failed_count": 2,
+  "partial_count": 4,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "partial",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "partial",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "partial",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "partial",
+      "items": []
+    }
+  ],
+  "notes": "Most district /zsks/ pages remain seasonally offline after enrollment period ended (June 21-22 deadline). Only 闵行 and 奉贤 still serve content from their 政务公开 platforms. 青浦 item is a re-post of known city-level policy document."
+}
