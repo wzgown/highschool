@@ -1,0 +1,116 @@
+{
+  "date": "2026-07-23",
+  "scrape_time": "2026-07-23T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 16,
+  "failed_count": 0,
+  "note": "多数区/zsks/子页已季节性下线（志愿填报06-22截止后）",
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "size": "varies",
+      "items": [
+        "zhaoban.hpe.cn恢复可访问，含2026名额分配分数线转载+2025统一招生分数线参考"
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": "varies",
+      "items": [
+        "仍含2026名额分配到区/到校计划"
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": "varies",
+      "items": [
+        "仍含2026名额分配到区/到校最低分数线（长宁区）"
+      ]
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": "30KB",
+      "items": [
+        "转发民办高中降分公告(07-21)",
+        "转发自主招生录取名单",
+        "转发控分线确定"
+      ]
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "size": "varies",
+      "items": [
+        "含2026自主招生录取名单、控分线等转载"
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": "22KB",
+      "items": [
+        "仍含2026名额分配到校/到区计划"
+      ]
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        "仍含名额分配到区/到校招生计划"
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ],
+  "changes_since_last": "无新变化",
+  "districts_with_content": 7,
+  "districts_empty": 9
+}
