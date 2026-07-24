@@ -1,0 +1,89 @@
+{
+  "date": "2026-07-24",
+  "city_level": {
+    "url": "https://www.shmeea.edu.cn/page/03000/",
+    "status": "no_new_content",
+    "latest_article": {
+      "date": "07-21",
+      "title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+      "url": "https://www.shmeea.edu.cn/page/03600/20260721/20476.html"
+    },
+    "notes": "No new articles since 07-21. 民办高中降分 data already imported on 07-22."
+  },
+  "district_level": {
+    "scanned": 16,
+    "accessible": 8,
+    "new_findings": [
+      {
+        "district": "宝山区",
+        "date": "2026-07-23",
+        "articles": [
+          {
+            "title": "2026年上海市高中学校'1至15志愿'统一招生录取最低分数线（宝山区）",
+            "url": "http://www.bsedu.org.cn/baoshan/gzzs/145858.jhtml",
+            "pdf": "http://www.bsedu.org.cn/u/cms/www/202607/23083450ug4s.pdf",
+            "type": "统一招生录取分数线",
+            "data": {
+              "high_school_count": 59,
+              "score_range": "462.0 - 717.5",
+              "top_school": "上海市上海中学 717.5分",
+              "imported": true,
+              "table": "ref_admission_score_unified",
+              "records": 59
+            }
+          },
+          {
+            "title": "2026年上海市中职校'1至15志愿'统一招生录取最低分数线（宝山区）",
+            "url": "http://www.bsedu.org.cn/baoshan/gzzs/145859.jhtml",
+            "pdf": "http://www.bsedu.org.cn/u/cms/www/202607/23083801a04k.pdf",
+            "type": "中职校统一招生录取分数线",
+            "data": {
+              "vocational_count": 40,
+              "score_range": "426.5 - 595.5",
+              "saved_as_csv": true,
+              "note": "No dedicated DB table for vocational schools"
+            }
+          },
+          {
+            "title": "关于2026年宝山区中考无录取去向考生征求志愿的通知",
+            "url": "http://www.bsedu.org.cn/baoshan/gzzs/145860.jhtml",
+            "type": "征求志愿通知"
+          }
+        ]
+      },
+      {
+        "district": "闵行区",
+        "status": "known_article",
+        "note": "统一招生录取最低分数线（闵行区）已发布，但页面为JS渲染，无法通过curl提取数据",
+        "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3c872451-e7fe-4b54-9d93-0c9bbd4430a0.htm"
+      }
+    ],
+    "inaccessible_sites": [
+      "徐汇 (WAF/JS-only)",
+      "静安 (404)",
+      "普陀 (0B)",
+      "杨浦 (404)",
+      "松江 (0B)",
+      "嘉定 (0B)",
+      "崇明 (404)",
+      "黄浦 (云防护WAF)"
+    ]
+  },
+  "database_changes": {
+    "table": "ref_admission_score_unified",
+    "action": "INSERT",
+    "year": 2026,
+    "district": "宝山区",
+    "district_id": 10,
+    "records_added": 59,
+    "total_2026_unified_scores": 59,
+    "note": "First district-level unified admission scores for 2026"
+  },
+  "files_created": [
+    "original_data/raw/2026/宝山_高中_1至15志愿.pdf (89042B)",
+    "original_data/raw/2026/宝山_中职校_1至15志愿.pdf (77373B)",
+    "original_data/processed/2026/admission_score_unified_highschool_baoshan_2026.csv",
+    "original_data/processed/2026/admission_score_unified_vocational_baoshan_2026.csv",
+    "original_data/processed/2026/admission_score_unified_baoshan_2026.sql"
+  ]
+}
