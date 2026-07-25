@@ -1,0 +1,46 @@
+-- 2026年奉贤区统一招生录取普通高中最低录取分数线
+-- Data source: https://zsks.shfxjy.cn/1784771714.html
+-- Extracted: 2026-07-25
+-- Note: 5 schools with no qualified applicants (无考生达线) excluded from INSERT
+
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 281, '上海市奉贤中学', 690.00, 406.00, 138.00, 126.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 282, '华东师范大学第二附属中学临港奉贤分校', 682.50, 401.50, 129.00, 130.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 38, '上海市格致中学（奉贤校区）', 682.00, 402.00, 129.00, 133.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 283, '华东理工大学附属奉贤曙光中学', 659.50, 385.50, 125.00, 121.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 284, '东华大学附属奉贤致远中学', 637.50, 371.50, 128.00, 113.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 285, '上海应用技术大学附属奉贤奉城高级中学', 616.50, 362.50, 133.00, 126.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 286, '上海师范大学第四附属中学', 579.00, 336.00, 119.00, 103.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 287, '上海市奉贤区景秀高级中学', 591.50, 345.50, 103.00, 116.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 342, '上海美达菲双语高级中学', 506.50, 259.50, 102.00, 106.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 364, '上海奉贤区博华高级中学', 507.50, 282.50, 57.00, 119.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 1, '上海市上海中学', 718.00, 424.00, 140.00, 137.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 323, '上海田家炳中学', 637.50, 369.50, 116.00, 125.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 368, '上海戏剧学院附属高级中学（艺术班）', 662.50, 394.00, 123.00, 134.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 369, '上海音乐学院附属安师实验中学（艺术班）', 630.00, 378.00, 120.00, 123.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 2, '上海交通大学附属中学', 713.00, 428.00, 146.00, 137.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 3, '复旦大学附属中学', 709.50, 420.50, 143.00, 133.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 154, '上海市民办文绮中学', 627.00, 363.00, 106.00, 117.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 352, '上海圣华紫竹高级中学', 513.00, 280.50, 67.00, 120.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 175, '上海民办行中中学', 491.00, 275.50, 78.00, 97.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 176, '上海存志高级中学', 649.50, 370.50, 118.00, 115.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 178, '上海创艺高级中学', 578.50, 333.50, 106.00, 119.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 179, '上海市宝山华曜高级中学', 506.00, 276.00, 96.00, 99.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 180, '上海市同洲模范学校', 503.00, 293.50, 76.00, 99.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 190, '上海市民办远东学校', 529.00, 283.00, 122.00, 100.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 4, '华东师范大学第二附属中学', 711.00, 417.00, 138.00, 133.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 5, '上海师范大学附属中学', 694.50, 403.50, 134.00, 128.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 225, '上海市民办丰华高级中学', 573.50, 298.50, 106.00, 109.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 227, '民办上海工商外国语职业学院附属中学', 568.00, 321.00, 100.00, 111.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 234, '上海浦东新区民办东鼎外国语学校', 578.00, 333.00, 93.00, 118.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 235, '上海市民办尚德实验学校', 619.50, 356.50, 111.00, 123.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 341, '上海市民办交大南洋中学', 523.50, 312.00, 101.00, 110.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 251, '上海市民办永昌中学', 565.50, 318.50, 103.00, 114.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 249, '上海金山区世外学校', 624.00, 360.00, 111.00, 120.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 267, '上海市西外外国语学校', 532.50, 286.50, 76.00, 113.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 269, '上海赫贤学校', 629.00, 369.00, 113.00, 119.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 270, '上海松江区爱菊学校', 531.00, 302.00, 82.00, 111.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 277, '上海青浦区世外高级中学', 509.00, 275.00, 103.00, 103.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 363, '上海市奉贤中学附属南桥中学', 657.50, 383.50, 111.00, 128.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 291, '上海市崇明区城桥中学', 559.50, 328.50, 88.00, 107.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 294, '上海市崇明区堡镇中学', 624.00, 370.00, 110.00, 120.00);
+INSERT INTO ref_admission_score_unified (year, district_id, school_id, school_name, min_score, chinese_math_foreign_sum, math_score, chinese_score) VALUES (2026, 16, 295, '上海民办民一中学', 544.00, 296.00, 87.00, 121.00);

@@ -1,0 +1,99 @@
+{
+  "date": "2026-07-25",
+  "timestamp": "2026-07-25T08:10:48.724183",
+  "status": "PARTIAL_UPDATE",
+  "city_level": {
+    "url": "https://www.shmeea.edu.cn/page/03000/",
+    "new_articles": false,
+    "latest_date": "2026-07-21",
+    "notes": "No new articles since last check. 03600 page latest: 07-21 (民办高中降分公告). 名额分配分数线 07-20 already processed."
+  },
+  "district_level": {
+    "total_scanned": 16,
+    "accessible": {
+      "奉贤区": "Accessible - 46 schools in unified table (41 with scores, 5 无考生达线), 47 vocational programs",
+      "闵行区": "Page accessible but no unified scores found - listing shows gov meeting minutes, not exam data",
+      "金山": "Page accessible but unified scores behind interactive query system (kscfbmhtdlqcx)",
+      "虹口": "WAF/JS protection - kszx.hongkouedu.com returns same shell page, hongkouedu.com empty"
+    },
+    "blocked_or_empty": {
+      "黄浦区": "Connection failed",
+      "徐汇区": "WAF protection (822B shell)",
+      "长宁区": "Connection failed",
+      "静安区": "WAF protection (1054B shell)",
+      "普陀区": "WAF protection (539B shell)",
+      "杨浦区": "Empty (11B)",
+      "嘉定区": "404 Not Found",
+      "浦东新区": "WAF protection (3213B shell)",
+      "青浦区": "404 Not Found",
+      "松江区": "WAF protection (439B shell)",
+      "崇明区": "WAF protection (449B shell)",
+      "宝山区": "Connection failed (already imported)"
+    }
+  },
+  "data_updates": {
+    "fengxian_unified": {
+      "status": "IMPORTED",
+      "source": "https://zsks.shfxjy.cn/1784771714.html",
+      "total_schools": 46,
+      "imported_records": 41,
+      "skipped_no_score": 5,
+      "no_score_schools": [
+        "上海安生学校(074081)",
+        "上海闵行区民办德闳学校(125119)",
+        "上海市松江区励滕高级中学(173005)",
+        "上海青浦区协和双语学校(185014)",
+        "上海新纪元双语学校(514014)"
+      ],
+      "score_range": "491.0 - 718.0",
+      "top_schools": [
+        "上海市上海中学: 718",
+        "上海交通大学附属中学: 713",
+        "华东师范大学第二附属中学: 711",
+        "复旦大学附属中学: 709.5",
+        "上海师范大学附属中学: 694.5"
+      ],
+      "district_id": 16,
+      "sql_file": "original_data/processed/2026/admission_score_unified_fengxian_2026.sql",
+      "csv_file": "original_data/processed/2026/admission_score_unified_highschool_fengxian_2026.csv"
+    },
+    "fengxian_vocational": {
+      "status": "CSV_SAVED",
+      "source": "https://zsks.shfxjy.cn/1784772002.html",
+      "total_programs": 47,
+      "score_range": "305.0 - 577.0",
+      "csv_file": "original_data/processed/2026/admission_score_unified_vocational_fengxian_2026.csv",
+      "note": "No DB table for vocational scores, CSV only"
+    }
+  },
+  "db_state": {
+    "table": "ref_admission_score_unified",
+    "year": 2026,
+    "total_records": 100,
+    "by_district": {
+      "宝山区(district_id=10)": 59,
+      "奉贤区(district_id=16)": 41
+    }
+  },
+  "blocked_districts": [
+    "嘉定",
+    "金山",
+    "虹口",
+    "闵行",
+    "黄浦",
+    "徐汇",
+    "长宁",
+    "静安",
+    "普陀",
+    "杨浦",
+    "浦东",
+    "青浦",
+    "松江",
+    "崇明"
+  ],
+  "next_steps": [
+    "Try browser automation for 嘉定/金山/虹口 when curl blocks",
+    "Monitor remaining 14 districts for unified score publications",
+    "4所全市分配型学校按区分配明细仍待补"
+  ]
+}
