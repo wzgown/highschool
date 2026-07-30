@@ -1,0 +1,111 @@
+{
+  "date": "2026-07-30",
+  "method": "curl",
+  "total_districts": 17,
+  "success_count": 15,
+  "failed_count": 2,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "ok",
+      "size": 30036,
+      "notes": "名额分配到校招生计划,8所民办降分公告(转载)"
+    },
+    {
+      "name": "奉贤",
+      "status": "ok",
+      "size": 20946,
+      "notes": "统一批次普通高中+中职校最低录取分数线(已入库),名额分配到区/到校"
+    },
+    {
+      "name": "金山",
+      "status": "ok",
+      "size": 48314,
+      "notes": "1至15志愿统一招生录取最低分数线(金山区),自主招生录取名单"
+    },
+    {
+      "name": "徐汇",
+      "status": "ok",
+      "size": 10847,
+      "notes": "2026名额分配到区/到校招生计划,1至15志愿统一招生录取分数线(徐汇区)"
+    },
+    {
+      "name": "长宁",
+      "status": "ok",
+      "size": 29511,
+      "notes": "名额分配到区招生录取最低分数线,名额分配到区/到校招生计划表,1至15志愿统一招生录取分数线"
+    },
+    {
+      "name": "松江",
+      "status": "partial",
+      "size": 2065,
+      "notes": "仅2KB,内容极少"
+    },
+    {
+      "name": "青浦",
+      "status": "ok",
+      "size": 13304,
+      "notes": "转发招生工作若干意见"
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "size": 148,
+      "notes": "empty response"
+    },
+    {
+      "name": "虹口",
+      "status": "ok",
+      "size": 10521,
+      "notes": "统一招生录取结果查询,高考本科征求志愿(排除)"
+    },
+    {
+      "name": "宝山",
+      "status": "ok",
+      "size": 13492,
+      "notes": "名额分配到区到校(2026),中职校1至15志愿最低分数线,征求志愿通知"
+    },
+    {
+      "name": "嘉定",
+      "status": "ok",
+      "size": 46431,
+      "notes": "统一招生录取1至15志愿高中+中职校投档分数线(2026-07-23)"
+    },
+    {
+      "name": "杨浦",
+      "status": "partial",
+      "size": 46335,
+      "notes": "大页面但无中考关键词(季节性内容下线)"
+    },
+    {
+      "name": "浦东",
+      "status": "partial",
+      "size": 46182,
+      "notes": "大页面但无中考关键词"
+    },
+    {
+      "name": "静安",
+      "status": "partial",
+      "size": 116380,
+      "notes": "大页面但无中考关键词"
+    },
+    {
+      "name": "黄浦",
+      "status": "failed",
+      "size": 1569,
+      "notes": "404/empty"
+    },
+    {
+      "name": "崇明",
+      "status": "ok",
+      "size": 59486,
+      "notes": "1-15志愿招生录取最低分数线"
+    },
+    {
+      "name": "宝山zkxx",
+      "status": "not_checked",
+      "notes": "仅检查gzzs子页"
+    }
+  ],
+  "summary": "无新增中考数据。各区统一招生分数线已在07-24至07-29期间全部入库(861条)。季节性页面下线持续中。"
+}
