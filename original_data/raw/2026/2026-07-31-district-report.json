@@ -1,0 +1,155 @@
+{
+  "date": "2026-07-31",
+  "scrape_time": "2026-07-31T00:03:14.143612",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 0,
+  "partial_count": 2,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "size": 1572,
+      "note": "页面已清空(季节性)"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": 10850,
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": 29514,
+      "items": [
+        {
+          "title": "长宁中考录取结果查询",
+          "note": "链接入口"
+        },
+        {
+          "title": "2026年上海市高中学校1至15志愿统一招生录取分数线（长宁区）",
+          "note": "已导入DB"
+        },
+        {
+          "title": "2026年中考投档缺额情况表(长宁区）",
+          "date": "2026-07-23",
+          "note": "PDF已下载,征求志愿数据"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "size": 1057,
+      "note": "页面已清空(季节性)"
+    },
+    {
+      "name": "普陀",
+      "status": "partial",
+      "size": 151,
+      "note": "空壳"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "size": 10524,
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "size": 1010,
+      "note": "页面已清空(季节性)"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": 30039,
+      "items": [
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价名额分配到校招生计划（闵行区）",
+          "note": "已导入DB"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+          "note": "已导入DB"
+        },
+        {
+          "title": "2026年上海市高中学校1至15志愿统一招生录取最低分数线（闵行区）",
+          "note": "已导入DB"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "size": 13495,
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "size": 46439,
+      "items": [
+        {
+          "title": "2026年嘉定区统一招生录取1至15志愿高中学校投档分数线",
+          "date": "2026-07-23",
+          "note": "已导入DB"
+        },
+        {
+          "title": "2026年嘉定区统一招生录取1至15志愿中职校投档分数线",
+          "date": "2026-07-23",
+          "note": "CSV已保存"
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "partial",
+      "size": 538,
+      "note": "空壳/反爬"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "size": 48317,
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "size": 2068,
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "size": 13307,
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 20949,
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "size": 59565,
+      "items": []
+    }
+  ],
+  "new_discoveries": [
+    {
+      "type": "投档缺额情况表",
+      "district": "长宁区",
+      "date": "2026-07-23",
+      "description": "征求志愿阶段民办高中剩余计划，含9所学校21个名额（6个区）",
+      "pdf_path": "original_data/raw/2026/pdfs/2026_changning_shortfall.pdf",
+      "action": "已下载归档，非DB核心数据"
+    }
+  ]
+}
