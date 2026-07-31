@@ -153,6 +153,11 @@ Page({
     wx.switchTab({ url: '/pages/history/history' })
   },
 
+  askAgent: function () {
+    getApp().globalData.pendingAnalysisId = this.data.id
+    wx.switchTab({ url: '/pages/chat/chat' })
+  },
+
   onRetry: function () {
     this.loadResult()
   },

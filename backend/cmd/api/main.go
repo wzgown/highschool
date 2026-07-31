@@ -122,6 +122,7 @@ func main() {
 	// 注册 Connect-RPC 服务
 	v1.RegisterReferenceService(mux, otelInterceptor)
 	v1.RegisterCandidateService(mux, otelInterceptor)
+	v1.RegisterAgentService(mux, otelInterceptor)
 
 	// 添加中间件
 	// 顺序（从外到内）：OTel HTTP tracing -> 日志 -> handler

@@ -1,0 +1,108 @@
+<view class="chat-page">
+  <view class="chat-header">
+    <view class="chat-header-text">
+      <text class="chat-title">AI 顾问</text>
+      <text class="chat-subtitle">分数线 · 政策 · 志愿策略，有问必答</text>
+    </view>
+    <button class="new-chat-btn" bindtap="onNewChat">新对话</button>
+  </view>
+
+  <scroll-view class="chat-scroll" scroll-y scroll-into-view="{{scrollToId}}" scroll-with-animation>
+    <view class="chat-body">
+      <view class="chat-welcome" wx:if="{{!messages.length}}">
+        <text class="welcome-title">你好，我是 AI 顾问</text>
+        <text class="welcome-desc">可以问我中考分数线、名额分配政策、志愿填报策略等问题。</text>
+        <text class="welcome-disclaimer">回答由 DeepSeek 模型生成，仅供参考；数据以上海市教育考试院官方公布为准。</text>
+        <view class="quick-list">
+          <view
+            class="chip"
+            wx:for="{{quickQuestions}}"
+            wx:key="index"
+            data-text="{{item}}"
+            bindtap="onQuickQuestion"
+          >{{item}}</view>
+        </view>
+      </view>
+
+      <view
+        wx:for="{{messages}}"
+        wx:key="id"
+        id="{{item.id}}"
+        class="msg-row msg-row-{{item.role}}"
+      >
+        <view class="bubble bubble-{{item.role}}">
+          <view class="status-line" wx:if="{{item.statusLine}}">{{item.statusLine}}</view>
+          <text class="bubble-text" user-select="{{true}}">{{item.content}}</text>
+
+          <view class="card-list" wx:if="{{item.cards.length}}">
+            <view class="school-card" wx:for="{{item.cards}}" wx:for-item="card" wx:key="index">
+              <view class="school-card-header">
+                <text class="school-card-name">{{card.schoolName}}</text>
+                <text class="school-card-district" wx:if="{{card.districtName}}">{{card.districtName}}</text>
+              </view>
+
+              <block wx:if="{{card.displayType === 'score_trend'}}">
+                <view class="trend-table">
+                  <view class="trend-row trend-row-head">
+                    <text class="trend-cell">年份</text>
+                    <text class="trend-cell">录取分</text>
+                  </view>
+                  <view class="trend-row" wx:for="{{card.trendRows}}" wx:for-item="row" wx:key="year">
+                    <text class="trend-cell">{{row.year}}</text>
+                    <text class="trend-cell trend-score">{{row.score}}</text>
+                  </view>
+                </view>
+              </block>
+
+              <block wx:elif="{{card.kv.length}}">
+                <view class="kv-row" wx:for="{{card.kv}}" wx:for-item="kv" wx:key="key">
+                  <text class="kv-key">{{kv.key}}</text>
+                  <text class="kv-value">{{kv.value}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="msg-row msg-row-assistant" wx:if="{{sending}}" id="chat-typing">
+        <view class="bubble bubble-assistant typing-bubble">
+          <view class="typing-dot"></view>
+          <view class="typing-dot"></view>
+          <view class="typing-dot"></view>
+        </view>
+      </view>
+
+      <view class="pending-panel" wx:if="{{pendingQuestion && !sending}}">
+        <text class="pending-question">{{pendingQuestion.question}}</text>
+        <view class="quick-list" wx:if="{{pendingQuestion.options.length}}">
+          <view
+            class="chip"
+            wx:for="{{pendingQuestion.options}}"
+            wx:key="index"
+            data-text="{{item}}"
+            bindtap="onPendingOption"
+          >{{item}}</view>
+        </view>
+      </view>
+
+      <view id="chat-bottom" class="chat-bottom-anchor"></view>
+    </view>
+  </scroll-view>
+
+  <view class="input-bar">
+    <input
+      class="chat-input"
+      value="{{inputValue}}"
+      placeholder="输入你的问题…"
+      confirm-type="send"
+      bindinput="onInput"
+      bindconfirm="onSend"
+    />
+    <button
+      class="send-btn {{(!inputValue || sending) ? 'send-btn-disabled' : ''}}"
+      bindtap="onSend"
+      disabled="{{sending || !inputValue}}"
+    >发送</button>
+  </view>
+</view>

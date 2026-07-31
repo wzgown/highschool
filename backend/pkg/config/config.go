@@ -14,6 +14,36 @@ type Config struct {
 	Log      LogConfig      `mapstructure:"log"`
 	Tracing  TracingConfig  `mapstructure:"tracing"`
 	Tip      TipConfig      `mapstructure:"tip"`
+	LLM      LLMConfig      `mapstructure:"llm"`
+	Agent    AgentConfig    `mapstructure:"agent"`
+	WeChat   WeChatConfig   `mapstructure:"wechat"`
+}
+
+// LLMConfig LLM（OpenAI 兼容）配置
+type LLMConfig struct {
+	Provider       string `mapstructure:"provider"`
+	BaseURL        string `mapstructure:"base_url"`
+	APIKey         string `mapstructure:"api_key"`
+	Model          string `mapstructure:"model"`
+	MaxTokens      int    `mapstructure:"max_tokens"`
+	TimeoutSeconds int    `mapstructure:"timeout_seconds"`
+}
+
+// AgentConfig AI 顾问 Agent 模式配置
+type AgentConfig struct {
+	MaxReplan            int  `mapstructure:"max_replan"`
+	StepBudget           int  `mapstructure:"step_budget"`
+	SessionTTLHours      int  `mapstructure:"session_ttl_hours"`
+	DailyQuota           int  `mapstructure:"daily_quota"`
+	MaxContextMessages   int  `mapstructure:"max_context_messages"`
+	MaxLLMConcurrency    int  `mapstructure:"max_llm_concurrency"`
+	ReflectionLLMEnabled bool `mapstructure:"reflection_llm_enabled"`
+}
+
+// WeChatConfig 微信小程序配置（内容安全 msgSecCheck）
+type WeChatConfig struct {
+	AppID  string `mapstructure:"appid"`
+	Secret string `mapstructure:"secret"` // 仅经环境变量 HS_WECHAT_SECRET 注入
 }
 
 // TipConfig 打赏码配置
@@ -93,6 +123,19 @@ func Load() (*Config, error) {
 	viper.SetDefault("tip.enabled", true)
 	viper.SetDefault("tip.qr_url", "")
 	viper.SetDefault("tip.review_versions", []string{})
+	viper.SetDefault("llm.provider", "deepseek")
+	viper.SetDefault("llm.base_url", "https://api.deepseek.com")
+	viper.SetDefault("llm.model", "deepseek-chat")
+	viper.SetDefault("llm.max_tokens", 800)
+	viper.SetDefault("llm.timeout_seconds", 60)
+	viper.SetDefault("agent.max_replan", 2)
+	viper.SetDefault("agent.step_budget", 12)
+	viper.SetDefault("agent.session_ttl_hours", 72)
+	viper.SetDefault("agent.daily_quota", 50)
+	viper.SetDefault("agent.max_context_messages", 20)
+	viper.SetDefault("agent.max_llm_concurrency", 10)
+	viper.SetDefault("agent.reflection_llm_enabled", false)
+	viper.SetDefault("wechat.appid", "")
 
 	// 环境变量支持 - 使用 EnvKeyReplacer 将 database.host 映射到 HS_DATABASE_HOST
 	viper.SetEnvPrefix("HS")

@@ -28,6 +28,27 @@
   <view class="card">
     <view class="card-header">
       <view class="card-header-icon"></view>
+      <text>AI 生成内容声明</text>
+    </view>
+    <view class="info-list">
+      <view class="info-row">
+        <text class="info-label">AI 顾问</text>
+        <text class="info-value">「顾问」频道的回答由深度求索（DeepSeek）人工智能模型生成，仅供参考</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">内容安全</text>
+        <text class="info-value">提问与回答均经内容安全检测，请勿输入违法违规信息</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">准确性</text>
+        <text class="info-value">AI 回答可能存在偏差，数据类结论以上海市教育考试院官方公布为准</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <view class="card-header-icon"></view>
       <text>覆盖范围</text>
     </view>
     <view class="feature-list">

@@ -61,3 +61,4 @@ backend/go.work
 # Protobuf generated (optional, if you want to regenerate them)
 # backend/gen/
 # frontend/src/gen/
+.loop/

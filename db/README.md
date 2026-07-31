@@ -358,6 +358,36 @@ psql -U your_user -d your_database -f db/seeds/023_seed_2024_jiading_admission_u
 
 ## 更新日志
 
+### 2026-07-31 (Agent 模式基础设施：会话四表 + 分析视图层)
+- **新增 Agent 四表**（db/migrations/009_create_agent_tables.sql）：
+  - agent_session（ThreadStore 主表，version 乐观锁 + waiting_input 状态机）
+  - agent_message（对话消息，含 usage 成本字段）
+  - agent_checkpoint（每节点 State 快照，HITL 续跑/崩溃恢复/回放）
+  - agent_trace（LLM/工具/节点调用留痕，回放与成本审计）
+- **新增分析视图层**（db/migrations/010_agent_analysis_views.sql，普通 VIEW 无需刷新）：
+  - v_school_score_trend：校×批次×区×年分数线 + 同比涨跌（含小分）
+  - v_quota_trend：校×批次×区×年名额 + 同比增减
+  - v_school_profile：高中画像（主档+本区最新三类线+最新年名额合计）
+  - v_middle_school_profile：初中画像（梯队/排名/人数/700+ + 到校名额与线聚合）
+- **设计文档**：docs/agent-mode-plan.md
+
+### 2026-07-29 (2026年录取分数线全量导入 + 初中统计扩展)
+- **数据来源**：sh_zhongkao_2026 数据集（`original_data/raw/2026/sh_zhongkao_2026/`，官方：考试院/各区教育局；民间/推算数据已逐行标注）
+- **新增 2026 分数线（线上库此前完全空白）**：
+  - seed_ref_admission_score_quota_district_2026.sql：名额到区录取线 906 行（16区）
+  - seed_ref_admission_score_quota_school_2026.sql：名额到校录取线 3247 行（16区）
+  - seed_ref_admission_score_unified_2026_fill.sql：平行志愿补缺（16区全覆盖至 861 行，已有行 DO NOTHING 保留）
+  - seed_ref_district_exam_count_2026.sql：16区中考人数（民间估算，全市官方 138000）
+- **校名匹配**：高中以招生代码为主键；华二/市二/格致/向明等多校区同名歧义按「2026计划过滤 + 2025分数就近」消解，审计见 `import_audit.csv`；虹口等区无代码缩写已建 19 条别名映射
+- **修复（patches）**：
+  - patch_2026_quota_district_remove_total_rows.sql：删除 152006/155001 冗余"上海市"总计行（汇总双倍计数）
+  - patch_2026_unified_cleanup_artclass_xuhui.sql：删艺术班幻影行 5 条 + 修复徐汇区 44 行 school_id 误植为 1
+  - patch_2026_unified_fix_chongming_3schools.sql：崇明 3 校疑似 2025 分数误标 2026，按官方 2026 线修正
+- **初中扩展（migration 008 + patches）**：
+  - 新增列：reputation_score（声誉口碑 0-100，主观）、score_700plus_count/reliability（民间 700+ 统计）
+  - 4 所 2026 新初中入库；district_rank 回填 671 所、tier 200 所、推算人数 727 所
+- **注意**：名额分配线为 800 分制（含综评 50），平行志愿线为 750 分制，不可混用
+
 ### 2025-02-12 (2025年学校全量数据)
 - **新增2025年学校全量数据**：
   - 002_seed_schools_2025_full.sql：76所学校信息

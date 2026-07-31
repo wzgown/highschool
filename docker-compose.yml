@@ -75,6 +75,14 @@ services:
       - HS_TRACING_SERVICE_NAME=highschool-backend
       - HS_TRACING_OTLP_ENDPOINT=localhost:4317
       - HS_TRACING_SAMPLE_RATE=0.1
+      # LLM（AI 顾问；key 通过环境注入，勿提交真实值）
+      - HS_LLM_PROVIDER=${HS_LLM_PROVIDER:-deepseek}
+      - HS_LLM_BASE_URL=${HS_LLM_BASE_URL:-https://api.deepseek.com}
+      - HS_LLM_MODEL=${HS_LLM_MODEL:-deepseek-chat}
+      - HS_LLM_API_KEY=${HS_LLM_API_KEY:-}
+      # WeChat（内容安全 msgSecCheck；未配置时自动降级放行）
+      - HS_WECHAT_APPID=wx75a71eee586a2ad3
+      - HS_WECHAT_SECRET=${HS_WECHAT_SECRET:-}
       # Tip
       - HS_TIP_ENABLED=true
       - HS_TIP_QR_URL=https://zg.mkfriend.top/static/tip-qr.jpg

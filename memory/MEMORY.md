@@ -69,6 +69,7 @@ src/
 |------|------|------|
 | ReferenceService | `/highschool.v1.ReferenceService/*` | 区县、学校、历史分数查询 |
 | CandidateService | `/highschool.v1.CandidateService/*` | 志愿分析、模拟提交、历史记录 |
+| AgentService | `/highschool.v1.AgentService/*` | AI 顾问对话（Chat/NewSession/GetSessionHistory），详见 docs/agent-mode-plan.md |
 
 ## 核心业务规则
 

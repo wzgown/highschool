@@ -3,7 +3,8 @@ App({
     apiBaseUrl: 'https://zg.mkfriend.top',
     version: '1.0.0',
     formData: null,
-    analysisId: null
+    analysisId: null,
+    pendingAnalysisId: null
   },
 
   onLaunch() {

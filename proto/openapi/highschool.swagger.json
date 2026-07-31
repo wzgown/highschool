@@ -1,10 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "highschool/v1/candidate.proto",
+    "title": "highschool/v1/agent_service.proto",
     "version": "version not set"
   },
   "tags": [
+    {
+      "name": "AgentService"
+    },
     {
       "name": "CandidateService"
     },
@@ -144,6 +147,69 @@
         }
       },
       "title": "考生成绩"
+    },
+    "v1ChatContext": {
+      "type": "object",
+      "properties": {
+        "analysisId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "关联的模拟结果（结果解读场景）"
+        },
+        "districtId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "middleSchoolId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalScore": {
+          "type": "number",
+          "format": "double"
+        },
+        "examType": {
+          "type": "string",
+          "title": "MOCK1/MOCK2/ZHONGKAO"
+        }
+      },
+      "title": "对话上下文（前端可携带，帮助 Router 抽取槽位）"
+    },
+    "v1ChatResponse": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "reply": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "toolCalls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ToolCallInfo"
+          }
+        },
+        "schoolCards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SchoolCard"
+          }
+        },
+        "pendingQuestion": {
+          "$ref": "#/definitions/v1PendingQuestion",
+          "title": "非空 → 会话处于 waiting_input"
+        },
+        "traceId": {
+          "type": "string",
+          "title": "用于问题上报/回放定位"
+        }
+      }
     },
     "v1CompetitorAnalysis": {
       "type": "object",
@@ -367,6 +433,21 @@
       },
       "title": "获取有名额分配到校的高中列表响应"
     },
+    "v1GetSessionHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SessionMessage"
+          }
+        }
+      }
+    },
     "v1GetVolunteerRecommendationsResponse": {
       "type": "object",
       "properties": {
@@ -487,6 +568,14 @@
       },
       "title": "初中学校"
     },
+    "v1NewSessionResponse": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        }
+      }
+    },
     "v1PaginationMeta": {
       "type": "object",
       "properties": {
@@ -514,6 +603,26 @@
         }
       },
       "title": "分页响应元数据"
+    },
+    "v1PendingQuestion": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string",
+          "title": "等待填充的槽位名，如 district_id / total_score / confirm"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "可点选项（区名、一模/二模、「确认」）"
+        }
+      },
+      "title": "HITL 追问：非空时前端渲染选项 chips / 确认按钮"
     },
     "v1RankPrediction": {
       "type": "object",
@@ -664,6 +773,30 @@
       },
       "title": "高中学校"
     },
+    "v1SchoolCard": {
+      "type": "object",
+      "properties": {
+        "schoolId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "schoolName": {
+          "type": "string"
+        },
+        "districtName": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string",
+          "title": "score_trend / compare / profile / quota"
+        },
+        "payloadJson": {
+          "type": "string",
+          "title": "结构化数据（JSON），前端按 card_type 解析渲染"
+        }
+      },
+      "title": "结构化学校卡片（前端渲染）"
+    },
     "v1SchoolDetail": {
       "type": "object",
       "properties": {
@@ -793,6 +926,23 @@
         }
       },
       "title": "分数分布项"
+    },
+    "v1SessionMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "node": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
     },
     "v1SimulationResults": {
       "type": "object",
@@ -926,6 +1076,22 @@
         }
       },
       "title": "提交模拟分析响应"
+    },
+    "v1ToolCallInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "工具名"
+        },
+        "summary": {
+          "type": "string",
+          "title": "给人看的摘要，如「查询 2024-2026 平行志愿分数线」"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
     },
     "v1VolunteerProbability": {
       "type": "object",

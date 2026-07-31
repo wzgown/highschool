@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package highschool.v1;
+
+option go_package = "github.com/highschool/backend/gen/highschool/v1;highschoolv1";
+
+// AI 顾问 Agent 服务（设计文档: docs/agent-mode-plan.md）
+service AgentService {
+  // 对话（unary；流式输出走裸 HTTP /agent/chat/stream，P3）
+  rpc Chat(ChatRequest) returns (ChatResponse);
+
+  // 新建会话
+  rpc NewSession(NewSessionRequest) returns (NewSessionResponse);
+
+  // 获取会话历史消息
+  rpc GetSessionHistory(GetSessionHistoryRequest) returns (GetSessionHistoryResponse);
+}
+
+// 对话上下文（前端可携带，帮助 Router 抽取槽位）
+message ChatContext {
+  int32 analysis_id = 1;        // 关联的模拟结果（结果解读场景）
+  int32 district_id = 2;
+  int32 middle_school_id = 3;
+  double total_score = 4;
+  string exam_type = 5;         // MOCK1/MOCK2/ZHONGKAO
+}
+
+message ChatRequest {
+  string device_id = 1;
+  string session_id = 2;        // 空则新建会话
+  string message = 3;
+  ChatContext context = 4;
+  string pending_answer = 5;    // HITL: 对 pending_question 的回答（也可直接走 message）
+}
+
+message ToolCallInfo {
+  string name = 1;              // 工具名
+  string summary = 2;           // 给人看的摘要，如「查询 2024-2026 平行志愿分数线」
+  bool success = 3;
+}
+
+// 结构化学校卡片（前端渲染）
+message SchoolCard {
+  int32 school_id = 1;
+  string school_name = 2;
+  string district_name = 3;
+  string card_type = 4;         // score_trend / compare / profile / quota
+  string payload_json = 5;      // 结构化数据（JSON），前端按 card_type 解析渲染
+}
+
+// HITL 追问：非空时前端渲染选项 chips / 确认按钮
+message PendingQuestion {
+  string question = 1;
+  string field = 2;             // 等待填充的槽位名，如 district_id / total_score / confirm
+  repeated string options = 3;  // 可点选项（区名、一模/二模、「确认」）
+}
+
+message ChatResponse {
+  string session_id = 1;
+  string reply = 2;
+  string intent = 3;
+  repeated ToolCallInfo tool_calls = 4;
+  repeated SchoolCard school_cards = 5;
+  PendingQuestion pending_question = 6;  // 非空 → 会话处于 waiting_input
+  string trace_id = 7;                   // 用于问题上报/回放定位
+}
+
+message NewSessionRequest {
+  string device_id = 1;
+  ChatContext context = 2;
+}
+
+message NewSessionResponse {
+  string session_id = 1;
+}
+
+message GetSessionHistoryRequest {
+  string device_id = 1;
+  string session_id = 2;
+  int32 limit = 3;              // 默认 50
+}
+
+message SessionMessage {
+  string role = 1;
+  string content = 2;
+  string node = 3;
+  string created_at = 4;
+}
+
+message GetSessionHistoryResponse {
+  string session_id = 1;
+  repeated SessionMessage messages = 2;
+}
