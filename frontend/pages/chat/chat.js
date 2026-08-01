@@ -1,4 +1,5 @@
 var agent = require('../../utils/agent')
+var markdown = require('../../utils/markdown')
 
 var QUICK_QUESTIONS = [
   '今年最低控制线多少',
@@ -143,10 +144,13 @@ Page({
         var history = (res && res.messages) || []
         if (!history.length) return
         var messages = history.map(function (m) {
+          var role = (m && m.role === 'user') ? 'user' : 'assistant'
+          var content = (m && m.content) || ''
           return {
             id: nextMsgId(),
-            role: (m && m.role === 'user') ? 'user' : 'assistant',
-            content: (m && m.content) || '',
+            role: role,
+            content: content,
+            nodes: role === 'assistant' ? markdown.toNodes(content) : null,
             statusLine: '',
             cards: []
           }
@@ -257,6 +261,7 @@ Page({
         id: nextMsgId(),
         role: 'assistant',
         content: res.reply || '',
+        nodes: markdown.toNodes(res.reply || ''),
         statusLine: buildStatusLine(res.toolCalls),
         cards: parseSchoolCards(res.schoolCards)
       }

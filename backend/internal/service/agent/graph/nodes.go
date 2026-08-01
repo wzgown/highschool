@@ -24,7 +24,7 @@ func (g *Graph) routerNode(ctx context.Context, s *agent.State) (string, error) 
 	contextJSON, _ := json.Marshal(map[string]any{"已知槽位": s.Slots})
 	msgs := []agent.Message{
 		{Role: agent.RoleSystem, Content: RouterSystemPrompt},
-		{Role: agent.RoleUser, Content: fmt.Sprintf("上下文：%s\n用户消息：%s", contextJSON, s.UserMessage)},
+		{Role: agent.RoleUser, Content: fmt.Sprintf("%s\n上下文：%s\n用户消息：%s", currentDateContext(), contextJSON, s.UserMessage)},
 	}
 	result, err := g.callLLM(ctx, s, "router", agent.ChatParams{
 		Messages: msgs, MaxTokens: 300, Temperature: 0, ResponseJSON: true,
@@ -65,7 +65,7 @@ func (g *Graph) plannerNode(ctx context.Context, s *agent.State) (string, error)
 		"intent": s.Intent, "slots": s.Slots, "message": s.UserMessage,
 	})
 	msgs := []agent.Message{
-		{Role: agent.RoleSystem, Content: PlannerSystemPrompt + "\n\n可用工具：\n" + string(specsJSON)},
+		{Role: agent.RoleSystem, Content: PlannerSystemPrompt + "\n\n" + currentDateContext() + "\n\n可用工具：\n" + string(specsJSON)},
 		{Role: agent.RoleUser, Content: string(payload)},
 	}
 	result, err := g.callLLM(ctx, s, "planner", agent.ChatParams{

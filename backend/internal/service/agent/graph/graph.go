@@ -165,6 +165,13 @@ func (g *Graph) traceNode(ctx context.Context, s *agent.State, node, next string
 	})
 }
 
+// currentDateContext 给 Router/Planner 的当前时间上下文（防止 LLM 凭训练记忆把「今年」当成过去年份）
+func currentDateContext() string {
+	now := time.Now()
+	return fmt.Sprintf("当前时间：%d年%d月。今年=%d年，去年=%d年；用户说「今年」指%d年，「去年」指%d年。",
+		now.Year(), int(now.Month()), now.Year(), now.Year()-1, now.Year(), now.Year()-1)
+}
+
 // setSlot 写入槽位（field 为槽位名；district/exam 做标准化）
 func setSlot(s *agent.State, field string, value any) {
 	if s.Slots == nil {
