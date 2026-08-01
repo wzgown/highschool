@@ -1,0 +1,30 @@
+{
+  "date": "2026-08-01",
+  "scrape_time": "2026-08-01T08:02:20.394132",
+  "method": "curl",
+  "sections": {
+    "index": {
+      "total_2026_items": 20,
+      "latest_date": "20260723",
+      "latest_item": "上海市民办高中学校招生计划余额公布"
+    },
+    "zhao_sheng_gong_shi": {
+      "total_2026_items": 10,
+      "latest_date": "20260707",
+      "latest_item": "上海市成人中等职业教育（秋季）招生学校名单"
+    },
+    "zhao_sheng_lu_qu": {
+      "total_2026_items": 10,
+      "latest_date": "20260723",
+      "latest_item": "上海市民办高中学校招生计划余额公布"
+    },
+    "unified_results": {
+      "total_2026_items": 2,
+      "latest_date": "20260715",
+      "latest_item": "高中阶段学校招生和随迁子女招生录取结果查询"
+    }
+  },
+  "new_since_last_check": false,
+  "last_check_date": "2026-07-25",
+  "notes": "Deep seasonal shutdown. No new content since July 25. 民办高中招生计划余额 (07-23) was the last city-level publication. District sites mostly 404/empty. 宝山征求志愿通知 (07-23, deadline 07-24) is historical."
+}
