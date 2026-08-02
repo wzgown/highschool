@@ -1,0 +1,41 @@
+{
+  "date": "2026-08-02",
+  "scrape_time": "2026-08-02T08:03:05.104750",
+  "city_monitoring": {
+    "status": "success",
+    "sections_scanned": 6,
+    "total_2026_items": 42,
+    "new_items": 0,
+    "latest_item_date": "2026-07-23",
+    "notes": "Seasonal quiet period. No new announcements since last scan (2026-07-23). All 2026 items are archival from completed admissions cycle."
+  },
+  "district_monitoring": {
+    "total": 16,
+    "success": 13,
+    "failed": 3,
+    "with_content": 5,
+    "new_items": 0,
+    "failed_districts": [
+      "普陀(empty)",
+      "闵行(empty)",
+      "嘉定(empty)"
+    ],
+    "content_districts": {
+      "宝山": "2026-07-23 征求志愿通知 (已知)",
+      "徐汇": "名额分配到区/到校计划 (已知)",
+      "奉贤": "名额分配到校+中职校分数线 (已知)",
+      "金山": "中考志愿填报/查询入口 (导航链接)",
+      "长宁": "高中招生导航 (导航链接)"
+    },
+    "notes": "Deep seasonal shutdown. All detected content is archival from May-July 2026."
+  },
+  "data_status": {
+    "quota_district": "17区全覆盖, 945条/7,416名额",
+    "quota_school": "16区全覆盖, 3,883条/12,861名额",
+    "unified_scores": "16区全覆盖, 861条",
+    "control_scores": "6条已导入",
+    "lowered_private": "8条已导入",
+    "quota_score_pdfs": "32个PDF已归档, 待解析入库"
+  },
+  "recommendations": "进入8月淡季，建议降频为每周一次。所有主要数据类型已入库完毕。"
+}
