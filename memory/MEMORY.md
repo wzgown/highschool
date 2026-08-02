@@ -36,9 +36,12 @@ cd frontend && npm run build       # 构建
 
 ### 数据库
 ```bash
-docker compose up -d  # 启动 PostgreSQL 和 Redis
-psql -U highschool -d highschool -f db/migrations/*.sql     # 创建表
-psql -U highschool -d highschool -f db/seeds/*.sql          # 导入种子数据
+# 基础设施（postgres/redis）已迁移到 192.168.71.160，本机不再需要启动 docker。
+# make run / make dev 默认通过 HS_DATABASE_HOST/HS_REDIS_HOST 连 160；
+# 临时连线上生产库用 make run-prod，或 HS_DATABASE_HOST=36.150.236.225 make run。
+make infra-check                                                  # 检查 160 连通性
+psql -h 192.168.71.160 -U highschool -d highschool -f db/migrations/*.sql  # 创建表
+psql -h 192.168.71.160 -U highschool -d highschool -f db/seeds/*.sql       # 导入种子数据
 ```
 
 ## 架构设计

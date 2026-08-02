@@ -64,13 +64,13 @@ npm run build
 ### 数据库
 
 ```bash
-# 启动 PostgreSQL 和 Redis
-docker compose up -d
+# 基础设施（postgres/redis）已迁移到 192.168.71.160，本机不再需要 docker。
+# backend 下 make run / make dev 默认连接 160（详见 backend/Makefile）。
 
 # 初始化数据库
-psql -U highschool -d highschool -f db/migrations/001_create_reference_tables_v2.sql
-psql -U highschool -d highschool -f db/migrations/002_create_history_tables_v2.sql
-psql -U highschool -d highschool -f db/migrations/003_create_simulation_history.sql
+psql -h 192.168.71.160 -U highschool -d highschool -f db/migrations/001_create_reference_tables_v2.sql
+psql -h 192.168.71.160 -U highschool -d highschool -f db/migrations/002_create_history_tables_v2.sql
+psql -h 192.168.71.160 -U highschool -d highschool -f db/migrations/003_create_simulation_history.sql
 
 # 导入种子数据
 psql -U highschool -d highschool -f db/seeds/000_seed_districts.sql
