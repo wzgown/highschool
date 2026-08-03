@@ -1,5 +1,6 @@
 var agent = require('../../utils/agent')
 var markdown = require('../../utils/markdown')
+var appConfig = require('../../utils/config')
 
 var QUICK_QUESTIONS = [
   '今年最低控制线多少',
@@ -112,14 +113,29 @@ Page({
     sending: false,
     pendingQuestion: null,
     quickQuestions: QUICK_QUESTIONS,
-    scrollToId: ''
+    scrollToId: '',
+    configReady: false
   },
 
   onLoad: function () {
-    this.sessionReady = this.initSession()
+    var self = this
+    // 功能开关：审核期间远程关闭 AI 顾问（个人开发者类目限制）。
+    // 关闭时不渲染任何内容，直接跳回首页——页面完全不可见。
+    this.sessionReady = appConfig.fetchAppConfig().then(function (cfg) {
+      if (!cfg.agentEnabled) {
+        wx.switchTab({ url: '/pages/index/index' })
+        return null
+      }
+      self.setData({ configReady: true })
+      return self.initSession()
+    })
   },
 
   onShow: function () {
+    if (!this.data.configReady) return
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 2 })
+    }
     var app = getApp()
     var analysisId = app && app.globalData && app.globalData.pendingAnalysisId
     if (analysisId) {
@@ -226,7 +242,7 @@ Page({
   sendMessage: function (text, extra) {
     extra = extra || {}
     var self = this
-    if (!text || this.data.sending) return
+    if (!text || this.data.sending || !this.data.configReady) return
 
     var userMsg = {
       id: nextMsgId(),

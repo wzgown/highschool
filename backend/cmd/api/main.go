@@ -109,6 +109,25 @@ func main() {
 		json.NewEncoder(w).Encode(map[string]string{"url": url})
 	})
 
+	// 应用功能开关（AI 顾问等；审核版本强制关闭 AI 功能——个人开发者类目限制）
+	mux.HandleFunc("/app-config", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+
+		version := r.URL.Query().Get("version")
+		agentEnabled := cfg.Feature.AgentEnabled && !containsString(cfg.Feature.ReviewVersions, version)
+
+		tipURL := ""
+		if tipCfg.Enabled && tipCfg.QrURL != "" && !containsString(tipCfg.ReviewVersions, version) {
+			tipURL = tipCfg.QrURL
+		}
+
+		json.NewEncoder(w).Encode(map[string]any{
+			"agent_enabled": agentEnabled,
+			"tip_url":       tipURL,
+		})
+	})
+
 	// 创建 OpenTelemetry 拦截器
 	var otelInterceptor *otelconnect.Interceptor
 	if cfg.Tracing.Enabled {

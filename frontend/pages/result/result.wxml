@@ -154,7 +154,7 @@
     <view class="result-actions">
       <button class="btn-secondary action-btn" bindtap="goBack">返回修改</button>
       <button class="btn-primary action-btn" bindtap="viewHistory">查看历史</button>
-      <button class="btn-secondary action-btn" bindtap="askAgent">问问 AI 顾问</button>
+      <button class="btn-secondary action-btn" bindtap="askAgent" wx:if="{{agentEnabled}}">问问 AI 顾问</button>
     </view>
 
     <tip-section />

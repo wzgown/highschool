@@ -1,5 +1,6 @@
 var candidate = require('../../utils/candidate')
 var format = require('../../utils/format')
+var appConfig = require('../../utils/config')
 
 Page({
   data: {
@@ -7,6 +8,7 @@ Page({
     error: null,
     id: '',
     result: null,
+    agentEnabled: false,
     // 展示数据（已从 proto 字段映射）
     predictions: null,
     probabilities: [],
@@ -19,6 +21,10 @@ Page({
       this.setData({ id: options.id })
       this.loadResult()
     }
+    var self = this
+    appConfig.fetchAppConfig().then(function (cfg) {
+      self.setData({ agentEnabled: cfg.agentEnabled })
+    })
   },
 
   loadResult: function () {

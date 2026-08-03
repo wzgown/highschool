@@ -263,6 +263,7 @@ message ChatResponse {
 ### 3.9 合规
 - 模型侧：DeepSeek/Kimi/通义均已按《生成式人工智能服务管理暂行办法》备案；小程序内公示「由 XX 模型提供」，更新用户协议/隐私政策。
 - 微信侧：纯文本问答不涉及深度合成资质；提审版本声明 AI 生成内容；P2 接 `msgSecCheck`。
+- **审核开关（已实现）**：个人开发者类目限制 AI 服务，故做远程开关——后端 `GET /app-config?version=x` 返回 `agent_enabled`；`feature.review_versions` 中的版本强制返回 `false`。审核期把提审版本号加入 `review_versions`（或直接把 `feature.agent_enabled` 设为 false），chat 页整体显示「功能升级中」占位、result 页隐藏「问问 AI 顾问」；通过后从配置移除即可线上打开。同模式复用打赏码 `/tip-config` 的 review_versions 机制。
 - 数据侧：回答带年份来源；民间/推算数据保留口径；`agent_trace` 全量留痕支撑审计与人工接管。
 
 ### 3.10 测试与观测

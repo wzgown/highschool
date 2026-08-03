@@ -38,7 +38,8 @@
         "iconPath": "images/chat.png",
         "selectedIconPath": "images/chat-active.png"
       }
-    ]
+    ],
+    "custom": true
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

@@ -17,6 +17,7 @@ type Config struct {
 	LLM      LLMConfig      `mapstructure:"llm"`
 	Agent    AgentConfig    `mapstructure:"agent"`
 	WeChat   WeChatConfig   `mapstructure:"wechat"`
+	Feature  FeatureConfig  `mapstructure:"feature"`
 }
 
 // LLMConfig LLM（OpenAI 兼容）配置
@@ -44,6 +45,12 @@ type AgentConfig struct {
 type WeChatConfig struct {
 	AppID  string `mapstructure:"appid"`
 	Secret string `mapstructure:"secret"` // 仅经环境变量 HS_WECHAT_SECRET 注入
+}
+
+// FeatureConfig 功能开关（审核期隐藏 AI 顾问等，远程可控）
+type FeatureConfig struct {
+	AgentEnabled   bool     `mapstructure:"agent_enabled"`  // AI 顾问总开关
+	ReviewVersions []string `mapstructure:"review_versions"` // 审核中的小程序版本：这些版本强制关闭
 }
 
 // TipConfig 打赏码配置
@@ -136,6 +143,7 @@ func Load() (*Config, error) {
 	viper.SetDefault("agent.max_llm_concurrency", 10)
 	viper.SetDefault("agent.reflection_llm_enabled", false)
 	viper.SetDefault("wechat.appid", "")
+	viper.SetDefault("feature.agent_enabled", true)
 
 	// 环境变量支持 - 使用 EnvKeyReplacer 将 database.host 映射到 HS_DATABASE_HOST
 	viper.SetEnvPrefix("HS")
