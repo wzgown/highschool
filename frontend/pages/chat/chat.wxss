@@ -367,3 +367,59 @@ page {
 .send-btn-disabled {
   opacity: 0.42;
 }
+
+/* 「更多」诗意页（功能关闭/审核期展示，无任何 AI 痕迹） */
+.poem-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f6f8fa 0%, #eef3f1 100%);
+}
+.poem-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 60rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 40rpx rgba(31, 122, 104, 0.08);
+  margin: 0 60rpx;
+}
+.poem-title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 600;
+  color: #1f7a68;
+  letter-spacing: 8rpx;
+}
+.poem-author {
+  display: block;
+  font-size: 24rpx;
+  color: #8a939e;
+  margin-top: 16rpx;
+  letter-spacing: 4rpx;
+}
+.poem-divider {
+  width: 80rpx;
+  height: 4rpx;
+  background: #1f7a68;
+  opacity: 0.3;
+  border-radius: 2rpx;
+  margin: 36rpx 0;
+}
+.poem-line {
+  display: block;
+  font-size: 30rpx;
+  color: #3a4550;
+  line-height: 2.2;
+  letter-spacing: 2rpx;
+  text-align: center;
+}
+.poem-footer {
+  display: block;
+  font-size: 22rpx;
+  color: #a8b0b8;
+  margin-top: 48rpx;
+  letter-spacing: 4rpx;
+}

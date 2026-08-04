@@ -1,3 +1,14 @@
+<view class="poem-page" wx:if="{{featureOff}}">
+  <view class="poem-card">
+    <text class="poem-title">登科后</text>
+    <text class="poem-author">唐 · 孟郊</text>
+    <view class="poem-divider"></view>
+    <text class="poem-line">昔日龌龊不足夸，今朝放荡思无涯。</text>
+    <text class="poem-line">春风得意马蹄疾，一日看尽长安花。</text>
+    <text class="poem-footer">—— 折桂登高，与君共勉 ——</text>
+  </view>
+</view>
+
 <view class="chat-page" wx:if="{{configReady}}">
   <view class="chat-header">
     <view class="chat-header-text">

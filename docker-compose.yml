@@ -83,6 +83,9 @@ services:
       # WeChat（内容安全 msgSecCheck；未配置时自动降级放行）
       - HS_WECHAT_APPID=wx75a71eee586a2ad3
       - HS_WECHAT_SECRET=${HS_WECHAT_SECRET:-}
+      # 功能开关（审核期把提审版本号加入 review_versions；通过后移除并重启即可线上打开）
+      - HS_FEATURE_AGENT_ENABLED=${HS_FEATURE_AGENT_ENABLED:-true}
+      - HS_FEATURE_REVIEW_VERSIONS=${HS_FEATURE_REVIEW_VERSIONS:-1.4}
       # Tip
       - HS_TIP_ENABLED=true
       - HS_TIP_QR_URL=https://zg.mkfriend.top/static/tip-qr.jpg

@@ -17,6 +17,7 @@ import (
 
 	v1 "highschool-backend/internal/api/v1"
 	"highschool-backend/internal/infrastructure/database"
+	"highschool-backend/internal/infrastructure/settings"
 	"highschool-backend/pkg/config"
 	"highschool-backend/pkg/logger"
 	"highschool-backend/pkg/tracing"
@@ -92,39 +93,33 @@ func main() {
 		w.Write([]byte(`{"status":"ok","time":` + fmt.Sprintf("%d", time.Now().Unix()) + `}`))
 	})
 
-	// 打赏码配置
+	// 应用功能开关（AI 顾问 + 打赏码；DB app_config 表驱动，UPDATE 后 60s 内生效，无需重启）
 	tipCfg := cfg.Tip
+	featureFlags := settings.NewProvider(settings.Fallback{
+		AgentEnabled:      cfg.Feature.AgentEnabled,
+		ReviewVersions:    cfg.Feature.ReviewVersions,
+		TipEnabled:        tipCfg.Enabled,
+		TipURL:            tipCfg.QrURL,
+		TipReviewVersions: tipCfg.ReviewVersions,
+	})
 	mux.HandleFunc("/tip-config", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
-		url := ""
-		if tipCfg.Enabled && tipCfg.QrURL != "" {
-			version := r.URL.Query().Get("version")
-			if !containsString(tipCfg.ReviewVersions, version) {
-				url = tipCfg.QrURL
-			}
-		}
-
-		json.NewEncoder(w).Encode(map[string]string{"url": url})
+		json.NewEncoder(w).Encode(map[string]string{
+			"url": featureFlags.TipURL(r.Context(), r.URL.Query().Get("version")),
+		})
 	})
 
-	// 应用功能开关（AI 顾问等；审核版本强制关闭 AI 功能——个人开发者类目限制）
 	mux.HandleFunc("/app-config", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		version := r.URL.Query().Get("version")
-		agentEnabled := cfg.Feature.AgentEnabled && !containsString(cfg.Feature.ReviewVersions, version)
-
-		tipURL := ""
-		if tipCfg.Enabled && tipCfg.QrURL != "" && !containsString(tipCfg.ReviewVersions, version) {
-			tipURL = tipCfg.QrURL
-		}
 
 		json.NewEncoder(w).Encode(map[string]any{
-			"agent_enabled": agentEnabled,
-			"tip_url":       tipURL,
+			"agent_enabled": featureFlags.AgentEnabled(r.Context(), version),
+			"tip_url":       featureFlags.TipURL(r.Context(), version),
 		})
 	})
 
@@ -185,15 +180,6 @@ func main() {
 	}
 
 	logger.Info(ctx, "server exited")
-}
-
-func containsString(slice []string, s string) bool {
-	for _, v := range slice {
-		if v == s {
-			return true
-		}
-	}
-	return false
 }
 
 // responseWriter 包装 http.ResponseWriter 以捕获状态码

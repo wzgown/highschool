@@ -25,7 +25,7 @@
     </view>
   </view>
 
-  <view class="card">
+  <view class="card" wx:if="{{agentEnabled}}">
     <view class="card-header">
       <view class="card-header-icon"></view>
       <text>AI 生成内容声明</text>

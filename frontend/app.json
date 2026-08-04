@@ -34,7 +34,7 @@
       },
       {
         "pagePath": "pages/chat/chat",
-        "text": "顾问",
+        "text": "更多",
         "iconPath": "images/chat.png",
         "selectedIconPath": "images/chat-active.png"
       }

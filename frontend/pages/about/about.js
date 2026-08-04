@@ -1,4 +1,17 @@
+var appConfig = require('../../utils/config')
+
 Page({
+  data: {
+    agentEnabled: false
+  },
+
+  onLoad: function () {
+    var self = this
+    appConfig.fetchAppConfig().then(function (cfg) {
+      self.setData({ agentEnabled: cfg.agentEnabled })
+    })
+  },
+
   onShareAppMessage: function () {
     return {
       title: '折桂登高 - 中考志愿模拟分析',
