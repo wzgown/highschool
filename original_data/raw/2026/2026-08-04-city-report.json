@@ -1,0 +1,33 @@
+{
+  "date": "2026-08-04",
+  "scrape_time": "2026-08-04T08:02:34",
+  "method": "curl",
+  "sections": {
+    "zhao_sheng_zheng_ce": {
+      "latest_2026": "2026年成人中职秋季招生学校名单 (07-07)",
+      "no_new_since": "07-25"
+    },
+    "zhao_sheng_gong_shi": {
+      "latest_2026": "成人中职秋季招生学校名单 (07-07)",
+      "no_new_since": "07-25"
+    },
+    "bao_ming_xu_zhi": {
+      "latest_2026": "跨区报名注意事项一览表 (05-12)",
+      "no_new_since": "07-25"
+    },
+    "zhi_yuan_tian_bao": {
+      "latest_2026": "中职校招收随迁子女志愿填报即将开始 (05-31)",
+      "no_new_since": "07-25"
+    },
+    "zhao_sheng_lu_qu": {
+      "latest_2026": "民办高中招生计划余额公布 (07-23)",
+      "no_new_since": "07-25"
+    },
+    "tong_yi_lu_qu": {
+      "latest_2026": "高中阶段学校招生录取结果查询 (07-15)",
+      "no_new_since": "07-25"
+    }
+  },
+  "index_translations": 4,
+  "changes": "无新公告 (与2026-07-31报告一致)"
+}

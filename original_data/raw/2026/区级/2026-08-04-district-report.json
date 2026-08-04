@@ -1,0 +1,97 @@
+{
+  "date": "2026-08-04",
+  "scrape_time": "2026-08-04T08:02:34",
+  "method": "curl",
+  "total_districts": 12,
+  "success_count": 9,
+  "failed_count": 0,
+  "partial_count": 3,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "partial",
+      "size": 0,
+      "items": [],
+      "notes": "WORSE: was 30KB on 08-01, now EMPTY(0B). Deep seasonal shutdown."
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 20945,
+      "items": [],
+      "notes": "Still serving content. No new items since 08-01."
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": 10846,
+      "items": [],
+      "notes": "Still serving content. No new items."
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "size": 13304,
+      "items": [],
+      "notes": "Still serving content. No new items."
+    },
+    {
+      "name": "金山",
+      "status": "partial",
+      "size": 0,
+      "items": [],
+      "notes": "WORSE: was 48KB on 08-01, now EMPTY(0B). Deep seasonal shutdown."
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "size": 13333,
+      "items": [
+        {
+          "title": "关于2026年宝山区中考无录取去向考生征求志愿的通知",
+          "url": "https://www.bsedu.org.cn/baoshan/gzzs/145860.jhtml",
+          "date": "2026-07-23"
+        }
+      ],
+      "notes": "Only historical item (征求志愿 deadline passed 07-24)."
+    },
+    {
+      "name": "黄浦",
+      "status": "partial",
+      "size": 1568,
+      "items": [],
+      "notes": "Small response. Seasonal content removal."
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": 28837,
+      "items": [],
+      "notes": "Still serving content. Latest items dated 2026-07-23. No new."
+    },
+    {
+      "name": "普陀",
+      "status": "partial",
+      "size": 147,
+      "items": [],
+      "notes": "Near-empty response."
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "size": 10518,
+      "items": [],
+      "notes": "Content is 高考 related (本科征求志愿). No 中考 content."
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "size": 2064,
+      "items": [],
+      "notes": "Minimal response. No new content."
+    }
+  ],
+  "new_since_last_check": false,
+  "last_check_date": "2026-08-01",
+  "notes": "Deep seasonal shutdown continues. 闵行 and 金山 dropped from working to empty. No new 中考 data from any district. 招生 season effectively complete."
+}

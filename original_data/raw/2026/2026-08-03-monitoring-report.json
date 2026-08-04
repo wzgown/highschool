@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-03",
+  "scrape_time": "2026-08-03T08:00:00",
+  "city_monitoring": {
+    "status": "success",
+    "index_items": 38,
+    "sections_scanned": 6,
+    "total_2026_items": 11,
+    "new_items": 0,
+    "latest_article_date": "2026-07-23",
+    "notes": "Seasonal quiet period. No new announcements since 2026-07-23 (统一招生录取结果). /page/03600/ articles all from Jul 14-21. /page/03200/ latest is Jul 7."
+  },
+  "district_monitoring": {
+    "total": 16,
+    "success": 0,
+    "failed": 16,
+    "with_content": 0,
+    "new_items": 0,
+    "notes": "Complete seasonal shutdown - ALL 16 districts return 0 bytes (curl timeout/empty response). Deeper than Aug 2 (which had 13 success, 5 with_content). District /zsks/ pages fully offline for August."
+  },
+  "data_status": {
+    "quota_district": "943 records, 7156 quota (17 districts)",
+    "quota_school": "3883 records, 12861 quota (16 districts)",
+    "unified_scores": "861 records, 16 districts complete",
+    "control_scores": "6 records",
+    "lowered_private": "8 records",
+    "unified_alloc": "54 records (Jiading only)",
+    "quota_score_pdfs": "32 PDFs archived, pending parse+import"
+  },
+  "recommendations": "Deep seasonal shutdown. ALL district sites now returning 0 bytes. Recommend reducing monitoring to weekly or pausing until ~March 2027. No data changes expected until next enrollment cycle."
+}
