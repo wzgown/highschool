@@ -1,0 +1,110 @@
+{
+  "date": "2026-08-08",
+  "scrape_time": "2026-08-08T00:01:39.941873Z",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 8,
+  "failed_count": 0,
+  "empty_count": 7,
+  "offline_count": 1,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": 30036,
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 20946,
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": 10847,
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "size": 48314,
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "size": 13304,
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "size": 2065,
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "size": 13492,
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": 28837,
+      "items": []
+    },
+    {
+      "name": "黄浦",
+      "status": "empty",
+      "size": 1569,
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "empty",
+      "size": 10494,
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "empty",
+      "size": 1007,
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "empty",
+      "size": 1054,
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "empty",
+      "size": 535,
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "size": 59475,
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "offline",
+      "size": 148,
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "offline",
+      "size": 147,
+      "items": []
+    }
+  ],
+  "new_items": [],
+  "summary": "Seasonal shutdown continues. All content is pre-August. No new data detected."
+}
