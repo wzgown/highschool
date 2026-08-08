@@ -446,7 +446,25 @@ func (r *schoolRepo) GetSchoolsForUnified(ctx context.Context, districtID int32)
 	return r.getSchoolsForUnifiedWithCache(ctx, districtID, year)
 }
 
+// getLatestUnifiedAllocationYear 获取该区统一招生计划数据的最新年份。
+// 分数线表年份可能领先招生计划表（部分区当年计划尚未导入），
+// 此时需回退到该区实际有数据的年份，否则 INNER JOIN 结果为空。
+func (r *schoolRepo) getLatestUnifiedAllocationYear(ctx context.Context, districtID int32, fallback int) int {
+	var year int
+	err := r.db.QueryRow(ctx, `
+		SELECT COALESCE(MAX(year), 0) FROM ref_quota_unified_allocation_district WHERE district_id = $1
+	`, districtID).Scan(&year)
+	if err != nil || year <= 0 {
+		return fallback
+	}
+	if year < fallback {
+		return year
+	}
+	return fallback
+}
+
 func (r *schoolRepo) getSchoolsForUnifiedWithCache(ctx context.Context, districtID int32, year int) ([]*highschoolv1.SchoolForUnified, error) {
+	year = r.getLatestUnifiedAllocationYear(ctx, districtID, year)
 	// 查询该区在统一招生批次可填报的学校
 	// 规则：只能填报在该区有统一招生计划的学校
 	// 使用新的 ref_quota_unified_allocation_district 表查询
@@ -508,6 +526,7 @@ func (r *schoolRepo) GetSchoolsByCutoffScoreRanking(ctx context.Context, distric
 }
 
 func (r *schoolRepo) getSchoolsByCutoffScoreRankingWithCache(ctx context.Context, districtID int32, year int) ([]*SchoolRankingInfo, error) {
+	year = r.getLatestUnifiedAllocationYear(ctx, districtID, year)
 	// 只返回在该区有统一招生计划的学校（使用新表 ref_quota_unified_allocation_district）
 	// 综合使用名额到区分数线和统一招生分数线数据作为排名依据
 	// 优先使用名额到区分数线（更能反映学校的真实录取难度），如果没有则使用统一招生分数线

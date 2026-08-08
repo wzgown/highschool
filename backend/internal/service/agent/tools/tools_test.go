@@ -626,8 +626,8 @@ func TestGetAnalysisResult_JSON(t *testing.T) {
 	if strategy["score"].(float64) != 80 || len(strategy["suggestions"].([]any)) != 1 {
 		t.Fatalf("策略分析要点缺失: %v", strategy)
 	}
-	if len(res.Cards) != 1 || res.Cards[0].CardType != "profile" {
-		t.Fatalf("应给 1 张 profile 卡片: %+v", res.Cards)
+	if len(res.Cards) != 0 {
+		t.Fatalf("解读结果不应下发卡片（前端兜底渲染会暴露原始 JSON）: %+v", res.Cards)
 	}
 }
 

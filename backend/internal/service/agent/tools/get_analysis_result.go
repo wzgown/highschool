@@ -163,16 +163,8 @@ func (t *getAnalysisResultTool) Execute(ctx context.Context, raw json.RawMessage
 		payload["strategy"] = strategy
 	}
 
-	card := agent.SchoolCard{
-		SchoolID:   0,
-		SchoolName: fmt.Sprintf("模拟结果 #%d", args.AnalysisID),
-		CardType:   "profile",
-		Payload: map[string]any{
-			"volunteers":      volunteers,
-			"rank_prediction": payload["rank_prediction"],
-			"strategy":        payload["strategy"],
-		},
-	}
+	// 不下发结构化卡片：前端对非 score_trend 卡片只做 key-value 兜底渲染，
+	// 原始 JSON 直接暴露给用户看不懂、易误认为异常；数据留在 payload 供 LLM 解读即可。
 	summary := fmt.Sprintf("解读模拟结果 #%d（%d 个志愿）", args.AnalysisID, len(volunteers))
-	return buildResult(payload, []agent.SchoolCard{card}, summary)
+	return buildResult(payload, nil, summary)
 }
