@@ -8,6 +8,7 @@
 var reference = require('../../utils/reference')
 var districtUtil = require('../../utils/district')
 var pickerUtil = require('../../utils/picker')
+var storage = require('../../utils/storage')
 
 // 区总分配置：{ firstMock: 一模总分, secondMock: 二模总分 }
 var DISTRICT_SCORE_CONFIG = {
@@ -477,6 +478,45 @@ Page({
   // ======== 操作 ========
 
   goToSimulation: function () {
+    var d = this.data
+
+    // 预填模拟填报表单：复用表单页的本地草稿机制（form 页 onLoad 时 _restoreForm 读取）
+    var saved = storage.loadFormData() || {}
+
+    // 模考成绩换算 750 分制预填总分，优先二模（更接近中考水平）
+    var total = 0
+    if (d.secondMockHasScore && d.secondMockConverted) {
+      total = Number(d.secondMockConverted)
+    } else if (d.firstMockHasScore && d.firstMockConverted) {
+      total = Number(d.firstMockConverted)
+    }
+
+    var scores = Object.assign({
+      total: 0, chinese: 0, math: 0, foreign: 0,
+      integrated: 0, ethics: 0, history: 0, pe: 0
+    }, saved.scores || {})
+    if (total > 0) scores.total = total
+
+    // 区县一致才保留草稿中的志愿，否则志愿失效
+    var sameDistrict = !!saved.districtId && saved.districtId === d.districtId
+    var volunteers = (sameDistrict && saved.volunteers) || {
+      quotaDistrict: null,
+      quotaSchool: [0, 0],
+      unified: new Array(15).fill(0)
+    }
+
+    storage.saveFormData({
+      districtId: d.districtId,
+      districtName: d.districtName,
+      middleSchoolId: d.middleSchoolId || null,
+      middleSchoolName: d.middleSchoolName || '',
+      hasQuotaSchoolEligibility: d.hasQuotaSchoolEligibility,
+      scores: scores,
+      comprehensiveQuality: saved.comprehensiveQuality || 50,
+      ranking: saved.ranking || { rank: 0, totalStudents: 0 },
+      volunteers: volunteers
+    })
+
     wx.navigateTo({ url: '/pages/form/form' })
   },
 
