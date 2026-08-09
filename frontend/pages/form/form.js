@@ -95,7 +95,13 @@ Page({
     showSchoolPicker: false,
     pickerType: '',
     pickerSchools: [],
-    pickerSearch: ''
+    pickerSearch: '',
+
+    // 统一招生志愿拖拽排序
+    dragging: false,
+    dragIdx: -1,
+    dragOffsets: new Array(15).fill(0),
+    dragAnim: false
   },
 
   // ======== 生命周期 ========
@@ -546,22 +552,43 @@ Page({
 
   // ======== 学校选择器 ========
 
-  onSchoolPickerOpen: function (e) {
-    var type = e.currentTarget.dataset.type
-    var schools = []
+  // 同批次已选学校（当前正在编辑的志愿位除外）：同批次不可重复填报
+  _getSelectedIds: function (type) {
+    var v = this.data.volunteers
+    if (type === 'quotaDistrict') {
+      return []
+    }
+    if (type === 'quotaSchool0' || type === 'quotaSchool1') {
+      var other = type === 'quotaSchool0' ? v.quotaSchool[1] : v.quotaSchool[0]
+      return other ? [other] : []
+    }
+    // unifiedN：排除其他志愿位已选学校
+    var index = parseInt(type.replace('unified', ''), 10)
+    return v.unified.filter(function (id, i) { return id && i !== index })
+  },
 
+  // 批次可选学校列表（剔除同批次已选）
+  _getBatchSchools: function (type) {
+    var schools
     if (type === 'quotaDistrict') {
       schools = this.data.quotaDistrictSchools
     } else if (type === 'quotaSchool0' || type === 'quotaSchool1') {
       schools = this.data.quotaSchoolSchools
-    } else if (type.indexOf('unified') === 0) {
+    } else {
       schools = this.data.unifiedSchools
     }
+    var selected = this._getSelectedIds(type)
+    if (!selected.length) return schools
+    return (schools || []).filter(function (s) { return selected.indexOf(s.id) === -1 })
+  },
+
+  onSchoolPickerOpen: function (e) {
+    var type = e.currentTarget.dataset.type
 
     this.setData({
       showSchoolPicker: true,
       pickerType: type,
-      pickerSchools: schools,
+      pickerSchools: this._getBatchSchools(type),
       pickerSearch: ''
     })
   },
@@ -570,16 +597,7 @@ Page({
     var query = e.detail.value.trim()
     this.setData({ pickerSearch: query })
 
-    var allSchools = []
-    var type = this.data.pickerType
-
-    if (type === 'quotaDistrict') {
-      allSchools = this.data.quotaDistrictSchools
-    } else if (type === 'quotaSchool0' || type === 'quotaSchool1') {
-      allSchools = this.data.quotaSchoolSchools
-    } else {
-      allSchools = this.data.unifiedSchools
-    }
+    var allSchools = this._getBatchSchools(this.data.pickerType)
 
     if (!query) {
       this.setData({ pickerSchools: allSchools })
@@ -593,6 +611,12 @@ Page({
     var schoolId = Number(e.currentTarget.dataset.id)
     var schoolName = e.currentTarget.dataset.name || ''
     var type = this.data.pickerType
+
+    // 兜底：同批次重复选择直接拒绝（正常流程下选择器已过滤）
+    if (this._getSelectedIds(type).indexOf(schoolId) !== -1) {
+      wx.showToast({ title: '同批次不能重复选择该学校', icon: 'none' })
+      return
+    }
 
     var updates = {
       showSchoolPicker: false,
@@ -646,6 +670,96 @@ Page({
 
     this.setData(updates)
     this._validateStep2()
+  },
+
+  // ======== 统一招生志愿拖拽排序（长按整行拖动） ========
+
+  onPageScroll: function (e) {
+    this._scrollTop = e.scrollTop || 0
+  },
+
+  onDragStart: function (e) {
+    var index = Number(e.currentTarget.dataset.index)
+    if (!this.data.volunteers.unified[index]) return
+    var self = this
+    wx.createSelectorQuery().in(this).selectAll('.volunteer-item-unified').boundingClientRect(function (rects) {
+      if (!rects || rects.length < 2) return
+      // 先只记录基准，不改动任何 data；等手指真的移动再进入拖拽态，
+      // 避免长按瞬间的 setData 重渲染造成画面闪缩
+      self._dragMetrics = {
+        baseTop: rects[0].top,
+        rowH: rects[0].height,
+        stride: rects[1].top - rects[0].top
+      }
+      self._dragScroll0 = self._scrollTop || 0
+      self._dragPending = index
+    }).exec()
+  },
+
+  onDragMove: function (e) {
+    if (!this._dragMetrics) return
+    if (!this.data.dragging) {
+      if (this._dragPending === -1 || this._dragPending === undefined) return
+      this.setData({ dragging: true, dragIdx: this._dragPending })
+      this._dragPending = -1
+      return
+    }
+    var touch = e.touches[0]
+    var m = this._dragMetrics
+    // 拖动过程中页面可能同时滚动，用滚动量修正行位置基准
+    var baseTop = m.baseTop - ((this._scrollTop || 0) - (this._dragScroll0 || 0))
+
+    // 已填志愿为数组前缀，空位（0）在后；拖拽范围限制在前缀内
+    var u = this.data.volunteers.unified
+    var filled = 0
+    for (var i = 0; i < u.length; i++) { if (u[i]) filled++ }
+
+    var target = Math.round((touch.clientY - baseTop - m.rowH / 2) / m.stride)
+    target = Math.max(0, Math.min(filled - 1, target))
+
+    var from = this.data.dragIdx
+    if (target === from) return
+
+    var newU = u.slice()
+    var newNames = this.data.volunteerNames.unified.slice()
+    newU.splice(target, 0, newU.splice(from, 1)[0])
+    newNames.splice(target, 0, newNames.splice(from, 1)[0])
+
+    // 换位动画：给被挤开的行一个反向初始位移（瞬间、无过渡），
+    // 下一帧归位（带过渡），视觉上它们平滑滑到新位置
+    var offsets = new Array(15).fill(0)
+    var i2
+    if (target > from) {
+      for (i2 = from; i2 < target; i2++) offsets[i2] = m.stride
+    } else {
+      for (i2 = target + 1; i2 <= from; i2++) offsets[i2] = -m.stride
+    }
+
+    this.setData({
+      'volunteers.unified': newU,
+      'volunteerNames.unified': newNames,
+      dragIdx: target,
+      dragOffsets: offsets,
+      dragAnim: false
+    })
+    var self = this
+    clearTimeout(this._dragAnimTimer)
+    this._dragAnimTimer = setTimeout(function () {
+      self.setData({ dragOffsets: new Array(15).fill(0), dragAnim: true })
+    }, 40)
+  },
+
+  onDragEnd: function () {
+    this._dragMetrics = null
+    this._dragPending = -1
+    clearTimeout(this._dragAnimTimer)
+    if (!this.data.dragging) return
+    this.setData({
+      dragging: false,
+      dragIdx: -1,
+      dragOffsets: new Array(15).fill(0),
+      dragAnim: false
+    })
   },
 
   // ======== 查找学校名称 ========

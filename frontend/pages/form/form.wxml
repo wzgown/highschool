@@ -393,13 +393,19 @@
         <text class="section-count">1-15个志愿</text>
       </view>
 
-      <!-- 显示已填写的志愿 + 下一个空志愿 -->
+      <!-- 显示已填写的志愿 + 下一个空志愿；长按已填志愿拖拽排序 -->
       <block wx:for="{{volunteers.unified}}" wx:key="index">
         <view
           wx:if="{{item !== 0 || index === 0 || volunteers.unified[index - 1] !== 0}}"
-          class="volunteer-item"
+          class="volunteer-item volunteer-item-unified {{dragging && dragIdx === index ? 'dragging' : ''}}"
+          style="transform: translateY({{dragOffsets[index]}}px); transition: {{dragAnim ? 'transform 0.18s ease' : 'none'}};"
           bindtap="onSchoolPickerOpen"
           data-type="unified{{index}}"
+          catchlongpress="onDragStart"
+          bindtouchmove="onDragMove"
+          bindtouchend="onDragEnd"
+          bindtouchcancel="onDragEnd"
+          data-index="{{index}}"
         >
           <view class="volunteer-index-cell">
             <view class="volunteer-index">{{index + 1}}</view>
