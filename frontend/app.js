@@ -1,7 +1,7 @@
 App({
   globalData: {
     apiBaseUrl: 'https://zg.mkfriend.top',
-    version: '1.6',
+    version: '1.7',
     formData: null,
     analysisId: null,
     pendingAnalysisId: null

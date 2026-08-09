@@ -23,7 +23,7 @@
         <view class="glyph-node"></view>
         <view class="glyph-node small"></view>
       </view>
-      <text class="secondary-title">智能推荐</text>
+      <text class="secondary-title">志愿推荐</text>
       <text class="secondary-desc">根据模考成绩生成冲稳保参考</text>
       <text class="secondary-arrow">›</text>
     </view>

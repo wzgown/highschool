@@ -1,6 +1,6 @@
 var appConfig = require('../utils/config')
 
-// 基础 tab（任何时候都显示）；AI 顾问 tab 仅在远程配置开启时追加
+// 基础 tab（任何时候都显示）；顾问 tab 仅在远程配置开启时追加，文案由后端下发
 var BASE_TABS = [
   {
     pagePath: 'pages/index/index',
@@ -18,7 +18,7 @@ var BASE_TABS = [
 
 var AGENT_TAB = {
   pagePath: 'pages/chat/chat',
-  text: '顾问',
+  text: '',
   iconPath: '/images/chat.png',
   selectedIconPath: '/images/chat-active.png'
 }
@@ -34,7 +34,10 @@ Component({
       var self = this
       appConfig.fetchAppConfig().then(function (cfg) {
         if (cfg.agentEnabled && self.data.list.length === BASE_TABS.length) {
-          self.setData({ list: BASE_TABS.concat([AGENT_TAB]) })
+          var tab = Object.assign({}, AGENT_TAB, {
+            text: (cfg.agentUi && cfg.agentUi.tab) || '顾问'
+          })
+          self.setData({ list: BASE_TABS.concat([tab]) })
         }
       })
     }

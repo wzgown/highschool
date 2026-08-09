@@ -1,7 +1,7 @@
 /**
  * AgentService API
  * Connect-RPC JSON over wx.request
- * 注意：AI 推理耗时较长，单独使用 60s 超时，
+ * 注意：顾问频道推理耗时较长，单独使用 60s 超时，
  * 不复用 api.js 的 8s 契约，仅共享其 baseUrl 解析逻辑
  */
 
@@ -31,7 +31,7 @@ function callAgentRpc(method, data) {
           var result = (res.data && res.data.result) ? res.data.result : res.data
           resolve(result)
         } else {
-          reject(new Error('AI 服务请求失败 (' + res.statusCode + ')'))
+          reject(new Error('顾问服务请求失败 (' + res.statusCode + ')'))
         }
       },
       fail: function (err) {

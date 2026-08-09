@@ -87,7 +87,7 @@
 
 <view class="container recommendation-page">
   <view class="page-hero recommendation-hero">
-    <text class="page-eyebrow">智能推荐</text>
+    <text class="page-eyebrow">志愿推荐</text>
     <text class="page-title">冲稳保志愿参考</text>
     <text class="page-subtitle">根据模考分数和所在区，生成可继续模拟的志愿候选清单。</text>
   </view>
@@ -201,7 +201,7 @@
   <view wx:if="{{currentStep === 2}}" class="step-content">
     <view wx:if="{{loading}}" class="loading-box">
       <view class="loading-spinner"></view>
-      <text class="loading-text">正在生成智能推荐...</text>
+      <text class="loading-text">正在生成推荐方案...</text>
     </view>
 
     <view wx:elif="{{firstMockResults || secondMockResults}}">

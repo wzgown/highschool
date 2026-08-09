@@ -90,7 +90,7 @@ Page({
 
   onShareTimeline: function () {
     return {
-      title: '折桂登高 - 智能分析录取概率，优化志愿填报策略'
+      title: '折桂登高 - 录取概率分析，优化志愿填报策略'
     }
   }
 })

@@ -117,10 +117,32 @@ func main() {
 
 		version := r.URL.Query().Get("version")
 
-		json.NewEncoder(w).Encode(map[string]any{
+		resp := map[string]any{
 			"agent_enabled": featureFlags.AgentEnabled(r.Context(), version),
 			"tip_url":       featureFlags.TipURL(r.Context(), version),
-		})
+		}
+		// 顾问频道 UI 文案仅在开启时下发；提审版本（关闭）不携带任何相关字样，
+		// 小程序包体内不含深度合成相关静态文本
+		if resp["agent_enabled"] == true {
+			resp["agent_ui"] = map[string]string{
+				"tab":                "顾问",
+				"title":              "AI 顾问",
+				"subtitle":           "分数线 · 政策 · 志愿策略，有问必答",
+				"welcome_title":      "你好，我是 AI 顾问",
+				"welcome_desc":       "可以问我中考分数线、名额分配政策、志愿填报策略等问题。",
+				"welcome_disclaimer": "回答由 DeepSeek 模型生成，仅供参考；数据以上海市教育考试院官方公布为准。",
+				"result_cta":         "问问 AI 顾问",
+				"about_title":        "AI 生成内容声明",
+				"about_1_label":      "AI 顾问",
+				"about_1_value":      "「顾问」频道的回答由深度求索（DeepSeek）人工智能模型生成，仅供参考",
+				"about_2_label":      "内容安全",
+				"about_2_value":      "提问与回答均经内容安全检测，请勿输入违法违规信息",
+				"about_3_label":      "准确性",
+				"about_3_value":      "AI 回答可能存在偏差，数据类结论以上海市教育考试院官方公布为准",
+			}
+		}
+
+		json.NewEncoder(w).Encode(resp)
 	})
 
 	// 创建 OpenTelemetry 拦截器

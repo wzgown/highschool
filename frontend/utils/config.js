@@ -12,7 +12,8 @@ var CACHE_TTL = 5 * 60 * 1000
 
 var DEFAULT_CONFIG = {
   agentEnabled: false,
-  tipUrl: ''
+  tipUrl: '',
+  agentUi: null
 }
 
 function readCache() {
@@ -65,6 +66,7 @@ function fetchAppConfig(force) {
           var cfg = {
             agentEnabled: !!res.data.agent_enabled,
             tipUrl: res.data.tip_url || '',
+            agentUi: res.data.agent_ui || null,
             fetchedAt: Date.now()
           }
           writeCache(cfg)

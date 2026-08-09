@@ -368,7 +368,7 @@ page {
   opacity: 0.42;
 }
 
-/* 「更多」诗意页（功能关闭/审核期展示，无任何 AI 痕迹） */
+/* 「更多」诗意页（功能关闭/审核期展示，无任何频道痕迹） */
 .poem-page {
   display: flex;
   align-items: center;

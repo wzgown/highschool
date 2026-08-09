@@ -9,6 +9,7 @@ Page({
     id: '',
     result: null,
     agentEnabled: false,
+    agentCta: '',
     // 展示数据（已从 proto 字段映射）
     predictions: null,
     probabilities: [],
@@ -23,7 +24,10 @@ Page({
     }
     var self = this
     appConfig.fetchAppConfig().then(function (cfg) {
-      self.setData({ agentEnabled: cfg.agentEnabled })
+      self.setData({
+        agentEnabled: cfg.agentEnabled,
+        agentCta: (cfg.agentUi && cfg.agentUi.result_cta) || ''
+      })
     })
   },
 
@@ -177,7 +181,7 @@ Page({
 
   onShareTimeline: function () {
     return {
-      title: '折桂登高 - 智能分析录取概率，优化志愿填报策略'
+      title: '折桂登高 - 录取概率分析，优化志愿填报策略'
     }
   }
 })

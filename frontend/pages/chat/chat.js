@@ -115,22 +115,42 @@ Page({
     quickQuestions: QUICK_QUESTIONS,
     scrollToId: '',
     configReady: false,
-    featureOff: false
+    featureOff: false,
+    // 频道文案（功能开启时由后端 /app-config 下发；包体不含相关静态字样）
+    ui: {
+      title: '',
+      subtitle: '',
+      welcomeTitle: '',
+      welcomeDesc: '',
+      welcomeDisclaimer: ''
+    }
   },
 
   onLoad: function () {
     var self = this
-    // 功能开关：审核期间远程关闭 AI 顾问（个人开发者类目限制）。
-    // 关闭时不渲染任何内容，直接跳回首页——页面完全不可见。
+    // 功能开关：审核期间远程关闭顾问频道（个人开发者类目限制）。
+    // 关闭时不渲染任何内容，直接展示中性内容——页面完全不可见。
     this.sessionReady = appConfig.fetchAppConfig().then(function (cfg) {
       if (!cfg.agentEnabled) {
-        // 功能关闭（审核期）：停留本页展示中性诗意内容，不跳走、无任何 AI 痕迹
+        // 功能关闭（审核期）：停留本页展示中性诗意内容，不跳走、无任何频道痕迹
         self.setData({ featureOff: true })
         return null
       }
-      // 功能开启时恢复真实标题（app.json/chat.json 中为审核安全的中性标题「更多」）
-      wx.setNavigationBarTitle({ title: 'AI 顾问' })
-      self.setData({ configReady: true })
+      // 功能开启时由后端文案恢复真实标题（app.json/chat.json 中为审核安全的中性标题「更多」）
+      var ui = cfg.agentUi || {}
+      self.setData({
+        configReady: true,
+        ui: {
+          title: ui.title || '',
+          subtitle: ui.subtitle || '',
+          welcomeTitle: ui.welcome_title || '',
+          welcomeDesc: ui.welcome_desc || '',
+          welcomeDisclaimer: ui.welcome_disclaimer || ''
+        }
+      })
+      if (ui.title) {
+        wx.setNavigationBarTitle({ title: ui.title })
+      }
       return self.initSession()
     })
   },

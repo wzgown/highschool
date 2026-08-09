@@ -12,8 +12,8 @@
 <view class="chat-page" wx:if="{{configReady}}">
   <view class="chat-header">
     <view class="chat-header-text">
-      <text class="chat-title">AI 顾问</text>
-      <text class="chat-subtitle">分数线 · 政策 · 志愿策略，有问必答</text>
+      <text class="chat-title">{{ui.title}}</text>
+      <text class="chat-subtitle">{{ui.subtitle}}</text>
     </view>
     <button class="new-chat-btn" bindtap="onNewChat">新对话</button>
   </view>
@@ -21,9 +21,9 @@
   <scroll-view class="chat-scroll" scroll-y scroll-into-view="{{scrollToId}}" scroll-with-animation>
     <view class="chat-body">
       <view class="chat-welcome" wx:if="{{!messages.length}}">
-        <text class="welcome-title">你好，我是 AI 顾问</text>
-        <text class="welcome-desc">可以问我中考分数线、名额分配政策、志愿填报策略等问题。</text>
-        <text class="welcome-disclaimer">回答由 DeepSeek 模型生成，仅供参考；数据以上海市教育考试院官方公布为准。</text>
+        <text class="welcome-title">{{ui.welcomeTitle}}</text>
+        <text class="welcome-desc">{{ui.welcomeDesc}}</text>
+        <text class="welcome-disclaimer">{{ui.welcomeDisclaimer}}</text>
         <view class="quick-list">
           <view
             class="chip"

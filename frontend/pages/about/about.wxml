@@ -28,20 +28,20 @@
   <view class="card" wx:if="{{agentEnabled}}">
     <view class="card-header">
       <view class="card-header-icon"></view>
-      <text>AI 生成内容声明</text>
+      <text>{{aiCardTitle}}</text>
     </view>
     <view class="info-list">
-      <view class="info-row">
-        <text class="info-label">AI 顾问</text>
-        <text class="info-value">「顾问」频道的回答由深度求索（DeepSeek）人工智能模型生成，仅供参考</text>
+      <view class="info-row" wx:if="{{aiLines.length >= 1}}">
+        <text class="info-label">{{aiLines[0].label}}</text>
+        <text class="info-value">{{aiLines[0].value}}</text>
       </view>
-      <view class="info-row">
-        <text class="info-label">内容安全</text>
-        <text class="info-value">提问与回答均经内容安全检测，请勿输入违法违规信息</text>
+      <view class="info-row" wx:if="{{aiLines.length >= 2}}">
+        <text class="info-label">{{aiLines[1].label}}</text>
+        <text class="info-value">{{aiLines[1].value}}</text>
       </view>
-      <view class="info-row">
-        <text class="info-label">准确性</text>
-        <text class="info-value">AI 回答可能存在偏差，数据类结论以上海市教育考试院官方公布为准</text>
+      <view class="info-row" wx:if="{{aiLines.length >= 3}}">
+        <text class="info-label">{{aiLines[2].label}}</text>
+        <text class="info-value">{{aiLines[2].value}}</text>
       </view>
     </view>
   </view>
@@ -58,7 +58,7 @@
       </view>
       <view class="feature-item">
         <text class="feature-index">02</text>
-        <text class="feature-text">智能推荐：基于模考成绩，生成冲稳保参考方案</text>
+        <text class="feature-text">志愿推荐：基于模考成绩，生成冲稳保参考方案</text>
       </view>
       <view class="feature-item">
         <text class="feature-index">03</text>
