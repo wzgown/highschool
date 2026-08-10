@@ -9,6 +9,7 @@ RUN apk add --no-cache git ca-certificates tzdata
 # Set Go proxy for faster downloads
 ENV GOPROXY=https://goproxy.cn,direct
 ENV GOSUMDB=sum.golang.org
+ENV GOTOOLCHAIN=auto
 
 # Copy go mod files first for better caching
 COPY go.mod go.sum ./
