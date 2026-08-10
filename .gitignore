@@ -63,3 +63,4 @@ backend/go.work
 # frontend/src/gen/
 .loop/
 .env
+__pycache__/
