@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetSessionReplayRequest, GetSessionReplayResponse, ListAgentSessionsRequest, ListAgentSessionsResponse } from "./admin_service_pb.js";
+import { GetCostDashboardRequest, GetCostDashboardResponse, GetSessionReplayRequest, GetSessionReplayResponse, ListAgentSessionsRequest, ListAgentSessionsResponse } from "./admin_service_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -34,6 +34,17 @@ export const AdminService = {
       name: "GetSessionReplay",
       I: GetSessionReplayRequest,
       O: GetSessionReplayResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 成本/用量审计看板（按天）
+     *
+     * @generated from rpc highschool.v1.AdminService.GetCostDashboard
+     */
+    getCostDashboard: {
+      name: "GetCostDashboard",
+      I: GetCostDashboardRequest,
+      O: GetCostDashboardResponse,
       kind: MethodKind.Unary,
     },
   }

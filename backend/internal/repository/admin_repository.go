@@ -155,3 +155,77 @@ func (r *AdminRepository) GetSessionReplay(ctx context.Context, sessionID int64)
 	}
 	return b, nil
 }
+
+// GetCostDashboard 读取三张可观测性视图（v_agent_llm_daily / v_agent_tool_daily /
+// v_agent_session_daily，定义见 db/migrations/012_agent_observability_views.sql）。
+// from/to 为 'YYYY-MM-DD' 含端点；空串表示不限制对应边界。
+// 视图列已在迁移中 COALESCE，此处无需再兜底。
+func (r *AdminRepository) GetCostDashboard(ctx context.Context, from, to string) (*admin.CostDashboard, error) {
+	d := &admin.CostDashboard{}
+
+	// 1) v_agent_llm_daily
+	lrows, err := r.db.Query(ctx, `
+		SELECT day::text, llm_calls, prompt_tokens, completion_tokens, total_tokens,
+		       avg_latency_ms, p95_latency_ms, error_count
+		FROM v_agent_llm_daily
+		WHERE ($1 = '' OR day >= $1::date) AND ($2 = '' OR day <= $2::date)
+		ORDER BY day`, from, to)
+	if err != nil {
+		return nil, fmt.Errorf("admin cost llm daily: %w", err)
+	}
+	defer lrows.Close()
+	for lrows.Next() {
+		var v admin.CostLlmDaily
+		if err := lrows.Scan(&v.Day, &v.LlmCalls, &v.PromptTokens, &v.CompletionTokens,
+			&v.TotalTokens, &v.AvgLatencyMs, &v.P95LatencyMs, &v.ErrorCount); err != nil {
+			return nil, fmt.Errorf("admin cost llm daily scan: %w", err)
+		}
+		d.LlmDaily = append(d.LlmDaily, v)
+	}
+	if err := lrows.Err(); err != nil {
+		return nil, fmt.Errorf("admin cost llm daily: %w", err)
+	}
+
+	// 2) v_agent_tool_daily
+	trows, err := r.db.Query(ctx, `
+		SELECT day::text, tool_name, calls, failures, avg_latency_ms
+		FROM v_agent_tool_daily
+		WHERE ($1 = '' OR day >= $1::date) AND ($2 = '' OR day <= $2::date)
+		ORDER BY day, calls DESC`, from, to)
+	if err != nil {
+		return nil, fmt.Errorf("admin cost tool daily: %w", err)
+	}
+	defer trows.Close()
+	for trows.Next() {
+		var v admin.CostToolDaily
+		if err := trows.Scan(&v.Day, &v.ToolName, &v.Calls, &v.Failures, &v.AvgLatencyMs); err != nil {
+			return nil, fmt.Errorf("admin cost tool daily scan: %w", err)
+		}
+		d.ToolDaily = append(d.ToolDaily, v)
+	}
+	if err := trows.Err(); err != nil {
+		return nil, fmt.Errorf("admin cost tool daily: %w", err)
+	}
+
+	// 3) v_agent_session_daily
+	srows, err := r.db.Query(ctx, `
+		SELECT day::text, active_sessions, messages, user_messages, assistant_messages
+		FROM v_agent_session_daily
+		WHERE ($1 = '' OR day >= $1::date) AND ($2 = '' OR day <= $2::date)
+		ORDER BY day`, from, to)
+	if err != nil {
+		return nil, fmt.Errorf("admin cost session daily: %w", err)
+	}
+	defer srows.Close()
+	for srows.Next() {
+		var v admin.CostSessionDaily
+		if err := srows.Scan(&v.Day, &v.ActiveSessions, &v.Messages, &v.UserMessages, &v.AssistantMessages); err != nil {
+			return nil, fmt.Errorf("admin cost session daily scan: %w", err)
+		}
+		d.SessionDaily = append(d.SessionDaily, v)
+	}
+	if err := srows.Err(); err != nil {
+		return nil, fmt.Errorf("admin cost session daily: %w", err)
+	}
+	return d, nil
+}

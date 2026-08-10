@@ -78,8 +78,46 @@ type ReplayBundle struct {
 	Checkpoints []ReplayCheckpoint
 }
 
+// CostLlmDaily 成本看板-按天 LLM 聚合行（对应 v_agent_llm_daily）
+type CostLlmDaily struct {
+	Day              string
+	LlmCalls         int64
+	PromptTokens     int64
+	CompletionTokens int64
+	TotalTokens      int64
+	AvgLatencyMs     int64
+	P95LatencyMs     int64
+	ErrorCount       int64
+}
+
+// CostToolDaily 成本看板-按天 × 工具聚合行（对应 v_agent_tool_daily）
+type CostToolDaily struct {
+	Day          string
+	ToolName     string
+	Calls        int64
+	Failures     int64
+	AvgLatencyMs int64
+}
+
+// CostSessionDaily 成本看板-按天会话/消息聚合行（对应 v_agent_session_daily）
+type CostSessionDaily struct {
+	Day               string
+	ActiveSessions    int64
+	Messages          int64
+	UserMessages      int64
+	AssistantMessages int64
+}
+
+// CostDashboard 成本看板全量数据（三张视图的并集）
+type CostDashboard struct {
+	LlmDaily     []CostLlmDaily
+	ToolDaily    []CostToolDaily
+	SessionDaily []CostSessionDaily
+}
+
 // Store 管理后台只读仓储（handler 依赖此接口，便于测试用 fake）
 type Store interface {
 	ListAgentSessions(ctx context.Context, f ListFilter) ([]SessionRow, int32, error)
 	GetSessionReplay(ctx context.Context, sessionID int64) (*ReplayBundle, error)
+	GetCostDashboard(ctx context.Context, from, to string) (*CostDashboard, error)
 }

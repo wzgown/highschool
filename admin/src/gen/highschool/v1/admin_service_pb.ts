@@ -547,3 +547,300 @@ export class GetSessionReplayResponse extends Message<GetSessionReplayResponse> 
   }
 }
 
+/**
+ * @generated from message highschool.v1.GetCostDashboardRequest
+ */
+export class GetCostDashboardRequest extends Message<GetCostDashboardRequest> {
+  /**
+   * 含；'YYYY-MM-DD'；空=不限制下界
+   *
+   * @generated from field: string from = 1;
+   */
+  from = "";
+
+  /**
+   * 含；空=不限制上界
+   *
+   * @generated from field: string to = 2;
+   */
+  to = "";
+
+  constructor(data?: PartialMessage<GetCostDashboardRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.GetCostDashboardRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "from", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "to", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetCostDashboardRequest {
+    return new GetCostDashboardRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetCostDashboardRequest {
+    return new GetCostDashboardRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetCostDashboardRequest {
+    return new GetCostDashboardRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetCostDashboardRequest | PlainMessage<GetCostDashboardRequest> | undefined, b: GetCostDashboardRequest | PlainMessage<GetCostDashboardRequest> | undefined): boolean {
+    return proto3.util.equals(GetCostDashboardRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.CostLlmDaily
+ */
+export class CostLlmDaily extends Message<CostLlmDaily> {
+  /**
+   * @generated from field: string day = 1;
+   */
+  day = "";
+
+  /**
+   * @generated from field: int64 llm_calls = 2;
+   */
+  llmCalls = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 prompt_tokens = 3;
+   */
+  promptTokens = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 completion_tokens = 4;
+   */
+  completionTokens = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 total_tokens = 5;
+   */
+  totalTokens = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 avg_latency_ms = 6;
+   */
+  avgLatencyMs = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 p95_latency_ms = 7;
+   */
+  p95LatencyMs = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 error_count = 8;
+   */
+  errorCount = protoInt64.zero;
+
+  constructor(data?: PartialMessage<CostLlmDaily>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.CostLlmDaily";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "day", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "llm_calls", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "prompt_tokens", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "completion_tokens", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 5, name: "total_tokens", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 6, name: "avg_latency_ms", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 7, name: "p95_latency_ms", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 8, name: "error_count", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CostLlmDaily {
+    return new CostLlmDaily().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CostLlmDaily {
+    return new CostLlmDaily().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CostLlmDaily {
+    return new CostLlmDaily().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CostLlmDaily | PlainMessage<CostLlmDaily> | undefined, b: CostLlmDaily | PlainMessage<CostLlmDaily> | undefined): boolean {
+    return proto3.util.equals(CostLlmDaily, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.CostToolDaily
+ */
+export class CostToolDaily extends Message<CostToolDaily> {
+  /**
+   * @generated from field: string day = 1;
+   */
+  day = "";
+
+  /**
+   * @generated from field: string tool_name = 2;
+   */
+  toolName = "";
+
+  /**
+   * @generated from field: int64 calls = 3;
+   */
+  calls = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 failures = 4;
+   */
+  failures = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 avg_latency_ms = 5;
+   */
+  avgLatencyMs = protoInt64.zero;
+
+  constructor(data?: PartialMessage<CostToolDaily>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.CostToolDaily";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "day", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "tool_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "calls", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "failures", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 5, name: "avg_latency_ms", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CostToolDaily {
+    return new CostToolDaily().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CostToolDaily {
+    return new CostToolDaily().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CostToolDaily {
+    return new CostToolDaily().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CostToolDaily | PlainMessage<CostToolDaily> | undefined, b: CostToolDaily | PlainMessage<CostToolDaily> | undefined): boolean {
+    return proto3.util.equals(CostToolDaily, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.CostSessionDaily
+ */
+export class CostSessionDaily extends Message<CostSessionDaily> {
+  /**
+   * @generated from field: string day = 1;
+   */
+  day = "";
+
+  /**
+   * @generated from field: int64 active_sessions = 2;
+   */
+  activeSessions = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 messages = 3;
+   */
+  messages = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 user_messages = 4;
+   */
+  userMessages = protoInt64.zero;
+
+  /**
+   * @generated from field: int64 assistant_messages = 5;
+   */
+  assistantMessages = protoInt64.zero;
+
+  constructor(data?: PartialMessage<CostSessionDaily>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.CostSessionDaily";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "day", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "active_sessions", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "messages", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "user_messages", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 5, name: "assistant_messages", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CostSessionDaily {
+    return new CostSessionDaily().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CostSessionDaily {
+    return new CostSessionDaily().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CostSessionDaily {
+    return new CostSessionDaily().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CostSessionDaily | PlainMessage<CostSessionDaily> | undefined, b: CostSessionDaily | PlainMessage<CostSessionDaily> | undefined): boolean {
+    return proto3.util.equals(CostSessionDaily, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.GetCostDashboardResponse
+ */
+export class GetCostDashboardResponse extends Message<GetCostDashboardResponse> {
+  /**
+   * @generated from field: repeated highschool.v1.CostLlmDaily llm_daily = 1;
+   */
+  llmDaily: CostLlmDaily[] = [];
+
+  /**
+   * @generated from field: repeated highschool.v1.CostToolDaily tool_daily = 2;
+   */
+  toolDaily: CostToolDaily[] = [];
+
+  /**
+   * @generated from field: repeated highschool.v1.CostSessionDaily session_daily = 3;
+   */
+  sessionDaily: CostSessionDaily[] = [];
+
+  constructor(data?: PartialMessage<GetCostDashboardResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.GetCostDashboardResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "llm_daily", kind: "message", T: CostLlmDaily, repeated: true },
+    { no: 2, name: "tool_daily", kind: "message", T: CostToolDaily, repeated: true },
+    { no: 3, name: "session_daily", kind: "message", T: CostSessionDaily, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetCostDashboardResponse {
+    return new GetCostDashboardResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetCostDashboardResponse {
+    return new GetCostDashboardResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetCostDashboardResponse {
+    return new GetCostDashboardResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetCostDashboardResponse | PlainMessage<GetCostDashboardResponse> | undefined, b: GetCostDashboardResponse | PlainMessage<GetCostDashboardResponse> | undefined): boolean {
+    return proto3.util.equals(GetCostDashboardResponse, a, b);
+  }
+}
+

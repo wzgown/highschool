@@ -267,6 +267,89 @@
       },
       "title": "竞争分析"
     },
+    "v1CostLlmDaily": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "string"
+        },
+        "llmCalls": {
+          "type": "string",
+          "format": "int64"
+        },
+        "promptTokens": {
+          "type": "string",
+          "format": "int64"
+        },
+        "completionTokens": {
+          "type": "string",
+          "format": "int64"
+        },
+        "totalTokens": {
+          "type": "string",
+          "format": "int64"
+        },
+        "avgLatencyMs": {
+          "type": "string",
+          "format": "int64"
+        },
+        "p95LatencyMs": {
+          "type": "string",
+          "format": "int64"
+        },
+        "errorCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CostSessionDaily": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "string"
+        },
+        "activeSessions": {
+          "type": "string",
+          "format": "int64"
+        },
+        "messages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userMessages": {
+          "type": "string",
+          "format": "int64"
+        },
+        "assistantMessages": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CostToolDaily": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "string"
+        },
+        "toolName": {
+          "type": "string"
+        },
+        "calls": {
+          "type": "string",
+          "format": "int64"
+        },
+        "failures": {
+          "type": "string",
+          "format": "int64"
+        },
+        "avgLatencyMs": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "v1DeleteHistoryResponse": {
       "type": "object",
       "properties": {
@@ -335,6 +418,32 @@
         }
       },
       "title": "获取分析结果响应"
+    },
+    "v1GetCostDashboardResponse": {
+      "type": "object",
+      "properties": {
+        "llmDaily": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CostLlmDaily"
+          }
+        },
+        "toolDaily": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CostToolDaily"
+          }
+        },
+        "sessionDaily": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CostSessionDaily"
+          }
+        }
+      }
     },
     "v1GetDistrictExamCountResponse": {
       "type": "object",

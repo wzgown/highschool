@@ -39,6 +39,9 @@ const (
 	// AdminServiceGetSessionReplayProcedure is the fully-qualified name of the AdminService's
 	// GetSessionReplay RPC.
 	AdminServiceGetSessionReplayProcedure = "/highschool.v1.AdminService/GetSessionReplay"
+	// AdminServiceGetCostDashboardProcedure is the fully-qualified name of the AdminService's
+	// GetCostDashboard RPC.
+	AdminServiceGetCostDashboardProcedure = "/highschool.v1.AdminService/GetCostDashboard"
 )
 
 // AdminServiceClient is a client for the highschool.v1.AdminService service.
@@ -47,6 +50,8 @@ type AdminServiceClient interface {
 	ListAgentSessions(context.Context, *connect.Request[v1.ListAgentSessionsRequest]) (*connect.Response[v1.ListAgentSessionsResponse], error)
 	// 单会话回放（消息/trace/checkpoint 全量）
 	GetSessionReplay(context.Context, *connect.Request[v1.GetSessionReplayRequest]) (*connect.Response[v1.GetSessionReplayResponse], error)
+	// 成本/用量审计看板（按天）
+	GetCostDashboard(context.Context, *connect.Request[v1.GetCostDashboardRequest]) (*connect.Response[v1.GetCostDashboardResponse], error)
 }
 
 // NewAdminServiceClient constructs a client for the highschool.v1.AdminService service. By default,
@@ -72,6 +77,12 @@ func NewAdminServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(adminServiceMethods.ByName("GetSessionReplay")),
 			connect.WithClientOptions(opts...),
 		),
+		getCostDashboard: connect.NewClient[v1.GetCostDashboardRequest, v1.GetCostDashboardResponse](
+			httpClient,
+			baseURL+AdminServiceGetCostDashboardProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("GetCostDashboard")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -79,6 +90,7 @@ func NewAdminServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 type adminServiceClient struct {
 	listAgentSessions *connect.Client[v1.ListAgentSessionsRequest, v1.ListAgentSessionsResponse]
 	getSessionReplay  *connect.Client[v1.GetSessionReplayRequest, v1.GetSessionReplayResponse]
+	getCostDashboard  *connect.Client[v1.GetCostDashboardRequest, v1.GetCostDashboardResponse]
 }
 
 // ListAgentSessions calls highschool.v1.AdminService.ListAgentSessions.
@@ -91,12 +103,19 @@ func (c *adminServiceClient) GetSessionReplay(ctx context.Context, req *connect.
 	return c.getSessionReplay.CallUnary(ctx, req)
 }
 
+// GetCostDashboard calls highschool.v1.AdminService.GetCostDashboard.
+func (c *adminServiceClient) GetCostDashboard(ctx context.Context, req *connect.Request[v1.GetCostDashboardRequest]) (*connect.Response[v1.GetCostDashboardResponse], error) {
+	return c.getCostDashboard.CallUnary(ctx, req)
+}
+
 // AdminServiceHandler is an implementation of the highschool.v1.AdminService service.
 type AdminServiceHandler interface {
 	// 会话列表（分页）
 	ListAgentSessions(context.Context, *connect.Request[v1.ListAgentSessionsRequest]) (*connect.Response[v1.ListAgentSessionsResponse], error)
 	// 单会话回放（消息/trace/checkpoint 全量）
 	GetSessionReplay(context.Context, *connect.Request[v1.GetSessionReplayRequest]) (*connect.Response[v1.GetSessionReplayResponse], error)
+	// 成本/用量审计看板（按天）
+	GetCostDashboard(context.Context, *connect.Request[v1.GetCostDashboardRequest]) (*connect.Response[v1.GetCostDashboardResponse], error)
 }
 
 // NewAdminServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -118,12 +137,20 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(adminServiceMethods.ByName("GetSessionReplay")),
 		connect.WithHandlerOptions(opts...),
 	)
+	adminServiceGetCostDashboardHandler := connect.NewUnaryHandler(
+		AdminServiceGetCostDashboardProcedure,
+		svc.GetCostDashboard,
+		connect.WithSchema(adminServiceMethods.ByName("GetCostDashboard")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/highschool.v1.AdminService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AdminServiceListAgentSessionsProcedure:
 			adminServiceListAgentSessionsHandler.ServeHTTP(w, r)
 		case AdminServiceGetSessionReplayProcedure:
 			adminServiceGetSessionReplayHandler.ServeHTTP(w, r)
+		case AdminServiceGetCostDashboardProcedure:
+			adminServiceGetCostDashboardHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -139,4 +166,8 @@ func (UnimplementedAdminServiceHandler) ListAgentSessions(context.Context, *conn
 
 func (UnimplementedAdminServiceHandler) GetSessionReplay(context.Context, *connect.Request[v1.GetSessionReplayRequest]) (*connect.Response[v1.GetSessionReplayResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.GetSessionReplay is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) GetCostDashboard(context.Context, *connect.Request[v1.GetCostDashboardRequest]) (*connect.Response[v1.GetCostDashboardResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.GetCostDashboard is not implemented"))
 }

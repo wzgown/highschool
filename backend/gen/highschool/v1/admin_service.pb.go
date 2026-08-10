@@ -689,6 +689,370 @@ func (x *GetSessionReplayResponse) GetCheckpoints() []*ReplayCheckpoint {
 	return nil
 }
 
+type GetCostDashboardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"` // 含；'YYYY-MM-DD'；空=不限制下界
+	To            string                 `protobuf:"bytes,2,opt,name=to,proto3" json:"to,omitempty"`     // 含；空=不限制上界
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCostDashboardRequest) Reset() {
+	*x = GetCostDashboardRequest{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCostDashboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCostDashboardRequest) ProtoMessage() {}
+
+func (x *GetCostDashboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCostDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetCostDashboardRequest) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetCostDashboardRequest) GetFrom() string {
+	if x != nil {
+		return x.From
+	}
+	return ""
+}
+
+func (x *GetCostDashboardRequest) GetTo() string {
+	if x != nil {
+		return x.To
+	}
+	return ""
+}
+
+type CostLlmDaily struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Day              string                 `protobuf:"bytes,1,opt,name=day,proto3" json:"day,omitempty"`
+	LlmCalls         int64                  `protobuf:"varint,2,opt,name=llm_calls,json=llmCalls,proto3" json:"llm_calls,omitempty"`
+	PromptTokens     int64                  `protobuf:"varint,3,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
+	CompletionTokens int64                  `protobuf:"varint,4,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
+	TotalTokens      int64                  `protobuf:"varint,5,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
+	AvgLatencyMs     int64                  `protobuf:"varint,6,opt,name=avg_latency_ms,json=avgLatencyMs,proto3" json:"avg_latency_ms,omitempty"`
+	P95LatencyMs     int64                  `protobuf:"varint,7,opt,name=p95_latency_ms,json=p95LatencyMs,proto3" json:"p95_latency_ms,omitempty"`
+	ErrorCount       int64                  `protobuf:"varint,8,opt,name=error_count,json=errorCount,proto3" json:"error_count,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CostLlmDaily) Reset() {
+	*x = CostLlmDaily{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CostLlmDaily) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CostLlmDaily) ProtoMessage() {}
+
+func (x *CostLlmDaily) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CostLlmDaily.ProtoReflect.Descriptor instead.
+func (*CostLlmDaily) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CostLlmDaily) GetDay() string {
+	if x != nil {
+		return x.Day
+	}
+	return ""
+}
+
+func (x *CostLlmDaily) GetLlmCalls() int64 {
+	if x != nil {
+		return x.LlmCalls
+	}
+	return 0
+}
+
+func (x *CostLlmDaily) GetPromptTokens() int64 {
+	if x != nil {
+		return x.PromptTokens
+	}
+	return 0
+}
+
+func (x *CostLlmDaily) GetCompletionTokens() int64 {
+	if x != nil {
+		return x.CompletionTokens
+	}
+	return 0
+}
+
+func (x *CostLlmDaily) GetTotalTokens() int64 {
+	if x != nil {
+		return x.TotalTokens
+	}
+	return 0
+}
+
+func (x *CostLlmDaily) GetAvgLatencyMs() int64 {
+	if x != nil {
+		return x.AvgLatencyMs
+	}
+	return 0
+}
+
+func (x *CostLlmDaily) GetP95LatencyMs() int64 {
+	if x != nil {
+		return x.P95LatencyMs
+	}
+	return 0
+}
+
+func (x *CostLlmDaily) GetErrorCount() int64 {
+	if x != nil {
+		return x.ErrorCount
+	}
+	return 0
+}
+
+type CostToolDaily struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Day           string                 `protobuf:"bytes,1,opt,name=day,proto3" json:"day,omitempty"`
+	ToolName      string                 `protobuf:"bytes,2,opt,name=tool_name,json=toolName,proto3" json:"tool_name,omitempty"`
+	Calls         int64                  `protobuf:"varint,3,opt,name=calls,proto3" json:"calls,omitempty"`
+	Failures      int64                  `protobuf:"varint,4,opt,name=failures,proto3" json:"failures,omitempty"`
+	AvgLatencyMs  int64                  `protobuf:"varint,5,opt,name=avg_latency_ms,json=avgLatencyMs,proto3" json:"avg_latency_ms,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CostToolDaily) Reset() {
+	*x = CostToolDaily{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CostToolDaily) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CostToolDaily) ProtoMessage() {}
+
+func (x *CostToolDaily) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CostToolDaily.ProtoReflect.Descriptor instead.
+func (*CostToolDaily) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CostToolDaily) GetDay() string {
+	if x != nil {
+		return x.Day
+	}
+	return ""
+}
+
+func (x *CostToolDaily) GetToolName() string {
+	if x != nil {
+		return x.ToolName
+	}
+	return ""
+}
+
+func (x *CostToolDaily) GetCalls() int64 {
+	if x != nil {
+		return x.Calls
+	}
+	return 0
+}
+
+func (x *CostToolDaily) GetFailures() int64 {
+	if x != nil {
+		return x.Failures
+	}
+	return 0
+}
+
+func (x *CostToolDaily) GetAvgLatencyMs() int64 {
+	if x != nil {
+		return x.AvgLatencyMs
+	}
+	return 0
+}
+
+type CostSessionDaily struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Day               string                 `protobuf:"bytes,1,opt,name=day,proto3" json:"day,omitempty"`
+	ActiveSessions    int64                  `protobuf:"varint,2,opt,name=active_sessions,json=activeSessions,proto3" json:"active_sessions,omitempty"`
+	Messages          int64                  `protobuf:"varint,3,opt,name=messages,proto3" json:"messages,omitempty"`
+	UserMessages      int64                  `protobuf:"varint,4,opt,name=user_messages,json=userMessages,proto3" json:"user_messages,omitempty"`
+	AssistantMessages int64                  `protobuf:"varint,5,opt,name=assistant_messages,json=assistantMessages,proto3" json:"assistant_messages,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *CostSessionDaily) Reset() {
+	*x = CostSessionDaily{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CostSessionDaily) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CostSessionDaily) ProtoMessage() {}
+
+func (x *CostSessionDaily) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CostSessionDaily.ProtoReflect.Descriptor instead.
+func (*CostSessionDaily) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *CostSessionDaily) GetDay() string {
+	if x != nil {
+		return x.Day
+	}
+	return ""
+}
+
+func (x *CostSessionDaily) GetActiveSessions() int64 {
+	if x != nil {
+		return x.ActiveSessions
+	}
+	return 0
+}
+
+func (x *CostSessionDaily) GetMessages() int64 {
+	if x != nil {
+		return x.Messages
+	}
+	return 0
+}
+
+func (x *CostSessionDaily) GetUserMessages() int64 {
+	if x != nil {
+		return x.UserMessages
+	}
+	return 0
+}
+
+func (x *CostSessionDaily) GetAssistantMessages() int64 {
+	if x != nil {
+		return x.AssistantMessages
+	}
+	return 0
+}
+
+type GetCostDashboardResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	LlmDaily      []*CostLlmDaily        `protobuf:"bytes,1,rep,name=llm_daily,json=llmDaily,proto3" json:"llm_daily,omitempty"`
+	ToolDaily     []*CostToolDaily       `protobuf:"bytes,2,rep,name=tool_daily,json=toolDaily,proto3" json:"tool_daily,omitempty"`
+	SessionDaily  []*CostSessionDaily    `protobuf:"bytes,3,rep,name=session_daily,json=sessionDaily,proto3" json:"session_daily,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCostDashboardResponse) Reset() {
+	*x = GetCostDashboardResponse{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCostDashboardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCostDashboardResponse) ProtoMessage() {}
+
+func (x *GetCostDashboardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCostDashboardResponse.ProtoReflect.Descriptor instead.
+func (*GetCostDashboardResponse) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetCostDashboardResponse) GetLlmDaily() []*CostLlmDaily {
+	if x != nil {
+		return x.LlmDaily
+	}
+	return nil
+}
+
+func (x *GetCostDashboardResponse) GetToolDaily() []*CostToolDaily {
+	if x != nil {
+		return x.ToolDaily
+	}
+	return nil
+}
+
+func (x *GetCostDashboardResponse) GetSessionDaily() []*CostSessionDaily {
+	if x != nil {
+		return x.SessionDaily
+	}
+	return nil
+}
+
 var File_highschool_v1_admin_service_proto protoreflect.FileDescriptor
 
 const file_highschool_v1_admin_service_proto_rawDesc = "" +
@@ -758,10 +1122,41 @@ const file_highschool_v1_admin_service_proto_rawDesc = "" +
 	"\asession\x18\x01 \x01(\v2\x1c.highschool.v1.ReplaySessionR\asession\x128\n" +
 	"\bmessages\x18\x02 \x03(\v2\x1c.highschool.v1.ReplayMessageR\bmessages\x122\n" +
 	"\x06traces\x18\x03 \x03(\v2\x1a.highschool.v1.ReplayTraceR\x06traces\x12A\n" +
-	"\vcheckpoints\x18\x04 \x03(\v2\x1f.highschool.v1.ReplayCheckpointR\vcheckpoints2\xdb\x01\n" +
+	"\vcheckpoints\x18\x04 \x03(\v2\x1f.highschool.v1.ReplayCheckpointR\vcheckpoints\"=\n" +
+	"\x17GetCostDashboardRequest\x12\x12\n" +
+	"\x04from\x18\x01 \x01(\tR\x04from\x12\x0e\n" +
+	"\x02to\x18\x02 \x01(\tR\x02to\"\x9f\x02\n" +
+	"\fCostLlmDaily\x12\x10\n" +
+	"\x03day\x18\x01 \x01(\tR\x03day\x12\x1b\n" +
+	"\tllm_calls\x18\x02 \x01(\x03R\bllmCalls\x12#\n" +
+	"\rprompt_tokens\x18\x03 \x01(\x03R\fpromptTokens\x12+\n" +
+	"\x11completion_tokens\x18\x04 \x01(\x03R\x10completionTokens\x12!\n" +
+	"\ftotal_tokens\x18\x05 \x01(\x03R\vtotalTokens\x12$\n" +
+	"\x0eavg_latency_ms\x18\x06 \x01(\x03R\favgLatencyMs\x12$\n" +
+	"\x0ep95_latency_ms\x18\a \x01(\x03R\fp95LatencyMs\x12\x1f\n" +
+	"\verror_count\x18\b \x01(\x03R\n" +
+	"errorCount\"\x96\x01\n" +
+	"\rCostToolDaily\x12\x10\n" +
+	"\x03day\x18\x01 \x01(\tR\x03day\x12\x1b\n" +
+	"\ttool_name\x18\x02 \x01(\tR\btoolName\x12\x14\n" +
+	"\x05calls\x18\x03 \x01(\x03R\x05calls\x12\x1a\n" +
+	"\bfailures\x18\x04 \x01(\x03R\bfailures\x12$\n" +
+	"\x0eavg_latency_ms\x18\x05 \x01(\x03R\favgLatencyMs\"\xbd\x01\n" +
+	"\x10CostSessionDaily\x12\x10\n" +
+	"\x03day\x18\x01 \x01(\tR\x03day\x12'\n" +
+	"\x0factive_sessions\x18\x02 \x01(\x03R\x0eactiveSessions\x12\x1a\n" +
+	"\bmessages\x18\x03 \x01(\x03R\bmessages\x12#\n" +
+	"\ruser_messages\x18\x04 \x01(\x03R\fuserMessages\x12-\n" +
+	"\x12assistant_messages\x18\x05 \x01(\x03R\x11assistantMessages\"\xd7\x01\n" +
+	"\x18GetCostDashboardResponse\x128\n" +
+	"\tllm_daily\x18\x01 \x03(\v2\x1b.highschool.v1.CostLlmDailyR\bllmDaily\x12;\n" +
+	"\n" +
+	"tool_daily\x18\x02 \x03(\v2\x1c.highschool.v1.CostToolDailyR\ttoolDaily\x12D\n" +
+	"\rsession_daily\x18\x03 \x03(\v2\x1f.highschool.v1.CostSessionDailyR\fsessionDaily2\xc0\x02\n" +
 	"\fAdminService\x12f\n" +
 	"\x11ListAgentSessions\x12'.highschool.v1.ListAgentSessionsRequest\x1a(.highschool.v1.ListAgentSessionsResponse\x12c\n" +
-	"\x10GetSessionReplay\x12&.highschool.v1.GetSessionReplayRequest\x1a'.highschool.v1.GetSessionReplayResponseB\xae\x01\n" +
+	"\x10GetSessionReplay\x12&.highschool.v1.GetSessionReplayRequest\x1a'.highschool.v1.GetSessionReplayResponse\x12c\n" +
+	"\x10GetCostDashboard\x12&.highschool.v1.GetCostDashboardRequest\x1a'.highschool.v1.GetCostDashboardResponseB\xae\x01\n" +
 	"\x11com.highschool.v1B\x11AdminServiceProtoP\x01Z1highschool-backend/gen/highschool/v1;highschoolv1\xa2\x02\x03HXX\xaa\x02\rHighschool.V1\xca\x02\rHighschool\\V1\xe2\x02\x19Highschool\\V1\\GPBMetadata\xea\x02\x0eHighschool::V1b\x06proto3"
 
 var (
@@ -776,7 +1171,7 @@ func file_highschool_v1_admin_service_proto_rawDescGZIP() []byte {
 	return file_highschool_v1_admin_service_proto_rawDescData
 }
 
-var file_highschool_v1_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_highschool_v1_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_highschool_v1_admin_service_proto_goTypes = []any{
 	(*ListAgentSessionsRequest)(nil),  // 0: highschool.v1.ListAgentSessionsRequest
 	(*AgentSessionRow)(nil),           // 1: highschool.v1.AgentSessionRow
@@ -787,22 +1182,32 @@ var file_highschool_v1_admin_service_proto_goTypes = []any{
 	(*ReplayTrace)(nil),               // 6: highschool.v1.ReplayTrace
 	(*ReplayCheckpoint)(nil),          // 7: highschool.v1.ReplayCheckpoint
 	(*GetSessionReplayResponse)(nil),  // 8: highschool.v1.GetSessionReplayResponse
+	(*GetCostDashboardRequest)(nil),   // 9: highschool.v1.GetCostDashboardRequest
+	(*CostLlmDaily)(nil),              // 10: highschool.v1.CostLlmDaily
+	(*CostToolDaily)(nil),             // 11: highschool.v1.CostToolDaily
+	(*CostSessionDaily)(nil),          // 12: highschool.v1.CostSessionDaily
+	(*GetCostDashboardResponse)(nil),  // 13: highschool.v1.GetCostDashboardResponse
 }
 var file_highschool_v1_admin_service_proto_depIdxs = []int32{
-	1, // 0: highschool.v1.ListAgentSessionsResponse.items:type_name -> highschool.v1.AgentSessionRow
-	4, // 1: highschool.v1.GetSessionReplayResponse.session:type_name -> highschool.v1.ReplaySession
-	5, // 2: highschool.v1.GetSessionReplayResponse.messages:type_name -> highschool.v1.ReplayMessage
-	6, // 3: highschool.v1.GetSessionReplayResponse.traces:type_name -> highschool.v1.ReplayTrace
-	7, // 4: highschool.v1.GetSessionReplayResponse.checkpoints:type_name -> highschool.v1.ReplayCheckpoint
-	0, // 5: highschool.v1.AdminService.ListAgentSessions:input_type -> highschool.v1.ListAgentSessionsRequest
-	3, // 6: highschool.v1.AdminService.GetSessionReplay:input_type -> highschool.v1.GetSessionReplayRequest
-	2, // 7: highschool.v1.AdminService.ListAgentSessions:output_type -> highschool.v1.ListAgentSessionsResponse
-	8, // 8: highschool.v1.AdminService.GetSessionReplay:output_type -> highschool.v1.GetSessionReplayResponse
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	1,  // 0: highschool.v1.ListAgentSessionsResponse.items:type_name -> highschool.v1.AgentSessionRow
+	4,  // 1: highschool.v1.GetSessionReplayResponse.session:type_name -> highschool.v1.ReplaySession
+	5,  // 2: highschool.v1.GetSessionReplayResponse.messages:type_name -> highschool.v1.ReplayMessage
+	6,  // 3: highschool.v1.GetSessionReplayResponse.traces:type_name -> highschool.v1.ReplayTrace
+	7,  // 4: highschool.v1.GetSessionReplayResponse.checkpoints:type_name -> highschool.v1.ReplayCheckpoint
+	10, // 5: highschool.v1.GetCostDashboardResponse.llm_daily:type_name -> highschool.v1.CostLlmDaily
+	11, // 6: highschool.v1.GetCostDashboardResponse.tool_daily:type_name -> highschool.v1.CostToolDaily
+	12, // 7: highschool.v1.GetCostDashboardResponse.session_daily:type_name -> highschool.v1.CostSessionDaily
+	0,  // 8: highschool.v1.AdminService.ListAgentSessions:input_type -> highschool.v1.ListAgentSessionsRequest
+	3,  // 9: highschool.v1.AdminService.GetSessionReplay:input_type -> highschool.v1.GetSessionReplayRequest
+	9,  // 10: highschool.v1.AdminService.GetCostDashboard:input_type -> highschool.v1.GetCostDashboardRequest
+	2,  // 11: highschool.v1.AdminService.ListAgentSessions:output_type -> highschool.v1.ListAgentSessionsResponse
+	8,  // 12: highschool.v1.AdminService.GetSessionReplay:output_type -> highschool.v1.GetSessionReplayResponse
+	13, // 13: highschool.v1.AdminService.GetCostDashboard:output_type -> highschool.v1.GetCostDashboardResponse
+	11, // [11:14] is the sub-list for method output_type
+	8,  // [8:11] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_highschool_v1_admin_service_proto_init() }
@@ -816,7 +1221,7 @@ func file_highschool_v1_admin_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_highschool_v1_admin_service_proto_rawDesc), len(file_highschool_v1_admin_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

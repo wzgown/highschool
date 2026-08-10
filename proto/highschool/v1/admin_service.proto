@@ -10,6 +10,8 @@ service AdminService {
   rpc ListAgentSessions(ListAgentSessionsRequest) returns (ListAgentSessionsResponse);
   // 单会话回放（消息/trace/checkpoint 全量）
   rpc GetSessionReplay(GetSessionReplayRequest) returns (GetSessionReplayResponse);
+  // 成本/用量审计看板（按天）
+  rpc GetCostDashboard(GetCostDashboardRequest) returns (GetCostDashboardResponse);
 }
 
 message ListAgentSessionsRequest {
@@ -80,4 +82,28 @@ message GetSessionReplayResponse {
   repeated ReplayMessage messages = 2;
   repeated ReplayTrace traces = 3;
   repeated ReplayCheckpoint checkpoints = 4;
+}
+
+message GetCostDashboardRequest {
+  string from = 1;  // 含；'YYYY-MM-DD'；空=不限制下界
+  string to = 2;    // 含；空=不限制上界
+}
+
+message CostLlmDaily {
+  string day = 1; int64 llm_calls = 2; int64 prompt_tokens = 3; int64 completion_tokens = 4;
+  int64 total_tokens = 5; int64 avg_latency_ms = 6; int64 p95_latency_ms = 7; int64 error_count = 8;
+}
+
+message CostToolDaily {
+  string day = 1; string tool_name = 2; int64 calls = 3; int64 failures = 4; int64 avg_latency_ms = 5;
+}
+
+message CostSessionDaily {
+  string day = 1; int64 active_sessions = 2; int64 messages = 3; int64 user_messages = 4; int64 assistant_messages = 5;
+}
+
+message GetCostDashboardResponse {
+  repeated CostLlmDaily llm_daily = 1;
+  repeated CostToolDaily tool_daily = 2;
+  repeated CostSessionDaily session_daily = 3;
 }

@@ -88,6 +88,39 @@ func (h *AdminServiceHandler) GetSessionReplay(ctx context.Context, req *connect
 	return connect.NewResponse(resp), nil
 }
 
+// GetCostDashboard 成本/用量审计看板（按天，读 012 视图）
+func (h *AdminServiceHandler) GetCostDashboard(ctx context.Context, req *connect.Request[highschoolv1.GetCostDashboardRequest]) (*connect.Response[highschoolv1.GetCostDashboardResponse], error) {
+	d, err := h.store.GetCostDashboard(ctx, req.Msg.From, req.Msg.To)
+	if err != nil {
+		logger.Error(ctx, "admin get cost dashboard failed", err)
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	resp := &highschoolv1.GetCostDashboardResponse{
+		LlmDaily:     make([]*highschoolv1.CostLlmDaily, 0, len(d.LlmDaily)),
+		ToolDaily:    make([]*highschoolv1.CostToolDaily, 0, len(d.ToolDaily)),
+		SessionDaily: make([]*highschoolv1.CostSessionDaily, 0, len(d.SessionDaily)),
+	}
+	for _, v := range d.LlmDaily {
+		resp.LlmDaily = append(resp.LlmDaily, &highschoolv1.CostLlmDaily{
+			Day: v.Day, LlmCalls: v.LlmCalls, PromptTokens: v.PromptTokens,
+			CompletionTokens: v.CompletionTokens, TotalTokens: v.TotalTokens,
+			AvgLatencyMs: v.AvgLatencyMs, P95LatencyMs: v.P95LatencyMs, ErrorCount: v.ErrorCount,
+		})
+	}
+	for _, v := range d.ToolDaily {
+		resp.ToolDaily = append(resp.ToolDaily, &highschoolv1.CostToolDaily{
+			Day: v.Day, ToolName: v.ToolName, Calls: v.Calls, Failures: v.Failures, AvgLatencyMs: v.AvgLatencyMs,
+		})
+	}
+	for _, v := range d.SessionDaily {
+		resp.SessionDaily = append(resp.SessionDaily, &highschoolv1.CostSessionDaily{
+			Day: v.Day, ActiveSessions: v.ActiveSessions, Messages: v.Messages,
+			UserMessages: v.UserMessages, AssistantMessages: v.AssistantMessages,
+		})
+	}
+	return connect.NewResponse(resp), nil
+}
+
 // RegisterAdminService 注册管理后台服务（挂鉴权 interceptor）
 func RegisterAdminService(mux *http.ServeMux, otelInterceptor *otelconnect.Interceptor, secret string, store admin.Store) {
 	if secret == "" {
