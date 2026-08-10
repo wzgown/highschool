@@ -40,3 +40,11 @@ tip:
 feature:
   agent_enabled: true
   review_versions: []
+
+# 管理后台（单管理员；password_hash 为 bcrypt，cookie_secret 为 HMAC 密钥；
+# 生产经 HS_ADMIN_PASSWORD_HASH / HS_ADMIN_COOKIE_SECRET 注入，勿提交真实值）
+admin:
+  enabled: true
+  password_hash: ""
+  cookie_secret: ""
+  session_ttl_hours: 12
