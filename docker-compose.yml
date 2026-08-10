@@ -70,10 +70,14 @@ services:
       # Log
       - HS_LOG_LEVEL=info
       - HS_LOG_FORMAT=json
-      # Tracing
-      - HS_TRACING_ENABLED=false
+      # Tracing（OTLP/HTTP 直连 OpenObserve；OO 未启动时 exporter 仅异步失败，不影响服务）
+      - HS_TRACING_ENABLED=${HS_TRACING_ENABLED:-true}
       - HS_TRACING_SERVICE_NAME=highschool-backend
-      - HS_TRACING_OTLP_ENDPOINT=localhost:4317
+      - HS_TRACING_PROTOCOL=${HS_TRACING_PROTOCOL:-http}
+      - HS_TRACING_OTLP_ENDPOINT=${HS_TRACING_OTLP_ENDPOINT:-openobserve:5080}
+      - HS_TRACING_OTLP_URL_PATH=${HS_TRACING_OTLP_URL_PATH:-/api/default/v1/traces}
+      # OpenObserve basic auth（与下方 ZO_ROOT_USER_* 默认值对应；生产请用环境变量覆盖）
+      - HS_TRACING_OTLP_HEADERS=${HS_TRACING_OTLP_HEADERS:-Authorization=Basic YWRtaW5AaGlnaHNjaG9vbC5sb2NhbDpIaWdoc2Nob29sIzIwMjZvbw==}
       - HS_TRACING_SAMPLE_RATE=0.1
       # LLM（AI 顾问；key 通过环境注入，勿提交真实值）
       - HS_LLM_PROVIDER=${HS_LLM_PROVIDER:-deepseek}
@@ -97,10 +101,35 @@ services:
       redis:
         condition: service_healthy
 
+  # ==================== Observability（默认不启动） ====================
+  # 启用方式：docker compose --profile observability up -d
+  # OpenObserve UI: http://localhost:5080（traces/logs/metrics 一体，含告警）
+  # backend 通过 OTLP/HTTP 直连（见上方 HS_TRACING_* 环境变量），无需 collector
+  openobserve:
+    image: public.ecr.aws/zinclabs/openobserve:v0.16.3
+    container_name: highschool_openobserve
+    restart: unless-stopped
+    profiles:
+      - observability
+    environment:
+      ZO_DATA_DIR: /data
+      # 生产部署务必通过环境变量覆盖默认账号（与 backend 的 HS_TRACING_OTLP_HEADERS 对应）
+      ZO_ROOT_USER_EMAIL: ${ZO_ROOT_USER_EMAIL:-admin@highschool.local}
+      ZO_ROOT_USER_PASSWORD: ${ZO_ROOT_USER_PASSWORD:-Highschool#2026oo}
+    volumes:
+      - openobserve_data:/data
+    ports:
+      - "5080:5080"   # UI + OTLP/HTTP
+      - "5081:5081"   # gRPC（备用）
+    networks:
+      - highschool_net
+
 volumes:
   postgres_data:
     driver: local
   redis_data:
+    driver: local
+  openobserve_data:
     driver: local
 
 networks:

@@ -20,6 +20,7 @@ import (
 	"highschool-backend/internal/infrastructure/settings"
 	"highschool-backend/pkg/config"
 	"highschool-backend/pkg/logger"
+	"highschool-backend/pkg/metrics"
 	"highschool-backend/pkg/tracing"
 )
 
@@ -42,6 +43,9 @@ func main() {
 		Enabled:      cfg.Tracing.Enabled,
 		ServiceName:  cfg.Tracing.ServiceName,
 		OTLPEndpoint: cfg.Tracing.OTLPEndpoint,
+		Protocol:     cfg.Tracing.Protocol,
+		URLPath:      cfg.Tracing.URLPath,
+		Headers:      cfg.Tracing.Headers,
 		SampleRate:   cfg.Tracing.SampleRate,
 	}
 	tracingShutdown, err := tracing.Initialize(tracingCfg)
@@ -92,6 +96,9 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(`{"status":"ok","time":` + fmt.Sprintf("%d", time.Now().Unix()) + `}`))
 	})
+
+	// Prometheus 指标
+	mux.Handle("/metrics", metrics.Handler())
 
 	// 应用功能开关（AI 顾问 + 打赏码；DB app_config 表驱动，UPDATE 后 60s 内生效，无需重启）
 	tipCfg := cfg.Tip

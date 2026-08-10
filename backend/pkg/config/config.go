@@ -97,6 +97,9 @@ type TracingConfig struct {
 	Enabled      bool    `mapstructure:"enabled"`
 	ServiceName  string  `mapstructure:"service_name"`
 	OTLPEndpoint string  `mapstructure:"otlp_endpoint"`
+	Protocol     string  `mapstructure:"protocol"`   // grpc（collector）或 http（OpenObserve 直连）
+	URLPath      string  `mapstructure:"url_path"`   // http 协议时的路径，如 /api/default/v1/traces
+	Headers      string  `mapstructure:"headers"`    // "k=v,k2=v2" 形式，用于 OpenObserve basic auth
 	SampleRate   float64 `mapstructure:"sample_rate"`
 }
 
@@ -126,6 +129,9 @@ func Load() (*Config, error) {
 	viper.SetDefault("tracing.enabled", false)
 	viper.SetDefault("tracing.service_name", "highschool-backend")
 	viper.SetDefault("tracing.otlp_endpoint", "localhost:4317")
+	viper.SetDefault("tracing.protocol", "grpc")
+	viper.SetDefault("tracing.url_path", "")
+	viper.SetDefault("tracing.headers", "")
 	viper.SetDefault("tracing.sample_rate", 1.0)
 	viper.SetDefault("tip.enabled", true)
 	viper.SetDefault("tip.qr_url", "")

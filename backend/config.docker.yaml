@@ -23,9 +23,13 @@ log:
   format: json
 
 tracing:
-  enabled: false
+  enabled: true
   service_name: highschool-backend
-  otlp_endpoint: localhost:4317
+  # OpenObserve 直连（OTLP/HTTP）；headers 与 compose 中 ZO_ROOT_USER_* 对应
+  otlp_endpoint: openobserve:5080
+  protocol: http
+  url_path: /api/default/v1/traces
+  headers: "Authorization=Basic YWRtaW5AaGlnaHNjaG9vbC5sb2NhbDpIaWdoc2Nob29sIzIwMjZvbw=="
   sample_rate: 0.1
 
 tip:
