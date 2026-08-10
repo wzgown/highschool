@@ -19,6 +19,7 @@ import (
 	"highschool-backend/internal/infrastructure/database"
 	"highschool-backend/internal/infrastructure/settings"
 	"highschool-backend/internal/repository"
+	"highschool-backend/internal/service/admin"
 	"highschool-backend/pkg/config"
 	"highschool-backend/pkg/logger"
 	"highschool-backend/pkg/metrics"
@@ -183,13 +184,22 @@ func main() {
 	v1.RegisterAgentService(mux, otelInterceptor)
 
 	// 管理后台：AdminService（cookie 鉴权）+ 登录 + SPA 静态
-	v1.RegisterAdminService(mux, otelInterceptor, cfg.Admin.CookieSecret, repository.NewAdminRepository())
+	repo := repository.NewAdminRepository()
+	v1.RegisterAdminService(mux, otelInterceptor, cfg.Admin.CookieSecret, repo)
 	mux.HandleFunc("/admin/api/login", v1.NewAdminLoginHandler(cfg))
 	mux.HandleFunc("/admin/api/logout", v1.NewAdminLogoutHandler())
 	mux.Handle("/admin/", http.StripPrefix("/admin/", v1.AdminSPAHandler()))
 	mux.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/admin/", http.StatusFound)
 	})
+
+	// P3 告警巡检引擎：后台 ticker 定时跑 3 项检查、去重写 agent_alert、推 webhook
+	if cfg.Admin.InspectIntervalMinutes > 0 {
+		go admin.NewInspector(repo, cfg.Admin.DailyTokenBudget, cfg.Admin.WebhookURL).
+			Start(context.Background(), time.Duration(cfg.Admin.InspectIntervalMinutes)*time.Minute)
+		logger.Info(context.Background(), "admin inspector started",
+			logger.Int("interval_minutes", cfg.Admin.InspectIntervalMinutes))
+	}
 
 	// 添加中间件
 	// 顺序（从外到内）：OTel HTTP tracing -> 日志 -> handler

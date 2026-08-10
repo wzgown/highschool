@@ -56,9 +56,12 @@ type FeatureConfig struct {
 
 // AdminConfig 管理后台配置（单管理员）
 type AdminConfig struct {
-	PasswordHash    string `mapstructure:"password_hash"`     // bcrypt 哈希；优先经 HS_ADMIN_PASSWORD_HASH 注入
-	CookieSecret    string `mapstructure:"cookie_secret"`     // HMAC 签名密钥；优先经 HS_ADMIN_COOKIE_SECRET 注入
-	SessionTTLHours int    `mapstructure:"session_ttl_hours"` // 登录会话有效期
+	PasswordHash           string `mapstructure:"password_hash"`            // bcrypt 哈希；优先经 HS_ADMIN_PASSWORD_HASH 注入
+	CookieSecret           string `mapstructure:"cookie_secret"`            // HMAC 签名密钥；优先经 HS_ADMIN_COOKIE_SECRET 注入
+	SessionTTLHours        int    `mapstructure:"session_ttl_hours"`        // 登录会话有效期
+	InspectIntervalMinutes int    `mapstructure:"inspect_interval_minutes"` // 告警巡检间隔（分钟）；<=0 关闭
+	DailyTokenBudget       int64  `mapstructure:"daily_token_budget"`       // 当日 LLM token 预算阈值
+	WebhookURL             string `mapstructure:"webhook_url"`              // 企业微信群机器人 webhook（告警推送）
 }
 
 // TipConfig 打赏码配置
@@ -159,6 +162,8 @@ func Load() (*Config, error) {
 	viper.SetDefault("wechat.appid", "")
 	viper.SetDefault("feature.agent_enabled", true)
 	viper.SetDefault("admin.session_ttl_hours", 12)
+	viper.SetDefault("admin.inspect_interval_minutes", 15)
+	viper.SetDefault("admin.daily_token_budget", int64(2000000))
 
 	// 环境变量支持 - 使用 EnvKeyReplacer 将 database.host 映射到 HS_DATABASE_HOST
 	viper.SetEnvPrefix("HS")

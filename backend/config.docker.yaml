@@ -48,3 +48,6 @@ admin:
   password_hash: ""
   cookie_secret: ""
   session_ttl_hours: 12
+  inspect_interval_minutes: 15
+  daily_token_budget: 2000000
+  webhook_url: ""

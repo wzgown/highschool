@@ -93,6 +93,10 @@ services:
       # Admin console（单管理员；生产务必经环境变量覆盖）
       - HS_ADMIN_PASSWORD_HASH=${HS_ADMIN_PASSWORD_HASH:-}
       - HS_ADMIN_COOKIE_SECRET=${HS_ADMIN_COOKIE_SECRET:-}
+      # Admin 告警巡检（P3）：间隔 / token 预算 / 企业微信群机器人 webhook
+      - HS_ADMIN_INSPECT_INTERVAL_MINUTES=${HS_ADMIN_INSPECT_INTERVAL_MINUTES:-15}
+      - HS_ADMIN_DAILY_TOKEN_BUDGET=${HS_ADMIN_DAILY_TOKEN_BUDGET:-2000000}
+      - HS_ADMIN_WEBHOOK_URL=${HS_ADMIN_WEBHOOK_URL:-}
       # Tip
       - HS_TIP_ENABLED=true
       - HS_TIP_QR_URL=https://zg.mkfriend.top/static/tip-qr.jpg
