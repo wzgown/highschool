@@ -13,3 +13,6 @@ npm-debug.log*
 .idea/
 .vscode/
 *.swp
+
+# vue-tsc -b incremental cache
+*.tsbuildinfo
