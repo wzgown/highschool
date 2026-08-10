@@ -1,0 +1,811 @@
+<title>折桂登高 · AI 顾问 Agent 架构</title>
+<meta name="description" content="上海中考志愿顾问 Agent 的状态图架构与反幻觉设计">
+<style>
+  :root {
+    --ground: #F6F4EF;
+    --surface: #FCFAF6;
+    --surface-2: #EFEAE0;
+    --ink: #211D1A;
+    --muted: #6B6358;
+    --line: #DDD7CB;
+    --line-strong: #C9C1B2;
+    --accent: #B8841A;
+    --accent-ink: #8A6212;
+    --accent-soft: rgba(184, 132, 26, 0.12);
+    --guard: #2F6F61;
+    --guard-soft: rgba(47, 111, 97, 0.12);
+    --code-bg: #ECE7DD;
+
+    --font-sans: "PingFang SC", "Noto Sans SC", "Source Han Sans SC", "Hiragino Sans GB", system-ui, -apple-system, sans-serif;
+    --font-mono: "SF Mono", "JetBrains Mono", "Roboto Mono", "Menlo", "Consolas", monospace;
+
+    --maxw: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #161310;
+      --surface: #1E1A16;
+      --surface-2: #252019;
+      --ink: #ECE6DB;
+      --muted: #9B9286;
+      --line: #312B25;
+      --line-strong: #443C32;
+      --accent: #D9A23A;
+      --accent-ink: #E9B856;
+      --accent-soft: rgba(217, 162, 58, 0.16);
+      --guard: #6FB3A2;
+      --guard-soft: rgba(111, 179, 162, 0.16);
+      --code-bg: #221E19;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #161310;
+    --surface: #1E1A16;
+    --surface-2: #252019;
+    --ink: #ECE6DB;
+    --muted: #9B9286;
+    --line: #312B25;
+    --line-strong: #443C32;
+    --accent: #D9A23A;
+    --accent-ink: #E9B856;
+    --accent-soft: rgba(217, 162, 58, 0.16);
+    --guard: #6FB3A2;
+    --guard-soft: rgba(111, 179, 162, 0.16);
+    --code-bg: #221E19;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    font-feature-settings: "tnum" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---- masthead ---- */
+  header.mast {
+    border-bottom: 1px solid var(--line);
+    padding: 56px 0 40px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin: 0 0 18px;
+  }
+  .eyebrow .dot { color: var(--muted); margin: 0 8px; }
+  h1.title {
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.18;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+    max-width: 22ch;
+  }
+  h1.title .accent { color: var(--accent-ink); }
+  p.lede {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 26px;
+    margin-top: 28px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  /* ---- section ---- */
+  section.block {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .block-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .block-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent-ink);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .block-sub {
+    color: var(--muted);
+    margin: 6px 0 0;
+    font-size: 15px;
+    max-width: 70ch;
+  }
+
+  /* ---- hero philosophy lead ---- */
+  .thesis {
+    font-size: clamp(18px, 2.2vw, 21px);
+    line-height: 1.6;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 22px;
+    margin: 0 0 18px;
+    max-width: 68ch;
+    text-wrap: pretty;
+  }
+  .thesis .g { color: var(--guard); font-weight: 600; }
+  .thesis em { font-style: normal; color: var(--accent-ink); font-weight: 600; }
+
+  p { margin: 0 0 14px; max-width: 70ch; }
+  p, li { color: var(--ink); }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); }
+  strong { font-weight: 650; }
+  code, .mono {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 1.5px 5px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+
+  /* ---- figure / svg ---- */
+  figure.diag {
+    margin: 26px 0 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px 18px 16px;
+    overflow-x: auto;
+  }
+  figure.diag svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 640px;
+  }
+  figcaption {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    max-width: 90ch;
+  }
+  figcaption b { color: var(--ink); font-weight: 600; }
+
+  svg .node-rect { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1.4; }
+  svg .node-rect.accent { stroke: var(--accent); stroke-width: 1.8; }
+  svg .node-rect.end { fill: var(--surface-2); stroke-dasharray: 0; }
+  svg text { font-family: var(--font-mono); fill: var(--ink); }
+  svg .nt { font-weight: 600; font-size: 13px; }
+  svg .nr { font-size: 10.5px; fill: var(--muted); }
+  svg .edge { stroke: var(--accent); stroke-width: 2; fill: none; }
+  svg .edge-branch { stroke: var(--muted); stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; }
+  svg .edge-loop { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+  svg .el { font-size: 10px; fill: var(--muted); }
+  svg .el.on { fill: var(--accent-ink); font-weight: 600; }
+  svg .m-accent { fill: var(--accent); }
+  svg .m-muted { fill: var(--muted); }
+  svg .band { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  svg .band-accent { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+  svg .bt { font-family: var(--font-sans); font-weight: 600; font-size: 13px; }
+  svg .bs { font-size: 10.5px; fill: var(--muted); }
+
+  /* ---- node cards ---- */
+  .nodes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .node-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 20px;
+    position: relative;
+  }
+  .node-card .ix {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-ink);
+    letter-spacing: 0.06em;
+  }
+  .node-card h3 {
+    margin: 4px 0 2px;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .node-card .role {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  .node-card ul { padding-left: 18px; margin: 0; }
+  .node-card li { font-size: 14px; line-height: 1.55; margin-bottom: 4px; }
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--code-bg);
+    color: var(--muted);
+    margin-right: 4px;
+  }
+  .tag.guard { background: var(--guard-soft); color: var(--guard); }
+
+  /* ---- table ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 8px;
+    font-size: 14px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  th, td {
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    background: var(--surface);
+    font-weight: 600;
+  }
+  tr:last-child td { border-bottom: none; }
+  td .pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .pill.pass { background: var(--accent-soft); color: var(--accent-ink); }
+  .pill.fail { background: var(--guard-soft); color: var(--guard); }
+
+  /* ---- tool grid ---- */
+  .tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+  .tool {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .tool .tn { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-ink); font-weight: 600; }
+  .tool .td { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .tool.engine { border-color: var(--accent); border-style: dashed; }
+  .grp-label {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 20px 0 4px;
+  }
+  .grp-label:first-of-type { margin-top: 0; }
+
+  /* ---- concerns grid ---- */
+  .concerns {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .concern {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .concern h4 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+  .concern p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ---- journey ---- */
+  ol.journey { counter-reset: step; list-style: none; padding: 0; margin: 18px 0 0; }
+  ol.journey li {
+    counter-increment: step;
+    position: relative;
+    padding: 4px 0 18px 44px;
+    margin: 0;
+    border-left: 1px solid var(--line);
+    margin-left: 14px;
+    padding-left: 30px;
+  }
+  ol.journey li::before {
+    content: counter(step);
+    position: absolute;
+    left: -14px;
+    top: 0;
+    width: 27px;
+    height: 27px;
+    background: var(--ground);
+    border: 1.5px solid var(--accent);
+    color: var(--accent-ink);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ol.journey li:last-child { border-left-color: transparent; }
+  ol.journey li .jh { font-weight: 650; }
+  ol.journey li .jd { color: var(--muted); font-size: 14px; line-height: 1.55; }
+
+  footer.foot {
+    padding: 36px 0 60px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer.foot .src { font-family: var(--font-mono); font-size: 12px; }
+
+  @media (max-width: 720px) {
+    .nodes { grid-template-columns: 1fr; }
+    .meta { gap: 6px 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  a:focus-visible, :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">Agent Architecture <span class="dot">·</span> 折桂登高 中考志愿顾问</p>
+    <h1 class="title">AI 顾问：<span class="accent">一个不会编数字</span>的对话 Agent</h1>
+    <p class="lede">用六节点状态图把一次「中考志愿咨询」拆成 意图识别 → 规划 → 取数 → 综合 → 校验，并以一道确定性程序化校验守住底线——回答里每一个数字，都必须能溯源到一次真实的工具查询。</p>
+    <div class="meta">
+      <span><b>6</b> 状态图节点</span>
+      <span><b>6</b> 意图</span>
+      <span><b>14</b> 受控工具</span>
+      <span>反思重规划 <b>≤ 2</b></span>
+      <span>全局并发 <b>10</b> · 会话串行</span>
+      <span>工具 <b>5s</b> / LLM <b>60s</b></span>
+      <span>LLM <b>OpenAI 兼容</b> 可插拔</span>
+    </div>
+  </header>
+
+  <!-- ============ 图1：状态图 ============ -->
+  <section class="block">
+    <figure class="diag" role="img" aria-label="AI 顾问六节点状态图：Router 到 Reflection 的主路径，含 Clarify 追问、拒答、降级与反思重规划回路">
+      <svg viewBox="0 0 1080 470" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <marker id="ar-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path class="m-accent" d="M0,0 L10,5 L0,10 z"/>
+          </marker>
+          <marker id="ar-m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path class="m-muted" d="M0,0 L10,5 L0,10 z"/>
+          </marker>
+        </defs>
+
+        <!-- happy path nodes -->
+        <g>
+          <rect class="node-rect accent" x="40" y="70" width="140" height="58" rx="5"/>
+          <text class="nt" x="110" y="98" text-anchor="middle">Router</text>
+          <text class="nr" x="110" y="115" text-anchor="middle">意图识别</text>
+
+          <rect class="node-rect accent" x="250" y="70" width="140" height="58" rx="5"/>
+          <text class="nt" x="320" y="98" text-anchor="middle">Planner</text>
+          <text class="nr" x="320" y="115" text-anchor="middle">任务规划</text>
+
+          <rect class="node-rect accent" x="460" y="70" width="140" height="58" rx="5"/>
+          <text class="nt" x="530" y="98" text-anchor="middle">Executor</text>
+          <text class="nr" x="530" y="115" text-anchor="middle">并行执行</text>
+
+          <rect class="node-rect accent" x="670" y="70" width="140" height="58" rx="5"/>
+          <text class="nt" x="740" y="98" text-anchor="middle">Synthesizer</text>
+          <text class="nr" x="740" y="115" text-anchor="middle">结果综合</text>
+
+          <rect class="node-rect accent" x="880" y="70" width="140" height="58" rx="5"/>
+          <text class="nt" x="950" y="98" text-anchor="middle">Reflection</text>
+          <text class="nr" x="950" y="115" text-anchor="middle">校验·重规划</text>
+
+          <!-- Clarify -->
+          <rect class="node-rect" x="250" y="250" width="140" height="58" rx="5"/>
+          <text class="nt" x="320" y="278" text-anchor="middle">Clarify</text>
+          <text class="nr" x="320" y="295" text-anchor="middle">HITL 追问</text>
+
+          <!-- End -->
+          <rect class="node-rect end" x="460" y="372" width="140" height="58" rx="5"/>
+          <text class="nt" x="530" y="400" text-anchor="middle">End</text>
+          <text class="nr" x="530" y="417" text-anchor="middle">返回响应</text>
+        </g>
+
+        <!-- happy path edges -->
+        <path class="edge" d="M180 99 L246 99" marker-end="url(#ar-a)"/>
+        <path class="edge" d="M390 99 L456 99" marker-end="url(#ar-a)"/>
+        <path class="edge" d="M600 99 L666 99" marker-end="url(#ar-a)"/>
+        <path class="edge" d="M810 99 L876 99" marker-end="url(#ar-a)"/>
+
+        <!-- replan loop over the top -->
+        <path class="edge-loop" d="M950 70 C 950 12, 110 12, 110 70" marker-end="url(#ar-a)"/>
+        <text class="el on" x="530" y="20" text-anchor="middle">校验失败 → 回 Router 重规划（≤ MaxReplan）</text>
+
+        <!-- planner -> clarify -->
+        <path class="edge-branch" d="M320 128 L320 246" marker-end="url(#ar-m)"/>
+        <text class="el" x="328" y="158">recommendation</text>
+        <text class="el" x="328" y="171">缺必填槽位</text>
+
+        <!-- clarify -> end -->
+        <path class="edge-branch" d="M390 279 L 458 372" marker-end="url(#ar-m)"/>
+        <text class="el" x="404" y="320">等待用户输入</text>
+
+        <!-- planner -> synthesizer (empty plan, skip) -->
+        <path class="edge-branch" d="M390 128 L390 168 L740 168 L740 124" marker-end="url(#ar-m)"/>
+        <text class="el" x="530" y="161" text-anchor="middle">空计划 · 无需工具（policy_qa）</text>
+
+        <!-- router -> end (reject) -->
+        <path class="edge-branch" d="M110 128 L110 401 L456 401" marker-end="url(#ar-m)"/>
+        <text class="el" x="118" y="180">off_topic / 置信度&lt;0.4</text>
+        <text class="el" x="118" y="193">→ 越界拒答</text>
+
+        <!-- reflection -> end (pass / exhausted) -->
+        <path class="edge-branch" d="M950 128 L950 401 L604 401" marker-end="url(#ar-m)"/>
+        <text class="el" x="942" y="180" text-anchor="end">校验通过 → 结束</text>
+        <text class="el" x="942" y="193" text-anchor="end">重规划耗尽 → 降级兜底</text>
+      </svg>
+    </figure>
+    <figcaption>
+      <b>主路径</b>（金色实线）是大多数对话走的线性流程；<b>分支</b>（灰色虚线）是降级与中断路径——越界直接拒答、缺槽位转人机追问、空计划跳过执行、反思耗尽走降级话术；<b>顶部金色弧线</b>是这套设计的安全网：回答通不过校验时，带失败原因回到 Router 重新取数，最多重试 2 次。
+    </figcaption>
+
+    <p class="thesis" style="margin-top:32px;">
+      这个 Agent 的灵魂不是「会调工具的 LLM」，而是 <em>数据驱动反幻觉</em>：Synthesizer 被硬性要求「<span class="g">回答中的每一个数字都必须来自工具查询结果</span>」，而 Reflection 节点用一道<span class="g">确定性的程序化校验</span>（<code>verifyReply</code>）逐字核对——任何无法在工具结果中溯源的数字，都会触发重规划。LLM 负责语言，校验器负责真相。
+    </p>
+  </section>
+
+  <!-- ============ 六节点详解 ============ -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">§ 01</span>
+      <h2>六节点状态图</h2>
+    </div>
+    <p class="block-sub">每个节点是一次独立的 LLM 调用或确定性步骤，产出写入共享 <code>State</code>，逐节点 <code>checkpoint</code> 落库。状态图本身不持有运行时状态——<code>graph.Run()</code> 是个从 Router 推进到 End 的循环。</p>
+
+    <div class="nodes">
+      <div class="node-card">
+        <div class="ix">NODE ①</div>
+        <h3>Router · 意图识别</h3>
+        <div class="role">LLM · temp 0 · 强 JSON · 300 tok</div>
+        <ul>
+          <li>识别 6 类意图（policy_qa / data_query / recommendation / simulation / result_interpretation / off_topic），抽取 7 类槽位</li>
+          <li>注入「当前时间」上下文，防止把「今年」当成训练记忆里的旧年份</li>
+          <li>槽位标准化：<code>一模→MOCK1</code>、区名补「区」</li>
+          <li><span class="tag guard">守门</span>置信度 &lt; 0.4 或 off_topic → 直接拒答，<strong>不消耗后续节点</strong></li>
+        </ul>
+      </div>
+
+      <div class="node-card">
+        <div class="ix">NODE ②</div>
+        <h3>Planner · 任务规划</h3>
+        <div class="role">LLM · temp 0 · 强 JSON · 500 tok</div>
+        <ul>
+          <li>从 <code>Tools.Specs()</code> 里选工具，产出 <code>steps[]</code>（建议 1–4 步）</li>
+          <li>过滤掉 LLM 幻觉出的未注册工具名</li>
+          <li><span class="tag guard">守门</span>recommendation 缺必填槽位（区 / 分数 / 考试类型）→ 转 Clarify</li>
+          <li>空计划（纯政策问答）→ 跳过 Executor 直奔 Synthesizer</li>
+        </ul>
+      </div>
+
+      <div class="node-card">
+        <div class="ix">NODE ③</div>
+        <h3>Executor · 并行执行</h3>
+        <div class="role">errgroup 并发 · 无 LLM</div>
+        <ul>
+          <li>所有 Step 经 <code>errgroup</code> 并发执行，单工具 5s 超时 + panic recover</li>
+          <li>每个工具产出<strong>双载荷</strong>：<code>ForLLM</code>（紧凑 JSON 给模型）+ <code>Cards</code>（结构化卡片给前端）+ <code>Summary</code>（给人看的摘要）</li>
+          <li><span class="tag guard">守门</span>单步失败降级返回 error JSON，<strong>不中断</strong>整轮；metrics + span + trace 全留痕</li>
+        </ul>
+      </div>
+
+      <div class="node-card">
+        <div class="ix">NODE ④</div>
+        <h3>Clarify · HITL 追问</h3>
+        <div class="role">模板化 · 无 LLM</div>
+        <ul>
+          <li>按缺失槽位取追问模板（区 / 分数 / 考试类型 / 初中），设置 <code>PendingQ</code></li>
+          <li>本轮结束，会话置 <code>waiting_input</code></li>
+          <li>下轮用户回答 → <code>resumeFromClarify</code> 把答案并入 Slots，从 Planner 继续</li>
+        </ul>
+      </div>
+
+      <div class="node-card">
+        <div class="ix">NODE ⑤</div>
+        <h3>Synthesizer · 结果综合</h3>
+        <div class="role">LLM · temp 0.3 · 800 tok</div>
+        <ul>
+          <li>把工具结果注入为<strong>「回答的唯一数据来源」</strong>，带最近 N 条历史</li>
+          <li>8 条硬规则：数字必须来自工具、800/750 分制不可混用、分数线必带年份与涨跌、推算数据标口径、结尾固定免责声明、≤400 字</li>
+          <li>这里只产「草稿回答」，是否放行由 Reflection 决定</li>
+        </ul>
+      </div>
+
+      <div class="node-card">
+        <div class="ix">NODE ⑥</div>
+        <h3>Reflection · 校验重规划</h3>
+        <div class="role">确定性校验 + 可选 LLM</div>
+        <ul>
+          <li><span class="tag guard">核心</span><code>verifyReply</code>：逐数字核对可否溯源（见 §02）</li>
+          <li>数据类意图<strong>未调工具</strong>却出现数字 → 判幻觉，拦截</li>
+          <li>未通过 → 清空 ToolResults，带失败原因回 Router（≤ 2 次）</li>
+          <li>连续未通过 → 降级话术 + <strong>保留卡片</strong>（数据照给，话术不误导）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 反幻觉内核 ============ -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">§ 02</span>
+      <h2>反幻觉内核：数字溯源</h2>
+    </div>
+    <p class="block-sub">Reflection 节点的确定性校验规则。回答里提取出的每个数字，都要在「工具结果的容差集合」里命中——直接命中、两数之差（涨跌 / gap）、白名单常量、或合法年份，四者居其一才算通过。这是一道<span class="tag guard">硬规则</span>，不依赖 LLM 自觉。</p>
+
+    <table>
+      <thead>
+        <tr><th>情形</th><th>规则</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>合规数字</td>
+          <td>命中工具结果集合——直接命中 / 两数之差（<code>gap = 分数 − 线</code>）/ <code>±0.05</code> 容差</td>
+          <td><span class="pill pass">通过</span></td>
+        </tr>
+        <tr>
+          <td>政策常量</td>
+          <td>白名单：批次志愿数（1 / 2 / 15）、分制满分（750 / 800）、控制线（501 / 615）等 system prompt 中的规则数字</td>
+          <td><span class="pill pass">通过</span></td>
+        </tr>
+        <tr>
+          <td>年份</td>
+          <td>1900–2100 范围内的整数（不视为需要溯源的数据）</td>
+          <td><span class="pill pass">通过</span></td>
+        </tr>
+        <tr>
+          <td>无源数字</td>
+          <td>数据类意图（data_query / recommendation / result_interpretation）<strong>未调用任何工具</strong>却给出数字</td>
+          <td><span class="pill fail">拦截 → 重规划</span></td>
+        </tr>
+        <tr>
+          <td>无法溯源</td>
+          <td>数字不在容差集合、不在白名单、非年份 → 判为模型编造</td>
+          <td><span class="pill fail">拦截 → 重规划</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <figcaption>可选开关 <code>reflection_llm_enabled</code> 会在程序化校验通过后追加一轮 LLM 评测（答非所问 / 分制混淆 / 「保证录取」式风险承诺），默认关闭以省成本——程序化校验已能挡住绝大多数幻觉。</figcaption>
+  </section>
+
+  <!-- ============ 受控工具集 ============ -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">§ 03</span>
+      <h2>受控工具集</h2>
+    </div>
+    <p class="block-sub"><code>ToolRegistry</code> 统一注册、统一 5s 超时与 panic 保护；<code>Specs()</code> 按名排序保证喂给 LLM 的 tools 参数稳定。全部 12 个数据工具<strong>只读</strong>，2 个引擎型工具在 P2 接入。每个工具同时产出给模型的 JSON 与给前端的卡片——一次取数，两处消费。</p>
+
+    <div class="grp-label">只读数据工具 · 12</div>
+    <div class="tools">
+      <div class="tool"><div class="tn">get_admission_scores</div><div class="td">录取分数线（按批次/年份）</div></div>
+      <div class="tool"><div class="tn">locate_score</div><div class="td">分数定位：线 ≤ 分的学校</div></div>
+      <div class="tool"><div class="tn">get_score_trend</div><div class="td">分数线多年趋势 + 涨跌</div></div>
+      <div class="tool"><div class="tn">search_schools</div><div class="td">学校模糊搜索</div></div>
+      <div class="tool"><div class="tn">get_school_detail</div><div class="td">学校画像 / 梯队</div></div>
+      <div class="tool"><div class="tn">compare_schools</div><div class="td">多校并排对比</div></div>
+      <div class="tool"><div class="tn">get_quota_plan</div><div class="td">名额分配计划（到区/到校）</div></div>
+      <div class="tool"><div class="tn">get_quota_change</div><div class="td">名额年度变化</div></div>
+      <div class="tool"><div class="tn">get_control_scores</div><div class="td">最低投档控制线</div></div>
+      <div class="tool"><div class="tn">get_middle_school_stats</div><div class="td">初中考生 / 录取数据</div></div>
+      <div class="tool"><div class="tn">get_middle_school_advantage</div><div class="td">初中名额到校优势</div></div>
+      <div class="tool"><div class="tn">get_tie_break_detail</div><div class="td">同分比较 6 位序明细</div></div>
+    </div>
+
+    <div class="grp-label">引擎型工具 · 2（P2）</div>
+    <div class="tools">
+      <div class="tool engine"><div class="tn">run_recommendation</div><div class="td">调录取概率模拟引擎</div></div>
+      <div class="tool engine"><div class="tn">get_analysis_result</div><div class="td">取历史模拟分析结果</div></div>
+    </div>
+
+    <p style="margin-top:14px;"><span class="tag guard">分制红线</span>工具层强制校验分制：名额分配（到区 / 到校）是 <strong>800 分制</strong>（含综评 50 分），平行志愿 1–15 是 <strong>750 分制</strong>。分数超过该批次满分直接拒绝（<code>locate_score</code> 等），从源头杜绝 800/750 混用。</p>
+  </section>
+
+  <!-- ============ 图2：分层架构 ============ -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">§ 04</span>
+      <h2>分层架构</h2>
+    </div>
+    <p class="block-sub">DDD 分层 + 依赖组装集中在 <code>agent_connect.go</code>。状态图与业务编排解耦：Graph 只依赖 <code>LLMClient</code> / <code>ToolRunner</code> / <code>Store</code> 三个接口，便于单测与替换 provider。</p>
+
+    <figure class="diag" role="img" aria-label="分层架构：从微信小程序请求经 Connect-RPC、AgentService 编排、Graph 状态图、工具与 LLM 客户端，到 Repository 与 PostgreSQL，两侧是横切关注点">
+      <svg viewBox="0 0 980 470" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <marker id="b2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path class="m-accent" d="M0,0 L10,5 L0,10 z"/>
+          </marker>
+        </defs>
+
+        <!-- left rail: cross-cutting -->
+        <text class="el" x="60" y="30">横切关注点</text>
+        <rect class="band" x="40" y="44" width="150" height="34" rx="5"/>
+        <text class="bs" x="115" y="65" text-anchor="middle">内容安全 (WeChat)</text>
+        <rect class="band" x="40" y="86" width="150" height="34" rx="5"/>
+        <text class="bs" x="115" y="107" text-anchor="middle">限流 · 每日配额</text>
+        <rect class="band" x="40" y="128" width="150" height="34" rx="5"/>
+        <text class="bs" x="115" y="149" text-anchor="middle">全局并发 · 会话串行</text>
+
+        <!-- right rail: observability -->
+        <text class="el" x="790" y="30">可观测</text>
+        <rect class="band" x="770" y="44" width="170" height="34" rx="5"/>
+        <text class="bs" x="855" y="65" text-anchor="middle">OTel span（节点/工具/LLM）</text>
+        <rect class="band" x="770" y="86" width="170" height="34" rx="5"/>
+        <text class="bs" x="855" y="107" text-anchor="middle">trace 留痕（落库）</text>
+        <rect class="band" x="770" y="128" width="170" height="34" rx="5"/>
+        <text class="bs" x="855" y="149" text-anchor="middle">metrics（调用/延迟/token）</text>
+
+        <!-- central stack -->
+        <rect class="band-accent" x="240" y="44" width="500" height="40" rx="5"/>
+        <text class="bt" x="490" y="69" text-anchor="middle">客户端 · 微信小程序</text>
+
+        <path class="edge" d="M490 88 L490 102" marker-end="url(#b2)"/>
+        <rect class="band" x="240" y="106" width="500" height="40" rx="5"/>
+        <text class="bt" x="490" y="131" text-anchor="middle">Connect-RPC API 层  ·  agent_connect.go</text>
+
+        <path class="edge" d="M490 150 L490 164" marker-end="url(#b2)"/>
+        <rect class="band" x="240" y="168" width="500" height="40" rx="5"/>
+        <text class="bt" x="490" y="193" text-anchor="middle">AgentService 编排  ·  agent_service.go</text>
+
+        <path class="edge" d="M490 212 L490 226" marker-end="url(#b2)"/>
+        <rect class="band-accent" x="240" y="230" width="500" height="40" rx="5"/>
+        <text class="bt" x="490" y="255" text-anchor="middle">Graph 状态图  ·  6 节点循环</text>
+
+        <!-- branch to tools & llm -->
+        <path class="edge" d="M400 274 L400 312" marker-end="url(#b2)"/>
+        <path class="edge" d="M580 274 L580 312" marker-end="url(#b2)"/>
+        <rect class="band" x="270" y="316" width="260" height="40" rx="5"/>
+        <text class="bt" x="400" y="341" text-anchor="middle">受控工具集 · 14</text>
+        <rect class="band" x="550" y="316" width="260" height="40" rx="5"/>
+        <text class="bt" x="680" y="341" text-anchor="middle">LLM Client · OpenAI 兼容</text>
+
+        <!-- converge to repository -->
+        <path class="edge" d="M400 360 L400 384 L490 384 L490 392" marker-end="url(#b2)"/>
+        <path class="edge" d="M580 360 L580 384 L490 384" />
+        <rect class="band" x="240" y="396" width="500" height="40" rx="5"/>
+        <text class="bt" x="490" y="421" text-anchor="middle">Repository · AgentStore + AgentData  →  PostgreSQL</text>
+      </svg>
+    </figure>
+    <figcaption>金色高亮的三层是请求的「主轴」：客户端 → Graph → 数据层。<b>Graph 只面向三个接口</b>（<code>LLMClient</code> / <code>ToolRunner</code> / <code>Store</code>），所以状态图可以脱离数据库与具体 LLM 厂商单独测试——这也是 <code>graph_test.go</code> 能用假 LLM / 假工具跑全流程的原因。</figcaption>
+  </section>
+
+  <!-- ============ 横切关注点 ============ -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">§ 05</span>
+      <h2>工程化：让它在生产里稳得住</h2>
+    </div>
+    <p class="block-sub">状态图只是核心；真正让它能上线的是一圈横切机制——并发、限流、内容安全、降级、可观测、持久化。每一项都对应代码里一处明确的设计。</p>
+
+    <div class="concerns">
+      <div class="concern">
+        <h4>并发控制</h4>
+        <p>全局信号量闸（默认 <code>MaxLLMConcurrency=10</code>，等满 30s 超时回「咨询人数较多」）+ 会话级 <code>sync.Mutex</code>（同一 session 串行，防双击 / 多端并发竞态）。</p>
+      </div>
+      <div class="concern">
+        <h4>限流</h4>
+        <p>按 <code>device_id</code> 的每日消息配额（<code>DailyQuota</code>），用完提示明天再来，并在用户层引导去用「智能推荐」。</p>
+      </div>
+      <div class="concern">
+        <h4>内容安全（双向）</h4>
+        <p>输入 <code>msgSecCheck</code>：违规直接拒答，<strong>不消耗 LLM</strong>。输出检测：违规替换为兜底话术并清空卡片。微信侧不配置时降级为 <code>NoopChecker</code>。</p>
+      </div>
+      <div class="concern">
+        <h4>降级链</h4>
+        <p>节点失败 → 兜底话术；工具失败 → 不中断整轮；Reflection 失败 → 重规划 → 降级话术；<code>StepBudget</code>（默认 12）耗尽 → 兜底。任何路径都不裸抛给用户。</p>
+      </div>
+      <div class="concern">
+        <h4>可观测</h4>
+        <p>OTel span（节点 / 工具 / LLM 调用，关闭时 noop 零开销）+ trace 落库（llm / tool / node 三类，含 token 与延迟）+ metrics（<code>ObserveLLMCall</code> / <code>ObserveToolCall</code> / <code>IncChatRequests</code>）。</p>
+      </div>
+      <div class="concern">
+        <h4>持久化</h4>
+        <p>每节点 <code>SaveCheckpoint</code>（全量 <code>State</code> 快照）+ 会话 <code>UpdateSessionCAS</code> 乐观锁（冲突不视为失败）+ 消息落库携带 token usage。</p>
+      </div>
+      <div class="concern">
+        <h4>LLM 韧性</h4>
+        <p>429 / 5xx 重试 1 次（退避 1s）；60s 超时；上下文取消不重试。客户端仅依赖标准库，实现 <code>agent.LLMClient</code>，可换任意 OpenAI 兼容 provider。</p>
+      </div>
+      <div class="concern">
+        <h4>审核期开关</h4>
+        <p><code>feature.agent_enabled</code> 总开关 + <code>review_versions</code> 黑名单：审核中的小程序版本强制关闭 AI 顾问，过审后远程放开。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 一条请求的旅程 ============ -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">§ 06</span>
+      <h2>一条请求的旅程</h2>
+    </div>
+    <p class="block-sub">把上面所有部分串起来——一条「浦东 705 平行志愿能去哪」从进入到返回，经历了什么。</p>
+
+    <ol class="journey">
+      <li>
+        <span class="jh">入口 · ChatRequest</span><br>
+        <span class="jd">小程序带 <code>device_id / session_id / message / context</code> 发到 Connect-RPC <code>AgentService.Chat</code>；API 层做协议转换。</span>
+      </li>
+      <li>
+        <span class="jh">AgentService 前置关卡</span><br>
+        <span class="jd">输入内容安全 → 每日配额 → 会话获取/创建 → 会话级锁 → 重建 <code>State</code>（历史消息 + session 槽位 + 前端 context 并入）→ 全局并发闸 → 落库用户消息。</span>
+      </li>
+      <li>
+        <span class="jh">Router</span><br>
+        <span class="jd">识别为 <code>recommendation</code>，抽出槽位 <code>district_name=浦东新区, total_score=705</code>，置信度足，进入 Planner。</span>
+      </li>
+      <li>
+        <span class="jh">Planner</span><br>
+        <span class="jd">必填槽位齐全，规划两步：<code>locate_score</code>（定位达线学校）+ <code>get_score_trend</code>（看目标校稳定性）。</span>
+      </li>
+      <li>
+        <span class="jh">Executor</span><br>
+        <span class="jd"><code>errgroup</code> 并发跑两工具，各产出 <code>ForLLM</code> JSON + <code>Cards</code>；5s 超时与 panic 保护兜底。</span>
+      </li>
+      <li>
+        <span class="jh">Synthesizer</span><br>
+        <span class="jd">把工具结果作为唯一数据来源，综合出带年份、分制、冲稳保建议的草稿回答。</span>
+      </li>
+      <li>
+        <span class="jh">Reflection</span><br>
+        <span class="jd"><code>verifyReply</code> 逐数字核对——705、各校分数线、gap 全部能溯源 → <span class="tag">通过</span>。放行到 End。</span>
+      </li>
+      <li>
+        <span class="jh">出口 · ChatResponse</span><br>
+        <span class="jd">输出内容安全 → CAS 更新 session → 落库助手消息（带 token usage）→ 返回 <code>reply + school_cards + tool_calls + trace_id</code>。</span>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="foot">
+    <p>这是 <b>折桂登高</b> AI 顾问 Agent 的架构总览。核心实现位于 <span class="src">backend/internal/service/agent/</span>（<span class="src">graph/</span> 状态图、<span class="src">tools/</span> 工具集）、<span class="src">agent_service.go</span>（编排）、<span class="src">infrastructure/llm/</span>（LLM 客户端）。</p>
+    <p>数据仅供参考，以上海市教育考试院官方公布为准。</p>
+  </footer>
+
+</div>
