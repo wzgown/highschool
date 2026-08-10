@@ -1,0 +1,23 @@
+{
+  "date": "2026-08-10",
+  "scrape_time": "2026-08-10T08:00:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 2,
+  "failed_count": 0,
+  "partial_count": 0,
+  "skipped_seasonal_shutdown": 14,
+  "note": "14/16 districts in seasonal shutdown (404/empty). Only 闵行(30KB) and 奉贤(22KB) serving content. No new 中考 items detected.",
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    }
+  ]
+}
