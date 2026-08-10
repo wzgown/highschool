@@ -42,6 +42,11 @@ const (
 	// AdminServiceGetCostDashboardProcedure is the fully-qualified name of the AdminService's
 	// GetCostDashboard RPC.
 	AdminServiceGetCostDashboardProcedure = "/highschool.v1.AdminService/GetCostDashboard"
+	// AdminServiceListAlertsProcedure is the fully-qualified name of the AdminService's ListAlerts RPC.
+	AdminServiceListAlertsProcedure = "/highschool.v1.AdminService/ListAlerts"
+	// AdminServiceAcknowledgeAlertProcedure is the fully-qualified name of the AdminService's
+	// AcknowledgeAlert RPC.
+	AdminServiceAcknowledgeAlertProcedure = "/highschool.v1.AdminService/AcknowledgeAlert"
 )
 
 // AdminServiceClient is a client for the highschool.v1.AdminService service.
@@ -52,6 +57,10 @@ type AdminServiceClient interface {
 	GetSessionReplay(context.Context, *connect.Request[v1.GetSessionReplayRequest]) (*connect.Response[v1.GetSessionReplayResponse], error)
 	// 成本/用量审计看板（按天）
 	GetCostDashboard(context.Context, *connect.Request[v1.GetCostDashboardRequest]) (*connect.Response[v1.GetCostDashboardResponse], error)
+	// 告警列表（分页；status 过滤 open|acked|resolved）
+	ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error)
+	// 确认告警（status→'acked'）
+	AcknowledgeAlert(context.Context, *connect.Request[v1.AcknowledgeAlertRequest]) (*connect.Response[v1.AcknowledgeAlertResponse], error)
 }
 
 // NewAdminServiceClient constructs a client for the highschool.v1.AdminService service. By default,
@@ -83,6 +92,18 @@ func NewAdminServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(adminServiceMethods.ByName("GetCostDashboard")),
 			connect.WithClientOptions(opts...),
 		),
+		listAlerts: connect.NewClient[v1.ListAlertsRequest, v1.ListAlertsResponse](
+			httpClient,
+			baseURL+AdminServiceListAlertsProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("ListAlerts")),
+			connect.WithClientOptions(opts...),
+		),
+		acknowledgeAlert: connect.NewClient[v1.AcknowledgeAlertRequest, v1.AcknowledgeAlertResponse](
+			httpClient,
+			baseURL+AdminServiceAcknowledgeAlertProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("AcknowledgeAlert")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -91,6 +112,8 @@ type adminServiceClient struct {
 	listAgentSessions *connect.Client[v1.ListAgentSessionsRequest, v1.ListAgentSessionsResponse]
 	getSessionReplay  *connect.Client[v1.GetSessionReplayRequest, v1.GetSessionReplayResponse]
 	getCostDashboard  *connect.Client[v1.GetCostDashboardRequest, v1.GetCostDashboardResponse]
+	listAlerts        *connect.Client[v1.ListAlertsRequest, v1.ListAlertsResponse]
+	acknowledgeAlert  *connect.Client[v1.AcknowledgeAlertRequest, v1.AcknowledgeAlertResponse]
 }
 
 // ListAgentSessions calls highschool.v1.AdminService.ListAgentSessions.
@@ -108,6 +131,16 @@ func (c *adminServiceClient) GetCostDashboard(ctx context.Context, req *connect.
 	return c.getCostDashboard.CallUnary(ctx, req)
 }
 
+// ListAlerts calls highschool.v1.AdminService.ListAlerts.
+func (c *adminServiceClient) ListAlerts(ctx context.Context, req *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error) {
+	return c.listAlerts.CallUnary(ctx, req)
+}
+
+// AcknowledgeAlert calls highschool.v1.AdminService.AcknowledgeAlert.
+func (c *adminServiceClient) AcknowledgeAlert(ctx context.Context, req *connect.Request[v1.AcknowledgeAlertRequest]) (*connect.Response[v1.AcknowledgeAlertResponse], error) {
+	return c.acknowledgeAlert.CallUnary(ctx, req)
+}
+
 // AdminServiceHandler is an implementation of the highschool.v1.AdminService service.
 type AdminServiceHandler interface {
 	// 会话列表（分页）
@@ -116,6 +149,10 @@ type AdminServiceHandler interface {
 	GetSessionReplay(context.Context, *connect.Request[v1.GetSessionReplayRequest]) (*connect.Response[v1.GetSessionReplayResponse], error)
 	// 成本/用量审计看板（按天）
 	GetCostDashboard(context.Context, *connect.Request[v1.GetCostDashboardRequest]) (*connect.Response[v1.GetCostDashboardResponse], error)
+	// 告警列表（分页；status 过滤 open|acked|resolved）
+	ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error)
+	// 确认告警（status→'acked'）
+	AcknowledgeAlert(context.Context, *connect.Request[v1.AcknowledgeAlertRequest]) (*connect.Response[v1.AcknowledgeAlertResponse], error)
 }
 
 // NewAdminServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -143,6 +180,18 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(adminServiceMethods.ByName("GetCostDashboard")),
 		connect.WithHandlerOptions(opts...),
 	)
+	adminServiceListAlertsHandler := connect.NewUnaryHandler(
+		AdminServiceListAlertsProcedure,
+		svc.ListAlerts,
+		connect.WithSchema(adminServiceMethods.ByName("ListAlerts")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceAcknowledgeAlertHandler := connect.NewUnaryHandler(
+		AdminServiceAcknowledgeAlertProcedure,
+		svc.AcknowledgeAlert,
+		connect.WithSchema(adminServiceMethods.ByName("AcknowledgeAlert")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/highschool.v1.AdminService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AdminServiceListAgentSessionsProcedure:
@@ -151,6 +200,10 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 			adminServiceGetSessionReplayHandler.ServeHTTP(w, r)
 		case AdminServiceGetCostDashboardProcedure:
 			adminServiceGetCostDashboardHandler.ServeHTTP(w, r)
+		case AdminServiceListAlertsProcedure:
+			adminServiceListAlertsHandler.ServeHTTP(w, r)
+		case AdminServiceAcknowledgeAlertProcedure:
+			adminServiceAcknowledgeAlertHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -170,4 +223,12 @@ func (UnimplementedAdminServiceHandler) GetSessionReplay(context.Context, *conne
 
 func (UnimplementedAdminServiceHandler) GetCostDashboard(context.Context, *connect.Request[v1.GetCostDashboardRequest]) (*connect.Response[v1.GetCostDashboardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.GetCostDashboard is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.ListAlerts is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) AcknowledgeAlert(context.Context, *connect.Request[v1.AcknowledgeAlertRequest]) (*connect.Response[v1.AcknowledgeAlertResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.AcknowledgeAlert is not implemented"))
 }

@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetCostDashboardRequest, GetCostDashboardResponse, GetSessionReplayRequest, GetSessionReplayResponse, ListAgentSessionsRequest, ListAgentSessionsResponse } from "./admin_service_pb.js";
+import { AcknowledgeAlertRequest, AcknowledgeAlertResponse, GetCostDashboardRequest, GetCostDashboardResponse, GetSessionReplayRequest, GetSessionReplayResponse, ListAgentSessionsRequest, ListAgentSessionsResponse, ListAlertsRequest, ListAlertsResponse } from "./admin_service_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -45,6 +45,28 @@ export const AdminService = {
       name: "GetCostDashboard",
       I: GetCostDashboardRequest,
       O: GetCostDashboardResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 告警列表（分页；status 过滤 open|acked|resolved）
+     *
+     * @generated from rpc highschool.v1.AdminService.ListAlerts
+     */
+    listAlerts: {
+      name: "ListAlerts",
+      I: ListAlertsRequest,
+      O: ListAlertsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 确认告警（status→'acked'）
+     *
+     * @generated from rpc highschool.v1.AdminService.AcknowledgeAlert
+     */
+    acknowledgeAlert: {
+      name: "AcknowledgeAlert",
+      I: AcknowledgeAlertRequest,
+      O: AcknowledgeAlertResponse,
       kind: MethodKind.Unary,
     },
   }

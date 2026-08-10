@@ -121,6 +121,38 @@ func (h *AdminServiceHandler) GetCostDashboard(ctx context.Context, req *connect
 	return connect.NewResponse(resp), nil
 }
 
+// ListAlerts 告警列表（分页；status 过滤 open|acked|resolved）
+func (h *AdminServiceHandler) ListAlerts(ctx context.Context, req *connect.Request[highschoolv1.ListAlertsRequest]) (*connect.Response[highschoolv1.ListAlertsResponse], error) {
+	m := req.Msg
+	rows, total, err := h.store.ListAlerts(ctx, admin.AlertFilter{
+		Status: m.Status, Page: m.Page, PageSize: m.PageSize,
+	})
+	if err != nil {
+		logger.Error(ctx, "admin list alerts failed", err)
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	items := make([]*highschoolv1.AdminAlert, 0, len(rows))
+	for _, r := range rows {
+		items = append(items, &highschoolv1.AdminAlert{
+			Id: r.ID, CreatedAt: r.CreatedAt, Kind: r.Kind, Severity: r.Severity,
+			Title: r.Title, DetailJson: r.DetailJSON, Status: r.Status, AckedAt: r.AckedAt,
+		})
+	}
+	return connect.NewResponse(&highschoolv1.ListAlertsResponse{Items: items, Total: total}), nil
+}
+
+// AcknowledgeAlert 确认告警（status→'acked'）。未命中返回 CodeNotFound。
+func (h *AdminServiceHandler) AcknowledgeAlert(ctx context.Context, req *connect.Request[highschoolv1.AcknowledgeAlertRequest]) (*connect.Response[highschoolv1.AcknowledgeAlertResponse], error) {
+	if err := h.store.AckAlert(ctx, req.Msg.Id); err != nil {
+		if errors.Is(err, admin.ErrNotFound) {
+			return nil, connect.NewError(connect.CodeNotFound, err)
+		}
+		logger.Error(ctx, "admin ack alert failed", err)
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	return connect.NewResponse(&highschoolv1.AcknowledgeAlertResponse{}), nil
+}
+
 // RegisterAdminService 注册管理后台服务（挂鉴权 interceptor）
 func RegisterAdminService(mux *http.ServeMux, otelInterceptor *otelconnect.Interceptor, secret string, store admin.Store) {
 	if secret == "" {

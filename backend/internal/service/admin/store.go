@@ -115,9 +115,37 @@ type CostDashboard struct {
 	SessionDaily []CostSessionDaily
 }
 
+// Alert agent_alert 行（P3 巡检引擎写入，handler 读取）
+type Alert struct {
+	ID         int64
+	CreatedAt  string
+	Kind       string
+	Severity   string
+	Title      string
+	DetailJSON string // 原始 detail(jsonb) 文本
+	Status     string
+	AckedAt    string
+}
+
+// AlertFilter 告警列表过滤/分页
+type AlertFilter struct {
+	Status   string // open|acked|resolved；空=不过滤
+	Page     int32  // 从 1 起
+	PageSize int32
+}
+
 // Store 管理后台只读仓储（handler 依赖此接口，便于测试用 fake）
 type Store interface {
 	ListAgentSessions(ctx context.Context, f ListFilter) ([]SessionRow, int32, error)
 	GetSessionReplay(ctx context.Context, sessionID int64) (*ReplayBundle, error)
 	GetCostDashboard(ctx context.Context, from, to string) (*CostDashboard, error)
+
+	// 告警数据层（P3）：handler 直读 + 后续巡检查询引擎写入/判定。
+	ListAlerts(ctx context.Context, f AlertFilter) ([]Alert, int32, error)
+	AckAlert(ctx context.Context, id int64) error
+	InsertAlert(ctx context.Context, a *Alert) (int64, error)
+	HasOpenAlert(ctx context.Context, kind string) (bool, error)
+	LLMStatsLastHour(ctx context.Context) (calls int32, errors int32, err error)
+	TraceGapLastHour(ctx context.Context) (userMsgs int32, traces int32, err error)
+	TodayTokenTotal(ctx context.Context) (int64, error)
 }

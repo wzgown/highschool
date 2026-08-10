@@ -844,3 +844,248 @@ export class GetCostDashboardResponse extends Message<GetCostDashboardResponse> 
   }
 }
 
+/**
+ * @generated from message highschool.v1.AdminAlert
+ */
+export class AdminAlert extends Message<AdminAlert> {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id = protoInt64.zero;
+
+  /**
+   * @generated from field: string created_at = 2;
+   */
+  createdAt = "";
+
+  /**
+   * @generated from field: string kind = 3;
+   */
+  kind = "";
+
+  /**
+   * @generated from field: string severity = 4;
+   */
+  severity = "";
+
+  /**
+   * @generated from field: string title = 5;
+   */
+  title = "";
+
+  /**
+   * 原始 detail(jsonb) 文本
+   *
+   * @generated from field: string detail_json = 6;
+   */
+  detailJson = "";
+
+  /**
+   * @generated from field: string status = 7;
+   */
+  status = "";
+
+  /**
+   * @generated from field: string acked_at = 8;
+   */
+  ackedAt = "";
+
+  constructor(data?: PartialMessage<AdminAlert>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.AdminAlert";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "created_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "kind", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "severity", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "detail_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "acked_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AdminAlert {
+    return new AdminAlert().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AdminAlert {
+    return new AdminAlert().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AdminAlert {
+    return new AdminAlert().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AdminAlert | PlainMessage<AdminAlert> | undefined, b: AdminAlert | PlainMessage<AdminAlert> | undefined): boolean {
+    return proto3.util.equals(AdminAlert, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.ListAlertsRequest
+ */
+export class ListAlertsRequest extends Message<ListAlertsRequest> {
+  /**
+   * open|acked|resolved；空=不过滤
+   *
+   * @generated from field: string status = 1;
+   */
+  status = "";
+
+  /**
+   * 从 1 起
+   *
+   * @generated from field: int32 page = 2;
+   */
+  page = 0;
+
+  /**
+   * @generated from field: int32 page_size = 3;
+   */
+  pageSize = 0;
+
+  constructor(data?: PartialMessage<ListAlertsRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.ListAlertsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "page", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "page_size", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListAlertsRequest {
+    return new ListAlertsRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListAlertsRequest {
+    return new ListAlertsRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAlertsRequest {
+    return new ListAlertsRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ListAlertsRequest | PlainMessage<ListAlertsRequest> | undefined, b: ListAlertsRequest | PlainMessage<ListAlertsRequest> | undefined): boolean {
+    return proto3.util.equals(ListAlertsRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.ListAlertsResponse
+ */
+export class ListAlertsResponse extends Message<ListAlertsResponse> {
+  /**
+   * @generated from field: repeated highschool.v1.AdminAlert items = 1;
+   */
+  items: AdminAlert[] = [];
+
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total = 0;
+
+  constructor(data?: PartialMessage<ListAlertsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.ListAlertsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "message", T: AdminAlert, repeated: true },
+    { no: 2, name: "total", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListAlertsResponse {
+    return new ListAlertsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListAlertsResponse {
+    return new ListAlertsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAlertsResponse {
+    return new ListAlertsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ListAlertsResponse | PlainMessage<ListAlertsResponse> | undefined, b: ListAlertsResponse | PlainMessage<ListAlertsResponse> | undefined): boolean {
+    return proto3.util.equals(ListAlertsResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.AcknowledgeAlertRequest
+ */
+export class AcknowledgeAlertRequest extends Message<AcknowledgeAlertRequest> {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id = protoInt64.zero;
+
+  constructor(data?: PartialMessage<AcknowledgeAlertRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.AcknowledgeAlertRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AcknowledgeAlertRequest {
+    return new AcknowledgeAlertRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AcknowledgeAlertRequest {
+    return new AcknowledgeAlertRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AcknowledgeAlertRequest {
+    return new AcknowledgeAlertRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AcknowledgeAlertRequest | PlainMessage<AcknowledgeAlertRequest> | undefined, b: AcknowledgeAlertRequest | PlainMessage<AcknowledgeAlertRequest> | undefined): boolean {
+    return proto3.util.equals(AcknowledgeAlertRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.AcknowledgeAlertResponse
+ */
+export class AcknowledgeAlertResponse extends Message<AcknowledgeAlertResponse> {
+  constructor(data?: PartialMessage<AcknowledgeAlertResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.AcknowledgeAlertResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AcknowledgeAlertResponse {
+    return new AcknowledgeAlertResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AcknowledgeAlertResponse {
+    return new AcknowledgeAlertResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AcknowledgeAlertResponse {
+    return new AcknowledgeAlertResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AcknowledgeAlertResponse | PlainMessage<AcknowledgeAlertResponse> | undefined, b: AcknowledgeAlertResponse | PlainMessage<AcknowledgeAlertResponse> | undefined): boolean {
+    return proto3.util.equals(AcknowledgeAlertResponse, a, b);
+  }
+}
+

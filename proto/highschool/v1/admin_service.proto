@@ -12,6 +12,10 @@ service AdminService {
   rpc GetSessionReplay(GetSessionReplayRequest) returns (GetSessionReplayResponse);
   // 成本/用量审计看板（按天）
   rpc GetCostDashboard(GetCostDashboardRequest) returns (GetCostDashboardResponse);
+  // 告警列表（分页；status 过滤 open|acked|resolved）
+  rpc ListAlerts(ListAlertsRequest) returns (ListAlertsResponse);
+  // 确认告警（status→'acked'）
+  rpc AcknowledgeAlert(AcknowledgeAlertRequest) returns (AcknowledgeAlertResponse);
 }
 
 message ListAgentSessionsRequest {
@@ -107,3 +111,31 @@ message GetCostDashboardResponse {
   repeated CostToolDaily tool_daily = 2;
   repeated CostSessionDaily session_daily = 3;
 }
+
+message AdminAlert {
+  int64 id = 1;
+  string created_at = 2;
+  string kind = 3;
+  string severity = 4;
+  string title = 5;
+  string detail_json = 6;  // 原始 detail(jsonb) 文本
+  string status = 7;
+  string acked_at = 8;
+}
+
+message ListAlertsRequest {
+  string status = 1;   // open|acked|resolved；空=不过滤
+  int32 page = 2;      // 从 1 起
+  int32 page_size = 3;
+}
+
+message ListAlertsResponse {
+  repeated AdminAlert items = 1;
+  int32 total = 2;
+}
+
+message AcknowledgeAlertRequest {
+  int64 id = 1;
+}
+
+message AcknowledgeAlertResponse {}

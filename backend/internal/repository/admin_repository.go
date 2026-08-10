@@ -229,3 +229,119 @@ func (r *AdminRepository) GetCostDashboard(ctx context.Context, from, to string)
 	}
 	return d, nil
 }
+
+// ListAlerts 分页列出告警（按 created_at 倒序）。status 为空时不过滤状态。
+func (r *AdminRepository) ListAlerts(ctx context.Context, f admin.AlertFilter) ([]admin.Alert, int32, error) {
+	if f.Page < 1 {
+		f.Page = 1
+	}
+	if f.PageSize < 1 || f.PageSize > 100 {
+		f.PageSize = 20
+	}
+	offset := (f.Page - 1) * f.PageSize
+
+	const q = `
+		SELECT id, created_at::text, kind, severity, title,
+		       COALESCE(detail::text,'{}'), status, COALESCE(acked_at::text,'')
+		FROM agent_alert
+		WHERE ($1 = '' OR status = $1)
+		ORDER BY created_at DESC
+		LIMIT $2 OFFSET $3`
+	rows, err := r.db.Query(ctx, q, f.Status, f.PageSize, offset)
+	if err != nil {
+		return nil, 0, fmt.Errorf("admin list alerts: %w", err)
+	}
+	defer rows.Close()
+
+	out := make([]admin.Alert, 0, f.PageSize)
+	for rows.Next() {
+		var a admin.Alert
+		if err := rows.Scan(&a.ID, &a.CreatedAt, &a.Kind, &a.Severity, &a.Title,
+			&a.DetailJSON, &a.Status, &a.AckedAt); err != nil {
+			return nil, 0, fmt.Errorf("admin list alerts scan: %w", err)
+		}
+		out = append(out, a)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, 0, fmt.Errorf("admin list alerts rows: %w", err)
+	}
+
+	var total int32
+	const cq = `SELECT COUNT(*) FROM agent_alert WHERE ($1 = '' OR status = $1)`
+	if err := r.db.QueryRow(ctx, cq, f.Status).Scan(&total); err != nil {
+		return nil, 0, fmt.Errorf("admin count alerts: %w", err)
+	}
+	return out, total, nil
+}
+
+// AckAlert 将告警置为已确认（status='acked', acked_at=now）。
+// 未命中时返回 admin.ErrNotFound（handler 据此映射 CodeNotFound）。
+func (r *AdminRepository) AckAlert(ctx context.Context, id int64) error {
+	ct, err := r.db.Exec(ctx, `UPDATE agent_alert SET status='acked', acked_at=now() WHERE id=$1`, id)
+	if err != nil {
+		return fmt.Errorf("admin ack alert: %w", err)
+	}
+	if ct.RowsAffected() == 0 {
+		return fmt.Errorf("admin ack alert: id %d not found: %w", id, admin.ErrNotFound)
+	}
+	return nil
+}
+
+// InsertAlert 写入一条告警；返回新 id。detail 字段为 jsonb，pgx 以 text 下发，
+// 经 $1::jsonb 显式转换写入（无效 JSON 会在此报错，由调用方保证 DetailJSON 合法）。
+func (r *AdminRepository) InsertAlert(ctx context.Context, a *admin.Alert) (int64, error) {
+	if a == nil {
+		a = &admin.Alert{}
+	}
+	const q = `INSERT INTO agent_alert (kind, severity, title, detail)
+	            VALUES ($1, $2, $3, $4::jsonb) RETURNING id`
+	var id int64
+	if err := r.db.QueryRow(ctx, q, a.Kind, a.Severity, a.Title, a.DetailJSON).Scan(&id); err != nil {
+		return 0, fmt.Errorf("admin insert alert: %w", err)
+	}
+	return id, nil
+}
+
+// HasOpenAlert 判断指定 kind 是否存在 status='open' 的告警（巡检查询引擎去重用）。
+func (r *AdminRepository) HasOpenAlert(ctx context.Context, kind string) (bool, error) {
+	var exists bool
+	const q = `SELECT EXISTS(SELECT 1 FROM agent_alert WHERE kind=$1 AND status='open')`
+	if err := r.db.QueryRow(ctx, q, kind).Scan(&exists); err != nil {
+		return false, fmt.Errorf("admin has open alert: %w", err)
+	}
+	return exists, nil
+}
+
+// LLMStatsLastHour 返回近 1 小时 LLM trace 调用数与其中失败数（output 含 error key）。
+func (r *AdminRepository) LLMStatsLastHour(ctx context.Context) (int32, int32, error) {
+	var calls, errs int32
+	const q = `SELECT COUNT(*)::int, COUNT(*) FILTER (WHERE output ? 'error')::int
+	           FROM agent_trace WHERE kind='llm' AND created_at >= now() - interval '1 hour'`
+	if err := r.db.QueryRow(ctx, q).Scan(&calls, &errs); err != nil {
+		return 0, 0, fmt.Errorf("admin llm stats last hour: %w", err)
+	}
+	return calls, errs, nil
+}
+
+// TraceGapLastHour 返回近 1 小时用户消息数与 trace 总数（用于 trace 缺失检测）。
+func (r *AdminRepository) TraceGapLastHour(ctx context.Context) (int32, int32, error) {
+	var userMsgs, traces int32
+	const q = `SELECT
+		(SELECT COUNT(*)::int FROM agent_message WHERE role='user' AND created_at >= now() - interval '1 hour'),
+		(SELECT COUNT(*)::int FROM agent_trace WHERE created_at >= now() - interval '1 hour')`
+	if err := r.db.QueryRow(ctx, q).Scan(&userMsgs, &traces); err != nil {
+		return 0, 0, fmt.Errorf("admin trace gap last hour: %w", err)
+	}
+	return userMsgs, traces, nil
+}
+
+// TodayTokenTotal 返回今日（CURRENT_DATE 起）LLM trace prompt+completion token 合计。
+func (r *AdminRepository) TodayTokenTotal(ctx context.Context) (int64, error) {
+	var total int64
+	const q = `SELECT COALESCE(SUM(prompt_tokens),0) + COALESCE(SUM(completion_tokens),0)
+	           FROM agent_trace WHERE kind='llm' AND created_at >= CURRENT_DATE`
+	if err := r.db.QueryRow(ctx, q).Scan(&total); err != nil {
+		return 0, fmt.Errorf("admin today token total: %w", err)
+	}
+	return total, nil
+}

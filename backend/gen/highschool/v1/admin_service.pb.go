@@ -1053,6 +1053,298 @@ func (x *GetCostDashboardResponse) GetSessionDaily() []*CostSessionDaily {
 	return nil
 }
 
+type AdminAlert struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Kind          string                 `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
+	Severity      string                 `protobuf:"bytes,4,opt,name=severity,proto3" json:"severity,omitempty"`
+	Title         string                 `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
+	DetailJson    string                 `protobuf:"bytes,6,opt,name=detail_json,json=detailJson,proto3" json:"detail_json,omitempty"` // 原始 detail(jsonb) 文本
+	Status        string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	AckedAt       string                 `protobuf:"bytes,8,opt,name=acked_at,json=ackedAt,proto3" json:"acked_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdminAlert) Reset() {
+	*x = AdminAlert{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminAlert) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminAlert) ProtoMessage() {}
+
+func (x *AdminAlert) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminAlert.ProtoReflect.Descriptor instead.
+func (*AdminAlert) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *AdminAlert) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AdminAlert) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *AdminAlert) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+func (x *AdminAlert) GetSeverity() string {
+	if x != nil {
+		return x.Severity
+	}
+	return ""
+}
+
+func (x *AdminAlert) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *AdminAlert) GetDetailJson() string {
+	if x != nil {
+		return x.DetailJson
+	}
+	return ""
+}
+
+func (x *AdminAlert) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *AdminAlert) GetAckedAt() string {
+	if x != nil {
+		return x.AckedAt
+	}
+	return ""
+}
+
+type ListAlertsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"` // open|acked|resolved；空=不过滤
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`    // 从 1 起
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAlertsRequest) Reset() {
+	*x = ListAlertsRequest{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertsRequest) ProtoMessage() {}
+
+func (x *ListAlertsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertsRequest.ProtoReflect.Descriptor instead.
+func (*ListAlertsRequest) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ListAlertsRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListAlertsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAlertsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type ListAlertsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*AdminAlert          `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAlertsResponse) Reset() {
+	*x = ListAlertsResponse{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertsResponse) ProtoMessage() {}
+
+func (x *ListAlertsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertsResponse.ProtoReflect.Descriptor instead.
+func (*ListAlertsResponse) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListAlertsResponse) GetItems() []*AdminAlert {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListAlertsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type AcknowledgeAlertRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AcknowledgeAlertRequest) Reset() {
+	*x = AcknowledgeAlertRequest{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AcknowledgeAlertRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AcknowledgeAlertRequest) ProtoMessage() {}
+
+func (x *AcknowledgeAlertRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AcknowledgeAlertRequest.ProtoReflect.Descriptor instead.
+func (*AcknowledgeAlertRequest) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AcknowledgeAlertRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type AcknowledgeAlertResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AcknowledgeAlertResponse) Reset() {
+	*x = AcknowledgeAlertResponse{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AcknowledgeAlertResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AcknowledgeAlertResponse) ProtoMessage() {}
+
+func (x *AcknowledgeAlertResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AcknowledgeAlertResponse.ProtoReflect.Descriptor instead.
+func (*AcknowledgeAlertResponse) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{18}
+}
+
 var File_highschool_v1_admin_service_proto protoreflect.FileDescriptor
 
 const file_highschool_v1_admin_service_proto_rawDesc = "" +
@@ -1152,11 +1444,36 @@ const file_highschool_v1_admin_service_proto_rawDesc = "" +
 	"\tllm_daily\x18\x01 \x03(\v2\x1b.highschool.v1.CostLlmDailyR\bllmDaily\x12;\n" +
 	"\n" +
 	"tool_daily\x18\x02 \x03(\v2\x1c.highschool.v1.CostToolDailyR\ttoolDaily\x12D\n" +
-	"\rsession_daily\x18\x03 \x03(\v2\x1f.highschool.v1.CostSessionDailyR\fsessionDaily2\xc0\x02\n" +
+	"\rsession_daily\x18\x03 \x03(\v2\x1f.highschool.v1.CostSessionDailyR\fsessionDaily\"\xd5\x01\n" +
+	"\n" +
+	"AdminAlert\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x02 \x01(\tR\tcreatedAt\x12\x12\n" +
+	"\x04kind\x18\x03 \x01(\tR\x04kind\x12\x1a\n" +
+	"\bseverity\x18\x04 \x01(\tR\bseverity\x12\x14\n" +
+	"\x05title\x18\x05 \x01(\tR\x05title\x12\x1f\n" +
+	"\vdetail_json\x18\x06 \x01(\tR\n" +
+	"detailJson\x12\x16\n" +
+	"\x06status\x18\a \x01(\tR\x06status\x12\x19\n" +
+	"\backed_at\x18\b \x01(\tR\aackedAt\"\\\n" +
+	"\x11ListAlertsRequest\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"[\n" +
+	"\x12ListAlertsResponse\x12/\n" +
+	"\x05items\x18\x01 \x03(\v2\x19.highschool.v1.AdminAlertR\x05items\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\")\n" +
+	"\x17AcknowledgeAlertRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1a\n" +
+	"\x18AcknowledgeAlertResponse2\xf8\x03\n" +
 	"\fAdminService\x12f\n" +
 	"\x11ListAgentSessions\x12'.highschool.v1.ListAgentSessionsRequest\x1a(.highschool.v1.ListAgentSessionsResponse\x12c\n" +
 	"\x10GetSessionReplay\x12&.highschool.v1.GetSessionReplayRequest\x1a'.highschool.v1.GetSessionReplayResponse\x12c\n" +
-	"\x10GetCostDashboard\x12&.highschool.v1.GetCostDashboardRequest\x1a'.highschool.v1.GetCostDashboardResponseB\xae\x01\n" +
+	"\x10GetCostDashboard\x12&.highschool.v1.GetCostDashboardRequest\x1a'.highschool.v1.GetCostDashboardResponse\x12Q\n" +
+	"\n" +
+	"ListAlerts\x12 .highschool.v1.ListAlertsRequest\x1a!.highschool.v1.ListAlertsResponse\x12c\n" +
+	"\x10AcknowledgeAlert\x12&.highschool.v1.AcknowledgeAlertRequest\x1a'.highschool.v1.AcknowledgeAlertResponseB\xae\x01\n" +
 	"\x11com.highschool.v1B\x11AdminServiceProtoP\x01Z1highschool-backend/gen/highschool/v1;highschoolv1\xa2\x02\x03HXX\xaa\x02\rHighschool.V1\xca\x02\rHighschool\\V1\xe2\x02\x19Highschool\\V1\\GPBMetadata\xea\x02\x0eHighschool::V1b\x06proto3"
 
 var (
@@ -1171,7 +1488,7 @@ func file_highschool_v1_admin_service_proto_rawDescGZIP() []byte {
 	return file_highschool_v1_admin_service_proto_rawDescData
 }
 
-var file_highschool_v1_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_highschool_v1_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_highschool_v1_admin_service_proto_goTypes = []any{
 	(*ListAgentSessionsRequest)(nil),  // 0: highschool.v1.ListAgentSessionsRequest
 	(*AgentSessionRow)(nil),           // 1: highschool.v1.AgentSessionRow
@@ -1187,6 +1504,11 @@ var file_highschool_v1_admin_service_proto_goTypes = []any{
 	(*CostToolDaily)(nil),             // 11: highschool.v1.CostToolDaily
 	(*CostSessionDaily)(nil),          // 12: highschool.v1.CostSessionDaily
 	(*GetCostDashboardResponse)(nil),  // 13: highschool.v1.GetCostDashboardResponse
+	(*AdminAlert)(nil),                // 14: highschool.v1.AdminAlert
+	(*ListAlertsRequest)(nil),         // 15: highschool.v1.ListAlertsRequest
+	(*ListAlertsResponse)(nil),        // 16: highschool.v1.ListAlertsResponse
+	(*AcknowledgeAlertRequest)(nil),   // 17: highschool.v1.AcknowledgeAlertRequest
+	(*AcknowledgeAlertResponse)(nil),  // 18: highschool.v1.AcknowledgeAlertResponse
 }
 var file_highschool_v1_admin_service_proto_depIdxs = []int32{
 	1,  // 0: highschool.v1.ListAgentSessionsResponse.items:type_name -> highschool.v1.AgentSessionRow
@@ -1197,17 +1519,22 @@ var file_highschool_v1_admin_service_proto_depIdxs = []int32{
 	10, // 5: highschool.v1.GetCostDashboardResponse.llm_daily:type_name -> highschool.v1.CostLlmDaily
 	11, // 6: highschool.v1.GetCostDashboardResponse.tool_daily:type_name -> highschool.v1.CostToolDaily
 	12, // 7: highschool.v1.GetCostDashboardResponse.session_daily:type_name -> highschool.v1.CostSessionDaily
-	0,  // 8: highschool.v1.AdminService.ListAgentSessions:input_type -> highschool.v1.ListAgentSessionsRequest
-	3,  // 9: highschool.v1.AdminService.GetSessionReplay:input_type -> highschool.v1.GetSessionReplayRequest
-	9,  // 10: highschool.v1.AdminService.GetCostDashboard:input_type -> highschool.v1.GetCostDashboardRequest
-	2,  // 11: highschool.v1.AdminService.ListAgentSessions:output_type -> highschool.v1.ListAgentSessionsResponse
-	8,  // 12: highschool.v1.AdminService.GetSessionReplay:output_type -> highschool.v1.GetSessionReplayResponse
-	13, // 13: highschool.v1.AdminService.GetCostDashboard:output_type -> highschool.v1.GetCostDashboardResponse
-	11, // [11:14] is the sub-list for method output_type
-	8,  // [8:11] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	14, // 8: highschool.v1.ListAlertsResponse.items:type_name -> highschool.v1.AdminAlert
+	0,  // 9: highschool.v1.AdminService.ListAgentSessions:input_type -> highschool.v1.ListAgentSessionsRequest
+	3,  // 10: highschool.v1.AdminService.GetSessionReplay:input_type -> highschool.v1.GetSessionReplayRequest
+	9,  // 11: highschool.v1.AdminService.GetCostDashboard:input_type -> highschool.v1.GetCostDashboardRequest
+	15, // 12: highschool.v1.AdminService.ListAlerts:input_type -> highschool.v1.ListAlertsRequest
+	17, // 13: highschool.v1.AdminService.AcknowledgeAlert:input_type -> highschool.v1.AcknowledgeAlertRequest
+	2,  // 14: highschool.v1.AdminService.ListAgentSessions:output_type -> highschool.v1.ListAgentSessionsResponse
+	8,  // 15: highschool.v1.AdminService.GetSessionReplay:output_type -> highschool.v1.GetSessionReplayResponse
+	13, // 16: highschool.v1.AdminService.GetCostDashboard:output_type -> highschool.v1.GetCostDashboardResponse
+	16, // 17: highschool.v1.AdminService.ListAlerts:output_type -> highschool.v1.ListAlertsResponse
+	18, // 18: highschool.v1.AdminService.AcknowledgeAlert:output_type -> highschool.v1.AcknowledgeAlertResponse
+	14, // [14:19] is the sub-list for method output_type
+	9,  // [9:14] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_highschool_v1_admin_service_proto_init() }
@@ -1221,7 +1548,7 @@ func file_highschool_v1_admin_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_highschool_v1_admin_service_proto_rawDesc), len(file_highschool_v1_admin_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

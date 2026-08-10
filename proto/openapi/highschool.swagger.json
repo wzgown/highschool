@@ -75,6 +75,40 @@
         }
       }
     },
+    "v1AcknowledgeAlertResponse": {
+      "type": "object"
+    },
+    "v1AdminAlert": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "detailJson": {
+          "type": "string",
+          "title": "原始 detail(jsonb) 文本"
+        },
+        "status": {
+          "type": "string"
+        },
+        "ackedAt": {
+          "type": "string"
+        }
+      }
+    },
     "v1AgentSessionRow": {
       "type": "object",
       "properties": {
@@ -717,6 +751,22 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1AgentSessionRow"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ListAlertsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AdminAlert"
           }
         },
         "total": {

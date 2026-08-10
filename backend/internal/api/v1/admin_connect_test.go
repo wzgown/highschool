@@ -17,6 +17,7 @@ type fakeAdminStore struct {
 	sessions []admin.SessionRow
 	replay   *admin.ReplayBundle
 	cost     *admin.CostDashboard
+	alerts   []admin.Alert
 	err      error
 }
 
@@ -37,6 +38,48 @@ func (f *fakeAdminStore) GetCostDashboard(ctx context.Context, from, to string) 
 		return nil, f.err
 	}
 	return f.cost, nil
+}
+func (f *fakeAdminStore) ListAlerts(ctx context.Context, fl admin.AlertFilter) ([]admin.Alert, int32, error) {
+	if f.err != nil {
+		return nil, 0, f.err
+	}
+	return f.alerts, int32(len(f.alerts)), nil
+}
+func (f *fakeAdminStore) AckAlert(ctx context.Context, id int64) error {
+	if f.err != nil {
+		return f.err
+	}
+	return nil
+}
+func (f *fakeAdminStore) InsertAlert(ctx context.Context, a *admin.Alert) (int64, error) {
+	if f.err != nil {
+		return 0, f.err
+	}
+	return 0, nil
+}
+func (f *fakeAdminStore) HasOpenAlert(ctx context.Context, kind string) (bool, error) {
+	if f.err != nil {
+		return false, f.err
+	}
+	return false, nil
+}
+func (f *fakeAdminStore) LLMStatsLastHour(ctx context.Context) (int32, int32, error) {
+	if f.err != nil {
+		return 0, 0, f.err
+	}
+	return 0, 0, nil
+}
+func (f *fakeAdminStore) TraceGapLastHour(ctx context.Context) (int32, int32, error) {
+	if f.err != nil {
+		return 0, 0, f.err
+	}
+	return 0, 0, nil
+}
+func (f *fakeAdminStore) TodayTokenTotal(ctx context.Context) (int64, error) {
+	if f.err != nil {
+		return 0, f.err
+	}
+	return 0, nil
 }
 
 // TestAdminHandler_ListAgentSessions 通过真实 Connect 方法验证 SessionRow→proto 字段映射（CamelCase 回归守卫）。
@@ -288,5 +331,79 @@ func TestAdminHandler_GetCostDashboard_Error(t *testing.T) {
 	}
 	if connect.CodeOf(err) != connect.CodeInternal {
 		t.Fatalf("CodeOf(err) = %v, want CodeInternal", connect.CodeOf(err))
+	}
+}
+
+// TestAdminHandler_ListAlerts 通过真实 Connect 方法验证 Alert→proto 字段映射（CamelCase 回归守卫：
+// detail_json→DetailJson、acked_at→AckedAt、created_at→CreatedAt）以及分页字段。
+func TestAdminHandler_ListAlerts(t *testing.T) {
+	h := NewAdminServiceHandler(&fakeAdminStore{
+		alerts: []admin.Alert{{
+			ID: 101, CreatedAt: "2026-08-10T10:00:00", Kind: "llm_error_rate",
+			Severity: "warn", Title: "LLM 错误率过高", DetailJSON: `{"rate":0.5}`,
+			Status: "open", AckedAt: "",
+		}},
+	})
+	resp, err := h.ListAlerts(context.Background(), connect.NewRequest(&highschoolv1.ListAlertsRequest{
+		Status: "open", Page: 1, PageSize: 10,
+	}))
+	if err != nil {
+		t.Fatalf("ListAlerts: %v", err)
+	}
+	if resp.Msg.Total != 1 {
+		t.Fatalf("Total = %d, want 1", resp.Msg.Total)
+	}
+	if len(resp.Msg.Items) != 1 {
+		t.Fatalf("Items len = %d, want 1", len(resp.Msg.Items))
+	}
+	got := resp.Msg.Items[0]
+	if got.Id != 101 {
+		t.Errorf("Id = %d, want 101", got.Id)
+	}
+	if got.CreatedAt != "2026-08-10T10:00:00" {
+		t.Errorf("CreatedAt = %q, want 2026-08-10T10:00:00", got.CreatedAt)
+	}
+	if got.Kind != "llm_error_rate" {
+		t.Errorf("Kind = %q, want llm_error_rate", got.Kind)
+	}
+	if got.Severity != "warn" {
+		t.Errorf("Severity = %q, want warn", got.Severity)
+	}
+	if got.Title != "LLM 错误率过高" {
+		t.Errorf("Title = %q, want LLM 错误率过高", got.Title)
+	}
+	if got.DetailJson != `{"rate":0.5}` {
+		t.Errorf("DetailJson = %q, want {\"rate\":0.5}", got.DetailJson)
+	}
+	if got.Status != "open" {
+		t.Errorf("Status = %q, want open", got.Status)
+	}
+	if got.AckedAt != "" {
+		t.Errorf("AckedAt = %q, want empty", got.AckedAt)
+	}
+}
+
+// TestAdminHandler_AcknowledgeAlert_NotFound 验证 store 返回 admin.ErrNotFound
+// （含被 wrap 的情形）时映射为 CodeNotFound 而非 CodeInternal。
+func TestAdminHandler_AcknowledgeAlert_NotFound(t *testing.T) {
+	// 直接返回哨兵
+	h := NewAdminServiceHandler(&fakeAdminStore{err: admin.ErrNotFound})
+	_, err := h.AcknowledgeAlert(context.Background(), connect.NewRequest(&highschoolv1.AcknowledgeAlertRequest{Id: 9999}))
+	if err == nil {
+		t.Fatal("expected CodeNotFound error, got nil")
+	}
+	if connect.CodeOf(err) != connect.CodeNotFound {
+		t.Fatalf("direct sentinel: CodeOf(err) = %v, want CodeNotFound", connect.CodeOf(err))
+	}
+
+	// 被 fmt.Errorf wrap 的情形（与 admin_repository.AckAlert 的 RowsAffected()==0 分支一致）
+	wrapped := fmt.Errorf("admin ack alert: id %d not found: %w", 9999, admin.ErrNotFound)
+	h2 := NewAdminServiceHandler(&fakeAdminStore{err: wrapped})
+	_, err2 := h2.AcknowledgeAlert(context.Background(), connect.NewRequest(&highschoolv1.AcknowledgeAlertRequest{Id: 9999}))
+	if err2 == nil {
+		t.Fatal("expected CodeNotFound error, got nil")
+	}
+	if connect.CodeOf(err2) != connect.CodeNotFound {
+		t.Fatalf("wrapped sentinel: CodeOf(err) = %v, want CodeNotFound", connect.CodeOf(err2))
 	}
 }
