@@ -3,6 +3,7 @@ package v1
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"connectrpc.com/connect"
@@ -23,11 +24,6 @@ type AdminServiceHandler struct {
 // NewAdminServiceHandler 创建管理后台处理器
 func NewAdminServiceHandler(store admin.Store) *AdminServiceHandler {
 	return &AdminServiceHandler{store: store}
-}
-
-// listSessions 内部：转调 store（便于单测，不经 connect 层）
-func (h *AdminServiceHandler) listSessions(ctx context.Context, f admin.ListFilter) ([]admin.SessionRow, int32, error) {
-	return h.store.ListAgentSessions(ctx, f)
 }
 
 // ListAgentSessions 会话列表
@@ -58,6 +54,9 @@ func (h *AdminServiceHandler) GetSessionReplay(ctx context.Context, req *connect
 	if err != nil {
 		logger.Error(ctx, "admin get replay failed", err)
 		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	if b == nil {
+		return nil, connect.NewError(connect.CodeNotFound, fmt.Errorf("admin replay: session %d not found", req.Msg.SessionId))
 	}
 	resp := &highschoolv1.GetSessionReplayResponse{
 		Session: &highschoolv1.ReplaySession{
