@@ -607,9 +607,9 @@ func determineRecommendationType(scoreGap float64, isQuotaDistrict bool) highsch
 }
 
 // determineRecommendationTypeUnified 确定推荐类型（统一招生）
-// 基于分数差距判断：冲刺（< -5）、稳妥（-5 ~ +10）、保底（> +10）
+// 基于分数差距判断：冲刺（< -5）、稳妥（-5 ~ +15）、保底（> +15）
 func determineRecommendationTypeUnified(scoreGap float64) highschoolv1.RecommendationType {
-	if scoreGap > 10 {
+	if scoreGap > 15 {
 		return highschoolv1.RecommendationType_RECOMMENDATION_TYPE_SAFETY
 	} else if scoreGap >= -5 {
 		return highschoolv1.RecommendationType_RECOMMENDATION_TYPE_TARGET
