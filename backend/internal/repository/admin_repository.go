@@ -3,8 +3,10 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"highschool-backend/internal/infrastructure/database"
@@ -62,7 +64,7 @@ func (r *AdminRepository) ListAgentSessions(ctx context.Context, f admin.ListFil
 		out = append(out, r2)
 	}
 	if err := rows.Err(); err != nil {
-		return nil, 0, err
+		return nil, 0, fmt.Errorf("admin list sessions rows: %w", err)
 	}
 
 	var total int32
@@ -87,6 +89,9 @@ func (r *AdminRepository) GetSessionReplay(ctx context.Context, sessionID int64)
 	if err := r.db.QueryRow(ctx, sq, sessionID).Scan(
 		&b.Session.SessionID, &b.Session.DeviceID, &b.Session.Status,
 		&b.Session.Intent, &b.Session.CreatedAt); err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, fmt.Errorf("admin replay: session %d not found", sessionID)
+		}
 		return nil, fmt.Errorf("admin replay session: %w", err)
 	}
 
@@ -101,9 +106,12 @@ func (r *AdminRepository) GetSessionReplay(ctx context.Context, sessionID int64)
 	for mrows.Next() {
 		var m admin.ReplayMessage
 		if err := mrows.Scan(&m.Role, &m.Content, &m.Node, &m.CreatedAt, &m.UsageJSON); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("admin replay messages scan: %w", err)
 		}
 		b.Messages = append(b.Messages, m)
+	}
+	if err := mrows.Err(); err != nil {
+		return nil, fmt.Errorf("admin replay messages: %w", err)
 	}
 
 	// 3) trace
@@ -119,9 +127,12 @@ func (r *AdminRepository) GetSessionReplay(ctx context.Context, sessionID int64)
 		var t admin.ReplayTrace
 		if err := trows.Scan(&t.Kind, &t.Name, &t.InputJSON, &t.OutputJSON,
 			&t.PromptTokens, &t.CompletionTokens, &t.LatencyMs, &t.CreatedAt); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("admin replay traces scan: %w", err)
 		}
 		b.Traces = append(b.Traces, t)
+	}
+	if err := trows.Err(); err != nil {
+		return nil, fmt.Errorf("admin replay traces: %w", err)
 	}
 
 	// 4) checkpoint
@@ -135,9 +146,12 @@ func (r *AdminRepository) GetSessionReplay(ctx context.Context, sessionID int64)
 	for crows.Next() {
 		var c admin.ReplayCheckpoint
 		if err := crows.Scan(&c.StepSeq, &c.Node, &c.StateJSON, &c.CreatedAt); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("admin replay checkpoints scan: %w", err)
 		}
 		b.Checkpoints = append(b.Checkpoints, c)
+	}
+	if err := crows.Err(); err != nil {
+		return nil, fmt.Errorf("admin replay checkpoints: %w", err)
 	}
 	return b, nil
 }

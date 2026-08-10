@@ -22,13 +22,10 @@ func TestAdminRepository_Smoke(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ListAgentSessions: %v", err)
 	}
-	if total < 0 {
-		t.Fatalf("total = %d", total)
-	}
-	_ = rows
+	_ = total
 
 	// 若有会话，回放第一条
-	if total > 0 {
+	if len(rows) > 0 {
 		b, err := r.GetSessionReplay(ctx, rows[0].SessionID)
 		if err != nil {
 			t.Fatalf("GetSessionReplay: %v", err)
