@@ -8,6 +8,8 @@ dist/
 build/
 frontend/dist/
 backend/tmp/
+# 管理后台前端构建产物（Docker 内重 build，不入 git）
+backend/internal/api/v1/admin_dist/
 
 # Environment variables
 .env

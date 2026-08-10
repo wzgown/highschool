@@ -42,8 +42,8 @@ services:
   # Go 后端 API 服务
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: highschool_backend
     restart: unless-stopped
     ports:

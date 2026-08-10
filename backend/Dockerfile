@@ -1,51 +1,36 @@
-# Build stage
+# ---- admin 前端构建 ----
+FROM node:20-alpine AS admin-build
+WORKDIR /admin
+COPY admin/package.json admin/package-lock.json ./
+RUN npm ci
+COPY admin/ ./
+# 覆盖 vite.config 的 outDir，构建到独立目录供 go 阶段拷贝
+RUN npx vite build --outDir /admin/dist --emptyOutDir
+
+# ---- Go 构建 ----
 FROM golang:1.24-alpine AS builder
-
 WORKDIR /app
-
-# Install build dependencies
 RUN apk add --no-cache git ca-certificates tzdata
-
-# Set Go proxy for faster downloads
 ENV GOPROXY=https://goproxy.cn,direct
 ENV GOSUMDB=sum.golang.org
 ENV GOTOOLCHAIN=auto
-
-# Copy go mod files first for better caching
-COPY go.mod go.sum ./
-
-# Download dependencies
+COPY backend/go.mod backend/go.sum ./
 RUN go mod download
+COPY backend/cmd ./cmd/
+COPY backend/internal ./internal/
+COPY backend/pkg ./pkg/
+COPY backend/gen ./gen/
+# 放入前端构建产物（admin_dist_embed.go 用 -tags admindist 内嵌）
+COPY --from=admin-build /admin/dist ./internal/api/v1/admin_dist
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -tags admindist -ldflags="-w -s" -o /api ./cmd/api
 
-# Copy source code
-COPY cmd/ ./cmd/
-COPY internal/ ./internal/
-COPY pkg/ ./pkg/
-COPY gen/ ./gen/
-
-# Build the binary
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /api ./cmd/api
-
-# Runtime stage
+# ---- 运行时 ----
 FROM alpine:3.19
-
 WORKDIR /app
-
-# Install runtime dependencies
 RUN apk --no-cache add ca-certificates tzdata wget
-
-# Copy binary from builder
 COPY --from=builder /api /app/api
-
-# Set timezone
 ENV TZ=Asia/Shanghai
-
-# Expose port
 EXPOSE 3000
-
-# Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
-
-# Run
 CMD ["./api"]
