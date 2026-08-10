@@ -13,6 +13,10 @@ import (
 // 未配置 password_hash/cookie_secret 时返回 503。
 func NewAdminLoginHandler(cfg *config.Config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
 		if cfg.Admin.PasswordHash == "" || cfg.Admin.CookieSecret == "" {
 			http.Error(w, "admin disabled", http.StatusServiceUnavailable)
 			return
@@ -20,6 +24,7 @@ func NewAdminLoginHandler(cfg *config.Config) http.HandlerFunc {
 		var body struct {
 			Password string `json:"password"`
 		}
+		r.Body = http.MaxBytesReader(w, r.Body, 4096)
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 			http.Error(w, "bad request", http.StatusBadRequest)
 			return
@@ -35,7 +40,8 @@ func NewAdminLoginHandler(cfg *config.Config) http.HandlerFunc {
 		token := auth.SignSession(cfg.Admin.CookieSecret, "admin", time.Now().Add(ttl))
 		http.SetCookie(w, &http.Cookie{
 			Name: adminCookieName, Value: token, Path: "/",
-			HttpOnly: true, MaxAge: int(ttl.Seconds()), SameSite: http.SameSiteLaxMode,
+			HttpOnly: true, Secure: cfg.Server.Mode == "production",
+			MaxAge: int(ttl.Seconds()), SameSite: http.SameSiteLaxMode,
 		})
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]bool{"ok": true})

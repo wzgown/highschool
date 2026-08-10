@@ -5,7 +5,7 @@ COPY admin/package.json admin/package-lock.json ./
 RUN npm ci
 COPY admin/ ./
 # 覆盖 vite.config 的 outDir，构建到独立目录供 go 阶段拷贝
-RUN npx vite build --outDir /admin/dist --emptyOutDir
+RUN npm run type-check && npx vite build --outDir /admin/dist --emptyOutDir
 
 # ---- Go 构建 ----
 FROM golang:1.24-alpine AS builder

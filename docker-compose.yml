@@ -90,6 +90,9 @@ services:
       # 功能开关（审核期把提审版本号加入 review_versions；通过后移除并重启即可线上打开）
       - HS_FEATURE_AGENT_ENABLED=${HS_FEATURE_AGENT_ENABLED:-true}
       - HS_FEATURE_REVIEW_VERSIONS=${HS_FEATURE_REVIEW_VERSIONS:-1.8}
+      # Admin console（单管理员；生产务必经环境变量覆盖）
+      - HS_ADMIN_PASSWORD_HASH=${HS_ADMIN_PASSWORD_HASH:-}
+      - HS_ADMIN_COOKIE_SECRET=${HS_ADMIN_COOKIE_SECRET:-}
       # Tip
       - HS_TIP_ENABLED=true
       - HS_TIP_QR_URL=https://zg.mkfriend.top/static/tip-qr.jpg
