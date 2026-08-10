@@ -3,6 +3,7 @@ package graph
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"strings"
 	"testing"
 
@@ -43,6 +44,7 @@ func (f *fakeTools) Execute(ctx context.Context, name string, args json.RawMessa
 type fakeStore struct {
 	checkpoints int
 	traces      int
+	traceErr    error // 非空时 AppendTrace 返回该错误，验证留痕失败不阻断主流程
 }
 
 func (f *fakeStore) CreateSession(ctx context.Context, d string, a *int64) (int64, error) { return 1, nil }
@@ -65,7 +67,7 @@ func (f *fakeStore) ListMessages(ctx context.Context, sid int64, limit int) ([]a
 }
 func (f *fakeStore) AppendTrace(ctx context.Context, rec *agent.TraceRecord) (int64, error) {
 	f.traces++
-	return 1, nil
+	return 1, f.traceErr
 }
 func (f *fakeStore) CountTodayUserMessages(ctx context.Context, d string) (int, error) { return 0, nil }
 
@@ -176,5 +178,28 @@ func TestGraph_ReflectionReplanThenDegrade(t *testing.T) {
 	}
 	if s.ReplanCount != 3 {
 		t.Fatalf("replan count = %d, want 3", s.ReplanCount)
+	}
+}
+
+// TestGraph_TracePersistErrorDoesNotBreakTurn 锁定契约：trace 落库失败（DB 抖动）
+// 必须仅告警，不得中断用户对话、不得返回 error。
+func TestGraph_TracePersistErrorDoesNotBreakTurn(t *testing.T) {
+	llm := &fakeLLM{responses: map[string]string{
+		"意图识别器": `{"intent":"data_query","confidence":0.95,"slots":{"school_names":["上海市第二中学"],"district_name":"徐汇区","batch":"UNIFIED_1_15"}}`,
+		"任务规划器":  `{"steps":[{"tool_name":"get_admission_scores","args":{"school_name":"上海市第二中学","district_name":"徐汇区"}}]}`,
+		"折桂登高": "市二中学在徐汇区平行志愿线：2026年689.5（750分制）。",
+	}}
+	store := &fakeStore{traceErr: errors.New("db connection refused")}
+	g := NewGraph(llm, &fakeTools{}, store, Config{MaxReplan: 2, StepBudget: 12})
+
+	s, err := g.Run(context.Background(), newTestState())
+	if err != nil {
+		t.Fatalf("trace persist failure must not break the turn: %v", err)
+	}
+	if !strings.Contains(s.Reply, "689.5") {
+		t.Fatalf("reply should still be produced: %s", s.Reply)
+	}
+	if store.traces == 0 {
+		t.Fatal("AppendTrace should still be invoked (and fail loudly) despite db errors")
 	}
 }

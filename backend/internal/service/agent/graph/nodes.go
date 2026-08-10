@@ -326,7 +326,7 @@ func (g *Graph) callLLM(ctx context.Context, s *agent.State, node string, params
 			errStr = err.Error()
 			outJSON, _ = json.Marshal(map[string]any{"error": errStr})
 		}
-		_, _ = g.Store.AppendTrace(ctx, &agent.TraceRecord{
+		g.appendTrace(ctx, &agent.TraceRecord{
 			SessionID: s.SessionID, Kind: "llm", Name: node,
 			Input: inJSON, Output: outJSON,
 			PromptTokens: pt, CompletionTokens: ct, LatencyMs: int(cost.Milliseconds()),
@@ -346,7 +346,7 @@ func (g *Graph) traceTool(ctx context.Context, s *agent.State, name string, args
 	} else {
 		outJSON, _ = json.Marshal(map[string]any{"summary": tr.Summary, "for_llm": tr.ForLLM})
 	}
-	_, _ = g.Store.AppendTrace(ctx, &agent.TraceRecord{
+	g.appendTrace(ctx, &agent.TraceRecord{
 		SessionID: s.SessionID, Kind: "tool", Name: name,
 		Input: args, Output: outJSON, LatencyMs: int(cost.Milliseconds()),
 	})
@@ -358,9 +358,26 @@ func (g *Graph) traceReflection(ctx context.Context, s *agent.State, pass bool, 
 		return
 	}
 	outJSON, _ := json.Marshal(map[string]any{"pass": pass, "reason": reason})
-	_, _ = g.Store.AppendTrace(ctx, &agent.TraceRecord{
+	g.appendTrace(ctx, &agent.TraceRecord{
 		SessionID: s.SessionID, Kind: "node", Name: "reflection_check", Output: outJSON,
 	})
+}
+
+// appendTrace 落库一条 LLM/工具/节点留痕。
+// 写入失败仅告警（带 session_id/kind/name），不阻断 agent 主流程——
+// trace 是可观测旁路，其失败不应影响用户对话。
+func (g *Graph) appendTrace(ctx context.Context, rec *agent.TraceRecord) {
+	if g.Store == nil {
+		return
+	}
+	if _, err := g.Store.AppendTrace(ctx, rec); err != nil {
+		logger.Warn(ctx, "agent trace persist failed",
+			logger.Int64("session_id", rec.SessionID),
+			logger.String("kind", rec.Kind),
+			logger.String("name", rec.Name),
+			logger.ErrorField(err),
+		)
+	}
 }
 
 // extractJSON 从 LLM 输出中提取 JSON 对象（容忍 ```json 包裹）

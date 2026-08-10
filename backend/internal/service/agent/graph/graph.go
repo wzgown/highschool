@@ -168,7 +168,7 @@ func (g *Graph) traceNode(ctx context.Context, s *agent.State, node, next string
 	inJSON, _ := json.Marshal(map[string]any{
 		"intent": s.Intent, "replan_count": s.ReplanCount, "step_budget": s.StepBudget,
 	})
-	_, _ = g.Store.AppendTrace(ctx, &agent.TraceRecord{
+	g.appendTrace(ctx, &agent.TraceRecord{
 		SessionID: s.SessionID,
 		Kind:      "node",
 		Name:      node,
