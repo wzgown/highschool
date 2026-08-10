@@ -26,7 +26,16 @@ plugins:
   - remote: buf.build/connectrpc/es:v1.4.0
     out: ../frontend/src/gen
     opt: target=ts
-  
+
+  # 生成 TypeScript protobuf 消息类型 (用于管理后台 admin/)
+  - remote: buf.build/bufbuild/es:v1.7.2
+    out: ../admin/src/gen
+    opt: target=ts
+  # 生成 TypeScript Connect 代码 (用于管理后台 admin/)
+  - remote: buf.build/connectrpc/es:v1.4.0
+    out: ../admin/src/gen
+    opt: target=ts
+
   # 生成 OpenAPI 规范
   - remote: buf.build/grpc-ecosystem/openapiv2:v2.21.0
     out: ./openapi

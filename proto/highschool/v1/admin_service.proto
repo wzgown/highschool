@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package highschool.v1;
+
+option go_package = "github.com/highschool/backend/gen/highschool/v1;highschoolv1";
+
+// 管理后台服务（单管理员 cookie 鉴权；设计文档 docs/superpowers/specs/2026-08-10-admin-console-design.md）
+service AdminService {
+  // 会话列表（分页）
+  rpc ListAgentSessions(ListAgentSessionsRequest) returns (ListAgentSessionsResponse);
+  // 单会话回放（消息/trace/checkpoint 全量）
+  rpc GetSessionReplay(GetSessionReplayRequest) returns (GetSessionReplayResponse);
+}
+
+message ListAgentSessionsRequest {
+  string time_from = 1;   // 含；空不过滤；RFC3339 或 'YYYY-MM-DD'
+  string time_to = 2;
+  string device_id = 3;
+  string intent = 4;
+  int32 page = 5;         // 从 1 起
+  int32 page_size = 6;
+}
+
+message AgentSessionRow {
+  int64 session_id = 1;
+  string device_id = 2;
+  string status = 3;
+  string intent = 4;
+  string created_at = 5;
+  string last_active_at = 6;
+  int32 message_count = 7;
+  int64 total_tokens = 8;
+}
+
+message ListAgentSessionsResponse {
+  repeated AgentSessionRow items = 1;
+  int32 total = 2;
+}
+
+message GetSessionReplayRequest {
+  int64 session_id = 1;
+}
+
+message ReplaySession {
+  int64 session_id = 1;
+  string device_id = 2;
+  string status = 3;
+  string intent = 4;
+  string created_at = 5;
+}
+
+message ReplayMessage {
+  string role = 1;
+  string content = 2;
+  string node = 3;
+  string created_at = 4;
+  string usage_json = 5;
+}
+
+message ReplayTrace {
+  string kind = 1;
+  string name = 2;
+  string input_json = 3;
+  string output_json = 4;
+  int32 prompt_tokens = 5;
+  int32 completion_tokens = 6;
+  int32 latency_ms = 7;
+  string created_at = 8;
+}
+
+message ReplayCheckpoint {
+  int32 step_seq = 1;
+  string node = 2;
+  string state_json = 3;
+  string created_at = 4;
+}
+
+message GetSessionReplayResponse {
+  ReplaySession session = 1;
+  repeated ReplayMessage messages = 2;
+  repeated ReplayTrace traces = 3;
+  repeated ReplayCheckpoint checkpoints = 4;
+}

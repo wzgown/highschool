@@ -1,10 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "highschool/v1/agent_service.proto",
+    "title": "highschool/v1/admin_service.proto",
     "version": "version not set"
   },
   "tags": [
+    {
+      "name": "AdminService"
+    },
     {
       "name": "AgentService"
     },
@@ -69,6 +72,38 @@
             "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1AgentSessionRow": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "lastActiveAt": {
+          "type": "string"
+        },
+        "messageCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTokens": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -452,6 +487,35 @@
         }
       }
     },
+    "v1GetSessionReplayResponse": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/v1ReplaySession"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ReplayMessage"
+          }
+        },
+        "traces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ReplayTrace"
+          }
+        },
+        "checkpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ReplayCheckpoint"
+          }
+        }
+      }
+    },
     "v1GetVolunteerRecommendationsResponse": {
       "type": "object",
       "properties": {
@@ -535,6 +599,22 @@
         }
       },
       "title": "历史记录摘要"
+    },
+    "v1ListAgentSessionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AgentSessionRow"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "v1MiddleSchool": {
       "type": "object",
@@ -741,6 +821,97 @@
         }
       },
       "title": "推荐学校"
+    },
+    "v1ReplayCheckpoint": {
+      "type": "object",
+      "properties": {
+        "stepSeq": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "node": {
+          "type": "string"
+        },
+        "stateJson": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ReplayMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "node": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "usageJson": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ReplaySession": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ReplayTrace": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "inputJson": {
+          "type": "string"
+        },
+        "outputJson": {
+          "type": "string"
+        },
+        "promptTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "completionTokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "latencyMs": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
     },
     "v1School": {
       "type": "object",
