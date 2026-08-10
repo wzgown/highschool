@@ -105,6 +105,21 @@ services:
   # 启用方式：docker compose --profile observability up -d
   # OpenObserve UI: http://localhost:5080（traces/logs/metrics 一体，含告警）
   # backend 通过 OTLP/HTTP 直连（见上方 HS_TRACING_* 环境变量），无需 collector
+  # Prometheus（采集 backend 指标 → remote_write 到 OpenObserve）
+  prometheus:
+    image: prom/prometheus:v3.4.1
+    container_name: highschool_prometheus
+    restart: unless-stopped
+    profiles:
+      - observability
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - highschool_net
+    depends_on:
+      - backend
+      - openobserve
+
   openobserve:
     image: public.ecr.aws/zinclabs/openobserve:v0.16.3
     container_name: highschool_openobserve

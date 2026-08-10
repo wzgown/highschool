@@ -21,6 +21,7 @@ import (
 	"highschool-backend/pkg/config"
 	"highschool-backend/pkg/logger"
 	"highschool-backend/pkg/metrics"
+	"highschool-backend/pkg/otellog"
 	"highschool-backend/pkg/tracing"
 )
 
@@ -32,7 +33,20 @@ func main() {
 		os.Exit(1)
 	}
 
-	// 初始化日志
+	// 初始化日志（stdout + OTLP 导出）
+	// OTLP 日志导出必须先于 logger.Initialize，因为 logger 构建 zapcore 时需要 otellog provider
+	otellogShutdown, err := otellog.Initialize(context.Background(), otellog.Config{
+		Enabled:     cfg.Tracing.Enabled,
+		Endpoint:    cfg.Tracing.OTLPEndpoint,
+		URLPath:     "/api/default/v1/logs",
+		Headers:     cfg.Tracing.Headers,
+		ServiceName: cfg.Tracing.ServiceName,
+	})
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "[otellog] init error: %v (logs will only go to stdout)\n", err)
+	}
+	defer otellogShutdown(context.Background())
+
 	if err := logger.Initialize(cfg.Log.Level, cfg.Log.Format); err != nil {
 		fmt.Printf("init logger error: %v\n", err)
 		os.Exit(1)

@@ -23,6 +23,9 @@ COPY internal/ ./internal/
 COPY pkg/ ./pkg/
 COPY gen/ ./gen/
 
+# Resolve any new dependencies (go.sum) before build
+RUN go mod tidy
+
 # Build the binary
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /api ./cmd/api
 
