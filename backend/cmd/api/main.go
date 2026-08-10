@@ -185,6 +185,7 @@ func main() {
 	// 管理后台：AdminService（cookie 鉴权）+ 登录 + SPA 静态
 	v1.RegisterAdminService(mux, otelInterceptor, cfg.Admin.CookieSecret, repository.NewAdminRepository())
 	mux.HandleFunc("/admin/api/login", v1.NewAdminLoginHandler(cfg))
+	mux.HandleFunc("/admin/api/logout", v1.NewAdminLogoutHandler())
 	mux.Handle("/admin/", http.StripPrefix("/admin/", v1.AdminSPAHandler()))
 	mux.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/admin/", http.StatusFound)

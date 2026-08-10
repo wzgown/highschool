@@ -49,10 +49,16 @@ func VerifySession(secret, token string) (string, bool) {
 	if err != nil {
 		return "", false
 	}
-	sub, expStr, ok := strings.Cut(string(raw), ".")
-	if !ok {
+	// payload 形如 "<subject>.<expUnix>"。按 LAST "." 切分：subject 自身可能含 "."
+	// （例如 "a.b"），按首个 "." 切会让 expiry 解析拿到 "b.<expUnix>" 从而失败。
+	// expiry 是末段，因此 LastIndex 正确切分 subject 与 expiry。
+	payload := string(raw)
+	idx := strings.LastIndex(payload, ".")
+	if idx < 0 {
 		return "", false
 	}
+	sub := payload[:idx]
+	expStr := payload[idx+1:]
 	expUnix, err := strconv.ParseInt(expStr, 10, 64)
 	if err != nil {
 		return "", false

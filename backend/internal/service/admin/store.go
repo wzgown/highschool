@@ -1,7 +1,14 @@
 // Package admin 管理后台业务类型契约（回放/审计只读查询）。
 package admin
 
-import "context"
+import (
+	"context"
+	"errors"
+)
+
+// ErrNotFound 哨兵错误：查询的目标资源不存在（如 session id 未命中）。
+// Store 实现在 pgx.ErrNoRows 时返回（直接或 wrap），handler 据此映射 connect.CodeNotFound。
+var ErrNotFound = errors.New("admin: not found")
 
 // ListAgentSessions 会话列表过滤条件
 type ListFilter struct {

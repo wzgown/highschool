@@ -90,7 +90,7 @@ func (r *AdminRepository) GetSessionReplay(ctx context.Context, sessionID int64)
 		&b.Session.SessionID, &b.Session.DeviceID, &b.Session.Status,
 		&b.Session.Intent, &b.Session.CreatedAt); err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
-			return nil, fmt.Errorf("admin replay: session %d not found", sessionID)
+			return nil, fmt.Errorf("admin replay: session %d not found: %w", sessionID, admin.ErrNotFound)
 		}
 		return nil, fmt.Errorf("admin replay session: %w", err)
 	}

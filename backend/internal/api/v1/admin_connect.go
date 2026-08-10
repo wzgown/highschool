@@ -3,6 +3,7 @@ package v1
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -52,6 +53,9 @@ func (h *AdminServiceHandler) ListAgentSessions(ctx context.Context, req *connec
 func (h *AdminServiceHandler) GetSessionReplay(ctx context.Context, req *connect.Request[highschoolv1.GetSessionReplayRequest]) (*connect.Response[highschoolv1.GetSessionReplayResponse], error) {
 	b, err := h.store.GetSessionReplay(ctx, req.Msg.SessionId)
 	if err != nil {
+		if errors.Is(err, admin.ErrNotFound) {
+			return nil, connect.NewError(connect.CodeNotFound, err)
+		}
 		logger.Error(ctx, "admin get replay failed", err)
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}

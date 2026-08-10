@@ -55,3 +55,15 @@ func TestSessionTokenRejectsWrongSecret(t *testing.T) {
 		t.Fatal("wrong-secret token must not verify")
 	}
 }
+
+// TestSessionTokenDotSubjectRoundTrip 验证 subject 含 "." 时仍能正确还原。
+// 回归：旧实现按首个 "." 切分会把 "a.b.<exp>" 拆成 sub="a"、expStr="b.<exp>"，解析失败。
+func TestSessionTokenDotSubjectRoundTrip(t *testing.T) {
+	secret := "super-secret-key"
+	exp := time.Now().Add(1 * time.Hour)
+	token := SignSession(secret, "a.b", exp)
+	sub, ok := VerifySession(secret, token)
+	if !ok || sub != "a.b" {
+		t.Fatalf("dot subject round-trip failed: sub=%q ok=%v", sub, ok)
+	}
+}

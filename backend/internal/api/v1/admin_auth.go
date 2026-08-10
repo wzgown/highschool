@@ -55,8 +55,14 @@ func (a *adminAuthInterceptor) WrapStreamingClient(next connect.StreamingClientF
 	return next
 }
 
-// WrapStreamingHandler 实现 connect.Interceptor：服务端侧 streaming 直通。
-// （AdminService 当前仅暴露 unary 方法；保留直通以便未来扩展。）
+// WrapStreamingHandler 实现 connect.Interceptor：服务端侧 streaming 一律拒绝。
+// AdminService 为 unary-only；任何 streaming 调用都视为非法（防止未来新增 streaming
+// admin RPC 时 WrapUnary 鉴权被绕过——因为 streaming 路径不走 WrapUnary）。
+// 新增合法 streaming RPC 时需在此显式放开并复用 checkAdminCookie。
 func (a *adminAuthInterceptor) WrapStreamingHandler(next connect.StreamingHandlerFunc) connect.StreamingHandlerFunc {
-	return next
+	return func(ctx context.Context, conn connect.StreamingHandlerConn) error {
+		_ = next
+		_ = conn
+		return connect.NewError(connect.CodeUnauthenticated, errAdminUnauthenticated)
+	}
 }

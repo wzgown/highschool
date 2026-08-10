@@ -3,6 +3,7 @@ package v1
 import (
 	"context"
 	"errors"
+	"fmt"
 	"testing"
 
 	"connectrpc.com/connect"
@@ -126,6 +127,31 @@ func TestAdminHandler_GetSessionReplay_NilBundle(t *testing.T) {
 	}
 	if connect.CodeOf(err) != connect.CodeNotFound {
 		t.Fatalf("CodeOf(err) = %v, want CodeNotFound", connect.CodeOf(err))
+	}
+}
+
+// TestAdminHandler_GetSessionReplay_NotFound 验证 store 返回 admin.ErrNotFound
+// （含被 wrap 的情形，如 repo 的 pgx.ErrNoRows 分支）时映射为 CodeNotFound 而非 CodeInternal。
+func TestAdminHandler_GetSessionReplay_NotFound(t *testing.T) {
+	// 直接返回哨兵
+	h := NewAdminServiceHandler(&fakeAdminStore{err: admin.ErrNotFound})
+	_, err := h.GetSessionReplay(context.Background(), connect.NewRequest(&highschoolv1.GetSessionReplayRequest{SessionId: 1234}))
+	if err == nil {
+		t.Fatal("expected CodeNotFound error, got nil")
+	}
+	if connect.CodeOf(err) != connect.CodeNotFound {
+		t.Fatalf("direct sentinel: CodeOf(err) = %v, want CodeNotFound", connect.CodeOf(err))
+	}
+
+	// 被 fmt.Errorf wrap 的情形（与 admin_repository 的 ErrNoRows 分支一致）
+	wrapped := fmt.Errorf("admin replay: session %d not found: %w", 1234, admin.ErrNotFound)
+	h2 := NewAdminServiceHandler(&fakeAdminStore{err: wrapped})
+	_, err2 := h2.GetSessionReplay(context.Background(), connect.NewRequest(&highschoolv1.GetSessionReplayRequest{SessionId: 1234}))
+	if err2 == nil {
+		t.Fatal("expected CodeNotFound error, got nil")
+	}
+	if connect.CodeOf(err2) != connect.CodeNotFound {
+		t.Fatalf("wrapped sentinel: CodeOf(err) = %v, want CodeNotFound", connect.CodeOf(err2))
 	}
 }
 
