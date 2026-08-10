@@ -1345,6 +1345,234 @@ func (*AcknowledgeAlertResponse) Descriptor() ([]byte, []int) {
 	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{18}
 }
 
+type AppConfigFlag struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AppConfigFlag) Reset() {
+	*x = AppConfigFlag{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppConfigFlag) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppConfigFlag) ProtoMessage() {}
+
+func (x *AppConfigFlag) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppConfigFlag.ProtoReflect.Descriptor instead.
+func (*AppConfigFlag) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *AppConfigFlag) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *AppConfigFlag) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *AppConfigFlag) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type GetAppConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAppConfigRequest) Reset() {
+	*x = GetAppConfigRequest{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAppConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAppConfigRequest) ProtoMessage() {}
+
+func (x *GetAppConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAppConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetAppConfigRequest) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{20}
+}
+
+type GetAppConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*AppConfigFlag       `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAppConfigResponse) Reset() {
+	*x = GetAppConfigResponse{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAppConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAppConfigResponse) ProtoMessage() {}
+
+func (x *GetAppConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAppConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetAppConfigResponse) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetAppConfigResponse) GetItems() []*AppConfigFlag {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type SetAppConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAppConfigRequest) Reset() {
+	*x = SetAppConfigRequest{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAppConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAppConfigRequest) ProtoMessage() {}
+
+func (x *SetAppConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAppConfigRequest.ProtoReflect.Descriptor instead.
+func (*SetAppConfigRequest) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *SetAppConfigRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *SetAppConfigRequest) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type SetAppConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAppConfigResponse) Reset() {
+	*x = SetAppConfigResponse{}
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAppConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAppConfigResponse) ProtoMessage() {}
+
+func (x *SetAppConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_highschool_v1_admin_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAppConfigResponse.ProtoReflect.Descriptor instead.
+func (*SetAppConfigResponse) Descriptor() ([]byte, []int) {
+	return file_highschool_v1_admin_service_proto_rawDescGZIP(), []int{23}
+}
+
 var File_highschool_v1_admin_service_proto protoreflect.FileDescriptor
 
 const file_highschool_v1_admin_service_proto_rawDesc = "" +
@@ -1466,14 +1694,27 @@ const file_highschool_v1_admin_service_proto_rawDesc = "" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\")\n" +
 	"\x17AcknowledgeAlertRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1a\n" +
-	"\x18AcknowledgeAlertResponse2\xf8\x03\n" +
+	"\x18AcknowledgeAlertResponse\"Y\n" +
+	"\rAppConfigFlag\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"\x15\n" +
+	"\x13GetAppConfigRequest\"J\n" +
+	"\x14GetAppConfigResponse\x122\n" +
+	"\x05items\x18\x01 \x03(\v2\x1c.highschool.v1.AppConfigFlagR\x05items\"=\n" +
+	"\x13SetAppConfigRequest\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\x16\n" +
+	"\x14SetAppConfigResponse2\xaa\x05\n" +
 	"\fAdminService\x12f\n" +
 	"\x11ListAgentSessions\x12'.highschool.v1.ListAgentSessionsRequest\x1a(.highschool.v1.ListAgentSessionsResponse\x12c\n" +
 	"\x10GetSessionReplay\x12&.highschool.v1.GetSessionReplayRequest\x1a'.highschool.v1.GetSessionReplayResponse\x12c\n" +
 	"\x10GetCostDashboard\x12&.highschool.v1.GetCostDashboardRequest\x1a'.highschool.v1.GetCostDashboardResponse\x12Q\n" +
 	"\n" +
 	"ListAlerts\x12 .highschool.v1.ListAlertsRequest\x1a!.highschool.v1.ListAlertsResponse\x12c\n" +
-	"\x10AcknowledgeAlert\x12&.highschool.v1.AcknowledgeAlertRequest\x1a'.highschool.v1.AcknowledgeAlertResponseB\xae\x01\n" +
+	"\x10AcknowledgeAlert\x12&.highschool.v1.AcknowledgeAlertRequest\x1a'.highschool.v1.AcknowledgeAlertResponse\x12W\n" +
+	"\fGetAppConfig\x12\".highschool.v1.GetAppConfigRequest\x1a#.highschool.v1.GetAppConfigResponse\x12W\n" +
+	"\fSetAppConfig\x12\".highschool.v1.SetAppConfigRequest\x1a#.highschool.v1.SetAppConfigResponseB\xae\x01\n" +
 	"\x11com.highschool.v1B\x11AdminServiceProtoP\x01Z1highschool-backend/gen/highschool/v1;highschoolv1\xa2\x02\x03HXX\xaa\x02\rHighschool.V1\xca\x02\rHighschool\\V1\xe2\x02\x19Highschool\\V1\\GPBMetadata\xea\x02\x0eHighschool::V1b\x06proto3"
 
 var (
@@ -1488,7 +1729,7 @@ func file_highschool_v1_admin_service_proto_rawDescGZIP() []byte {
 	return file_highschool_v1_admin_service_proto_rawDescData
 }
 
-var file_highschool_v1_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_highschool_v1_admin_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_highschool_v1_admin_service_proto_goTypes = []any{
 	(*ListAgentSessionsRequest)(nil),  // 0: highschool.v1.ListAgentSessionsRequest
 	(*AgentSessionRow)(nil),           // 1: highschool.v1.AgentSessionRow
@@ -1509,6 +1750,11 @@ var file_highschool_v1_admin_service_proto_goTypes = []any{
 	(*ListAlertsResponse)(nil),        // 16: highschool.v1.ListAlertsResponse
 	(*AcknowledgeAlertRequest)(nil),   // 17: highschool.v1.AcknowledgeAlertRequest
 	(*AcknowledgeAlertResponse)(nil),  // 18: highschool.v1.AcknowledgeAlertResponse
+	(*AppConfigFlag)(nil),             // 19: highschool.v1.AppConfigFlag
+	(*GetAppConfigRequest)(nil),       // 20: highschool.v1.GetAppConfigRequest
+	(*GetAppConfigResponse)(nil),      // 21: highschool.v1.GetAppConfigResponse
+	(*SetAppConfigRequest)(nil),       // 22: highschool.v1.SetAppConfigRequest
+	(*SetAppConfigResponse)(nil),      // 23: highschool.v1.SetAppConfigResponse
 }
 var file_highschool_v1_admin_service_proto_depIdxs = []int32{
 	1,  // 0: highschool.v1.ListAgentSessionsResponse.items:type_name -> highschool.v1.AgentSessionRow
@@ -1520,21 +1766,26 @@ var file_highschool_v1_admin_service_proto_depIdxs = []int32{
 	11, // 6: highschool.v1.GetCostDashboardResponse.tool_daily:type_name -> highschool.v1.CostToolDaily
 	12, // 7: highschool.v1.GetCostDashboardResponse.session_daily:type_name -> highschool.v1.CostSessionDaily
 	14, // 8: highschool.v1.ListAlertsResponse.items:type_name -> highschool.v1.AdminAlert
-	0,  // 9: highschool.v1.AdminService.ListAgentSessions:input_type -> highschool.v1.ListAgentSessionsRequest
-	3,  // 10: highschool.v1.AdminService.GetSessionReplay:input_type -> highschool.v1.GetSessionReplayRequest
-	9,  // 11: highschool.v1.AdminService.GetCostDashboard:input_type -> highschool.v1.GetCostDashboardRequest
-	15, // 12: highschool.v1.AdminService.ListAlerts:input_type -> highschool.v1.ListAlertsRequest
-	17, // 13: highschool.v1.AdminService.AcknowledgeAlert:input_type -> highschool.v1.AcknowledgeAlertRequest
-	2,  // 14: highschool.v1.AdminService.ListAgentSessions:output_type -> highschool.v1.ListAgentSessionsResponse
-	8,  // 15: highschool.v1.AdminService.GetSessionReplay:output_type -> highschool.v1.GetSessionReplayResponse
-	13, // 16: highschool.v1.AdminService.GetCostDashboard:output_type -> highschool.v1.GetCostDashboardResponse
-	16, // 17: highschool.v1.AdminService.ListAlerts:output_type -> highschool.v1.ListAlertsResponse
-	18, // 18: highschool.v1.AdminService.AcknowledgeAlert:output_type -> highschool.v1.AcknowledgeAlertResponse
-	14, // [14:19] is the sub-list for method output_type
-	9,  // [9:14] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	19, // 9: highschool.v1.GetAppConfigResponse.items:type_name -> highschool.v1.AppConfigFlag
+	0,  // 10: highschool.v1.AdminService.ListAgentSessions:input_type -> highschool.v1.ListAgentSessionsRequest
+	3,  // 11: highschool.v1.AdminService.GetSessionReplay:input_type -> highschool.v1.GetSessionReplayRequest
+	9,  // 12: highschool.v1.AdminService.GetCostDashboard:input_type -> highschool.v1.GetCostDashboardRequest
+	15, // 13: highschool.v1.AdminService.ListAlerts:input_type -> highschool.v1.ListAlertsRequest
+	17, // 14: highschool.v1.AdminService.AcknowledgeAlert:input_type -> highschool.v1.AcknowledgeAlertRequest
+	20, // 15: highschool.v1.AdminService.GetAppConfig:input_type -> highschool.v1.GetAppConfigRequest
+	22, // 16: highschool.v1.AdminService.SetAppConfig:input_type -> highschool.v1.SetAppConfigRequest
+	2,  // 17: highschool.v1.AdminService.ListAgentSessions:output_type -> highschool.v1.ListAgentSessionsResponse
+	8,  // 18: highschool.v1.AdminService.GetSessionReplay:output_type -> highschool.v1.GetSessionReplayResponse
+	13, // 19: highschool.v1.AdminService.GetCostDashboard:output_type -> highschool.v1.GetCostDashboardResponse
+	16, // 20: highschool.v1.AdminService.ListAlerts:output_type -> highschool.v1.ListAlertsResponse
+	18, // 21: highschool.v1.AdminService.AcknowledgeAlert:output_type -> highschool.v1.AcknowledgeAlertResponse
+	21, // 22: highschool.v1.AdminService.GetAppConfig:output_type -> highschool.v1.GetAppConfigResponse
+	23, // 23: highschool.v1.AdminService.SetAppConfig:output_type -> highschool.v1.SetAppConfigResponse
+	17, // [17:24] is the sub-list for method output_type
+	10, // [10:17] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_highschool_v1_admin_service_proto_init() }
@@ -1548,7 +1799,7 @@ func file_highschool_v1_admin_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_highschool_v1_admin_service_proto_rawDesc), len(file_highschool_v1_admin_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -134,6 +134,13 @@ type AlertFilter struct {
 	PageSize int32
 }
 
+// AppConfigFlag app_config 表行：管理后台可读写的远程开关
+type AppConfigFlag struct {
+	Key         string
+	Value       string
+	Description string
+}
+
 // Store 管理后台只读仓储（handler 依赖此接口，便于测试用 fake）
 type Store interface {
 	ListAgentSessions(ctx context.Context, f ListFilter) ([]SessionRow, int32, error)
@@ -148,4 +155,8 @@ type Store interface {
 	LLMStatsLastHour(ctx context.Context) (calls int32, errors int32, err error)
 	TraceGapLastHour(ctx context.Context) (userMsgs int32, traces int32, err error)
 	TodayTokenTotal(ctx context.Context) (int64, error)
+
+	// 应用开关（P4）：读写 app_config 表。
+	ListAppConfig(ctx context.Context) ([]AppConfigFlag, error)
+	SetAppConfig(ctx context.Context, key, value string) error
 }

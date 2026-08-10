@@ -166,6 +166,20 @@
       },
       "title": "分析结果"
     },
+    "v1AppConfigFlag": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
     "v1CandidateInfo": {
       "type": "object",
       "properties": {
@@ -452,6 +466,18 @@
         }
       },
       "title": "获取分析结果响应"
+    },
+    "v1GetAppConfigResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AppConfigFlag"
+          }
+        }
+      }
     },
     "v1GetCostDashboardResponse": {
       "type": "object",
@@ -1277,6 +1303,9 @@
           "type": "string"
         }
       }
+    },
+    "v1SetAppConfigResponse": {
+      "type": "object"
     },
     "v1SimulationResults": {
       "type": "object",

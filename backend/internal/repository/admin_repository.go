@@ -345,3 +345,36 @@ func (r *AdminRepository) TodayTokenTotal(ctx context.Context) (int64, error) {
 	}
 	return total, nil
 }
+
+// ListAppConfig 列出 app_config 全部开关（按 key 升序）。description 允许 NULL，以 COALESCE 兜底。
+func (r *AdminRepository) ListAppConfig(ctx context.Context) ([]admin.AppConfigFlag, error) {
+	rows, err := r.db.Query(ctx,
+		`SELECT key, value, COALESCE(description,'') FROM app_config ORDER BY key`)
+	if err != nil {
+		return nil, fmt.Errorf("admin list app_config: %w", err)
+	}
+	defer rows.Close()
+
+	out := make([]admin.AppConfigFlag, 0)
+	for rows.Next() {
+		var f admin.AppConfigFlag
+		if err := rows.Scan(&f.Key, &f.Value, &f.Description); err != nil {
+			return nil, fmt.Errorf("admin list app_config scan: %w", err)
+		}
+		out = append(out, f)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("admin list app_config rows: %w", err)
+	}
+	return out, nil
+}
+
+// SetAppConfig 新增或更新单个开关（upsert）。已存在行仅更新 value，保留原 description。
+func (r *AdminRepository) SetAppConfig(ctx context.Context, key, value string) error {
+	const q = `INSERT INTO app_config (key, value) VALUES ($1, $2)
+	           ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value`
+	if _, err := r.db.Exec(ctx, q, key, value); err != nil {
+		return fmt.Errorf("admin set app_config: %w", err)
+	}
+	return nil
+}

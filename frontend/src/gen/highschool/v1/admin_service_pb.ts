@@ -1089,3 +1089,194 @@ export class AcknowledgeAlertResponse extends Message<AcknowledgeAlertResponse> 
   }
 }
 
+/**
+ * @generated from message highschool.v1.AppConfigFlag
+ */
+export class AppConfigFlag extends Message<AppConfigFlag> {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key = "";
+
+  /**
+   * @generated from field: string value = 2;
+   */
+  value = "";
+
+  /**
+   * @generated from field: string description = 3;
+   */
+  description = "";
+
+  constructor(data?: PartialMessage<AppConfigFlag>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.AppConfigFlag";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppConfigFlag {
+    return new AppConfigFlag().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppConfigFlag {
+    return new AppConfigFlag().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppConfigFlag {
+    return new AppConfigFlag().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AppConfigFlag | PlainMessage<AppConfigFlag> | undefined, b: AppConfigFlag | PlainMessage<AppConfigFlag> | undefined): boolean {
+    return proto3.util.equals(AppConfigFlag, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.GetAppConfigRequest
+ */
+export class GetAppConfigRequest extends Message<GetAppConfigRequest> {
+  constructor(data?: PartialMessage<GetAppConfigRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.GetAppConfigRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppConfigRequest {
+    return new GetAppConfigRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppConfigRequest {
+    return new GetAppConfigRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppConfigRequest {
+    return new GetAppConfigRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetAppConfigRequest | PlainMessage<GetAppConfigRequest> | undefined, b: GetAppConfigRequest | PlainMessage<GetAppConfigRequest> | undefined): boolean {
+    return proto3.util.equals(GetAppConfigRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.GetAppConfigResponse
+ */
+export class GetAppConfigResponse extends Message<GetAppConfigResponse> {
+  /**
+   * @generated from field: repeated highschool.v1.AppConfigFlag items = 1;
+   */
+  items: AppConfigFlag[] = [];
+
+  constructor(data?: PartialMessage<GetAppConfigResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.GetAppConfigResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "message", T: AppConfigFlag, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppConfigResponse {
+    return new GetAppConfigResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppConfigResponse {
+    return new GetAppConfigResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppConfigResponse {
+    return new GetAppConfigResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetAppConfigResponse | PlainMessage<GetAppConfigResponse> | undefined, b: GetAppConfigResponse | PlainMessage<GetAppConfigResponse> | undefined): boolean {
+    return proto3.util.equals(GetAppConfigResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.SetAppConfigRequest
+ */
+export class SetAppConfigRequest extends Message<SetAppConfigRequest> {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key = "";
+
+  /**
+   * @generated from field: string value = 2;
+   */
+  value = "";
+
+  constructor(data?: PartialMessage<SetAppConfigRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.SetAppConfigRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetAppConfigRequest {
+    return new SetAppConfigRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetAppConfigRequest {
+    return new SetAppConfigRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetAppConfigRequest {
+    return new SetAppConfigRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetAppConfigRequest | PlainMessage<SetAppConfigRequest> | undefined, b: SetAppConfigRequest | PlainMessage<SetAppConfigRequest> | undefined): boolean {
+    return proto3.util.equals(SetAppConfigRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message highschool.v1.SetAppConfigResponse
+ */
+export class SetAppConfigResponse extends Message<SetAppConfigResponse> {
+  constructor(data?: PartialMessage<SetAppConfigResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "highschool.v1.SetAppConfigResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetAppConfigResponse {
+    return new SetAppConfigResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetAppConfigResponse {
+    return new SetAppConfigResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetAppConfigResponse {
+    return new SetAppConfigResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetAppConfigResponse | PlainMessage<SetAppConfigResponse> | undefined, b: SetAppConfigResponse | PlainMessage<SetAppConfigResponse> | undefined): boolean {
+    return proto3.util.equals(SetAppConfigResponse, a, b);
+  }
+}
+

@@ -18,7 +18,12 @@ type fakeAdminStore struct {
 	replay   *admin.ReplayBundle
 	cost     *admin.CostDashboard
 	alerts   []admin.Alert
+	flags    []admin.AppConfigFlag
 	err      error
+
+	// SetAppConfig 调用记录（断言写入参数用）
+	setKey   string
+	setValue string
 }
 
 func (f *fakeAdminStore) ListAgentSessions(ctx context.Context, fl admin.ListFilter) ([]admin.SessionRow, int32, error) {
@@ -81,6 +86,27 @@ func (f *fakeAdminStore) TodayTokenTotal(ctx context.Context) (int64, error) {
 	}
 	return 0, nil
 }
+func (f *fakeAdminStore) ListAppConfig(ctx context.Context) ([]admin.AppConfigFlag, error) {
+	if f.err != nil {
+		return nil, f.err
+	}
+	return f.flags, nil
+}
+func (f *fakeAdminStore) SetAppConfig(ctx context.Context, key, value string) error {
+	if f.err != nil {
+		return f.err
+	}
+	f.setKey = key
+	f.setValue = value
+	return nil
+}
+
+// fakeCacheInvalidator 记录 Invalidate() 调用次数，用于断言 SetAppConfig 触发热刷
+type fakeCacheInvalidator struct {
+	calls int
+}
+
+func (c *fakeCacheInvalidator) Invalidate() { c.calls++ }
 
 // TestAdminHandler_ListAgentSessions 通过真实 Connect 方法验证 SessionRow→proto 字段映射（CamelCase 回归守卫）。
 func TestAdminHandler_ListAgentSessions(t *testing.T) {
@@ -89,7 +115,7 @@ func TestAdminHandler_ListAgentSessions(t *testing.T) {
 			SessionID: 7, DeviceID: "dev", Status: "running", Intent: "data_query",
 			CreatedAt: "2026-08-10", LastActiveAt: "2026-08-10", MessageCount: 3, TotalTokens: 1500,
 		}},
-	})
+	}, nil)
 	resp, err := h.ListAgentSessions(context.Background(), connect.NewRequest(&highschoolv1.ListAgentSessionsRequest{Page: 1, PageSize: 10}))
 	if err != nil {
 		t.Fatalf("ListAgentSessions: %v", err)
@@ -130,7 +156,7 @@ func TestAdminHandler_GetSessionReplay(t *testing.T) {
 			Traces:      []admin.ReplayTrace{{Kind: "llm", Name: "plan", InputJSON: `{"in":1}`, OutputJSON: `{"out":1}`, PromptTokens: 10, CompletionTokens: 20, LatencyMs: 350, CreatedAt: "2026-08-10"}},
 			Checkpoints: []admin.ReplayCheckpoint{{StepSeq: 1, Node: "entry", StateJSON: `{"s":1}`, CreatedAt: "2026-08-10"}},
 		},
-	})
+	}, nil)
 	resp, err := h.GetSessionReplay(context.Background(), connect.NewRequest(&highschoolv1.GetSessionReplayRequest{SessionId: 42}))
 	if err != nil {
 		t.Fatalf("GetSessionReplay: %v", err)
@@ -170,7 +196,7 @@ func TestAdminHandler_GetSessionReplay(t *testing.T) {
 
 // TestAdminHandler_GetSessionReplay_NilBundle 验证 store 返回 nil bundle 时返回 CodeNotFound 而非 panic。
 func TestAdminHandler_GetSessionReplay_NilBundle(t *testing.T) {
-	h := NewAdminServiceHandler(&fakeAdminStore{replay: nil})
+	h := NewAdminServiceHandler(&fakeAdminStore{replay: nil}, nil)
 	_, err := h.GetSessionReplay(context.Background(), connect.NewRequest(&highschoolv1.GetSessionReplayRequest{SessionId: 99}))
 	if err == nil {
 		t.Fatal("expected CodeNotFound error, got nil")
@@ -184,7 +210,7 @@ func TestAdminHandler_GetSessionReplay_NilBundle(t *testing.T) {
 // （含被 wrap 的情形，如 repo 的 pgx.ErrNoRows 分支）时映射为 CodeNotFound 而非 CodeInternal。
 func TestAdminHandler_GetSessionReplay_NotFound(t *testing.T) {
 	// 直接返回哨兵
-	h := NewAdminServiceHandler(&fakeAdminStore{err: admin.ErrNotFound})
+	h := NewAdminServiceHandler(&fakeAdminStore{err: admin.ErrNotFound}, nil)
 	_, err := h.GetSessionReplay(context.Background(), connect.NewRequest(&highschoolv1.GetSessionReplayRequest{SessionId: 1234}))
 	if err == nil {
 		t.Fatal("expected CodeNotFound error, got nil")
@@ -195,7 +221,7 @@ func TestAdminHandler_GetSessionReplay_NotFound(t *testing.T) {
 
 	// 被 fmt.Errorf wrap 的情形（与 admin_repository 的 ErrNoRows 分支一致）
 	wrapped := fmt.Errorf("admin replay: session %d not found: %w", 1234, admin.ErrNotFound)
-	h2 := NewAdminServiceHandler(&fakeAdminStore{err: wrapped})
+	h2 := NewAdminServiceHandler(&fakeAdminStore{err: wrapped}, nil)
 	_, err2 := h2.GetSessionReplay(context.Background(), connect.NewRequest(&highschoolv1.GetSessionReplayRequest{SessionId: 1234}))
 	if err2 == nil {
 		t.Fatal("expected CodeNotFound error, got nil")
@@ -207,7 +233,7 @@ func TestAdminHandler_GetSessionReplay_NotFound(t *testing.T) {
 
 // TestAdminHandler_StoreError 验证 store 错误经真实 Connect 方法映射为 CodeInternal。
 func TestAdminHandler_StoreError(t *testing.T) {
-	h := NewAdminServiceHandler(&fakeAdminStore{err: errors.New("db down")})
+	h := NewAdminServiceHandler(&fakeAdminStore{err: errors.New("db down")}, nil)
 	_, err := h.ListAgentSessions(context.Background(), connect.NewRequest(&highschoolv1.ListAgentSessionsRequest{Page: 1}))
 	if err == nil {
 		t.Fatal("store error must propagate")
@@ -234,7 +260,7 @@ func TestAdminHandler_GetCostDashboard(t *testing.T) {
 				Day: "2026-08-10", ActiveSessions: 3, Messages: 20, UserMessages: 8, AssistantMessages: 12,
 			}},
 		},
-	})
+	}, nil)
 	resp, err := h.GetCostDashboard(context.Background(), connect.NewRequest(&highschoolv1.GetCostDashboardRequest{From: "2026-08-10", To: "2026-08-10"}))
 	if err != nil {
 		t.Fatalf("GetCostDashboard: %v", err)
@@ -306,7 +332,7 @@ func TestAdminHandler_GetCostDashboard(t *testing.T) {
 
 // TestAdminHandler_GetCostDashboard_Empty 验证 store 返回空 Dashboard 时三个切片均为非 nil 空切片。
 func TestAdminHandler_GetCostDashboard_Empty(t *testing.T) {
-	h := NewAdminServiceHandler(&fakeAdminStore{cost: &admin.CostDashboard{}})
+	h := NewAdminServiceHandler(&fakeAdminStore{cost: &admin.CostDashboard{}}, nil)
 	resp, err := h.GetCostDashboard(context.Background(), connect.NewRequest(&highschoolv1.GetCostDashboardRequest{}))
 	if err != nil {
 		t.Fatalf("GetCostDashboard: %v", err)
@@ -324,7 +350,7 @@ func TestAdminHandler_GetCostDashboard_Empty(t *testing.T) {
 
 // TestAdminHandler_GetCostDashboard_Error 验证 store 错误经真实 Connect 方法映射为 CodeInternal。
 func TestAdminHandler_GetCostDashboard_Error(t *testing.T) {
-	h := NewAdminServiceHandler(&fakeAdminStore{err: errors.New("db down")})
+	h := NewAdminServiceHandler(&fakeAdminStore{err: errors.New("db down")}, nil)
 	_, err := h.GetCostDashboard(context.Background(), connect.NewRequest(&highschoolv1.GetCostDashboardRequest{}))
 	if err == nil {
 		t.Fatal("store error must propagate")
@@ -343,7 +369,7 @@ func TestAdminHandler_ListAlerts(t *testing.T) {
 			Severity: "warn", Title: "LLM 错误率过高", DetailJSON: `{"rate":0.5}`,
 			Status: "open", AckedAt: "",
 		}},
-	})
+	}, nil)
 	resp, err := h.ListAlerts(context.Background(), connect.NewRequest(&highschoolv1.ListAlertsRequest{
 		Status: "open", Page: 1, PageSize: 10,
 	}))
@@ -387,7 +413,7 @@ func TestAdminHandler_ListAlerts(t *testing.T) {
 // （含被 wrap 的情形）时映射为 CodeNotFound 而非 CodeInternal。
 func TestAdminHandler_AcknowledgeAlert_NotFound(t *testing.T) {
 	// 直接返回哨兵
-	h := NewAdminServiceHandler(&fakeAdminStore{err: admin.ErrNotFound})
+	h := NewAdminServiceHandler(&fakeAdminStore{err: admin.ErrNotFound}, nil)
 	_, err := h.AcknowledgeAlert(context.Background(), connect.NewRequest(&highschoolv1.AcknowledgeAlertRequest{Id: 9999}))
 	if err == nil {
 		t.Fatal("expected CodeNotFound error, got nil")
@@ -398,12 +424,132 @@ func TestAdminHandler_AcknowledgeAlert_NotFound(t *testing.T) {
 
 	// 被 fmt.Errorf wrap 的情形（与 admin_repository.AckAlert 的 RowsAffected()==0 分支一致）
 	wrapped := fmt.Errorf("admin ack alert: id %d not found: %w", 9999, admin.ErrNotFound)
-	h2 := NewAdminServiceHandler(&fakeAdminStore{err: wrapped})
+	h2 := NewAdminServiceHandler(&fakeAdminStore{err: wrapped}, nil)
 	_, err2 := h2.AcknowledgeAlert(context.Background(), connect.NewRequest(&highschoolv1.AcknowledgeAlertRequest{Id: 9999}))
 	if err2 == nil {
 		t.Fatal("expected CodeNotFound error, got nil")
 	}
 	if connect.CodeOf(err2) != connect.CodeNotFound {
 		t.Fatalf("wrapped sentinel: CodeOf(err) = %v, want CodeNotFound", connect.CodeOf(err2))
+	}
+}
+
+// TestAdminHandler_GetAppConfig 通过真实 Connect 方法验证 AppConfigFlag→proto 字段映射
+// （key/value/description 三字段 + 空结果返回非 nil 空切片）。
+func TestAdminHandler_GetAppConfig(t *testing.T) {
+	store := &fakeAdminStore{flags: []admin.AppConfigFlag{
+		{Key: "feature.agent_enabled", Value: "true", Description: "AI 顾问总开关"},
+		{Key: "tip.qr_url", Value: "https://example.com/qr.png", Description: ""},
+	}}
+	h := NewAdminServiceHandler(store, nil)
+	resp, err := h.GetAppConfig(context.Background(), connect.NewRequest(&highschoolv1.GetAppConfigRequest{}))
+	if err != nil {
+		t.Fatalf("GetAppConfig: %v", err)
+	}
+	if len(resp.Msg.Items) != 2 {
+		t.Fatalf("Items len = %d, want 2", len(resp.Msg.Items))
+	}
+	got := resp.Msg.Items[0]
+	if got.Key != "feature.agent_enabled" {
+		t.Errorf("Items[0].Key = %q, want feature.agent_enabled", got.Key)
+	}
+	if got.Value != "true" {
+		t.Errorf("Items[0].Value = %q, want true", got.Value)
+	}
+	if got.Description != "AI 顾问总开关" {
+		t.Errorf("Items[0].Description = %q, want AI 顾问总开关", got.Description)
+	}
+	if resp.Msg.Items[1].Description != "" {
+		t.Errorf("Items[1].Description = %q, want empty", resp.Msg.Items[1].Description)
+	}
+}
+
+// TestAdminHandler_GetAppConfig_Empty 验证无开关时返回非 nil 空切片。
+func TestAdminHandler_GetAppConfig_Empty(t *testing.T) {
+	h := NewAdminServiceHandler(&fakeAdminStore{}, nil)
+	resp, err := h.GetAppConfig(context.Background(), connect.NewRequest(&highschoolv1.GetAppConfigRequest{}))
+	if err != nil {
+		t.Fatalf("GetAppConfig: %v", err)
+	}
+	if resp.Msg.Items == nil {
+		t.Error("Items is nil, want non-nil empty slice")
+	}
+	if len(resp.Msg.Items) != 0 {
+		t.Errorf("Items len = %d, want 0", len(resp.Msg.Items))
+	}
+}
+
+// TestAdminHandler_SetAppConfig 验证：空 key→CodeInvalidArgument；正常写入时 store.SetAppConfig(key,value)
+// 被调用且 cache.Invalidate() 被触发（一次写入恰好一次热刷）。
+func TestAdminHandler_SetAppConfig(t *testing.T) {
+	store := &fakeAdminStore{}
+	cache := &fakeCacheInvalidator{}
+	h := NewAdminServiceHandler(store, cache)
+
+	// 空 key → CodeInvalidArgument，且不应触碰 store/cache
+	_, err := h.SetAppConfig(context.Background(), connect.NewRequest(&highschoolv1.SetAppConfigRequest{
+		Key: "", Value: "true",
+	}))
+	if err == nil {
+		t.Fatal("empty key: expected CodeInvalidArgument error, got nil")
+	}
+	if connect.CodeOf(err) != connect.CodeInvalidArgument {
+		t.Fatalf("empty key: CodeOf(err) = %v, want CodeInvalidArgument", connect.CodeOf(err))
+	}
+	if store.setKey != "" || cache.calls != 0 {
+		t.Errorf("empty key must not touch store/cache: setKey=%q cache.calls=%d", store.setKey, cache.calls)
+	}
+
+	// 正常写入
+	resp, err := h.SetAppConfig(context.Background(), connect.NewRequest(&highschoolv1.SetAppConfigRequest{
+		Key: "feature.agent_enabled", Value: "false",
+	}))
+	if err != nil {
+		t.Fatalf("SetAppConfig: %v", err)
+	}
+	if resp == nil {
+		t.Fatal("SetAppConfig: nil response")
+	}
+	if store.setKey != "feature.agent_enabled" {
+		t.Errorf("store.SetAppConfig key = %q, want feature.agent_enabled", store.setKey)
+	}
+	if store.setValue != "false" {
+		t.Errorf("store.SetAppConfig value = %q, want false", store.setValue)
+	}
+	if cache.calls != 1 {
+		t.Errorf("cache.Invalidate calls = %d, want 1", cache.calls)
+	}
+}
+
+// TestAdminHandler_SetAppConfig_NilCache 验证 cache 为 nil 时不 panic（仅 store 写入生效）。
+func TestAdminHandler_SetAppConfig_NilCache(t *testing.T) {
+	store := &fakeAdminStore{}
+	h := NewAdminServiceHandler(store, nil)
+	_, err := h.SetAppConfig(context.Background(), connect.NewRequest(&highschoolv1.SetAppConfigRequest{
+		Key: "tip.enabled", Value: "true",
+	}))
+	if err != nil {
+		t.Fatalf("SetAppConfig nil cache: %v", err)
+	}
+	if store.setKey != "tip.enabled" {
+		t.Errorf("store.SetAppConfig key = %q, want tip.enabled", store.setKey)
+	}
+}
+
+// TestAdminHandler_SetAppConfig_StoreError 验证 store 错误映射 CodeInternal 且不触发 cache 热刷。
+func TestAdminHandler_SetAppConfig_StoreError(t *testing.T) {
+	cache := &fakeCacheInvalidator{}
+	h := NewAdminServiceHandler(&fakeAdminStore{err: errors.New("db down")}, cache)
+	_, err := h.SetAppConfig(context.Background(), connect.NewRequest(&highschoolv1.SetAppConfigRequest{
+		Key: "feature.agent_enabled", Value: "true",
+	}))
+	if err == nil {
+		t.Fatal("store error must propagate")
+	}
+	if connect.CodeOf(err) != connect.CodeInternal {
+		t.Fatalf("CodeOf(err) = %v, want CodeInternal", connect.CodeOf(err))
+	}
+	if cache.calls != 0 {
+		t.Errorf("cache.Invalidate must not fire on store error: calls=%d", cache.calls)
 	}
 }

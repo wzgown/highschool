@@ -16,6 +16,10 @@ service AdminService {
   rpc ListAlerts(ListAlertsRequest) returns (ListAlertsResponse);
   // 确认告警（status→'acked'）
   rpc AcknowledgeAlert(AcknowledgeAlertRequest) returns (AcknowledgeAlertResponse);
+  // 列出全部应用开关（app_config 表）
+  rpc GetAppConfig(GetAppConfigRequest) returns (GetAppConfigResponse);
+  // 设置/更新单个开关（upsert；成功后热刷内存缓存）
+  rpc SetAppConfig(SetAppConfigRequest) returns (SetAppConfigResponse);
 }
 
 message ListAgentSessionsRequest {
@@ -139,3 +143,22 @@ message AcknowledgeAlertRequest {
 }
 
 message AcknowledgeAlertResponse {}
+
+message AppConfigFlag {
+  string key = 1;
+  string value = 2;
+  string description = 3;
+}
+
+message GetAppConfigRequest {}
+
+message GetAppConfigResponse {
+  repeated AppConfigFlag items = 1;
+}
+
+message SetAppConfigRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message SetAppConfigResponse {}

@@ -47,6 +47,12 @@ const (
 	// AdminServiceAcknowledgeAlertProcedure is the fully-qualified name of the AdminService's
 	// AcknowledgeAlert RPC.
 	AdminServiceAcknowledgeAlertProcedure = "/highschool.v1.AdminService/AcknowledgeAlert"
+	// AdminServiceGetAppConfigProcedure is the fully-qualified name of the AdminService's GetAppConfig
+	// RPC.
+	AdminServiceGetAppConfigProcedure = "/highschool.v1.AdminService/GetAppConfig"
+	// AdminServiceSetAppConfigProcedure is the fully-qualified name of the AdminService's SetAppConfig
+	// RPC.
+	AdminServiceSetAppConfigProcedure = "/highschool.v1.AdminService/SetAppConfig"
 )
 
 // AdminServiceClient is a client for the highschool.v1.AdminService service.
@@ -61,6 +67,10 @@ type AdminServiceClient interface {
 	ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error)
 	// 确认告警（status→'acked'）
 	AcknowledgeAlert(context.Context, *connect.Request[v1.AcknowledgeAlertRequest]) (*connect.Response[v1.AcknowledgeAlertResponse], error)
+	// 列出全部应用开关（app_config 表）
+	GetAppConfig(context.Context, *connect.Request[v1.GetAppConfigRequest]) (*connect.Response[v1.GetAppConfigResponse], error)
+	// 设置/更新单个开关（upsert；成功后热刷内存缓存）
+	SetAppConfig(context.Context, *connect.Request[v1.SetAppConfigRequest]) (*connect.Response[v1.SetAppConfigResponse], error)
 }
 
 // NewAdminServiceClient constructs a client for the highschool.v1.AdminService service. By default,
@@ -104,6 +114,18 @@ func NewAdminServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(adminServiceMethods.ByName("AcknowledgeAlert")),
 			connect.WithClientOptions(opts...),
 		),
+		getAppConfig: connect.NewClient[v1.GetAppConfigRequest, v1.GetAppConfigResponse](
+			httpClient,
+			baseURL+AdminServiceGetAppConfigProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("GetAppConfig")),
+			connect.WithClientOptions(opts...),
+		),
+		setAppConfig: connect.NewClient[v1.SetAppConfigRequest, v1.SetAppConfigResponse](
+			httpClient,
+			baseURL+AdminServiceSetAppConfigProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("SetAppConfig")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -114,6 +136,8 @@ type adminServiceClient struct {
 	getCostDashboard  *connect.Client[v1.GetCostDashboardRequest, v1.GetCostDashboardResponse]
 	listAlerts        *connect.Client[v1.ListAlertsRequest, v1.ListAlertsResponse]
 	acknowledgeAlert  *connect.Client[v1.AcknowledgeAlertRequest, v1.AcknowledgeAlertResponse]
+	getAppConfig      *connect.Client[v1.GetAppConfigRequest, v1.GetAppConfigResponse]
+	setAppConfig      *connect.Client[v1.SetAppConfigRequest, v1.SetAppConfigResponse]
 }
 
 // ListAgentSessions calls highschool.v1.AdminService.ListAgentSessions.
@@ -141,6 +165,16 @@ func (c *adminServiceClient) AcknowledgeAlert(ctx context.Context, req *connect.
 	return c.acknowledgeAlert.CallUnary(ctx, req)
 }
 
+// GetAppConfig calls highschool.v1.AdminService.GetAppConfig.
+func (c *adminServiceClient) GetAppConfig(ctx context.Context, req *connect.Request[v1.GetAppConfigRequest]) (*connect.Response[v1.GetAppConfigResponse], error) {
+	return c.getAppConfig.CallUnary(ctx, req)
+}
+
+// SetAppConfig calls highschool.v1.AdminService.SetAppConfig.
+func (c *adminServiceClient) SetAppConfig(ctx context.Context, req *connect.Request[v1.SetAppConfigRequest]) (*connect.Response[v1.SetAppConfigResponse], error) {
+	return c.setAppConfig.CallUnary(ctx, req)
+}
+
 // AdminServiceHandler is an implementation of the highschool.v1.AdminService service.
 type AdminServiceHandler interface {
 	// 会话列表（分页）
@@ -153,6 +187,10 @@ type AdminServiceHandler interface {
 	ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error)
 	// 确认告警（status→'acked'）
 	AcknowledgeAlert(context.Context, *connect.Request[v1.AcknowledgeAlertRequest]) (*connect.Response[v1.AcknowledgeAlertResponse], error)
+	// 列出全部应用开关（app_config 表）
+	GetAppConfig(context.Context, *connect.Request[v1.GetAppConfigRequest]) (*connect.Response[v1.GetAppConfigResponse], error)
+	// 设置/更新单个开关（upsert；成功后热刷内存缓存）
+	SetAppConfig(context.Context, *connect.Request[v1.SetAppConfigRequest]) (*connect.Response[v1.SetAppConfigResponse], error)
 }
 
 // NewAdminServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -192,6 +230,18 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(adminServiceMethods.ByName("AcknowledgeAlert")),
 		connect.WithHandlerOptions(opts...),
 	)
+	adminServiceGetAppConfigHandler := connect.NewUnaryHandler(
+		AdminServiceGetAppConfigProcedure,
+		svc.GetAppConfig,
+		connect.WithSchema(adminServiceMethods.ByName("GetAppConfig")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceSetAppConfigHandler := connect.NewUnaryHandler(
+		AdminServiceSetAppConfigProcedure,
+		svc.SetAppConfig,
+		connect.WithSchema(adminServiceMethods.ByName("SetAppConfig")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/highschool.v1.AdminService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AdminServiceListAgentSessionsProcedure:
@@ -204,6 +254,10 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 			adminServiceListAlertsHandler.ServeHTTP(w, r)
 		case AdminServiceAcknowledgeAlertProcedure:
 			adminServiceAcknowledgeAlertHandler.ServeHTTP(w, r)
+		case AdminServiceGetAppConfigProcedure:
+			adminServiceGetAppConfigHandler.ServeHTTP(w, r)
+		case AdminServiceSetAppConfigProcedure:
+			adminServiceSetAppConfigHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -231,4 +285,12 @@ func (UnimplementedAdminServiceHandler) ListAlerts(context.Context, *connect.Req
 
 func (UnimplementedAdminServiceHandler) AcknowledgeAlert(context.Context, *connect.Request[v1.AcknowledgeAlertRequest]) (*connect.Response[v1.AcknowledgeAlertResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.AcknowledgeAlert is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) GetAppConfig(context.Context, *connect.Request[v1.GetAppConfigRequest]) (*connect.Response[v1.GetAppConfigResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.GetAppConfig is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) SetAppConfig(context.Context, *connect.Request[v1.SetAppConfigRequest]) (*connect.Response[v1.SetAppConfigResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("highschool.v1.AdminService.SetAppConfig is not implemented"))
 }

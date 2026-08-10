@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AcknowledgeAlertRequest, AcknowledgeAlertResponse, GetCostDashboardRequest, GetCostDashboardResponse, GetSessionReplayRequest, GetSessionReplayResponse, ListAgentSessionsRequest, ListAgentSessionsResponse, ListAlertsRequest, ListAlertsResponse } from "./admin_service_pb.js";
+import { AcknowledgeAlertRequest, AcknowledgeAlertResponse, GetAppConfigRequest, GetAppConfigResponse, GetCostDashboardRequest, GetCostDashboardResponse, GetSessionReplayRequest, GetSessionReplayResponse, ListAgentSessionsRequest, ListAgentSessionsResponse, ListAlertsRequest, ListAlertsResponse, SetAppConfigRequest, SetAppConfigResponse } from "./admin_service_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -67,6 +67,28 @@ export const AdminService = {
       name: "AcknowledgeAlert",
       I: AcknowledgeAlertRequest,
       O: AcknowledgeAlertResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 列出全部应用开关（app_config 表）
+     *
+     * @generated from rpc highschool.v1.AdminService.GetAppConfig
+     */
+    getAppConfig: {
+      name: "GetAppConfig",
+      I: GetAppConfigRequest,
+      O: GetAppConfigResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 设置/更新单个开关（upsert；成功后热刷内存缓存）
+     *
+     * @generated from rpc highschool.v1.AdminService.SetAppConfig
+     */
+    setAppConfig: {
+      name: "SetAppConfig",
+      I: SetAppConfigRequest,
+      O: SetAppConfigResponse,
       kind: MethodKind.Unary,
     },
   }

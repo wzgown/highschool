@@ -16,15 +16,22 @@ import (
 	"highschool-backend/pkg/logger"
 )
 
+// CacheInvalidator 配置缓存失效器（settings.Provider 即满足此接口）。
+// 抽成窄接口便于 handler 测试：无需引入具体 Provider 依赖即可断言 Invalidate 被调用。
+type CacheInvalidator interface {
+	Invalidate()
+}
+
 // AdminServiceHandler 管理后台处理器
 type AdminServiceHandler struct {
 	highschoolv1connect.UnimplementedAdminServiceHandler
 	store admin.Store
+	cache CacheInvalidator
 }
 
-// NewAdminServiceHandler 创建管理后台处理器
-func NewAdminServiceHandler(store admin.Store) *AdminServiceHandler {
-	return &AdminServiceHandler{store: store}
+// NewAdminServiceHandler 创建管理后台处理器。cache 可为 nil（仅 SetAppConfig 用，nil 时跳过热刷）。
+func NewAdminServiceHandler(store admin.Store, cache CacheInvalidator) *AdminServiceHandler {
+	return &AdminServiceHandler{store: store, cache: cache}
 }
 
 // ListAgentSessions 会话列表
@@ -153,13 +160,45 @@ func (h *AdminServiceHandler) AcknowledgeAlert(ctx context.Context, req *connect
 	return connect.NewResponse(&highschoolv1.AcknowledgeAlertResponse{}), nil
 }
 
+// GetAppConfig 列出 app_config 全部开关（按 key 升序）。
+func (h *AdminServiceHandler) GetAppConfig(ctx context.Context, req *connect.Request[highschoolv1.GetAppConfigRequest]) (*connect.Response[highschoolv1.GetAppConfigResponse], error) {
+	flags, err := h.store.ListAppConfig(ctx)
+	if err != nil {
+		logger.Error(ctx, "admin get app_config failed", err)
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	items := make([]*highschoolv1.AppConfigFlag, 0, len(flags))
+	for _, f := range flags {
+		items = append(items, &highschoolv1.AppConfigFlag{
+			Key: f.Key, Value: f.Value, Description: f.Description,
+		})
+	}
+	return connect.NewResponse(&highschoolv1.GetAppConfigResponse{Items: items}), nil
+}
+
+// SetAppConfig 新增/更新单个开关（upsert）。空 key 返回 CodeInvalidArgument；
+// 成功后调用 cache.Invalidate() 使配置热刷（settings.Provider 下一次读即从 DB 重载）。
+func (h *AdminServiceHandler) SetAppConfig(ctx context.Context, req *connect.Request[highschoolv1.SetAppConfigRequest]) (*connect.Response[highschoolv1.SetAppConfigResponse], error) {
+	if req.Msg.GetKey() == "" {
+		return nil, connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("admin set app_config: empty key"))
+	}
+	if err := h.store.SetAppConfig(ctx, req.Msg.GetKey(), req.Msg.GetValue()); err != nil {
+		logger.Error(ctx, "admin set app_config failed", err)
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	if h.cache != nil {
+		h.cache.Invalidate()
+	}
+	return connect.NewResponse(&highschoolv1.SetAppConfigResponse{}), nil
+}
+
 // RegisterAdminService 注册管理后台服务（挂鉴权 interceptor）
-func RegisterAdminService(mux *http.ServeMux, otelInterceptor *otelconnect.Interceptor, secret string, store admin.Store) {
+func RegisterAdminService(mux *http.ServeMux, otelInterceptor *otelconnect.Interceptor, secret string, store admin.Store, cache CacheInvalidator) {
 	if secret == "" {
 		logger.Warn(context.Background(), "admin service disabled: empty cookie secret (set HS_ADMIN_COOKIE_SECRET)")
 		return
 	}
-	h := NewAdminServiceHandler(store)
+	h := NewAdminServiceHandler(store, cache)
 	opts := []connect.HandlerOption{connect.WithInterceptors(newAdminAuthInterceptor(secret))}
 	if otelInterceptor != nil {
 		opts = append(opts, connect.WithInterceptors(otelInterceptor))
