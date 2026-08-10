@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 
+	"highschool-backend/pkg/otellog"
 	"highschool-backend/pkg/tracing"
 
 	"go.uber.org/zap"
@@ -56,7 +57,13 @@ func Initialize(level string, format string) error {
 		lvl,
 	)
 
-	log = zap.New(core, zap.AddCaller(), zap.AddStacktrace(zapcore.ErrorLevel))
+	// Tee OTLP log export if available (non-blocking, drops on failure)
+	cores := []zapcore.Core{core}
+	if otelCore := otellog.NewZapCore(lvl); otelCore != nil {
+		cores = append(cores, otelCore)
+	}
+
+	log = zap.New(zapcore.NewTee(cores...), zap.AddCaller(), zap.AddStacktrace(zapcore.ErrorLevel))
 	return nil
 }
 

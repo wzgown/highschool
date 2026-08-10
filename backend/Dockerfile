@@ -20,6 +20,8 @@ COPY backend/cmd ./cmd/
 COPY backend/internal ./internal/
 COPY backend/pkg ./pkg/
 COPY backend/gen ./gen/
+# Resolve any new dependencies (go.sum) before build
+RUN go mod tidy
 # 放入前端构建产物（admin_dist_embed.go 用 -tags admindist 内嵌）
 COPY --from=admin-build /admin/dist ./internal/api/v1/admin_dist
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -tags admindist -ldflags="-w -s" -o /api ./cmd/api

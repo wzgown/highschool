@@ -106,8 +106,8 @@ type TracingConfig struct {
 	ServiceName  string  `mapstructure:"service_name"`
 	OTLPEndpoint string  `mapstructure:"otlp_endpoint"`
 	Protocol     string  `mapstructure:"protocol"`   // grpc（collector）或 http（OpenObserve 直连）
-	URLPath      string  `mapstructure:"url_path"`   // http 协议时的路径，如 /api/default/v1/traces
-	Headers      string  `mapstructure:"headers"`    // "k=v,k2=v2" 形式，用于 OpenObserve basic auth
+	URLPath      string  `mapstructure:"otlp_url_path"` // http 协议时的路径，如 /api/default/v1/traces
+	Headers      string  `mapstructure:"otlp_headers"`  // "k=v,k2=v2" 形式，用于 OpenObserve basic auth
 	SampleRate   float64 `mapstructure:"sample_rate"`
 }
 
