@@ -57,7 +57,7 @@ function submitAnalysis(formData) {
     volunteers: volunteers,
     isTiePreferred: false,
     deviceId: deviceId
-  }).then(function (res) {
+  }, { timeout: 60000 }).then(function (res) {
     var result = res.result || res
     if (!result || !result.id) {
       throw new Error('提交分析失败')

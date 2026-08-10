@@ -20,15 +20,16 @@ function getApiUrl() {
  * @param {string} service
  * @param {string} method
  * @param {object} data
+ * @param {object} [opts] 可选：{ timeout } 覆盖默认 8s（如 SubmitAnalysis 引擎同步计算需 15s+）
  * @returns {Promise<object>}
  */
-function callRpc(service, method, data) {
+function callRpc(service, method, data, opts) {
   return new Promise(function (resolve, reject) {
     wx.request({
       url: getApiUrl() + '/' + service + '/' + method,
       method: 'POST',
       data: data || {},
-      timeout: 8000,
+      timeout: (opts && opts.timeout) || 8000,
       dataType: 'json',
       responseType: 'text',
       header: {
