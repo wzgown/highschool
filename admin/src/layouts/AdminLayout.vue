@@ -6,6 +6,7 @@
         <el-menu-item index="/sessions">会话回放</el-menu-item>
         <el-menu-item index="/cost">成本审计</el-menu-item>
         <el-menu-item index="/alerts">告警</el-menu-item>
+        <el-menu-item index="/flags">开关</el-menu-item>
       </el-menu>
       <el-button type="danger" plain style="margin-top:8px" @click="onLogout">退出登录</el-button>
     </el-aside>

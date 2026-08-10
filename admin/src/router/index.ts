@@ -13,6 +13,7 @@ const router = createRouter({
         { path: "replay/:id", component: () => import("../views/SessionReplay.vue") },
         { path: "cost", component: () => import("../views/CostDashboard.vue") },
         { path: "alerts", component: () => import("../views/Alerts.vue") },
+        { path: "flags", component: () => import("../views/Flags.vue") },
       ],
     },
   ],
