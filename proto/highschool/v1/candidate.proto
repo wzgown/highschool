@@ -108,6 +108,8 @@ message AnalysisResult {
   optional SimulationResults results = 3;
   string created_at = 4;
   optional string completed_at = 5;
+  // 分析失败原因（status = failed 时有值）
+  optional string error_message = 6;
 }
 
 // 历史记录摘要

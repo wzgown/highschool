@@ -39,6 +39,50 @@ func (m *MockSimulationHistoryRepo) Save(ctx context.Context, deviceID string, d
 	return fmt.Sprintf("%d", m.counter), nil
 }
 
+func (m *MockSimulationHistoryRepo) SavePending(ctx context.Context, deviceID string, deviceInfo map[string]interface{},
+	candidateData *highschoolv1.SubmitAnalysisRequest) (string, error) {
+
+	m.counter++
+	m.data[m.counter] = &SimulationHistoryRecord{
+		ID:            m.counter,
+		DeviceID:      deviceID,
+		DeviceInfo:    deviceInfo,
+		CandidateData: candidateData,
+		Status:        "pending",
+		CreatedAt:     time.Now(),
+	}
+	return fmt.Sprintf("%d", m.counter), nil
+}
+
+func (m *MockSimulationHistoryRepo) UpdateResult(ctx context.Context, id string, result *highschoolv1.SimulationResults) error {
+	idInt, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return err
+	}
+	record, ok := m.data[idInt]
+	if !ok {
+		return context.DeadlineExceeded // 简化错误处理
+	}
+	record.SimulationResult = result
+	record.Status = "completed"
+	record.ErrorMessage = nil
+	return nil
+}
+
+func (m *MockSimulationHistoryRepo) UpdateStatus(ctx context.Context, id string, status string, errorMessage *string) error {
+	idInt, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return err
+	}
+	record, ok := m.data[idInt]
+	if !ok {
+		return context.DeadlineExceeded // 简化错误处理
+	}
+	record.Status = status
+	record.ErrorMessage = errorMessage
+	return nil
+}
+
 func (m *MockSimulationHistoryRepo) GetByID(ctx context.Context, id string) (*SimulationHistoryRecord, error) {
 	idInt, err := strconv.ParseInt(id, 10, 64)
 	if err != nil {

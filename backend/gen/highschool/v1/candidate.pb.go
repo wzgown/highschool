@@ -859,12 +859,14 @@ func (x *SimulationResults) GetCompetitors() *CompetitorAnalysis {
 
 // 分析结果
 type AnalysisResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Results       *SimulationResults     `protobuf:"bytes,3,opt,name=results,proto3,oneof" json:"results,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CompletedAt   *string                `protobuf:"bytes,5,opt,name=completed_at,json=completedAt,proto3,oneof" json:"completed_at,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Id          string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Status      string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Results     *SimulationResults     `protobuf:"bytes,3,opt,name=results,proto3,oneof" json:"results,omitempty"`
+	CreatedAt   string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CompletedAt *string                `protobuf:"bytes,5,opt,name=completed_at,json=completedAt,proto3,oneof" json:"completed_at,omitempty"`
+	// 分析失败原因（status = failed 时有值）
+	ErrorMessage  *string `protobuf:"bytes,6,opt,name=error_message,json=errorMessage,proto3,oneof" json:"error_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -930,6 +932,13 @@ func (x *AnalysisResult) GetCreatedAt() string {
 func (x *AnalysisResult) GetCompletedAt() string {
 	if x != nil && x.CompletedAt != nil {
 		return *x.CompletedAt
+	}
+	return ""
+}
+
+func (x *AnalysisResult) GetErrorMessage() string {
+	if x != nil && x.ErrorMessage != nil {
+		return *x.ErrorMessage
 	}
 	return ""
 }
@@ -1144,17 +1153,19 @@ const file_highschool_v1_candidate_proto_rawDesc = "" +
 	"\vpredictions\x18\x01 \x01(\v2\x1d.highschool.v1.RankPredictionR\vpredictions\x12I\n" +
 	"\rprobabilities\x18\x02 \x03(\v2#.highschool.v1.VolunteerProbabilityR\rprobabilities\x12;\n" +
 	"\bstrategy\x18\x03 \x01(\v2\x1f.highschool.v1.StrategyAnalysisR\bstrategy\x12C\n" +
-	"\vcompetitors\x18\x04 \x01(\v2!.highschool.v1.CompetitorAnalysisR\vcompetitors\"\xdd\x01\n" +
+	"\vcompetitors\x18\x04 \x01(\v2!.highschool.v1.CompetitorAnalysisR\vcompetitors\"\x99\x02\n" +
 	"\x0eAnalysisResult\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12?\n" +
 	"\aresults\x18\x03 \x01(\v2 .highschool.v1.SimulationResultsH\x00R\aresults\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\x04 \x01(\tR\tcreatedAt\x12&\n" +
-	"\fcompleted_at\x18\x05 \x01(\tH\x01R\vcompletedAt\x88\x01\x01B\n" +
+	"\fcompleted_at\x18\x05 \x01(\tH\x01R\vcompletedAt\x88\x01\x01\x12(\n" +
+	"\rerror_message\x18\x06 \x01(\tH\x02R\ferrorMessage\x88\x01\x01B\n" +
 	"\n" +
 	"\b_resultsB\x0f\n" +
-	"\r_completed_at\"\x9e\x02\n" +
+	"\r_completed_atB\x10\n" +
+	"\x0e_error_message\"\x9e\x02\n" +
 	"\x0eHistorySummary\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +

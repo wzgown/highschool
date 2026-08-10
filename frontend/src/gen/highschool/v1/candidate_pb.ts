@@ -727,6 +727,13 @@ export class AnalysisResult extends Message<AnalysisResult> {
    */
   completedAt?: string;
 
+  /**
+   * 分析失败原因（status = failed 时有值）
+   *
+   * @generated from field: optional string error_message = 6;
+   */
+  errorMessage?: string;
+
   constructor(data?: PartialMessage<AnalysisResult>) {
     super();
     proto3.util.initPartial(data, this);
@@ -740,6 +747,7 @@ export class AnalysisResult extends Message<AnalysisResult> {
     { no: 3, name: "results", kind: "message", T: SimulationResults, opt: true },
     { no: 4, name: "created_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "completed_at", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "error_message", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AnalysisResult {

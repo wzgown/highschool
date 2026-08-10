@@ -35,7 +35,7 @@ Page({
     var self = this
     self.setData({ loading: true, error: null })
 
-    candidate.pollAnalysisResult(self.data.id, 10, 3000)
+    candidate.pollAnalysisResult(self.data.id, 20, 3000)
       .then(function (result) {
         var results = result.results || {}
         var rawPredictions = results.predictions || null

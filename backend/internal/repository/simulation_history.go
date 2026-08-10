@@ -23,6 +23,16 @@ type SimulationHistoryRepository interface {
 		candidateData *highschoolv1.SubmitAnalysisRequest,
 		result *highschoolv1.SimulationResults) (string, error)
 
+	// SavePending 保存一条 status='pending' 的记录（异步分析入口，结果为空）
+	SavePending(ctx context.Context, deviceID string, deviceInfo map[string]interface{},
+		candidateData *highschoolv1.SubmitAnalysisRequest) (string, error)
+
+	// UpdateResult 引擎成功后写入结果并置 status='completed'
+	UpdateResult(ctx context.Context, id string, result *highschoolv1.SimulationResults) error
+
+	// UpdateStatus 更新任务状态（failed 时携带 errorMessage）
+	UpdateStatus(ctx context.Context, id string, status string, errorMessage *string) error
+
 	// GetByID 根据ID获取记录
 	GetByID(ctx context.Context, id string) (*SimulationHistoryRecord, error)
 
@@ -43,6 +53,8 @@ type SimulationHistoryRecord struct {
 	DeviceInfo       map[string]interface{}
 	CandidateData    *highschoolv1.SubmitAnalysisRequest
 	SimulationResult *highschoolv1.SimulationResults
+	Status           string
+	ErrorMessage     *string
 	CreatedAt        time.Time
 }
 
@@ -80,6 +92,63 @@ func (r *simulationHistoryRepo) Save(ctx context.Context, deviceID string, devic
 	return strconv.FormatInt(analysisID, 10), nil
 }
 
+// SavePending 保存一条 status='pending' 的记录（异步分析入口，结果为空）
+func (r *simulationHistoryRepo) SavePending(ctx context.Context, deviceID string, deviceInfo map[string]interface{},
+	candidateData *highschoolv1.SubmitAnalysisRequest) (string, error) {
+
+	createdAt := time.Now()
+	var analysisID int64
+
+	// simulation_result 列为 NOT NULL，pending 阶段先写入空 JSON 对象占位
+	err := r.db.QueryRow(ctx, `
+		INSERT INTO simulation_history (device_id, device_info, candidate_data, simulation_result, status, created_at)
+		VALUES ($1, $2, $3, '{}'::jsonb, 'pending', $4)
+		RETURNING id
+	`, deviceID, deviceInfo, candidateData, createdAt).Scan(&analysisID)
+
+	if err != nil {
+		return "", fmt.Errorf("save pending simulation history failed: %w", err)
+	}
+
+	return strconv.FormatInt(analysisID, 10), nil
+}
+
+// UpdateResult 引擎成功后写入结果并置 status='completed'
+func (r *simulationHistoryRepo) UpdateResult(ctx context.Context, id string, result *highschoolv1.SimulationResults) error {
+	idInt, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return fmt.Errorf("invalid id format")
+	}
+
+	_, err = r.db.Exec(ctx, `
+		UPDATE simulation_history
+		SET simulation_result = $2, status = 'completed', error_message = NULL
+		WHERE id = $1
+	`, idInt, result)
+	if err != nil {
+		return fmt.Errorf("update simulation result failed: %w", err)
+	}
+	return nil
+}
+
+// UpdateStatus 更新任务状态（failed 时携带 errorMessage）
+func (r *simulationHistoryRepo) UpdateStatus(ctx context.Context, id string, status string, errorMessage *string) error {
+	idInt, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return fmt.Errorf("invalid id format")
+	}
+
+	_, err = r.db.Exec(ctx, `
+		UPDATE simulation_history
+		SET status = $2, error_message = $3
+		WHERE id = $1
+	`, idInt, status, errorMessage)
+	if err != nil {
+		return fmt.Errorf("update simulation status failed: %w", err)
+	}
+	return nil
+}
+
 // GetByID 根据ID获取记录
 func (r *simulationHistoryRepo) GetByID(ctx context.Context, id string) (*SimulationHistoryRecord, error) {
 	idInt, err := strconv.ParseInt(id, 10, 64)
@@ -88,7 +157,7 @@ func (r *simulationHistoryRepo) GetByID(ctx context.Context, id string) (*Simula
 	}
 
 	row := r.db.QueryRow(ctx, `
-		SELECT id, device_id, device_info, candidate_data, simulation_result, created_at
+		SELECT id, device_id, device_info, candidate_data, simulation_result, status, error_message, created_at
 		FROM simulation_history
 		WHERE id = $1
 	`, idInt)
@@ -97,7 +166,7 @@ func (r *simulationHistoryRepo) GetByID(ctx context.Context, id string) (*Simula
 	var createdAt pgtype.Timestamp
 	var simResultJSON []byte
 
-	err = row.Scan(&record.ID, &record.DeviceID, &record.DeviceInfo, &record.CandidateData, &simResultJSON, &createdAt)
+	err = row.Scan(&record.ID, &record.DeviceID, &record.DeviceInfo, &record.CandidateData, &simResultJSON, &record.Status, &record.ErrorMessage, &createdAt)
 	if err != nil {
 		if err == pgx.ErrNoRows {
 			return nil, fmt.Errorf("record not found")

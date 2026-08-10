@@ -36,8 +36,24 @@ type candidateService struct {
 	schoolRepo       repository.SchoolRepository
 	middleSchoolRepo repository.MiddleSchoolRepository
 	districtRepo     repository.DistrictRepository
-	simEngine        *simulation.Engine
+	simEngine        simulationRunner
+	// engineSem 限制并发执行的引擎数量，满时后台 goroutine 排队等待
+	engineSem chan struct{}
 }
+
+// simulationRunner 抽象模拟引擎，便于测试注入
+type simulationRunner interface {
+	Run(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) *highschoolv1.SimulationResults
+}
+
+const (
+	// maxConcurrentEngineRuns 并发引擎上限
+	maxConcurrentEngineRuns = 8
+	// engineRunTimeout 单次引擎执行（含排队）的超时兜底
+	engineRunTimeout = 3 * time.Minute
+	// statusUpdateTimeout 后台状态回写的 DB 操作超时
+	statusUpdateTimeout = 10 * time.Second
+)
 
 // NewCandidateService 创建考生服务
 func NewCandidateService() CandidateService {
@@ -48,10 +64,11 @@ func NewCandidateService() CandidateService {
 		middleSchoolRepo: repository.NewMiddleSchoolRepository(),
 		districtRepo:     repository.NewDistrictRepository(),
 		simEngine:        simulation.NewEngine(simulation.WithQuotaRepo(quotaRepo)),
+		engineSem:        make(chan struct{}, maxConcurrentEngineRuns),
 	}
 }
 
-// SubmitAnalysis 提交模拟分析
+// SubmitAnalysis 提交模拟分析（异步：校验 + 落 pending 记录后立即返回，引擎在后台执行）
 func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1.SubmitAnalysisRequest) (*highschoolv1.SubmitAnalysisResponse, error) {
 	startTime := time.Now()
 	logger.Info(ctx, "SubmitAnalysis started",
@@ -60,7 +77,7 @@ func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1
 		logger.Int("total_score", int(req.Scores.Total)),
 	)
 
-	// 1. 完整参数校验
+	// 1. 完整参数校验（同步，校验失败直接返回错误）
 	logger.Debug(ctx, "step 1: validating request")
 	if err := s.validateRequest(ctx, req); err != nil {
 		logger.Error(ctx, "request validation failed", err)
@@ -78,8 +95,8 @@ func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1
 		logger.Debug(ctx, "generated new device_id", logger.String("device_id", deviceID))
 	}
 
-	// 3. 执行模拟分析
-	logger.Info(ctx, "step 2: running simulation engine",
+	// 3. 落一条 status='pending' 的记录，立即返回
+	logger.Info(ctx, "step 2: saving pending record",
 		logger.Int("ranking", int(req.Ranking.Rank)),
 		logger.Int("total_students", int(req.Ranking.TotalStudents)),
 		logger.Bool("has_quota_district", req.Volunteers.QuotaDistrict != nil),
@@ -87,47 +104,93 @@ func (s *candidateService) SubmitAnalysis(ctx context.Context, req *highschoolv1
 		logger.Int("unified_count", len(req.Volunteers.Unified)),
 	)
 
-	simStart := time.Now()
-	results := s.simEngine.Run(ctx, req)
-	logger.Info(ctx, "simulation engine completed",
-		logger.String("duration", time.Since(simStart).String()),
-		logger.Int("probabilities_count", len(results.Probabilities)),
-	)
-
-	// 4. 保存到数据库
-	logger.Debug(ctx, "step 3: saving to database")
-	saveStart := time.Now()
 	deviceInfo := map[string]interface{}{} // 简化版
-	analysisID, err := s.simRepo.Save(ctx, deviceID, deviceInfo, req, results)
+	analysisID, err := s.simRepo.SavePending(ctx, deviceID, deviceInfo, req)
 	if err != nil {
-		logger.Error(ctx, "save analysis failed", err)
+		logger.Error(ctx, "save pending analysis failed", err)
 		return nil, fmt.Errorf("save analysis failed: %w", err)
 	}
-	logger.Info(ctx, "analysis saved to database",
-		logger.String("analysis_id", analysisID),
-		logger.String("duration", time.Since(saveStart).String()),
-	)
 
-	// 5. 组装响应
+	// 4. 后台 goroutine 跑引擎（必须使用新的 background ctx，
+	// request 返回后 request ctx 会被取消，不能沿用）
+	go s.runAnalysis(analysisID, req)
+
 	createdAt := time.Now().Format(time.RFC3339)
 	response := &highschoolv1.SubmitAnalysisResponse{
 		Result: &highschoolv1.AnalysisResult{
-			Id:          analysisID,
-			Status:      "completed",
-			Results:     results,
-			CreatedAt:   createdAt,
-			CompletedAt: &createdAt,
+			Id:        analysisID,
+			Status:    "pending",
+			CreatedAt: createdAt,
 		},
 	}
 
-	logger.Info(ctx, "SubmitAnalysis completed",
+	logger.Info(ctx, "SubmitAnalysis accepted (async)",
 		logger.String("analysis_id", analysisID),
 		logger.String("total_duration", time.Since(startTime).String()),
-		logger.String("prediction_confidence", results.Predictions.Confidence),
-		logger.Float64("percentile", results.Predictions.Percentile),
 	)
 
 	return response, nil
+}
+
+// runAnalysis 后台执行模拟引擎并回写结果/状态
+func (s *candidateService) runAnalysis(analysisID string, req *highschoolv1.SubmitAnalysisRequest) {
+	ctx, cancel := context.WithTimeout(context.Background(), engineRunTimeout)
+	defer cancel()
+
+	// 并发保护：信号量满时在 goroutine 内排队，ctx 超时兜底
+	if s.engineSem != nil {
+		select {
+		case s.engineSem <- struct{}{}:
+			defer func() { <-s.engineSem }()
+		case <-ctx.Done():
+			s.markFailed(analysisID, "模拟引擎排队超时，请稍后再试")
+			return
+		}
+	}
+
+	// panic 兜底：记为 failed，避免记录永远停在 pending
+	defer func() {
+		if r := recover(); r != nil {
+			logger.Error(context.Background(), "simulation engine panic", fmt.Errorf("%v", r),
+				logger.String("analysis_id", analysisID))
+			s.markFailed(analysisID, fmt.Sprintf("模拟引擎执行异常: %v", r))
+		}
+	}()
+
+	simStart := time.Now()
+	results := s.simEngine.Run(ctx, req)
+	logger.Info(context.Background(), "simulation engine completed",
+		logger.String("analysis_id", analysisID),
+		logger.String("duration", time.Since(simStart).String()),
+	)
+
+	if results == nil {
+		s.markFailed(analysisID, "模拟引擎未返回结果")
+		return
+	}
+
+	if err := s.simRepo.UpdateResult(ctx, analysisID, results); err != nil {
+		logger.Error(context.Background(), "update simulation result failed", err,
+			logger.String("analysis_id", analysisID))
+		s.markFailed(analysisID, fmt.Sprintf("保存分析结果失败: %v", err))
+		return
+	}
+
+	logger.Info(context.Background(), "analysis completed",
+		logger.String("analysis_id", analysisID),
+		logger.String("prediction_confidence", results.Predictions.Confidence),
+		logger.Float64("percentile", results.Predictions.Percentile),
+	)
+}
+
+// markFailed 将记录置为 failed 并写入失败原因（使用独立 ctx，避免被引擎 ctx 取消/超时影响）
+func (s *candidateService) markFailed(analysisID, errMsg string) {
+	ctx, cancel := context.WithTimeout(context.Background(), statusUpdateTimeout)
+	defer cancel()
+	if err := s.simRepo.UpdateStatus(ctx, analysisID, "failed", &errMsg); err != nil {
+		logger.Error(context.Background(), "mark analysis failed status failed", err,
+			logger.String("analysis_id", analysisID))
+	}
 }
 
 // GetAnalysisResult 获取分析结果
@@ -138,12 +201,18 @@ func (s *candidateService) GetAnalysisResult(ctx context.Context, id string) (*h
 	}
 
 	createdAt := record.CreatedAt.Format(time.RFC3339)
-	return &highschoolv1.AnalysisResult{
+	result := &highschoolv1.AnalysisResult{
 		Id:        strconv.FormatInt(record.ID, 10),
-		Status:    "completed",
-		Results:   record.SimulationResult,
+		Status:    record.Status,
 		CreatedAt: createdAt,
-	}, nil
+	}
+	if record.Status == "completed" {
+		result.Results = record.SimulationResult
+	}
+	if record.Status == "failed" {
+		result.ErrorMessage = record.ErrorMessage
+	}
+	return result, nil
 }
 
 // GetHistory 获取历史记录

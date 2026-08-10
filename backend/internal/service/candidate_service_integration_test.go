@@ -139,11 +139,14 @@ func TestSubmitAnalysis_Comprehensive(t *testing.T) {
 					failedTests++
 					fmt.Printf("    [%s %d分] 失败: %v\n", level.Name, int(level.TotalScore), err)
 				} else {
+					// SubmitAnalysis 已异步化：提交返回 pending，轮询等待引擎完成
+					analysis := waitAnalysisCompleted(t, service, resp.Result.Id)
+
 					result.Success = true
 					successTests++
 
 					// 统计录取概率分布
-					probs := resp.Result.Results.Probabilities
+					probs := analysis.Results.Probabilities
 					result.ProbCount = len(probs)
 
 					for _, p := range probs {
@@ -159,7 +162,7 @@ func TestSubmitAnalysis_Comprehensive(t *testing.T) {
 						}
 					}
 
-					result.StrategyScore = resp.Result.Results.Strategy.Score
+					result.StrategyScore = analysis.Results.Strategy.Score
 
 					fmt.Printf("    [%s %d分] 成功: 概率数=%d, 安全区=%d, 稳健区=%d, 风险区=%d, 高风险=%d, 策略分=%d\n",
 						level.Name, int(level.TotalScore),
@@ -167,7 +170,7 @@ func TestSubmitAnalysis_Comprehensive(t *testing.T) {
 						result.StrategyScore)
 
 					// 验证结果合理性
-					validateResult(t, &result, level, resp.Result.Results)
+					validateResult(t, &result, level, analysis.Results)
 				}
 
 				results = append(results, result)
@@ -230,11 +233,14 @@ func TestSubmitAnalysis_SampleSelection(t *testing.T) {
 
 					require.NoError(t, err, "SubmitAnalysis应该成功")
 					assert.NotNil(t, resp.Result, "结果不应为空")
-					assert.NotNil(t, resp.Result.Results, "模拟结果不应为空")
-					assert.NotEmpty(t, resp.Result.Results.Probabilities, "应该有概率预测结果")
+
+					// SubmitAnalysis 已异步化：提交返回 pending，轮询等待引擎完成
+					analysis := waitAnalysisCompleted(t, service, resp.Result.Id)
+					assert.NotNil(t, analysis.Results, "模拟结果不应为空")
+					assert.NotEmpty(t, analysis.Results.Probabilities, "应该有概率预测结果")
 
 					// 验证基本逻辑
-					validateResultBasic(t, resp.Result.Results, level)
+					validateResultBasic(t, analysis.Results, level)
 				})
 			}
 		})
@@ -735,6 +741,26 @@ func getEnv(key, defaultValue string) string {
 		return value
 	}
 	return defaultValue
+}
+
+// waitAnalysisCompleted 轮询等待异步分析完成（SubmitAnalysis 已改为提交即返回 pending）
+func waitAnalysisCompleted(t *testing.T, service *candidateService, id string) *highschoolv1.AnalysisResult {
+	t.Helper()
+	deadline := time.Now().Add(120 * time.Second)
+	for {
+		res, err := service.GetAnalysisResult(context.Background(), id)
+		require.NoError(t, err, "获取分析结果失败")
+		if res.Status == "completed" {
+			return res
+		}
+		if res.Status == "failed" {
+			t.Fatalf("分析失败: %s", res.GetErrorMessage())
+		}
+		if time.Now().After(deadline) {
+			t.Fatalf("等待分析结果超时（最后的 status=%s）", res.Status)
+		}
+		time.Sleep(500 * time.Millisecond)
+	}
 }
 
 // TestMain 设置测试环境

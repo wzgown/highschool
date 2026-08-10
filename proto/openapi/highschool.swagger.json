@@ -89,6 +89,10 @@
         },
         "completedAt": {
           "type": "string"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "分析失败原因（status = failed 时有值）"
         }
       },
       "title": "分析结果"
