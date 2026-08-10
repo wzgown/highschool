@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { login as doLogin, adminClient } from "../api/client";
+import { login as doLogin, logout as doLogout, adminClient } from "../api/client";
 
 export const useAuthStore = defineStore("auth", () => {
   const loggedIn = ref(false);
@@ -11,7 +11,10 @@ export const useAuthStore = defineStore("auth", () => {
     await doLogin(password);
     loggedIn.value = true;
   }
-  function logout() { loggedIn.value = false; }
+  async function logout() {
+    try { await doLogout(); } catch { /* best-effort：cookie 失效或网络错误都忽略 */ }
+    loggedIn.value = false;
+  }
 
   // 启动时一次性探针：用 listAgentSessions 探测 admin_sess cookie 是否仍有效。
   // 200 → loggedIn=true；401/错误 → 保持 false（留在 /login）。

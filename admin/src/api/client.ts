@@ -18,3 +18,11 @@ export async function login(password: string): Promise<void> {
   });
   if (!res.ok) throw new Error("登录失败：" + res.status);
 }
+
+export async function logout(): Promise<void> {
+  const res = await fetch("/admin/api/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+  if (!res.ok) throw new Error("logout failed: " + res.status);
+}

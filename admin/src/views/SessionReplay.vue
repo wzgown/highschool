@@ -1,6 +1,7 @@
 <template>
   <div v-loading="loading">
     <el-page-header @back="$router.back()" :content="`会话 #${id}`" style="margin-bottom:12px" />
+    <el-alert v-if="err" :title="err" type="error" show-icon :closable="false" style="margin-bottom:12px" />
     <el-tabs v-model="tab">
       <el-tab-pane label="时间线" name="timeline">
         <el-timeline>
@@ -39,11 +40,12 @@
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { adminClient } from "../api/client";
-import { ElTabs, ElTabPane, ElTimeline, ElTimelineItem, ElTag, ElCollapse, ElCollapseItem, ElPageHeader } from "element-plus";
+import { ElTabs, ElTabPane, ElTimeline, ElTimelineItem, ElTag, ElCollapse, ElCollapseItem, ElPageHeader, ElAlert } from "element-plus";
 
 const route = useRoute();
 const id = route.params.id as string;
 const loading = ref(false);
+const err = ref("");
 const bundle = ref<any>({ messages: [], traces: [], checkpoints: [] });
 
 // 合并时间线：消息 + trace 按时间
@@ -59,7 +61,9 @@ function fmt(s: string) { try { return JSON.stringify(JSON.parse(s), null, 2); }
 
 async function load() {
   loading.value = true;
+  err.value = "";
   try { bundle.value = await adminClient.getSessionReplay({ sessionId: BigInt(id) }); }
+  catch (e) { err.value = "加载失败：" + (e instanceof Error ? e.message : String(e)); }
   finally { loading.value = false; }
 }
 onMounted(load);

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-alert v-if="err" :title="err" type="error" show-icon :closable="false" style="margin-bottom:12px" />
     <el-table :data="rows" v-loading="loading" @row-click="go" style="cursor:pointer">
       <el-table-column prop="sessionId" label="会话" width="80" />
       <el-table-column prop="deviceId" label="设备" width="120" />
@@ -16,20 +17,24 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { adminClient } from "../api/client";
-import { ElTable, ElTableColumn, ElPagination } from "element-plus";
+import { ElTable, ElTableColumn, ElPagination, ElAlert } from "element-plus";
 
 const rows = ref<any[]>([]);
 const total = ref(0);
 const page = ref(1);
 const loading = ref(false);
+const err = ref("");
 const router = useRouter();
 
 async function load() {
   loading.value = true;
+  err.value = "";
   try {
     const res = await adminClient.listAgentSessions({ page: page.value, pageSize: 20 });
     rows.value = res.items as any[];
     total.value = res.total;
+  } catch (e) {
+    err.value = "加载失败：" + (e instanceof Error ? e.message : String(e));
   } finally { loading.value = false; }
 }
 function onPage(p: number) { page.value = p; load(); }
