@@ -18,6 +18,7 @@ import (
 	v1 "highschool-backend/internal/api/v1"
 	"highschool-backend/internal/infrastructure/database"
 	"highschool-backend/internal/infrastructure/settings"
+	"highschool-backend/internal/repository"
 	"highschool-backend/pkg/config"
 	"highschool-backend/pkg/logger"
 	"highschool-backend/pkg/metrics"
@@ -166,6 +167,14 @@ func main() {
 	v1.RegisterReferenceService(mux, otelInterceptor)
 	v1.RegisterCandidateService(mux, otelInterceptor)
 	v1.RegisterAgentService(mux, otelInterceptor)
+
+	// 管理后台：AdminService（cookie 鉴权）+ 登录 + SPA 静态
+	v1.RegisterAdminService(mux, otelInterceptor, cfg.Admin.CookieSecret, repository.NewAdminRepository())
+	mux.HandleFunc("/admin/api/login", v1.NewAdminLoginHandler(cfg))
+	mux.Handle("/admin/", http.StripPrefix("/admin/", v1.AdminSPAHandler()))
+	mux.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/admin/", http.StatusFound)
+	})
 
 	// 添加中间件
 	// 顺序（从外到内）：OTel HTTP tracing -> 日志 -> handler
