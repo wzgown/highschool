@@ -4,13 +4,19 @@ package graph
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strings"
 	"time"
 
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 
 	"highschool-backend/internal/service/agent"
+	"highschool-backend/pkg/logger"
+	"highschool-backend/pkg/metrics"
 )
 
 // ---------- ① Router 意图识别 ----------
@@ -107,9 +113,25 @@ func (g *Graph) executorNode(ctx context.Context, s *agent.State) (string, error
 		i, st := i, st
 		eg.Go(func() error {
 			argsJSON, _ := json.Marshal(st.Args)
+			toolCtx, span := startSpan(egCtx, "tool."+st.ToolName, attribute.Int64("session_id", s.SessionID))
 			start := time.Now()
-			tr, err := g.Tools.Execute(egCtx, st.ToolName, argsJSON)
-			g.traceTool(ctx, s, st.ToolName, argsJSON, tr, err, time.Since(start))
+			tr, err := g.Tools.Execute(toolCtx, st.ToolName, argsJSON)
+			cost := time.Since(start)
+			span.SetAttributes(
+				attribute.Int64("latency_ms", cost.Milliseconds()),
+				attribute.Bool("success", err == nil),
+			)
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+			toolStatus := "success"
+			if err != nil {
+				toolStatus = "error"
+			}
+			metrics.ObserveToolCall(st.ToolName, toolStatus, cost.Seconds())
+			g.traceTool(ctx, s, st.ToolName, argsJSON, tr, err, cost)
 			if err != nil {
 				infos[i] = agent.ToolCallInfo{Name: st.ToolName, Summary: "执行失败: " + err.Error(), Success: false}
 				results[i] = &agent.ToolResult{ForLLM: fmt.Sprintf(`{"error":%q}`, err.Error()), Summary: "执行失败"}
@@ -178,6 +200,8 @@ func (g *Graph) synthesizerNode(ctx context.Context, s *agent.State) (string, er
 
 // ---------- ⑥ Reflection 校验·重规划 ----------
 func (g *Graph) reflectionNode(ctx context.Context, s *agent.State) (string, error) {
+	_, span := startSpan(ctx, "reflection", attribute.Int64("session_id", s.SessionID))
+	defer span.End()
 	pass, reason := verifyReply(s.Reply, s.ToolResults)
 	// 数据类意图：无工具结果支撑却出现数字，视为幻觉（政策问答/越界除外）
 	if pass && len(s.ToolResults) == 0 &&
@@ -196,6 +220,7 @@ func (g *Graph) reflectionNode(ctx context.Context, s *agent.State) (string, err
 		pass, reason = g.llmReflect(ctx, s)
 		g.traceReflection(ctx, s, pass, "llm: "+reason)
 	}
+	span.SetAttributes(attribute.Bool("passed", pass))
 	if pass {
 		return NodeEnd, nil
 	}
@@ -240,18 +265,61 @@ func (g *Graph) llmReflect(ctx context.Context, s *agent.State) (bool, string) {
 	return out.Pass, out.Reason
 }
 
-// callLLM 统一 LLM 调用 + 留痕
+// callLLM 统一 LLM 调用 + 留痕 + span/指标
 func (g *Graph) callLLM(ctx context.Context, s *agent.State, node string, params agent.ChatParams) (*agent.ChatResult, error) {
+	ctx, span := startSpan(ctx, "llm.call",
+		attribute.Int64("session_id", s.SessionID),
+		attribute.String("model", g.Cfg.Model),
+		attribute.String("node", node),
+	)
+	defer span.End()
 	start := time.Now()
 	result, err := g.LLM.Chat(ctx, params)
 	cost := time.Since(start)
+
+	var pt, ct int
+	hasToolCalls := false
+	if result != nil {
+		pt, ct = result.PromptTokens, result.CompletionTokens
+		hasToolCalls = len(result.ToolCalls) > 0
+	}
+	span.SetAttributes(
+		attribute.Int("prompt_tokens", pt),
+		attribute.Int("completion_tokens", ct),
+		attribute.Int64("latency_ms", cost.Milliseconds()),
+		attribute.Bool("has_tool_calls", hasToolCalls),
+	)
+
+	status := "success"
+	if err != nil {
+		status = "error"
+		span.RecordError(err)
+		span.SetStatus(codes.Error, err.Error())
+		// LLM 调用失败：记 model/状态码/耗时（prompt 不落日志）
+		fields := []zap.Field{
+			logger.String("model", g.Cfg.Model),
+			logger.String("node", node),
+			logger.Int64("session_id", s.SessionID),
+			logger.Int64("latency_ms", cost.Milliseconds()),
+			logger.ErrorField(err),
+		}
+		var apiErr interface{ HTTPStatus() int }
+		if errors.As(err, &apiErr) {
+			fields = append(fields, logger.Int("status", apiErr.HTTPStatus()))
+		}
+		logger.Warn(ctx, "agent llm call failed", fields...)
+	} else {
+		// 本轮 token 累计（落库到 assistant 消息 usage）
+		s.PromptTokens += pt
+		s.CompletionTokens += ct
+	}
+	metrics.ObserveLLMCall(g.Cfg.Model, status, pt, ct, cost.Seconds())
+
 	if g.Store != nil {
 		inJSON, _ := json.Marshal(params.Messages)
 		var outJSON json.RawMessage
-		var pt, ct int
 		if result != nil {
 			outJSON, _ = json.Marshal(map[string]any{"content": result.Content, "tool_calls": result.ToolCalls})
-			pt, ct = result.PromptTokens, result.CompletionTokens
 		}
 		var errStr string
 		if err != nil {

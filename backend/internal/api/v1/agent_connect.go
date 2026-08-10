@@ -44,6 +44,7 @@ func NewAgentServiceHandler() (*AgentServiceHandler, error) {
 		StepBudget:           cfg.Agent.StepBudget,
 		MaxContextMsgs:       cfg.Agent.MaxContextMessages,
 		ReflectionLLMEnabled: cfg.Agent.ReflectionLLMEnabled,
+		Model:                cfg.LLM.Model,
 	})
 	var secChecker wechat.SecChecker
 	if cfg.WeChat.Secret != "" && cfg.WeChat.AppID != "" {

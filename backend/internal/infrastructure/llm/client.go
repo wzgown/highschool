@@ -116,6 +116,9 @@ func (e *APIError) Error() string {
 	return fmt.Sprintf("llm: API returned status %d: %s", e.StatusCode, e.Body)
 }
 
+// HTTPStatus 返回 HTTP 状态码（供上层结构化日志/指标提取）
+func (e *APIError) HTTPStatus() int { return e.StatusCode }
+
 // Chat 调用 Chat Completions API，429/5xx 重试 1 次
 func (c *Client) Chat(ctx context.Context, params agent.ChatParams) (*agent.ChatResult, error) {
 	reqBody, err := json.Marshal(c.buildRequest(params))

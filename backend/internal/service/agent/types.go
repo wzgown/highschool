@@ -144,6 +144,9 @@ type State struct {
 	PendingAnswer string `json:"-"`
 	// Planner → Clarify 传递的缺失槽位名
 	NeedClarifyField string `json:"-"`
+	// 本轮 LLM token 累计（不落 checkpoint，仅用于 assistant 消息 usage 落库）
+	PromptTokens     int `json:"-"`
+	CompletionTokens int `json:"-"`
 }
 
 // ---------- ThreadStore 持久化抽象 ----------

@@ -16,6 +16,7 @@ import (
 	"highschool-backend/internal/service/agent/graph"
 	"highschool-backend/pkg/config"
 	"highschool-backend/pkg/logger"
+	"highschool-backend/pkg/metrics"
 )
 
 // AgentService Agent 服务接口
@@ -61,6 +62,7 @@ func (s *agentService) sessionLock(sessionID int64) *sync.Mutex {
 
 // Chat 对话主入口
 func (s *agentService) Chat(ctx context.Context, req *highschoolv1.ChatRequest) (*highschoolv1.ChatResponse, error) {
+	metrics.IncChatRequests()
 	if req.DeviceId == "" {
 		return nil, fmt.Errorf("device_id 不能为空")
 	}
@@ -208,8 +210,12 @@ func (s *agentService) Chat(ctx context.Context, req *highschoolv1.ChatRequest) 
 		logger.Error(ctx, "agent update session failed", uErr)
 	}
 
-	// 落库助手消息
-	_ = s.store.AppendMessage(ctx, sessionID, agent.Message{Role: agent.RoleAssistant, Content: state.Reply}, "", nil)
+	// 落库助手消息（携带本轮累计 token usage）
+	var usage *agent.ChatResult
+	if state.PromptTokens > 0 || state.CompletionTokens > 0 {
+		usage = &agent.ChatResult{PromptTokens: state.PromptTokens, CompletionTokens: state.CompletionTokens}
+	}
+	_ = s.store.AppendMessage(ctx, sessionID, agent.Message{Role: agent.RoleAssistant, Content: state.Reply}, "", usage)
 
 	// 组装响应
 	resp := &highschoolv1.ChatResponse{

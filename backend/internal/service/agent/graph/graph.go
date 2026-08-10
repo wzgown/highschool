@@ -8,6 +8,9 @@ import (
 	"strings"
 	"time"
 
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+
 	"highschool-backend/internal/service/agent"
 	"highschool-backend/pkg/logger"
 )
@@ -25,10 +28,11 @@ const (
 
 // Config 状态图配置
 type Config struct {
-	MaxReplan            int  // Reflection 未通过的最大重规划次数（默认 2）
-	StepBudget           int  // 单次对话全局节点步数预算（默认 12）
-	MaxContextMsgs       int  // 带入 LLM 的最近消息数（默认 20）
-	ReflectionLLMEnabled bool // 程序化校验后追加 LLM 评测（默认 false，省成本）
+	MaxReplan            int    // Reflection 未通过的最大重规划次数（默认 2）
+	StepBudget           int    // 单次对话全局节点步数预算（默认 12）
+	MaxContextMsgs       int    // 带入 LLM 的最近消息数（默认 20）
+	ReflectionLLMEnabled bool   // 程序化校验后追加 LLM 评测（默认 false，省成本）
+	Model                string // LLM 模型名（span 属性 / 指标标签用）
 }
 
 // ToolRunner 工具执行抽象（避免 graph 直接依赖 tools 包实现细节）
@@ -79,11 +83,20 @@ func (g *Graph) Run(ctx context.Context, s *agent.State) (*agent.State, error) {
 			return s, nil
 		}
 		s.StepBudget--
+		// 节点级 span（tracing 关闭时 noop，零开销）
+		nodeCtx, span := startSpan(ctx, "node."+node, attribute.Int64("session_id", s.SessionID))
 		start := time.Now()
-		next, err := g.runNode(ctx, node, s)
-		g.traceNode(ctx, s, node, next, err, time.Since(start))
+		next, err := g.runNode(nodeCtx, node, s)
+		cost := time.Since(start)
+		span.SetAttributes(attribute.Int64("latency_ms", cost.Milliseconds()))
 		if err != nil {
-			logger.Error(ctx, "agent node failed", err, logger.String("node", node))
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+		g.traceNode(ctx, s, node, next, err, cost)
+		if err != nil {
+			logger.Error(ctx, "agent node failed", err, logger.String("node", node), logger.Int64("session_id", s.SessionID))
 			// 节点失败降级：直接给出兜底回答，不中断用户
 			s.Reply = "抱歉，处理时出了点问题，请换个问法再试一次。\n\n数据仅供参考，以上海市教育考试院官方公布为准。"
 			return s, nil
