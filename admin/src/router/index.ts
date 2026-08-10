@@ -12,6 +12,7 @@ const router = createRouter({
         { path: "sessions", component: () => import("../views/SessionList.vue") },
         { path: "replay/:id", component: () => import("../views/SessionReplay.vue") },
         { path: "cost", component: () => import("../views/CostDashboard.vue") },
+        { path: "alerts", component: () => import("../views/Alerts.vue") },
       ],
     },
   ],
