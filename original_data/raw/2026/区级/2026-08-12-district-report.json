@@ -1,0 +1,122 @@
+{
+  "date": "2026-08-12",
+  "scrape_time": "2026-08-12T08:03:47.374636",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 2,
+  "failed_count": 0,
+  "partial_count": 0,
+  "skipped_seasonal_shutdown": 14,
+  "note": "14/16 districts in deep seasonal shutdown (404/empty/dns-fail). Only 闵行(30KB) and 奉贤(22KB) serving content. No new 中考 items detected across all sources.",
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": 30036,
+      "items": [],
+      "note": "Standard 政务公开 content, no new 中考 announcements"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 20946,
+      "items": [],
+      "note": "Exam center site still active, existing content unchanged"
+    },
+    {
+      "name": "浦东",
+      "status": "shutdown",
+      "size": 3125,
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "shutdown",
+      "size": 46358,
+      "items": [],
+      "note": "Main education page has general news only, no 中考 content"
+    },
+    {
+      "name": "宝山",
+      "status": "shutdown",
+      "size": 13333,
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "shutdown",
+      "size": 10847,
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "shutdown",
+      "size": 48314,
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "shutdown",
+      "size": 2065,
+      "items": []
+    },
+    {
+      "name": "黄浦",
+      "status": "shutdown",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "shutdown",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "shutdown",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "shutdown",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "shutdown",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "shutdown",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "shutdown",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "shutdown",
+      "items": []
+    }
+  ],
+  "city_level": {
+    "shmeea_index": "15 items with 2026 keywords on index page (all previously known)",
+    "page_03600": "9 articles (latest: 07-21 民办降分公告, 07-20 名额分配分数线, 07-19 中职校录取分数线)",
+    "page_03200": "5 articles (latest: 07-07 成人中职秋季招生名单)",
+    "page_24500": "1 article (07-03 高考录取结果查询)",
+    "new_since_last_check": "None"
+  },
+  "db_status": {
+    "quota_district": 943,
+    "quota_school": 3883,
+    "score_quota_district": 906,
+    "score_quota_school": 3247,
+    "score_unified": 861,
+    "quota_unified_district": 910,
+    "control_score": 6,
+    "school_control_score": 8
+  },
+  "seasonal_assessment": "DEEP SHUTDOWN - enrollment season effectively complete. No major data updates expected. Recommend reducing monitoring to weekly. Only 征求志愿 (supplementary admission) for private schools may produce minor updates."
+}
