@@ -38,6 +38,13 @@
 ### 1.5 会话行 = 「最新 intent」+「累积 slots」单值
 `agent_session.intent`（最新一轮）、`agent_session.slots`（累积）。无「话题段 / 意图轨迹」概念。
 
+### 1.6 两个上下文：Messages（对话原文） vs Slots（结构化字段）
+State 同时持有两个相互独立、用途不同的"上下文"，勿混：
+- **Messages**：用户/助手原话往返，时间序数组。受 `MaxContextMessages`（默认 20）滑窗约束（仅最近 N 条喂给 LLM）。是 prefix cache 的主体。
+- **Slots**：Router 让 LLM 从原话里**抽取的结构化 key-value 参数**（`school_name` / `district_name` / `total_score` / `exam_type`…），`map[string]any`——**不是原话本身**。全 session 累积（见 1.3）。
+
+→ 「slot 是否过期」与「消息是否滑出窗口」是两件事；当前 bug 的本质是 slot 脱离了消息窗口、自己无限累积。
+
 ---
 
 ## 2. 问题清单
@@ -107,6 +114,30 @@
   - ✗ 工作量最大；偏移检测的准确率是新的风险点。
 
 > **推荐**：先做 **A1**（性价比最高，直接消掉 P3 这个实际 bug），把 A3 留作长期演进。
+
+#### 诱人但不可行：每轮从消息窗口"重提 slot"
+直观解法是"既然消息有滑窗，slot 也跟着窗口重提、旧的随消息滑出自动消失"。**否决，五条理由**：
+1. **丢持久事实**：`district / total_score / exam_type` 这类用户/考生属性，说一次就该记整场；其来源消息一旦滑出窗口，重提就没了 → agent 又来问"哪个区"。当前 bug 是"该丢的不丢"，这是"该留的留不住"——对称的另一种坏。
+2. **破坏跨轮拼信息**：用户分多次给信息（turn1 分数、turn3 一模），窗口一滑，已拼好的 slot 又碎掉。
+3. **Clarify 死循环**：HITL 的 Q&A 滑出窗 → 重提丢 slot → 重复追问。
+4. **重提成本 + LLM 不确定**：每轮把窗口再喂 LLM 抽一次，多花 token/延迟；且 LLM 抽取非确定，同一窗口重抽可能这次有、下次没，slot 不稳定、回放难复现。
+5. **打断 prefix cache**（见下）。
+
+#### 约束：prefix cache 要求"追加式"消息历史
+LLM 前缀缓存（DeepSeek 默认开启）从 prompt **开头**匹配最长公共前缀。
+- **追加式**（turn N+1 = turn N + 1 条新消息）→ 上一轮整段即本轮前缀 → **全命中**，只算新增那条。
+- **每轮滑窗**（前面丢一条）→ 开头变了 → 公共前缀只剩 `system` → **几乎全 miss**，整段历史每轮重算，成本随历史线性涨。
+
+→ 正确范式是 **append-only 当默认，仅在撞 context 上限时裁一次**（裁后继续追加，cache 断裂只发生在偶发裁剪点）；或裁剪时把旧消息压成 summary，形成新的稳定前缀。**不要每轮滑窗。**
+
+**对本项目**：会话通常 3~10 轮，`MaxContextMessages=20` 几乎不触发 → 实际即 append-only → 本就 cache 友好；只有极端长会话才裁一次。真正吃 cache 的是带历史的 Synthesizer 调用（追加→命中）；Router/Planner 每轮短而独立，本就没什么前缀可缓存。
+
+#### 结论：回到 A1 槽位分级
+prefix cache 这条 + 上面四条，共同否决"用消息滑窗管 slot"。落点是 **A1**：
+- **持久槽位**（`district / total_score / exam_type`）：session 级保留，不受窗口影响；
+- **易变槽位**（`school_name` 这类强绑定某次查询的）：意图切换时清，或仅本轮有效。
+
+A1 **完全不碰消息历史的追加结构**，prefix cache 照样命中；同时消掉 P3（易变陈旧值误导推荐）。Prompt 结构上再注意一条：**易变内容放 prompt 尾部（user 消息），稳定内容放开头（system）**——别把每轮都变的 slot 塞进 system 打断 cache。
 
 ### 针对 P2（Router 不看历史）
 - **B1. Router 传最近 K 条消息**（滑动窗口，如最近 4 条），而非只看当前一句。
