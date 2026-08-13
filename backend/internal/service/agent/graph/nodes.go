@@ -27,7 +27,17 @@ func (g *Graph) routerNode(ctx context.Context, s *agent.State) (string, error) 
 		Slots      map[string]any `json:"slots"`
 		Reason     string         `json:"reason"`
 	}
-	contextJSON, _ := json.Marshal(map[string]any{"已知槽位": s.Slots})
+	priorIntent := s.Intent
+	// P2：带最近若干条历史，帮助解指代 + 更准分类（当前消息已单独传，从历史里去掉最后一条）
+	const routerHistoryN = 4
+	recent := s.Messages
+	if len(recent) > 0 {
+		recent = recent[:len(recent)-1]
+	}
+	if len(recent) > routerHistoryN {
+		recent = recent[len(recent)-routerHistoryN:]
+	}
+	contextJSON, _ := json.Marshal(map[string]any{"已知槽位": s.Slots, "最近对话": recent})
 	msgs := []agent.Message{
 		{Role: agent.RoleSystem, Content: RouterSystemPrompt},
 		{Role: agent.RoleUser, Content: fmt.Sprintf("%s\n上下文：%s\n用户消息：%s", currentDateContext(), contextJSON, s.UserMessage)},
@@ -42,6 +52,14 @@ func (g *Graph) routerNode(ctx context.Context, s *agent.State) (string, error) 
 	if err := json.Unmarshal([]byte(extractJSON(result.Content)), &out); err != nil {
 		// 解析失败：降级为数据查询，让后续工具去尝试
 		out = routerOut{Intent: agent.IntentDataQuery, Confidence: 0.5}
+	}
+	// P3：意图切换 → 清易变槽位（保留持久槽位），避免陈旧槽位污染新意图
+	if priorIntent != "" && out.Intent != priorIntent {
+		for k := range s.Slots {
+			if !agent.IsPersistentSlot(k) {
+				delete(s.Slots, k)
+			}
+		}
 	}
 	s.Intent = out.Intent
 	for k, v := range out.Slots {

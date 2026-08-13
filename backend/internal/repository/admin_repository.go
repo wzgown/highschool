@@ -138,7 +138,7 @@ func (r *AdminRepository) GetSessionReplay(ctx context.Context, sessionID int64)
 	// 4) checkpoint
 	crows, err := r.db.Query(ctx, `
 		SELECT step_seq, node, COALESCE(state::text,''), created_at::text
-		FROM agent_checkpoint WHERE session_id = $1 ORDER BY step_seq`, sessionID)
+		FROM agent_checkpoint WHERE session_id = $1 ORDER BY id`, sessionID)
 	if err != nil {
 		return nil, fmt.Errorf("admin replay checkpoints: %w", err)
 	}
