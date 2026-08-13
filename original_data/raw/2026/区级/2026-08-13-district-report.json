@@ -1,0 +1,28 @@
+{
+  "date": "2026-08-13",
+  "scrape_time": "2026-08-13T00:05:34.932317Z",
+  "method": "curl",
+  "city_status": {
+    "shmeea_index": "11427B, 22 items with 2026, latest article 2026-07-23",
+    "shmeea_03600": "7378B, 8 items, latest article 2026-07-23 (民办高中余额)",
+    "shmeea_24500": "5313B, only 高考 录取查询 active",
+    "new_since_last_check": "None"
+  },
+  "district_status": {
+    "total_districts": 16,
+    "accessible": 11,
+    "failed": 3,
+    "empty_content": 2,
+    "notes": "深度季节性关闭期，多数区/zsks/页面404或空壳"
+  },
+  "db_status": {
+    "quota_district": "943 records, 7156 quota",
+    "quota_school": "3883 records, 12861 quota",
+    "unified_scores": "861 records, 16 districts complete",
+    "control_scores": "6 records",
+    "lowered_private": "8 records"
+  },
+  "notable": "黄浦区录取去向查询系统今日(8/13)16:00关闭",
+  "new_data": false,
+  "recommendation": "维持每周监控频率至8月底，9月转为月度检查"
+}
