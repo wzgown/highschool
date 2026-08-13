@@ -6,7 +6,7 @@
       <el-tab-pane label="时间线" name="timeline">
         <el-timeline>
           <el-timeline-item v-for="e in timeline" :key="e.id" :timestamp="e.ts" :type="e.t" placement="top">
-            <strong>[{{ e.kind }}]</strong> <span v-if="e.title">{{ e.title }}</span>
+            <strong>[{{ e.kind === 'ckpt' ? 'checkpoint' : e.kind }}]</strong> <span v-if="e.title">{{ e.title }}</span>
             <pre v-if="e.body" style="white-space:pre-wrap;background:#f6f8fa;padding:8px;margin-top:4px">{{ e.body }}</pre>
           </el-timeline-item>
         </el-timeline>
@@ -48,11 +48,16 @@ const loading = ref(false);
 const err = ref("");
 const bundle = ref<any>({ messages: [], traces: [], checkpoints: [] });
 
-// 合并时间线：消息 + trace 按时间
+// 合并时间线：消息 + trace + checkpoint 按时间
 const timeline = computed(() => {
   const items: any[] = [];
   (bundle.value.messages || []).forEach((m: any) => items.push({ id: "m" + m.createdAt, ts: m.createdAt, kind: "msg:" + m.role, title: m.content?.slice(0, 60), t: "primary" }));
   (bundle.value.traces || []).forEach((t: any) => items.push({ id: "t" + t.createdAt, ts: t.createdAt, kind: t.kind, title: `${t.name} · ${t.latencyMs}ms`, body: t.outputJson?.slice(0, 300), t: t.outputJson?.includes("error") ? "danger" : "success" }));
+  (bundle.value.checkpoints || []).forEach((c: any) => {
+    let intent = "";
+    try { intent = JSON.parse(c.stateJson || "{}")?.intent || ""; } catch { intent = ""; }
+    items.push({ id: "c" + c.createdAt, ts: c.createdAt, kind: "ckpt", title: `checkpoint · ${c.node} · step${c.stepSeq}${intent ? " · intent:" + intent : ""}`, t: "warning" });
+  });
   return items.sort((a, b) => (a.ts > b.ts ? 1 : -1));
 });
 const tab = ref("timeline");
