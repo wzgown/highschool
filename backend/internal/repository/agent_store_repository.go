@@ -99,11 +99,13 @@ func (r *AgentStoreRepository) SaveCheckpoint(ctx context.Context, sessionID int
 	if err != nil {
 		return 0, fmt.Errorf("marshal agent state: %w", err)
 	}
+	// 注：(session_id, step_seq) 的 UNIQUE 已随迁移 015 移除（Run 每轮 stepSeq 重置，
+	// 轮内递增即可）；此处必须纯 INSERT，不可带 ON CONFLICT —— 约束不存在时
+	// PostgreSQL 会在 plan 阶段直接报 42P10。
 	var id int64
 	err = r.db.QueryRow(ctx,
 		`INSERT INTO agent_checkpoint (session_id, step_seq, node, state)
 		 VALUES ($1, $2, $3, $4)
-		 ON CONFLICT (session_id, step_seq) DO UPDATE SET node=EXCLUDED.node, state=EXCLUDED.state
 		 RETURNING id`,
 		sessionID, stepSeq, node, stateJSON).Scan(&id)
 	if err != nil {
@@ -112,14 +114,14 @@ func (r *AgentStoreRepository) SaveCheckpoint(ctx context.Context, sessionID int
 	return id, nil
 }
 
-// LatestCheckpoint 读取最新快照
+// LatestCheckpoint 读取最新快照（按 id 即写入时间序；step_seq 每轮重置，不可作全局序）
 func (r *AgentStoreRepository) LatestCheckpoint(ctx context.Context, sessionID int64) (int, string, *agent.State, error) {
 	var stepSeq int
 	var node string
 	var stateJSON []byte
 	err := r.db.QueryRow(ctx,
 		`SELECT step_seq, node, state FROM agent_checkpoint
-		 WHERE session_id = $1 ORDER BY step_seq DESC LIMIT 1`, sessionID).
+		 WHERE session_id = $1 ORDER BY id DESC LIMIT 1`, sessionID).
 		Scan(&stepSeq, &node, &stateJSON)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return 0, "", nil, nil

@@ -64,6 +64,7 @@ type ReplayTrace struct {
 
 // ReplayCheckpoint 回放-节点快照
 type ReplayCheckpoint struct {
+	ID        int64 // 主键：一轮多个快照 created_at 同秒，前端 key 靠它保证唯一
 	StepSeq   int32
 	Node      string
 	StateJSON string

@@ -153,6 +153,13 @@ A1 **完全不碰消息历史的追加结构**，prefix cache 照样命中；同
   - ✅ 保留 UNIQUE 不变量；回放一条连续 trail。
   - ✗ 改动 3 处 + State 字段；与「每轮重建」需对齐（续接的 stepSeq 要从 session 维度取）。
 > **推荐**：**C1**（契合现有「每轮重建」设计，最小）。若团队更想要「会话级连续轨迹」再考虑 C2。
+>
+> **实施陷阱（已踩过，2026-08-14 修复）**：C1 落地时不能只改 DDL——`SaveCheckpoint` 原有的
+> `ON CONFLICT (session_id, step_seq) DO UPDATE` 必须同步删除：约束不存在时 PostgreSQL 在 plan 阶段
+> 直接报 42P10，而 graph 对 checkpoint 写失败只告警不中断 → **静默丢快照**，单测（fakeStore）抓不到、
+> 裸 SQL 验证「重复 step_seq 放行」也恰好绕开。同理 `LatestCheckpoint` 的 `ORDER BY step_seq DESC`
+> 在 step_seq 每轮重置后语义失效（上一轮 step=5 会赢过本轮 step=2），须 `ORDER BY id DESC`。
+> 现由真库集成测试守护（`agent_store_repository_test.go`，重复 step_seq 写入 + 按 id 取最新）。
 
 ### 针对 P6（回放诊断力）
 - **D1. checkpoint 并进时间线**：在 timeline 里按 `created_at` 插入 checkpoint 标记（"checkpoint · node=X · step=N"），点开看该快照的 `state.slots`。

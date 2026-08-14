@@ -83,6 +83,7 @@ message ReplayCheckpoint {
   string node = 2;
   string state_json = 3;
   string created_at = 4;
+  int64 id = 5;  // checkpoint 主键：轮内多个快照 created_at 同秒，前端 key 需唯一
 }
 
 message GetSessionReplayResponse {

@@ -48,17 +48,18 @@ const loading = ref(false);
 const err = ref("");
 const bundle = ref<any>({ messages: [], traces: [], checkpoints: [] });
 
-// 合并时间线：消息 + trace + checkpoint 按时间
+// 合并时间线：消息 + trace + checkpoint 按时间。
+// key 唯一性：checkpoint 用数据库 id；消息/trace 的 created_at 秒级、同轮多条会同秒，追加数组下标区分。
 const timeline = computed(() => {
   const items: any[] = [];
-  (bundle.value.messages || []).forEach((m: any) => items.push({ id: "m" + m.createdAt, ts: m.createdAt, kind: "msg:" + m.role, title: m.content?.slice(0, 60), t: "primary" }));
-  (bundle.value.traces || []).forEach((t: any) => items.push({ id: "t" + t.createdAt, ts: t.createdAt, kind: t.kind, title: `${t.name} · ${t.latencyMs}ms`, body: t.outputJson?.slice(0, 300), t: t.outputJson?.includes("error") ? "danger" : "success" }));
+  (bundle.value.messages || []).forEach((m: any, i: number) => items.push({ id: `m${i}:${m.createdAt}`, ts: m.createdAt, kind: "msg:" + m.role, title: m.content?.slice(0, 60), t: "primary" }));
+  (bundle.value.traces || []).forEach((t: any, i: number) => items.push({ id: `t${i}:${t.createdAt}`, ts: t.createdAt, kind: t.kind, title: `${t.name} · ${t.latencyMs}ms`, body: t.outputJson?.slice(0, 300), t: t.outputJson?.includes("error") ? "danger" : "success" }));
   (bundle.value.checkpoints || []).forEach((c: any) => {
     let intent = "";
     try { intent = JSON.parse(c.stateJson || "{}")?.intent || ""; } catch { intent = ""; }
-    items.push({ id: "c" + c.createdAt, ts: c.createdAt, kind: "ckpt", title: `checkpoint · ${c.node} · step${c.stepSeq}${intent ? " · intent:" + intent : ""}`, t: "warning" });
+    items.push({ id: "c" + c.id, ts: c.createdAt, kind: "ckpt", title: `checkpoint · ${c.node} · step${c.stepSeq}${intent ? " · intent:" + intent : ""}`, t: "warning" });
   });
-  return items.sort((a, b) => (a.ts > b.ts ? 1 : -1));
+  return items.sort((a, b) => (a.ts < b.ts ? -1 : a.ts > b.ts ? 1 : 0));
 });
 const tab = ref("timeline");
 

@@ -559,6 +559,7 @@ type ReplayCheckpoint struct {
 	Node          string                 `protobuf:"bytes,2,opt,name=node,proto3" json:"node,omitempty"`
 	StateJson     string                 `protobuf:"bytes,3,opt,name=state_json,json=stateJson,proto3" json:"state_json,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Id            int64                  `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"` // checkpoint 主键：轮内多个快照 created_at 同秒，前端 key 需唯一
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -619,6 +620,13 @@ func (x *ReplayCheckpoint) GetCreatedAt() string {
 		return x.CreatedAt
 	}
 	return ""
+}
+
+func (x *ReplayCheckpoint) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 type GetSessionReplayResponse struct {
@@ -1630,14 +1638,15 @@ const file_highschool_v1_admin_service_proto_rawDesc = "" +
 	"\n" +
 	"latency_ms\x18\a \x01(\x05R\tlatencyMs\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\tR\tcreatedAt\"\x7f\n" +
+	"created_at\x18\b \x01(\tR\tcreatedAt\"\x8f\x01\n" +
 	"\x10ReplayCheckpoint\x12\x19\n" +
 	"\bstep_seq\x18\x01 \x01(\x05R\astepSeq\x12\x12\n" +
 	"\x04node\x18\x02 \x01(\tR\x04node\x12\x1d\n" +
 	"\n" +
 	"state_json\x18\x03 \x01(\tR\tstateJson\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\tR\tcreatedAt\"\x83\x02\n" +
+	"created_at\x18\x04 \x01(\tR\tcreatedAt\x12\x0e\n" +
+	"\x02id\x18\x05 \x01(\x03R\x02id\"\x83\x02\n" +
 	"\x18GetSessionReplayResponse\x126\n" +
 	"\asession\x18\x01 \x01(\v2\x1c.highschool.v1.ReplaySessionR\asession\x128\n" +
 	"\bmessages\x18\x02 \x03(\v2\x1c.highschool.v1.ReplayMessageR\bmessages\x122\n" +
