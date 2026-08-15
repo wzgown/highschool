@@ -181,6 +181,45 @@ func TestGraph_ReflectionReplanThenDegrade(t *testing.T) {
 	}
 }
 
+// TestRouter_ClearsEphemeralSlotsOnIntentChange 锁定契约（P3 / §4 A1）：
+// 意图切换时，易变槽位（如旧意图遗留的 school_name）被清除；持久槽位
+// （district_name/total_score）保留；当轮新槽位（school_names）正常合并。
+func TestRouter_ClearsEphemeralSlotsOnIntentChange(t *testing.T) {
+	llm := &fakeLLM{responses: map[string]string{
+		"意图识别器": `{"intent":"data_query","confidence":0.9,"slots":{"school_names":["新学校"]}}`,
+	}}
+	g := NewGraph(llm, &fakeTools{}, nil, Config{}) // nil store: routerNode/callLLM 均有 nil 守卫
+
+	s := &agent.State{
+		Intent:      agent.IntentRecommendation, // prior intent
+		Slots:       map[string]any{"district_name": "徐汇区", "total_score": 690, "school_name": "旧学校"},
+		UserMessage: "新学校多少分",
+	}
+	if _, err := g.routerNode(context.Background(), s); err != nil {
+		t.Fatalf("routerNode failed: %v", err)
+	}
+	// 易变槽位被清除
+	if _, ok := s.Slots["school_name"]; ok {
+		t.Fatalf("ephemeral slot school_name should be cleared on intent change, got %v", s.Slots["school_name"])
+	}
+	// 持久槽位保留
+	if s.Slots["district_name"] != "徐汇区" {
+		t.Fatalf("persistent slot district_name lost: %v", s.Slots["district_name"])
+	}
+	if s.Slots["total_score"] != 690 {
+		t.Fatalf("persistent slot total_score lost: %v", s.Slots["total_score"])
+	}
+	// 当轮新槽位合并进来
+	names, ok := s.Slots["school_names"].([]any)
+	if !ok || len(names) != 1 || names[0] != "新学校" {
+		t.Fatalf("new slot school_names not merged: %#v", s.Slots["school_names"])
+	}
+	// 意图已切换
+	if s.Intent != agent.IntentDataQuery {
+		t.Fatalf("intent = %s, want data_query", s.Intent)
+	}
+}
+
 // TestGraph_TracePersistErrorDoesNotBreakTurn 锁定契约：trace 落库失败（DB 抖动）
 // 必须仅告警，不得中断用户对话、不得返回 error。
 func TestGraph_TracePersistErrorDoesNotBreakTurn(t *testing.T) {

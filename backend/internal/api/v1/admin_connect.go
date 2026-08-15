@@ -89,7 +89,7 @@ func (h *AdminServiceHandler) GetSessionReplay(ctx context.Context, req *connect
 	}
 	for _, c := range b.Checkpoints {
 		resp.Checkpoints = append(resp.Checkpoints, &highschoolv1.ReplayCheckpoint{
-			StepSeq: c.StepSeq, Node: c.Node, StateJson: c.StateJSON, CreatedAt: c.CreatedAt,
+			Id: c.ID, StepSeq: c.StepSeq, Node: c.Node, StateJson: c.StateJSON, CreatedAt: c.CreatedAt,
 		})
 	}
 	return connect.NewResponse(resp), nil

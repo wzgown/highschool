@@ -1022,6 +1022,11 @@
         },
         "createdAt": {
           "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "checkpoint 主键：轮内多个快照 created_at 同秒，前端 key 需唯一"
         }
       }
     },

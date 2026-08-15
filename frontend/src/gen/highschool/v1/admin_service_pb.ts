@@ -461,6 +461,13 @@ export class ReplayCheckpoint extends Message<ReplayCheckpoint> {
    */
   createdAt = "";
 
+  /**
+   * checkpoint 主键：轮内多个快照 created_at 同秒，前端 key 需唯一
+   *
+   * @generated from field: int64 id = 5;
+   */
+  id = protoInt64.zero;
+
   constructor(data?: PartialMessage<ReplayCheckpoint>) {
     super();
     proto3.util.initPartial(data, this);
@@ -473,6 +480,7 @@ export class ReplayCheckpoint extends Message<ReplayCheckpoint> {
     { no: 2, name: "node", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "state_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "created_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReplayCheckpoint {

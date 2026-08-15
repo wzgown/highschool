@@ -22,6 +22,8 @@ const RouterSystemPrompt = `你是上海中考志愿顾问系统的意图识别�
 - batch: QUOTA_DISTRICT(名额到区)/QUOTA_SCHOOL(名额到校)/UNIFIED_1_15(平行志愿1-15志愿)
 - year: 年份（数字）
 
+注意：slots 只输出本轮对话新提及（或指代可明确解出）的信息。「已知槽位」仅供理解上下文，勿把与本轮问题无关的旧值原样回显进 slots——意图切换后陈旧槽位会被清除，回显等于重新污染。
+
 输出 JSON：{"intent":"...","confidence":0.0-1.0,"slots":{...},"reason":"一句话"}`
 
 // PlannerSystemPrompt 任务规划（产出工具执行计划）
