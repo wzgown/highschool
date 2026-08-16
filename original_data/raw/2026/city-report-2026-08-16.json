@@ -1,0 +1,48 @@
+{
+  "date": "2026-08-16",
+  "scrape_time": "2026-08-16T08:00:00Z",
+  "method": "curl",
+  "city_status": {
+    "shmeea_index": "11427B, 22 items with 2026, latest article 2026-07-21",
+    "shmeea_03600": "7378B, 8 items, latest article 2026-07-21 (民办高中余额)",
+    "shmeea_03200": "8712B, 10 items, latest article 2026-07-07",
+    "shmeea_03100": "latest article 2026-03-31",
+    "shmeea_24500": "5313B, only 高考 录取查询 active",
+    "new_since_last_check": "None"
+  },
+  "district_status": {
+    "total_districts": 16,
+    "accessible": 14,
+    "failed": 1,
+    "empty_content": 1,
+    "details": {
+      "闵行": "OK (30KB), 历史内容(分数线/民办降分)",
+      "奉贤": "OK (21KB), 历史内容(分数线)",
+      "金山": "OK (48KB), 历史内容(分数线)",
+      "青浦": "OK (13KB), 历史内容",
+      "徐汇": "OK (11KB), 历史内容",
+      "浦东": "OK (3KB), minimal",
+      "宝山": "OK (13KB), 历史内容(征求志愿通知)",
+      "虹口": "OK (10KB), 高考内容为主",
+      "长宁": "OK (29KB), 历史内容",
+      "嘉定": "OK (46KB), 历史内容(分数线)",
+      "崇明": "OK (60KB), 教育新闻",
+      "松江": "OK (2KB), minimal",
+      "黄浦": "OK (31KB), 录取查询已关闭(8/13 16:00)",
+      "静安": "OK (116KB), 大页面",
+      "杨浦": "OK (46KB), 历史内容",
+      "普陀": "empty/failed (148B)"
+    },
+    "notes": "深度季节性关闭期。无8月新内容。黄浦录取去向查询已于8/13 16:00关闭。"
+  },
+  "db_status": {
+    "quota_district": "943 records",
+    "quota_school": "3883 records",
+    "unified_scores": "861 records (16 districts complete)",
+    "control_scores": "6 records",
+    "lowered_private": "8 records"
+  },
+  "new_data": false,
+  "notable": "黄浦区录取去向查询已于8/13 16:00关闭，2026年录取季所有查询通道已关闭。",
+  "recommendation": "录取季完全结束。建议转为月度检查(9月起)或暂停至2027年3月。下次有意义的更新预计为2027年3月(招生工作若干意见发布)。"
+}
