@@ -1,0 +1,114 @@
+{
+  "date": "2026-08-17",
+  "scrape_time": "2026-08-17T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 11,
+  "failed_count": 2,
+  "empty_count": 3,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "empty",
+      "size": 1670,
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": 11869,
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": 31073,
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "empty",
+      "size": 548,
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "empty",
+      "size": 159,
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "size": 11782,
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "empty",
+      "size": 1107,
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": 33254,
+      "items": [
+        {
+          "title": "2026年上海市高中学校1至15志愿统一招生录取最低分数线（闵行区）",
+          "date": "pre-08-10"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "size": 15127,
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "empty",
+      "size": 147,
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "empty",
+      "size": 548,
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "size": 51633,
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "size": 2097,
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "size": 15348,
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 22041,
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "size": 71098,
+      "items": []
+    }
+  ],
+  "new_discoveries": [],
+  "notes": "All district sites in deep seasonal shutdown. 5/16 returning empty/404. Remaining sites show only pre-existing historical content."
+}
