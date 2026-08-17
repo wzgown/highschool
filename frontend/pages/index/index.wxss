@@ -1,6 +1,8 @@
 .home-page {
   min-height: 100vh;
   padding-top: 28rpx;
+  /* tab 页：为悬浮的 custom-tab-bar（100rpx + 安全区）预留底部空间 */
+  padding-bottom: calc(100rpx + env(safe-area-inset-bottom));
 }
 
 .hero-band {

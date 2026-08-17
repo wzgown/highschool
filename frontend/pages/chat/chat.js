@@ -1,13 +1,28 @@
 var agent = require('../../utils/agent')
 var markdown = require('../../utils/markdown')
 var appConfig = require('../../utils/config')
+var storage = require('../../utils/storage')
 
-var QUICK_QUESTIONS = [
+// 通用快捷问题（可直接回答，不含占位模板）
+var BASE_QUICK_QUESTIONS = [
   '今年最低控制线多少',
   '名额分配到校规则是什么',
-  '我们学校到校录取线多少',
-  'XX 中学三年分数线走势'
+  '我们学校到校录取线多少'
 ]
+
+// 追加上下文 chip：用户最近浏览的分析结果里的第一所志愿学校
+// （result 页写入 storage）。无上下文时退回通用趋势问题——
+// 后端 Planner 检测到缺校名会走 Clarify 追问「哪所高中」，而不是死胡同。
+function buildQuickQuestions() {
+  var list = BASE_QUICK_QUESTIONS.slice()
+  var schools = storage.loadFocusSchools()
+  if (schools && schools.length) {
+    list.push(schools[0] + '三年分数线走势')
+  } else {
+    list.push('查一所高中的三年分数线走势')
+  }
+  return list
+}
 
 var msgSeq = 0
 function nextMsgId() {
@@ -49,23 +64,82 @@ function extractTrendRows(payload) {
   }).filter(function (row) { return row !== null })
 }
 
+// 卡片数据明细的展示规则：技术字段隐藏，常用字段中文化。
+// 原始 payload（school_id/boardiing_type_id 等）直接展示对普通用户毫无意义。
+var KV_HIDDEN_KEYS = {
+  school_id: true, code: true, data_nature: true, is_active: true,
+  created_at: true, updated_at: true, district_filter: true, keyword: true, count: true
+}
+
+var KV_LABELS = {
+  full_name: '学校',
+  short_name: '简称',
+  district_name: '所在区',
+  school_type_id: '学校类型',
+  school_nature_id: '办学性质',
+  boarding_type_id: '寄宿',
+  has_international_course: '国际课程',
+  unified_score_latest: '最新平行志愿线',
+  quota_district_score_latest: '最新名额到区线',
+  quota_school_score_latest: '最新名额到校线',
+  batch: '批次',
+  year: '年份',
+  min_score: '最低分',
+  avg_score: '平均分',
+  plan: '计划人数',
+  score_scale: '分制'
+}
+
+var KV_VALUE_MAPS = {
+  school_nature_id: { PUBLIC: '公办', PRIVATE: '民办' },
+  school_type_id: {
+    MUNICIPAL: '市属高中',
+    CITY_MODEL: '市实验性示范性高中',
+    CITY_FEATURED: '市特色普通高中',
+    CITY_POLICY: '市实验性示范性高中（校区/分校）',
+    DISTRICT_EXPERIMENTAL: '区实验性示范性高中',
+    DISTRICT_FEATURED: '区特色普通高中',
+    DISTRICT_MODEL: '区示范性高中',
+    GENERAL: '普通高中'
+  },
+  boarding_type_id: { FULL: '全寄宿', PARTIAL: '部分寄宿', DAY: '走读', NONE: '不寄宿' },
+  batch: {
+    QUOTA_DISTRICT: '名额分配到区',
+    QUOTA_SCHOOL: '名额分配到校',
+    UNIFIED_1_15: '统一招生1-15志愿'
+  }
+}
+
+// 单个值的用户可读化：枚举映射 → 布尔 → 分数条目（{year,min_score,score_scale}）
+function formatKvValue(key, value) {
+  if (value === null || value === undefined) return ''
+  var map = KV_VALUE_MAPS[key]
+  if (map && typeof value === 'string' && map[value]) return map[value]
+  if (typeof value === 'boolean') return value ? '有' : '无'
+  if (typeof value === 'object') {
+    var parts = []
+    if (value.min_score !== undefined && value.min_score !== null) parts.push(value.min_score + '分')
+    if (value.avg_score !== undefined && value.avg_score !== null) parts.push('平均' + value.avg_score + '分')
+    if (parts.length) {
+      if (value.year) parts.push(value.year + '年')
+      if (value.score_scale) parts.push(value.score_scale + '分制')
+      return parts.join(' · ')
+    }
+    try { return JSON.stringify(value) } catch (e) { return String(value) }
+  }
+  return String(value)
+}
+
 /**
- * 通用 payload 转 key-value 列表
+ * 通用 payload 转 key-value 列表（隐藏技术字段 + 中文标签）
  */
 function toKvList(payload) {
-  return Object.keys(payload).map(function (key) {
-    var value = payload[key]
-    if (value === null || value === undefined) {
-      value = ''
-    } else if (typeof value === 'object') {
-      try {
-        value = JSON.stringify(value)
-      } catch (e) {
-        value = String(value)
-      }
-    }
-    return { key: key, value: String(value) }
-  })
+  return Object.keys(payload)
+    .filter(function (k) { return !KV_HIDDEN_KEYS[k] })
+    .map(function (key) {
+      return { key: KV_LABELS[key] || key, value: formatKvValue(key, payload[key]) }
+    })
+    .filter(function (row) { return row.value !== '' })
 }
 
 /**
@@ -88,7 +162,9 @@ function parseSchoolCards(cards) {
       districtName: (card && card.districtName) || '',
       displayType: 'kv',
       trendRows: [],
-      kv: []
+      kv: [],
+      // 数据明细默认折叠：内容偏技术性，普通用户不需要展开
+      kvCollapsed: true
     }
     if (payload && typeof payload === 'object') {
       if (view.cardType === 'score_trend') {
@@ -112,7 +188,7 @@ Page({
     inputValue: '',
     sending: false,
     pendingQuestion: null,
-    quickQuestions: QUICK_QUESTIONS,
+    quickQuestions: [],
     scrollToId: '',
     configReady: false,
     featureOff: false,
@@ -128,6 +204,7 @@ Page({
 
   onLoad: function () {
     var self = this
+    this.setData({ quickQuestions: buildQuickQuestions() })
     // 功能开关：审核期间远程关闭顾问频道（个人开发者类目限制）。
     // 关闭时不渲染任何内容，直接展示中性内容——页面完全不可见。
     this.sessionReady = appConfig.fetchAppConfig().then(function (cfg) {
@@ -156,6 +233,8 @@ Page({
   },
 
   onShow: function () {
+    // 每次进入/回到本页都刷新上下文 chip（用户可能刚看完分析结果回来）
+    this.setData({ quickQuestions: buildQuickQuestions() })
     if (!this.data.configReady) return
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 2 })
@@ -261,6 +340,18 @@ Page({
     if (!text) return
     this.setData({ pendingQuestion: null })
     this.sendMessage(text, { pendingAnswer: text })
+  },
+
+  // 展开/收起卡片数据明细
+  onToggleKvCard: function (e) {
+    var mi = e.currentTarget.dataset.mi
+    var ci = e.currentTarget.dataset.ci
+    var msg = this.data.messages[mi]
+    var card = msg && msg.cards && msg.cards[ci]
+    if (!card) return
+    var upd = {}
+    upd['messages[' + mi + '].cards[' + ci + '].kvCollapsed'] = !card.kvCollapsed
+    this.setData(upd)
   },
 
   sendMessage: function (text, extra) {

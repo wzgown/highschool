@@ -1,6 +1,7 @@
 var candidate = require('../../utils/candidate')
 var format = require('../../utils/format')
 var appConfig = require('../../utils/config')
+var storage = require('../../utils/storage')
 
 Page({
   data: {
@@ -124,6 +125,18 @@ Page({
           strategy: strategy,
           competitors: competitors
         })
+
+        // 志愿学校名（按展示顺序去重）落本地，供顾问 tab 生成
+        // 「XX三年分数线走势」上下文快捷提问
+        var focusSchools = []
+        probabilities.forEach(function (p) {
+          if (p.schoolName && focusSchools.indexOf(p.schoolName) < 0) {
+            focusSchools.push(p.schoolName)
+          }
+        })
+        if (focusSchools.length) {
+          storage.saveFocusSchools(focusSchools.slice(0, 8))
+        }
       })
       .catch(function (err) {
         self.setData({

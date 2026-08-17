@@ -1,3 +1,9 @@
+/* tab 页：为悬浮的 custom-tab-bar（100rpx + 安全区）预留底部空间
+   （覆盖 .container 仅 40rpx 的预留，页面样式在 app.wxss 之后加载、同特异性下生效） */
+.history-page {
+  padding-bottom: calc(100rpx + env(safe-area-inset-bottom));
+}
+
 .history-hero {
   padding-bottom: 20rpx;
 }

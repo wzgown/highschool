@@ -47,7 +47,7 @@
           <text class="bubble-text" user-select="{{true}}" wx:else>{{item.content}}</text>
 
           <view class="card-list" wx:if="{{item.cards.length}}">
-            <view class="school-card" wx:for="{{item.cards}}" wx:for-item="card" wx:key="index">
+            <view class="school-card" wx:for="{{item.cards}}" wx:for-item="card" wx:for-index="ci" wx:key="index">
               <view class="school-card-header">
                 <text class="school-card-name">{{card.schoolName}}</text>
                 <text class="school-card-district" wx:if="{{card.districtName}}">{{card.districtName}}</text>
@@ -67,7 +67,10 @@
               </block>
 
               <block wx:elif="{{card.kv.length}}">
-                <view class="kv-row" wx:for="{{card.kv}}" wx:for-item="kv" wx:key="key">
+                <view class="kv-toggle" data-mi="{{index}}" data-ci="{{ci}}" bindtap="onToggleKvCard">
+                  数据明细（{{card.kv.length}} 项）<text class="kv-toggle-arrow">{{card.kvCollapsed ? '▾' : '▴'}}</text>
+                </view>
+                <view class="kv-row" wx:if="{{!card.kvCollapsed}}" wx:for="{{card.kv}}" wx:for-item="kv" wx:key="key">
                   <text class="kv-key">{{kv.key}}</text>
                   <text class="kv-value">{{kv.value}}</text>
                 </view>

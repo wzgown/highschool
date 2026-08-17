@@ -4,6 +4,10 @@ page {
 
 .chat-page {
   height: 100%;
+  box-sizing: border-box;
+  /* custom-tab-bar 固定悬浮于屏幕底部（100rpx + 安全区），不占布局流；
+     必须预留同等高度，否则输入框被完全遮挡、无法继续对话 */
+  padding-bottom: calc(100rpx + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   background-color: var(--color-bg);
@@ -246,6 +250,24 @@ page {
   color: var(--color-primary);
 }
 
+/* 数据明细折叠开关：默认收起，弱化视觉（内容偏技术性） */
+.kv-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  margin-top: 10rpx;
+  padding: 8rpx 0 4rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  border-top: 2rpx dashed var(--color-border);
+}
+
+.kv-toggle-arrow {
+  font-size: 22rpx;
+  color: var(--color-text-muted);
+}
+
 .kv-row {
   display: flex;
   align-items: flex-start;
@@ -329,7 +351,8 @@ page {
   align-items: center;
   gap: 16rpx;
   padding: 16rpx 24rpx;
-  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  /* 设备安全区已由 .chat-page 的 padding-bottom 统一预留，此处不再叠加 */
+  padding-bottom: 16rpx;
   background-color: #FFFFFF;
   border-top: 2rpx solid rgba(227, 232, 239, 0.7);
 }
