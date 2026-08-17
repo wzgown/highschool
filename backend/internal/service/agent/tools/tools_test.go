@@ -49,6 +49,11 @@ func (f *fakeRepo) FindDistrictByName(ctx context.Context, name string) (*reposi
 	return &repository.DistrictRef{ID: 12, Name: "浦东新区"}, nil
 }
 
+// TopSchoolNamesByDistrict Clarify 动态选项数据源（工具测试不涉及，桩实现）
+func (f *fakeRepo) TopSchoolNamesByDistrict(ctx context.Context, districtID int32, districtName string, limit int) ([]string, error) {
+	return nil, nil
+}
+
 func (f *fakeRepo) FindSchoolByName(ctx context.Context, name string, districtID int32) (*repository.SchoolRef, error) {
 	if f.schoolErr != nil {
 		return nil, f.schoolErr

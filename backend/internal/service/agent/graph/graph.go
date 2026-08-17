@@ -49,6 +49,9 @@ type Graph struct {
 	Tools ToolRunner
 	Store agent.Store
 	Cfg   Config
+	// ClarifyOptions 槽位追问的动态选项数据源（如「哪所高中」按区给候选）；
+	// nil 时 school_names 追问无选项、由用户自由输入
+	ClarifyOptions agent.ClarifyOptionsProvider
 }
 
 // NewGraph 创建状态图

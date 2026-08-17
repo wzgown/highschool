@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
 	"highschool-backend/internal/repository"
 	"highschool-backend/internal/service/agent"
@@ -30,12 +31,12 @@ func (t *getScoreTrendTool) Spec() agent.ToolSpec {
 	return agent.ToolSpec{
 		Name: "get_score_trend",
 		Description: "查询某高中某批次的多年录取分数线与同比涨跌，用于判断「这学校线稳不稳」。" +
-			"batch 必填且分制固定（到区/到校 800 制，平行志愿 750 制）。例：「华二到区线这几年涨了吗」。",
+			"batch 不传默认查 UNIFIED_1_15（1-15 平行志愿，750 分制）。例：「华二这几年线涨了吗」。",
 		ParametersJSON: jsonSchema(map[string]any{
 			"school_name":   strProp("高中名称，支持简称"),
-			"batch":         batchProp(true),
+			"batch":         batchProp(false),
 			"district_name": strProp("可选，限定录取区（到区/平行志愿按区出线的场景建议传）"),
-		}, []string{"school_name", "batch"}),
+		}, []string{"school_name"}),
 	}
 }
 
@@ -48,12 +49,11 @@ func (t *getScoreTrendTool) Execute(ctx context.Context, raw json.RawMessage) (*
 	if err != nil {
 		return nil, err
 	}
-	batch, err := trimRequired(args.Batch, "batch")
-	if err != nil {
-		return nil, err
-	}
-	batch, err = checkBatch(batch)
-	if err != nil {
+	// 用户问「三年走势」通常不指明批次：缺省平行志愿（1-15），分制固定 750
+	batch := strings.ToUpper(strings.TrimSpace(args.Batch))
+	if batch == "" {
+		batch = BatchUnified
+	} else if batch, err = checkBatch(args.Batch); err != nil {
 		return nil, err
 	}
 	districtID, districtName, err := resolveDistrict(ctx, t.repo, args.DistrictName)

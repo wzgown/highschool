@@ -46,6 +46,8 @@ func NewAgentServiceHandler() (*AgentServiceHandler, error) {
 		ReflectionLLMEnabled: cfg.Agent.ReflectionLLMEnabled,
 		Model:                cfg.LLM.Model,
 	})
+	// 槽位追问动态选项数据源（「哪所高中」按考生所在区给候选）
+	g.ClarifyOptions = dataRepo
 	var secChecker wechat.SecChecker
 	if cfg.WeChat.Secret != "" && cfg.WeChat.AppID != "" {
 		secChecker = wechat.NewSecChecker(cfg.WeChat.AppID, cfg.WeChat.Secret)

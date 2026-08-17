@@ -27,10 +27,10 @@ const (
 
 // ---------- 会话状态 ----------
 const (
-	SessionStatusRunning       = "running"
-	SessionStatusWaitingInput  = "waiting_input"
-	SessionStatusDone          = "done"
-	SessionStatusAborted       = "aborted"
+	SessionStatusRunning      = "running"
+	SessionStatusWaitingInput = "waiting_input"
+	SessionStatusDone         = "done"
+	SessionStatusAborted      = "aborted"
 )
 
 // Message 对话消息（同时用于 LLM 上下文与 agent_message 落库）
@@ -89,8 +89,8 @@ type SchoolCard struct {
 
 // ToolResult 工具执行结果（双载荷）
 type ToolResult struct {
-	ForLLM  string       `json:"-"`      // 给 LLM 的 JSON 文本
-	Cards   []SchoolCard `json:"-"`      // 给前端的卡片
+	ForLLM  string       `json:"-"`       // 给 LLM 的 JSON 文本
+	Cards   []SchoolCard `json:"-"`       // 给前端的卡片
 	Summary string       `json:"summary"` // 给人看的工具摘要，如「查询 2024-2026 平行志愿分数线」
 }
 
@@ -151,17 +151,27 @@ type State struct {
 
 // ---------- ThreadStore 持久化抽象 ----------
 
+// ClarifyOptionsProvider Clarify 追问动态选项数据源。
+// 槽位追问的选项不应写死——如「哪所高中」应按考生所在区给区内头部校，
+// 区未知时无选项、由用户自由输入。
+type ClarifyOptionsProvider interface {
+	// TopSchoolNamesByDistrict 区内热门高中展示名（可被 FindSchoolByName 解析）。
+	// districtID 优先；为 0 时用 districtName 解析（支持「徐汇」→「徐汇区」）。
+	// 两者皆空或无数据时返回错误/空列表。
+	TopSchoolNamesByDistrict(ctx context.Context, districtID int32, districtName string, limit int) ([]string, error)
+}
+
 // Session 会话记录
 type Session struct {
-	ID           int64
-	DeviceID     string
-	Status       string
-	CurrentNode  string
-	Intent       string
-	Slots        map[string]any
-	PendingQ     *PendingQuestion
-	AnalysisID   *int64
-	Version      int
+	ID          int64
+	DeviceID    string
+	Status      string
+	CurrentNode string
+	Intent      string
+	Slots       map[string]any
+	PendingQ    *PendingQuestion
+	AnalysisID  *int64
+	Version     int
 }
 
 // TraceRecord 一次 LLM/工具/节点调用留痕

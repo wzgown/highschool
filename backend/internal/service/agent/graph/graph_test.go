@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strings"
 	"testing"
 
@@ -47,7 +48,9 @@ type fakeStore struct {
 	traceErr    error // 非空时 AppendTrace 返回该错误，验证留痕失败不阻断主流程
 }
 
-func (f *fakeStore) CreateSession(ctx context.Context, d string, a *int64) (int64, error) { return 1, nil }
+func (f *fakeStore) CreateSession(ctx context.Context, d string, a *int64) (int64, error) {
+	return 1, nil
+}
 func (f *fakeStore) GetSession(ctx context.Context, id int64) (*agent.Session, error) {
 	return &agent.Session{ID: id, DeviceID: "dev"}, nil
 }
@@ -86,8 +89,8 @@ func newTestState() *agent.State {
 func TestGraph_DataQueryFlow(t *testing.T) {
 	llm := &fakeLLM{responses: map[string]string{
 		"意图识别器": `{"intent":"data_query","confidence":0.95,"slots":{"school_names":["上海市第二中学"],"district_name":"徐汇区","batch":"UNIFIED_1_15"}}`,
-		"任务规划器":  `{"steps":[{"tool_name":"get_admission_scores","args":{"school_name":"上海市第二中学","district_name":"徐汇区"}}]}`,
-		"折桂登高": "市二中学在徐汇区平行志愿线：2024年683.5、2025年682.5、2026年689.5（750分制）。",
+		"任务规划器": `{"steps":[{"tool_name":"get_admission_scores","args":{"school_name":"上海市第二中学","district_name":"徐汇区"}}]}`,
+		"折桂登高":  "市二中学在徐汇区平行志愿线：2024年683.5、2025年682.5、2026年689.5（750分制）。",
 	}}
 	tools := &fakeTools{}
 	store := &fakeStore{}
@@ -166,8 +169,8 @@ func TestGraph_ReflectionReplanThenDegrade(t *testing.T) {
 	// Synthesizer 永远输出幻觉数字 → Reflection 连续拦截 → 超过 MaxReplan 降级
 	llm := &fakeLLM{responses: map[string]string{
 		"意图识别器": `{"intent":"data_query","confidence":0.9,"slots":{}}`,
-		"任务规划器":  `{"steps":[{"tool_name":"get_admission_scores","args":{}}]}`,
-		"折桂登高": "这所学校录取线是999.9分。",
+		"任务规划器": `{"steps":[{"tool_name":"get_admission_scores","args":{}}]}`,
+		"折桂登高":  "这所学校录取线是999.9分。",
 	}}
 	g := NewGraph(llm, &fakeTools{}, &fakeStore{}, Config{MaxReplan: 2, StepBudget: 20})
 	state := newTestState()
@@ -220,13 +223,214 @@ func TestRouter_ClearsEphemeralSlotsOnIntentChange(t *testing.T) {
 	}
 }
 
+// TestPlanner_NeedClarifySchool 锁定契约：Planner 声明缺 school_names 槽位 →
+// 转 Clarify 追问（HITL）；槽位已存在时 need_clarify 被忽略（防误报）。
+// 区未知 → 追问无选项（用户自由输入）；区已知 → 选项由 ClarifyOptions 按区动态给出。
+func TestPlanner_NeedClarifySchool(t *testing.T) {
+	llm := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[],"need_clarify":"school_names"}`,
+	}}
+	g := NewGraph(llm, &fakeTools{}, nil, Config{})
+
+	// ① 槽位缺失且区未知 → Clarify，无选项（不写死热门校）
+	s := &agent.State{Intent: agent.IntentDataQuery, UserMessage: "查一所高中的三年分数线走势"}
+	next, err := g.plannerNode(context.Background(), s)
+	if err != nil {
+		t.Fatalf("plannerNode failed: %v", err)
+	}
+	if next != NodeClarify || s.NeedClarifyField != "school_names" {
+		t.Fatalf("next=%s needClarify=%q, want clarify/school_names", next, s.NeedClarifyField)
+	}
+	if _, err := g.clarifyNode(context.Background(), s); err != nil {
+		t.Fatalf("clarifyNode failed: %v", err)
+	}
+	if s.PendingQ == nil || s.PendingQ.Field != "school_names" {
+		t.Fatalf("PendingQ 应为 school_names：%+v", s.PendingQ)
+	}
+	if len(s.PendingQ.Options) != 0 {
+		t.Fatalf("区未知时校名追问不应有选项：%v", s.PendingQ.Options)
+	}
+
+	// ② 槽位缺失但区已知（徐汇）→ 选项来自 ClarifyOptions（按区）
+	g.ClarifyOptions = fakeClarifyOptions{"徐汇区": []string{"上海中学", "位育中学", "南洋模范"}}
+	s2 := &agent.State{
+		Intent:      agent.IntentDataQuery,
+		Slots:       map[string]any{"district_name": "徐汇区"},
+		UserMessage: "查一所高中的三年分数线走势",
+	}
+	if _, err := g.plannerNode(context.Background(), s2); err != nil {
+		t.Fatalf("plannerNode(2) failed: %v", err)
+	}
+	if _, err := g.clarifyNode(context.Background(), s2); err != nil {
+		t.Fatalf("clarifyNode(2) failed: %v", err)
+	}
+	if s2.PendingQ == nil || len(s2.PendingQ.Options) != 3 || s2.PendingQ.Options[0] != "上海中学" {
+		t.Fatalf("区已知时选项应为按区动态候选：%+v", s2.PendingQ)
+	}
+	if !strings.Contains(s2.PendingQ.Question, "徐汇") {
+		t.Fatalf("追问应提及考生所在区：%q", s2.PendingQ.Question)
+	}
+
+	// ③ 槽位已在（如 HITL 回答已并入）→ 忽略 need_clarify，按空计划走 Synthesizer
+	s3 := &agent.State{
+		Intent:      agent.IntentDataQuery,
+		Slots:       map[string]any{"school_names": "华二"},
+		UserMessage: "华二三年分数线走势",
+	}
+	next3, err := g.plannerNode(context.Background(), s3)
+	if err != nil {
+		t.Fatalf("plannerNode(3) failed: %v", err)
+	}
+	if next3 != NodeSynthesizer {
+		t.Fatalf("槽位已存在时 need_clarify 应被忽略：next=%s, want %s", next3, NodeSynthesizer)
+	}
+}
+
+// fakeClarifyOptions 按区名返回固定候选
+type fakeClarifyOptions map[string][]string
+
+func (f fakeClarifyOptions) TopSchoolNamesByDistrict(ctx context.Context, districtID int32, districtName string, limit int) ([]string, error) {
+	if names, ok := f[districtName]; ok {
+		return names, nil
+	}
+	return nil, fmt.Errorf("no district %q", districtName)
+}
+
+// schemaTools 带参数 schema 的工具桩（validatePlan 依据 required 列表校验）
+type schemaTools struct{ fakeTools }
+
+func (f *schemaTools) Specs() []agent.ToolSpec {
+	return []agent.ToolSpec{{
+		Name: "get_score_trend", Description: "查趋势",
+		ParametersJSON: map[string]any{
+			"type":       "object",
+			"properties": map[string]any{"school_name": map[string]any{"type": "string"}},
+			"required":   []any{"school_name"},
+		},
+	}}
+}
+
+// TestPlanner_PlaceholderArgBecomesClarify 锁定契约（session 59 实证）：
+// planner 把参数描述 echo 成值（school_name="学校名称"）时，确定性校验拦截 →
+// Clarify 追问校名；真实校名的步骤正常保留。
+func TestPlanner_PlaceholderArgBecomesClarify(t *testing.T) {
+	llm := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{"school_name":"学校名称"}}]}`,
+	}}
+	g := NewGraph(llm, &schemaTools{}, nil, Config{})
+
+	s := &agent.State{Intent: agent.IntentDataQuery, UserMessage: "查一所高中的三年分数线走势"}
+	next, err := g.plannerNode(context.Background(), s)
+	if err != nil {
+		t.Fatalf("plannerNode failed: %v", err)
+	}
+	if next != NodeClarify || s.NeedClarifyField != "school_names" {
+		t.Fatalf("占位校名应触发 Clarify：next=%s field=%q", next, s.NeedClarifyField)
+	}
+
+	// 真实校名 → 步骤保留进入执行
+	s2 := &agent.State{Intent: agent.IntentDataQuery, UserMessage: "嘉定一中走势"}
+	llm2 := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{"school_name":"嘉定一中"}}]}`,
+	}}
+	g2 := NewGraph(llm2, &schemaTools{}, nil, Config{})
+	next2, err := g2.plannerNode(context.Background(), s2)
+	if err != nil {
+		t.Fatalf("plannerNode(2) failed: %v", err)
+	}
+	if next2 != NodeExecutor || len(s2.Plan) != 1 {
+		t.Fatalf("真实校名的步骤应保留：next=%s plan=%+v", next2, s2.Plan)
+	}
+}
+
+// TestGraph_FullFlow_PlaceholderSchoolClarifies 复刻线上 session 59 的失败链：
+// router 正确空槽位 + planner 把参数描述 echo 成值（school_name="学校名称"）→
+// 确定性校验拦截 → 用户收到友好的校名追问，而非暴露「必填参数 batch」等内部术语。
+func TestGraph_FullFlow_PlaceholderSchoolClarifies(t *testing.T) {
+	llm := &fakeLLM{responses: map[string]string{
+		"意图识别器": `{"intent":"data_query","confidence":0.95,"slots":{},"reason":"未指明具体高中"}`,
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{"school_name":"学校名称"}}]}`,
+	}}
+	g := NewGraph(llm, &schemaTools{}, &fakeStore{}, Config{})
+	s := newTestState()
+	s.UserMessage = "查一所高中的三年分数线走势"
+	s.Intent = agent.IntentDataQuery
+
+	got, err := g.Run(context.Background(), s)
+	if err != nil {
+		t.Fatalf("Run failed: %v", err)
+	}
+	if got.PendingQ == nil || got.PendingQ.Field != "school_names" {
+		t.Fatalf("应以校名追问收尾：%+v", got.PendingQ)
+	}
+	for _, banned := range []string{"参数", "batch", "工具", "槽位"} {
+		if strings.Contains(got.Reply, banned) {
+			t.Fatalf("回复不得暴露内部术语 %q：%s", banned, got.Reply)
+		}
+	}
+	if want := ClarifyQuestions["school_names"].Question; got.Reply != want {
+		t.Fatalf("回复应为校名追问模板：got %q want %q", got.Reply, want)
+	}
+}
+
+// TestPlanner_FabricatedSchoolBecomesClarify 锁定契约（session 60 实证）：
+// 消息无校名时，planner 凭空编造真实校名（「上海市实验学校」）→ 依据校验拦截 → Clarify；
+// 消息确有校名（planner 仅做标准化）→ 放行执行。
+func TestPlanner_FabricatedSchoolBecomesClarify(t *testing.T) {
+	// ① 编造校名：消息是通用趋势问题，无任何校名依据
+	llm := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{"school_name":"上海市实验学校"}}]}`,
+	}}
+	g := NewGraph(llm, &schemaTools{}, nil, Config{})
+	s := &agent.State{Intent: agent.IntentDataQuery, UserMessage: "查一所高中的三年分数线走势"}
+	next, err := g.plannerNode(context.Background(), s)
+	if err != nil {
+		t.Fatalf("plannerNode failed: %v", err)
+	}
+	if next != NodeClarify || s.NeedClarifyField != "school_names" {
+		t.Fatalf("编造校名应触发 Clarify：next=%s field=%q", next, s.NeedClarifyField)
+	}
+
+	// ② 有依据：用户消息含「格致」，planner 标准化出全称（含括号校区）→ 放行
+	llm2 := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{"school_name":"格致中学（奉贤校区）"}}]}`,
+	}}
+	g2 := NewGraph(llm2, &schemaTools{}, nil, Config{})
+	s2 := &agent.State{Intent: agent.IntentDataQuery, UserMessage: "格致中学（奉贤校区）三年分数线走势"}
+	next2, err := g2.plannerNode(context.Background(), s2)
+	if err != nil {
+		t.Fatalf("plannerNode(2) failed: %v", err)
+	}
+	if next2 != NodeExecutor || len(s2.Plan) != 1 {
+		t.Fatalf("有依据的校名应放行执行：next=%s plan=%+v", next2, s2.Plan)
+	}
+
+	// ③ 有依据（简称在历史里）：本轮用「它」，上轮说过「嘉定一中」→ 放行
+	llm3 := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{"school_name":"嘉定一中"}}]}`,
+	}}
+	g3 := NewGraph(llm3, &schemaTools{}, nil, Config{})
+	s3 := &agent.State{
+		Intent:      agent.IntentDataQuery,
+		UserMessage: "它近三年走势呢",
+		Messages:    []agent.Message{{Role: agent.RoleUser, Content: "嘉定一中分数线"}, {Role: agent.RoleAssistant, Content: "…"}},
+	}
+	next3, err := g3.plannerNode(context.Background(), s3)
+	if err != nil {
+		t.Fatalf("plannerNode(3) failed: %v", err)
+	}
+	if next3 != NodeExecutor || len(s3.Plan) != 1 {
+		t.Fatalf("历史有依据的校名应放行：next=%s plan=%+v", next3, s3.Plan)
+	}
+}
+
 // TestGraph_TracePersistErrorDoesNotBreakTurn 锁定契约：trace 落库失败（DB 抖动）
 // 必须仅告警，不得中断用户对话、不得返回 error。
 func TestGraph_TracePersistErrorDoesNotBreakTurn(t *testing.T) {
 	llm := &fakeLLM{responses: map[string]string{
 		"意图识别器": `{"intent":"data_query","confidence":0.95,"slots":{"school_names":["上海市第二中学"],"district_name":"徐汇区","batch":"UNIFIED_1_15"}}`,
-		"任务规划器":  `{"steps":[{"tool_name":"get_admission_scores","args":{"school_name":"上海市第二中学","district_name":"徐汇区"}}]}`,
-		"折桂登高": "市二中学在徐汇区平行志愿线：2026年689.5（750分制）。",
+		"任务规划器": `{"steps":[{"tool_name":"get_admission_scores","args":{"school_name":"上海市第二中学","district_name":"徐汇区"}}]}`,
+		"折桂登高":  "市二中学在徐汇区平行志愿线：2026年689.5（750分制）。",
 	}}
 	store := &fakeStore{traceErr: errors.New("db connection refused")}
 	g := NewGraph(llm, &fakeTools{}, store, Config{MaxReplan: 2, StepBudget: 12})

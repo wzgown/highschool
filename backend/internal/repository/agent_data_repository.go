@@ -13,6 +13,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"highschool-backend/internal/infrastructure/database"
+	"highschool-backend/internal/service/agent"
 )
 
 // ErrNotFound 记录未找到（学校/初中/区县/画像）
@@ -166,6 +167,9 @@ type LocatedSchoolRow struct {
 type AgentDataRepository interface {
 	// FindDistrictByName 区名 → 区县（exact → LIKE，如「浦东」→「浦东新区」）
 	FindDistrictByName(ctx context.Context, name string) (*DistrictRef, error)
+	// TopSchoolNamesByDistrict 区内热门高中展示名（Clarify 追问动态选项；agent.ClarifyOptionsProvider）
+	// districtID 优先，为 0 时用 districtName 解析；无分数线数据退回区内学校列表
+	TopSchoolNamesByDistrict(ctx context.Context, districtID int32, districtName string, limit int) ([]string, error)
 	// FindSchoolByName 高中名 → 学校（full_name exact → short_name exact → LIKE）
 	// districtID 传 0 表示不限区；未找到返回 ErrNotFound
 	FindSchoolByName(ctx context.Context, name string, districtID int32) (*SchoolRef, error)
@@ -230,6 +234,71 @@ func (r *agentDataRepo) FindDistrictByName(ctx context.Context, name string) (*D
 		return nil, fmt.Errorf("find district failed: %w", err)
 	}
 	return &d, nil
+}
+
+var _ agent.ClarifyOptionsProvider = (*agentDataRepo)(nil)
+
+// TopSchoolNamesByDistrict 区内热门高中展示名（agent.ClarifyOptionsProvider 实现）。
+// 「热门」以最新年份平行志愿录取线降序为准；该区无分数线数据时退回区内学校列表。
+// 展示名优先简称（可被 FindSchoolByName short_name 精确命中）。
+func (r *agentDataRepo) TopSchoolNamesByDistrict(ctx context.Context, districtID int32, districtName string, limit int) ([]string, error) {
+	if districtID == 0 && districtName != "" {
+		d, err := r.FindDistrictByName(ctx, districtName)
+		if err != nil {
+			return nil, err
+		}
+		districtID = d.ID
+	}
+	if districtID == 0 {
+		return nil, fmt.Errorf("top schools: no district")
+	}
+	if limit <= 0 {
+		limit = 7
+	}
+
+	// 主路径：区内最新年份平行志愿线降序（即该区考生实际可填、最热的头部校）
+	rows, err := r.db.Query(ctx, `
+		SELECT COALESCE(NULLIF(s.short_name, ''), s.full_name)
+		FROM (
+			SELECT DISTINCT ON (school_id) school_id, min_score
+			FROM ref_admission_score_unified
+			WHERE district_id = $1 AND school_id IS NOT NULL
+			ORDER BY school_id, year DESC
+		) t
+		JOIN ref_school s ON s.id = t.school_id
+		WHERE s.is_active
+		ORDER BY t.min_score DESC, t.school_id
+		LIMIT $2`, districtID, limit)
+	if err != nil {
+		return nil, fmt.Errorf("top schools by score: %w", err)
+	}
+	defer rows.Close()
+	names, err := pgx.CollectRows(rows, func(row pgx.CollectableRow) (string, error) {
+		var n string
+		return n, row.Scan(&n)
+	})
+	if err != nil {
+		return nil, fmt.Errorf("top schools scan: %w", err)
+	}
+	if len(names) > 0 {
+		return names, nil
+	}
+
+	// 兜底：区内无分数线（数据缺口），退回区内全部在招高中
+	fallback, err := r.db.Query(ctx, `
+		SELECT COALESCE(NULLIF(s.short_name, ''), s.full_name)
+		FROM ref_school s
+		WHERE s.district_id = $1 AND s.is_active
+		ORDER BY s.full_name
+		LIMIT $2`, districtID, limit)
+	if err != nil {
+		return nil, fmt.Errorf("top schools fallback: %w", err)
+	}
+	defer fallback.Close()
+	return pgx.CollectRows(fallback, func(row pgx.CollectableRow) (string, error) {
+		var n string
+		return n, row.Scan(&n)
+	})
 }
 
 func (r *agentDataRepo) FindSchoolByName(ctx context.Context, name string, districtID int32) (*SchoolRef, error) {

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"regexp"
 	"strings"
 	"time"
 
@@ -99,10 +100,18 @@ func (g *Graph) plannerNode(ctx context.Context, s *agent.State) (string, error)
 		return "", err
 	}
 	var planOut struct {
-		Steps []agent.Step `json:"steps"`
+		Steps       []agent.Step `json:"steps"`
+		NeedClarify string       `json:"need_clarify"`
 	}
 	if err := json.Unmarshal([]byte(extractJSON(result.Content)), &planOut); err != nil {
 		planOut.Steps = nil
+	}
+	// 缺必要槽位 → Clarify 向用户追问（槽位实际已存在则忽略，防 LLM 误报）
+	if f := planOut.NeedClarify; f != "" {
+		if _, ok := s.Slots[f]; !ok {
+			s.NeedClarifyField = f
+			return NodeClarify, nil
+		}
 	}
 	// 过滤掉注册表中不存在的工具
 	valid := map[string]bool{}
@@ -115,11 +124,136 @@ func (g *Graph) plannerNode(ctx context.Context, s *agent.State) (string, error)
 			steps = append(steps, st)
 		}
 	}
+	// 计划校验（确定性兜底，不信任 LLM 自觉）：必填参数为空/占位文字的步骤
+	// 视为缺信息——校名缺失且无校名槽位 → Clarify 向用户追问，其余此类步骤丢弃。
+	// 背景：session 59 实证 planner 会把参数描述 echo 成值（school_name="学校名称"）。
+	steps, clarifyField := validatePlan(specs, steps, s)
+	if clarifyField != "" {
+		if _, ok := s.Slots[clarifyField]; !ok {
+			s.NeedClarifyField = clarifyField
+			return NodeClarify, nil
+		}
+	}
 	s.Plan = steps
 	if len(steps) == 0 {
 		return NodeSynthesizer, nil
 	}
 	return NodeExecutor, nil
+}
+
+// validatePlan 校验步骤必填参数（依据 ToolSpec JSON Schema 的 required 列表）。
+// 无 schema 的工具（如测试桩）不校验。返回存活步骤与需追问的槽位名。
+func validatePlan(specs []agent.ToolSpec, steps []agent.Step, s *agent.State) ([]agent.Step, string) {
+	requiredByTool := make(map[string][]string, len(specs))
+	for _, sp := range specs {
+		raw, ok := sp.ParametersJSON["required"]
+		if !ok {
+			continue
+		}
+		arr, ok := raw.([]any)
+		if !ok {
+			continue
+		}
+		req := make([]string, 0, len(arr))
+		for _, item := range arr {
+			if str, ok := item.(string); ok {
+				req = append(req, str)
+			}
+		}
+		requiredByTool[sp.Name] = req
+	}
+	if len(requiredByTool) == 0 {
+		return steps, ""
+	}
+
+	clarifyField := ""
+	kept := make([]agent.Step, 0, len(steps))
+	for _, st := range steps {
+		drop := false
+		for _, k := range requiredByTool[st.ToolName] {
+			v, _ := st.Args[k].(string)
+			if !isPlaceholderArg(v) {
+				// 非占位但槽位无校名：校名必须与用户消息/历史有依据，
+				// 防 planner 凭空编造真实校名（session 60 实证：填了「上海市实验学校」）
+				if (k == "school_name" || k == "school_names") && !slotHasSchool(s) && !schoolArgGrounded(v, s) {
+					clarifyField = "school_names"
+					drop = true
+				}
+				continue
+			}
+			if (k == "school_name" || k == "school_names") && !slotHasSchool(s) {
+				clarifyField = "school_names"
+			}
+			drop = true
+		}
+		if !drop {
+			kept = append(kept, st)
+		}
+	}
+	return kept, clarifyField
+}
+
+// schoolGenericWords 校名中的通用词（去掉后剩下的才是可判依据的核心字）
+var schoolGenericWords = []string{
+	"上海市", "上海", "师范", "大学", "附属", "高级", "中学", "高中",
+	"校区", "分校", "实验", "学校", "（", "）", "(", ")", " ",
+}
+
+// schoolArgGrounded planner 给出的校名是否有用户依据：
+// 去通用词后的核心字，任意连续 2 字出现在本轮消息或最近历史即算有依据
+// （planner 可能把「华二」标准化成全称，故不能要求全名子串命中；
+// 反之编造的校名核心字几乎不可能撞上用户原话）。
+func schoolArgGrounded(name string, s *agent.State) bool {
+	core := name
+	for _, w := range schoolGenericWords {
+		core = strings.ReplaceAll(core, w, "")
+	}
+	runes := []rune(core)
+	if len(runes) < 2 {
+		// 核心字不足 2（如纯「实验学校」类），无法建立依据，交由 Clarify
+		return false
+	}
+	text := s.UserMessage
+	history := s.Messages
+	if len(history) > 8 {
+		history = history[len(history)-8:]
+	}
+	for _, m := range history {
+		text += m.Content
+	}
+	for i := 0; i+2 <= len(runes); i++ {
+		if strings.Contains(text, string(runes[i:i+2])) {
+			return true
+		}
+	}
+	return false
+}
+
+// isPlaceholderArg 参数值是否为空/占位文字（LLM 可能把 schema 描述 echo 成值）
+func isPlaceholderArg(v string) bool {
+	v = strings.TrimSpace(v)
+	if v == "" {
+		return true
+	}
+	if strings.Contains(v, "支持简称") || strings.Contains(v, "支持全称") {
+		return true
+	}
+	return placeholderArgRe.MatchString(v)
+}
+
+var placeholderArgRe = regexp.MustCompile(`^(学校名称|高中名称|学校名|校名|某所高中|一所高中|批次|年份|区县|区名|初中名称|XX|xx|待定|未知|…|\.{3})$`)
+
+// slotHasSchool 槽位里是否已有可用校名（HITL 回答回填或 Router 抽取）
+func slotHasSchool(s *agent.State) bool {
+	if arr, ok := s.Slots["school_names"].([]any); ok && len(arr) > 0 {
+		return true
+	}
+	for _, k := range []string{"school_names", "school_name"} {
+		if v, ok := s.Slots[k].(string); ok && strings.TrimSpace(v) != "" {
+			return true
+		}
+	}
+	return false
 }
 
 // ---------- ③ PlanExecutor 工具执行 ----------
@@ -178,13 +312,57 @@ func (g *Graph) clarifyNode(ctx context.Context, s *agent.State) (string, error)
 	if !ok {
 		tpl = ClarifyQuestions["confirm"]
 	}
-	s.PendingQ = &agent.PendingQuestion{
-		Question: tpl.Question,
-		Field:    s.NeedClarifyField,
-		Options:  tpl.Options,
+	question, options := tpl.Question, tpl.Options
+
+	// school_names：选项按考生所在区动态取（区内头部校）；区未知则无选项、纯输入
+	if s.NeedClarifyField == "school_names" {
+		if district := slotString(s.Slots, "district_name"); district != "" {
+			if names := g.schoolOptionsByDistrict(ctx, s, district); len(names) > 0 {
+				options = names
+				question = fmt.Sprintf("你想了解哪所高中？%s的热门高中如下，也可以直接说校名：", strings.TrimSuffix(district, "区"))
+			}
+		}
 	}
-	s.Reply = tpl.Question
+
+	s.PendingQ = &agent.PendingQuestion{
+		Question: question,
+		Field:    s.NeedClarifyField,
+		Options:  options,
+	}
+	s.Reply = question
 	return NodeEnd, nil
+}
+
+// schoolOptionsByDistrict 从槽位解析 district_id（前端 context 下来源）辅助查询
+func (g *Graph) schoolOptionsByDistrict(ctx context.Context, s *agent.State, districtName string) []string {
+	if g.ClarifyOptions == nil {
+		return nil
+	}
+	names, err := g.ClarifyOptions.TopSchoolNamesByDistrict(ctx, slotInt32(s.Slots, "district_id"), districtName, 7)
+	if err != nil {
+		logger.Warn(ctx, "clarify school options by district failed: "+err.Error())
+		return nil
+	}
+	return names
+}
+
+// slotString 读字符串槽位（容错空值）
+func slotString(slots map[string]any, key string) string {
+	v, _ := slots[key].(string)
+	return v
+}
+
+// slotInt32 读整型槽位（JSON 反序列化后数字为 float64，兼容 int/int64）
+func slotInt32(slots map[string]any, key string) int32 {
+	switch n := slots[key].(type) {
+	case float64:
+		return int32(n)
+	case int:
+		return int32(n)
+	case int64:
+		return int32(n)
+	}
+	return 0
 }
 
 // ---------- ⑤ ResultSynthesizer 结果综合 ----------
