@@ -1,0 +1,151 @@
+{
+  "date": "2026-08-18",
+  "scrape_time": "2026-08-18T08:00:00+08:00",
+  "method": "curl",
+  "status": "no_new_data",
+  "summary": {
+    "city_level": "no_changes",
+    "latest_city_article": "2026-07-14 (录取工作答学生问)",
+    "district_level": "seasonal_shutdown",
+    "district_success": 10,
+    "district_empty_404": 6,
+    "district_error": 0,
+    "district_with_content": 7
+  },
+  "sections": {
+    "zhao_sheng_zheng_ce": {
+      "latest_date": "2026-03-31",
+      "status": "no_change"
+    },
+    "zhao_sheng_gong_shi": {
+      "latest_date": "2026-07-07",
+      "status": "no_change"
+    },
+    "zhao_sheng_lu_qu": {
+      "latest_date": "2026-07-14",
+      "status": "no_change"
+    },
+    "bao_ming_xu_zhi": {
+      "status": "no_change"
+    },
+    "zhi_yuan_tian_bao": {
+      "status": "no_change"
+    },
+    "kao_shi_gui_ding": {
+      "status": "no_change"
+    },
+    "page_24500": {
+      "status": "no_change"
+    }
+  },
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "404",
+      "size": 1569
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "size": 10847,
+      "items": 5
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "size": 28837,
+      "items": 5
+    },
+    {
+      "name": "静安",
+      "status": "404",
+      "size": 535
+    },
+    {
+      "name": "普陀",
+      "status": "empty",
+      "size": 148
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "size": 10494,
+      "items": 0
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "size": 1007,
+      "items": 0
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "size": 30036,
+      "items": 10
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "size": 13333,
+      "items": 5
+    },
+    {
+      "name": "嘉定",
+      "status": "404",
+      "size": 147
+    },
+    {
+      "name": "浦东",
+      "status": "404",
+      "size": 535
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "size": 48314,
+      "items": 5
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "size": 2065,
+      "items": 0
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "size": 13304,
+      "items": 10
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "size": 20946,
+      "items": 5
+    },
+    {
+      "name": "崇明",
+      "status": "404",
+      "size": 449
+    }
+  ],
+  "db_status": {
+    "quota_district": {
+      "records": 943,
+      "quota": 7156
+    },
+    "quota_school": {
+      "records": 3883,
+      "quota": 12861
+    },
+    "unified_scores": {
+      "records": 861,
+      "avg": 606.9,
+      "min": 441.5,
+      "max": 719.5
+    },
+    "control_scores": 6,
+    "school_control_scores": 8
+  }
+}
