@@ -1,0 +1,40 @@
+{
+  "date": "2026-08-21",
+  "scrape_time": "2026-08-21T08:00:00",
+  "city_monitoring": {
+    "status": "success",
+    "method": "curl",
+    "notes": "与08-19报告一致，无新公告。最新文章日期2026-07-23。6个板块内容无变化。"
+  },
+  "district_monitoring": {
+    "total_districts": 16,
+    "checked": 12,
+    "new_items": 0,
+    "notes": "深度季节性关闭期。抽查12个区网站均无8月新中考内容。录取季完全结束。"
+  },
+  "db_changes": {
+    "action": "IMPORTED quota admission scores (2026)",
+    "quota_district_scores_2026": {
+      "before": 0,
+      "after": 906,
+      "source": "seed_ref_admission_score_quota_district_2026.sql (derived from sh_zhongkao_2026 dataset, 77 schools x 16 districts)"
+    },
+    "quota_school_scores_2026": {
+      "before": 0,
+      "after": 3247,
+      "source": "seed_ref_admission_score_quota_school_2026.sql (derived from sh_zhongkao_2026 dataset, 16 districts)"
+    },
+    "notes": "PDFs downloaded 2026-07-20 from shmeea, parsed and seed SQL generated via sh_zhongkao_2026 dataset. FK validation passed (all 77 school_ids and 16 district_ids valid). ON CONFLICT DO UPDATE used for idempotency."
+  },
+  "db_status": {
+    "quota_alloc_district_2026": 943,
+    "quota_alloc_school_2026": 3883,
+    "quota_score_district_2025": 914,
+    "quota_score_district_2026": 906,
+    "quota_score_school_2025": 3672,
+    "quota_score_school_2026": 3247,
+    "unified_scores_2025": 314,
+    "unified_scores_2026": 861
+  },
+  "recommendation": "2026录取季数据基本完整。名额分配到区/到校录取分数线已入库。建议转为月度检查或暂停至2027年3月。"
+}

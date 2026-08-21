@@ -1,0 +1,60 @@
+{
+  "date": "2026-08-19",
+  "scrape_time": "2026-08-19T08:04:48.744767",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 8,
+  "failed_count": 1,
+  "partial_count": 0,
+  "skipped_count": 7,
+  "skipped_reason": "confirmed 404/empty since 07-25 to 08-16",
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "failed",
+      "items": []
+    }
+  ],
+  "new_data": false,
+  "notes": "所有可访问区仅显示历史内容，无8月新发布。7区已确认持续关闭未检查。"
+}
