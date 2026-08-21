@@ -164,6 +164,17 @@ page {
   word-break: break-word;
 }
 
+/* 免责声明脚注：小于正文、弱化配色、细线分隔 */
+.bubble-footnote {
+  display: block;
+  margin-top: 12rpx;
+  padding-top: 8rpx;
+  border-top: 1rpx solid var(--color-border);
+  font-size: 20rpx;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
 .status-line {
   display: block;
   margin-bottom: 12rpx;

@@ -45,6 +45,7 @@
           <view class="status-line" wx:if="{{item.statusLine}}">{{item.statusLine}}</view>
           <rich-text class="bubble-text" user-select="{{true}}" nodes="{{item.nodes}}" wx:if="{{item.role === 'assistant' && item.nodes && item.nodes.length}}" />
           <text class="bubble-text" user-select="{{true}}" wx:else>{{item.content}}</text>
+          <text class="bubble-footnote" user-select="{{true}}" wx:if="{{item.footnote}}">{{item.footnote}}</text>
 
           <view class="card-list" wx:if="{{item.cards.length}}">
             <view class="school-card" wx:for="{{item.cards}}" wx:for-item="card" wx:for-index="ci" wx:key="index">

@@ -30,6 +30,16 @@ function nextMsgId() {
   return 'msg-' + Date.now() + '-' + msgSeq
 }
 
+// 免责声明固定脚注（Synthesizer 硬规则：每条数据类回复结尾附带）。
+// 从正文拆出单独渲染，避免与正文同字号同样式。
+var FOOTNOTE_RE = /\n+\s*(数据仅供参考[^\n]*官方公布为准[。.]?)\s*$/
+
+function splitFootnote(content) {
+  var m = String(content || '').match(FOOTNOTE_RE)
+  if (!m) return { body: content || '', footnote: '' }
+  return { body: String(content).slice(0, m.index).replace(/\s+$/, ''), footnote: m[1] }
+}
+
 /**
  * 拼接 toolCalls 的节点状态条文案
  */
@@ -264,12 +274,13 @@ Page({
         if (!history.length) return
         var messages = history.map(function (m) {
           var role = (m && m.role === 'user') ? 'user' : 'assistant'
-          var content = (m && m.content) || ''
+          var split = role === 'assistant' ? splitFootnote((m && m.content) || '') : { body: (m && m.content) || '', footnote: '' }
           return {
             id: nextMsgId(),
             role: role,
-            content: content,
-            nodes: role === 'assistant' ? markdown.toNodes(content) : null,
+            content: split.body,
+            footnote: split.footnote,
+            nodes: role === 'assistant' ? markdown.toNodes(split.body) : null,
             statusLine: '',
             cards: []
           }
@@ -388,11 +399,13 @@ Page({
         } catch (e) {}
         self.setData({ sessionId: res.sessionId })
       }
+      var split = splitFootnote(res.reply || '')
       var assistantMsg = {
         id: nextMsgId(),
         role: 'assistant',
-        content: res.reply || '',
-        nodes: markdown.toNodes(res.reply || ''),
+        content: split.body,
+        footnote: split.footnote,
+        nodes: markdown.toNodes(split.body),
         statusLine: buildStatusLine(res.toolCalls),
         cards: parseSchoolCards(res.schoolCards)
       }
