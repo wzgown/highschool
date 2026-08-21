@@ -190,10 +190,13 @@ func (r *AgentStoreRepository) ListMessages(ctx context.Context, sessionID int64
 func (r *AgentStoreRepository) AppendTrace(ctx context.Context, rec *agent.TraceRecord) (int64, error) {
 	var id int64
 	err := r.db.QueryRow(ctx,
-		`INSERT INTO agent_trace (session_id, checkpoint_id, kind, name, input, output, prompt_tokens, completion_tokens, latency_ms)
-		 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
+		`INSERT INTO agent_trace (session_id, checkpoint_id, kind, name, input, output,
+		                          prompt_tokens, completion_tokens, latency_ms,
+		                          prompt_cache_hit_tokens, prompt_cache_miss_tokens)
+		 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id`,
 		rec.SessionID, rec.CheckpointID, rec.Kind, nullStr(rec.Name), rec.Input, rec.Output,
-		rec.PromptTokens, rec.CompletionTokens, rec.LatencyMs).Scan(&id)
+		rec.PromptTokens, rec.CompletionTokens, rec.LatencyMs,
+		rec.PromptCacheHitTokens, rec.PromptCacheMissTokens).Scan(&id)
 	if err != nil {
 		return 0, fmt.Errorf("append agent trace: %w", err)
 	}

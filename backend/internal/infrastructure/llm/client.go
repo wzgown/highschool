@@ -101,8 +101,10 @@ type chatResponse struct {
 		} `json:"message"`
 	} `json:"choices"`
 	Usage struct {
-		PromptTokens     int `json:"prompt_tokens"`
-		CompletionTokens int `json:"completion_tokens"`
+		PromptTokens          int `json:"prompt_tokens"`
+		CompletionTokens      int `json:"completion_tokens"`
+		PromptCacheHitTokens  int `json:"prompt_cache_hit_tokens"`  // DeepSeek prefix cache 命中部分
+		PromptCacheMissTokens int `json:"prompt_cache_miss_tokens"` // 未命中部分（全价计费）
 	} `json:"usage"`
 }
 
@@ -241,9 +243,11 @@ func (c *Client) doChat(ctx context.Context, body []byte) (*agent.ChatResult, bo
 
 	msg := cr.Choices[0].Message
 	result := &agent.ChatResult{
-		Content:          msg.Content,
-		PromptTokens:     cr.Usage.PromptTokens,
-		CompletionTokens: cr.Usage.CompletionTokens,
+		Content:               msg.Content,
+		PromptTokens:          cr.Usage.PromptTokens,
+		CompletionTokens:      cr.Usage.CompletionTokens,
+		PromptCacheHitTokens:  cr.Usage.PromptCacheHitTokens,
+		PromptCacheMissTokens: cr.Usage.PromptCacheMissTokens,
 	}
 	for _, tc := range msg.ToolCalls {
 		result.ToolCalls = append(result.ToolCalls, agent.LLMToolCall{

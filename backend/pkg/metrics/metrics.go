@@ -27,6 +27,13 @@ var (
 		Help:    "LLM 调用耗时",
 		Buckets: prometheus.DefBuckets,
 	}, []string{"model"})
+	// prefix cache 命中拆分（DeepSeek；hit+miss=prompt_tokens）。
+	// 命中率 = hit / (hit+miss)，按 node 分维度诊断：
+	// synthesizer（带长历史，追加式）应高命中；router/planner 短 prompt 无从命中属正常
+	llmCacheTokens = promauto.NewCounterVec(prometheus.CounterOpts{
+		Name: "agent_llm_cache_tokens_total",
+		Help: "LLM prefix cache 命中/未命中 token（kind=hit|miss，未命中全价、命中约1/10价）",
+	}, []string{"model", "node", "kind"})
 	toolCalls = promauto.NewCounterVec(prometheus.CounterOpts{
 		Name: "agent_tool_calls_total",
 		Help: "工具调用次数",
@@ -44,8 +51,9 @@ func Handler() http.Handler { return promhttp.Handler() }
 // IncChatRequests 对话请求计数 +1
 func IncChatRequests() { chatRequests.Inc() }
 
-// ObserveLLMCall 记录一次 LLM 调用（status 为 success/error，kind 为 prompt/completion）
-func ObserveLLMCall(model, status string, promptTokens, completionTokens int, seconds float64) {
+// ObserveLLMCall 记录一次 LLM 调用（status 为 success/error，kind 为 prompt/completion；
+// cacheHit/cacheMiss 为 prefix cache 命中拆分，node 为调用节点 router/planner/synthesizer…）
+func ObserveLLMCall(model, node, status string, promptTokens, completionTokens, cacheHit, cacheMiss int, seconds float64) {
 	if model == "" {
 		model = "unknown"
 	}
@@ -55,6 +63,12 @@ func ObserveLLMCall(model, status string, promptTokens, completionTokens int, se
 	}
 	if completionTokens > 0 {
 		llmTokens.WithLabelValues(model, "completion").Add(float64(completionTokens))
+	}
+	if cacheHit > 0 {
+		llmCacheTokens.WithLabelValues(model, node, "hit").Add(float64(cacheHit))
+	}
+	if cacheMiss > 0 {
+		llmCacheTokens.WithLabelValues(model, node, "miss").Add(float64(cacheMiss))
 	}
 	llmDuration.WithLabelValues(model).Observe(seconds)
 }

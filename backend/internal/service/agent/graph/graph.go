@@ -146,6 +146,16 @@ func (g *Graph) resumeFromClarify(s *agent.State) {
 	if s.PendingQ != nil && s.PendingQ.Field != "" && answer != "" {
 		setSlot(s, s.PendingQ.Field, answer)
 	}
+	// 任务连续性：恢复轮的 UserMessage 只是槽位回答（如「嘉定一中」），
+	// 从历史找回追问前的原始诉求（如「三年分数线走势」），供 Planner 选对工具
+	if s.TaskContext == "" && len(s.Messages) > 1 {
+		for i := len(s.Messages) - 2; i >= 0; i-- { // -1 是本轮回答
+			if s.Messages[i].Role == agent.RoleUser {
+				s.TaskContext = s.Messages[i].Content
+				break
+			}
+		}
+	}
 	s.PendingQ = nil
 }
 

@@ -45,6 +45,10 @@ const PlannerSystemPrompt = `你是上海中考志愿顾问的任务规划器。
    严禁填「XX」「待定」。batch 用户未指明时可省略（get_score_trend 默认平行志愿）。
 9. school_name 必须是用户本轮消息、最近对话或已知槽位里明确出现过的学校。用户没有指明学校时，
    严禁自行挑选任何学校（哪怕很有名），必须输出 {"steps":[],"need_clarify":"school_names"}。
+10. 输入里的 task 是本轮任务的原始诉求。当 message 只是某个追问的回答（如只回了校名）时，
+    以 task 为准选择工具——task 是「三年分数线走势」就该用 get_score_trend（多年数据），
+    而不是只有最新一年的学校画像。
+11. school_name/district_name/middle_school_name 若槽位已有值，系统会自动注入参数，args 里可留空。
 
 输出 JSON：{"steps":[{"tool_name":"...","args":{...}}], "need_clarify":"可选；仅当缺少必要槽位时填槽位名，否则省略"}`
 

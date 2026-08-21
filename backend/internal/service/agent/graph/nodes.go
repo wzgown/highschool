@@ -30,15 +30,7 @@ func (g *Graph) routerNode(ctx context.Context, s *agent.State) (string, error) 
 	}
 	priorIntent := s.Intent
 	// P2：带最近若干条历史，帮助解指代 + 更准分类（当前消息已单独传，从历史里去掉最后一条）
-	const routerHistoryN = 4
-	recent := s.Messages
-	if len(recent) > 0 {
-		recent = recent[:len(recent)-1]
-	}
-	if len(recent) > routerHistoryN {
-		recent = recent[len(recent)-routerHistoryN:]
-	}
-	contextJSON, _ := json.Marshal(map[string]any{"已知槽位": s.Slots, "最近对话": recent})
+	contextJSON, _ := json.Marshal(map[string]any{"已知槽位": s.Slots, "最近对话": recentMessages(s.Messages, 4)})
 	msgs := []agent.Message{
 		{Role: agent.RoleSystem, Content: RouterSystemPrompt},
 		{Role: agent.RoleUser, Content: fmt.Sprintf("%s\n上下文：%s\n用户消息：%s", currentDateContext(), contextJSON, s.UserMessage)},
@@ -63,6 +55,8 @@ func (g *Graph) routerNode(ctx context.Context, s *agent.State) (string, error) 
 		}
 	}
 	s.Intent = out.Intent
+	// 任务连续性：常规轮当前消息即任务本体；追问恢复轮由 resumeFromClarify 回填
+	s.TaskContext = s.UserMessage
 	for k, v := range out.Slots {
 		setSlot(s, k, v)
 	}
@@ -86,9 +80,16 @@ func (g *Graph) plannerNode(ctx context.Context, s *agent.State) (string, error)
 	}
 	specs := g.Tools.Specs()
 	specsJSON, _ := json.Marshal(specs)
-	payload, _ := json.Marshal(map[string]any{
+	// 任务上下文 + 最近历史：追问恢复轮 message 只是槽位回答，task 是原始诉求；
+	// 历史帮助跟上多轮语境（如「那到校线呢」）
+	payloadMap := map[string]any{
 		"intent": s.Intent, "slots": s.Slots, "message": s.UserMessage,
-	})
+		"recent_dialog": recentMessages(s.Messages, 4),
+	}
+	if s.TaskContext != "" && s.TaskContext != s.UserMessage {
+		payloadMap["task"] = s.TaskContext
+	}
+	payload, _ := json.Marshal(payloadMap)
 	msgs := []agent.Message{
 		{Role: agent.RoleSystem, Content: PlannerSystemPrompt + "\n\n" + currentDateContext() + "\n\n可用工具：\n" + string(specsJSON)},
 		{Role: agent.RoleUser, Content: string(payload)},
@@ -124,6 +125,9 @@ func (g *Graph) plannerNode(ctx context.Context, s *agent.State) (string, error)
 			steps = append(steps, st)
 		}
 	}
+	// 参数确定性注入（系统性修复，先于校验）：已知槽位参数（校名/区/初中）由代码
+	// 从 Slots 填入——LLM 不再是这些参数的唯一来源，占位/编造整类问题失去产生的机会。
+	injectSlotArgs(specs, steps, s)
 	// 计划校验（确定性兜底，不信任 LLM 自觉）：必填参数为空/占位文字的步骤
 	// 视为缺信息——校名缺失且无校名槽位 → Clarify 向用户追问，其余此类步骤丢弃。
 	// 背景：session 59 实证 planner 会把参数描述 echo 成值（school_name="学校名称"）。
@@ -139,6 +143,75 @@ func (g *Graph) plannerNode(ctx context.Context, s *agent.State) (string, error)
 		return NodeSynthesizer, nil
 	}
 	return NodeExecutor, nil
+}
+
+// recentMessages 取最近 n 条历史（去掉最后一条——那是本轮消息，已单独传）
+func recentMessages(msgs []agent.Message, n int) []agent.Message {
+	if len(msgs) > 0 {
+		msgs = msgs[:len(msgs)-1]
+	}
+	if len(msgs) > n {
+		msgs = msgs[len(msgs)-n:]
+	}
+	return msgs
+}
+
+// injectSlotArgs 用槽位确定性填充步骤参数（school_name/district_name/middle_school_name）。
+// 仅当参数缺失或为占位文字时注入；不覆盖 LLM 填的合法值（合法值由 validatePlan 把关）。
+// 系统性修复：参数组装不再是 LLM 的自由发挥——槽位有值就一定正确落进参数。
+func injectSlotArgs(specs []agent.ToolSpec, steps []agent.Step, s *agent.State) {
+	props := map[string]map[string]bool{}
+	for _, sp := range specs {
+		if m, ok := sp.ParametersJSON["properties"].(map[string]any); ok {
+			names := map[string]bool{}
+			for k := range m {
+				names[k] = true
+			}
+			props[sp.Name] = names
+		}
+	}
+	slotVal := func(keys ...string) (string, bool) {
+		for _, k := range keys {
+			switch v := s.Slots[k].(type) {
+			case string:
+				if !isPlaceholderArg(v) {
+					return v, true
+				}
+			case []any:
+				if len(v) > 0 {
+					if str, ok := v[0].(string); ok && !isPlaceholderArg(str) {
+						return str, true
+					}
+				}
+			}
+		}
+		return "", false
+	}
+	injectors := map[string]func() (string, bool){
+		"school_name":        func() (string, bool) { return slotVal("school_names", "school_name") },
+		"district_name":      func() (string, bool) { return slotVal("district_name") },
+		"middle_school_name": func() (string, bool) { return slotVal("middle_school_name") },
+	}
+	for i := range steps {
+		names := props[steps[i].ToolName]
+		if len(names) == 0 {
+			continue
+		}
+		for param, get := range injectors {
+			if !names[param] {
+				continue
+			}
+			if cur, ok := steps[i].Args[param].(string); ok && !isPlaceholderArg(cur) {
+				continue // 已有合法值，不覆盖
+			}
+			if v, ok := get(); ok {
+				if steps[i].Args == nil {
+					steps[i].Args = map[string]any{}
+				}
+				steps[i].Args[param] = v
+			}
+		}
+	}
 }
 
 // validatePlan 校验步骤必填参数（依据 ToolSpec JSON Schema 的 required 列表）。
@@ -474,14 +547,18 @@ func (g *Graph) callLLM(ctx context.Context, s *agent.State, node string, params
 	cost := time.Since(start)
 
 	var pt, ct int
+	var cacheHit, cacheMiss int
 	hasToolCalls := false
 	if result != nil {
 		pt, ct = result.PromptTokens, result.CompletionTokens
+		cacheHit, cacheMiss = result.PromptCacheHitTokens, result.PromptCacheMissTokens
 		hasToolCalls = len(result.ToolCalls) > 0
 	}
 	span.SetAttributes(
 		attribute.Int("prompt_tokens", pt),
 		attribute.Int("completion_tokens", ct),
+		attribute.Int("prompt_cache_hit_tokens", cacheHit),
+		attribute.Int("prompt_cache_miss_tokens", cacheMiss),
 		attribute.Int64("latency_ms", cost.Milliseconds()),
 		attribute.Bool("has_tool_calls", hasToolCalls),
 	)
@@ -509,7 +586,7 @@ func (g *Graph) callLLM(ctx context.Context, s *agent.State, node string, params
 		s.PromptTokens += pt
 		s.CompletionTokens += ct
 	}
-	metrics.ObserveLLMCall(g.Cfg.Model, status, pt, ct, cost.Seconds())
+	metrics.ObserveLLMCall(g.Cfg.Model, node, status, pt, ct, cacheHit, cacheMiss, cost.Seconds())
 
 	if g.Store != nil {
 		inJSON, _ := json.Marshal(params.Messages)
@@ -525,7 +602,9 @@ func (g *Graph) callLLM(ctx context.Context, s *agent.State, node string, params
 		g.appendTrace(ctx, &agent.TraceRecord{
 			SessionID: s.SessionID, Kind: "llm", Name: node,
 			Input: inJSON, Output: outJSON,
-			PromptTokens: pt, CompletionTokens: ct, LatencyMs: int(cost.Milliseconds()),
+			PromptTokens: pt, CompletionTokens: ct,
+			PromptCacheHitTokens: cacheHit, PromptCacheMissTokens: cacheMiss,
+			LatencyMs: int(cost.Milliseconds()),
 		})
 	}
 	return result, err

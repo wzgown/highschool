@@ -71,6 +71,10 @@ type ChatResult struct {
 	ToolCalls        []LLMToolCall
 	PromptTokens     int
 	CompletionTokens int
+	// prefix cache 命中拆分（DeepSeek usage；hit+miss=prompt_tokens）。
+	// 未命中最贵（全价），命中约 1/10 价——监控命中率即监控成本。
+	PromptCacheHitTokens  int
+	PromptCacheMissTokens int
 }
 
 // LLMClient ChatModel 抽象（可插拔 provider，OpenAI 兼容）
@@ -142,6 +146,10 @@ type State struct {
 	// 本次用户输入（不持久化到 checkpoint 语义外）
 	UserMessage   string `json:"-"`
 	PendingAnswer string `json:"-"`
+	// 任务连续性：本轮任务的原始诉求（Clarify 追问发生前的用户消息）。
+	// HITL 恢复轮 UserMessage 只是槽位回答（如「嘉定一中」），Planner
+	// 需由此得知任务本意（如「三年分数线走势」→ 应选 get_score_trend）
+	TaskContext string `json:"task_context,omitempty"`
 	// Planner → Clarify 传递的缺失槽位名
 	NeedClarifyField string `json:"-"`
 	// 本轮 LLM token 累计（不落 checkpoint，仅用于 assistant 消息 usage 落库）
@@ -184,7 +192,10 @@ type TraceRecord struct {
 	Output           json.RawMessage
 	PromptTokens     int
 	CompletionTokens int
-	LatencyMs        int
+	// prefix cache 命中拆分（迁移 016 列；仅 LLM 调用有值）
+	PromptCacheHitTokens  int
+	PromptCacheMissTokens int
+	LatencyMs             int
 }
 
 // Store ThreadStore（session + checkpoint + message + trace）

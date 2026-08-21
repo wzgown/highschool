@@ -14,10 +14,14 @@ import (
 // ---------- mocks ----------
 
 type fakeLLM struct {
-	responses map[string]string // 按节点关键字匹配 system prompt
+	responses  map[string]string // 按节点关键字匹配 system prompt
+	lastPrompt string            // 最近一次 user prompt（断言 planner/router 输入用）
 }
 
 func (f *fakeLLM) Chat(ctx context.Context, p agent.ChatParams) (*agent.ChatResult, error) {
+	if len(p.Messages) > 0 {
+		f.lastPrompt = p.Messages[len(p.Messages)-1].Content
+	}
 	for key, resp := range f.responses {
 		if strings.Contains(p.Messages[0].Content, key) {
 			return &agent.ChatResult{Content: resp, PromptTokens: 10, CompletionTokens: 5}, nil
@@ -421,6 +425,93 @@ func TestPlanner_FabricatedSchoolBecomesClarify(t *testing.T) {
 	}
 	if next3 != NodeExecutor || len(s3.Plan) != 1 {
 		t.Fatalf("历史有依据的校名应放行：next=%s plan=%+v", next3, s3.Plan)
+	}
+}
+
+// TestResume_TaskContextRestored 任务连续性（系统性修复①）：
+// HITL 恢复轮 UserMessage 只是「嘉定一中」，resumeFromClarify 应从历史
+// 找回原始诉求「三年分数线走势」并写入 TaskContext，供 Planner 选对工具。
+func TestResume_TaskContextRestored(t *testing.T) {
+	g := NewGraph(&fakeLLM{responses: map[string]string{}}, &fakeTools{}, &fakeStore{}, Config{})
+	s := &agent.State{
+		UserMessage: "嘉定一中",
+		PendingQ:    &agent.PendingQuestion{Question: "哪所高中？", Field: "school_names"},
+		Messages: []agent.Message{
+			{Role: agent.RoleUser, Content: "查一所高中的三年分数线走势"},
+			{Role: agent.RoleAssistant, Content: "你想了解哪所高中？"},
+			{Role: agent.RoleUser, Content: "嘉定一中"},
+		},
+	}
+	g.resumeFromClarify(s)
+	if s.Slots["school_names"] != "嘉定一中" {
+		t.Fatalf("槽位应并入回答：%v", s.Slots["school_names"])
+	}
+	if s.TaskContext != "查一所高中的三年分数线走势" {
+		t.Fatalf("TaskContext 应为追问前的原始诉求：%q", s.TaskContext)
+	}
+}
+
+// TestPlanner_PayloadCarriesTaskAndHistory Planner 输入应携带 task（原始诉求）与最近历史，
+// 恢复轮才不至于只对着「嘉定一中」选错工具。
+func TestPlanner_PayloadCarriesTaskAndHistory(t *testing.T) {
+	llm := &fakeLLM{responses: map[string]string{"任务规划器": `{"steps":[]}`}}
+	g := NewGraph(llm, &fakeTools{}, nil, Config{})
+	s := &agent.State{
+		Intent:      agent.IntentDataQuery,
+		UserMessage: "嘉定一中",
+		TaskContext: "查一所高中的三年分数线走势",
+		Messages: []agent.Message{
+			{Role: agent.RoleUser, Content: "查一所高中的三年分数线走势"},
+			{Role: agent.RoleAssistant, Content: "你想了解哪所高中？"},
+			{Role: agent.RoleUser, Content: "嘉定一中"},
+		},
+	}
+	if _, err := g.plannerNode(context.Background(), s); err != nil {
+		t.Fatalf("plannerNode failed: %v", err)
+	}
+	if !strings.Contains(llm.lastPrompt, "三年分数线走势") || !strings.Contains(llm.lastPrompt, "task") {
+		t.Fatalf("planner 输入应含原始诉求(task)：%s", llm.lastPrompt)
+	}
+}
+
+// TestPlanner_InjectsSlotArgs 参数确定性注入（系统性修复②）：
+// 槽位已有校名时，planner 输出空 args/占位值 → 代码从 Slots 注入，步骤保留执行。
+// 参数组装不再依赖 LLM 自觉（session 59/60 占位与编造的整类根因）。
+func TestPlanner_InjectsSlotArgs(t *testing.T) {
+	// ① 槽位为字符串（HITL 回答回填形态）+ planner 空 args
+	llm := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{}}]}`,
+	}}
+	g := NewGraph(llm, &schemaTools{}, nil, Config{})
+	s := &agent.State{
+		Intent:      agent.IntentDataQuery,
+		UserMessage: "嘉定一中",
+		Slots:       map[string]any{"school_names": "嘉定一中"},
+	}
+	next, err := g.plannerNode(context.Background(), s)
+	if err != nil {
+		t.Fatalf("plannerNode failed: %v", err)
+	}
+	if next != NodeExecutor || len(s.Plan) != 1 || s.Plan[0].Args["school_name"] != "嘉定一中" {
+		t.Fatalf("空 args 应由槽位注入 school_name：next=%s plan=%+v", next, s.Plan)
+	}
+
+	// ② 槽位为列表（Router 抽取形态）+ planner 占位值 → 同样被注入替换
+	llm2 := &fakeLLM{responses: map[string]string{
+		"任务规划器": `{"steps":[{"tool_name":"get_score_trend","args":{"school_name":"学校名称"}}]}`,
+	}}
+	g2 := NewGraph(llm2, &schemaTools{}, nil, Config{})
+	s2 := &agent.State{
+		Intent:      agent.IntentDataQuery,
+		UserMessage: "走势",
+		Slots:       map[string]any{"school_names": []any{"上海市嘉定区第一中学"}},
+	}
+	next2, err := g2.plannerNode(context.Background(), s2)
+	if err != nil {
+		t.Fatalf("plannerNode(2) failed: %v", err)
+	}
+	if next2 != NodeExecutor || s2.Plan[0].Args["school_name"] != "上海市嘉定区第一中学" {
+		t.Fatalf("占位值应被槽位注入替换：next=%s args=%+v", next2, s2.Plan[0].Args)
 	}
 }
 
