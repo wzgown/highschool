@@ -63,7 +63,7 @@ func (t *getAdmissionScoresTool) Execute(ctx context.Context, raw json.RawMessag
 	school, err := t.repo.FindSchoolByName(ctx, schoolName, districtID)
 	if err != nil {
 		if errors.Is(err, repository.ErrNotFound) {
-			return nil, fmt.Errorf("找不到高中 %q，请确认学校名称或换用全称", schoolName)
+			return nil, fmt.Errorf("%s", schoolNotFoundMsg(schoolName, err))
 		}
 		return nil, err
 	}

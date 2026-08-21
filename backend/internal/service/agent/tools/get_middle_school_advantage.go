@@ -61,7 +61,7 @@ func (t *getMiddleSchoolAdvantageTool) Execute(ctx context.Context, raw json.Raw
 		highSchool, err = t.repo.FindSchoolByName(ctx, args.HighSchoolName, 0)
 		if err != nil {
 			if errors.Is(err, repository.ErrNotFound) {
-				return nil, fmt.Errorf("找不到高中 %q，请确认学校名称", args.HighSchoolName)
+				return nil, fmt.Errorf("%s", schoolNotFoundMsg(args.HighSchoolName, err))
 			}
 			return nil, err
 		}

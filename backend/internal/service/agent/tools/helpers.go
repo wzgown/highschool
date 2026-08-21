@@ -4,6 +4,7 @@ package tools
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strings"
 
@@ -214,4 +215,23 @@ func schoolCard(schoolID int32, schoolName, districtName, cardType string, paylo
 		CardType:     cardType,
 		Payload:      payload,
 	}
+}
+
+// schoolNotFoundMsg 校名未命中时的用户可读报错（含核心词候选提示）。
+// 覆盖 7 个工具的同款分支：口语缩写（如「交大附中嘉定分校」）在仓储层
+// 已做变体展开，仍 miss 时带上候选给用户「是不是要找…」的出路。
+func schoolNotFoundMsg(query string, err error) string {
+	var sne *repository.SchoolNotFoundError
+	if errors.As(err, &sne) && len(sne.Candidates) > 0 {
+		names := make([]string, 0, len(sne.Candidates))
+		for _, c := range sne.Candidates {
+			if c.ShortName != "" {
+				names = append(names, c.FullName+"（"+c.ShortName+"）")
+			} else {
+				names = append(names, c.FullName)
+			}
+		}
+		return fmt.Sprintf("没查到 %q，你要找的可能是：%s", query, strings.Join(names, "、"))
+	}
+	return fmt.Sprintf("找不到高中 %q，请确认学校名称（可用简称，如「华二」「格致」）", query)
 }

@@ -8,6 +8,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -238,6 +239,73 @@ func (r *agentDataRepo) FindDistrictByName(ctx context.Context, name string) (*D
 
 var _ agent.ClarifyOptionsProvider = (*agentDataRepo)(nil)
 
+// SchoolNotFoundError 校名未命中（含按核心词给出的候选，供工具层生成可读提示）。
+// errors.Is(err, ErrNotFound) 依然成立，工具层既有分支不受影响。
+type SchoolNotFoundError struct {
+	Query      string
+	Candidates []SchoolRef
+}
+
+func (e *SchoolNotFoundError) Error() string {
+	if len(e.Candidates) > 0 {
+		names := make([]string, 0, len(e.Candidates))
+		for _, c := range e.Candidates {
+			names = append(names, c.FullName)
+		}
+		return fmt.Sprintf("school %q not found (candidates: %s)", e.Query, strings.Join(names, "、"))
+	}
+	return fmt.Sprintf("school %q not found", e.Query)
+}
+
+func (e *SchoolNotFoundError) Is(target error) bool { return target == ErrNotFound }
+
+// schoolAliasExpansions 口语校名 → 官方命名的片段展开（上海高中命名惯例）。
+// 「交大附中嘉定分校」类口语缩写与官方全名「上海交通大学附属中学嘉定分校」
+// 无子串关系，LIKE 亦无法命中（线上实证）；展开变体后可命中。
+// 复合缩写（交大附中→交通大学附属中学）排在单 token（交大→交通大学）之前。
+var schoolAliasExpansions = []struct{ from, to string }{
+	{"交大附中", "交通大学附属中学"},
+	{"交附", "交通大学附属中学"},
+	{"复附", "复旦大学附属中学"},
+	{"华师大附中", "华东师范大学附属中学"},
+	{"上师大附中", "上海师范大学附属中学"},
+	{"附中", "附属中学"},
+	{"交大", "交通大学"},
+	{"复旦", "复旦大学"},
+	{"华师大", "华东师范大学"},
+	{"上师大", "上海师范大学"},
+}
+
+// expandSchoolNameVariants 生成查询变体（原样永远第一，绝不影响可精确匹配的
+// 查询——库内有 19 所名字含「附中」的学校，靠原样优先保证零回归）。上限 16 防膨胀。
+func expandSchoolNameVariants(name string) []string {
+	seen := map[string]bool{name: true}
+	variants := []string{name}
+	for _, ex := range schoolAliasExpansions {
+		n := len(variants)
+		for i := 0; i < n; i++ {
+			if !strings.Contains(variants[i], ex.from) {
+				continue
+			}
+			v := strings.ReplaceAll(variants[i], ex.from, ex.to)
+			if !seen[v] {
+				seen[v] = true
+				variants = append(variants, v)
+			}
+			if len(variants) >= 16 {
+				return variants
+			}
+		}
+	}
+	return variants
+}
+
+// schoolQueryCoreWords 校名匹配时的通用词（剥掉后剩下的核心词用于候选搜索）
+var schoolQueryCoreWords = []string{
+	"上海市", "上海", "交通", "师范", "大学", "附属", "中学", "高中", "附属",
+	"实验", "校区", "分校", "附中", "交大", "复旦", "华师大", "上师大", " ", "（", "）", "(", ")",
+}
+
 // TopSchoolNamesByDistrict 区内热门高中展示名（agent.ClarifyOptionsProvider 实现）。
 // 「热门」以最新年份平行志愿录取线降序为准；该区无分数线数据时退回区内学校列表。
 // 展示名优先简称（可被 FindSchoolByName short_name 精确命中）。
@@ -302,6 +370,32 @@ func (r *agentDataRepo) TopSchoolNamesByDistrict(ctx context.Context, districtID
 }
 
 func (r *agentDataRepo) FindSchoolByName(ctx context.Context, name string, districtID int32) (*SchoolRef, error) {
+	// 变体依序尝试（原样第一）：口语缩写「交大附中嘉定分校」经展开后
+	// 才能命中官方全名「上海交通大学附属中学嘉定分校」
+	for _, v := range expandSchoolNameVariants(name) {
+		s, err := r.findSchoolByNameSingle(ctx, v, districtID)
+		if err == nil {
+			return s, nil
+		}
+		if !errors.Is(err, ErrNotFound) {
+			return nil, err
+		}
+	}
+	// 全部变体未命中：剥通用词取核心词搜候选，给用户「是不是要找…」的出路
+	core := name
+	for _, w := range schoolQueryCoreWords {
+		core = strings.ReplaceAll(core, w, "")
+	}
+	sne := &SchoolNotFoundError{Query: name}
+	if len([]rune(core)) >= 2 {
+		if cands, err := r.SearchSchools(ctx, core, districtID, 3); err == nil {
+			sne.Candidates = cands
+		}
+	}
+	return nil, sne
+}
+
+func (r *agentDataRepo) findSchoolByNameSingle(ctx context.Context, name string, districtID int32) (*SchoolRef, error) {
 	row := r.db.QueryRow(ctx, `
 		SELECT s.id, s.code, s.full_name, COALESCE(s.short_name, ''), s.district_id, d.name
 		FROM ref_school s
@@ -327,6 +421,20 @@ func (r *agentDataRepo) SearchSchools(ctx context.Context, keyword string, distr
 	if limit <= 0 {
 		limit = 10
 	}
+	// 变体依序尝试（原样第一），口语缩写关键词同样受益
+	for _, kw := range expandSchoolNameVariants(keyword) {
+		out, err := r.searchSchoolsSingle(ctx, kw, districtID, limit)
+		if err != nil {
+			return nil, err
+		}
+		if len(out) > 0 {
+			return out, nil
+		}
+	}
+	return nil, nil
+}
+
+func (r *agentDataRepo) searchSchoolsSingle(ctx context.Context, keyword string, districtID int32, limit int) ([]SchoolRef, error) {
 	rows, err := r.db.Query(ctx, `
 		SELECT s.id, s.code, s.full_name, COALESCE(s.short_name, ''), s.district_id, d.name
 		FROM ref_school s
@@ -390,6 +498,10 @@ func (r *agentDataRepo) FindMiddleSchoolByName(ctx context.Context, name string,
 // ---------- 分数线 ----------
 
 func (r *agentDataRepo) GetScoreTrend(ctx context.Context, schoolID int32, batch string, districtID int32, minYear int) ([]ScoreTrendRow, error) {
+	// district 语义按批次区分（视图列语义实证）：
+	// - QUOTA_DISTRICT 行的 district_id = 录取区（考生视角）→ 按考生区过滤
+	// - QUOTA_SCHOOL/UNIFIED_1_15 行的 district_id = 学校所在区 → 与考生区无关，
+	//   过滤会把这些批次整段滤空（用户问外区学校"查无数据"的根因），故不过滤
 	rows, err := r.db.Query(ctx, `
 		SELECT batch, year, district_id, school_id, school_name, middle_school_name,
 		       min_score, yoy_change, chinese_math_foreign_sum, math_score, chinese_score,
@@ -397,7 +509,7 @@ func (r *agentDataRepo) GetScoreTrend(ctx context.Context, schoolID int32, batch
 		FROM v_school_score_trend
 		WHERE school_id = $1
 		  AND ($2 = '' OR batch = $2)
-		  AND ($3 = 0 OR district_id = $3)
+		  AND ($3 = 0 OR batch <> 'QUOTA_DISTRICT' OR district_id = $3)
 		  AND ($4 = 0 OR year >= $4)
 		ORDER BY batch, year
 	`, schoolID, batch, districtID, minYear)
@@ -507,12 +619,14 @@ func (r *agentDataRepo) GetMiddleSchoolProfile(ctx context.Context, middleSchool
 // ---------- 名额计划 ----------
 
 func (r *agentDataRepo) GetQuotaTrend(ctx context.Context, schoolID int32, batch string, districtID int32, minYear int) ([]QuotaTrendRow, error) {
+	// 同 GetScoreTrend：district 过滤仅作用于到区批次（考生视角），
+	// 到校/平行志愿行的 district_id 是学校所在区，考生区过滤会滤空
 	rows, err := r.db.Query(ctx, `
 		SELECT batch, year, district_id, school_id, school_code, quota_count, yoy_change
 		FROM v_quota_trend
 		WHERE school_id = $1
 		  AND ($2 = '' OR batch = $2)
-		  AND ($3 = 0 OR district_id = $3)
+		  AND ($3 = 0 OR batch <> 'QUOTA_DISTRICT' OR district_id = $3)
 		  AND ($4 = 0 OR year >= $4)
 		ORDER BY batch, district_id, year
 	`, schoolID, batch, districtID, minYear)

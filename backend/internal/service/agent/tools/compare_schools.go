@@ -65,7 +65,7 @@ func (t *compareSchoolsTool) Execute(ctx context.Context, raw json.RawMessage) (
 		school, err := t.repo.FindSchoolByName(ctx, name, 0)
 		if err != nil {
 			if errors.Is(err, repository.ErrNotFound) {
-				return nil, fmt.Errorf("找不到高中 %q，请确认学校名称或换用全称", name)
+				return nil, fmt.Errorf("%s", schoolNotFoundMsg(name, err))
 			}
 			return nil, err
 		}

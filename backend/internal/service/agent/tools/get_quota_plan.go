@@ -56,7 +56,7 @@ func (t *getQuotaPlanTool) Execute(ctx context.Context, raw json.RawMessage) (*a
 		school, err = t.repo.FindSchoolByName(ctx, args.SchoolName, 0)
 		if err != nil {
 			if errors.Is(err, repository.ErrNotFound) {
-				return nil, fmt.Errorf("找不到高中 %q，请确认学校名称", args.SchoolName)
+				return nil, fmt.Errorf("%s", schoolNotFoundMsg(args.SchoolName, err))
 			}
 			return nil, err
 		}

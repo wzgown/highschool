@@ -31,11 +31,12 @@ func (t *getScoreTrendTool) Spec() agent.ToolSpec {
 	return agent.ToolSpec{
 		Name: "get_score_trend",
 		Description: "查询某高中某批次的多年录取分数线与同比涨跌，用于判断「这学校线稳不稳」。" +
-			"batch 不传默认查 UNIFIED_1_15（1-15 平行志愿，750 分制）。例：「华二这几年线涨了吗」。",
+			"batch 不传默认查 UNIFIED_1_15（1-15 平行志愿，750 分制）。例：「华二这几年线涨了吗」。" +
+			"用户明确问到区/到校时传对应 batch。",
 		ParametersJSON: jsonSchema(map[string]any{
 			"school_name":   strProp("高中名称，支持简称"),
 			"batch":         batchProp(false),
-			"district_name": strProp("可选，限定录取区（到区/平行志愿按区出线的场景建议传）"),
+			"district_name": strProp("可选，考生所在区——仅决定到区线取哪条；到校线/平行志愿线按学校所在区出，不受此参数影响"),
 		}, []string{"school_name"}),
 	}
 }
@@ -64,7 +65,7 @@ func (t *getScoreTrendTool) Execute(ctx context.Context, raw json.RawMessage) (*
 	school, err := t.repo.FindSchoolByName(ctx, schoolName, districtID)
 	if err != nil {
 		if errors.Is(err, repository.ErrNotFound) {
-			return nil, fmt.Errorf("找不到高中 %q，请确认学校名称", schoolName)
+			return nil, fmt.Errorf("%s", schoolNotFoundMsg(schoolName, err))
 		}
 		return nil, err
 	}
