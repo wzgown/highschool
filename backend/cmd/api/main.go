@@ -71,6 +71,21 @@ func main() {
 	}
 	defer tracingShutdown(context.Background())
 
+	// 初始化 OTel 指标：OTLP 推送 OpenObserve（与 traces 同端点）+ /metrics 调试端点
+	metricsShutdown, err := metrics.Init(context.Background(), metrics.Config{
+		Enabled:      cfg.Metrics.Enabled,
+		ServiceName:  cfg.Metrics.ServiceName,
+		OTLPEndpoint: cfg.Metrics.OTLPEndpoint,
+		URLPath:      cfg.Metrics.URLPath,
+		Headers:      cfg.Metrics.Headers,
+		IntervalSec:  cfg.Metrics.IntervalSec,
+	})
+	if err != nil {
+		logger.Error(context.Background(), "metrics init error", err)
+		os.Exit(1)
+	}
+	defer metricsShutdown(context.Background())
+
 	logger.Info(context.Background(), "starting highschool backend service (Connect-RPC)")
 
 	// 初始化数据库

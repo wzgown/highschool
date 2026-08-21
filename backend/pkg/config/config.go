@@ -13,6 +13,7 @@ type Config struct {
 	Redis    RedisConfig    `mapstructure:"redis"`
 	Log      LogConfig      `mapstructure:"log"`
 	Tracing  TracingConfig  `mapstructure:"tracing"`
+	Metrics  MetricsConfig  `mapstructure:"metrics"`
 	Tip      TipConfig      `mapstructure:"tip"`
 	LLM      LLMConfig      `mapstructure:"llm"`
 	Agent    AgentConfig    `mapstructure:"agent"`
@@ -50,7 +51,7 @@ type WeChatConfig struct {
 
 // FeatureConfig 功能开关（审核期隐藏 AI 顾问等，远程可控）
 type FeatureConfig struct {
-	AgentEnabled   bool     `mapstructure:"agent_enabled"`  // AI 顾问总开关
+	AgentEnabled   bool     `mapstructure:"agent_enabled"`   // AI 顾问总开关
 	ReviewVersions []string `mapstructure:"review_versions"` // 审核中的小程序版本：这些版本强制关闭
 }
 
@@ -108,10 +109,20 @@ type TracingConfig struct {
 	Enabled      bool    `mapstructure:"enabled"`
 	ServiceName  string  `mapstructure:"service_name"`
 	OTLPEndpoint string  `mapstructure:"otlp_endpoint"`
-	Protocol     string  `mapstructure:"protocol"`   // grpc（collector）或 http（OpenObserve 直连）
+	Protocol     string  `mapstructure:"protocol"`      // grpc（collector）或 http（OpenObserve 直连）
 	URLPath      string  `mapstructure:"otlp_url_path"` // http 协议时的路径，如 /api/default/v1/traces
 	Headers      string  `mapstructure:"otlp_headers"`  // "k=v,k2=v2" 形式，用于 OpenObserve basic auth
 	SampleRate   float64 `mapstructure:"sample_rate"`
+}
+
+// MetricsConfig OTLP 指标推送（与 tracing 同 OpenObserve）
+type MetricsConfig struct {
+	Enabled      bool   `mapstructure:"enabled"`
+	ServiceName  string `mapstructure:"service_name"`
+	OTLPEndpoint string `mapstructure:"otlp_endpoint"` // host:port，如 openobserve:5080
+	URLPath      string `mapstructure:"otlp_url_path"` // /api/default/v1/metrics
+	Headers      string `mapstructure:"otlp_headers"`  // OpenObserve basic auth
+	IntervalSec  int    `mapstructure:"interval_seconds"`
 }
 
 // Load 加载配置
@@ -144,6 +155,12 @@ func Load() (*Config, error) {
 	viper.SetDefault("tracing.url_path", "")
 	viper.SetDefault("tracing.headers", "")
 	viper.SetDefault("tracing.sample_rate", 1.0)
+	viper.SetDefault("metrics.enabled", true)
+	viper.SetDefault("metrics.service_name", "highschool-backend")
+	viper.SetDefault("metrics.otlp_endpoint", "localhost:5080")
+	viper.SetDefault("metrics.otlp_url_path", "/api/default/v1/metrics")
+	viper.SetDefault("metrics.otlp_headers", "")
+	viper.SetDefault("metrics.interval_seconds", 60)
 	viper.SetDefault("tip.enabled", true)
 	viper.SetDefault("tip.qr_url", "")
 	viper.SetDefault("tip.review_versions", []string{})

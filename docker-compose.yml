@@ -79,6 +79,13 @@ services:
       # OpenObserve basic auth（与下方 ZO_ROOT_USER_* 默认值对应；生产请用环境变量覆盖）
       - HS_TRACING_OTLP_HEADERS=${HS_TRACING_OTLP_HEADERS:-Authorization=Basic YWRtaW5AaGlnaHNjaG9vbC5sb2NhbDpIaWdoc2Nob29sIzIwMjZvbw==}
       - HS_TRACING_SAMPLE_RATE=0.1
+      # Metrics（OTLP/HTTP 直推 OpenObserve，与 traces 同端点同认证；无需 Prometheus）
+      - HS_METRICS_ENABLED=${HS_METRICS_ENABLED:-true}
+      - HS_METRICS_SERVICE_NAME=${HS_METRICS_SERVICE_NAME:-highschool-backend}
+      - HS_METRICS_OTLP_ENDPOINT=${HS_METRICS_OTLP_ENDPOINT:-openobserve:5080}
+      - HS_METRICS_OTLP_URL_PATH=${HS_METRICS_OTLP_URL_PATH:-/api/default/v1/metrics}
+      - HS_METRICS_OTLP_HEADERS=${HS_METRICS_OTLP_HEADERS:-Authorization=Basic YWRtaW5AaGlnaHNjaG9vbC5sb2NhbDpIaWdoc2Nob29sIzIwMjZvbw==}
+      - HS_METRICS_INTERVAL_SECONDS=${HS_METRICS_INTERVAL_SECONDS:-60}
       # LLM（AI 顾问；key 通过环境注入，勿提交真实值）
       - HS_LLM_PROVIDER=${HS_LLM_PROVIDER:-deepseek}
       - HS_LLM_BASE_URL=${HS_LLM_BASE_URL:-https://api.deepseek.com}
@@ -111,22 +118,8 @@ services:
   # ==================== Observability（默认不启动） ====================
   # 启用方式：docker compose --profile observability up -d
   # OpenObserve UI: http://localhost:5080（traces/logs/metrics 一体，含告警）
-  # backend 通过 OTLP/HTTP 直连（见上方 HS_TRACING_* 环境变量），无需 collector
-  # Prometheus（采集 backend 指标 → remote_write 到 OpenObserve）
-  prometheus:
-    image: prom/prometheus:v3.4.1
-    container_name: highschool_prometheus
-    restart: unless-stopped
-    profiles:
-      - observability
-    volumes:
-      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    networks:
-      - highschool_net
-    depends_on:
-      - backend
-      - openobserve
-
+  # backend 通过 OTLP/HTTP 直连（traces 见 HS_TRACING_*，metrics 见 HS_METRICS_*），
+  # 无需 collector，也无需 Prometheus（指标为后端周期推送，非拉取）
   openobserve:
     image: public.ecr.aws/zinclabs/openobserve:v0.16.3
     container_name: highschool_openobserve
