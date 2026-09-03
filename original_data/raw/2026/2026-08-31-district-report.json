@@ -1,0 +1,43 @@
+{
+  "date": "2026-08-31",
+  "scrape_time": "2026-08-31T08:01:44.462406",
+  "method": "curl (spot-check, 5 districts + 2 city pages)",
+  "total_districts": 16,
+  "checked": 5,
+  "total_new_items": 0,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [],
+      "size": 30036
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [],
+      "size": 20946
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [],
+      "size": 10847
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [],
+      "size": 48314
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [],
+      "size": 13304
+    }
+  ],
+  "city_24500_aug": 0,
+  "city_03600_aug": 0,
+  "notes": "Deep seasonal shutdown. No new Aug 2026 content found. Recommendation: monthly or pause until March 2027."
+}

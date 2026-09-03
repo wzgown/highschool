@@ -1,0 +1,110 @@
+{
+ "date": "2026-09-03",
+ "scrape_time": "2026-09-03T08:01:30+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 12,
+ "failed_count": 0,
+ "partial_count": 0,
+ "empty_count": 4,
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "浦东",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "虹口",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "静安",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "items": [],
+   "note": "empty/seasonal shutdown"
+  },
+  {
+   "name": "嘉定",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  },
+  {
+   "name": "松江",
+   "status": "failed",
+   "items": [],
+   "note": "empty/seasonal shutdown"
+  },
+  {
+   "name": "普陀",
+   "status": "failed",
+   "items": [],
+   "note": "empty/seasonal shutdown"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "items": [],
+   "note": "historical content only"
+  }
+ ],
+ "new_data": false,
+ "notes": "Monthly spot-check. 12/16 reachable. 黄浦(zhaoban.hpe.cn) recovered from 404, 长宁(kssx.chneic IndexAction) reachable again. 杨浦/松江/普陀 empty shells. No new 中考 content in any district — all 16 in deep seasonal shutdown. 静安(08-27)/崇明(08-26) Aug items are non-中考 (开学季/少儿互助)."
+}

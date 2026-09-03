@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-23",
+  "scrape_time": "2026-08-23T08:02:54.336986",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 11,
+  "failed_count": 5,
+  "partial_count": 0,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "failed",
+      "items": []
+    }
+  ],
+  "city_items_2026": 22,
+  "city_new_since_last_check": 0
+}
