@@ -1,0 +1,101 @@
+{
+  "date": "2026-09-04",
+  "scrape_time": "2026-09-04T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 12,
+  "failed_count": 1,
+  "partial_count": 0,
+  "empty_count": 3,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ],
+  "city_level": {
+    "shmeea_index": "HTTP 200, latest article 2026-07-21",
+    "03200_gongshi": "latest 2026-07-07",
+    "03600_luqu": "latest 2026-07-21",
+    "24500_chaxun": "latest 2026-07-03",
+    "new_articles_after_20260721": 0
+  },
+  "new_data": false,
+  "notes": "Daily check (off-season). City site unchanged since 07-21 (民办高中降分公告). 12/16 districts reachable; 普陀/杨浦 empty shells, 松江 minimal shell, 浦东 412 anti-crawl (intermittent, reachable 09-03). 静安(08-27 游戏创新大赛/开学季采购)/崇明(08-26 人大换届/开学准备/少儿互助) Aug items are non-中考. 黄浦/闵行/青浦 zk titles are all known historical July-or-earlier items. Zero new 中考 content. 2026 cycle COMPLETE; next meaningful data expected ~2027-02/03."
+}
