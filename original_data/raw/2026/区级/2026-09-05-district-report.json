@@ -1,0 +1,137 @@
+{
+  "date": "2026-09-05",
+  "scrape_time": "2026-09-05T08:05:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 16,
+  "failed_count": 0,
+  "partial_count": 0,
+  "empty_count": 11,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "items_found",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（徐汇区）",
+          "note": "已知条目，数据已通过市级来源于2026-07-24入库"
+        },
+        {
+          "title": "2026年徐汇区中招跨区报名（跨入）学生注意事项",
+          "note": "5月招生期间已知条目"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "items_found",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取分数线（长宁区）",
+          "note": "已知条目，已入库"
+        },
+        {
+          "title": "2026年中考投档缺额情况表(长宁区）",
+          "note": "2026-07-23已处理（8校缺额117人，征求志愿）"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "items_found",
+      "items": [
+        {
+          "title": "2026年上海市中等学校高中阶段招生（闵行区）",
+          "note": "栏目页导航条目，非新数据"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "note": "已知条目，已入库"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "items_found",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "note": "2026-07-23已导入59条"
+        },
+        {
+          "title": "2026年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "note": "2026-07-23已存CSV"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "empty",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "empty",
+      "items": []
+    }
+  ],
+  "city_level": {
+    "shmeea_index": "无新公告",
+    "03200_gongshi": "最新2026-07-07",
+    "03600_luqu": "最新2026-07-21（8所民办高中降低最低投档控制分数线公告）",
+    "24500_chaxun": "最新2026-07-03",
+    "new_articles_after_20260721": 0
+  },
+  "new_data": false,
+  "notes": "淡季月度抽查。全部8个疑似条目经与历史报告及DB导入记录比对，均为7月下旬已处理数据的格式变体或同数据另一来源（统一招生分数线已于07-24~29全市入库861条）。2026年中考周期已结束，无任何2026-08-04之后发布的新内容。"
+}
