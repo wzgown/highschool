@@ -1,0 +1,146 @@
+{
+  "date": "2026-09-06",
+  "scrape_time": "2026-09-06 08:06:18",
+  "method": "curl (execute_code sequential, HTTPS where HTTP blocked by security scanner)",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 1,
+  "partial_count": 1,
+  "empty_count": 3,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "ok_no_items",
+      "http_size": 27149,
+      "items_count": 0,
+      "items": [],
+      "note": "页面已恢复(27KB)但无中考关键词条目"
+    },
+    {
+      "name": "徐汇",
+      "status": "ok_no_items",
+      "http_size": 27131,
+      "items_count": 0,
+      "items": [],
+      "note": "页面正常，无新条目"
+    },
+    {
+      "name": "长宁",
+      "status": "items_found",
+      "http_size": 28837,
+      "items_count": 5,
+      "items": [],
+      "note": "已知条目：1至15志愿分数线(07-24已入库)+投档缺额表(07-23已归档)+到区/到校计划(6月已入库)"
+    },
+    {
+      "name": "静安",
+      "status": "ok_no_items",
+      "http_size": 116394,
+      "items_count": 0,
+      "items": [],
+      "note": "页面正常，无新条目"
+    },
+    {
+      "name": "普陀",
+      "status": "ok_no_items",
+      "http_size": 55436,
+      "items_count": 0,
+      "items": [],
+      "note": "页面正常，无新条目"
+    },
+    {
+      "name": "虹口",
+      "status": "ok_no_items",
+      "http_size": 79967,
+      "items_count": 0,
+      "items": [],
+      "note": "页面正常，无新条目"
+    },
+    {
+      "name": "杨浦",
+      "status": "empty_shell",
+      "http_size": 333,
+      "items_count": 0,
+      "items": [],
+      "note": "空壳页(季节性下线)"
+    },
+    {
+      "name": "闵行",
+      "status": "items_found",
+      "http_size": 30036,
+      "items_count": 4,
+      "items": [],
+      "note": "已知条目：1至15志愿分数线(07-24已入库)+到校/到区计划(6月已入库)+跨区报名须知(3月)"
+    },
+    {
+      "name": "宝山",
+      "status": "ok_no_items",
+      "http_size": 198253,
+      "items_count": 0,
+      "items": [],
+      "note": "页面正常，无新条目"
+    },
+    {
+      "name": "嘉定",
+      "status": "ok_no_items",
+      "http_size": 105538,
+      "items_count": 0,
+      "items": [],
+      "note": "页面正常，无新条目"
+    },
+    {
+      "name": "浦东",
+      "status": "blocked_412",
+      "http_size": 3094,
+      "items_count": 0,
+      "items": [],
+      "note": "HTTP 412(已知，需特殊处理)"
+    },
+    {
+      "name": "金山",
+      "status": "ok_no_items",
+      "http_size": 18762,
+      "items_count": 0,
+      "items": [],
+      "note": "HTTPS可达(18KB)，无新条目；HTTP被安全扫描器拦截"
+    },
+    {
+      "name": "松江",
+      "status": "empty_shell",
+      "http_size": 2022,
+      "items_count": 0,
+      "items": [],
+      "note": "2KB壳页(季节性下线)；HTTPS可达，HTTP被拦截"
+    },
+    {
+      "name": "青浦",
+      "status": "empty_shell",
+      "http_size": 108,
+      "items_count": 0,
+      "items": [],
+      "note": "空壳页(季节性下线)"
+    },
+    {
+      "name": "奉贤",
+      "status": "items_found",
+      "http_size": 20946,
+      "items_count": 3,
+      "items": [],
+      "note": "已知条目：统一批次分数线(07-25已入库)+到校/到区计划(6月已入库)"
+    },
+    {
+      "name": "崇明",
+      "status": "ok_no_items",
+      "http_size": 59329,
+      "items_count": 0,
+      "items": [],
+      "note": "页面正常，无新条目"
+    }
+  ],
+  "new_data": false,
+  "notes": [
+    "Off-season check. All found items are duplicate channels of data already imported: 统一招生分数线 via city-level (861 records in ref_admission_score_unified), 到区/到校计划 via June district PDFs.",
+    "松江/金山 plain-HTTP URLs blocked by cron security scanner (tirith:plain_http_to_sink); HTTPS fallback used successfully.",
+    "与2026-09-05基准一致，无新数据。"
+  ]
+}
