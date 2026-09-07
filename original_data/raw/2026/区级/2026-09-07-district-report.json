@@ -1,0 +1,114 @@
+{
+  "date": "2026-09-07",
+  "scrape_time": "2026-09-07 08:05:34",
+  "method": "curl (execute_code sequential, HTTPS where HTTP blocked by security scanner)",
+  "total_districts": 16,
+  "success_count": 13,
+  "failed_count": 1,
+  "partial_count": 1,
+  "empty_count": 3,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "转载条目均为7月已归档内容(自主招生录取名单07-17/分数线07-20/去向查询窗口7/23-8/13)"
+    },
+    {
+      "name": "徐汇",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "徐教〔2026〕5号+名额到校/到区计划均为6月已导入数据"
+    },
+    {
+      "name": "长宁",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "到区/到校分数线+计划表+1至15志愿分数线均为7月已导入数据"
+    },
+    {
+      "name": "静安",
+      "status": "partial",
+      "items": [],
+      "note": "ja.edu.sh.cn连接失败(000)，jingan.gov.cn门户200但无2026中考条目"
+    },
+    {
+      "name": "普陀",
+      "status": "empty_shell",
+      "items": [],
+      "note": "159B空壳"
+    },
+    {
+      "name": "虹口",
+      "status": "ok_no_items",
+      "items": [],
+      "note": ""
+    },
+    {
+      "name": "杨浦",
+      "status": "empty_shell",
+      "items": [],
+      "note": "342B空壳"
+    },
+    {
+      "name": "闵行",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "07-14/07-17转发条目均已归档"
+    },
+    {
+      "name": "宝山",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "07-23分数线已导入；征求志愿通知为7月窗口"
+    },
+    {
+      "name": "嘉定",
+      "status": "ok_no_items",
+      "items": [],
+      "note": ""
+    },
+    {
+      "name": "浦东",
+      "status": "blocked_412",
+      "items": [],
+      "note": "反爬拦截(常态)"
+    },
+    {
+      "name": "金山",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "仅查询入口"
+    },
+    {
+      "name": "松江",
+      "status": "empty_shell",
+      "items": [],
+      "note": "2097B off-season壳"
+    },
+    {
+      "name": "青浦",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "录取查询入口+2月报名须知，无新内容"
+    },
+    {
+      "name": "奉贤",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "招生信息页仅有7月分数线(已导入)；确认奉贤未在网上发布2026统一招生计划(招生计划书为线下发放)——ref_quota_unified_allocation_district缺district_id=16为已知数据缺口，非新数据"
+    },
+    {
+      "name": "崇明",
+      "status": "ok_no_items",
+      "items": [],
+      "note": ""
+    }
+  ],
+  "notes": [
+    "Off-season check #4 (after 09-03/04/05/06). All found items are duplicates of already-imported data.",
+    "DB status snapshot 2026-09-07: 到区 943条/7156名(77校, 4所全市分配型学校各覆盖16区—拆分已补齐); 到校 3883条/12861名(16区, orphan=0); 统一招生 910条/61774名(15区—缺奉贤16, 该区未在线发布计划); 统一录取分数线 861条.",
+    "静安 ja.edu.sh.cn down today (jingan.gov.cn portal OK, no items). 浦东 412 as usual."
+  ]
+}
