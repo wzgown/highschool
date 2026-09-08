@@ -1,0 +1,114 @@
+{
+  "date": "2026-09-08",
+  "scrape_time": "2026-09-08T08:08:59",
+  "method": "curl+UA via Golden Source URLs (execute_code sequential loop, 11s)",
+  "total_districts": 16,
+  "success_count": 10,
+  "failed_count": 1,
+  "partial_count": 1,
+  "empty_count": 4,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "/zkxx/ 1.6KB壳→root 36KB可访问; 命中条目均为7月已知(去向查询窗口7/23-8/13、1至15志愿分数线=市级重复渠道)"
+    },
+    {
+      "name": "徐汇",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "cat/216 11.8KB; 命中均为已导入(到校221/到区69/统一分数线=市级重复)"
+    },
+    {
+      "name": "长宁",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "IndexAction.action 30.4KB; 命中均为已知(缺额表07-23已归档、到区/到校分数线=市级重复); 页面'2026年09月08'为'今天是'日期控件非文章"
+    },
+    {
+      "name": "静安",
+      "status": "partial",
+      "items": [],
+      "note": "ja.edu.sh.cn 0B宕机(同09-07)"
+    },
+    {
+      "name": "普陀",
+      "status": "empty_shell",
+      "items": [],
+      "note": "kszx.pte.sh.cn 150B"
+    },
+    {
+      "name": "虹口",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "11.5KB; 消息速递08-05条目=高考档案转递通知(非中考), 其余为高考专科/征求志愿"
+    },
+    {
+      "name": "杨浦",
+      "status": "empty_shell",
+      "items": [],
+      "note": "333B"
+    },
+    {
+      "name": "闵行",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "list_0.htm 33.3KB; 4个已知条目(统一分数线=市级重复、到校计划已入库460条)"
+    },
+    {
+      "name": "宝山",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "zkxx 14.8KB; 命中均为7月已知(征求志愿07-23、中职/高中1至15志愿分数线已入库)"
+    },
+    {
+      "name": "嘉定",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "jiaoyu 53.5KB; 0个中考关键词命中; 8/18-9/2日期均为开学季教育新闻(非中考)"
+    },
+    {
+      "name": "浦东",
+      "status": "empty_shell",
+      "items": [],
+      "note": "3.1KB壳(往常412)"
+    },
+    {
+      "name": "金山",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "/zsks 51KB; 命中为查询系统入口+7月已知分数线条目"
+    },
+    {
+      "name": "松江",
+      "status": "empty_shell",
+      "items": [],
+      "note": "zsb.sjedu.cn 2.1KB"
+    },
+    {
+      "name": "青浦",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "kszx 15.3KB; 命中为导航+6月跨区注意事项(已知)"
+    },
+    {
+      "name": "奉贤",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "22KB; 命中均为7月已知(统一批次分数线已入库41条、到校计划已导入)"
+    },
+    {
+      "name": "崇明",
+      "status": "ok_no_items",
+      "items": [],
+      "note": "portal 69.3KB; 0个中考关键词命中; 8月下旬条目为门户新闻(非中考)"
+    }
+  ],
+  "notes": [
+    "Off-season check #6 (after 09-03/04/05/06/07). All found items are duplicates of already-imported data or non-中考 content.",
+    "DB status snapshot 2026-09-08: 到区 943条/7156名(77校,全市分配型拆分已补齐); 到校 3883条/12861名(16区,orphan=0); 统一招生 910条(15区—缺奉贤,该区未在线发布,永久缺口); 统一录取分数线 861条.",
+    "No DB changes today. No ETL triggered."
+  ]
+}

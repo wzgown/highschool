@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-08",
+  "scrape_time": "2026-09-08T08:08:59",
+  "index_2026_items": 19,
+  "subpages_checked": [
+    "03000",
+    "03100",
+    "03200",
+    "03300",
+    "03400",
+    "03500",
+    "03600",
+    "24500"
+  ],
+  "latest_article_date": "2026-07-21",
+  "latest_articles": [
+    {
+      "title": "2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+      "date": "2026-07-20/21",
+      "status": "已入库(906+3247条)"
+    },
+    {
+      "title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+      "date": "2026-07-21",
+      "status": "已入库(ref_school_control_score 8条)"
+    },
+    {
+      "title": "2026年上海市民办高中学校招生计划余额公布",
+      "date": "2026-07-25",
+      "status": "已归档PDF,不导入"
+    }
+  ],
+  "new_items": [],
+  "new_data": false,
+  "notes": "Off-season daily check #6 (09-04~09-08). All 8 pages reachable; max article date unchanged at 20260721 across index+03600. /24500/ max 20260703 (高考查询). No Aug/Sep publications. 2026 cycle complete."
+}
