@@ -1,0 +1,114 @@
+{
+  "date": "2026-09-09",
+  "scrape_time": "2026-09-09T08:05:11",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 12,
+  "failed_count": 0,
+  "partial_count": 0,
+  "empty_count": 5,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "ok_shell",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "empty_shell",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "ok",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": "2026-07-24",
+          "note": "已知条目，市级来源数据已于2026-07-24入库(ref_admission_score_unified)，重复渠道非新数据"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "empty_shell",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "ok_no_items",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "empty_shell",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "empty_shell",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "ok",
+      "items": [
+        {
+          "title": "2026年奉贤区统一批次中职校最低录取分数线",
+          "url": "https://zsks.shfxjy.cn/",
+          "date": "2026-07-24",
+          "note": "已知条目，2026-07-24已归档CSV(original_data/processed/2026/)，非新数据"
+        },
+        {
+          "title": "体育中考(导航栏常态链接)",
+          "url": "https://zsks.shfxjy.cn/",
+          "date": "",
+          "note": "导航栏链接，非公告"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "ok_no_items",
+      "items": []
+    }
+  ],
+  "notes": "Off-season daily check #7. 13/16 sites reachable (vs 09-08: 青浦 108B empty shell seasonal fluctuation; 普陀 recovered ok 55KB; 静安 portal ok 116KB no 中考 content). 闵行/奉贤 keyword hits are all known items (duplicate channels of already-imported data). 0 genuinely new announcements. 2026 cycle complete."
+}
