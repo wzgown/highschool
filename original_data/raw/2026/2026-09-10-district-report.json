@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-10",
+  "scrape_time": "2026-09-10T08:10:00",
+  "method": "curl (September monthly spot-check, 8 targets + 2 portal fallbacks)",
+  "total_districts": 16,
+  "checked": 8,
+  "total_new_items": 0,
+  "districts": [
+    {"name": "闵行(招生考试信息公开)", "status": "success", "items": [], "max_date": "20260721", "size": 30038, "note": "max date unchanged since July"},
+    {"name": "奉贤(招考子站 zsks.shfxjy.cn)", "status": "success", "items": [], "note": "only known 2026 cycle links (名额分配到区/到校计划入口), no new items"},
+    {"name": "虹口(政府门户)", "status": "success", "items": [], "note": "portal news up to 20260909 but zero 中考/招生 keywords — generic content"},
+    {"name": "宝山(政府门户)", "status": "success", "items": [], "note": "portal news up to 20260909 but zero 中考/招生 keywords — generic content"},
+    {"name": "黄浦(教育局官网)", "status": "partial", "items": [], "note": "JS-rendered shell (3.7KB), no extractable items — known limitation"},
+    {"name": "松江(教育局 sjedu.cn)", "status": "error", "items": [], "note": "HTTP 502; fallback 松江政府门户 200 OK, no exam keywords"},
+    {"name": "长宁(教育局 chneic.sh.cn)", "status": "error", "items": [], "note": "HTTP 502 (site down); fallback 长宁政府门户 200 OK, no exam keywords"},
+    {"name": "浦东(政府门户)", "status": "error", "items": [], "note": "HTTP 412 — known special case, requires browser headers; skipped"}
+  ],
+  "city_24500_sep": 0,
+  "city_03600_sep": 0,
+  "notes": "September monthly spot-check (first since 08-31). No new 中考-related content in any checked district. 松江/长宁 district edu sites returning 502 (likely off-season maintenance; portals reachable). 2026 cycle complete — recommendation stands: daily city check + monthly district spot-check until March 2027."
+}

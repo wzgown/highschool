@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-10",
+  "scrape_time": "2026-09-10T08:05:00",
+  "index_2026_items": 19,
+  "subpages_checked": ["03000", "03100", "03200", "03300", "03400", "03500", "03600", "24500"],
+  "latest_article_date": "2026-07-21",
+  "max_dates_by_page": {
+    "03000": "(index, no dated items)",
+    "03100": "20260331",
+    "03200": "20260707",
+    "03300": "20260512",
+    "03400": "20260621",
+    "03500": "20260710",
+    "03600": "20260721 (articles) / 20260723 (cdn PDF link, known)",
+    "24500": "20260703"
+  },
+  "new_items": [],
+  "new_data": false,
+  "notes": "Off-season daily check #8 (09-04~09-10). All 8 pages reachable. Max article date unchanged at 20260721. The 20260723 cdn link (民办高中学校招生计划余额 PDF) re-verified as the known item already archived on 07-30/08-01/08-05 reports — not new. No Aug/Sep publications. 2026 cycle complete."
+}
