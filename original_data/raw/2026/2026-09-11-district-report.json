@@ -1,0 +1,149 @@
+{
+  "date": "2026-09-11",
+  "scrape_time": "08:05",
+  "method": "curl+UA sequential (execute_code)",
+  "total_districts": 16,
+  "checked": 16,
+  "reachable": 12,
+  "total_new_items": 0,
+  "districts": [
+    {
+      "name": "闵行(招生考试信息公开)",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "status": "success",
+      "size": 33252,
+      "items": [],
+      "max_date": "20260721",
+      "note": "known 2026-cycle items only (1至15志愿分数线=市级重复渠道, 自主招生录取名单); max date unchanged since July"
+    },
+    {
+      "name": "浦东(政府门户)",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "status": "blocked",
+      "size": 3062,
+      "items": [],
+      "note": "anti-crawl shell (412 pattern) — known special case"
+    },
+    {
+      "name": "徐汇(中考招生子页)",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "status": "success",
+      "size": 11861,
+      "items": [],
+      "max_date": "20260721",
+      "note": "known items only (1至15志愿分数线/跨区注意事项/名额到校计划入口), all archived July"
+    },
+    {
+      "name": "黄浦(招办 zhaoban.hpe.cn)",
+      "url": "https://zhaoban.hpe.cn",
+      "status": "success",
+      "size": 36237,
+      "items": [],
+      "note": "root OK; known items only (体育免考公示=春季归档, 名额分配分数线转载)"
+    },
+    {
+      "name": "静安(政府门户)",
+      "url": "https://www.jingan.gov.cn",
+      "status": "success",
+      "size": 126782,
+      "items": [],
+      "note": "portal news 20260910 but zero 中考/招生 keywords (开学季/中秋/商圈新闻)"
+    },
+    {
+      "name": "杨浦(政府门户)",
+      "url": "https://www.shyp.gov.cn/shypq/jyj/",
+      "status": "shell",
+      "size": 1063,
+      "items": [],
+      "note": "1KB shell — off-season pattern"
+    },
+    {
+      "name": "宝山(招考 zkxx)",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "status": "success",
+      "size": 14843,
+      "items": [],
+      "note": "known items only (征求志愿=07-23归档, 1至15志愿分数线)"
+    },
+    {
+      "name": "嘉定(教育局)",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "status": "success",
+      "size": 53887,
+      "items": [],
+      "note": "教师节/开学调研 news only, zero 中考 keywords"
+    },
+    {
+      "name": "长宁(kszx IndexAction)",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "status": "success",
+      "size": 30409,
+      "items": [],
+      "note": "recovered from 09-10 502; known items only (1至15志愿/投档缺额表=07-23归档/名额分配分数线)"
+    },
+    {
+      "name": "普陀(kszx.pte.sh.cn)",
+      "url": "https://kszx.pte.sh.cn",
+      "status": "shell",
+      "size": 150,
+      "items": [],
+      "note": "150B empty shell — off-season fluctuation (was ok 55KB on 09-09)"
+    },
+    {
+      "name": "虹口(kszx)",
+      "url": "https://kszx.hongkouedu.com",
+      "status": "success",
+      "size": 11474,
+      "items": [],
+      "note": "no 中考 keywords"
+    },
+    {
+      "name": "松江(zsb.sjedu.cn)",
+      "url": "https://zsb.sjedu.cn",
+      "status": "shell",
+      "size": 2097,
+      "items": [],
+      "note": "2KB shell — off-season pattern (gov portal fallback per 09-10 has no exam content)"
+    },
+    {
+      "name": "金山(zsks子页)",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "status": "success",
+      "size": 50994,
+      "items": [],
+      "note": "known items only (1至15志愿分数线)"
+    },
+    {
+      "name": "奉贤(zsks子站)",
+      "url": "https://zsks.shfxjy.cn/",
+      "status": "success",
+      "size": 22041,
+      "items": [],
+      "note": "known 2026-cycle links only (统一批次分数线/名额分配到校到区计划入口)"
+    },
+    {
+      "name": "青浦(kszx.qpedu.cn)",
+      "url": "https://kszx.qpedu.cn",
+      "status": "success",
+      "size": 15348,
+      "items": [],
+      "note": "recovered from 09-09 empty shell; known items only (若干意见转载/跨区注意事项/查询入口)"
+    },
+    {
+      "name": "崇明(政府门户)",
+      "url": "https://www.shcm.gov.cn/",
+      "status": "success",
+      "size": 69371,
+      "items": [],
+      "note": "portal news 20260910 but zero 中考 keywords (交通管制/大潮汛/接待公示)"
+    }
+  ],
+  "notes": [
+    "off-season daily run #9; 2026 cycle complete (DB terminal state verified 09-10)",
+    "city max article date still 20260721; 0 new items",
+    "all keyword hits = known 2026-cycle items (duplicate channels of city data already in DB, or July-archived)",
+    "静安/嘉定/崇明 September news = 开学季/portal news, non-中考",
+    "seasonal fluctuation vs 09-10: 长宁+青浦 recovered; 普陀 degraded to 150B shell; 杨浦/松江 shells as usual",
+    "next meaningful data ~2027-03 (招生工作意见)"
+  ]
+}
