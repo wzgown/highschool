@@ -1,0 +1,224 @@
+{
+  "date": "2026-09-12",
+  "scrape_time": "08:06",
+  "method": "curl+UA sequential (execute_code)",
+  "total_districts": 16,
+  "checked": 16,
+  "reachable": 12,
+  "total_new_items": 0,
+  "districts": [
+    {
+      "name": "闵行(招生考试信息公开)",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "status": "success",
+      "size": 33254,
+      "items": [
+        "2026年上海市中等学校高中阶段招生（闵行区）",
+        "2026年上海市闵行区民办初中 “调剂志愿”录取名单",
+        "2026年上海市闵行区民办小学 “调剂志愿”录取名单",
+        "2026年上海市高中名额分配到区招生计划（闵行区）",
+        "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+        "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+        "2026年闵行区中招跨区生报名及后续工作注意事项",
+        "2026年闵行区民办初中电脑随机录取结果公示",
+        "2026年闵行区民办小学电脑随机录取结果公示",
+        "2026年闵行区高中学校“校园开放日”信息汇总"
+      ],
+      "max_date": "20260723",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "浦东(教育局)",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "status": "js_shell_or_empty",
+      "size": 516,
+      "items": [],
+      "max_date": null,
+      "note": "JS shell (~516B), needs playwright — known limitation"
+    },
+    {
+      "name": "徐汇(中考招生)",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "status": "success",
+      "size": 11869,
+      "items": [],
+      "max_date": null,
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "黄浦(招考办)",
+      "url": "https://zhaoban.hpe.cn",
+      "status": "success",
+      "size": 36237,
+      "items": [
+        "2026学年第一学期黄浦区义务教育阶段学生申请转学登记细则（居住黄浦－初中）",
+        "2026学年第一学期黄浦区义务教育阶段学生申请转学登记细则（居住黄浦－小学）",
+        "2026学年第一学期黄浦区义务教育阶段本区户籍学生转学细则（户籍黄浦－初中）",
+        "2026学年第一学期黄浦区义务教育阶段本区户籍学生转学细则（户籍黄浦－小学）",
+        "2026学年第一学期黄浦区高中阶段学生转学操作细则",
+        "2026年上海市普通高等学校春季考试招生符合政策性加分考生名单",
+        "2026年上海市普通高等学校秋季考试招生符合政策性加分考生名单",
+        "2026年上海市高中学校“1至15志愿”统一招生 录取最低分数线（黄浦区）",
+        "2026年黄浦区中招个别考生（往届生、返沪生）现场确认注意事项及携带资料",
+        "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排"
+      ],
+      "max_date": null,
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "静安(区政府)",
+      "url": "https://www.jingan.gov.cn",
+      "status": "success",
+      "size": 128989,
+      "items": [
+        "上海市静安区国有资产监督管理委员会2026年资产评估顾问遴选项目中标结果公告2026-02-10",
+        "中秋来上海必打卡巨型“三耳兔”！兴业太古汇启幕秋日活动季→2026-09-10",
+        "关于公开招募入驻“一网通办”平台刻章服务企业的通知2026-04-22",
+        "关于静安区门户网站系统升级的公告2026-04-24",
+        "双向赋能，携手扬帆出海！“香港投资新机遇”专题活动在静安举行2026-09-10",
+        "坐标：静安寺商圈，TA上央视啦！2026-09-10",
+        "智能体如何“一起干活”？市北国际科创区企业“鼎捷数智”签约AIP协议……2026-09-10",
+        "王嘉尔同款首批预售卖出5万台！这家智能眼镜巨头研发总部落户静安，还把全球旗舰店开进了“千亿商圈”2026-09-10",
+        "行政复议补正通知书送达公告（沪静府复字（2026）第1025号）2026-07-01",
+        "诵读诗词、敬献鲜花、读书分享，今天我们纪念毛泽东同志逝世50周年2026-09-10"
+      ],
+      "max_date": "20260910",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "杨浦(教育局)",
+      "url": "https://www.shyp.gov.cn/shypq/jyj/",
+      "status": "js_shell_or_empty",
+      "size": 1107,
+      "items": [],
+      "max_date": null,
+      "note": "JS shell (~1.1KB) — known limitation"
+    },
+    {
+      "name": "宝山(中考信息)",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "status": "success",
+      "size": 14854,
+      "items": [],
+      "max_date": "20260723",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "嘉定(教育局)",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "status": "success",
+      "size": 54618,
+      "items": [
+        "标题：2026学年嘉定区教育系统公开招聘教师公告（第二批）\n点击数：33103\n发表时间：2026-03-09",
+        "标题：2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：3825\n发表时间：2026-04-07",
+        "标题：2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：755\n发表时间：2026-04-07",
+        "标题：2026年嘉定区新建学校项目设计方案征集公告（第一批）\n点击数：4637\n发表时间：2026-02-10",
+        "标题：2026年嘉定区适龄幼儿入园常见问题与解答\n点击数：0\n发表时间：2026-04-15",
+        "标题：一图就懂：2026年上海市嘉定区适龄幼儿入园报名流程\n点击数：0\n发表时间：2026-04-15",
+        "标题：上海市嘉定区中小学食堂供餐服务项目区级遴选公告\n点击数：4665\n发表时间：2026-04-27",
+        "标题：上海市嘉定区人民政府教育督导室关于对上海协和南苑幼儿园发展性督导的意见书\n点击数：134\n发表时间：2026-09-02",
+        "标题：上海市嘉定区人民政府教育督导室关于对上海师范大学附属嘉定幼儿园发展性督导的意见书\n点击数：96\n发表时间：2026-09-02",
+        "标题：上海市嘉定区人民政府教育督导室关于对上海维冠幼儿园发展性督导的意见书\n点击数：49\n发表时间：2026-09-02"
+      ],
+      "max_date": "20260911",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "长宁(招考中心)",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "status": "success",
+      "size": 31073,
+      "items": [],
+      "max_date": "20260723",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "普陀(招考中心)",
+      "url": "https://kszx.pte.sh.cn",
+      "status": "js_shell_or_empty",
+      "size": 159,
+      "items": [],
+      "max_date": null,
+      "note": "empty shell (~159B) — known limitation"
+    },
+    {
+      "name": "虹口(招考中心)",
+      "url": "https://kszx.hongkouedu.com",
+      "status": "success",
+      "size": 11782,
+      "items": [],
+      "max_date": "20260805",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "松江(招生考试)",
+      "url": "https://zsb.sjedu.cn",
+      "status": "js_shell_or_empty",
+      "size": 2097,
+      "items": [],
+      "max_date": null,
+      "note": "off-season shell (~2.1KB) — seasonal, content needs playwright"
+    },
+    {
+      "name": "金山(招生考试)",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "status": "success",
+      "size": 51633,
+      "items": [],
+      "max_date": "20260723",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "奉贤(招生考试网)",
+      "url": "https://zsks.shfxjy.cn/",
+      "status": "success",
+      "size": 22041,
+      "items": [],
+      "max_date": "20260723",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "青浦(招考中心)",
+      "url": "https://kszx.qpedu.cn",
+      "status": "success",
+      "size": 15348,
+      "items": [
+        "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+        "2026年青浦区往届生、返沪生中考报名现场确认须知",
+        "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+        "转：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水平考试的实施细则》的通知",
+        "转：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+        "转：上海市教育考试院关于印发《2026年上海市普通高校春季考试招生实施办法》的通知(沪教考院高招〔2025〕29号)",
+        "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知"
+      ],
+      "max_date": "20260511",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    },
+    {
+      "name": "崇明(区政府)",
+      "url": "https://www.shcm.gov.cn",
+      "status": "success",
+      "size": 70461,
+      "items": [
+        "2026年区委重点调研课题汇报会举行",
+        "区党政领导2026年8月13日（周四）接待来访群众公示",
+        "区党政领导2026年8月20日（周四）接待来访群众公示",
+        "区党政领导2026年8月27日（周四）接待来访群众公示",
+        "区党政领导2026年9月10日（周四）接待来访群众公示",
+        "区党政领导2026年9月3日（周四）接待来访群众公示",
+        "崇明区2026年8月社会救助对象信息公布表",
+        "崇明区港西镇公益性岗位补贴情况公示（2026年08月在岗）",
+        "沪2026年度养老机构等级评定结果公示，崇明这6家机构在列！"
+      ],
+      "max_date": "20260910",
+      "note": "known 2026-cycle items only (July score lines / May plans, already in DB or city duplicates); no new 中考 content"
+    }
+  ],
+  "notes": [
+    "off-season daily run #10; 2026 cycle complete (DB terminal state verified 09-10)",
+    "city max article date still 20260721; 0 new items; known July artifacts (余额公布/振华转载) reconfirmed already in history",
+    "all keyword hits = known 2026-cycle items (July 分数线/降分, May 计划) — duplicates of DB/city data",
+    "静安/嘉定/崇明 September news = 开学季/portal news, non-中考",
+    "no ETL, no DB changes"
+  ]
+}
