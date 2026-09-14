@@ -1,0 +1,189 @@
+{
+  "date": "2026-09-14",
+  "scrape_time": "08:05",
+  "method": "curl+UA sequential (execute_code)",
+  "total_districts": 16,
+  "checked": 16,
+  "reachable": 12,
+  "total_new_items": 0,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "items": [
+        {
+          "title": "2026年上海市中等学校高中阶段招生（闵行区）",
+          "note": "已知条目"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+          "note": "已知条目，已入库"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+          "note": "已知条目，已入库"
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "js_shell_or_empty",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（徐汇区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到校招生计划",
+          "note": "已知条目，已入库"
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到区招生计划",
+          "note": "已知条目，已入库"
+        }
+      ]
+    },
+    {
+      "name": "黄浦",
+      "status": "success",
+      "url": "https://zhaoban.hpe.cn",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生 录取最低分数线（黄浦区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+          "note": "已知条目"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "url": "https://www.jingan.gov.cn",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "js_shell_or_empty",
+      "url": "https://www.shyp.gov.cn/shypq/jyj/",
+      "items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "items": [
+        {
+          "title": "关于2026年宝山区中考无录取去向考生征求志愿的通知",
+          "note": "已知条目（7月征求志愿）"
+        },
+        {
+          "title": "2026年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "note": "已知条目"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "note": "已知条目，已入库"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取分数线（长宁区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "2026年中考投档缺额情况表(长宁区）",
+          "note": "已知条目，07-23已归档"
+        }
+      ]
+    },
+    {
+      "name": "普陀",
+      "status": "js_shell_or_empty",
+      "url": "https://kszx.pte.sh.cn",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "js_shell_or_empty",
+      "url": "https://zsb.sjedu.cn",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn/",
+      "items": [
+        {
+          "title": "体育中考",
+          "note": "已知栏目入口"
+        }
+      ]
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn",
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "note": "已知条目（2月政策）"
+        },
+        {
+          "title": "中考录取查询",
+          "note": "已知入口"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "url": "https://www.shcm.gov.cn",
+      "items": []
+    }
+  ],
+  "notes": [
+    "off-season daily watch run #11 (09-13 cron 未运行，今日为本周首次); 2026 cycle complete (DB terminal state verified 09-10)",
+    "12/16 reachable; 浦东(412-shell)/杨浦/普陀(147B)/松江(2KB) off-season shells as usual",
+    "all keyword hits = known 2026-cycle items — duplicates of DB/city data (7月分数线已入库, 5月计划已入库, 长宁缺额表已归档)",
+    "静安/嘉定/虹口/金山/崇明 0 中考 keyword hits (开学季 portal news only)",
+    "no ETL, no DB changes"
+  ]
+}
