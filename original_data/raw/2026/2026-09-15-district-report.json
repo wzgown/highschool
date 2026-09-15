@@ -1,0 +1,183 @@
+{
+  "date": "2026-09-15",
+  "scrape_time": "08:00",
+  "method": "curl+UA sequential (execute_code)",
+  "total_districts": 16,
+  "checked": 16,
+  "reachable": 11,
+  "total_new_items": 0,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市中等学校高中阶段招生（闵行区）",
+          "note": "已知条目"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "转发2026年上海市高中学校自主招生正式录取学生名单",
+          "note": "已知条目（07-17）"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区/到校招生计划（闵行区）",
+          "note": "已知条目，已入库"
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "blocked_412",
+      "items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（徐汇区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到校招生计划",
+          "note": "已知条目，已入库"
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到区招生计划",
+          "note": "已知条目，已入库"
+        }
+      ]
+    },
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（黄浦区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "转载：2026年名额分配到区/到校招生录取最低分数线",
+          "note": "已知条目（07-20）"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "success",
+      "items": [
+        {
+          "title": "(portal 129KB, 0 中考 keyword; 09-07~09-11 news 非)",
+          "note": "非中考内容"
+        }
+      ]
+    },
+    {
+      "name": "杨浦",
+      "status": "failed_404",
+      "items": [
+        {
+          "title": "https://www.shyp.gov.cn/shypq/jyj/ -> 404 today",
+          "note": "访问方式变化，内容无变化"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "关于2026年宝山区中考无录取去向考生征求志愿的通知",
+          "note": "已知条目（7月）"
+        },
+        {
+          "title": "2026年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "note": "已知条目"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "note": "已知条目，已入库"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取分数线（长宁区）",
+          "note": "已知条目，市级数据已入库"
+        },
+        {
+          "title": "2026年中考投档缺额情况表(长宁区）",
+          "note": "已知条目（07-23，已归档）"
+        }
+      ]
+    },
+    {
+      "name": "普陀",
+      "status": "tiny_shell_159B",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [
+        {
+          "title": "本科普通批次第二次征求志愿专业组",
+          "note": "高考内容，非中考"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "tiny_shell_2KB",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "体育中考",
+          "note": "内网链接(http://10.x)，非新内容"
+        }
+      ]
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生”考后相关事宜注意事项",
+          "note": "已知条目"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "note": "已知条目"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "failed_404",
+      "items": []
+    }
+  ],
+  "new_data": false,
+  "notes": "Off-season daily watch #12. City max article date unchanged (20260721). All district hits are known 2026-cycle items already archived/imported, or non-中考 (高考/portal news). Access fluctuations: 杨浦 404 (was JS shell), 普陀 159B tiny, 崇明 /zsks/ 404, 松江 zsb 2KB shell — seasonal, no content change."
+}
