@@ -1,0 +1,253 @@
+{
+  "date": "2026-09-16",
+  "scrape_time": "2026-09-16T08:06+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 2,
+  "partial_count": 0,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [],
+      "note": "3.8KB JS shell, 0 中考 hits (seasonal shell)"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "徐汇区2026年高中名额分配到区招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1199",
+          "date": "2026-06",
+          "note": "known, imported"
+        },
+        {
+          "title": "徐汇区2026年高中名额分配到校招生计划",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1200",
+          "date": "2026-06",
+          "note": "known, imported"
+        },
+        {
+          "title": "2026年上海市高中学校1至15志愿统一招生录取最低分数线（徐汇区）",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1209",
+          "date": "2026-07",
+          "note": "known, 市级重复渠道 (861 records in ref_admission_score_unified)"
+        },
+        {
+          "title": "徐教〔2026〕5号 招生工作实施意见",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1195",
+          "date": "2026-02/03",
+          "note": "known"
+        }
+      ],
+      "note": "10 known hits, max doc id 1209 (late-July), nothing new"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校\"名额分配到区\"招生计划表（长宁区）",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2060972590658945026",
+          "date": "2026-06",
+          "note": "known"
+        },
+        {
+          "title": "2026年上海市高中学校\"名额分配到校\"招生计划表(长宁区)",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2060971634832171009",
+          "date": "2026-06",
+          "note": "known"
+        },
+        {
+          "title": "2026年上海市高中学校\"名额分配到区\"招生录取最低分数线（长宁区）",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2079087711947980801",
+          "date": "2026-07",
+          "note": "known"
+        },
+        {
+          "title": "2026年上海市高中学校\"名额分配到校\"招生录取最低分数线（长宁区）",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2079087905087299585",
+          "date": "2026-07",
+          "note": "known"
+        },
+        {
+          "title": "2026年上海市高中学校\"1至15志愿\"统一招生录取分数线（长宁区）",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2080102692068507649",
+          "date": "2026-07",
+          "note": "known"
+        },
+        {
+          "title": "2026年中考投档缺额情况表(长宁区）",
+          "url": "https://kszx.chneic.sh.cn/info/viewDisclosure.action?disclosure.id=2080102936969162754",
+          "date": "2026-07-23",
+          "note": "known, archived 07-23"
+        }
+      ],
+      "note": "6 known hits; view() IDs are stable article IDs not dates"
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "items": [],
+      "note": "ja.edu.sh.cn connection failed (000) today; off-season flakiness, portal fallback known OK 09-09"
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "items": [],
+      "note": "151B tiny shell (seasonal); 0 hits"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": [],
+      "note": "0 中考 hits (开学季 portal news only)"
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "items": [],
+      "note": "shyp.gov.cn/shypq/jyj/ 404 today (seasonal)"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校1至15志愿统一招生录取最低分数线（闵行区）",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8_03/content/3c872451-e7fe-4b54-9d93-0c9bbd4430a0.htm",
+          "date": "2026-07",
+          "note": "known, 市级重复渠道"
+        },
+        {
+          "title": "转发关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+          "url": "(list_0.htm item)",
+          "date": "2026-07-21",
+          "note": "known, = city max article"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+          "url": "(list_0.htm item)",
+          "date": "2026-06",
+          "note": "known, imported"
+        },
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价名额分配到校招生计划（闵行区）",
+          "url": "(list_0.htm item)",
+          "date": "2026-06",
+          "note": "known, imported"
+        }
+      ],
+      "note": "19 known hits, visible dates ≤20260721"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145808.jhtml",
+          "date": "2026-06",
+          "note": "known, imported"
+        },
+        {
+          "title": "2026年上海市中职校/高中学校1至15志愿统一招生录取最低分数线（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145859.jhtml",
+          "date": "2026-07",
+          "note": "known, imported (宝山 59 records)"
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生注意事项/领档案通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml",
+          "date": "2026-05/06",
+          "note": "known"
+        },
+        {
+          "title": "2026年宝山区中考无录取去向考生征求志愿通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145860.jhtml",
+          "date": "2026-07",
+          "note": "known"
+        }
+      ],
+      "note": "14 known hits (2025/2026 cycle items), nothing new"
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [],
+      "note": "0 中考 hits (开学季 news only)"
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "items": [],
+      "note": "412 anti-crawl (usual)"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [],
+      "note": "0 中考 hits"
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "items": [],
+      "note": "sjedu.cn 2049B + zsb.sjedu.cn 2098B off-season shells, 0 hits"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "体育中考",
+          "url": "http://10.155.80.232 (internal)",
+          "date": "",
+          "note": "known internal-IP link, not web-accessible"
+        }
+      ],
+      "note": "1 known hit; 22KB page OK"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://kszx.qpedu.cn (item)",
+          "date": "2026-02-27",
+          "note": "known"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "https://kszx.qpedu.cn/zkzq/zk/509555.htm",
+          "date": "2026-02/03",
+          "note": "known"
+        },
+        {
+          "title": "2026年青浦区中考跨区（跨入）考生考后相关事宜注意事项",
+          "url": "https://kszx.qpedu.cn/sx/qkxx/515397.htm",
+          "date": "2026-06",
+          "note": "known"
+        },
+        {
+          "title": "中考成绩查询/中考录取查询/中考中招",
+          "url": "(nav nodes)",
+          "date": "",
+          "note": "nav links, not articles"
+        }
+      ],
+      "note": "8 hits = known items + nav nodes"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": [],
+      "note": "0 中考 hits"
+    }
+  ],
+  "notes": "Off-season daily #13. 14/16 reachable, 静安 conn-fail + 浦东 412 (usual). 53 keyword hits across 12 districts, ALL match known-item inventory; 0 new items. 2026 cycle complete."
+}
