@@ -1,0 +1,141 @@
+{
+  "date": "2026-09-18",
+  "scrape_time": "2026-09-18T08:03:00+08:00",
+  "method": "curl-https-sequential",
+  "total_districts": 16,
+  "success_count": 11,
+  "failed_count": 1,
+  "partial_count": 0,
+  "new_data": false,
+  "notes": "终态确认。11/16正常，浦东412/静安超时/杨浦-普陀-松江降级为已知非季模式，与09-17一致。关键词命中全部与历史标题并集匹配；形式化diff中3个表面新条目（黄浦控分线转载、金山1至15志愿线、金山控分线）经验证均为已知数据的标题变体：金山1至15志愿线已于07-24~29入库29条，控分线为7/14全市公告已入库。无新数据。",
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 33254,
+      "items_count": 8,
+      "new_items": 0
+    },
+    {
+      "name": "浦东",
+      "status": "degraded",
+      "http_status": 412,
+      "size_bytes": 3117,
+      "items_count": 0,
+      "new_items": 0
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 11869,
+      "items_count": 10,
+      "new_items": 0
+    },
+    {
+      "name": "黄浦",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 36237,
+      "items_count": 7,
+      "new_items": 0
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "http_status": 0,
+      "size_bytes": 0,
+      "items_count": 0,
+      "new_items": 0
+    },
+    {
+      "name": "杨浦",
+      "status": "degraded",
+      "http_status": 200,
+      "size_bytes": 342,
+      "items_count": 0,
+      "new_items": 0
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 14854,
+      "items_count": 14,
+      "new_items": 0
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 55095,
+      "items_count": 2,
+      "new_items": 0
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 31073,
+      "items_count": 6,
+      "new_items": 0
+    },
+    {
+      "name": "普陀",
+      "status": "degraded",
+      "http_status": 200,
+      "size_bytes": 159,
+      "items_count": 0,
+      "new_items": 0
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 11782,
+      "items_count": 0,
+      "new_items": 0
+    },
+    {
+      "name": "松江",
+      "status": "degraded",
+      "http_status": 200,
+      "size_bytes": 2097,
+      "items_count": 0,
+      "new_items": 0
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 51633,
+      "items_count": 7,
+      "new_items": 0
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 22041,
+      "items_count": 1,
+      "new_items": 0
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 15348,
+      "items_count": 8,
+      "new_items": 0
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "http_status": 200,
+      "size_bytes": 70416,
+      "items_count": 0,
+      "new_items": 0
+    }
+  ]
+}

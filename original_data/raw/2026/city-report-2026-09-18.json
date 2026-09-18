@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-18",
+  "scrape_time": "2026-09-18T08:03:00+08:00",
+  "method": "curl-https-sequential",
+  "new_data": false,
+  "max_article_date": "20260723",
+  "notes": "终态确认。8/8页面HTTP 200。市max日期仍为20260723（7/23民办高中余额公布，已归档，CDN残留不作为新数据）。6月关键词命中均为已知历史条目。DB终态复核：quota_district 943条/7156额、quota_school 3883条/12861额、到区线906、到校线3247、统一招生861、控分线6、民办降分8，与09-17一致，无变化。2026周期已结束，无新数据。",
+  "sections": {
+    "zhao_sheng_zheng_ce": {
+      "status": "200",
+      "size": 14333,
+      "max_date": "20260331",
+      "new_items": 0
+    },
+    "zhao_sheng_gong_shi": {
+      "status": "200",
+      "size": 9947,
+      "max_date": "20260707",
+      "new_items": 0
+    },
+    "bao_ming_xu_zhi": {
+      "status": "200",
+      "size": 9893,
+      "max_date": "20260512",
+      "new_items": 0
+    },
+    "zhi_yuan_tian_bao": {
+      "status": "200",
+      "size": 8667,
+      "max_date": "20260621",
+      "new_items": 0
+    },
+    "kao_shi_gui_ding": {
+      "status": "200",
+      "size": 8560,
+      "max_date": "20260710",
+      "new_items": 0
+    },
+    "zhao_sheng_lu_qu": {
+      "status": "200",
+      "size": 8658,
+      "max_date": "20260721",
+      "new_items": 0
+    },
+    "zhong_zhi": {
+      "status": "200",
+      "size": 8809,
+      "max_date": "20260721",
+      "new_items": 0
+    },
+    "index_24500": {
+      "status": "200",
+      "size": 5609,
+      "max_date": "20260723",
+      "new_items": 0
+    }
+  }
+}
