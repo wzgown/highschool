@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-19",
+  "method": "curl",
+  "pages_checked": [
+    "03000",
+    "03100",
+    "03200",
+    "03300",
+    "03400",
+    "03500",
+    "03600"
+  ],
+  "max_article_date": "20260721",
+  "notes": "Off-season. Max article date unchanged (20260721 民办高中降分公告 era). Homepage cdn 20260723 PDF = 民办高中招生计划余额 (known decoy, archived 07-30). No 2027-cycle signals. 2026 cycle complete.",
+  "new_items": []
+}
