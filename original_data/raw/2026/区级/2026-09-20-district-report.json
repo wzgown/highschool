@@ -1,0 +1,162 @@
+{
+  "date": "2026-09-20",
+  "scrape_time": "2026-09-20T08:00:00+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 11,
+  "partial_count": 4,
+  "failed_count": 1,
+  "new_data": false,
+  "notes": "Off-season watch mode. 16 districts fetched sequentially. Fetch results: 11 ok + 嘉定/崇明/虹口 ok = 12 success-class; degraded: 普陀(159B tiny)/杨浦(404)/浦东(412)/松江(2KB shell); failed: 静安 ja.edu.sh.cn conn-fail 000 (jingan.gov.cn portal 129KB ok, 0 中考 hits). 73 (title,url) items extracted; historical-union diff (193 reports, 780 normalized titles) → 27 raw flags → after prefix-strip normalization + era checks → 0 genuinely new items (all remaining unmatched are 2025-era sidebar listings or the persistent 黄浦 7/23 去向查询 banner present in 13 historical reports). DB terminal state re-verified: 到区943/7156名, 到校3883/12861名, 统一招生910, 到区分数906, 到校分数3247, 统一分数861, 控制线8.",
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线(转载)",
+          "url": "https://zhaoban.hpe.cn",
+          "date": "2026-07"
+        },
+        {
+          "title": "2026年黄浦区高中阶段招生录取去向查询(时间7/23-8/13, persistent banner)",
+          "url": "https://hpzy.hpe.cn/",
+          "date": "2026-07"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第一/二批公示)",
+          "url": "https://zhaoban.hpe.cn/sx/gql/707304.htm",
+          "date": "2026-04"
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（徐汇区）",
+          "url": "https://www.xuhui.gov.cn/egov/front2018/doc/1209",
+          "date": "2026-07"
+        },
+        {
+          "title": "2026年高中名额分配到校/到区招生计划等 known items",
+          "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+          "date": "2026-05"
+        }
+      ]
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取分数线（长宁区）等 known items",
+          "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+          "date": "2026-07"
+        }
+      ]
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "degraded",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "degraded",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）等 known items (19 hits)",
+          "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+          "date": "2026-07"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年宝山区中考无录取去向考生征求志愿的通知等 known items (15 hits incl. 2025-era listing)",
+          "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+          "date": "2026-07"
+        }
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年嘉定区义务教育阶段学校招生入学政策问答 (non-中考)",
+          "url": "https://www.jiading.gov.cn/jiaoyu/",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "name": "浦东",
+      "status": "degraded",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年上海市高中学校/中职校“1至15志愿”统一招生录取最低分数线（金山区）等 known items",
+          "url": "https://www.jsedu.sh.cn/zsks/",
+          "date": "2026-07"
+        }
+      ]
+    },
+    {
+      "name": "松江",
+      "status": "degraded",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "items": [
+        {
+          "title": "转：市教委2026年高中阶段学校招生工作的若干意见等 known items",
+          "url": "https://kszx.qpedu.cn",
+          "date": "2026-02"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "items": [
+        {
+          "title": "2026年奉贤区统一批次普通高中最低录取分数线等 known items",
+          "url": "https://zsks.shfxjy.cn",
+          "date": "2026-07"
+        }
+      ]
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "items": []
+    }
+  ]
+}
