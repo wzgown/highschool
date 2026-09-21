@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-21",
+  "scrape_time": "2026-09-21T08:05+08:00",
+  "method": "curl",
+  "pages_checked": 7,
+  "http_results": {
+    "index": "200/14333B",
+    "zhao_sheng_zheng_ce": "200/9947B",
+    "zhao_sheng_gong_shi": "200/9893B",
+    "bao_ming_xu_zhi": "200/8667B",
+    "zhi_yuan_tian_bao": "200/8560B",
+    "kao_shi_gui_ding": "200/8658B",
+    "zhao_sheng_lu_qu": "200/8809B"
+  },
+  "max_article_date": "20260721",
+  "max_article_title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+  "new_items": [],
+  "index_translations": [
+    {"title": "转载：艺术骨干学生招生通知", "url_date": "20260331", "known": true},
+    {"title": "转载：中职自主招生通知", "url_date": "20260325", "known": true},
+    {"title": "转载：随迁子女中职自主招生", "url_date": "20260325", "known": true},
+    {"title": "转载：优秀体育学生招生通知", "url_date": "20260318", "known": true}
+  ],
+  "cdn_decoy": {
+    "url": "https://cdn.shmeea.edu.cn/resource/upload/www/20260723904/001.pdf",
+    "note": "民办高中招生计划余额公布 (archived 07-30, known decoy)"
+  },
+  "signals_2027": 0,
+  "notes": "Off-season watch mode. Page sizes byte-identical to 09-20. Max article date unchanged at 20260721; 0x2027 mentions; 0 dates after 20260721 except known cdn decoy. Historical-union diff (156 files, 202 normalized titles): 99 items scanned, 0 new flags. All items known."
+}
