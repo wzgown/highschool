@@ -1,0 +1,196 @@
+{
+  "date": "2026-09-23",
+  "scrape_time": "2026-09-23T08:02+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 11,
+  "failed_count": 1,
+  "partial_count": 4,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "url": "https://zhaoban.hpe.cn",
+      "items": [
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第一批公示)",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第二批公示)",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招收随迁子女五年一贯制和中高职贯通各专业最低录取分数线",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "转载：上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        }
+      ]
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "items": []
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "url": "https://www.ja.edu.sh.cn/",
+      "items": []
+    },
+    {
+      "name": "普陀",
+      "status": "degraded",
+      "url": "https://kszx.pte.sh.cn",
+      "items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com",
+      "items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "degraded",
+      "url": "https://www.shyp.gov.cn/",
+      "items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "items": [
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "转发2026年上海市高中阶段学校招生最低投档控制分数线确定",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "转发上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        }
+      ]
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "items": []
+    },
+    {
+      "name": "浦东",
+      "status": "degraded",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "items": []
+    },
+    {
+      "name": "松江",
+      "status": "degraded",
+      "url": "https://zsb.sjedu.cn",
+      "items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn",
+      "items": [
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        },
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "",
+          "date": "",
+          "note": "已知条目（2026周期已处理/市级重复渠道），非新数据"
+        }
+      ]
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn",
+      "items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "url": "https://www.shcm.gov.cn/",
+      "items": []
+    }
+  ],
+  "notes": "区级无新数据（连续第13天）：所有关键词命中均为2026周期已知条目；全16区页面无任何URL日期>=20260918，最新URL日期为20260917（崇明区政务新闻：安全检查/隧道/网球赛等，非中考内容）。已知状态延续：静安宕机(000)、普陀159B/杨浦342B JS壳、浦东412、松江2KB淡季壳。无2027中考信号。"
+}
