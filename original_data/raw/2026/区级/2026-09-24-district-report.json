@@ -1,0 +1,157 @@
+{
+  "date": "2026-09-24",
+  "scrape_time": "2026-09-24T08:05+08:00",
+  "method": "curl + keyword search (名额分配/招生计划/名额到校/名额到区)",
+  "total_districts": 16,
+  "success_count": 11,
+  "failed_count": 2,
+  "partial_count": 3,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "url": "https://zhaoban.hpe.cn",
+      "bytes": 36237,
+      "http_code": "200",
+      "items": 10,
+      "new_items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "bytes": 11869,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "bytes": 31073,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "url": "https://www.ja.edu.sh.cn/",
+      "bytes": 0,
+      "http_code": "000",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "普陀",
+      "status": "degraded",
+      "url": "https://kszx.pte.sh.cn",
+      "bytes": 159,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com",
+      "bytes": 11782,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "degraded",
+      "url": "https://www.shyp.gov.cn/",
+      "bytes": 342,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "bytes": 33254,
+      "http_code": "200",
+      "items": 10,
+      "new_items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "bytes": 14854,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "bytes": 54682,
+      "http_code": "200",
+      "items": 10,
+      "new_items": []
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "bytes": 3093,
+      "http_code": "412",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "bytes": 51633,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "松江",
+      "status": "degraded",
+      "url": "https://zsb.sjedu.cn",
+      "bytes": 2097,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn",
+      "bytes": 15348,
+      "http_code": "200",
+      "items": 10,
+      "new_items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn",
+      "bytes": 22041,
+      "http_code": "200",
+      "items": 0,
+      "new_items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "url": "https://www.shcm.gov.cn/",
+      "bytes": 68377,
+      "http_code": "200",
+      "items": 10,
+      "new_items": []
+    }
+  ],
+  "notes": "区级无新数据(第14天)。状态分布与09-23一致：11区success/静安failed(000超时,慢性)/浦东failed(412,较前日degraded口径收紧但状态未变)/普陀、杨浦、松江degraded(159B/342B/2KB,与09-23字节完全相同)。黄浦12个关键词命中均为已知2026周期条目(跨区生志愿填报、1-15志愿分数线07-23等)。崇明近期URL日期(20260918/21/23)经核实为普通政务新闻(AI产业调研、农业普查、防空演练、领导接待公示)，与中考无关。全部16区零2027信号。"
+}

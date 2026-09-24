@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-24",
+  "scrape_time": "2026-09-24T08:05+08:00",
+  "method": "curl + byte-size comparison vs 09-23 baseline",
+  "pages_checked": 8,
+  "http_results": {
+    "首页": "200/14333B",
+    "招生政策": "200/9947B",
+    "招生公示": "200/9893B",
+    "报名须知": "200/8667B",
+    "志愿填报": "200/8560B",
+    "考试规定": "200/8658B",
+    "招生录取": "200/8809B",
+    "录取查询": "200/5609B"
+  },
+  "max_article_date": "20260721",
+  "max_article_title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+  "new_items": [],
+  "cdn_decoy": "https://cdn.shmeea.edu.cn/resource/upload/www/20260723904/001.pdf (民办余额公布, 已归档07-30)",
+  "signals_2027": [],
+  "notes": "市级无新数据：8页全部可达(200)，字节大小与09-23完全一致(index 14333/zszc 9947/zsgs 9893/bmxz 8667/zytb 8560/ksgd 8658/zslq 8809/lqcx 5609)，max_article_date仍为20260721(民办高中降分公告)。无任何2027周期信号。2026周期后市级监控进入纯守望状态(第14天)。"
+}
