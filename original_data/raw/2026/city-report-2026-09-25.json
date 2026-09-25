@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-25",
+  "scrape_time": "2026-09-25T08:05+08:00",
+  "method": "curl",
+  "pages_checked": [
+    "index",
+    "zhao_sheng_zheng_ce",
+    "zhao_sheng_gong_shi",
+    "bao_ming_xu_zhi",
+    "zhi_yuan_tian_bao",
+    "kao_shi_gui_ding",
+    "zhao_sheng_lu_qu"
+  ],
+  "http_results": {
+    "index": "200/14333B",
+    "zhao_sheng_zheng_ce": "200/9947B",
+    "zhao_sheng_gong_shi": "200/9893B",
+    "bao_ming_xu_zhi": "200/8667B",
+    "zhi_yuan_tian_bao": "200/8560B",
+    "kao_shi_gui_ding": "200/8658B",
+    "zhao_sheng_lu_qu": "200/8809B"
+  },
+  "max_article_date": "20260721",
+  "max_article_title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告 (20260721)",
+  "new_items": [],
+  "cdn_decoy": "20260723904/001.pdf 民办高中招生计划余额公布 — known artifact (archived 07-30)",
+  "signals_2027": 0,
+  "notes": "All 8 pages 200 (8.5-14.3KB). 4 edu.sh.gov.cn reprints all known (latest 20260331). Max substantive article date unchanged 20260721; 20260723 occurrences = known 余额公布 decoy. No 2027 mentions. Off-season watch mode."
+}

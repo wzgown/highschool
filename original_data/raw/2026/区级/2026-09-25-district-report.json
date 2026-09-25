@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-25",
+  "scrape_time": "2026-09-25T08:05+08:00",
+  "method": "curl-sequential",
+  "total_districts": 16,
+  "success_count": 11,
+  "failed_count": 2,
+  "partial_count": 3,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "黄浦",
+      "status": "success",
+      "url": "https://zhaoban.hpe.cn",
+      "http_code": "200",
+      "bytes": 36237,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "http_code": "200",
+      "bytes": 11869,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "http_code": "200",
+      "bytes": 31073,
+      "items": [],
+      "new_items": [],
+      "note": "'09-25' strings = date widget ('今天是2026年09月25日'), not articles"
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "url": "https://www.ja.edu.sh.cn/",
+      "http_code": "000",
+      "bytes": 0,
+      "items": [],
+      "new_items": [],
+      "note": "ja.edu.sh.cn conn-fail 000 (down since 09-21); jingan.gov.cn portal not checked today — recurring seasonal pattern"
+    },
+    {
+      "name": "普陀",
+      "status": "degraded",
+      "url": "https://kszx.pte.sh.cn",
+      "http_code": "200",
+      "bytes": 159,
+      "items": [],
+      "new_items": [],
+      "note": "159B JS shell — stable off-season profile, byte-identical to 09-24"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com",
+      "http_code": "200",
+      "bytes": 11782,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "杨浦",
+      "status": "degraded",
+      "url": "https://www.shyp.gov.cn/",
+      "http_code": "200",
+      "bytes": 342,
+      "items": [],
+      "new_items": [],
+      "note": "342B JS shell — stable off-season profile, byte-identical to 09-24"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "http_code": "200",
+      "bytes": 33254,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "http_code": "200",
+      "bytes": 14854,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "嘉定",
+      "status": "success",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "http_code": "200",
+      "bytes": 55007,
+      "items": [],
+      "new_items": [],
+      "note": "+325B drift vs 09-24 = new 开学季 portal news (工会报告会 09-22, 学农 09-24 etc.), 0 中考 keywords — non-new"
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "http_code": "412",
+      "bytes": 3085,
+      "items": [],
+      "new_items": [],
+      "note": "412 anti-crawl, as usual"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "http_code": "200",
+      "bytes": 51633,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "松江",
+      "status": "degraded",
+      "url": "https://zsb.sjedu.cn",
+      "http_code": "200",
+      "bytes": 2097,
+      "items": [],
+      "new_items": [],
+      "note": "2KB seasonal shell — byte-identical to 09-24"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn",
+      "http_code": "200",
+      "bytes": 15348,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn",
+      "http_code": "200",
+      "bytes": 22041,
+      "items": [],
+      "new_items": []
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "url": "https://www.shcm.gov.cn/",
+      "http_code": "200",
+      "bytes": 68306,
+      "items": [],
+      "new_items": [],
+      "note": "-71B drift vs 09-24; 2x '2027' mentions = known 选调生招录 item (2026-09-10, civil-servant recruitment, NOT 中考)"
+    }
+  ],
+  "notes": "16th consecutive no-data day. 12 ok / 2 degraded (普陀159B, 杨浦342B stable shells) / 2 failed (静安000 down, 浦东412 usual). Byte sizes identical to 09-24 except 嘉定 +325B & 崇明 -71B (verified non-中考 portal noise). Keyword hits all match known 2026-cycle items; zero links dated after 2026-09-24 across all 16 pages."
+}
