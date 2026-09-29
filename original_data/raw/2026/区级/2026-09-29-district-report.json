@@ -1,0 +1,218 @@
+{
+ "date": "2026-09-29",
+ "scrape_time": "2026-09-29T08:09+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 14,
+ "failed_count": 2,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [
+    {
+     "title": "2026年黄浦区初中毕业升学体育考试等8条已知2026周期条目（自主招生名单/中职分数线/名额分配分数线/答学生问等）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-28完全一致"
+    }
+   ]
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [
+    {
+     "title": "2026年1至15志愿分数线/跨区须知/徐教〔2026〕5号/2026到区到校计划等7条已知条目",
+     "url": "",
+     "date": "",
+     "note": "已知条目/无变化；字节漂移经核查为非中考内容（日期widget/portal新闻）(+8B)"
+    }
+   ]
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "items": [
+    {
+     "title": "2026到区/到校计划表、到区/到校最低分数线、1至15志愿分数线、投档缺额表等6条已知条目",
+     "url": "",
+     "date": "",
+     "note": "已知条目/无变化；字节漂移经核查为非中考内容（日期widget/portal新闻）(+664B, 日期widget/轮换内容, 已知条目不变)"
+    }
+   ]
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": []
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": []
+  },
+  {
+   "name": "虹口",
+   "status": "success",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "200",
+   "bytes": 11782,
+   "items": [
+    {
+     "title": "（无中考关键词命中；+308B为portal内容漂移）",
+     "url": "",
+     "date": "",
+     "note": "0关键词命中"
+    }
+   ]
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "items": []
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [
+    {
+     "title": "2026到区/到校计划、1至15志愿分数线、自主招生名单转发、降分公告转发等已知条目（含民办小初调剂志愿=义务教育非中考）",
+     "url": "",
+     "date": "",
+     "note": "已知条目/无变化；字节漂移经核查为非中考内容（日期widget/portal新闻）(-31B)"
+    }
+   ]
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [
+    {
+     "title": "2026名额分配到区到校计划、1至15志愿分数线、考点安排、跨区须知、征求志愿等已知条目",
+     "url": "",
+     "date": "",
+     "note": "已知条目/无变化；字节漂移经核查为非中考内容（日期widget/portal新闻）(+11B)"
+    }
+   ]
+  },
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 55012,
+   "items": [
+    {
+     "title": "（0中考关键词；+1504B为开学季portal新闻：工会报告会09-22/德育09-18/政绩观09-16/教师节走访09-10）",
+     "url": "",
+     "date": "",
+     "note": "0关键词命中"
+    }
+   ]
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3163,
+   "items": []
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51633,
+   "items": [
+    {
+     "title": "（0中考关键词命中；+639B为portal内容漂移）",
+     "url": "",
+     "date": "",
+     "note": "0关键词命中"
+    }
+   ]
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": []
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [
+    {
+     "title": "2026跨区考生考后事宜/往届生返沪生报名须知等已知条目",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-28完全一致"
+    }
+   ]
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [
+    {
+     "title": "已知2026周期条目（分数线等）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-28完全一致"
+    }
+   ]
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68018,
+   "items": [
+    {
+     "title": "（0中考关键词；+756B=冬季航班通知2026.10.8-2027.2.28(09-23)+已知2027选调生条目；20260924 URLs=portal新闻）",
+     "url": "",
+     "date": "",
+     "note": "非中考；选调生=公务员招录非中考信号"
+    }
+   ]
+  }
+ ],
+ "notes": "20th consecutive no-data day. Byte drifts (长宁+664/嘉定+1504/金山+639/崇明+756/虹口+308) all verified non-中考. 静安 down (000) since 09-21; 浦东 412 usual. City max article date 20260721 unchanged; 0×2027 city-wide."
+}
