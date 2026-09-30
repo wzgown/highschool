@@ -1,0 +1,253 @@
+{
+ "date": "2026-09-30",
+ "scrape_time": "2026-09-30T08:04:54+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 14,
+ "failed_count": 2,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [
+    {
+     "title": "13条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [
+    {
+     "title": "13条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "items": [
+    {
+     "title": "15条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": [
+    {
+     "title": "0条中考关键词命中",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "虹口",
+   "status": "success",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "200",
+   "bytes": 11782,
+   "items": [
+    {
+     "title": "4条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "items": [
+    {
+     "title": "0条中考关键词命中",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [
+    {
+     "title": "42条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [
+    {
+     "title": "15条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 55021,
+   "items": [
+    {
+     "title": "0条中考关键词命中",
+     "url": "",
+     "date": "",
+     "note": "开学季 portal news rotation (09-29 未成年人保护推进会/09-22 工会报告会/09-24 学农), 0 中考 keywords — non-中考"
+    }
+   ]
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3073,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "412 error-shell size drift (3163B→3073B), non-content"
+    }
+   ]
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51664,
+   "items": [
+    {
+     "title": "23条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "known nav/system links only (中考志愿填报/录取查询 systems, known since 05-06), 0 recent-dated content — non-中考"
+    }
+   ]
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": [
+    {
+     "title": "0条中考关键词命中",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [
+    {
+     "title": "18条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [
+    {
+     "title": "5条中考关键词命中（全部为已知2026周期条目）",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-29完全一致"
+    }
+   ]
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68019,
+   "items": [
+    {
+     "title": "0条中考关键词命中",
+     "url": "",
+     "date": "",
+     "note": "portal news rotation (09-28 冬季航班 2026.10.8-2027.2.28 known non-中考, 09-29 社救助), 0 中考 keywords — non-中考"
+    }
+   ]
+  }
+ ],
+ "notes": "21st consecutive no-data day. 14 ok / 2 failed (静安 000 down since 09-21; 浦东 412 usual, error-shell 3163B→3073B non-content). Tiny byte drifts all verified non-中考: 嘉定+9B (portal news rotation), 金山+31B (known system links), 崇明+1B (冬季航班/社救助 news). All other 11 districts byte-identical to 09-29. City pages byte-identical; max article date 20260721 unchanged; 0×2027 city-wide. 2026 cycle COMPLETE — off-season watch mode."
+}

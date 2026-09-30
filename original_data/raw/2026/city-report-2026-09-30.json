@@ -1,0 +1,51 @@
+{
+ "date": "2026-09-30",
+ "scrape_time": "2026-09-30T08:04:54+08:00",
+ "method": "curl",
+ "pages_checked": [
+  "index",
+  "zhao_sheng_zheng_ce",
+  "zhao_sheng_gong_shi",
+  "bao_ming_xu_zhi",
+  "zhi_yuan_tian_bao",
+  "kao_shi_gui_ding",
+  "zhao_sheng_lu_qu"
+ ],
+ "http_results": {
+  "index": "200/14333B",
+  "zhao_sheng_zheng_ce": "200/9947B",
+  "zhao_sheng_gong_shi": "200/9893B",
+  "bao_ming_xu_zhi": "200/8667B",
+  "zhi_yuan_tian_bao": "200/8560B",
+  "kao_shi_gui_ding": "200/8658B",
+  "zhao_sheng_lu_qu": "200/8809B"
+ },
+ "max_article_date": "20260721",
+ "max_article_title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告 (20260721)",
+ "new_items": [],
+ "cdn_decoy": "20260723 string (余额公布 URL-date decoy) still present; known since 07-30",
+ "index_translations": [
+  {
+   "title": "转载：高中阶段学校招收艺术骨干学生",
+   "url_date": "20260331",
+   "known": true
+  },
+  {
+   "title": "转载：中等职业学校自主招生",
+   "url_date": "20260325",
+   "known": true
+  },
+  {
+   "title": "转载：全日制普通中等职业学校自主招收上海市初中应届毕业生中来沪人员随迁子女",
+   "url_date": "20260325",
+   "known": true
+  },
+  {
+   "title": "转载：转载：上海市教育委员会 上海市体育局关于做好2026年上海市高中阶段学校招收优秀体育学生",
+   "url_date": "20260318",
+   "known": true
+  }
+ ],
+ "signals_2027": 0,
+ "notes": "All 7 pages 200, byte-for-byte identical to 2026-09-29 (and 09-25..28). Article URL dates max 20260721 (20260723 strings in index/03600 are known decoys: cdn 余额公布 URL + 07-23 统一招生录取结果查询 announcement). 4 edu.sh.gov.cn reprints all known (最新20260331). 0 occurrences of '2027'. Off-season watch mode — no new data (21st consecutive no-data day)."
+}
