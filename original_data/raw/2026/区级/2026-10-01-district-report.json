@@ -1,0 +1,253 @@
+{
+ "date": "2026-10-01",
+ "scrape_time": "2026-10-01T08:04:34+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 12,
+ "failed_count": 4,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (36237B)"
+    }
+   ]
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (11869B)"
+    }
+   ]
+  },
+  {
+   "name": "长宁",
+   "status": "failed",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "502",
+   "bytes": 556,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "HTTP 502 ×2 (off-season maintenance pattern, precedent 09-10 长宁/松江 502); 09-30 was 200/31073B — server-side, non-content"
+    }
+   ]
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "ja.edu.sh.cn 000/0B, down since 09-21"
+    }
+   ]
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (159B)"
+    }
+   ]
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "504",
+   "bytes": 7739,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "HTTP 504 ×2 gateway timeout, identical 7739B error page both attempts; 09-30 was 200/11782B — server-side, non-content"
+    }
+   ]
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (342B)"
+    }
+   ]
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (33221B)"
+    }
+   ]
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (14854B)"
+    }
+   ]
+  },
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 54953,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "byte drift 55021→54953 (-68B): 仅portal新闻轮换，唯一2026招生相关标题为已知04-07义务教育政策问答（非中考），非中考内容"
+    }
+   ]
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "000/0B ×2 (was 412/3073B on 09-30) — connection now failing entirely; failure mode change, non-content"
+    }
+   ]
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51664,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (51664B)"
+    }
+   ]
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (2097B)"
+    }
+   ]
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (15348B)"
+    }
+   ]
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "页面字节与09-30完全一致 (22041B)"
+    }
+   ]
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68267,
+   "items": [
+    {
+     "title": "",
+     "url": "",
+     "date": "",
+     "note": "byte drift 68019→68267 (+248B): 0中考关键词命中，1×2027=已知09-23冬季航班条目，最新URL日期20260928=政务新闻，非中考内容"
+    }
+   ]
+  }
+ ],
+ "notes": "22nd consecutive no-data day. 12 ok / 4 failed. 10 districts byte-identical to 09-30 (黄浦/徐汇/普陀/杨浦/闵行/宝山/金山/松江/青浦/奉贤); 2 tiny drifts verified non-中考: 嘉定 -68B (portal news rotation; only 2026 hit = known 04-07 义务教育 Q&A, non-中考), 崇明 +248B (0 中考 kw, 1×2027 = known 冬季航班, newest URL date 20260928 = 政务新闻). Failures all server-side non-content: 长宁 502 ×2 (off-season maintenance, precedent 09-10), 虹口 504 ×2 gateway timeout (identical 7739B error page), 浦东 000/0B ×2 (was 412 — connection now failing entirely), 静安 000 down since 09-21. 2026 cycle COMPLETE — off-season watch mode."
+}
