@@ -1,0 +1,292 @@
+{
+ "date": "2026-10-02",
+ "scrape_time": "2026-10-02T08:09:04+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 12,
+ "failed_count": 4,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 54953,
+   "attempts": 1,
+   "max_date": "20310000",
+   "n2027": 0,
+   "items": [],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "attempts": 1,
+   "max_date": "20241216",
+   "n2027": 0,
+   "items": [],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "attempts": 1,
+   "max_date": "20100037",
+   "n2027": 0,
+   "items": [],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68267,
+   "attempts": 1,
+   "max_date": "20260928",
+   "n2027": 2,
+   "items": [],
+   "note": "n2027=2 = known 冬季航班 notice (2026.10.8-2027.2.28); byte-identical to 10-01, non-中考"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11861,
+   "attempts": 1,
+   "max_date": "20250313",
+   "n2027": 0,
+   "items": [],
+   "note": "-8B vs 10-01 (11869→11861B), trivial rotation; 0 中考 keyword hits, max sidebar date 20250313 — non-content"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "attempts": 1,
+   "max_date": "",
+   "n2027": 0,
+   "items": [],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "attempts": 1,
+   "max_date": "",
+   "n2027": 0,
+   "items": [],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "attempts": 1,
+   "max_date": "",
+   "n2027": 0,
+   "items": [],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3218,
+   "attempts": 1,
+   "max_date": "",
+   "n2027": 0,
+   "items": [],
+   "note": "412 anti-crawl shell 3218B (was 000/0B on 10-01, 412/3073B on 09-30 — failure mode flip-flops, always failed; error shell drift non-content)"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "504",
+   "bytes": 7739,
+   "attempts": 2,
+   "max_date": "",
+   "n2027": 0,
+   "items": [],
+   "note": "504 ×2 attempts, identical 7739B gateway-timeout error page both days (10-01 same) — server-side, non-content"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51664,
+   "attempts": 1,
+   "max_date": "20220804",
+   "n2027": 2,
+   "items": [],
+   "note": "n2027=2 = 2027年普通高校本科专业选考科目要求 (高考 subject requirements, NOT 中考); otherwise byte-identical to 10-01"
+  },
+  {
+   "name": "长宁",
+   "status": "failed",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "504",
+   "bytes": 566,
+   "attempts": 2,
+   "max_date": "",
+   "n2027": 0,
+   "items": [],
+   "note": "504 ×2 attempts (566B error page); was 502 ×2 on 10-01, 200/29KB on 09-30 — server-side off-season maintenance, non-content"
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "attempts": 1,
+   "max_date": "20260721",
+   "n2027": 0,
+   "items": [
+    {
+     "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    }
+   ],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "attempts": 1,
+   "max_date": "20260227",
+   "n2027": 0,
+   "items": [
+    {
+     "title": "转：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "转：上海市教育考试院关于做好2025年上海市中等职业学校学业水平考试报名工作的通知（沪教考院中招〔2025〕16号）",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    }
+   ],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "attempts": 2,
+   "max_date": "",
+   "n2027": 0,
+   "items": [],
+   "note": "000 ×2 attempts, connection failure; down since 09-21 (jingan.gov.cn portal alternative not checked today, historical: 0 中考)"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "attempts": 1,
+   "max_date": "20260720",
+   "n2027": 0,
+   "items": [
+    {
+     "title": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "2026年黄浦区中招个别考生（往届生、返沪生）现场确认注意事项及携带资料",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "转载：2026年黄浦区民办初中招生计划",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "转载：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "转载：上海市教育考试院关于做好2024年上海市普通高中学业水平考试报名工作的通知（沪教考院中招〔2024〕3号）",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    },
+    {
+     "title": "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+     "url": "",
+     "date": "",
+     "note": "known 2026-cycle item"
+    }
+   ],
+   "note": "byte-identical to 10-01 baseline; keyword hits (if any) all known 2026-cycle items"
+  }
+ ],
+ "notes": "23rd consecutive no-data day. 12 ok (11 byte-identical to 10-01, 徐汇 -8B trivial) / 4 failed (长宁 504, 虹口 504, 静安 000, 浦东 412 — all server-side non-content, retried once each). 2027 mentions: 金山(高考选考科目)+崇明(冬季航班), both non-中考. 2026 cycle COMPLETE; next meaningful data ~2027-03."
+}
