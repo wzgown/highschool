@@ -1,0 +1,173 @@
+{
+ "date": "2026-10-03",
+ "scrape_time": "2026-10-03T08:10:35+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 12,
+ "failed_count": 4,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 54953,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "byte-identical to 10-02 (54953B); content unchanged"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [],
+   "keyword_hits": 9,
+   "note": "byte-identical to 10-02 (22041B); content unchanged"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [],
+   "keyword_hits": 19,
+   "note": "byte-identical to 10-02 (14854B); content unchanged"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68267,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "byte-identical to 10-02 (68267B); content unchanged"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [],
+   "keyword_hits": 17,
+   "note": "byte drift vs 10-02 (11861B -> 11869B, +8B); keyword hits 17, all known items (verified)"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "byte-identical to 10-02 (159B); content unchanged"
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "byte-identical to 10-02 (342B); content unchanged"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "byte-identical to 10-02 (2097B); content unchanged"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3150,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "412 ×2 anti-crawl error shell 3150B (10-02: 3218B — non-content shell drift, failure mode flip-flops but never content)"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "504",
+   "bytes": 7739,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "504 ×2, identical 7739B error page both attempts; 10-02 also 504 — server-side, non-content"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51664,
+   "items": [],
+   "keyword_hits": 19,
+   "note": "byte-identical to 10-02 (51664B); content unchanged"
+  },
+  {
+   "name": "长宁",
+   "status": "failed",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "504",
+   "bytes": 566,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "504 ×2, 566B error page; 10-02 also 504 — flip-flopping off-season maintenance, non-content"
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [],
+   "keyword_hits": 30,
+   "note": "byte-identical to 10-02 (33221B); content unchanged"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [],
+   "keyword_hits": 16,
+   "note": "byte-identical to 10-02 (15348B); content unchanged"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "000 ×2, down since 09-21"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [],
+   "keyword_hits": 13,
+   "note": "byte-identical to 10-02 (36237B); content unchanged"
+  }
+ ],
+ "notes": "Watch mode day 24. City byte-identical. 14/16 district pages byte-identical to 10-02; 徐汇 +8B rotation (identical to 10-01 size, all known items, max sidebar date 20250313); 浦东 412 shell -68B non-content. Failures (静安 000, 浦东 412, 虹口 504, 长宁 504) all match 10-02 profile, retried ×2, server-side non-content. 0 genuinely new items."
+}
