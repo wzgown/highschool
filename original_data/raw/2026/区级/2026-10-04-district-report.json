@@ -1,0 +1,173 @@
+{
+ "date": "2026-10-04",
+ "scrape_time": "2026-10-04T08:05:05+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 11,
+ "failed_count": 5,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 54953,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "byte-identical to 10-03"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [],
+   "keyword_hits": 5,
+   "note": "byte-identical to 10-03; 5 known 2026-cycle hits (max 20241216 sidebar)"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [],
+   "keyword_hits": 15,
+   "note": "byte-identical to 10-03; 15 known July items"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68267,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "byte-identical to 10-03; 2×2027 = known 冬季航班 notice (non-中考), newest URL date 20260928 政务新闻"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [],
+   "keyword_hits": 13,
+   "note": "byte-identical to 10-03 (11869B); 13 hits = known items, max sidebar date 20250313"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "159B tiny shell, identical to 10-03 baseline (stable off-season profile)"
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "342B tiny shell, identical to 10-03 baseline (stable off-season profile)"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "2097B shell, identical to 10-03 baseline"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3131,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "412 anti-crawl shell 3150→3131B (trivial non-content drift); usual profile"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "504",
+   "bytes": 7739,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "504 ×2 attempts, 7739B error page identical to 10-03 — server-side, non-content (offline since 10-01)"
+  },
+  {
+   "name": "金山",
+   "status": "failed",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "NEW FAILURE vs 10-03 (was 200/51664B): 000/0B ×2 attempts — connection failure, server-side non-content; watch for recovery"
+  },
+  {
+   "name": "长宁",
+   "status": "failed",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "504",
+   "bytes": 566,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "504 ×2 attempts, 566B error page identical to 10-03 — server-side, non-content"
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [],
+   "keyword_hits": 42,
+   "note": "byte-identical to 10-03; 42 hits = known July items (max 20260721)"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [],
+   "keyword_hits": 18,
+   "note": "byte-identical to 10-03; 18 known items (max 20260227)"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "keyword_hits": 0,
+   "note": "000 ×2 attempts, down since 09-21 — unchanged"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [],
+   "keyword_hits": 13,
+   "note": "byte-identical to 10-03; 13 known items (max 20260720)"
+  }
+ ],
+ "notes": "Watch mode day 25. City byte-identical (max substantive 20260721, 20260723=cdn decoy, 0×2027, reprints known). 11 ok / 5 failed. 11/12 previously-ok districts byte-identical; 浦东 412 shell -19B non-content. Failures: 静安 000 (down since 09-21), 浦东 412, 虹口 504 ×2, 长宁 504 ×2 — all match 10-03 profile, server-side non-content. 金山 NEW: 000/0B ×2 (was 200/51664B on 10-03) — connection failure, watch for recovery. 0 genuinely new items."
+}
