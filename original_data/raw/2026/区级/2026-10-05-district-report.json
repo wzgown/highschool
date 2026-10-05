@@ -1,0 +1,192 @@
+{
+ "date": "2026-10-05",
+ "scrape_time": "2026-10-05T08:05:20",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 12,
+ "failed_count": 4,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 55167,
+   "items": [],
+   "note": "+214B vs 10-04，全为portal新闻轮换（研修班结业/未成年人保护推进会09-29/工会报告会/教研活动），0中考关键词，非内容"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [],
+   "note": "与10-04字节一致",
+   "kw_hits": [
+    "中考×1",
+    "名额分配×4",
+    "招生计划×4"
+   ]
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [],
+   "note": "与10-04字节一致",
+   "kw_hits": [
+    "中考×6",
+    "名额分配×2",
+    "招生计划×4",
+    "高中.{0,4}招生×1"
+   ]
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68267,
+   "items": [],
+   "note": "与10-04字节一致"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [],
+   "note": "与10-04字节一致",
+   "kw_hits": [
+    "中考×2",
+    "名额分配×4",
+    "招生计划×6",
+    "高中.{0,4}招生×3"
+   ]
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": [],
+   "note": "与10-04字节一致"
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "items": [],
+   "note": "与10-04字节一致"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": [],
+   "note": "与10-04字节一致"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3107,
+   "items": [],
+   "note": "412 ×2，错误壳3131→3107B，常规反爬壳，非内容"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "504",
+   "bytes": 7739,
+   "items": [],
+   "note": "504 ×2，7739B错误页与10-03/10-04相同，服务端，非内容"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51664,
+   "items": [],
+   "note": "从10-04的000/0B恢复为200/51664B（与10-03字节一致），已知志愿系统链接+实施细则问答画像，无新内容",
+   "kw_hits": [
+    "中考×7",
+    "高中.{0,4}招生×7"
+   ]
+  },
+  {
+   "name": "长宁",
+   "status": "failed",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "504",
+   "bytes": 566,
+   "items": [],
+   "note": "504 ×2，566B错误页与10-04相同，服务端，非内容"
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [],
+   "note": "与10-04字节一致",
+   "kw_hits": [
+    "名额分配×6",
+    "招生计划×4",
+    "高中.{0,4}招生×18"
+   ]
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [],
+   "note": "与10-04字节一致",
+   "kw_hits": [
+    "中考×14",
+    "高中.{0,4}招生×2"
+   ]
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "note": "000/0B ×2，自09-21起宕机，非内容"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [],
+   "note": "与10-04字节一致",
+   "kw_hits": [
+    "名额分配×2",
+    "招生计划×2",
+    "高中.{0,4}招生×3"
+   ]
+  }
+ ],
+ "notes": "Off-season watch mode 第26个连续无数据日。市级字节级一致；12/16区成功，11区字节与10-04基线一致；金山恢复(51664B=10-03)；嘉定+214B非内容漂移；失败4区均为已知服务端问题(浦东412/虹口504×2/长宁504×2/静安000×2)。全部关键词命中为已知2026周期条目。"
+}

@@ -1,0 +1,45 @@
+{
+ "date": "2026-10-05",
+ "scrape_time": "2026-10-05T08:05:20",
+ "method": "curl",
+ "pages": {
+  "index": {
+   "http_code": "200",
+   "bytes": 14333,
+   "identical_to_baseline": true
+  },
+  "zhao_sheng_zheng_ce": {
+   "http_code": "200",
+   "bytes": 9947,
+   "identical_to_baseline": true
+  },
+  "zhao_sheng_gong_shi": {
+   "http_code": "200",
+   "bytes": 9893,
+   "identical_to_baseline": true
+  },
+  "bao_ming_xu_zhi": {
+   "http_code": "200",
+   "bytes": 8667,
+   "identical_to_baseline": true
+  },
+  "zhi_yuan_tian_bao": {
+   "http_code": "200",
+   "bytes": 8560,
+   "identical_to_baseline": true
+  },
+  "kao_shi_gui_ding": {
+   "http_code": "200",
+   "bytes": 8658,
+   "identical_to_baseline": true
+  },
+  "zhao_sheng_lu_qu": {
+   "http_code": "200",
+   "bytes": 8809,
+   "identical_to_baseline": true
+  }
+ },
+ "max_substantive_article_date": "20260721",
+ "new_data": false,
+ "notes": "7页全部200且与10-04基线字节一致(14333/9947/9893/8667/8560/8658/8809)。max substantive article date仍为20260721(民办高中降分公告era)；index的20260723字符串=已知cdn余额公布decoy(20260723904/001.pdf)×1 + 03600已知07-23录取查询公告；4条edu.sh.gov.cn转载已知(最新20260331)；0×2027。"
+}
