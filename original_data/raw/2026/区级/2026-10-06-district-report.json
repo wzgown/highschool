@@ -1,0 +1,349 @@
+{
+ "date": "2026-10-06",
+ "scrape_time": "2026-10-06T08:04:26",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 12,
+ "failed_count": 4,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 55167,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 2,
+   "n2027": 0,
+   "items": [
+    {
+     "t": "2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：4046\n发表时间：2026-04-07\">\n        ",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年嘉定区义务教育阶段学校招生入学政策问答\n点击数：887\n发表时间：2026-04-07\">\n        2",
+     "u": "(inline)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 4,
+   "n2027": 0,
+   "items": [
+    {
+     "t": "2026年奉贤区高中学校名额分配到校招生计划\n                                    ",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年上海市高中名额分配到区招生计划\n                                    ",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年奉贤区高中学校名额分配到校招生计划\n                                    ",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年上海市高中名额分配到区招生计划\n                                    ",
+     "u": "(inline)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 7,
+   "n2027": 0,
+   "items": [
+    {
+     "t": "2026年宝山区中考无录取去向考生征求志愿的通知 ",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区） ",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（宝山区） ",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知 ",
+     "u": "(inline)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68267,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 0,
+   "n2027": 2,
+   "items": [],
+   "note": ""
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 8,
+   "n2027": 0,
+   "items": [
+    {
+     "t": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（徐汇区）",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年徐汇区中招跨区（跨入徐汇）学生收取《2026徐汇区高中阶段学校招生计划 ...",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年高中名额分配到校招生计划",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年高中名额分配到区招生计划",
+     "u": "(inline)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 0,
+   "n2027": 0,
+   "items": [],
+   "note": ""
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 0,
+   "n2027": 0,
+   "items": [],
+   "note": ""
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 0,
+   "n2027": 0,
+   "items": [],
+   "note": ""
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3107,
+   "byte_identical_to_1005": false,
+   "attempts": 1,
+   "kw_hits": 0,
+   "n2027": 0,
+   "items": [],
+   "note": "412 x1, known server-side failure mode (identical to 10-05), non-content"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "504",
+   "bytes": 7739,
+   "byte_identical_to_1005": false,
+   "attempts": 2,
+   "kw_hits": 0,
+   "n2027": 0,
+   "items": [],
+   "note": "504 x2, known server-side failure mode (identical to 10-05), non-content"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51664,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 8,
+   "n2027": 2,
+   "items": [
+    {
+     "t": "2026年上海市高中学校“1至15志愿”统一招生录取最低...",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年上海市中职校“1至15志愿”统一招生录取最低分...",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（金山区...",
+     "u": "(inline)"
+    },
+    {
+     "t": "2026年上海市中职校“1至15志愿”统一招生录取最低分数线（金山区） ",
+     "u": "(inline)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "长宁",
+   "status": "failed",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "504",
+   "bytes": 566,
+   "byte_identical_to_1005": false,
+   "attempts": 2,
+   "kw_hits": 0,
+   "n2027": 0,
+   "items": [],
+   "note": "504 x2, known server-side failure mode (identical to 10-05), non-content"
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 8,
+   "n2027": 0,
+   "items": [
+    {
+     "t": "高中阶段学校招生",
+     "u": "../../xxgk_jyj_ywxx_8_03/List/index.htm"
+    },
+    {
+     "t": "2026年上海市中等学校高中阶段招生（闵行区）",
+     "u": "../../xxgk_jyj_ywxx_8_03/content/3cfd0b4e-3366-456e-b96d-13df0da6c4c5.htm"
+    },
+    {
+     "t": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+     "u": "../../xxgk_jyj_ywxx_8_03/content/3c872451-e7fe-4b54-9d93-0c9bbd4430a0.htm"
+    },
+    {
+     "t": "转发2026年上海市高中阶段学校招生最低投档控制分数线确定",
+     "u": "https://www.shmeea.edu.cn/page/08000/20260714/20442.html"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 11,
+   "n2027": 0,
+   "items": [
+    {
+     "t": "中考中招",
+     "u": "/info/iIndex.jsp?cat_id=16938"
+    },
+    {
+     "t": "中考",
+     "u": "/info/iList.jsp?cat_id=16944"
+    },
+    {
+     "t": "中招",
+     "u": "/info/iList.jsp?cat_id=16945"
+    },
+    {
+     "t": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+     "u": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "byte_identical_to_1005": false,
+   "attempts": 2,
+   "kw_hits": 0,
+   "n2027": 0,
+   "items": [],
+   "note": "000 x2, known server-side failure mode (identical to 10-05), non-content"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "byte_identical_to_1005": true,
+   "attempts": 1,
+   "kw_hits": 12,
+   "n2027": 0,
+   "items": [
+    {
+     "t": "初中招生",
+     "u": "/info/iList.jsp?cat_id=20920"
+    },
+    {
+     "t": "中招信息",
+     "u": "/info/iList.jsp?cat_id=20921"
+    },
+    {
+     "t": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+     "u": "/sx/ggl/708093.htm"
+    },
+    {
+     "t": "2026年黄浦区中招个别考生（往届生、返沪生）现场确认注意事项及携带资料",
+     "u": "/sx/ggl/703130.htm"
+    }
+   ],
+   "note": ""
+  }
+ ],
+ "notes": "12 ok / 4 failed, ALL byte-identical to 10-05 baseline (incl. identical error shells for 浦东412/虹口504/长宁504, 静安000 still down since 09-21). Keyword hits all known 2026-cycle items (奉贤到校/到区计划=已入库; 宝山/徐汇/金山1至15志愿分数线=市级重复渠道已入库07-24~29; 嘉定义教Q&A、崇明冬季航班、金山高考选考=非中考). 27th consecutive no-data day."
+}
