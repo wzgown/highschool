@@ -1,0 +1,80 @@
+{
+ "date": "2026-10-07",
+ "scrape_time": "2026-10-07T08:04:32",
+ "method": "curl",
+ "pages": {
+  "index": {
+   "page": "03000",
+   "url": "https://www.shmeea.edu.cn/page/03000/",
+   "http_code": "200",
+   "bytes": 14333,
+   "baseline_bytes": 14333,
+   "byte_identical_to_baseline": true,
+   "max_date_on_page": "20260723",
+   "n2027": 0
+  },
+  "zhao_sheng_zheng_ce": {
+   "page": "03100",
+   "url": "https://www.shmeea.edu.cn/page/03100/",
+   "http_code": "200",
+   "bytes": 9947,
+   "baseline_bytes": 9947,
+   "byte_identical_to_baseline": true,
+   "max_date_on_page": "20260331",
+   "n2027": 0
+  },
+  "zhao_sheng_gong_shi": {
+   "page": "03200",
+   "url": "https://www.shmeea.edu.cn/page/03200/",
+   "http_code": "200",
+   "bytes": 9893,
+   "baseline_bytes": 9893,
+   "byte_identical_to_baseline": true,
+   "max_date_on_page": "20260707",
+   "n2027": 0
+  },
+  "bao_ming_xu_zhi": {
+   "page": "03300",
+   "url": "https://www.shmeea.edu.cn/page/03300/",
+   "http_code": "200",
+   "bytes": 8667,
+   "baseline_bytes": 8667,
+   "byte_identical_to_baseline": true,
+   "max_date_on_page": "20260512",
+   "n2027": 0
+  },
+  "zhi_yuan_tian_bao": {
+   "page": "03400",
+   "url": "https://www.shmeea.edu.cn/page/03400/",
+   "http_code": "200",
+   "bytes": 8560,
+   "baseline_bytes": 8560,
+   "byte_identical_to_baseline": true,
+   "max_date_on_page": "20260621",
+   "n2027": 0
+  },
+  "kao_shi_gui_ding": {
+   "page": "03500",
+   "url": "https://www.shmeea.edu.cn/page/03500/",
+   "http_code": "200",
+   "bytes": 8658,
+   "baseline_bytes": 8658,
+   "byte_identical_to_baseline": true,
+   "max_date_on_page": "20260710",
+   "n2027": 0
+  },
+  "zhao_sheng_lu_qu": {
+   "page": "03600",
+   "url": "https://www.shmeea.edu.cn/page/03600/",
+   "http_code": "200",
+   "bytes": 8809,
+   "baseline_bytes": 8809,
+   "byte_identical_to_baseline": true,
+   "max_date_on_page": "20260723",
+   "n2027": 0
+  }
+ },
+ "max_substantive_article_date": "20260721",
+ "new_data": false,
+ "notes": "All 7 pages 200 and byte-for-byte identical to 10-06/09-30 baseline (14333/9947/9893/8667/8560/8658/8809). 20260723 strings = known cdn yu'e gongbu decoy (index) + known 07-23 tongyi zhaosheng luqu jieguo chaxun announcement (03600); 03100 max 20260331 = known edu.sh.gov.cn reprint set (4 items, latest 20260331). 0x'2027' on all pages. Off-season watch mode, 28th consecutive no-data day."
+}
