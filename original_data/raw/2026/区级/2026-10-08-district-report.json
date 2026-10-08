@@ -1,0 +1,252 @@
+{
+  "date": "2026-10-08",
+  "scrape_time": "2026-10-08T08:04:06+08:00",
+  "method": "curl-sequential",
+  "total_districts": 16,
+  "success_count": 14,
+  "failed_count": 2,
+  "partial_count": 0,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "嘉定",
+      "status": "success",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "http_code": "200",
+      "bytes": 55167,
+      "items": [],
+      "note": "byte-identical to 10-07; portal news rotation only, 0 中考 kw"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn",
+      "http_code": "200",
+      "bytes": 22041,
+      "items": [],
+      "note": "byte-identical to 10-07; known 2026-cycle links only"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "http_code": "200",
+      "bytes": 14854,
+      "items": [],
+      "note": "byte-identical to 10-07; known July items"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "url": "https://www.shcm.gov.cn/",
+      "http_code": "200",
+      "bytes": 68267,
+      "items": [],
+      "note": "byte-identical to 10-07; 政务新闻 only, non-中考"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "http_code": "200",
+      "bytes": 11869,
+      "items": [],
+      "note": "byte-identical to 10-07; known sidebar items, max doc date 20250313 non-中考"
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "url": "https://kszx.pte.sh.cn",
+      "http_code": "200",
+      "bytes": 159,
+      "items": [],
+      "note": "byte-identical to 10-07; stable tiny shell (off-season profile)"
+    },
+    {
+      "name": "杨浦",
+      "status": "success",
+      "url": "https://www.shyp.gov.cn/",
+      "http_code": "200",
+      "bytes": 342,
+      "items": [],
+      "note": "byte-identical to 10-07; stable tiny shell"
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "url": "https://zsb.sjedu.cn",
+      "http_code": "200",
+      "bytes": 2097,
+      "items": [],
+      "note": "byte-identical to 10-07; stable seasonal shell"
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "http_code": "412",
+      "bytes": 3129,
+      "items": [],
+      "note": "412 error shell, 1 attempt (no 5xx/000 so no retry per protocol); shell size 3073→3129B = known size-fluctuation pattern, non-content; anti-crawl, never content"
+    },
+    {
+      "name": "虹口",
+      "status": "success",
+      "url": "https://kszx.hongkouedu.com",
+      "http_code": "200",
+      "bytes": 11782,
+      "items": [
+        {
+          "title": "虹口区高中阶段统一招生录取结果查询",
+          "url": "",
+          "date": "2026-07-23",
+          "note": "known, city-sourced data already in DB"
+        },
+        {
+          "title": "2026年高考录取考生办理档案转递手续通知",
+          "url": "",
+          "date": "2026-07-25",
+          "note": "高考, non-中考"
+        },
+        {
+          "title": "上海市2026年普通高校招生专科阶段志愿填报及录取问答",
+          "url": "",
+          "date": "2026-07-29",
+          "note": "高考, non-中考"
+        }
+      ],
+      "note": "RECOVERED from 10-07's 504/7739B error page → 200/11782B, byte-identical to its 09-30 pre-failure state. All items known: max URL date 20260729 = 高考专科志愿问答 (non-中考), 07-25 高考档案转递 (non-中考), 统一招生录取结果查询 = known 07-23 era announcement"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn/zsks/",
+      "http_code": "200",
+      "bytes": 51664,
+      "items": [],
+      "note": "byte-identical to 10-07; known 志愿系统/实施细则 profile"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "http_code": "200",
+      "bytes": 31073,
+      "items": [
+        {
+          "title": "2026年上海市高中学校“名额分配到区”招生录取最低分数线（长宁区）",
+          "url": "",
+          "date": "2026-07",
+          "note": "known, city-sourced duplicate in DB"
+        },
+        {
+          "title": "2026年上海市高中学校“名额分配到校”招生录取最低分数线（长宁区）",
+          "url": "",
+          "date": "2026-07",
+          "note": "known, city-sourced duplicate in DB"
+        },
+        {
+          "title": "2026年上海市高中学校“名额分配到校”招生计划表(长宁区)",
+          "url": "",
+          "date": "2026-05-29",
+          "note": "known, imported"
+        },
+        {
+          "title": "2026年上海市高中学校“名额分配到区”招生计划表（长宁区）",
+          "url": "",
+          "date": "2026-05-29",
+          "note": "known, imported"
+        },
+        {
+          "title": "2026年中考投档缺额情况表(长宁区）",
+          "url": "",
+          "date": "2026-07-23",
+          "note": "known, 征求志愿 archived"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取分数线（长宁区）",
+          "url": "",
+          "date": "2026-07",
+          "note": "known, city-sourced duplicate in DB"
+        }
+      ],
+      "note": "RECOVERED from 10-07's 504/566B error page → 200/31073B, matches its known full-content profile (29-31KB). All items known 2026-cycle: 名额分配到区/到校计划表 = 5/29 plan docs already imported; 到区/到校/1至15志愿分数线 = city-sourced duplicates in DB (imported 07-24~29); 投档缺额表 = 07-23 征求志愿 archived"
+    },
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "http_code": "200",
+      "bytes": 33221,
+      "items": [
+        {
+          "title": "高中阶段学校招生",
+          "url": "",
+          "date": "",
+          "note": "known 2026-cycle items (1至15志愿分数线 = 市级重复渠道 etc.)"
+        },
+        {
+          "title": "2026年上海市中等学校高中阶段招生（闵行区）",
+          "url": "",
+          "date": "",
+          "note": "known 2026-cycle items"
+        }
+      ],
+      "note": "byte-identical to 10-07; same 7 known items"
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn",
+      "http_code": "200",
+      "bytes": 15348,
+      "items": [
+        {
+          "title": "中考中招",
+          "url": "",
+          "date": "",
+          "note": "known 2026-cycle items (报名/跨区 notes)"
+        },
+        {
+          "title": "中考",
+          "url": "",
+          "date": "",
+          "note": "known 2026-cycle items"
+        }
+      ],
+      "note": "byte-identical to 10-07; same 8 known items"
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "url": "https://www.ja.edu.sh.cn/",
+      "http_code": "000",
+      "bytes": 0,
+      "items": [],
+      "note": "conn-fail 000, retried x2 per protocol, both 000/0B — down since 09-21 (17th day); jingan.gov.cn portal not re-checked today (stable 0-中考 pattern)"
+    },
+    {
+      "name": "黄浦",
+      "status": "success",
+      "url": "https://zhaoban.hpe.cn",
+      "http_code": "200",
+      "bytes": 36237,
+      "items": [
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第二批公示)",
+          "url": "",
+          "date": "",
+          "note": "known 2026-cycle items"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第一批公示)",
+          "url": "",
+          "date": "",
+          "note": "known 2026-cycle items"
+        }
+      ],
+      "note": "byte-identical to 10-07; same 7 known items (体育免考公示 etc., max sidebar 20260720)"
+    }
+  ],
+  "notes": "Off-season watch mode, 29th consecutive no-data day. 14 ok / 2 failed. 12 successful districts byte-identical to 10-07 (incl. tiny shells 普陀 159B / 杨浦 342B / 松江 2097B). TWO RECOVERIES, both verified non-content (identical to pre-failure states): 虹口 504→200/11782B (=09-30 state, max URL date 20260729 高考), 长宁 504→200/31073B (full-content profile, all known July items = city-sourced duplicates already in DB). Failures: 静安 000 x2 (down since 09-21), 浦东 412 (shell 3073→3129B, known size-fluctuation, non-content). Keyword hits all known 2026-cycle items; 0 new data."
+}
