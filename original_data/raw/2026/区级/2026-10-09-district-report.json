@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-09",
+ "scrape_time": "2026-10-09T08:03:00+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 14,
+ "failed_count": 2,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 54963,
+   "items": [],
+   "note": "byte -204B vs 10-08 (55167→54963); portal news rotation only (newest article 10-08 教育新闻), 0 中考 kw, 0x2027 — non-content"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [],
+   "note": "byte-identical to 10-08 (22041B)"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [],
+   "note": "byte-identical to 10-08 (14854B)"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 68062,
+   "items": [],
+   "note": "byte -205B vs 10-08 (68267→68062); 0 中考 kw; 2x'2027' = known 冬季航班 notice (2026.10.8-2027.2.28); newest URL date 20261007 = 政务新闻 — non-content"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [],
+   "note": "byte-identical to 10-08 (11869B)"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": [],
+   "note": "byte-identical to 10-08 (159B)"
+  },
+  {
+   "name": "杨浦",
+   "status": "success",
+   "url": "https://www.shyp.gov.cn/",
+   "http_code": "200",
+   "bytes": 342,
+   "items": [],
+   "note": "byte-identical to 10-08 (342B)"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": [],
+   "note": "byte-identical to 10-08 (2097B)"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3198,
+   "items": [],
+   "note": "412 x1, error-shell 3129→3198B known size-fluctuation, non-content"
+  },
+  {
+   "name": "虹口",
+   "status": "success",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "200",
+   "bytes": 11782,
+   "items": [],
+   "note": "byte-identical to 10-08 (11782B)"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51664,
+   "items": [],
+   "note": "byte-identical to 10-08 (51664B)"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "items": [],
+   "note": "byte-identical to 10-08 (31073B)"
+  },
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [],
+   "note": "byte-identical to 10-08 (33221B)"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [],
+   "note": "byte-identical to 10-08 (15348B)"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "note": "000 x2 (down since 09-21); jingan.gov.cn portal not re-checked (0 中考 content pattern since 09-07) (x2 attempts)"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [],
+   "note": "byte-identical to 10-08 (36237B)"
+  }
+ ],
+ "notes": "Off-season watch mode, 30th consecutive no-data day. 14 ok / 2 failed (静安 000 x2 down since 09-21; 浦东 412 usual). 12 successful districts byte-identical to 10-08 (incl. tiny shells 普陀 159B / 杨浦 342B / 松江 2097B). Byte drifts: 嘉定 -204B, 崇明 -205B — both verified non-中考 (portal news rotation, 0 kw). City pages all byte-identical. No new data."
+}
