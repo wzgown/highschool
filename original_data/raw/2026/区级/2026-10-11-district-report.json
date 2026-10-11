@@ -1,0 +1,168 @@
+{
+ "date": "2026-10-11",
+ "scrape_time": "2026-10-11T08:02:00+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 11,
+ "failed_count": 5,
+ "partial_count": 0,
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3102,
+   "attempts": 1,
+   "note": "412 error-shell 3094→3102B size-fluctuation, known non-content pattern"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "attempts": 2,
+   "note": "000 x2 attempts, down since 09-21; jingan.gov.cn portal not re-checked (known 0 中考)"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "http_code": "404",
+   "bytes": 1107,
+   "attempts": 1,
+   "note": "404/1107B error page, identical to 10-10 state"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "嘉定",
+   "status": "failed",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "000",
+   "bytes": 55007,
+   "attempts": 2,
+   "note": "000 x2 attempts BUT content file persisted 55007B (~10-09 profile 54963B +44B); page complete (ends </html>), 0 中考 keywords, titles = portal news (工会/德育), +44B = news rotation, non-content"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "000",
+   "bytes": 11782,
+   "attempts": 2,
+   "note": "000 x2 attempts BUT content file persisted 11782B = byte-exact 10-08 recovered state; 3 keyword hits all known (newest URL date 20260729 = 高考专科志愿问答, non-中考); transfer completed but curl reported connection error"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51675,
+   "attempts": 1,
+   "note": "byte-identical to 10-10; 6x'2027' = 空军招飞初选(10-18) + 2027普通高校考试招生报名转载 — 高考-track items, non-中考",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn/",
+   "http_code": "200",
+   "bytes": 22041,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "attempts": 1,
+   "note": "",
+   "byte_identical_to_1010": true
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 67793,
+   "attempts": 1,
+   "note": "-194B vs 10-10 (67987→67793B) portal news rotation, 0 中考 kw; newest URL date 20261010 = 政务新闻; 4x'2027' = 人大监督议题征集 + 冬季航班 (known decoys)",
+   "byte_identical_to_1010": false
+  }
+ ],
+ "new_data": false,
+ "notes": "32nd consecutive no-data day. 11 ok / 5 failed (静安 000 x2 down-since-09-21, 浦东 412, 杨浦 404, 嘉定 000 x2 content-persisted-scanned-non-中考, 虹口 000 x2 content-persisted = exact 10-08 state). All 200-responses byte-identical to 10-10 except 崇明 -194B (news rotation, verified non-中考). Keyword hits (闵行26/金山17/青浦16/宝山15/长宁15/黄浦12/徐汇11) all known 2026-cycle items (city-duplicate channels already in DB). No genuinely new content."
+}
