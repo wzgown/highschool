@@ -1,0 +1,39 @@
+{
+ "date": "2026-10-13",
+ "scrape_time": "2026-10-13T08:00:00+08:00",
+ "method": "curl",
+ "pages": {
+  "index": {
+   "http_code": "200",
+   "bytes": 14333
+  },
+  "zhao_sheng_zheng_ce": {
+   "http_code": "200",
+   "bytes": 9947
+  },
+  "zhao_sheng_gong_shi": {
+   "http_code": "200",
+   "bytes": 9893
+  },
+  "bao_ming_xu_zhi": {
+   "http_code": "200",
+   "bytes": 8667
+  },
+  "zhi_yuan_tian_bao": {
+   "http_code": "200",
+   "bytes": 8560
+  },
+  "kao_shi_gui_ding": {
+   "http_code": "200",
+   "bytes": 8658
+  },
+  "zhao_sheng_lu_qu": {
+   "http_code": "200",
+   "bytes": 8809
+  }
+ },
+ "max_substantive_article_date": "20260721",
+ "edu_reprints_count": 4,
+ "new_data": false,
+ "notes": "34th consecutive no-data day. All 7 pages 200, byte-for-byte identical to baseline (14333/9947/9893/8667/8560/8658/8809). Max substantive article date still 20260721; 20260723 strings = known cdn 余额公布 decoy on index + known 07-23 录取查询 announcement on 03600. edu.sh.gov.cn reprints known (最新20260331), 0×2027. No new content."
+}
