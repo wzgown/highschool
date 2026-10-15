@@ -1,0 +1,29 @@
+{
+ "date": "2026-10-15",
+ "scrape_time": "2026-10-15T08:01:00+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 11,
+ "failed_count": 5,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {"name": "闵行", "status": "success", "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm", "http_code": "200", "bytes": 33221, "items": [], "kw_titles": ["高中阶段学校招生", "2026年上海市中等学校高中阶段招生（闵行区）", "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）", "转发2026年上海市高中阶段学校招生最低投档控制分数线确定", "转发上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问", "2026年上海市高中阶段学校名额分配综合评价“名额分配到校”招生计划（闵行区）", "2026年上海市高中名额分配到区招生计划（闵行区）"], "note": "byte-identical to 10-14; 7 title-level kw hits all known 2026-cycle city-duplicate channels already in DB"},
+  {"name": "浦东", "status": "failed", "url": "https://www.pudong.gov.cn/jyj/", "http_code": "412", "bytes": 3187, "items": [], "note": "412 ×2 attempts, 瑞数 anti-crawl shell 3070→3187B size fluctuation vs 10-14 — chronic 412 pattern, shell contains no 中考 content"},
+  {"name": "徐汇", "status": "success", "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216", "http_code": "200", "bytes": 11869, "items": [], "note": "byte-identical to 10-14; 0 kw hits"},
+  {"name": "黄浦", "status": "success", "url": "https://zhaoban.hpe.cn", "http_code": "200", "bytes": 36237, "items": [], "kw_titles": ["2026年上海市高中学校“1至15志愿”统一招生 录取最低分数线（黄浦区）", "转载：2026年黄浦区民办初中招生计划", "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线", "转载：2026 年上海市高中学校自主招生正式录取学生名单", "转载：上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问", "转载：2026年黄浦区民办学校（小学）招生计划"], "note": "byte-identical to 10-14; 6 title-level kw hits = 5 known 中考 items + 1 民办小学 false positive; all known"},
+  {"name": "静安", "status": "failed", "url": "https://www.ja.edu.sh.cn/", "http_code": "000", "bytes": 0, "items": [], "note": "000 ×2 attempts, down since 09-21, server-side"},
+  {"name": "杨浦", "status": "failed", "url": "https://www.shyp.gov.cn/shypq/jyj/", "http_code": "404", "bytes": 1107, "items": [], "note": "404/1107B identical to 10-14, stable error page"},
+  {"name": "宝山", "status": "success", "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml", "http_code": "200", "bytes": 14854, "items": [], "note": "byte-identical to 10-14; 0 kw hits"},
+  {"name": "嘉定", "status": "failed", "url": "https://www.jiading.gov.cn/jiaoyu/", "http_code": "000", "bytes": 0, "items": [], "note": "000 ×2 attempts, 3rd consecutive day conn-failure (10-13 recovered from same one-day pattern), server-side, no file written"},
+  {"name": "长宁", "status": "success", "url": "https://kszx.chneic.sh.cn/IndexAction.action", "http_code": "200", "bytes": 31073, "items": [], "note": "byte-identical to 10-14; 0 kw hits (maxdate 20801029 = JS date-widget artifact, not article date)"},
+  {"name": "普陀", "status": "success", "url": "https://kszx.pte.sh.cn", "http_code": "200", "bytes": 159, "items": [], "note": "159B tiny shell, byte-identical to 10-14"},
+  {"name": "虹口", "status": "failed", "url": "https://kszx.hongkouedu.com", "http_code": "000", "bytes": 0, "items": [], "note": "000 ×2 attempts, no file written; chronic fluctuator (504 09-30/10-07, 000 10-11/10-13/10-14/10-15)"},
+  {"name": "松江", "status": "success", "url": "https://zsb.sjedu.cn", "http_code": "200", "bytes": 2097, "items": [], "note": "2097B tiny shell, byte-identical to 10-14"},
+  {"name": "金山", "status": "success", "url": "https://www.jsedu.sh.cn/zsks/", "http_code": "200", "bytes": 51675, "items": [], "note": "byte-identical to 10-14; 0 kw hits"},
+  {"name": "奉贤", "status": "success", "url": "https://zsks.shfxjy.cn/", "http_code": "200", "bytes": 22041, "items": [], "note": "byte-identical to 10-14; 0 kw hits"},
+  {"name": "青浦", "status": "success", "url": "https://kszx.qpedu.cn", "http_code": "200", "bytes": 15348, "items": [], "kw_titles": ["中考中招", "中考", "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见", "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项", "2026年青浦区往届生、返沪生中考报名现场确认须知", "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知", "中考录取查询", "中考成绩查询"], "note": "byte-identical to 10-14; 8 title-level kw hits (4 nav nodes + 4 known 报名/指南 items), all known"},
+  {"name": "崇明", "status": "success", "url": "https://www.shcm.gov.cn/", "http_code": "200", "bytes": 68035, "items": [], "note": "+209B vs 10-14 (67826→68035) portal news rotation: newest URL date 20261014 = 区党政领导接待来访群众公示 (政务条目) + 20261011-13 政务新闻/世巡赛, 0 中考 kw — verified non-content"}
+ ],
+ "notes": "36th consecutive no-data day. 16 districts fetched sequentially (~91s incl. status-only retries ×2 on 浦东/静安/杨浦/嘉定/虹口): 11 ok / 5 failed. 10 of 11 successes byte-identical to 10-14 (incl. 普陀 159B / 松江 2097B tiny shells stable). Changes vs 10-14, all verified non-中考: 崇明 +209B news rotation (newest 20261014 政务公示, 0 中考 kw), 浦东 412 shell 3070→3187B size fluctuation. Failures continuing: 静安 000 ×2 (down since 09-21), 嘉定 000 ×2 (3rd consecutive day), 虹口 000 ×2 no file (chronic fluctuator), 杨浦 404/1107B stable. Title-level keyword hits (闵行7/黄浦6/青浦8) all known 2026-cycle city-duplicate channels already in DB."
+}
