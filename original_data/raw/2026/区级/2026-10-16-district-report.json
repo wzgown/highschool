@@ -1,0 +1,167 @@
+{
+ "date": "2026-10-16",
+ "scrape_time": "2026-10-16T08:01:00+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 11,
+ "failed_count": 5,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "attempts": 1,
+   "items": []
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3113,
+   "attempts": 1,
+   "items": [],
+   "note": "412 anti-crawl shell, size fluctuation 3187→3113B (chronic, non-content)"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "attempts": 1,
+   "items": []
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "attempts": 1,
+   "items": []
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "0",
+   "bytes": 0,
+   "attempts": 2,
+   "items": [],
+   "note": "000 ×2 attempts, no file — down since 09-21"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "http_code": "404",
+   "bytes": 1107,
+   "attempts": 1,
+   "items": [],
+   "note": "404/1107B error page, stable since 10-10"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "attempts": 1,
+   "items": []
+  },
+  {
+   "name": "嘉定",
+   "status": "failed",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "0",
+   "bytes": 0,
+   "attempts": 2,
+   "items": [],
+   "note": "000 ×2 attempts, no file — 4th consecutive day, server-side"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "attempts": 1,
+   "items": [],
+   "note": "byte-identical to 10-15; 8-digit strings in HTML are view() article IDs, not dates"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "attempts": 1,
+   "items": [],
+   "note": "159B tiny shell, stable"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "0",
+   "bytes": 0,
+   "attempts": 2,
+   "items": [],
+   "note": "000 ×2 attempts, no file — chronic fluctuator (504 09-30/10-07, 200 10-08, 000 10-11+)"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "attempts": 1,
+   "items": [],
+   "note": "2097B tiny shell, stable"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn/zsks/",
+   "http_code": "200",
+   "bytes": 51542,
+   "attempts": 1,
+   "items": [],
+   "note": "-133B vs 10-15; 11×'2027' = 高考-track 空军招飞初选(10-18) + 2027艺术类统考网上咨询 articles replicated across page modules — known decoys, non-中考"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn/",
+   "http_code": "200",
+   "bytes": 22041,
+   "attempts": 1,
+   "items": []
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "attempts": 1,
+   "items": []
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn/",
+   "http_code": "200",
+   "bytes": 67971,
+   "attempts": 1,
+   "items": [],
+   "note": "-64B vs 10-15, portal news rotation; newest URL date 20261014 (世锦赛/政务新闻), 0 中考 kw"
+  }
+ ],
+ "notes": "37th consecutive no-data day. 16 districts fetched sequentially (~61s incl. status-only retries ×2 on 静安/嘉定/虹口): 11 ok / 5 failed — same split as 10-15. All 11 successes' content verified: 闵行/黄浦/青浦 keyword hits all known 2026-cycle city-duplicate channels already in DB (1至15志愿分数线, 名额到区/到校计划, 跨区生须知); 金山/崇明 byte drifts verified non-中考 (高考-track 2027 decoys / 政务新闻 rotation). Failures continuing: 静安 000 (down since 09-21), 嘉定 000 (4th consecutive day), 虹口 000 (chronic fluctuator), 杨浦 404/1107B stable, 浦东 412 shell size fluctuation. No new content."
+}
