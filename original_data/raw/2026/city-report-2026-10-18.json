@@ -1,0 +1,91 @@
+{
+ "date": "2026-10-18",
+ "scrape_time": "2026-10-18T08:04:46",
+ "method": "curl",
+ "pages": [
+  {
+   "page": "index",
+   "url": "https://www.shmeea.edu.cn/page/03000/",
+   "http_code": "200",
+   "bytes": 14333,
+   "same_as_baseline": true,
+   "max_20dddddd_date": "20260723",
+   "n_2027_mentions": 0
+  },
+  {
+   "page": "zhao_sheng_zheng_ce",
+   "url": "https://www.shmeea.edu.cn/page/03100/",
+   "http_code": "200",
+   "bytes": 9947,
+   "same_as_baseline": true,
+   "max_20dddddd_date": "20260331",
+   "n_2027_mentions": 0
+  },
+  {
+   "page": "zhao_sheng_gong_shi",
+   "url": "https://www.shmeea.edu.cn/page/03200/",
+   "http_code": "200",
+   "bytes": 9893,
+   "same_as_baseline": true,
+   "max_20dddddd_date": "20260707",
+   "n_2027_mentions": 0
+  },
+  {
+   "page": "bao_ming_xu_zhi",
+   "url": "https://www.shmeea.edu.cn/page/03300/",
+   "http_code": "200",
+   "bytes": 8667,
+   "same_as_baseline": true,
+   "max_20dddddd_date": "20260512",
+   "n_2027_mentions": 0
+  },
+  {
+   "page": "zhi_yuan_tian_bao",
+   "url": "https://www.shmeea.edu.cn/page/03400/",
+   "http_code": "200",
+   "bytes": 8560,
+   "same_as_baseline": true,
+   "max_20dddddd_date": "20260621",
+   "n_2027_mentions": 0
+  },
+  {
+   "page": "kao_shi_gui_ding",
+   "url": "https://www.shmeea.edu.cn/page/03500/",
+   "http_code": "200",
+   "bytes": 8658,
+   "same_as_baseline": true,
+   "max_20dddddd_date": "20260710",
+   "n_2027_mentions": 0
+  },
+  {
+   "page": "zhao_sheng_lu_qu",
+   "url": "https://www.shmeea.edu.cn/page/03600/",
+   "http_code": "200",
+   "bytes": 8809,
+   "same_as_baseline": true,
+   "max_20dddddd_date": "20260723",
+   "n_2027_mentions": 0
+  }
+ ],
+ "index_edu_reprints": [
+  {
+   "date": "20260331",
+   "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招收艺术骨干学生工作的"
+  },
+  {
+   "date": "20260325",
+   "title": "转载：上海市教育委员会关于做好2026年上海市中等职业学校自主招生工作的通知"
+  },
+  {
+   "date": "20260325",
+   "title": "转载：上海市教育委员会关于做好2026年上海市全日制普通中等职业学校自主招收上海"
+  },
+  {
+   "date": "20260318",
+   "title": "转载：上海市教育委员会 上海市体育局关于做好2026年上海市高中阶段学校招收优秀"
+  }
+ ],
+ "max_substantive_article_date": "20260721",
+ "new_data": false,
+ "notes": "全部7页字节与基线一致；20260723串=已知cdn余额公布decoy(index)+已知07-23录取查询公告(03600)；4条edu.sh.gov.cn转载全部已知；无新数据。"
+}

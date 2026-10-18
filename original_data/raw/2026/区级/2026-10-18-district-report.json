@@ -1,0 +1,236 @@
+{
+ "date": "2026-10-18",
+ "scrape_time": "2026-10-18T08:04:46",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 11,
+ "failed_count": 5,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "items": [
+    {
+     "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转发2026年上海市高中阶段学校招生最低投档控制分数线确定",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转发上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "高中阶段学校招生",
+     "note": "导航节点，非数据条目"
+    }
+   ],
+   "note": "byte-identical to 10-17"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3089,
+   "items": [],
+   "note": "412 anti-crawl shell 3131→3089B size fluctuation, chronic"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "items": [],
+   "note": "byte-identical to 10-17, 0 kw hits"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "items": [
+    {
+     "title": "2026年上海市高中学校“1至15志愿”统一招生 录取最低分数线（黄浦区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年上海市中等职业学校自主招收随迁子女五年一贯制和中高职贯通各专业最低录取分数线",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年黄浦区民办初中招生计划",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年黄浦区民办学校（小学）招生计划",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    }
+   ],
+   "note": "byte-identical to 10-17"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "note": "conn-fail 000 ×2, down since 09-21"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "http_code": "404",
+   "bytes": 1107,
+   "items": [],
+   "note": "404 error page 1107B, stable"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "items": [],
+   "note": "byte-identical to 10-17, 0 kw hits"
+  },
+  {
+   "name": "嘉定",
+   "status": "failed",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "note": "conn-fail 000 ×2, 6th consecutive day, server-side"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "items": [],
+   "note": "byte-identical to 10-17, 0 kw hits (this run's method)"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "items": [],
+   "note": "159B tiny shell, stable off-season profile"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "000",
+   "bytes": 0,
+   "items": [],
+   "note": "conn-fail 000 ×2, no file, chronic fluctuator"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "items": [],
+   "note": "2097B tiny shell, stable off-season profile"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn",
+   "http_code": "200",
+   "bytes": 20789,
+   "items": [],
+   "note": "SITE-PROFILE CHANGE: 51377→20789B (-30588). Minimal shell: 0 dated news titles, 0×2026/2027, 0 中考 kw; re-fetch byte-identical ×2 → stable server-side state (news modules taken down), NOT partial load. Non-中考 drift, no new data."
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "items": [],
+   "note": "byte-identical to 10-17, 0 kw hits (this run's method)"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "items": [
+    {
+     "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "中考录取查询",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "中考成绩查询",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    }
+   ],
+   "note": "byte-identical to 10-17"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn",
+   "http_code": "200",
+   "bytes": 68044,
+   "items": [],
+   "note": "byte-identical to 10-17; 4×2027 = known decoys, 0 中考 kw"
+  }
+ ],
+ "notes": "11 ok / 5 failed, same failure split as 10-17. 10 of 11 successes byte-identical to 10-17. Only drift: 金山 51377→20789B site-profile change (minimal shell), verified non-中考 ×2 re-fetch. Keyword-hit 'NEW' flags on 闵行/黄浦/青浦 were baseline item-list format artifacts — pages byte-identical, all titles known city-duplicate channels."
+}
