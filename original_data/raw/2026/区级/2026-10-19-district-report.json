@@ -1,0 +1,316 @@
+{
+ "date": "2026-10-19",
+ "scrape_time": "2026-10-19T08:12:17",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 10,
+ "failed_count": 6,
+ "partial_count": 0,
+ "new_data": [],
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "sha256": "3a40388067039f70fbee9b165a761a737940009592ef817e41f4972ff594c816",
+   "attempts": 1,
+   "maxdate_20": "20260721",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [
+    {
+     "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转发2026年上海市高中阶段学校招生最低投档控制分数线确定",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转发上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "高中阶段学校招生",
+     "note": "导航节点，非数据条目"
+    }
+   ],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3150,
+   "sha256": "b3fbf76aa413db48372d8b255850a5dfb9c39fbe418f52e1dee9c4e85c2b073a",
+   "attempts": 1,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": false,
+   "items": [],
+   "note": "still failing: was 412, now 412"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "sha256": "111b14ce6281725f6f6a2746249829597676fb2de4e8a91218f904b5494abd2f",
+   "attempts": 1,
+   "maxdate_20": "20250313",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36237,
+   "sha256": "46eb35c47b7fc3b52bba25f161bfd3aaee76e286639009abcaaa86a5c417d4e2",
+   "attempts": 1,
+   "maxdate_20": "20260720",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [
+    {
+     "title": "2026年上海市高中学校“1至15志愿”统一招生 录取最低分数线（黄浦区）",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年上海市中等职业学校自主招收随迁子女五年一贯制和中高职贯通各专业最低录取分数线",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年黄浦区民办初中招生计划",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：2026年黄浦区民办学校（小学）招生计划",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转载：上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    }
+   ],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "sha256": "",
+   "attempts": 2,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": false,
+   "items": [],
+   "note": "still failing: was 000, now 000"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "http_code": "404",
+   "bytes": 1107,
+   "sha256": "72fae2a094b72353dac63ac231084ce09814a11b0444941d21fa5b5c0b0881bb",
+   "attempts": 1,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": false,
+   "items": [],
+   "note": "still failing: was 404, now 404"
+  },
+  {
+   "name": "宝山",
+   "status": "failed",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "000",
+   "bytes": 0,
+   "sha256": "",
+   "attempts": 2,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": false,
+   "items": [],
+   "note": "degraded: was 200/14854B, now 000 (0B)"
+  },
+  {
+   "name": "嘉定",
+   "status": "failed",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "000",
+   "bytes": 0,
+   "sha256": "",
+   "attempts": 2,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": false,
+   "items": [],
+   "note": "still failing: was 000, now 000"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "sha256": "bfaeeab82f09cd019225f7f82398ea52367d2085a48aab75021c48b85539b72b",
+   "attempts": 1,
+   "maxdate_20": "20801029",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "sha256": "a30ad35ad5cf30b6bcf2438dc34fbf8b26caaebc31229c5dd599cbff7e5cdf5c",
+   "attempts": 1,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "000",
+   "bytes": 0,
+   "sha256": "",
+   "attempts": 2,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": false,
+   "items": [],
+   "note": "still failing: was 000, now 000"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "sha256": "b5161f78473fcf1857f4ed371cacf9b08dc08c1bc3d00abada9023fd7a2df36f",
+   "attempts": 1,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn",
+   "http_code": "200",
+   "bytes": 20789,
+   "sha256": "bb312e33e700494cb9d25fec5ae00f67f33fc6474bdd3df11185257c898393d5",
+   "attempts": 1,
+   "maxdate_20": "",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": 22041,
+   "sha256": "21e995260820b473f66c6c0e0594134333f54619fa5ff2d5810dbef05bf124a7",
+   "attempts": 1,
+   "maxdate_20": "20241216",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15348,
+   "sha256": "85102b48c2e08005cd941f7fe8aa36e8d38f2a174928f2822bf6ef51f670efda",
+   "attempts": 1,
+   "maxdate_20": "20260227",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [
+    {
+     "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "中考录取查询",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "中考成绩查询",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    },
+    {
+     "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "note": "已知2026周期条目（市级重复渠道，数据已在DB）"
+    }
+   ],
+   "note": "byte-identical to 10-18"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn",
+   "http_code": "200",
+   "bytes": 68044,
+   "sha256": "24c205db791f128ccd1e114002e42d53e320f5a10b6864329f209612f852a1e0",
+   "attempts": 1,
+   "maxdate_20": "20261014",
+   "n2027": 0,
+   "byte_identical_vs_1018": true,
+   "items": [],
+   "note": "byte-identical to 10-18"
+  }
+ ],
+ "notes": "自动比对2026-10-18基线；10/16页200(其中普陀159B、松江2097B为稳定tiny shell)，6失败(静安000自09-21起连28日、嘉定000连7日、虹口000波动、浦东412、杨浦404、宝山000当日新增,重试x2仍000)。唯一状态变化：宝山200/14854B→000x2，server-side无文件，非内容变化；其余200页全部byte-identical。长宁max20=20801029为日期widget伪串(09-08已知模式)，非文章日期；崇明max20=20261014已知政务新闻。kw命中全部位于byte-identical页=已知条目，0新增。含sha256供后续比对。"
+}
