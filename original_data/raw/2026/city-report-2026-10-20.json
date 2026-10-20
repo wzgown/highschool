@@ -1,0 +1,278 @@
+{
+ "date": "2026-10-20",
+ "scrape_time": "2026-10-20T08:05:21+08:00",
+ "method": "curl",
+ "pages": [
+  {
+   "page": "index",
+   "http_code": "200",
+   "bytes": "14333",
+   "url": "https://www.shmeea.edu.cn/page/03000/",
+   "sha256": "64080bd97913db34d74a020d99474f1f936c4e2b7fc825f552e81bade7c4f806",
+   "maxdate_20": "20260723",
+   "n2027": "0",
+   "byte_identical_vs_1019": "True",
+   "kw_items": [
+    {
+     "title": "2026年上海市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+     "url": "/page/03300/20260512/20231.html"
+    },
+    {
+     "title": "2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+     "url": "/page/03300/20260112/20005.html"
+    },
+    {
+     "title": "关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "url": "/page/03300/20251229/19965.html"
+    },
+    {
+     "title": "2025年本市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+     "url": "/page/03300/20250515/19348.html"
+    },
+    {
+     "title": "2026年上海市高中阶段学校招生志愿填报即将开始",
+     "url": "/page/03400/20260621/20361.html"
+    },
+    {
+     "title": "关于《2026年上海中考中招指南（志愿篇、备考篇、计划篇、录取篇）》一书发行的通知",
+     "url": "/page/03400/20260610/20327.html"
+    },
+    {
+     "title": "招生录取",
+     "url": "/page/03600/index.html"
+    },
+    {
+     "title": "2026年上海市民办高中学校招生计划余额公布",
+     "url": "https://cdn.shmeea.edu.cn/resource/upload/www/20260723904/001.pdf"
+    },
+    {
+     "title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+     "url": "/page/03600/20260721/20476.html"
+    },
+    {
+     "title": "2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+     "url": "/page/03600/20260720/20471.html"
+    }
+   ]
+  },
+  {
+   "page": "zhao_sheng_zheng_ce",
+   "http_code": "200",
+   "bytes": "9947",
+   "url": "https://www.shmeea.edu.cn/page/03100/",
+   "sha256": "51e8fb4b033add16d2724b42cbf610df8f554508f979fad4e948f5540df11f9b",
+   "maxdate_20": "20260331",
+   "n2027": "0",
+   "byte_identical_vs_1019": "True",
+   "kw_items": [
+    {
+     "title": "中招政策",
+     "url": ""
+    },
+    {
+     "title": "上海市教育考试院关于印发《2026年上海市高中阶段学校考试招生工作实施细则》的通知（沪教考院中招〔2026〕3号）",
+     "url": "/page/03100/20260320/20117.html"
+    },
+    {
+     "title": "转载：上海市教育委员会关于做好2026年上海市特殊教育高中阶段招生入学工作的通知",
+     "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260312/bd228a8895d348d89023d26df0a3b143.html"
+    },
+    {
+     "title": "转载：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+     "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html"
+    },
+    {
+     "title": "上海市教育考试院关于印发《2026年上海市成人中等职业教育招生工作实施细则》的通知（沪教考院中招〔2025〕27号）",
+     "url": "/page/03100/20251226/19962.html"
+    },
+    {
+     "title": "转载：上海市教育委员会关于做好2026年上海市高中阶段学校招生报名工作的通知",
+     "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20251126/27f5a2d54e414ed4b1c6a53719e67865.html"
+    }
+   ]
+  },
+  {
+   "page": "zhao_sheng_gong_shi",
+   "http_code": "200",
+   "bytes": "9893",
+   "url": "https://www.shmeea.edu.cn/page/03200/",
+   "sha256": "d76b969b06283a4726e06932c600e41e6b9930e2abbd972d6aed196bd6ae74aa",
+   "maxdate_20": "20260707",
+   "n2027": "0",
+   "byte_identical_vs_1019": "True",
+   "kw_items": [
+    {
+     "title": "2026年上海市民办普通高中国际课程班和中外合作办学学校招生录取方案",
+     "url": "https://www.shmeea.edu.cn/download/20260529/8.pdf"
+    },
+    {
+     "title": "2026年上海市高中学校自主招生录取方案",
+     "url": "https://www.shmeea.edu.cn/download/20260529/7.pdf"
+    },
+    {
+     "title": "2026年上海市高中名额分配到区招生计划",
+     "url": "https://www.shmeea.edu.cn/download/20260529/4.pdf"
+    },
+    {
+     "title": "2026年上海市高中自主招生计划（不含国际课程班）",
+     "url": "https://www.shmeea.edu.cn/download/20260529/5.pdf"
+    }
+   ]
+  },
+  {
+   "page": "bao_ming_xu_zhi",
+   "http_code": "200",
+   "bytes": "8667",
+   "url": "https://www.shmeea.edu.cn/page/03300/",
+   "sha256": "821fa2cdf3a1145e9baa6a5aa4a49232b8669066d1808c8ff299e8ad337cdaa9",
+   "maxdate_20": "20260512",
+   "n2027": "0",
+   "byte_identical_vs_1019": "True",
+   "kw_items": [
+    {
+     "title": "2026年上海市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+     "url": "/page/03300/20260512/20231.html"
+    },
+    {
+     "title": "2026年本市高中阶段学校招生网上报名及信息确认将于1月19日开始",
+     "url": "/page/03300/20260112/20005.html"
+    },
+    {
+     "title": "关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "url": "/page/03300/20251229/19965.html"
+    },
+    {
+     "title": "2025年本市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+     "url": "/page/03300/20250515/19348.html"
+    },
+    {
+     "title": "2025年本市高中阶段学校招生网上报名及信息确认于2月20日开始",
+     "url": "/page/03300/20250220/19110.html"
+    },
+    {
+     "title": "关于《2025年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "url": "/page/03300/20250107/19027.html"
+    },
+    {
+     "title": "2024年本市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+     "url": "/page/03300/20240520/18461.html"
+    },
+    {
+     "title": "2024年本市高中阶段学校招生网上报名及信息确认将于2月22日开始",
+     "url": "/page/03300/20240220/18198.html"
+    },
+    {
+     "title": "关于《2024年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "url": "/page/03300/20240115/18148.html"
+    },
+    {
+     "title": "2023年本市高中阶段学校招生各区跨区报名（跨入）学生注意事项一览表",
+     "url": "/page/03300/20230602/17569.html"
+    }
+   ]
+  },
+  {
+   "page": "zhi_yuan_tian_bao",
+   "http_code": "200",
+   "bytes": "8560",
+   "url": "https://www.shmeea.edu.cn/page/03400/",
+   "sha256": "46177eab256b5ffaf7d115ae98e8d6f3ff12e2db66f1d2c7d5c319792fd59c0c",
+   "maxdate_20": "20260621",
+   "n2027": "0",
+   "byte_identical_vs_1019": "True",
+   "kw_items": [
+    {
+     "title": "2026年上海市高中阶段学校招生志愿填报即将开始",
+     "url": "/page/03400/20260621/20361.html"
+    },
+    {
+     "title": "关于《2026年上海中考中招指南（志愿篇、备考篇、计划篇、录取篇）》一书发行的通知",
+     "url": "/page/03400/20260610/20327.html"
+    },
+    {
+     "title": "2025年上海市高中阶段学校招生志愿填报即将开始",
+     "url": "/page/03400/20250615/19503.html"
+    },
+    {
+     "title": "关于《2025年上海中考中招指南（志愿篇、备考篇、计划篇、录取篇）》一书发行的通知",
+     "url": "/page/03400/20250604/19428.html"
+    },
+    {
+     "title": "2024年上海市高中阶段学校招生录取志愿填报即将开始",
+     "url": "/page/03400/20240617/18575.html"
+    },
+    {
+     "title": "关于《2024年上海中考中招指南（志愿篇、备考篇、计划篇、录取篇）》一书发行的通知",
+     "url": "/page/03400/20240604/18526.html"
+    }
+   ]
+  },
+  {
+   "page": "kao_shi_gui_ding",
+   "http_code": "200",
+   "bytes": "8658",
+   "url": "https://www.shmeea.edu.cn/page/03500/",
+   "sha256": "534bde759eaa0af161a42d2dda6ea6e380df725e9a5b06ebbe9cef483a2e3d68",
+   "maxdate_20": "20260710",
+   "n2027": "0",
+   "byte_identical_vs_1019": "True",
+   "kw_items": []
+  },
+  {
+   "page": "zhao_sheng_lu_qu",
+   "http_code": "200",
+   "bytes": "8809",
+   "url": "https://www.shmeea.edu.cn/page/03600/",
+   "sha256": "e6532b5cc4a26c3683bb618575ddc70c937112fc8c4f76730d38cb129c446e56",
+   "maxdate_20": "20260723",
+   "n2027": "0",
+   "byte_identical_vs_1019": "True",
+   "kw_items": [
+    {
+     "title": "招生录取",
+     "url": ""
+    },
+    {
+     "title": "2026年上海市民办高中学校招生计划余额公布",
+     "url": "https://cdn.shmeea.edu.cn/resource/upload/www/20260723904/001.pdf"
+    },
+    {
+     "title": "关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+     "url": "/page/03600/20260721/20476.html"
+    },
+    {
+     "title": "2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+     "url": "/page/03600/20260720/20471.html"
+    },
+    {
+     "title": "2026年上海市中等职业学校自主招收随迁子女五年一贯制和中高职贯通各专业最低录取分数线",
+     "url": "/page/03600/20260719/20460.html"
+    },
+    {
+     "title": "2026年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+     "url": "/page/03600/20260719/20461.html"
+    },
+    {
+     "title": "2026年上海市高中阶段学校招生最低投档控制分数线确定",
+     "url": "/page/03600/20260714/20441.html"
+    },
+    {
+     "title": "上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+     "url": "/page/03600/20260714/20438.html"
+    },
+    {
+     "title": "关于2025年上海市1所民办高中降低最低投档控制分数线的公告",
+     "url": "/page/03600/20250715/19630.html"
+    },
+    {
+     "title": "2025年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+     "url": "/page/03600/20250714/19623.html"
+    }
+   ]
+  }
+ ],
+ "index_edu_reprints": "unchanged (index byte-identical to 10-19; 4 edu.sh.gov.cn reprints known, latest 20260331)",
+ "max_substantive_article_date": "20260721",
+ "new_data": false,
+ "notes": "All 7 pages 200, byte-identical to 10-19 baseline (14333/9947/9893/8667/8560/8658/8809). maxdate strings 20260723 = known cdn 余额公布 decoy (index) + known 07-23 录取查询 announcement (03600). 0 x 2027. Off-season watch mode, 41st consecutive no-data day."
+}
