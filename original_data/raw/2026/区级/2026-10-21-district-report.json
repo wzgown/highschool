@@ -1,0 +1,481 @@
+{
+ "date": "2026-10-21",
+ "scrape_time": "2026-10-21T08:04:04+08:00",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 11,
+ "failed_count": 5,
+ "partial_count": 0,
+ "new_data": false,
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": "33221",
+   "sha256": "3a40388067039f70fbee9b165a761a737940009592ef817e41f4972ff594c816",
+   "attempts": "1",
+   "maxdate_20": "20260721",
+   "n2027": "0",
+   "byte_identical_vs_1020": "True",
+   "size_eq": "True",
+   "kw_count": 13,
+   "kw_items": [
+    {
+     "title": "义务教育招生",
+     "url": "../../xxgk_jyj_ywxx_8_02/List/index.htm"
+    },
+    {
+     "title": "高中阶段学校招生",
+     "url": "../../xxgk_jyj_ywxx_8_03/List/index.htm"
+    },
+    {
+     "title": "普通高校招生",
+     "url": "../../xxgk_jyj_ywxx_8_04/List/index.htm"
+    },
+    {
+     "title": "2026年上海市中等学校高中阶段招生（闵行区）",
+     "url": "../../xxgk_jyj_ywxx_8_03/content/3cfd0b4e-3366-456e-b96d-13df0da6c4c5.htm"
+    },
+    {
+     "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+     "url": "../../xxgk_jyj_ywxx_8_03/content/3c872451-e7fe-4b54-9d93-0c9bbd4430a0.htm"
+    },
+    {
+     "title": "转发关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+     "url": "https://cdn.shmeea.edu.cn/page/08000/20260721/20477.html"
+    },
+    {
+     "title": "转发2026年上海市高中阶段学校招生最低投档控制分数线确定",
+     "url": "https://www.shmeea.edu.cn/page/08000/20260714/20442.html"
+    },
+    {
+     "title": "转发上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+     "url": "https://www.shmeea.edu.cn/page/08000/20260714/20439.html"
+    },
+    {
+     "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+     "url": "../../xxgk_jyj_ywxx_8_03/content/b96006d5-88f9-4cd8-a8a6-74635475e752.htm"
+    },
+    {
+     "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+     "url": "../../xxgk_jyj_ywxx_8_03/content/6c8e827e-8729-4db2-950f-40b7b632f058.htm"
+    },
+    {
+     "title": "2026年闵行区高中阶段学校招收区级优秀体育学生、艺术骨干学生资格确认汇总表",
+     "url": "../../xxgk_jyj_ywxx_8_03/content/6fda82e9-8d46-4a03-8d60-2c7fc3f19eeb.htm"
+    },
+    {
+     "title": "2026年闵行区高中学校“校园开放日”信息汇总",
+     "url": "../../xxgk_jyj_ywxx_8_03/content/238cda3a-74e2-4f57-91b7-ac0276de8387.htm"
+    },
+    {
+     "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+     "url": "../../xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm"
+    }
+   ]
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": "3066",
+   "sha256": "",
+   "attempts": "1",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 0,
+   "kw_items": [],
+   "note": "412 anti-crawl shell 3087->3066B size fluctuation (chronic 瑞数 pattern), NON-content"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": "11869",
+   "sha256": "111b14ce6281725f6f6a2746249829597676fb2de4e8a91218f904b5494abd2f",
+   "attempts": "1",
+   "maxdate_20": "20250313",
+   "n2027": "0",
+   "byte_identical_vs_1020": "True",
+   "size_eq": "True",
+   "kw_count": 0,
+   "kw_items": []
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": "36381",
+   "sha256": "0fccb6c1f6caf3d1c3c12a29c29eec5222d0ff2aa72000953e68d7b07009accd",
+   "attempts": "1",
+   "maxdate_20": "20260720",
+   "n2027": "2",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 26,
+   "kw_items": [
+    {
+     "title": "小学招生",
+     "url": "/info/iList.jsp?cat_id=20919"
+    },
+    {
+     "title": "初中招生",
+     "url": "/info/iList.jsp?cat_id=20920"
+    },
+    {
+     "title": "中招信息",
+     "url": "/info/iList.jsp?cat_id=20921"
+    },
+    {
+     "title": "中职招生",
+     "url": "/info/iList.jsp?cat_id=20922"
+    },
+    {
+     "title": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+     "url": "/sx/ggl/708093.htm"
+    },
+    {
+     "title": "2026年上海市高中学校“1至15志愿”统一招生 录取最低分数线（黄浦区）",
+     "url": "/sx/gql/710617.htm"
+    },
+    {
+     "title": "2026年上海市普通高等学校秋季考试招生符合政策性加分考生名单",
+     "url": "/sx/gql/708175.htm"
+    },
+    {
+     "title": "2026年上海市普通高等学校春季考试招生符合政策性加分考生名单",
+     "url": "/sx/gql/701155.htm"
+    },
+    {
+     "title": "转载：2026年上海市普通高校春季考试招生志愿填报将于1月30日9:00开始",
+     "url": "https://www.shmeea.edu.cn/page/02300/20260127/20050.html"
+    },
+    {
+     "title": "转载：2026年上海市普通高校春季考试招生志愿填报及录取问答",
+     "url": "https://www.shmeea.edu.cn/page/02300/20260127/20052.html"
+    },
+    {
+     "title": "转载：上海市教育委员会关于印发《2026年上海市部分普通高校专科层次实行依法自主招生改革试点方案》的通知",
+     "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_04/20260115/0a7286d8a7e2473097a1125ba34a82de.html"
+    },
+    {
+     "title": "转载：上海市教育考试院关于印发《上海市2026年普通高校体育类专业考试招生实施办法》的通知（沪教考院高招〔2025〕40号）",
+     "url": "https://www.shmeea.edu.cn/page/02500/20260105/19985.html"
+    },
+    {
+     "title": "转载：2026年黄浦区初中阶段学校招生入学工作政策问答",
+     "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004002/009002004002003/20260407/deabd078-e634-4823-8c90-8331040977a3.html"
+    },
+    {
+     "title": "转载：2026年黄浦区民办初中招生计划",
+     "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/692aabe6-f260-42a2-b79a-12b99ee20c1c.html"
+    },
+    {
+     "title": "转载：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水平考试的实施细则》的通知",
+     "url": "https://edu.sh.gov.cn/xxgk2_zdgz_jcjy_02/20251031/3a523fcf871d42a79e8e0d49344baf74.html"
+    },
+    {
+     "title": "转载：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+     "url": "https://www.shmeea.edu.cn/page/02100/20251105/19831.html"
+    },
+    {
+     "title": "转载：上海市教育考试院关于做好2025年上海市普通高中学业水平考试报名工作的通知",
+     "url": "/clyw/hyks/688380.htm"
+    },
+    {
+     "title": "转载：上海市教育考试院关于做好2024年上海市普通高中学业水平考试报名工作的通知（沪教考院中招〔2024〕3号）",
+     "url": "https://www.shmeea.edu.cn/page/02100/20240314/18281.html"
+    },
+    {
+     "title": "转载：2024年1月上海市普通高中学业水平合格性考试成绩将于2月1日公布的通知",
+     "url": "https://www.shmeea.edu.cn/page/02100/20240130/18175.html"
+    },
+    {
+     "title": "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+     "url": "https://www.shmeea.edu.cn/page/08000/20260720/20472.html"
+    },
+    {
+     "title": "转载：2026 年上海市高中学校自主招生正式录取学生名单",
+     "url": "https://cdn.shmeea.edu.cn/resource/upload/www/20260717_hs7vj2/yu38wbr4.pdf"
+    },
+    {
+     "title": "转载：2026年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+     "url": "https://www.shmeea.edu.cn/page/08000/20260719/20462.html"
+    },
+    {
+     "title": "转载：上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+     "url": "https://www.shmeea.edu.cn/page/03600/20260714/20438.html"
+    },
+    {
+     "title": "转载：2026年黄浦区小学阶段学校招生入学政策问答",
+     "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004002/009002004002003/20260407/2f4fd696-6307-47bf-aea4-1749daceedc3.html"
+    },
+    {
+     "title": "转载：2026年黄浦区民办学校（小学）招生计划",
+     "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/d776fb1f-db14-4557-86d7-64e681389935.html"
+    },
+    {
+     "title": "2026学年第一学期黄浦区高中阶段学生转学操作细则",
+     "url": "/clyw/hjgl/709826.htm"
+    }
+   ],
+   "note": "Drift 36281->36381B: 公告栏 rotation, NON-中考 (new items = 高考政策性加分名单/小学招生/高中转学细则/学业考转载; known 07-era 中职分数线 item rotated off; newest date string still 20260720; 2x'2027' = 2027高考报名确认 notice)"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": "0",
+   "sha256": "",
+   "attempts": "2",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 0,
+   "kw_items": [],
+   "note": "000 x2 (down since 09-21, day 30), server-side"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "http_code": "404",
+   "bytes": "1107",
+   "sha256": "",
+   "attempts": "1",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 0,
+   "kw_items": [],
+   "note": "404/1107B stable, same as 10-20"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": "14854",
+   "sha256": "cf69f12ab72f61cb7d1e4e97ea515968373666b125692d3a5123947c75133a50",
+   "attempts": "1",
+   "maxdate_20": "20100037",
+   "n2027": "0",
+   "byte_identical_vs_1020": "True",
+   "size_eq": "True",
+   "kw_count": 0,
+   "kw_items": []
+  },
+  {
+   "name": "嘉定",
+   "status": "failed",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "000",
+   "bytes": "0",
+   "sha256": "",
+   "attempts": "2",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 0,
+   "kw_items": [],
+   "note": "000 x2 (9th consecutive day), server-side"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": "31073",
+   "sha256": "0a828b60378b0916db1ad4f486198e5eca40687643b57b28e864a60721fe893a",
+   "attempts": "1",
+   "maxdate_20": "20801029",
+   "n2027": "0",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "True",
+   "kw_count": 0,
+   "kw_items": [],
+   "note": "SIZE MATCH but sha differs -> content drift; Same-size sha-diff (31073B, 3rd consecutive day): jsessionid/randSesion token + date widget only (refetch byte-identical size, content-identical per 10-20 verification), NON-content"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": "159",
+   "sha256": "a30ad35ad5cf30b6bcf2438dc34fbf8b26caaebc31229c5dd599cbff7e5cdf5c",
+   "attempts": "1",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "True",
+   "size_eq": "True",
+   "kw_count": 0,
+   "kw_items": []
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "000",
+   "bytes": "0",
+   "sha256": "",
+   "attempts": "2",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 0,
+   "kw_items": [],
+   "note": "000 x2 (chronic fluctuator: 000 10-19/10-20 continuing), server-side"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": "2097",
+   "sha256": "b5161f78473fcf1857f4ed371cacf9b08dc08c1bc3d00abada9023fd7a2df36f",
+   "attempts": "1",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "True",
+   "size_eq": "True",
+   "kw_count": 0,
+   "kw_items": []
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn",
+   "http_code": "200",
+   "bytes": "20789",
+   "sha256": "bb312e33e700494cb9d25fec5ae00f67f33fc6474bdd3df11185257c898393d5",
+   "attempts": "1",
+   "maxdate_20": "",
+   "n2027": "0",
+   "byte_identical_vs_1020": "True",
+   "size_eq": "True",
+   "kw_count": 0,
+   "kw_items": []
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn",
+   "http_code": "200",
+   "bytes": "22041",
+   "sha256": "21e995260820b473f66c6c0e0594134333f54619fa5ff2d5810dbef05bf124a7",
+   "attempts": "1",
+   "maxdate_20": "20241216",
+   "n2027": "0",
+   "byte_identical_vs_1020": "True",
+   "size_eq": "True",
+   "kw_count": 0,
+   "kw_items": []
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": "15143",
+   "sha256": "c60d039eda93806e44b73f7685e9533dead98cc5e8308784698e194fe52000ce",
+   "attempts": "1",
+   "maxdate_20": "20260227",
+   "n2027": "2",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 15,
+   "kw_items": [
+    {
+     "title": "义务教育招生",
+     "url": "/info/iIndex.jsp?cat_id=16937"
+    },
+    {
+     "title": "中考中招",
+     "url": "/info/iIndex.jsp?cat_id=16938"
+    },
+    {
+     "title": "中考",
+     "url": "/info/iList.jsp?cat_id=16944"
+    },
+    {
+     "title": "中招",
+     "url": "/info/iList.jsp?cat_id=16945"
+    },
+    {
+     "title": "高中学业考",
+     "url": "/info/iList.jsp?cat_id=16949"
+    },
+    {
+     "title": "青浦区教育招生考试服务中心",
+     "url": "/zxgk/496321.htm"
+    },
+    {
+     "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+     "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html"
+    },
+    {
+     "title": "转：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+     "url": "https://www.shmeea.edu.cn/page/02100/20251105/19831.html"
+    },
+    {
+     "title": "转：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水平考试的实施细则》的通知",
+     "url": "https://edu.sh.gov.cn/xxgk2_zdgz_jcjy_02/20251031/3a523fcf871d42a79e8e0d49344baf74.html"
+    },
+    {
+     "title": "转：上海市教育考试院关于做好2025年上海市中等职业学校学业水平考试报名工作的通知（沪教考院中招〔2025〕16号）",
+     "url": "https://www.shmeea.edu.cn/page/21000/20251020/19814.html"
+    },
+    {
+     "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+     "url": "/sx/qkxx/515397.htm"
+    },
+    {
+     "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+     "url": "/zkzq/zk/509555.htm"
+    },
+    {
+     "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+     "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html"
+    },
+    {
+     "title": "中考录取查询",
+     "url": "https://info.qpedu.cn/zhaosheng/"
+    },
+    {
+     "title": "中考成绩查询",
+     "url": ""
+    }
+   ],
+   "note": "Drift 15348->15143B: link rotation, NON-中考 (nav nodes + 学业考转载 in, known 录取查询 link out; newest date string 20260227; 2x'2027' = 2027高考现场确认须知)"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn",
+   "http_code": "200",
+   "bytes": "68307",
+   "sha256": "185fd5fc94bdaecedb5e89be89af38261b134d9293c1f3ed8d2f99c05aa7152a",
+   "attempts": "1",
+   "maxdate_20": "20261014",
+   "n2027": "4",
+   "byte_identical_vs_1020": "False",
+   "size_eq": "False",
+   "kw_count": 0,
+   "kw_items": [],
+   "note": "Drift 67980->68307B: portal news rotation, NON-中考 (newest URL date still 20261014 政务新闻; 0 中考 kw; 4x'2027' = known 人大监督议题+冬季航班 decoys)"
+  }
+ ],
+ "notes": "42nd consecutive no-data day. City 7/7 byte-identical. 11 ok / 5 failed same split as 10-20. All 4 success-side drifts (黄浦+100B/长宁 sha/青浦-205B/崇明+327B) verified NON-中考 rotation; 浦东 412 shell size fluctuation; 静安/嘉定/虹口 000, 杨浦 404 continuing. 0 new items."
+}
