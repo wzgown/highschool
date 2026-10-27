@@ -1,0 +1,102 @@
+{
+ "date": "2026-10-27",
+ "scrape_time": "2026-10-27T08:04:24",
+ "method": "curl",
+ "pages": [
+  {
+   "url": "https://www.shmeea.edu.cn/page/03000/",
+   "http_code": "200",
+   "bytes": 14333,
+   "sha256": "64080bd97913db34d74a020d99474f1f936c4e2b7fc825f552e81bade7c4f806",
+   "attempts": 1,
+   "byte_equal_prev_day": true,
+   "sha_equal": true,
+   "kw_count": 24,
+   "maxdate_20": "20260723",
+   "n2027": "0",
+   "note": "byte+sha identical"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/page/03100/",
+   "http_code": "200",
+   "bytes": 9947,
+   "sha256": "51e8fb4b033add16d2724b42cbf610df8f554508f979fad4e948f5540df11f9b",
+   "attempts": 1,
+   "byte_equal_prev_day": true,
+   "sha_equal": true,
+   "kw_count": 10,
+   "maxdate_20": "20260331",
+   "n2027": "0",
+   "note": "byte+sha identical"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/page/03200/",
+   "http_code": "200",
+   "bytes": 9893,
+   "sha256": "d76b969b06283a4726e06932c600e41e6b9930e2abbd972d6aed196bd6ae74aa",
+   "attempts": 1,
+   "byte_equal_prev_day": true,
+   "sha_equal": true,
+   "kw_count": 11,
+   "maxdate_20": "20260707",
+   "n2027": "0",
+   "note": "byte+sha identical"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/page/03300/",
+   "http_code": "200",
+   "bytes": 8667,
+   "sha256": "821fa2cdf3a1145e9baa6a5aa4a49232b8669066d1808c8ff299e8ad337cdaa9",
+   "attempts": 1,
+   "byte_equal_prev_day": true,
+   "sha_equal": true,
+   "kw_count": 10,
+   "maxdate_20": "20260512",
+   "n2027": "0",
+   "note": "byte+sha identical"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/page/03400/",
+   "http_code": "200",
+   "bytes": 8560,
+   "sha256": "46177eab256b5ffaf7d115ae98e8d6f3ff12e2db66f1d2c7d5c319792fd59c0c",
+   "attempts": 1,
+   "byte_equal_prev_day": true,
+   "sha_equal": true,
+   "kw_count": 10,
+   "maxdate_20": "20260621",
+   "n2027": "0",
+   "note": "byte+sha identical"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/page/03500/",
+   "http_code": "200",
+   "bytes": 8658,
+   "sha256": "534bde759eaa0af161a42d2dda6ea6e380df725e9a5b06ebbe9cef483a2e3d68",
+   "attempts": 1,
+   "byte_equal_prev_day": true,
+   "sha_equal": true,
+   "kw_count": 10,
+   "maxdate_20": "20260710",
+   "n2027": "0",
+   "note": "byte+sha identical"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/page/03600/",
+   "http_code": "200",
+   "bytes": 8809,
+   "sha256": "e6532b5cc4a26c3683bb618575ddc70c937112fc8c4f76730d38cb129c446e56",
+   "attempts": 1,
+   "byte_equal_prev_day": true,
+   "sha_equal": true,
+   "kw_count": 11,
+   "maxdate_20": "20260723",
+   "n2027": "0",
+   "note": "byte+sha identical"
+  }
+ ],
+ "index_edu_reprints_note": "edu.sh.gov.cn reprints unchanged (byte-identical index); all known (最新20260331)",
+ "max_substantive_article_date": "20260721",
+ "new_data": false,
+ "notes": "All 7 pages byte+sha identical to 10-26 baseline; max substantive article date still 20260721; 20260723 strings = known cdn decoys; 0x2027."
+}
