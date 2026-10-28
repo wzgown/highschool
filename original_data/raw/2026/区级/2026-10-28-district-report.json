@@ -1,0 +1,1614 @@
+{
+  "date": "2026-10-28",
+  "scrape_time": "2026-10-28T08:06:30+08:00",
+  "method": "curl",
+  "total_districts": 16,
+  "success_count": 11,
+  "failed_count": 5,
+  "partial_count": 0,
+  "new_data": false,
+  "districts": [
+    {
+      "name": "闵行",
+      "status": "success",
+      "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+      "http_code": "200",
+      "bytes": 33221,
+      "sha256": "3a40388067039f70fbee9b165a761a737940009592ef817e41f4972ff594c816",
+      "attempts": 1,
+      "maxdate_20": "20260721",
+      "n2027": "0",
+      "kw_count": 18,
+      "kw_items": [
+        {
+          "title": "义务教育招生",
+          "url": "../../xxgk_jyj_ywxx_8_02/List/index.htm"
+        },
+        {
+          "title": "高中阶段学校招生",
+          "url": "../../xxgk_jyj_ywxx_8_03/List/index.htm"
+        },
+        {
+          "title": "普通高校招生",
+          "url": "../../xxgk_jyj_ywxx_8_04/List/index.htm"
+        },
+        {
+          "title": "2026年上海市中等学校高中阶段招生（闵行区）",
+          "url": "../../xxgk_jyj_ywxx_8_03/content/3cfd0b4e-3366-456e-b96d-13df0da6c4c5.htm"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（闵行区）",
+          "url": "../../xxgk_jyj_ywxx_8_03/content/3c872451-e7fe-4b54-9d93-0c9bbd4430a0.htm"
+        },
+        {
+          "title": "转发关于2026年上海市8所民办高中降低最低投档控制分数线的公告",
+          "url": "https://cdn.shmeea.edu.cn/page/08000/20260721/20477.html"
+        },
+        {
+          "title": "转发2026年上海市高中阶段学校招生最低投档控制分数线确定",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260714/20442.html"
+        },
+        {
+          "title": "转发上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260714/20439.html"
+        },
+        {
+          "title": "2026年上海市高中阶段学校名额分配综合评价”名额分配到校“招生计划（闵行区）",
+          "url": "../../xxgk_jyj_ywxx_8_03/content/b96006d5-88f9-4cd8-a8a6-74635475e752.htm"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区招生计划（闵行区）",
+          "url": "../../xxgk_jyj_ywxx_8_03/content/6c8e827e-8729-4db2-950f-40b7b632f058.htm"
+        },
+        {
+          "title": "2026年上海市闵行区民办初中 “调剂志愿”录取名单",
+          "url": "../../xxgk_jyj_ywxx_8_02/content/2c1c5545-ded2-420a-bf6b-de062a51478c.htm"
+        },
+        {
+          "title": "2026年上海市闵行区民办小学 “调剂志愿”录取名单",
+          "url": "../../xxgk_jyj_ywxx_8_02/content/9c130014-3e38-42f1-9840-10d575396ac4.htm"
+        },
+        {
+          "title": "2026年闵行区高中阶段学校招收区级优秀体育学生、艺术骨干学生资格确认汇总表",
+          "url": "../../xxgk_jyj_ywxx_8_03/content/6fda82e9-8d46-4a03-8d60-2c7fc3f19eeb.htm"
+        },
+        {
+          "title": "2026年闵行区民办初中电脑随机录取结果公示",
+          "url": "../../xxgk_jyj_ywxx_8_02/content/e1ba47a8-bf6a-4af5-9f3b-928fb8c8684a.htm"
+        },
+        {
+          "title": "2026年闵行区民办小学电脑随机录取结果公示",
+          "url": "../../xxgk_jyj_ywxx_8_02/content/7d7240fc-0473-49b6-873f-a406db0df761.htm"
+        },
+        {
+          "title": "2026年闵行区高中学校“校园开放日”信息汇总",
+          "url": "../../xxgk_jyj_ywxx_8_03/content/238cda3a-74e2-4f57-91b7-ac0276de8387.htm"
+        },
+        {
+          "title": "2026年闵行区中招跨区生报名及后续工作注意事项",
+          "url": "../../xxgk_jyj_ywxx_8_03/content/15f0fda0-74b1-4ee5-a182-04e63fc981f0.htm"
+        },
+        {
+          "title": "2026年民办一贯制学校直升电脑随机录取结果",
+          "url": "../../xxgk_jyj_ywxx_8_02/content/5b124a1f-545d-4aea-9f18-6fd9e87c9c97.htm"
+        }
+      ],
+      "note": "byte+sha identical; items carried forward"
+    },
+    {
+      "name": "浦东",
+      "status": "failed",
+      "url": "https://www.pudong.gov.cn/jyj/",
+      "http_code": "412",
+      "bytes": 3058,
+      "sha256": "ce9ceafcb32e51a444016de33959214d781b71c8a44ab46331d3ba033bcc5231",
+      "attempts": 2,
+      "maxdate_20": "",
+      "n2027": null,
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "failed code=412 (prev 412/3131B) x2 attempts"
+    },
+    {
+      "name": "徐汇",
+      "status": "success",
+      "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+      "http_code": "200",
+      "bytes": 11869,
+      "sha256": "111b14ce6281725f6f6a2746249829597676fb2de4e8a91218f904b5494abd2f",
+      "attempts": 1,
+      "maxdate_20": "20250313",
+      "n2027": "0",
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "byte+sha identical; items carried forward"
+    },
+    {
+      "name": "黄浦",
+      "status": "success",
+      "url": "https://zhaoban.hpe.cn",
+      "http_code": "200",
+      "bytes": 36277,
+      "sha256": "2c8a132cdbb841fd202b295ee3b4d7c07d11f01a77e56245d94a3490bba53927",
+      "attempts": 1,
+      "maxdate_20": "20260720",
+      "n2027": "2",
+      "kw_count": 30,
+      "kw_items": [
+        {
+          "title": "小学招生",
+          "url": "/info/iList.jsp?cat_id=20919"
+        },
+        {
+          "title": "初中招生",
+          "url": "/info/iList.jsp?cat_id=20920"
+        },
+        {
+          "title": "中招信息",
+          "url": "/info/iList.jsp?cat_id=20921"
+        },
+        {
+          "title": "中职招生",
+          "url": "/info/iList.jsp?cat_id=20922"
+        },
+        {
+          "title": "学业考试",
+          "url": "/info/iList.jsp?cat_id=20925"
+        },
+        {
+          "title": "2026年黄浦区中招跨区生领取“志愿填报计划书”日程安排",
+          "url": "/sx/ggl/708093.htm"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生 录取最低分数线（黄浦区）",
+          "url": "/sx/gql/710617.htm"
+        },
+        {
+          "title": "2026年上海市普通高等学校秋季考试招生符合政策性加分考生名单",
+          "url": "/sx/gql/708175.htm"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第二批公示)",
+          "url": "/sx/gql/707304.htm"
+        },
+        {
+          "title": "2026年黄浦区初中毕业升学体育考试申请免考学生名单汇总表(第一批公示)",
+          "url": "/sx/gql/705943.htm"
+        },
+        {
+          "title": "2026年上海市普通高等学校春季考试招生符合政策性加分考生名单",
+          "url": "/sx/gql/701155.htm"
+        },
+        {
+          "title": "转载：2026年上海市普通高校春季考试招生志愿填报将于1月30日9:00开始",
+          "url": "https://www.shmeea.edu.cn/page/02300/20260127/20050.html"
+        },
+        {
+          "title": "转载：2026年上海市普通高校春季考试招生志愿填报及录取问答",
+          "url": "https://www.shmeea.edu.cn/page/02300/20260127/20052.html"
+        },
+        {
+          "title": "转载：上海市教育委员会关于印发《2026年上海市部分普通高校专科层次实行依法自主招生改革试点方案》的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_04/20260115/0a7286d8a7e2473097a1125ba34a82de.html"
+        },
+        {
+          "title": "转载：上海市教育考试院关于印发《上海市2026年普通高校体育类专业考试招生实施办法》的通知（沪教考院高招〔2025〕40号）",
+          "url": "https://www.shmeea.edu.cn/page/02500/20260105/19985.html"
+        },
+        {
+          "title": "转载：2026年黄浦区初中阶段学校招生入学工作政策问答",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004002/009002004002003/20260407/deabd078-e634-4823-8c90-8331040977a3.html"
+        },
+        {
+          "title": "转载：2026年黄浦区民办初中招生计划",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/692aabe6-f260-42a2-b79a-12b99ee20c1c.html"
+        },
+        {
+          "title": "转载：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+          "url": "https://www.shmeea.edu.cn/page/02100/20251105/19831.html"
+        },
+        {
+          "title": "转载：上海市教育考试院关于做好2024年上海市普通高中学业水平考试报名工作的通知（沪教考院中招〔2024〕3号）",
+          "url": "https://www.shmeea.edu.cn/page/02100/20240314/18281.html"
+        },
+        {
+          "title": "转载：2026年上海市高中学校“名额分配到区”“名额分配到校”招生录取最低分数线",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260720/20472.html"
+        },
+        {
+          "title": "转载：2026 年上海市高中学校自主招生正式录取学生名单",
+          "url": "https://cdn.shmeea.edu.cn/resource/upload/www/20260717_hs7vj2/yu38wbr4.pdf"
+        },
+        {
+          "title": "转载：2026年上海市中等职业学校自主招生中本贯通、五年一贯制和中高职贯通各专业最低录取分数线",
+          "url": "https://www.shmeea.edu.cn/page/08000/20260719/20462.html"
+        },
+        {
+          "title": "转载：上海市教育考试院负责人就2026年上海市高中阶段学校招生录取工作答学生问",
+          "url": "https://www.shmeea.edu.cn/page/03600/20260714/20438.html"
+        },
+        {
+          "title": "转载：2026年黄浦区小学阶段学校招生入学政策问答",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004002/009002004002003/20260407/2f4fd696-6307-47bf-aea4-1749daceedc3.html"
+        },
+        {
+          "title": "转载：2026年黄浦区民办学校（小学）招生计划",
+          "url": "https://www.shhuangpu.gov.cn/zw/009002/009002004/009002004004/009002004004003/009002004004003002/20260407/d776fb1f-db14-4557-86d7-64e681389935.html"
+        },
+        {
+          "title": "2026学年第一学期黄浦区义务教育阶段本区户籍学生转学细则（户籍黄浦－小学）",
+          "url": "/clyw/hjgl/709831.htm"
+        },
+        {
+          "title": "2026学年第一学期黄浦区义务教育阶段学生申请转学登记细则（居住黄浦－小学）",
+          "url": "/clyw/hjgl/709830.htm"
+        },
+        {
+          "title": "2026学年第一学期黄浦区义务教育阶段本区户籍学生转学细则（户籍黄浦－初中）",
+          "url": "/clyw/hjgl/709829.htm"
+        },
+        {
+          "title": "2026学年第一学期黄浦区义务教育阶段学生申请转学登记细则（居住黄浦－初中）",
+          "url": "/clyw/hjgl/709827.htm"
+        },
+        {
+          "title": "2026学年第一学期黄浦区高中阶段学生转学操作细则",
+          "url": "/clyw/hjgl/709826.htm"
+        }
+      ],
+      "note": "byte+sha identical; items carried forward"
+    },
+    {
+      "name": "静安",
+      "status": "failed",
+      "url": "https://www.ja.edu.sh.cn/",
+      "http_code": "0",
+      "bytes": 0,
+      "sha256": "",
+      "attempts": 2,
+      "maxdate_20": "",
+      "n2027": null,
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "failed code=0 (prev 000/0B) x2 attempts"
+    },
+    {
+      "name": "杨浦",
+      "status": "failed",
+      "url": "https://www.shyp.gov.cn/shypq/jyj/",
+      "http_code": "404",
+      "bytes": 1107,
+      "sha256": "72fae2a094b72353dac63ac231084ce09814a11b0444941d21fa5b5c0b0881bb",
+      "attempts": 2,
+      "maxdate_20": "",
+      "n2027": null,
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "failed code=404 (prev 404/1107B) x2 attempts"
+    },
+    {
+      "name": "宝山",
+      "status": "success",
+      "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+      "http_code": "200",
+      "bytes": 14854,
+      "sha256": "cf69f12ab72f61cb7d1e4e97ea515968373666b125692d3a5123947c75133a50",
+      "attempts": 1,
+      "maxdate_20": "20100037",
+      "n2027": 0,
+      "kw_count": 38,
+      "kw_items": [
+        {
+          "title": "宝山教育信息网",
+          "url": "/"
+        },
+        {
+          "title": "宝教动态",
+          "url": "http://www.bsedu.org.cn/baoshan/bjdt/index.jhtml"
+        },
+        {
+          "title": "宝教通知",
+          "url": "http://www.bsedu.org.cn/baoshan/bjtz/index.jhtml"
+        },
+        {
+          "title": "调查问卷",
+          "url": "http://www.bsedu.org.cn/baoshan/dcwj.jhtml"
+        },
+        {
+          "title": "招生专栏",
+          "url": "http://www.bsedu.org.cn/baoshan/zszl/index.jhtml"
+        },
+        {
+          "title": "宝教地图",
+          "url": "http://www.bsedu.org.cn/baoshan/map.jhtml"
+        },
+        {
+          "title": "综合工作",
+          "url": "http://www.bsedu.org.cn/baoshan/zhgz/index.jhtml"
+        },
+        {
+          "title": "幼儿园招生",
+          "url": "http://www.bsedu.org.cn/baoshan/yeyzs/index.jhtml"
+        },
+        {
+          "title": "小学招生",
+          "url": "http://www.bsedu.org.cn/baoshan/xxzs/index.jhtml"
+        },
+        {
+          "title": "初中招生",
+          "url": "http://www.bsedu.org.cn/baoshan/czzs/index.jhtml"
+        },
+        {
+          "title": "高中招生",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/index.jhtml"
+        },
+        {
+          "title": "高考招生",
+          "url": "http://www.bsedu.org.cn/baoshan/gkzs/index.jhtml"
+        },
+        {
+          "title": "关于2026年宝山区中考无录取去向考生征求志愿的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145860.jhtml"
+        },
+        {
+          "title": "2026年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145859.jhtml"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145858.jhtml"
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145825.jhtml"
+        },
+        {
+          "title": "2026年上海市初中学业水平考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145810.jhtml"
+        },
+        {
+          "title": "2026年上海市高中名额分配到区、到校招生计划（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145808.jhtml"
+        },
+        {
+          "title": "上海市2026年普通高校招生全国统一考试考点安排",
+          "url": "http://www.bsedu.org.cn/baoshan/gkzs/145785.jhtml"
+        },
+        {
+          "title": "2026年中考跨入宝山区的外区考生的注意事项",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/145761.jhtml"
+        },
+        {
+          "title": "2026年高中学业等级性考试考点安排",
+          "url": "http://www.bsedu.org.cn/baoshan/gkzs/145678.jhtml"
+        },
+        {
+          "title": "2026年春考（外语1考）考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gkzs/145076.jhtml"
+        },
+        {
+          "title": "关于2025年宝山区中考无录取去向考生征求志愿的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144359.jhtml"
+        },
+        {
+          "title": "2025年上海市中职校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144358.jhtml"
+        },
+        {
+          "title": "2025年上海市高中学校“1至15志愿”统一招生录取最低分数线（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144357.jhtml"
+        },
+        {
+          "title": "2025年中考跨入宝山区的外区考生领取招生计划递交档案的通知",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144151.jhtml"
+        },
+        {
+          "title": "2025年上海市高中名额分配到区、到校招生计划（宝山区）",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144140.jhtml"
+        },
+        {
+          "title": "2025年上海市初中学业水平考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/144069.jhtml"
+        },
+        {
+          "title": "2025年上海市普通高校招生文化考试考点安排",
+          "url": "http://www.bsedu.org.cn/baoshan/gkzs/144068.jhtml"
+        },
+        {
+          "title": "2025年中考跨入宝山区的外区考生的注意事项",
+          "url": "http://www.bsedu.org.cn/baoshan/gzzs/143986.jhtml"
+        },
+        {
+          "title": "2025年高中学业等级性考试考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gkzs/143872.jhtml"
+        },
+        {
+          "title": "2025年春考（外语1考）考点安排表",
+          "url": "http://www.bsedu.org.cn/baoshan/gkzs/143123.jhtml"
+        },
+        {
+          "title": "网站主页",
+          "url": "#"
+        },
+        {
+          "title": "设为首页",
+          "url": "javascript:void(0)"
+        },
+        {
+          "title": "加入收藏",
+          "url": "javascript:void(0)"
+        },
+        {
+          "title": "网站介绍",
+          "url": "#"
+        },
+        {
+          "title": "网站声明",
+          "url": "#"
+        },
+        {
+          "title": "网站地图",
+          "url": ""
+        }
+      ],
+      "note": "DRIFT verified non-content: +37B site rotation; re-extraction kw_pairs=14, kw NEW=0 vs 24-item baseline; all 14 raw \"new pairs\" are nav/footer junk (设为首页/加入收藏/春考高考-track sidebar). Page size fluctuates 14817->14854->14843B across fetches (dynamic churn). kw NEW=0 = no 中考 items added. sha bookkept forward.",
+      "new_pairs_sample": [
+        [
+          "宝山教育信息网",
+          "/"
+        ],
+        [
+          "宝教动态",
+          "http://www.bsedu.org.cn/baoshan/bjdt/index.jhtml"
+        ],
+        [
+          "宝教通知",
+          "http://www.bsedu.org.cn/baoshan/bjtz/index.jhtml"
+        ],
+        [
+          "调查问卷",
+          "http://www.bsedu.org.cn/baoshan/dcwj.jhtml"
+        ],
+        [
+          "宝教地图",
+          "http://www.bsedu.org.cn/baoshan/map.jhtml"
+        ],
+        [
+          "综合工作",
+          "http://www.bsedu.org.cn/baoshan/zhgz/index.jhtml"
+        ],
+        [
+          "2026年春考（外语1考）考点安排表",
+          "http://www.bsedu.org.cn/baoshan/gkzs/145076.jhtml"
+        ],
+        [
+          "2025年春考（外语1考）考点安排表",
+          "http://www.bsedu.org.cn/baoshan/gkzs/143123.jhtml"
+        ],
+        [
+          "网站主页",
+          "#"
+        ],
+        [
+          "设为首页",
+          "javascript:void(0)"
+        ],
+        [
+          "加入收藏",
+          "javascript:void(0)"
+        ],
+        [
+          "网站介绍",
+          "#"
+        ],
+        [
+          "网站声明",
+          "#"
+        ],
+        [
+          "网站地图",
+          ""
+        ]
+      ]
+    },
+    {
+      "name": "嘉定",
+      "status": "failed",
+      "url": "https://www.jiading.gov.cn/jiaoyu/",
+      "http_code": "0",
+      "bytes": 0,
+      "sha256": "",
+      "attempts": 2,
+      "maxdate_20": "",
+      "n2027": null,
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "failed code=0 (prev 000/0B) x2 attempts"
+    },
+    {
+      "name": "长宁",
+      "status": "success",
+      "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+      "http_code": "200",
+      "bytes": 31073,
+      "sha256": "2418f1f9b84c1c4df144aa097a853486d4e10bd0b0395a8e7819cbdb803a408f",
+      "attempts": 1,
+      "maxdate_20": "20801029",
+      "n2027": 0,
+      "kw_count": 21,
+      "kw_items": [
+        {
+          "title": "幼儿园招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030102"
+        },
+        {
+          "title": "小学招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030103"
+        },
+        {
+          "title": "初中招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030104"
+        },
+        {
+          "title": "高中招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030105"
+        },
+        {
+          "title": "中职招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030106"
+        },
+        {
+          "title": "初中招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030104"
+        },
+        {
+          "title": "高中招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030105"
+        },
+        {
+          "title": "中职招生",
+          "url": "/info/gateMenu.action?menu.menuCode=030106"
+        },
+        {
+          "title": "[高中招生]",
+          "url": "/info/gateMenu.action?menu.menuCode=030105&from=1"
+        },
+        {
+          "title": "2026年上海市高中学校“1至15志愿”统一招生录取分数线（长宁区）",
+          "url": "javascript:view('2080102692068507649')"
+        },
+        {
+          "title": "[高中招生]",
+          "url": "/info/gateMenu.action?menu.menuCode=030105&from=1"
+        },
+        {
+          "title": "2026年中考投档缺额情况表(长宁区）",
+          "url": "javascript:view('2080102936969162754')"
+        },
+        {
+          "title": "[高中招生]",
+          "url": "/info/gateMenu.action?menu.menuCode=030105&from=1"
+        },
+        {
+          "title": "2026年上海市高中学校“名额分配到区”招生录取最低分数线（长宁区）",
+          "url": "javascript:view('2079087711947980801')"
+        },
+        {
+          "title": "[高中招生]",
+          "url": "/info/gateMenu.action?menu.menuCode=030105&from=1"
+        },
+        {
+          "title": "2026年上海市高中学校“名额分配到校”招生录取最低分数线（长宁区）",
+          "url": "javascript:view('2079087905087299585')"
+        },
+        {
+          "title": "[高中招生]",
+          "url": "/info/gateMenu.action?menu.menuCode=030105&from=1"
+        },
+        {
+          "title": "2026年上海市高中学校“名额分配到校”招生计划表(长宁区)",
+          "url": "javascript:view('2060971634832171009')"
+        },
+        {
+          "title": "[高中招生]",
+          "url": "/info/gateMenu.action?menu.menuCode=030105&from=1"
+        },
+        {
+          "title": "2026年上海市高中学校\"名额分配到区\"招生计划表（长宁区）",
+          "url": "javascript:view('2060972590658945026')"
+        },
+        {
+          "title": "长宁区初中阶段招生入学有哪些方式？",
+          "url": "javascript:view('8ad080f775c0f1130176d02f9f1c41eb')"
+        }
+      ],
+      "note": "byte-equal sha-diff (token churn); items carried forward"
+    },
+    {
+      "name": "普陀",
+      "status": "success",
+      "url": "https://kszx.pte.sh.cn",
+      "http_code": "200",
+      "bytes": 159,
+      "sha256": "a30ad35ad5cf30b6bcf2438dc34fbf8b26caaebc31229c5dd599cbff7e5cdf5c",
+      "attempts": 1,
+      "maxdate_20": "",
+      "n2027": "0",
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "byte+sha identical; items carried forward"
+    },
+    {
+      "name": "虹口",
+      "status": "failed",
+      "url": "https://kszx.hongkouedu.com",
+      "http_code": "0",
+      "bytes": 0,
+      "sha256": "",
+      "attempts": 2,
+      "maxdate_20": "",
+      "n2027": null,
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "failed code=0 (prev 000/0B) x2 attempts"
+    },
+    {
+      "name": "松江",
+      "status": "success",
+      "url": "https://zsb.sjedu.cn",
+      "http_code": "200",
+      "bytes": 2097,
+      "sha256": "b5161f78473fcf1857f4ed371cacf9b08dc08c1bc3d00abada9023fd7a2df36f",
+      "attempts": 1,
+      "maxdate_20": "",
+      "n2027": "0",
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "byte+sha identical; items carried forward"
+    },
+    {
+      "name": "金山",
+      "status": "success",
+      "url": "https://www.jsedu.sh.cn",
+      "http_code": "200",
+      "bytes": 20789,
+      "sha256": "bb312e33e700494cb9d25fec5ae00f67f33fc6474bdd3df11185257c898393d5",
+      "attempts": 1,
+      "maxdate_20": "",
+      "n2027": "0",
+      "kw_count": 0,
+      "kw_items": [],
+      "note": "byte+sha identical; items carried forward"
+    },
+    {
+      "name": "奉贤",
+      "status": "success",
+      "url": "https://zsks.shfxjy.cn",
+      "http_code": "200",
+      "bytes": 19530,
+      "sha256": "16de6753e8b74e5cb51113c668a7bc0300c6448125183072e9d0ef0c9a4b3b6c",
+      "attempts": 1,
+      "maxdate_20": "20261027",
+      "n2027": 6,
+      "kw_count": 53,
+      "kw_items": [
+        {
+          "title": "返回主页|",
+          "url": "/"
+        },
+        {
+          "title": "加入收藏|",
+          "url": "javascript:void(0)"
+        },
+        {
+          "title": "后台登录",
+          "url": "http://www.swzx.shfxjy.cn//manager/index.jsp"
+        },
+        {
+          "title": "新闻动态",
+          "url": "/info/iList.jsp?cat_id=14883"
+        },
+        {
+          "title": "中心概况",
+          "url": "/info/iList.jsp?cat_id=14888"
+        },
+        {
+          "title": "文明在线",
+          "url": "/info/iList.jsp?cat_id=14895"
+        },
+        {
+          "title": "信息公开",
+          "url": "/info/iList.jsp?cat_id=14902"
+        },
+        {
+          "title": "服务预约",
+          "url": "http://fwyy.shfxjy.cn"
+        },
+        {
+          "title": "新闻动态",
+          "url": "/info/iList.jsp?cat_id=14882"
+        },
+        {
+          "title": "更多>>",
+          "url": "/info/iList.jsp?cat_id=14882"
+        },
+        {
+          "title": "2027年奉贤区社会考生高考报名现...",
+          "url": "/xwdt/zxxw/201749.htm"
+        },
+        {
+          "title": "舞动中国绽芳华",
+          "url": "/xwdt/zxxw/201454.htm"
+        },
+        {
+          "title": "自觉践行教育家精神，做新时代好...",
+          "url": "/xwdt/zxxw/201357.htm"
+        },
+        {
+          "title": "认清形势，明确奋斗目标；服务大...",
+          "url": "/xwdt/zxxw/200240.htm"
+        },
+        {
+          "title": "2026年度奉贤区退教协工作推进会...",
+          "url": "/xwdt/zxxw/199828.htm"
+        },
+        {
+          "title": "2027年奉贤区社会考生高考报名现场确认注意事项",
+          "url": "/xwdt/zxxw/201749.htm"
+        },
+        {
+          "title": "舞动中国绽芳华",
+          "url": "/xwdt/zxxw/201454.htm"
+        },
+        {
+          "title": "自觉践行教育家精神，做新时代好教师",
+          "url": "/xwdt/zxxw/201357.htm"
+        },
+        {
+          "title": "认清形势，明确奋斗目标；服务大局，聚力国家发展—...",
+          "url": "/xwdt/zxxw/200240.htm"
+        },
+        {
+          "title": "2026年度奉贤区退教协工作推进会议",
+          "url": "/xwdt/zxxw/199828.htm"
+        },
+        {
+          "title": "区教育事务受理中心七届七次员工大会顺利召开",
+          "url": "/xwdt/zxxw/198923.htm"
+        },
+        {
+          "title": "银龄聚力传文脉共建共享谱新篇",
+          "url": "/xwdt/zxxw/198665.htm"
+        },
+        {
+          "title": "通知公告",
+          "url": "/info/iList.jsp?cat_id=14884"
+        },
+        {
+          "title": "更多>>",
+          "url": "/info/iList.jsp?cat_id=14884"
+        },
+        {
+          "title": "2027年奉贤区社会考生高考报名现场确认注意...",
+          "url": "/xwdt/tzgg/201748.htm"
+        },
+        {
+          "title": "2023年奉贤区教育系统事业单位编外用工(保...",
+          "url": "/xwdt/tzgg/155372.htm"
+        },
+        {
+          "title": "关于领取编外人员招聘考试准考证的通知",
+          "url": "/xwdt/tzgg/124415.htm"
+        },
+        {
+          "title": "2021年度奉贤区教育系统第二批教师招聘公告",
+          "url": "/xwdt/tzgg/122615.htm"
+        },
+        {
+          "title": "2020学年第二学期奉贤区公办幼儿园转学通知",
+          "url": "/xwdt/tzgg/113540.htm"
+        },
+        {
+          "title": "2021年度奉贤区教育系统教师招聘公告",
+          "url": "/xwdt/tzgg/112221.htm"
+        },
+        {
+          "title": "上海市2020年下半年中小学教师资格考试笔试...",
+          "url": "/xwdt/tzgg/106813.htm"
+        },
+        {
+          "title": "工作月报",
+          "url": "/info/iList.jsp?cat_id=14886"
+        },
+        {
+          "title": "更多>>",
+          "url": "/info/iList.jsp?cat_id=14886"
+        },
+        {
+          "title": "2026年10月教育事务受理中心重点工作、主要...",
+          "url": "/xwdt/gzrb/201207.htm"
+        },
+        {
+          "title": "2026年9月教育事务受理中心重点工作、主要...",
+          "url": "/xwdt/gzrb/199752.htm"
+        },
+        {
+          "title": "2026年8月教育事务受理中心重点工作、主要...",
+          "url": "/xwdt/gzrb/199751.htm"
+        },
+        {
+          "title": "2026年7月教育事务受理中心重点工作、主要...",
+          "url": "/xwdt/gzrb/198887.htm"
+        },
+        {
+          "title": "2026年6月教育事务受理中心重点工作、主要...",
+          "url": "/xwdt/gzrb/197663.htm"
+        },
+        {
+          "title": "文化风采",
+          "url": "/info/iList.jsp?cat_id=14885"
+        },
+        {
+          "title": "更多>>",
+          "url": "/info/iList.jsp?cat_id=14885"
+        },
+        {
+          "title": "喜获“二0一五~二0一六年度上海市文明单位...",
+          "url": "/xwdt/whfc/50939.htm"
+        },
+        {
+          "title": "喜获“2016-2016年度奉贤区‘文明行业（窗...",
+          "url": "/xwdt/whfc/50938.htm"
+        },
+        {
+          "title": "喜获“2016-2017年度奉贤区文明窗口”荣誉",
+          "url": "/xwdt/whfc/50937.htm"
+        },
+        {
+          "title": "【清韵讲坛】平凡无小事——书记袁静讲解学...",
+          "url": "/xwdt/whfc/50936.htm"
+        },
+        {
+          "title": "【清韵讲坛】招生考试部部长曹菊花作讲座：...",
+          "url": "/xwdt/whfc/50935.htm"
+        },
+        {
+          "title": "相关政策",
+          "url": "/info/iList.jsp?cat_id=14915"
+        },
+        {
+          "title": "更多>>",
+          "url": "/info/iList.jsp?cat_id=14915"
+        },
+        {
+          "title": "党支部工作手册",
+          "url": "/xxgk/jybwxxgk/xgzc/djbw/72402.htm"
+        },
+        {
+          "title": "2018学年第一学期奉贤区义务教育阶段学校（...",
+          "url": "/xxgk/jybwxxgk/xgzc/hjgl/50934.htm"
+        },
+        {
+          "title": "2018学年第一学期奉贤区义务教育阶段学校（...",
+          "url": "/xxgk/jybwxxgk/xgzc/hjgl/50933.htm"
+        },
+        {
+          "title": "2017学年第二学期奉贤区义务教育阶段学校（...",
+          "url": "/xxgk/jybwxxgk/xgzc/hjgl/50932.htm"
+        },
+        {
+          "title": "2017学年第二学期奉贤区义务教育阶段学校（...",
+          "url": "/xxgk/jybwxxgk/xgzc/hjgl/50931.htm"
+        },
+        {
+          "title": "沪公网安备31012002004247号",
+          "url": "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31012002004247"
+        }
+      ],
+      "note": "FLAP verified non-content: 503 (10-22~27) -> 200/19530B at 08:06 -> 301 redirect to www.swzx.shfxjy.cn by 08:18 (171B shell, byte-stable x2). 08:06 capture contained ZERO 中考 keyword items (only 高考报名/退教协 news; 2027 mentions are 高考-track). Server-side reconfiguration in progress; treat as failed/unstable, no content change.",
+      "new_pairs_sample": [
+        [
+          "返回主页|",
+          "/"
+        ],
+        [
+          "加入收藏|",
+          "javascript:void(0)"
+        ],
+        [
+          "后台登录",
+          "http://www.swzx.shfxjy.cn//manager/index.jsp"
+        ],
+        [
+          "新闻动态",
+          "/info/iList.jsp?cat_id=14883"
+        ],
+        [
+          "中心概况",
+          "/info/iList.jsp?cat_id=14888"
+        ],
+        [
+          "文明在线",
+          "/info/iList.jsp?cat_id=14895"
+        ],
+        [
+          "信息公开",
+          "/info/iList.jsp?cat_id=14902"
+        ],
+        [
+          "服务预约",
+          "http://fwyy.shfxjy.cn"
+        ],
+        [
+          "新闻动态",
+          "/info/iList.jsp?cat_id=14882"
+        ],
+        [
+          "更多>>",
+          "/info/iList.jsp?cat_id=14882"
+        ],
+        [
+          "2027年奉贤区社会考生高考报名现...",
+          "/xwdt/zxxw/201749.htm"
+        ],
+        [
+          "舞动中国绽芳华",
+          "/xwdt/zxxw/201454.htm"
+        ],
+        [
+          "自觉践行教育家精神，做新时代好...",
+          "/xwdt/zxxw/201357.htm"
+        ],
+        [
+          "认清形势，明确奋斗目标；服务大...",
+          "/xwdt/zxxw/200240.htm"
+        ],
+        [
+          "2026年度奉贤区退教协工作推进会...",
+          "/xwdt/zxxw/199828.htm"
+        ],
+        [
+          "2027年奉贤区社会考生高考报名现场确认注意事项",
+          "/xwdt/zxxw/201749.htm"
+        ],
+        [
+          "舞动中国绽芳华",
+          "/xwdt/zxxw/201454.htm"
+        ],
+        [
+          "自觉践行教育家精神，做新时代好教师",
+          "/xwdt/zxxw/201357.htm"
+        ],
+        [
+          "认清形势，明确奋斗目标；服务大局，聚力国家发展—...",
+          "/xwdt/zxxw/200240.htm"
+        ],
+        [
+          "2026年度奉贤区退教协工作推进会议",
+          "/xwdt/zxxw/199828.htm"
+        ],
+        [
+          "区教育事务受理中心七届七次员工大会顺利召开",
+          "/xwdt/zxxw/198923.htm"
+        ],
+        [
+          "银龄聚力传文脉共建共享谱新篇",
+          "/xwdt/zxxw/198665.htm"
+        ],
+        [
+          "通知公告",
+          "/info/iList.jsp?cat_id=14884"
+        ],
+        [
+          "更多>>",
+          "/info/iList.jsp?cat_id=14884"
+        ],
+        [
+          "2027年奉贤区社会考生高考报名现场确认注意...",
+          "/xwdt/tzgg/201748.htm"
+        ]
+      ]
+    },
+    {
+      "name": "青浦",
+      "status": "success",
+      "url": "https://kszx.qpedu.cn",
+      "http_code": "200",
+      "bytes": 15143,
+      "sha256": "c60d039eda93806e44b73f7685e9533dead98cc5e8308784698e194fe52000ce",
+      "attempts": 1,
+      "maxdate_20": "20260227",
+      "n2027": "2",
+      "kw_count": 18,
+      "kw_items": [
+        {
+          "title": "义务教育招生",
+          "url": "/info/iIndex.jsp?cat_id=16937"
+        },
+        {
+          "title": "中考中招",
+          "url": "/info/iIndex.jsp?cat_id=16938"
+        },
+        {
+          "title": "中考",
+          "url": "/info/iList.jsp?cat_id=16944"
+        },
+        {
+          "title": "中招",
+          "url": "/info/iList.jsp?cat_id=16945"
+        },
+        {
+          "title": "录取查询",
+          "url": "/info/iList.jsp?cat_id=16946"
+        },
+        {
+          "title": "学业考",
+          "url": "/info/iIndex.jsp?cat_id=16940"
+        },
+        {
+          "title": "高中学业考",
+          "url": "/info/iList.jsp?cat_id=16949"
+        },
+        {
+          "title": "中职学业考",
+          "url": "/info/iList.jsp?cat_id=16950"
+        },
+        {
+          "title": "青浦区教育招生考试服务中心",
+          "url": "/zxgk/496321.htm"
+        },
+        {
+          "title": "转：上海市教育委员会关于2026年上海市高中阶段学校招生工作的若干意见",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_rxgkyzs_03/20260227/923fcd6838744ca59c213daa3fb180fd.html"
+        },
+        {
+          "title": "转：上海市教育考试院关于做好2026年1月上海市普通高中学业水平合格性考试报名工作的通知（沪教考院中招〔2025〕17号）",
+          "url": "https://www.shmeea.edu.cn/page/02100/20251105/19831.html"
+        },
+        {
+          "title": "转：上海市教育委员会关于转发《上海市教育考试院关于2026年上海市普通高中学业水平考试的实施细则》的通知",
+          "url": "https://edu.sh.gov.cn/xxgk2_zdgz_jcjy_02/20251031/3a523fcf871d42a79e8e0d49344baf74.html"
+        },
+        {
+          "title": "转：上海市教育考试院关于做好2025年上海市中等职业学校学业水平考试报名工作的通知（沪教考院中招〔2025〕16号）",
+          "url": "https://www.shmeea.edu.cn/page/21000/20251020/19814.html"
+        },
+        {
+          "title": "2026年青浦区中考“跨区（跨入）考生” 考后相关事宜注意事项",
+          "url": "/sx/qkxx/515397.htm"
+        },
+        {
+          "title": "2026年青浦区往届生、返沪生中考报名现场确认须知",
+          "url": "/zkzq/zk/509555.htm"
+        },
+        {
+          "title": "转：关于《2026年上海中考中招指南（报名篇、考试篇、信息篇）》一书发行的通知",
+          "url": "https://www.shmeea.edu.cn/page/03300/20251229/19965.html"
+        },
+        {
+          "title": "中考录取查询",
+          "url": "https://info.qpedu.cn/zhaosheng/"
+        },
+        {
+          "title": "中考成绩查询",
+          "url": ""
+        }
+      ],
+      "note": "byte+sha identical; items carried forward"
+    },
+    {
+      "name": "崇明",
+      "status": "success",
+      "url": "https://www.shcm.gov.cn",
+      "http_code": "200",
+      "bytes": 67513,
+      "sha256": "20d1b25db04a399d428f2993c82288b68bf0849ebade17475673ffdea64ab6d7",
+      "attempts": 1,
+      "maxdate_20": "20261021",
+      "n2027": 0,
+      "kw_count": 99,
+      "kw_items": [
+        {
+          "title": "否（30s）",
+          "url": "javascript:;"
+        },
+        {
+          "title": "无障碍",
+          "url": "javascript:toolbar.Function.show.mainMethod()"
+        },
+        {
+          "title": "无障碍",
+          "url": "javascript:;"
+        },
+        {
+          "title": "无障碍",
+          "url": "javascript:;"
+        },
+        {
+          "title": "关怀版",
+          "url": "javascript:void(0)"
+        },
+        {
+          "title": "长者版",
+          "url": "/elder/specialArea.html"
+        },
+        {
+          "title": "智能问答",
+          "url": "/zcsearch/webrobot.html#ask/query="
+        },
+        {
+          "title": "上海市崇明区信易贷综合服务平台",
+          "url": "http://xyy.shcm.gov.cn/cmxyd/index"
+        },
+        {
+          "title": "影响营商环境建设问题线索征集",
+          "url": "https://tousu.www.gov.cn/dc/2024yxyshjjs/index.htm"
+        },
+        {
+          "title": "关于2023年度国务院推动高质量发展综合督查征集问题线索的公告",
+          "url": "https://tousu.www.gov.cn/dc/2023zhdc/index.htm"
+        },
+        {
+          "title": "上海市第五次全国经济普查单位清查告知书",
+          "url": "/fzlm/017003/20230815/1c01f0c7-4bee-4964-a37f-d2da4e26d7ea.html"
+        },
+        {
+          "title": "政务服务",
+          "url": "http://zwdt.sh.gov.cn/govPortals/region/SH00CM"
+        },
+        {
+          "title": "政务公开",
+          "url": "/govxxgk/xxgk.html"
+        },
+        {
+          "title": "政民互动",
+          "url": "/zmhd/interaction.html"
+        },
+        {
+          "title": "新闻中心",
+          "url": "/xwzx/news.html"
+        },
+        {
+          "title": "走进崇明",
+          "url": "/zjcm/entercm.html"
+        },
+        {
+          "title": "我要约",
+          "url": "javascript:;"
+        },
+        {
+          "title": "我要预约",
+          "url": "http://yue.sh.gov.cn/pc/location.html"
+        },
+        {
+          "title": "预约记录",
+          "url": "http://yue.sh.gov.cn/pc/recording.html"
+        },
+        {
+          "title": "排队情况",
+          "url": "http://zwdt.sh.gov.cn/zwdtSW/zwdt/yyxb/scene.jsp"
+        },
+        {
+          "title": "我要办",
+          "url": "javascript:;"
+        },
+        {
+          "title": "个人办事",
+          "url": "http://zwdt.sh.gov.cn/govPortals/naturalPerson/group"
+        },
+        {
+          "title": "法人办事",
+          "url": "http://zwdt.sh.gov.cn/govPortals/legalPerson/group"
+        },
+        {
+          "title": "我要查",
+          "url": "javascript:;"
+        },
+        {
+          "title": "查进度",
+          "url": "http://zwdt.sh.gov.cn/zwdtSW/applySearch/applySearch.html"
+        },
+        {
+          "title": "查物流",
+          "url": "http://zwdt.sh.gov.cn/govPortals/logistics/index.jsp"
+        },
+        {
+          "title": "查支付",
+          "url": "https://ggzf.sh.gov.cn/UnifiedPayWebFront/query/queryPrePayService.xhtml"
+        },
+        {
+          "title": "我要评",
+          "url": "javascript:;"
+        },
+        {
+          "title": "好差评",
+          "url": "http://zwdt.sh.gov.cn/govPortals/appr/apprIndex"
+        },
+        {
+          "title": "我要找茬",
+          "url": "https://zwdtuser.sh.gov.cn/uc/naturalUser/jump.do?redirect_uri=https://zwdt.sh.gov.cn/zwdtSW/zwdtSW/zhaocha32/zhaocha.jsp"
+        },
+        {
+          "title": "崇明区2025年度政府网站工作年度报表2026-01-23",
+          "url": "/xwzx/002008/20260123/f11158d9-0cee-44a8-a678-146ebcbca319.html"
+        },
+        {
+          "title": "上海市崇明区政府网站2026年第三季度检查情况报告2026-10-19",
+          "url": "/xwzx/002008/20261019/c4db445a-b1be-43fb-9d2e-fc9b4b10f51d.html"
+        },
+        {
+          "title": "沪2026年部分事业单位公开招聘（第二批）下周一起报名（附政策问...2026-10-16",
+          "url": "/xwzx/002008/20261016/5e3ef707-3802-4027-b70a-c91cc410e3bd.html"
+        },
+        {
+          "title": "关于发布《2026年度上海市旅游发展专项资金申报指南》的通知2026-10-15",
+          "url": "/xwzx/002008/20261015/a3b4f569-ce2b-40a8-a4e5-c179b1157c2c.html"
+        },
+        {
+          "title": "政策文件",
+          "url": "/goverList.html?categorynum=014"
+        },
+        {
+          "title": "公开指南",
+          "url": "/goverDetail.html?deptcode=&categorynum=004"
+        },
+        {
+          "title": "公开制度",
+          "url": "/goverList.html?categorynum=006"
+        },
+        {
+          "title": "政府公报",
+          "url": "/goverList.html?deptcode=&categorynum=018006"
+        },
+        {
+          "title": "公开内容",
+          "url": "/003/003013/goverPublic.html?deptcode=004&categorynum=009"
+        },
+        {
+          "title": "公开年报",
+          "url": "/goverList.html?categorynum=007"
+        },
+        {
+          "title": "依申请公开",
+          "url": "/goverApply.html?categorynum=010001"
+        },
+        {
+          "title": "上海市崇明区市场监督管理局公告（一）2026-10-27",
+          "url": "/govxxgk/qscjgj/2026-10-27/4bb20de0-b923-4f3d-a3be-ab859e218f28.html"
+        },
+        {
+          "title": "崇明统计月报2026092026-10-27",
+          "url": "/govxxgk/qtjj/2026-10-27/e517a178-a0fb-4e19-afa7-191d33e54e90.html"
+        },
+        {
+          "title": "2026年10月上海市崇明区新海镇社会救助情况2026-10-27",
+          "url": "/govxxgk/xinhz/2026-10-27/2f23f53d-36da-470e-991f-bc464e7434a5.html"
+        },
+        {
+          "title": "1020区领导调研轨交22号线站点建设情况今天（10月20日）下午，区委书记李峻在调研轨交22号线（崇明线）东滩站、陈家镇站建设情况时强调，要深入贯彻落实习近平总书记考察上海重要讲话精神，坚持以人民为中心的发展思想，高标准推进轨道交通站点周边配套建设，为世界级生态岛建设提供有力支撑。在轨交22号线（崇明线）东滩站，李峻详细了解产城融...",
+          "url": "/xwzx/002001/20261020/b467ccc1-a1fd-4100-a9db-390c9beb2c5b.html"
+        },
+        {
+          "title": "1020区委中心组学习会举行区委中心组今天（10月20日）上午举行扩大学习会，邀请市委讲师团成员、复旦大学教授桑玉成作《深入学习贯彻习近平总书记全过程人民民主重大理念，坚持好、完善好、运行好人民代表大会制度》专题辅导报告。区委书记李峻主持会议并讲话。会上，桑玉成围绕党的十八大以来推进国家治理体系和治理能力现代化这条主线...",
+          "url": "/xwzx/002001/20261020/d44b53ba-d017-4915-81cc-daa4f2b6a6c6.html"
+        },
+        {
+          "title": "1016区领导开展重阳节慰问活动金秋送暖，丹桂飘香。九九重阳节到来之际，连日来，区委书记李峻、区人大常委会主任薛红、区委副书记黄晓霞等区四套班子领导分赴各乡镇开展走访慰问活动，看望辖区百岁老人，实地调研养老服务机构与站点，代表区四套班子向全区广大老年朋友送上节日的美好祝福与诚挚问候，向长期奋战在老龄工作一线的全体从业者，以及一...",
+          "url": "/xwzx/002001/20261016/8383cbdf-c37f-48b9-a936-ebc35ec68d0f.html"
+        },
+        {
+          "title": "1015崇明区工商业联合会（总商会）第三次代表大会举行上海市崇明区工商业联合会（总商会）第三次代表大会今天（10月15日）下午举行。市委统战部副部长、市工商联党组书记张峰，区委书记李峻出席大会并讲话。张峰代表市委统战部、市工商联向大会的召开表示热烈祝贺，对崇明区工商联（总商会）五年来的成绩给予充分肯定。他指出，要强化思想政治引领，深入学习贯彻党...",
+          "url": "/xwzx/002001/20261015/cf13eb79-30cf-4fce-a704-edee72f9844c.html"
+        },
+        {
+          "title": "10092026年环崇明岛国际自盟女子公路世界巡回赛开赛2026年环崇明岛国际自盟女子公路世界巡回赛今天（10月9日）在崇明新城公园鸣笛开赛。市政府副秘书长周亚明，区委副书记、区长吕晨飞，市体育局副局长许琦，亚洲自行车运动联合会公路委员会主席、中国自行车运动协会副秘书长韩峰出席开赛式并共同开赛。区领导沙成禹主持开赛式。吕晨飞在致辞中代表崇明区委、...",
+          "url": "/xwzx/002001/20261009/48422b90-ceda-458e-80fa-80b2e1fad04f.html"
+        },
+        {
+          "title": "\"target=\"_blank\"class=\"rewb-more\"data-more=\"1\"labeltip=\"查看更多按钮，点击回车键可跳转至要闻动态栏目页\">查看更多>",
+          "url": "/xwzx/002001/newSec.html"
+        },
+        {
+          "title": "\"target=\"_blank\"class=\"rewb-more\"data-more=\"2\"labeltip=\"查看更多按钮，点击回车键可跳转至国务院信息栏目页\">查看更多>",
+          "url": "http://www.gov.cn/index.htm"
+        },
+        {
+          "title": "\"target=\"_blank\"class=\"rewb-more\"data-more=\"3\"labeltip=\"查看更多按钮，点击回车键可跳转至综合信息栏目页\">查看更多>",
+          "url": "/xwzx/002003/newSec.html"
+        },
+        {
+          "title": "区领导调研轨交22号线站点建设情况今天（10月20日）下午，区委书记李峻在调研轨交22号线（崇明线）东滩站、陈家镇站建设情况时强调，要深入贯彻落实习近平总书记考察上海重要讲话精神，坚持以人民为中心的发展思想，高标准推进轨道交通站点周边配套建设，为世界级生态岛建设提供有力支撑。在轨交22号线（崇明线）东滩站，李峻详细了解产城融...",
+          "url": "/xwzx/002001/20261020/b467ccc1-a1fd-4100-a9db-390c9beb2c5b.html"
+        },
+        {
+          "title": "区委中心组学习会举行2026-10-20",
+          "url": "/xwzx/002001/20261020/d44b53ba-d017-4915-81cc-daa4f2b6a6c6.html"
+        },
+        {
+          "title": "区委常委会召开会议，传达学习习近平总书记重要讲话、重要文章精神和市委有关会议精神2026-10-16",
+          "url": "/xwzx/002001/20261016/f687e355-d136-4d2e-ae33-99906679624e.html"
+        },
+        {
+          "title": "区领导开展重阳节慰问活动2026-10-16",
+          "url": "/xwzx/002001/20261016/8383cbdf-c37f-48b9-a936-ebc35ec68d0f.html"
+        },
+        {
+          "title": "全岛皆景四季可游！崇明全域旅游高质量发展迈上新台阶2026-10-15",
+          "url": "/xwzx/002001/20261015/3b126a62-67c7-4c8d-a9f0-750547f85a3b.html"
+        },
+        {
+          "title": "崇明区工商业联合会（总商会）第三次代表大会举行2026-10-15",
+          "url": "/xwzx/002001/20261015/cf13eb79-30cf-4fce-a704-edee72f9844c.html"
+        },
+        {
+          "title": "筑牢地下“安全屏障”，蒙电入沪过江隧道项目有序推进作为国家“十五五”重点能源基建项目，内蒙古库布齐沙漠基地送电上海受端配套过江工程于7月底在崇明正式开工。近日，记者从国网上海市电力公司工程建设咨询分公司了解到，过江工程始发井项目正在有序推进中，目前正在开展槽壁土体加固作业，为后续成槽施工、井体建设筑牢坚实的地下安全根基，全力保障项目高质量推进。...",
+          "url": "/xwzx/002003/20261019/b26cfb98-97e5-44ac-b841-e7d55637f6bf.html"
+        },
+        {
+          "title": "崇明这场太极拳赛事，解锁“体育消费+乡镇商圈”新模式2026-10-19",
+          "url": "/xwzx/002003/20261019/68047206-99cd-4bf7-803a-b73d9cfc4766.html"
+        },
+        {
+          "title": "康码蛋白营养液亮相第26届工博会，“崇明智造”农业科技走向全国2026-10-16",
+          "url": "/xwzx/002003/20261016/1b196d9c-7ee3-4a50-8b62-6ba4f187f017.html"
+        },
+        {
+          "title": "崇明区少先队纪念中国少年先锋队建队77周年主题活动举办2026-10-13",
+          "url": "/xwzx/002003/20261013/8e45ae04-3141-497f-92cc-3deb92d5fbc1.html"
+        },
+        {
+          "title": "崇明全区推广“瀛即办”基金，高效处置群众身边“烦心小事”2026-10-08",
+          "url": "/xwzx/002003/20261008/03967e2d-2e99-43d9-8b03-8e218fe6736d.html"
+        },
+        {
+          "title": "国庆出行开启！崇明交警全力守护进出岛通道2026-09-30",
+          "url": "/xwzx/002003/20260930/bc805b7c-30e7-4562-b46f-bfdbea27153d.html"
+        },
+        {
+          "title": "崇明概况",
+          "url": "/zjcm/006001/enterto.html"
+        },
+        {
+          "title": "上海市崇明区由崇明、长兴、横沙三岛组成，三岛陆域总面积1413平方公里。三面环江，一面临海，西接长江，东濒东海，南与浦东新区、宝山区及江苏省太仓市隔水相望，北与江苏省海门市、启东市一衣带水。地处北亚热带，气候温和湿润，年平均气温16.5℃，日照充足，雨水充沛，四季分明。全域水土洁净，空气清新，生态环境优良。",
+          "url": "/zjcm/006001/enterto.html"
+        },
+        {
+          "title": "生态建设",
+          "url": "/zjcm/006002/enterecological.html"
+        },
+        {
+          "title": "经济发展",
+          "url": "/zjcm/006003/entereconomy.html"
+        },
+        {
+          "title": "社会事业",
+          "url": "/zjcm/006004/entersociety.html"
+        },
+        {
+          "title": "城市建设",
+          "url": "/zjcm/006005/entercity.html"
+        },
+        {
+          "title": "查看更多",
+          "url": "/zjcm/entercm.html"
+        },
+        {
+          "title": "区党政领导2026年10月22日（周四）接待来访群众公示2026-10-21",
+          "url": "/zmhd/004012/20261021/c0439eec-7eb0-4370-85cb-b35c8eb0dbf9.html"
+        },
+        {
+          "title": "区党政领导2026年10月15日（周四）接待来访群众公示2026-10-14",
+          "url": "/zmhd/004012/20261014/d277e592-c811-4393-8d7e-daa83dc2b765.html"
+        },
+        {
+          "title": "区党政领导2026年10月8日（周四）接待来访群众公示2026-10-07",
+          "url": "/zmhd/004012/20261007/bfb2970d-36c2-42fb-b7ca-5c06289587ea.html"
+        },
+        {
+          "title": "区党政领导2026年9月24日（周四）接待来访群众公示2026-09-23",
+          "url": "/zmhd/004012/20260923/f9f3be80-dfe9-47c9-8078-f7c3c5a89782.html"
+        },
+        {
+          "title": "区党政领导2026年9月17日（周四）接待来访群众公示2026-09-16",
+          "url": "/zmhd/004012/20260916/c85dd2b7-0b4a-4690-bdc7-2b8062c3b483.html"
+        },
+        {
+          "title": "人民建议",
+          "url": "/ztzl/009010/index.html"
+        },
+        {
+          "title": "区委领导信箱",
+          "url": "https://qxf.sh.gov.cn/310230/party.getAreaPartyList.do"
+        },
+        {
+          "title": "12345",
+          "url": "http://www.sh12345.gov.cn/"
+        },
+        {
+          "title": "在线访谈",
+          "url": "/interonline.html"
+        },
+        {
+          "title": "查看更多",
+          "url": "/zmhd/interaction.html"
+        },
+        {
+          "title": "上海市生态环境保护例行督察专题时间:",
+          "url": "https://shcm.gov.cn/ztzl/009021/index.html"
+        },
+        {
+          "title": "重要政策举措及实施效果专题时间:2023.07.31-至今",
+          "url": "https://www.gov.cn/zhengce/zczhjd/"
+        },
+        {
+          "title": "惠企政策专题时间:2023.06.30-至今",
+          "url": "https://shcm.gov.cn/ztzl/009013/index.html"
+        },
+        {
+          "title": "数字政府建设专题时间:2023.06.30-至今",
+          "url": "https://shcm.gov.cn/ztzl/009014/index.html"
+        },
+        {
+          "title": "崇明区人民建议征集专题时间:2021.05.28-至今",
+          "url": "/ztzl/009010/index.html"
+        },
+        {
+          "title": "公益广告专题时间:2020.02.27-至今",
+          "url": "https://www.shcm.gov.cn/ztzl/009012/009012001/publicadvertising.html"
+        },
+        {
+          "title": "信用崇明专题时间:2020.08.06-至今",
+          "url": "/ztzl/009005/index.html"
+        },
+        {
+          "title": "创建全国禁毒城市专题时间:2024.10.14-至今",
+          "url": "https://www.shcm.gov.cn/ztzl/009017/forbid_poison.html"
+        },
+        {
+          "title": "网站年报专题时间:2020.02.14-至今",
+          "url": "https://www.shcm.gov.cn/003/003009/specialListSec.html"
+        },
+        {
+          "title": "查看更多",
+          "url": "/ztzl/009001/specialColumn.html"
+        },
+        {
+          "title": "政务服务",
+          "url": "http://zwdt.sh.gov.cn/govPortals/region/SH00CM"
+        },
+        {
+          "title": "政务公开",
+          "url": "/govxxgk/xxgk.html"
+        },
+        {
+          "title": "新闻中心",
+          "url": "/xwzx/news.html"
+        },
+        {
+          "title": "政民互动",
+          "url": "/zmhd/interaction.html"
+        },
+        {
+          "title": "走进崇明",
+          "url": "/zjcm/entercm.html"
+        },
+        {
+          "title": "{{order}}{{title}}{{date}}",
+          "url": "{{href}}"
+        },
+        {
+          "title": "{{title}}{{pubDate}}",
+          "url": "{{link}}"
+        },
+        {
+          "title": "{{word}}",
+          "url": "/zcsearch/mhsearch.html#search/query={{endcordeword}}"
+        }
+      ],
+      "note": "DRIFT verified non-content: -228B portal news rotation; kw_pairs=0, raw 中考/中招/名额分配 count = 0; max URL-date token 20261021 (= known pre-failure date, unchanged). all 99 raw \"new pairs\" are generic gov-portal chrome (无障碍/长者版/政务服务). Baseline kw_items was empty -> set-diff artifact only. sha bookkept forward.",
+      "new_pairs_sample": [
+        [
+          "否（30s）",
+          "javascript:;"
+        ],
+        [
+          "无障碍",
+          "javascript:toolbar.Function.show.mainMethod()"
+        ],
+        [
+          "无障碍",
+          "javascript:;"
+        ],
+        [
+          "无障碍",
+          "javascript:;"
+        ],
+        [
+          "关怀版",
+          "javascript:void(0)"
+        ],
+        [
+          "长者版",
+          "/elder/specialArea.html"
+        ],
+        [
+          "智能问答",
+          "/zcsearch/webrobot.html#ask/query="
+        ],
+        [
+          "上海市崇明区信易贷综合服务平台",
+          "http://xyy.shcm.gov.cn/cmxyd/index"
+        ],
+        [
+          "影响营商环境建设问题线索征集",
+          "https://tousu.www.gov.cn/dc/2024yxyshjjs/index.htm"
+        ],
+        [
+          "关于2023年度国务院推动高质量发展综合督查征集问题线索的公告",
+          "https://tousu.www.gov.cn/dc/2023zhdc/index.htm"
+        ],
+        [
+          "上海市第五次全国经济普查单位清查告知书",
+          "/fzlm/017003/20230815/1c01f0c7-4bee-4964-a37f-d2da4e26d7ea.html"
+        ],
+        [
+          "政务服务",
+          "http://zwdt.sh.gov.cn/govPortals/region/SH00CM"
+        ],
+        [
+          "政务公开",
+          "/govxxgk/xxgk.html"
+        ],
+        [
+          "政民互动",
+          "/zmhd/interaction.html"
+        ],
+        [
+          "新闻中心",
+          "/xwzx/news.html"
+        ],
+        [
+          "走进崇明",
+          "/zjcm/entercm.html"
+        ],
+        [
+          "我要约",
+          "javascript:;"
+        ],
+        [
+          "我要预约",
+          "http://yue.sh.gov.cn/pc/location.html"
+        ],
+        [
+          "预约记录",
+          "http://yue.sh.gov.cn/pc/recording.html"
+        ],
+        [
+          "排队情况",
+          "http://zwdt.sh.gov.cn/zwdtSW/zwdt/yyxb/scene.jsp"
+        ],
+        [
+          "我要办",
+          "javascript:;"
+        ],
+        [
+          "个人办事",
+          "http://zwdt.sh.gov.cn/govPortals/naturalPerson/group"
+        ],
+        [
+          "法人办事",
+          "http://zwdt.sh.gov.cn/govPortals/legalPerson/group"
+        ],
+        [
+          "我要查",
+          "javascript:;"
+        ],
+        [
+          "查进度",
+          "http://zwdt.sh.gov.cn/zwdtSW/applySearch/applySearch.html"
+        ]
+      ]
+    }
+  ],
+  "notes": "Day 49 consecutive no-data day (off-season). City 7/7 pages byte+sha identical to 10-27 (max article date 20260721, unchanged). Districts 11 ok / 5 failed (浦东412, 静安000 day37, 杨浦404, 嘉定000 day3-of-regression, 虹口000). 3 drifts verified NON-CONTENT: 宝山 +37B rotation (kw NEW=0), 崇明 -228B portal chrome (中考 raw count 0, maxdate 20261021 unchanged), 奉贤 flap 503->200->301->www.swzx.shfxjy.cn (zero 中考 items in 200 capture; server reconfig). 长宁 byte-equal sha-diff day 10 (jsessionid token churn). 零中考新增, zero 2027-cycle signals."
+}
