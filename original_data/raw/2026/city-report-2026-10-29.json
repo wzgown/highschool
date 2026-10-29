@@ -1,0 +1,81 @@
+{
+ "date": "2026-10-29",
+ "scrape_time": "2026-10-29T08:00+08:00",
+ "method": "curl",
+ "pages": [
+  {
+   "page": "03000",
+   "url": "https://www.shmeea.edu.cn/page/03000/",
+   "http_code": "200",
+   "bytes": 14333,
+   "sha256": "64080bd97913db34d74a020d99474f1f936c4e2b7fc825f552e81bade7c4f806",
+   "maxdate_20": "20260723",
+   "n2027": 0,
+   "drift": "identical"
+  },
+  {
+   "page": "03100",
+   "url": "https://www.shmeea.edu.cn/page/03100/",
+   "http_code": "200",
+   "bytes": 9947,
+   "sha256": "51e8fb4b033add16d2724b42cbf610df8f554508f979fad4e948f5540df11f9b",
+   "maxdate_20": "20260331",
+   "n2027": 0,
+   "drift": "identical"
+  },
+  {
+   "page": "03200",
+   "url": "https://www.shmeea.edu.cn/page/03200/",
+   "http_code": "200",
+   "bytes": 9893,
+   "sha256": "d76b969b06283a4726e06932c600e41e6b9930e2abbd972d6aed196bd6ae74aa",
+   "maxdate_20": "20260707",
+   "n2027": 0,
+   "drift": "identical"
+  },
+  {
+   "page": "03300",
+   "url": "https://www.shmeea.edu.cn/page/03300/",
+   "http_code": "200",
+   "bytes": 8667,
+   "sha256": "821fa2cdf3a1145e9baa6a5aa4a49232b8669066d1808c8ff299e8ad337cdaa9",
+   "maxdate_20": "20260512",
+   "n2027": 0,
+   "drift": "identical"
+  },
+  {
+   "page": "03400",
+   "url": "https://www.shmeea.edu.cn/page/03400/",
+   "http_code": "200",
+   "bytes": 8560,
+   "sha256": "46177eab256b5ffaf7d115ae98e8d6f3ff12e2db66f1d2c7d5c319792fd59c0c",
+   "maxdate_20": "20260621",
+   "n2027": 0,
+   "drift": "identical"
+  },
+  {
+   "page": "03500",
+   "url": "https://www.shmeea.edu.cn/page/03500/",
+   "http_code": "200",
+   "bytes": 8658,
+   "sha256": "534bde759eaa0af161a42d2dda6ea6e380df725e9a5b06ebbe9cef483a2e3d68",
+   "maxdate_20": "20260710",
+   "n2027": 0,
+   "drift": "identical"
+  },
+  {
+   "page": "03600",
+   "url": "https://www.shmeea.edu.cn/page/03600/",
+   "http_code": "200",
+   "bytes": 8809,
+   "sha256": "e6532b5cc4a26c3683bb618575ddc70c937112fc8c4f76730d38cb129c446e56",
+   "maxdate_20": "20260723",
+   "n2027": 0,
+   "drift": "identical"
+  }
+ ],
+ "index_edu_reprints_note": "4 edu.sh.gov.cn reprints unchanged (最新20260331), all known",
+ "max_substantive_article_date": "20260721",
+ "new_data": false,
+ "notes": "All 7 pages byte+sha identical to 10-28 baseline (14333/9947/9893/8667/8560/8658/8809). max substantive still 20260721; 20260723 strings = known cdn 余额公布 decoy (index) + known 07-23 录取查询 (03600). 0×2027. 50th consecutive no-data day."
+}

@@ -1,0 +1,244 @@
+{
+ "city_pages": [
+  {
+   "page": "03000",
+   "url": "https://www.shmeea.edu.cn/page/03000/",
+   "http_code": "200",
+   "bytes": 14333,
+   "sha256": "64080bd97913db34d74a020d99474f1f936c4e2b7fc825f552e81bade7c4f806",
+   "maxdate_20": "20260723",
+   "n2027": 0,
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "page": "03100",
+   "url": "https://www.shmeea.edu.cn/page/03100/",
+   "http_code": "200",
+   "bytes": 9947,
+   "sha256": "51e8fb4b033add16d2724b42cbf610df8f554508f979fad4e948f5540df11f9b",
+   "maxdate_20": "20260331",
+   "n2027": 0,
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "page": "03200",
+   "url": "https://www.shmeea.edu.cn/page/03200/",
+   "http_code": "200",
+   "bytes": 9893,
+   "sha256": "d76b969b06283a4726e06932c600e41e6b9930e2abbd972d6aed196bd6ae74aa",
+   "maxdate_20": "20260707",
+   "n2027": 0,
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "page": "03300",
+   "url": "https://www.shmeea.edu.cn/page/03300/",
+   "http_code": "200",
+   "bytes": 8667,
+   "sha256": "821fa2cdf3a1145e9baa6a5aa4a49232b8669066d1808c8ff299e8ad337cdaa9",
+   "maxdate_20": "20260512",
+   "n2027": 0,
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "page": "03400",
+   "url": "https://www.shmeea.edu.cn/page/03400/",
+   "http_code": "200",
+   "bytes": 8560,
+   "sha256": "46177eab256b5ffaf7d115ae98e8d6f3ff12e2db66f1d2c7d5c319792fd59c0c",
+   "maxdate_20": "20260621",
+   "n2027": 0,
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "page": "03500",
+   "url": "https://www.shmeea.edu.cn/page/03500/",
+   "http_code": "200",
+   "bytes": 8658,
+   "sha256": "534bde759eaa0af161a42d2dda6ea6e380df725e9a5b06ebbe9cef483a2e3d68",
+   "maxdate_20": "20260710",
+   "n2027": 0,
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "page": "03600",
+   "url": "https://www.shmeea.edu.cn/page/03600/",
+   "http_code": "200",
+   "bytes": 8809,
+   "sha256": "e6532b5cc4a26c3683bb618575ddc70c937112fc8c4f76730d38cb129c446e56",
+   "maxdate_20": "20260723",
+   "n2027": 0,
+   "drift": "identical",
+   "tries": "x1"
+  }
+ ],
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": "200",
+   "bytes": 33221,
+   "sha256": "3a40388067039f70fbee9b165a761a737940009592ef817e41f4972ff594c816",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": "412",
+   "bytes": 3114,
+   "sha256": "13a55fea356f4b7f4acb44c39518b8961393e3da40901931c3b89f8f900051ef",
+   "drift": "http_412",
+   "tries": "x1"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": "200",
+   "bytes": 11869,
+   "sha256": "111b14ce6281725f6f6a2746249829597676fb2de4e8a91218f904b5494abd2f",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": "200",
+   "bytes": 36277,
+   "sha256": "2c8a132cdbb841fd202b295ee3b4d7c07d11f01a77e56245d94a3490bba53927",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "sha256": "",
+   "drift": "http_000",
+   "tries": "x1"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "http_code": "404",
+   "bytes": 1107,
+   "sha256": "72fae2a094b72353dac63ac231084ce09814a11b0444941d21fa5b5c0b0881bb",
+   "drift": "http_404",
+   "tries": "x1"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": "200",
+   "bytes": 14854,
+   "sha256": "cf69f12ab72f61cb7d1e4e97ea515968373666b125692d3a5123947c75133a50",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "嘉定",
+   "status": "success",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": "200",
+   "bytes": 54765,
+   "sha256": "4cb246aff4cd45fbe0ce82743b45ceea4aeef347f9394c67df51bbfcdb03af33",
+   "drift": "baseline_sha_missing",
+   "tries": "x1"
+  },
+  {
+   "name": "长宁",
+   "status": "success",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": "200",
+   "bytes": 31073,
+   "sha256": "644dac05d1b782625dc34e1a53e7c13756a89695687efaa1e2e5cace8ec71b8f",
+   "drift": "same_size_sha_diff",
+   "tries": "x1"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": "200",
+   "bytes": 159,
+   "sha256": "a30ad35ad5cf30b6bcf2438dc34fbf8b26caaebc31229c5dd599cbff7e5cdf5c",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": "000",
+   "bytes": 0,
+   "sha256": "",
+   "drift": "http_000",
+   "tries": "x1"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": "200",
+   "bytes": 2097,
+   "sha256": "b5161f78473fcf1857f4ed371cacf9b08dc08c1bc3d00abada9023fd7a2df36f",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn",
+   "http_code": "200",
+   "bytes": 20789,
+   "sha256": "bb312e33e700494cb9d25fec5ae00f67f33fc6474bdd3df11185257c898393d5",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "奉贤",
+   "status": "failed",
+   "url": "https://www.swzx.shfxjy.cn/",
+   "http_code": "000",
+   "bytes": 0,
+   "sha256": "",
+   "drift": "http_000",
+   "tries": "x2",
+   "note": "old zsks.shfxjy.cn still 301; migration confirmed, fetched new domain www.swzx.shfxjy.cn"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": "200",
+   "bytes": 15143,
+   "sha256": "c60d039eda93806e44b73f7685e9533dead98cc5e8308784698e194fe52000ce",
+   "drift": "identical",
+   "tries": "x1"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn",
+   "http_code": "200",
+   "bytes": 67642,
+   "sha256": "bf2f8d7ee745946d072179aa368a966db192f4e62ebed933226283103f3b1336",
+   "drift": "size_drift 67513->67642",
+   "tries": "x1"
+  }
+ ]
+}
