@@ -1,0 +1,178 @@
+{
+ "date": "2026-11-11",
+ "scrape_time": "2026-11-11T08:06:49",
+ "method": "curl",
+ "total_districts": 16,
+ "success_count": 10,
+ "failed_count": 6,
+ "partial_count": 0,
+ "districts": [
+  {
+   "name": "闵行",
+   "status": "success",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "http_code": 200,
+   "bytes": 33221,
+   "sha256": "3a40388067039f70fbee9b165a761a737940009592ef817e41f4972ff594c816",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "浦东",
+   "status": "failed",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "http_code": 0,
+   "bytes": 0,
+   "sha256": null,
+   "items": [],
+   "note": "000 x2 (retry x1); 412 -> 000 since 11-04 (day 8), server-side, non-content; retried x1 after 10s (still failing)"
+  },
+  {
+   "name": "徐汇",
+   "status": "success",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "http_code": 200,
+   "bytes": 11869,
+   "sha256": "2220c77155dfaf2ed8727cbc214e420c6ea1a179e5b6eee3dbd40b9bff2de80a",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "黄浦",
+   "status": "success",
+   "url": "https://zhaoban.hpe.cn",
+   "http_code": 200,
+   "bytes": 36688,
+   "sha256": "bc2ae0eab5c1d3e804f010a34106010b80c0b744613ca3c15b36343c74fc7ddf",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "静安",
+   "status": "failed",
+   "url": "https://www.ja.edu.sh.cn/",
+   "http_code": 0,
+   "bytes": 0,
+   "sha256": null,
+   "items": [],
+   "note": "000 x2 (retry x1); day 9, server-side, non-content; retried x1 after 10s (still failing)"
+  },
+  {
+   "name": "杨浦",
+   "status": "failed",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "http_code": 404,
+   "bytes": 1107,
+   "sha256": null,
+   "items": [],
+   "note": "404 (1107B error page); day 2, non-content"
+  },
+  {
+   "name": "宝山",
+   "status": "success",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "http_code": 200,
+   "bytes": 14854,
+   "sha256": "cf69f12ab72f61cb7d1e4e97ea515968373666b125692d3a5123947c75133a50",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "嘉定",
+   "status": "failed",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "http_code": 0,
+   "bytes": 0,
+   "sha256": null,
+   "items": [],
+   "note": "000 x2 (retry x1) TODAY - flipped from 200/54643B on 11-10; server-side, retry tomorrow before calling persistent; retried x1 after 10s (still failing)"
+  },
+  {
+   "name": "长宁",
+   "status": "failed",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "http_code": 504,
+   "bytes": 566,
+   "sha256": null,
+   "items": [],
+   "note": "504 x2 (retry x1, 566B error page); day 7, server-side, non-content; retried x1 after 10s (still failing)"
+  },
+  {
+   "name": "普陀",
+   "status": "success",
+   "url": "https://kszx.pte.sh.cn",
+   "http_code": 200,
+   "bytes": 159,
+   "sha256": "b1a93719170203a53a7375f014667f239cf63a30a63756aa67622074ab9036ad",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "虹口",
+   "status": "failed",
+   "url": "https://kszx.hongkouedu.com",
+   "http_code": 0,
+   "bytes": 0,
+   "sha256": null,
+   "items": [],
+   "note": "000 x2 (retry x1); day 9, server-side, non-content; retried x1 after 10s (still failing)"
+  },
+  {
+   "name": "松江",
+   "status": "success",
+   "url": "https://zsb.sjedu.cn",
+   "http_code": 200,
+   "bytes": 2097,
+   "sha256": "1de7b613403b8fcb80784791c888943d7de7bdd81346d51a9a93fc1633c9b8fb",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "金山",
+   "status": "success",
+   "url": "https://www.jsedu.sh.cn",
+   "http_code": 200,
+   "bytes": 20789,
+   "sha256": "9c2f5f33bd721e9a77808e2d7223119c0a075ae3a755064e9ed3d4b100083078",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "奉贤",
+   "status": "success",
+   "url": "https://zsks.shfxjy.cn/",
+   "http_code": 200,
+   "bytes": 19532,
+   "sha256": "e7524135abc62799a627fe568158e685988514d05cf7a51bdc38af55dbd83637",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "青浦",
+   "status": "success",
+   "url": "https://kszx.qpedu.cn",
+   "http_code": 200,
+   "bytes": 15143,
+   "sha256": "c60d039eda93806e44b73f7685e9533dead98cc5e8308784698e194fe52000ce",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  },
+  {
+   "name": "崇明",
+   "status": "success",
+   "url": "https://www.shcm.gov.cn",
+   "http_code": 200,
+   "bytes": 68527,
+   "sha256": "8f537e7e5e101926a0019ef1439abf9b6af17af77553959aec8ec9bb699f2deb",
+   "items": [],
+   "note": "byte+sha identical, carried"
+  }
+ ],
+ "new_data": false,
+ "notes": [
+  "June-mode full 16-district run. 10 districts byte+sha IDENTICAL to 11-10 baseline (zero content drift).",
+  "State flip: 嘉定 200/54643B -> 000 x2 (new failure today, server-side; prev-day-state was success so retry fired).",
+  "Chronic failures continue: 浦东(day8)/静安(day9)/虹口(day9) 000, 长宁(day7) 504, 杨浦(day2) 404. No 2027 signals anywhere.",
+  "奉贤 stored URL https://zsks.shfxjy.cn/ answered directly 200/19532B, sha identical; no swzx fallback needed today."
+ ]
+}
