@@ -1,0 +1,188 @@
+{
+ "date": "2026-11-17",
+ "scrape_time": "2026-11-17T08:03:15",
+ "method": "urllib-sequential",
+ "total_districts": 16,
+ "success_count": 12,
+ "failed_count": 4,
+ "partial_count": 0,
+ "districts": [
+  {
+   "name": "闵行",
+   "url": "https://zwgk.shmh.gov.cn/mh-xxgk-cms/website/mh_xxgk/xxgk_jyj_ywxx_8/List/list_0.htm",
+   "items": [],
+   "http_code": "200",
+   "bytes": 33221,
+   "sha256": "3a40388067039f70fbee9b165a761a737940009592ef817e41f4972ff594c816",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "浦东",
+   "url": "https://www.pudong.gov.cn/jyj/",
+   "items": [],
+   "status": "failed",
+   "http_code": "412",
+   "bytes": 3072,
+   "sha256": "",
+   "note": "failed 412 x2 (3072B; shell 3161->3083->3072B); chronic day14"
+  },
+  {
+   "name": "徐汇",
+   "url": "https://www.xuhui.gov.cn/zsks/egov/front2018/cat/216",
+   "items": [],
+   "http_code": "200",
+   "bytes": 11869,
+   "sha256": "2220c77155dfaf2ed8727cbc214e420c6ea1a179e5b6eee3dbd40b9bff2de80a",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "黄浦",
+   "url": "https://zhaoban.hpe.cn",
+   "items": [],
+   "http_code": "200",
+   "bytes": 36532,
+   "sha256": "5c9af221d4749d598aef014d761c6b0cf9c54f5a149b59549240fb52f9d1f467",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "静安",
+   "url": "https://www.ja.edu.sh.cn/",
+   "items": [],
+   "status": "success",
+   "http_code": "200",
+   "bytes": 3247,
+   "sha256": "ca2e88e6d69254a82ed2ef5e6f3963cb3fecfecfd0dfcd85c7f714c59e9673d3",
+   "note": "recovered 000->200 first fetch (no retry needed); 3247B tiny page with 0 anchor pairs = bare intro-page profile, consistent with site history (static intro page, no dynamic items); sha=ca2e88e6d692 recorded as new forward baseline; state flip only, NOT content change; ended 000 streak at day14",
+   "kw_pairs": 0,
+   "anchor_pairs": 0,
+   "maxdate_20": "",
+   "n2027": 0,
+   "fresh_kw_titles": []
+  },
+  {
+   "name": "杨浦",
+   "url": "https://www.shyp.gov.cn/shypq/jyj/",
+   "items": [],
+   "status": "failed",
+   "http_code": "404",
+   "bytes": 1107,
+   "sha256": "",
+   "note": "failed 404 x2 (1107B); chronic day8"
+  },
+  {
+   "name": "宝山",
+   "url": "https://www.bsedu.org.cn/baoshan/zkxx/index.jhtml",
+   "items": [],
+   "http_code": "200",
+   "bytes": 14854,
+   "sha256": "cf69f12ab72f61cb7d1e4e97ea515968373666b125692d3a5123947c75133a50",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "嘉定",
+   "url": "https://www.jiading.gov.cn/jiaoyu/",
+   "items": [],
+   "http_code": "200",
+   "bytes": 54391,
+   "sha256": "46bd6c653a1b0bf9d620b60f0b4d88b459b492c8aa418acdbcee7e9dbfad8dc5",
+   "status": "success",
+   "note": "unstable across fetches (200/54395B); anchor=103 kw=0 maxdate=20240807 n2027=2 | drift verdict: NON-zhongkao homepage news rotation (-143B 54534->54391B, refetch 54395B = dynamic tokens); kw anchors=0; broad fallback only hit KNOWN 2026-04-07 义务教育招生入学政策问答; news items = 对口帮扶/劳动教育嘉年华/导师制研修班; not new data",
+   "kw_pairs": 0,
+   "anchor_pairs": 103,
+   "maxdate_20": "20240807",
+   "n2027": 2,
+   "fresh_kw_titles": []
+  },
+  {
+   "name": "长宁",
+   "url": "https://kszx.chneic.sh.cn/IndexAction.action",
+   "items": [],
+   "status": "failed",
+   "http_code": "504",
+   "bytes": 566,
+   "sha256": "",
+   "note": "failed 504 x2 (identical 566B error page); chronic day13"
+  },
+  {
+   "name": "普陀",
+   "url": "https://kszx.pte.sh.cn",
+   "items": [],
+   "http_code": "200",
+   "bytes": 159,
+   "sha256": "b1a93719170203a53a7375f014667f239cf63a30a63756aa67622074ab9036ad",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "虹口",
+   "url": "https://kszx.hongkouedu.com",
+   "items": [],
+   "status": "failed",
+   "http_code": "000",
+   "bytes": 8,
+   "sha256": "",
+   "note": "failed 000 x2 (conn fail, 8B); chronic day15"
+  },
+  {
+   "name": "松江",
+   "url": "https://zsb.sjedu.cn",
+   "items": [],
+   "http_code": "200",
+   "bytes": 2097,
+   "sha256": "1de7b613403b8fcb80784791c888943d7de7bdd81346d51a9a93fc1633c9b8fb",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "金山",
+   "url": "https://www.jsedu.sh.cn",
+   "items": [],
+   "http_code": "200",
+   "bytes": 20789,
+   "sha256": "9c2f5f33bd721e9a77808e2d7223119c0a075ae3a755064e9ed3d4b100083078",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "奉贤",
+   "url": "https://zsks.shfxjy.cn/",
+   "items": [],
+   "http_code": "200",
+   "bytes": 19532,
+   "sha256": "e7524135abc62799a627fe568158e685988514d05cf7a51bdc38af55dbd83637",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "青浦",
+   "url": "https://kszx.qpedu.cn",
+   "items": [],
+   "http_code": "200",
+   "bytes": 15143,
+   "sha256": "c60d039eda93806e44b73f7685e9533dead98cc5e8308784698e194fe52000ce",
+   "status": "success",
+   "note": "byte+sha(strip) identical, carried"
+  },
+  {
+   "name": "崇明",
+   "url": "https://www.shcm.gov.cn",
+   "items": [],
+   "http_code": "200",
+   "bytes": 68182,
+   "sha256": "b6a3fe5f3828222cf2c3efeb087b5852038305331e35b8b025eec1b40e4945fe",
+   "status": "success",
+   "note": "byte-diff refetch-STABLE genuine change; anchor=93 kw=0 maxdate=20261111 n2027=0 | drift verdict: NON-zhongkao portal news rotation (-192B 68374->68182B, refetch-stable; precedent 10-31 -44B); kw anchors=0, broad fallback=0; items = 区委全会/后勤招聘/造林项目 etc.; not new data",
+   "kw_pairs": 0,
+   "anchor_pairs": 93,
+   "maxdate_20": "20261111",
+   "n2027": 0,
+   "fresh_kw_titles": []
+  }
+ ],
+ "new_data": false,
+ "notes": "12/16 ok (+1 vs 11-16). State flip: jingan 000->200 recovered (3247B bare intro page, 0 anchors; state flip only, not content; 000 streak ended at day14). Chronic failures unchanged: pudong 412 day14 (shell 3161->3083->3072B), hongkou 000 day15, changning 504 day13 (identical 566B), yangpu 404 day8. Drifts verified NON-zhongkao: jiading -143B homepage news rotation (kw=0; broad=known 04-07 item only), chongming -192B portal news rotation (kw=0, broad=0; precedent 10-31). 0 new items -> [SILENT]"
+}
